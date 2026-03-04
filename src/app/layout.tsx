@@ -17,7 +17,7 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   title: "Jakub Skupin",
   description:
-    "Stavím značky a obsahové systémy, které dávají náskok. Research, strategie, obsah i web.",
+    "Stavím osobní značky a obsahové systémy, které dávají náskok. Research, strategie, obsah i web.",
 };
 
 export default function RootLayout({

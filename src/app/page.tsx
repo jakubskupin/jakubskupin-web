@@ -57,7 +57,7 @@ const tiers = [
     num: "02",
     name: "Starter Pack",
     tagline:
-      "Research, positioning, vizuální směr — vše v jednom dokumentu.",
+      "Odrazový můstek pro vaši osobní značku. Research, positioning, vizuální směr.",
     price: "27 000",
     priceNote: "jednorázově",
     features: [
@@ -76,9 +76,9 @@ const tiers = [
   },
   {
     num: "03",
-    name: "Brand & Web",
+    name: "Personal Brand & Web",
     tagline:
-      "Kompletní značka — od strategie přes identitu po funkční web.",
+      "Kompletní osobní značka — od strategie přes identitu po web.",
     price: "od 56 000",
     priceNote: "dle rozsahu",
     features: [
@@ -101,7 +101,7 @@ const services = [
   {
     title: "Copywriting",
     description:
-      "LinkedIn posty, webové texty, newslettery v tone of voice vaší značky.",
+      "LinkedIn posty, bio, speaker profily v tone of voice vaší značky.",
   },
   {
     title: "Slide decky",
@@ -163,7 +163,7 @@ export default function Home() {
           Marketing × AI × Realizace
         </div>
         <h1 className="mb-7 font-heading text-[clamp(36px,5.5vw,52px)] font-bold leading-[1.12] tracking-[-0.03em]">
-          Stavím značky a obsahové systémy, které dávají náskok
+          Stavím osobní značky a obsahové systémy, které dávají náskok
         </h1>
         <p className="max-w-[520px] text-lg leading-[1.65] text-text-secondary">
           Propojuji to, co ostatní dělají odděleně — research, strategii,
