@@ -1,26 +1,87 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #FAFAF8;
+  --text: #1A1A18;
+  --text-secondary: #86847E;
+  --text-tertiary: #ADABA5;
+  --border: #E8E6E1;
+  --card-bg: #FFFFFF;
+  --accent: #1A1A18;
+  --accent-soft: rgba(26, 26, 24, 0.06);
+  --radius: 16px;
+  --radius-lg: 24px;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-bg: var(--bg);
+  --color-text: var(--text);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-border: var(--border);
+  --color-card-bg: var(--card-bg);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --font-sans: var(--font-manrope);
+  --font-heading: var(--font-syne);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-manrope), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* ---- Browser Chrome (work cards) ---- */
+.browser-dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #DDDBD6;
+}
+
+/* ---- Pricing features bullet ---- */
+.features li {
+  position: relative;
+  padding-left: 18px;
+}
+
+.features li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--text-tertiary);
+}
+
+.tier-highlighted .features li::before {
+  background: var(--text);
+}
+
+/* ---- Highlighted tier badge ---- */
+.tier-highlighted {
+  position: relative;
+  border-color: var(--text) !important;
+  border-width: 2px;
+}
+
+.tier-highlighted::before {
+  content: 'Nejčastější volba';
+  position: absolute;
+  top: -12px;
+  left: 24px;
+  background: var(--text);
+  color: var(--bg);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 8px;
 }
