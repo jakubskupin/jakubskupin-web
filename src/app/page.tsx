@@ -324,6 +324,15 @@ export default function Home() {
             </motion.div>
           ))}
         </div>
+
+        <motion.p
+          className="max-w-[540px] text-[15px] leading-[1.7] text-text-secondary"
+          {...fadeUp}
+        >
+          Věřím, že hotovo je víc než dokonalo. Dvě rychlé iterace a máte
+          v ruce něco, s čím jdete za cílovkou — ne za dalším kolem
+          interních revizí.
+        </motion.p>
       </section>
 
       {/* ONGOING */}
