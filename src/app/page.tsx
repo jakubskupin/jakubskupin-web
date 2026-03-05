@@ -2,6 +2,10 @@
 
 import { motion, type Easing } from "framer-motion";
 
+/* ============ MAINTENANCE MODE ============ */
+/* true = "pracuje se na webu" | false = plná landing page */
+const MAINTENANCE = true;
+
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
   whileInView: { opacity: 1, y: 0 },
@@ -142,6 +146,30 @@ function ClockIcon() {
 /* ============ PAGE ============ */
 
 export default function Home() {
+  if (MAINTENANCE) {
+    return (
+      <div className="flex min-h-svh flex-col items-center justify-center px-6 text-center">
+        <div className="font-heading text-lg font-bold tracking-tight mb-8">
+          Jakub Skupin
+        </div>
+        <h1 className="font-heading text-[clamp(28px,4vw,40px)] font-bold leading-[1.2] tracking-[-0.03em] mb-4">
+          Pracuje se na novém webu.
+        </h1>
+        <p className="text-text-secondary text-base max-w-[380px] mb-8">
+          Brzy tu bude víc. Zatím mě najdete na LinkedIn.
+        </p>
+        <a
+          href="https://www.linkedin.com/in/jakubskupin/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="rounded-full border border-border px-6 py-2.5 text-sm font-semibold text-text transition-all duration-250 hover:border-text hover:bg-text hover:text-bg"
+        >
+          LinkedIn ↗
+        </a>
+      </div>
+    );
+  }
+
   return (
     <div className="mx-auto max-w-[960px] px-6">
       {/* NAV */}
