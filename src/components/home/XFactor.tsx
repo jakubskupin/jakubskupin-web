@@ -19,15 +19,15 @@ function stagger(index: number) {
 const steps = [
   {
     num: "01",
-    title: "X-factor",
-    description:
-      "Pojmenuju, čím jseš výjimečný — to, co sám nevidíš, protože je to pro tebe samozřejmé.",
-  },
-  {
-    num: "02",
     title: "Research a strategie",
     description:
       "Rešerše trhu, cílových skupin a tónu. AI analýza + lidský úsudek. Do 48 hodin máš jasno.",
+  },
+  {
+    num: "02",
+    title: "X-factor",
+    description:
+      "Z výzkumu pojmenuju, čím jseš výjimečný — to, co sám nevidíš, protože je to pro tebe samozřejmé.",
   },
   {
     num: "03",
