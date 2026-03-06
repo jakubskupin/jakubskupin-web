@@ -22,8 +22,7 @@ export default function Hero() {
         Pojmenuju, čím jste výjimeční
       </h1>
       <p className="max-w-[520px] text-lg leading-[1.65] text-text-secondary">
-        Pro experty a tvůrce, kteří mají co říct — ale online to není
-        vidět.
+        Od výzkumu po hotový obsah. Jeden člověk, celý systém.
       </p>
     </motion.section>
   );
