@@ -21,25 +21,25 @@ const steps = [
     num: "01",
     title: "Research a strategie",
     description:
-      "Rešerše trhu, cílových skupin a tónu. AI analýza + lidský úsudek. Do 48 hodin máš jasno.",
+      "Rešerše trhu, cílových skupin a tónu. AI analýza + lidský úsudek. Do 48 hodin máte jasno.",
   },
   {
     num: "02",
     title: "X-factor",
     description:
-      "Z výzkumu pojmenuju, čím jseš výjimečný — to, co sám nevidíš, protože je to pro tebe samozřejmé.",
+      "Z výzkumu pojmenuju, čím jste výjimeční — to, co sami nevidíte, protože je to pro vás samozřejmé.",
   },
   {
     num: "03",
     title: "Brand a web",
     description:
-      "Vizuální identita a web postavený kolem tvého x-faktoru. Ne šablona — systém, který dává smysl.",
+      "Vizuální identita a web postavený kolem vašeho x-faktoru. Ne šablona — systém, který dává smysl.",
   },
   {
     num: "04",
     title: "Obsahový systém",
     description:
-      "LinkedIn strategie, formáty, první obsah. Víš co, kam a proč publikovat.",
+      "LinkedIn strategie, formáty, první obsah. Víte co, kam a proč publikovat.",
   },
 ];
 
@@ -56,7 +56,7 @@ export default function XFactor() {
           Já to najdu
         </h2>
         <p className="max-w-[460px] text-base leading-[1.6] text-text-secondary">
-          Nejdřív pojmenuju tvůj x-factor. Pak kolem něj postavím strategii,
+          Nejdřív pojmenuju váš x-factor. Pak kolem něj postavím strategii,
           značku, web i obsah.
         </p>
       </motion.div>
