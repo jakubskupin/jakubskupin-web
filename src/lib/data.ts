@@ -31,8 +31,8 @@ export const tiers: Tier[] = [
     name: "X-Factor System",
     tagline:
       "Pojmenuju, čím jste výjimeční — a postavím kolem toho celý systém.",
-    price: "od 56 000",
-    priceNote: "dle rozsahu",
+    price: "40 000",
+    priceNote: "jednorázově",
     features: [
       "Hloubkový research + AI analýza",
       "Cílové skupiny a jejich jazyk",
@@ -40,7 +40,7 @@ export const tiers: Tier[] = [
       "Positioning a klíčové sdělení",
       "Tone of voice a obsahový směr",
       "Vizuální směr — barvy, typografie, vizuální jazyk",
-      "Web nebo landing page",
+      "Single-page web",
       "LinkedIn strategie + ukázkový obsah",
     ],
     delivery: "Do 5 pracovních dní",
