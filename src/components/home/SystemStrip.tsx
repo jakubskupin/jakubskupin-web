@@ -9,7 +9,7 @@ const fadeUp = {
   transition: { duration: 0.5, ease: "easeOut" as Easing },
 };
 
-const steps = ["Výzkum", "Strategie", "Copywriting", "Web", "Obsah"];
+const steps = ["Výzkum", "Strategie", "Vizuální styl", "Copywriting", "Web", "Obsah"];
 
 export default function SystemStrip() {
   return (
@@ -31,7 +31,7 @@ export default function SystemStrip() {
           ))}
         </div>
         <p className="text-[13px] tracking-[0.02em] text-text-tertiary">
-          Jeden člověk × AI. Rychlost, kterou nečekáte
+          AI mi dává rychlost a kompetence, které od jednotlivce nečekáte
         </p>
       </div>
     </motion.div>
