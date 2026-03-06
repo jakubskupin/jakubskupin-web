@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Hluboký výzkum — Jakub Skupin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAFAF8;
+  --text: #1A1A18;
+  --text-secondary: #86847E;
+  --text-tertiary: #ADABA5;
+  --border: #E8E6E1;
+  --card-bg: #FFFFFF;
+  --radius: 16px;
+  --radius-lg: 24px;
+  --accent: #1A1A18;
+  --highlight: #F0EDE8;
+  --green: #2D6A4F;
+  --green-bg: #E8F5E9;
+  --amber: #B45309;
+  --amber-bg: #FFF8E1;
+  --red: #991B1B;
+  --red-bg: #FEF2F2;
+  --blue: #1E40AF;
+  --blue-bg: #EFF6FF;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Manrope', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ─── HEADER ─── */
+.header {
+  padding: 48px 0 40px;
+  border-bottom: 1px solid var(--border);
+}
+.header-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.badge--version { background: var(--accent); color: var(--bg); }
+.badge--date { background: var(--highlight); color: var(--text-secondary); }
+.header h1 {
+  font-size: clamp(28px, 5vw, 42px);
+  margin-bottom: 12px;
+}
+.header p {
+  color: var(--text-secondary);
+  font-size: 16px;
+  max-width: 640px;
+}
+
+/* ─── LAYOUT ─── */
+.layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 48px;
+  padding-top: 48px;
+}
+
+/* ─── SIDEBAR NAV ─── */
+.sidebar {
+  position: sticky;
+  top: 32px;
+  align-self: start;
+  max-height: calc(100vh - 64px);
+  overflow-y: auto;
+}
+.sidebar nav a {
+  display: block;
+  padding: 6px 0;
+  color: var(--text-tertiary);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: color 0.2s;
+  border-left: 2px solid transparent;
+  padding-left: 12px;
+}
+.sidebar nav a:hover,
+.sidebar nav a.active {
+  color: var(--text);
+  border-left-color: var(--accent);
+}
+.sidebar nav a .num {
+  display: inline-block;
+  width: 24px;
+  font-weight: 700;
+  color: var(--text-tertiary);
+  font-size: 11px;
+}
+
+/* ─── SECTIONS ─── */
+.section {
+  padding: 56px 0;
+  border-bottom: 1px solid var(--border);
+}
+.section:last-child { border-bottom: none; }
+
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 8px;
+}
+.section h2 {
+  font-size: clamp(22px, 4vw, 30px);
+  margin-bottom: 8px;
+}
+.section-desc {
+  color: var(--text-secondary);
+  font-size: 15px;
+  margin-bottom: 32px;
+  max-width: 640px;
+}
+
+.section h3 {
+  font-size: 18px;
+  margin: 32px 0 12px;
+}
+.section h4 {
+  font-size: 15px;
+  margin: 24px 0 8px;
+}
+
+.section p { margin-bottom: 16px; }
+
+/* ─── TABLES ─── */
+.table-wrap {
+  overflow-x: auto;
+  margin: 16px 0 24px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  min-width: 600px;
+}
+thead {
+  background: var(--highlight);
+}
+th {
+  text-align: left;
+  padding: 10px 14px;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+td {
+  padding: 10px 14px;
+  border-top: 1px solid var(--border);
+  vertical-align: top;
+}
+tbody tr:hover { background: var(--highlight); }
+
+/* ─── CARDS ─── */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin-bottom: 16px;
+}
+.card--highlight {
+  border-left: 3px solid var(--accent);
+}
+.card--green { border-left: 3px solid var(--green); background: var(--green-bg); }
+.card--amber { border-left: 3px solid var(--amber); background: var(--amber-bg); }
+.card--red { border-left: 3px solid var(--red); background: var(--red-bg); }
+.card--blue { border-left: 3px solid var(--blue); background: var(--blue-bg); }
+
+.card h4 { margin: 0 0 8px; font-size: 14px; }
+.card p { margin-bottom: 8px; font-size: 14px; }
+.card p:last-child { margin-bottom: 0; }
+
+/* ─── FINDING CARDS ─── */
+.finding-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+.finding {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+.finding-num {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  text-align: center;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--bg);
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.finding h4 { margin: 0 0 8px; font-size: 14px; }
+.finding p { font-size: 13px; color: var(--text-secondary); margin: 0; }
+
+/* ─── POSITIONING MAP ─── */
+.map-wrap {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin: 24px 0;
+  overflow-x: auto;
+}
+.map-wrap pre {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: pre;
+  color: var(--text-secondary);
+}
+.map-wrap .highlight-text {
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* ─── PILLS ─── */
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0 24px;
+}
+.pill {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--highlight);
+  color: var(--text-secondary);
+}
+.pill--green { background: var(--green-bg); color: var(--green); }
+.pill--amber { background: var(--amber-bg); color: var(--amber); }
+.pill--red { background: var(--red-bg); color: var(--red); }
+
+/* ─── NEXT STEPS ─── */
+.step {
+  display: flex;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+}
+.step:last-child { border-bottom: none; }
+.step-priority {
+  flex-shrink: 0;
+  width: 64px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding-top: 2px;
+}
+.step-priority--now { color: var(--green); }
+.step-priority--month { color: var(--amber); }
+.step-priority--q2 { color: var(--blue); }
+.step-content h4 { margin: 0 0 4px; font-size: 14px; }
+.step-content p { margin: 0; font-size: 13px; color: var(--text-secondary); }
+
+/* ─── FOOTER ─── */
+.footer {
+  padding: 40px 0;
+  text-align: center;
+  color: var(--text-tertiary);
+  font-size: 13px;
+}
+
+/* ─── MOBILE ─── */
+@media (max-width: 768px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .sidebar {
+    position: relative;
+    top: 0;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 24px;
+    margin-bottom: 0;
+    max-height: none;
+  }
+  .sidebar nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 8px;
+  }
+  .sidebar nav a {
+    border-left: none;
+    padding-left: 0;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+  }
+  .sidebar nav a:hover,
+  .sidebar nav a.active {
+    background: var(--highlight);
+    border-left: none;
+  }
+  .section { padding: 40px 0; }
+  table { font-size: 12px; }
+  th, td { padding: 8px 10px; }
+  .finding-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── PRINT ─── */
+@media print {
+  .sidebar { display: none; }
+  .layout { grid-template-columns: 1fr; }
+  .section { break-inside: avoid; }
+  body { font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header class="header" id="top">
+  <div class="header-meta">
+    <span class="badge badge--version">v1.0</span>
+    <span class="badge badge--date">6. března 2026</span>
+  </div>
+  <h1>Hluboký výzkum</h1>
+  <p>Kompletní rešerše příležitostí, konkurentů a souvislostí pro Jakuba Skupina &mdash; freelancera, který spojuje brand strategii, web development a AI workflow.</p>
+</header>
+
+<div class="layout">
+
+<!-- ═══════════════ SIDEBAR ═══════════════ -->
+<aside class="sidebar">
+  <nav>
+    <a href="#konkurence"><span class="num">01</span> Konkurence</a>
+    <a href="#agentury"><span class="num">02</span> Agentury</a>
+    <a href="#zahranici"><span class="num">03</span> Zahraničí</a>
+    <a href="#trh"><span class="num">04</span> Trh a poptávka</a>
+    <a href="#ai-sluzby"><span class="num">05</span> AI služby v ČR</a>
+    <a href="#productized"><span class="num">06</span> Productized</a>
+    <a href="#positioning"><span class="num">07</span> Positioning</a>
+    <a href="#linkedin"><span class="num">08</span> LinkedIn</a>
+    <a href="#prilezitosti"><span class="num">09</span> Příležitosti</a>
+    <a href="#benchmark"><span class="num">10</span> Web benchmark</a>
+    <a href="#finance"><span class="num">11</span> Finanční model</a>
+    <a href="#synteza"><span class="num">12</span> Syntéza</a>
+    <a href="#next-steps"><span class="num">13</span> Next Steps</a>
+  </nav>
+</aside>
+
+<!-- ═══════════════ MAIN ═══════════════ -->
+<main>
+
+<!-- ─── 01 KONKURENCE ─── -->
+<section class="section" id="konkurence">
+  <div class="section-label">01 &mdash; Blok 1</div>
+  <h2>Přímá konkurence v ČR</h2>
+  <p class="section-desc">V ČR neexistuje nikdo, kdo by kombinoval všechny 4 pilíře (brand strategie + web dev + obsahová strategie + AI workflow). Každý pokrývá max 2&ndash;3 oblasti s výrazně jiným positioningem.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Jméno</th><th>Co nabízí</th><th>Positioning</th><th>Rozdíl od Jakuba</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Jiří Rostecký</strong><br><span style="color:var(--text-tertiary);font-size:12px">rostecky.cz</span></td>
+          <td>Business mentoring, podcasty (1300+ rozhovorů), mastermind skupiny (Evolve, Exclusive Club)</td>
+          <td>&bdquo;Tady podnikatelé rostou&ldquo; &mdash; mentor a podcaster</td>
+          <td>Rostecký <strong>učí a mentoruje</strong>. Jakub <strong>dělá</strong> &mdash; dodává strategii + exekuci. Komplementární.</td>
+        </tr>
+        <tr>
+          <td><strong>Filip Dřímalka</strong><br><span style="color:var(--text-tertiary);font-size:12px">drimalka.com</span></td>
+          <td>AI Leadership Masterclass (Future AI Leader), AI Projects (piloty, strategie), knihy, konference</td>
+          <td>AI innovation consultant pro business leaders. Masterclass 3&nbsp;990 Kč.</td>
+          <td>Dřímalka učí firmy <strong>O AI</strong>. Jakub <strong>S AI dělá</strong>. Potenciálně komplementární.</td>
+        </tr>
+        <tr>
+          <td><strong>Michal Bubeníček</strong><br><span style="color:var(--text-tertiary);font-size:12px">Etnetera Motion</span></td>
+          <td>CEO agentury (40+ lidí), klienti Škoda/Pepsi/Nivea, podcast Mike:ON, přednášky</td>
+          <td>Creative Director / agenturní CEO, enterprise segment</td>
+          <td>Enterprise agentura vs. solo freelancer. <strong>Není přímá konkurence.</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Nick Broekema</strong><br><span style="color:var(--text-tertiary);font-size:12px">LinkedIn 50k+</span></td>
+          <td>Content Design coaching &mdash; pomáhá freelancerům s LinkedIn strategií. 7-step framework.</td>
+          <td>&bdquo;Best content designer on LinkedIn&ldquo;</td>
+          <td>Čistě LinkedIn content coach. <strong>Inspirace pro distribuci</strong>, ne konkurence.</td>
+        </tr>
+        <tr>
+          <td><strong>Denisa Hrubešová</strong><br><span style="color:var(--text-tertiary);font-size:12px">denisahrubesova.cz</span></td>
+          <td>Community building, podcasty (VĚCI), Forendors, e-book (690 Kč), tattoo studio, event produkce</td>
+          <td>Community expertka a content creator. 7+ revenue streams.</td>
+          <td>Community/creator model. <strong>Jiná nabídka</strong>, ale podobná audience (tvůrci).</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card card--highlight">
+    <h4>Anti-portfolio analysis &mdash; co nikdo z nich NEDĚLÁ</h4>
+    <div class="pills">
+      <span class="pill pill--green">Strategie + kódování webů</span>
+      <span class="pill pill--green">Productized tiers s fixním pricingem</span>
+      <span class="pill pill--green">AI-accelerated delivery</span>
+      <span class="pill pill--green">End-to-end od research po hotový web</span>
+    </div>
+    <p>Všechny 4 mezery sedí přesně na Jakubův profil.</p>
+  </div>
+</section>
+
+<!-- ─── 02 AGENTURY ─── -->
+<section class="section" id="agentury">
+  <div class="section-label">02 &mdash; Blok 1</div>
+  <h2>Agentury jako nepřímá konkurence</h2>
+  <p class="section-desc">Pro SMB s budgetem 50&ndash;150K jsou agentury příliš drahé nebo příliš komplexní. Tady je mezera.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Agentura</th><th>Velikost</th><th>Segment</th><th>Cenový odhad</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Taste</strong> (Makovička)</td><td>51&ndash;200 zaměstnanců</td><td>Enterprise, cross-channel</td><td>od 200K+ CZK</td></tr>
+        <tr><td><strong>Pábení</strong></td><td>Malé studio</td><td>Service design, inovace, veřejný sektor</td><td>od 100K+</td></tr>
+        <tr><td><strong>Wvisual</strong></td><td>Minimální online přítomnost</td><td>&ndash;</td><td>&ndash;</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Cenový benchmark CZ</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Služba</th><th>Freelancer</th><th>Agentura</th><th>Jakub</th></tr></thead>
+      <tbody>
+        <tr><td>Web (malý/střední)</td><td>15&ndash;80K</td><td>40&ndash;300K</td><td><strong>od 56K</strong> (v Brand & Web)</td></tr>
+        <tr><td>Brand strategie</td><td>10&ndash;30K</td><td>50&ndash;150K</td><td><strong>27K</strong> (Starter Pack)</td></tr>
+        <tr><td>Research/analýza</td><td>5&ndash;20K</td><td>30&ndash;100K</td><td><strong>15K</strong> (Research Sprint)</td></tr>
+        <tr><td>Hodinová sazba</td><td>900&ndash;990 Kč/h</td><td>1500&ndash;3000 Kč/h</td><td><strong>~3750 Kč/h</strong> (Research Sprint)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card card--green">
+    <h4>Klíčový insight</h4>
+    <p>Jakubův pricing (56K za Brand & Web) sedí přesně do mezery mezi &bdquo;levný freelancer&ldquo; (15&ndash;30K) a &bdquo;drahá agentura&ldquo; (200K+).</p>
+  </div>
+</section>
+
+<!-- ─── 03 ZAHRANIČÍ ─── -->
+<section class="section" id="zahranici">
+  <div class="section-label">03 &mdash; Blok 1</div>
+  <h2>Zahraniční reference</h2>
+  <p class="section-desc">Globálně roste trend &bdquo;one-person agencies&ldquo; poháněných AI. Solo operátoři dosahují příjmů přes $1M/rok.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Studio</th><th>Model</th><th>Pricing</th><th>Revenue</th><th>Insight</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>DesignJoy</strong><br>(Brett Williams)</td>
+          <td>Productized design subscription</td>
+          <td>$5&nbsp;995/měsíc</td>
+          <td>$1.2M/rok</td>
+          <td>1 člověk, unlimited requests, 48h delivery</td>
+        </tr>
+        <tr>
+          <td><strong>Alex Rivera</strong></td>
+          <td>Full-service digital, solo + AI</td>
+          <td>$750&ndash;1&nbsp;000/měsíc × 12 klientů</td>
+          <td>~$100&ndash;144K/rok</td>
+          <td>AI automatizuje 70&ndash;80% operací</td>
+        </tr>
+        <tr>
+          <td><strong>Barbara Jovanovic</strong></td>
+          <td>Zero-employee content agency</td>
+          <td>Six-figure</td>
+          <td>$100K+/rok</td>
+          <td>1h klientova inputu = týdny obsahu</td>
+        </tr>
+        <tr>
+          <td><strong>Anonym. brand designer</strong></td>
+          <td>AI-powered brand design</td>
+          <td>Individuální</td>
+          <td>$720K (2025)</td>
+          <td>15&ndash;20 souběžných klientů díky AI</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Fractional CMO benchmark</h3>
+  <div class="pills">
+    <span class="pill">$3&ndash;15K/měsíc</span>
+    <span class="pill">Úspora 40&ndash;75% vs. full-time CMO</span>
+    <span class="pill">Průměr $8&ndash;12K/měsíc</span>
+  </div>
+
+  <div class="card card--highlight">
+    <h4>5 best practices ze zahraničí</h4>
+    <p><strong>1.</strong> Productized = škálovatelné (fixní cena, jasný scope)<br>
+    <strong>2.</strong> AI jako páka, ne náhrada (human review vždy)<br>
+    <strong>3.</strong> Niche > generalist<br>
+    <strong>4.</strong> Content as distribution (všichni úspěšní publikují)<br>
+    <strong>5.</strong> 5&ndash;8 klientů = sweet spot (12+ s AI)</p>
+  </div>
+</section>
+
+<!-- ─── 04 TRH ─── -->
+<section class="section" id="trh">
+  <div class="section-label">04 &mdash; Blok 2</div>
+  <h2>Trh a poptávka</h2>
+  <p class="section-desc">V ČR existuje ~25&ndash;30 tisíc firem s 10&ndash;50 zaměstnanci. Většina nemá marketingové oddělení.</p>
+
+  <div class="finding-grid">
+    <div class="finding">
+      <div class="finding-num">~</div>
+      <h4>15&ndash;20 000 firem</h4>
+      <p>Odhadovaný počet firem s 10&ndash;50 zaměstnanci bez dedikovaného marketingu</p>
+    </div>
+    <div class="finding">
+      <div class="finding-num">%</div>
+      <h4>3&ndash;8% obratu</h4>
+      <p>Reálná investice SMB do marketingu (doporučených je 15%)</p>
+    </div>
+    <div class="finding">
+      <div class="finding-num">#1</div>
+      <h4>Referrals</h4>
+      <p>Hlavní kanál, jak SMB hledají dodavatele. LinkedIn je sekundární.</p>
+    </div>
+    <div class="finding">
+      <div class="finding-num">!</div>
+      <h4>Web = vstupní bod</h4>
+      <p>Nový web nebo redesign je nejčastější první zakázka od SMB klienta</p>
+    </div>
+  </div>
+
+  <h3>Co SMB typicky řeší</h3>
+  <p><strong>1.</strong> Web (nový nebo redesign) &mdash; nejčastější vstupní bod<br>
+  <strong>2.</strong> Logo/vizuální identita &mdash; často spojené s webem<br>
+  <strong>3.</strong> Sociální sítě (LinkedIn, Instagram) &mdash; ongoing potřeba<br>
+  <strong>4.</strong> &bdquo;Potřebujeme marketing, ale nevíme jak&ldquo; &mdash; strategická nejistota</p>
+
+  <h3>Trend: agentury vs. freelanceri</h3>
+  <div class="card card--amber">
+    <h4>Nuance, ne binární závěr</h4>
+    <p>Trend od agentur k freelancerům je reálný pro SMB &mdash; ale agentury se transformují, nezmizí. Pro enterprise zůstávají. Jakub cílí na SMB → trend hraje v jeho prospěch.</p>
+  </div>
+</section>
+
+<!-- ─── 05 AI SLUŽBY ─── -->
+<section class="section" id="ai-sluzby">
+  <div class="section-label">05 &mdash; Blok 2</div>
+  <h2>AI služby v ČR</h2>
+  <p class="section-desc">Trh je ve fázi early adoption. Firmy nevědí CO s AI dělat &mdash; to je přesně Jakubova příležitost.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Hráč</th><th>Co nabízí</th><th>Cena</th><th>Positioning</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Fáborský (AIFirst)</strong></td><td>4h praktický kurz AI, 15h obsahu, vibe coding</td><td>3&nbsp;990 Kč</td><td>&bdquo;AI srozumitelně a prakticky&ldquo;</td></tr>
+        <tr><td><strong>Dřímalka (Aibility)</strong></td><td>Masterclass, AI Projects, strategie</td><td>Individuálně</td><td>AI innovation consultant</td></tr>
+        <tr><td><strong>Czechitas</strong></td><td>AI pro všechny &mdash; vzdělávací kurz</td><td>Dobrovolnický</td><td>Vzdělávání</td></tr>
+        <tr><td><strong>VŠE</strong></td><td>Workshop AI v marketingu</td><td>Akademický</td><td>Akademické prostředí</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card card--green">
+    <h4>Klíčová mezera</h4>
+    <p><strong>Všichni učí O AI, nikdo S AI nedodává výstupy.</strong> Fáborský a Dřímalka vytvářejí awareness. Jakub je implementační vrstva &mdash; &bdquo;tady je váš web hotový za 5 dní, ne za 8 týdnů.&ldquo;</p>
+  </div>
+</section>
+
+<!-- ─── 06 PRODUCTIZED ─── -->
+<section class="section" id="productized">
+  <div class="section-label">06 &mdash; Blok 2</div>
+  <h2>Productized services</h2>
+  <p class="section-desc">Globálně rostoucí model. Zvyšují marže o 30&ndash;40%. Fixní cena, jasný scope, předvídatelný delivery.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Služba</th><th>Model</th><th>Cena</th><th>Výkon</th></tr></thead>
+      <tbody>
+        <tr><td><strong>DesignJoy</strong></td><td>Design subscription</td><td>$5&nbsp;995/měsíc</td><td>$1.2M/rok, 1 člověk</td></tr>
+        <tr><td><strong>WP Speed Fix</strong></td><td>Jednorázová optimalizace</td><td>$495&ndash;$795</td><td>&ndash;</td></tr>
+        <tr><td><strong>Roast My LP</strong></td><td>15min video analýza konverzí</td><td>$350</td><td>850+ analýz</td></tr>
+        <tr><td><strong>100 Pound Social</strong></td><td>Správa sociálních sítí</td><td>£100&ndash;£255/měsíc</td><td>1000+ B2B klientů</td></tr>
+        <tr><td><strong>We Edit Podcasts</strong></td><td>Střih podcastů</td><td>$440&ndash;$1&nbsp;800/měsíc</td><td>4000+ klientů</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Vzor úspěšné productized service</h3>
+  <p><strong>1.</strong> Jasný název (&bdquo;Research Sprint&ldquo;, ne &bdquo;konzultace&ldquo;)<br>
+  <strong>2.</strong> Fixní cena viditelná na webu<br>
+  <strong>3.</strong> Konkrétní deliverable s deadlinem<br>
+  <strong>4.</strong> Sekce &bdquo;Mimo rozsah&ldquo; = stejně důležitá jako &bdquo;V rozsahu&ldquo;<br>
+  <strong>5.</strong> Social proof &mdash; počet dokončených projektů</p>
+</section>
+
+<!-- ─── 07 POSITIONING ─── -->
+<section class="section" id="positioning">
+  <div class="section-label">07 &mdash; Blok 3</div>
+  <h2>Positioning a messaging</h2>
+  <p class="section-desc">Analýza claimu, positioning mapa a doporučení pro komunikaci.</p>
+
+  <h3>Analýza claimu</h3>
+  <div class="card card--highlight">
+    <p style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin-bottom:12px">&bdquo;Stavím značky a obsahové systémy, které dávají náskok.&ldquo;</p>
+    <div class="pills">
+      <span class="pill pill--green">✓ &bdquo;Stavím&ldquo; = akce</span>
+      <span class="pill pill--green">✓ &bdquo;Náskok&ldquo; = validováno</span>
+      <span class="pill pill--amber">⚠ &bdquo;Obsahové systémy&ldquo; = příliš abstraktní</span>
+      <span class="pill pill--red">✗ Chybí: pro koho? jak rychle?</span>
+    </div>
+  </div>
+
+  <h3>Doporučené alternativy</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Varianta</th><th>Silné stránky</th><th>Slabiny</th></tr></thead>
+      <tbody>
+        <tr><td><strong>&bdquo;Stavím značky a weby, které dávají náskok. Rychleji než agentura, s hlubší strategií než freelancer.&ldquo;</strong></td><td>Konkrétní, diferenciace, časový prvek</td><td>Delší, dvě věty</td></tr>
+        <tr><td>&bdquo;Jeden člověk. AI stack. Brand, web a obsah za týdny, ne měsíce.&ldquo;</td><td>Extrémně konkrétní, provokativní</td><td>Může znít jako humbuk</td></tr>
+        <tr><td>&bdquo;Brand × Web × AI &mdash; od strategie po hotový web, jeden člověk.&ldquo;</td><td>Kompaktní, jasné 3 pilíře</td><td>Méně emocionální</td></tr>
+        <tr><td>&bdquo;Vaše značka za 5 dní, ne za 5 měsíců.&ldquo;</td><td>Brutálně konkrétní</td><td>Limitující pro větší projekty</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Positioning mapa</h3>
+  <div class="map-wrap">
+<pre>
+                        STRATEGIE
+                            │
+         Fractional CMO ●   │    ● Rostecký (mentor)
+                            │
+                            │    ● Dřímalka (AI education)
+                            │
+        ┌───────────────────┼───────────────────────┐
+        │                   │                       │
+SPECIALISTA ────────────────┼──────────────── GENERALISTA
+        │                   │                       │
+        │   ● Kodér         │  <span class="highlight-text">★ JAKUB SKUPIN</span>       │
+        │   ● Designer      │  <span class="highlight-text">  (strategie +</span>       │
+        │   ● Copywriter    │  <span class="highlight-text">   exekuce + AI)</span>      │
+        │                   │                       │
+        └───────────────────┼───────────────────────┘
+                            │
+        Fiverr/Upwork ●     │    ● Taste/agentury
+                            │
+                        EXEKUCE
+</pre>
+  </div>
+  <p>Jakub sedí v prázdném kvadrantu &mdash; <strong>generalista-stratég, který zároveň exekuuje</strong>. Nikdo jiný v ČR tuto pozici neobsazuje.</p>
+</section>
+
+<!-- ─── 08 LINKEDIN ─── -->
+<section class="section" id="linkedin">
+  <div class="section-label">08 &mdash; Blok 3</div>
+  <h2>LinkedIn strategie</h2>
+  <p class="section-desc">Data-driven doporučení pro B2B obsahovou strategii na LinkedInu.</p>
+
+  <h3>Jana Bartíková (Linked Akademie)</h3>
+  <div class="card">
+    <p><strong>90% prodejů z LinkedInu</strong> (inbound). 3000+ absolventů kurzů. Tři pilíře obsahu: unikátnost, expertíza, hodnota. Klienti: Lyreco, AutoCont, Legrand, Innogy.</p>
+  </div>
+
+  <h3>Co funguje v 2025</h3>
+  <div class="finding-grid">
+    <div class="finding">
+      <div class="finding-num">11×</div>
+      <h4>Carousel posty</h4>
+      <p>11.2× více impressions než text-only. Nejsilnější formát.</p>
+    </div>
+    <div class="finding">
+      <div class="finding-num">80%</div>
+      <h4>B2B leadů</h4>
+      <p>LinkedIn = 80% všech B2B leadů ze sociálních sítí.</p>
+    </div>
+    <div class="finding">
+      <div class="finding-num">2&ndash;3×</div>
+      <h4>Posty/týden</h4>
+      <p>Optimální frekvence. Kvalita > kvantita. Ne denně.</p>
+    </div>
+    <div class="finding">
+      <div class="finding-num">300%</div>
+      <h4>InMail vs. email</h4>
+      <p>InMail má 300% vyšší response rate než tradiční email.</p>
+    </div>
+  </div>
+
+  <div class="card card--blue">
+    <h4>Insider Notes = blue ocean v ČR</h4>
+    <p>Nikdo v ČR nepublikuje pravidelné, datově podložené vhledy z B2B marketingu. Žádná konkurence. Formát: 1&ndash;2 posty měsíčně na webu, sdílet na LinkedIn.</p>
+  </div>
+
+  <h3>Doporučení</h3>
+  <p><strong>Frekvence:</strong> 2 posty/týden (1× osobní příběh, 1× datový vhled)<br>
+  <strong>Formát:</strong> Carousel + storytelling mix<br>
+  <strong>Realistické očekávání:</strong> LinkedIn = trust building. Referrals zůstává #1.</p>
+</section>
+
+<!-- ─── 09 PŘÍLEŽITOSTI ─── -->
+<section class="section" id="prilezitosti">
+  <div class="section-label">09 &mdash; Blok 4</div>
+  <h2>Příležitosti k prohloubení</h2>
+  <p class="section-desc">Detailní analýza 4 klíčových příležitostí.</p>
+
+  <h3>AI-native content system</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Nástroj</th><th>Co dělá</th><th>Cena</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Castmagic</strong></td><td>Audio/video → transkript, posty, newsletter</td><td>od $23/měsíc</td></tr>
+        <tr><td><strong>Opus Clip</strong></td><td>Dlouhé video → krátké klipy</td><td>Free trial, pak placený</td></tr>
+        <tr><td><strong>Repurpose.io</strong></td><td>Cross-platform distribuce a resize</td><td>$35&ndash;$149/měsíc</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card card--highlight">
+    <h4>Jakubova přidaná hodnota</h4>
+    <p>Castmagic/Opus Clip jsou <strong>nástroje</strong>. Jakub dodává <strong>strategii</strong> &mdash; CO z videa vytěžit, PRO KOHO, v jakém TÓNU. Brand consistency, end-to-end delivery.</p>
+  </div>
+
+  <h3>Research sprint jako produkt</h3>
+  <p>Explicitně productized research sprinty jsou globálně vzácné &mdash; <strong>early mover příležitost</strong>. Benchmark: AI consulting $100&ndash;$450/h. Jakubových 15K (~$150/h) je competitive v ČR, pod globálním benchmarkem. Po 3+ referencích zvýšit na 20&ndash;25K.</p>
+
+  <h3>Expert Sprint</h3>
+  <p>Cenový bod 990&ndash;1&nbsp;990 Kč/účastník, 20&ndash;30 účastníků = 20&ndash;60K revenue. Frekvence: 1× za kvartál. Fáborský (AIFirst) kurz stojí 3&nbsp;990 Kč &mdash; benchmark pro horní hranici.</p>
+
+  <h3>AI produktová fotografie</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Metoda</th><th>Cena/snímek</th><th>Čas</th></tr></thead>
+      <tbody>
+        <tr><td>Studio</td><td>$150&ndash;$500+</td><td>2&ndash;4 týdny</td></tr>
+        <tr><td>Freelancer</td><td>$50&ndash;$150</td><td>1&ndash;2 týdny</td></tr>
+        <tr><td><strong>AI nástroje</strong></td><td><strong>$0.20&ndash;$1.00</strong></td><td><strong>&lt;30 sekund</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card card--amber">
+    <h4>Pozor na komoditizaci</h4>
+    <p>AI produktové fotky bude brzy dělat každý. Diferenciátor = brand-konzistentní vizuální systém (strategie), ne generování obrázků (exekuce). Zařadit jako doplňkovou službu, ne standalone.</p>
+  </div>
+</section>
+
+<!-- ─── 10 BENCHMARK ─── -->
+<section class="section" id="benchmark">
+  <div class="section-label">10 &mdash; Blok 5</div>
+  <h2>Web benchmark</h2>
+  <p class="section-desc">Best practices z 29 analyzovaných konzultantských webů + case study formát.</p>
+
+  <h3>Klíčové vzory</h3>
+  <p><strong>1.</strong> Jasná hodnotová propozice v hero &mdash; viditelná okamžitě<br>
+  <strong>2.</strong> Viditelné ceny na webu &mdash; filtrují kvalitní klienty<br>
+  <strong>3.</strong> Pojmenované nabídky &mdash; &bdquo;Research Sprint&ldquo; je zapamatovatelnější než &bdquo;konzultace&ldquo;<br>
+  <strong>4.</strong> Screenshots testimonials > text &mdash; zvyšují důvěryhodnost<br>
+  <strong>5.</strong> Osobnost &mdash; tón jako by mluvil s přítelem<br>
+  <strong>6.</strong> Specializace &mdash; niche vždy vítězí</p>
+
+  <h3>Hodnocení jakubskupin.cz</h3>
+  <div class="pills">
+    <span class="pill pill--green">✓ Pojmenované tiery</span>
+    <span class="pill pill--green">✓ Ceny viditelné</span>
+    <span class="pill pill--red">✗ Chybí case studies</span>
+    <span class="pill pill--red">✗ Chybí screenshot testimonials</span>
+    <span class="pill pill--amber">⚠ Chybí sekce &bdquo;Mimo rozsah&ldquo;</span>
+    <span class="pill pill--amber">⚠ Chybí počítadlo projektů</span>
+  </div>
+
+  <h3>Case study formát (2025 standard)</h3>
+  <div class="card card--highlight">
+    <h4>Challenge → Solution → Impact</h4>
+    <p>93% top firem používá tento framework. 88% top firem má case studies. Firmy s 4+ formáty mají 34% vyšší engagement.</p>
+    <p><strong>Obsah:</strong> Headline s výsledkem, 3&ndash;5 klíčových metrik, before/after, citát klienta, deliverables, čas dodání.</p>
+  </div>
+</section>
+
+<!-- ─── 11 FINANCE ─── -->
+<section class="section" id="finance">
+  <div class="section-label">11 &mdash; Blok 6</div>
+  <h2>Finanční model</h2>
+  <p class="section-desc">Revenue projekce a pricing benchmark.</p>
+
+  <h3>Revenue scénáře</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Scénář</th><th>Projekty/měsíc</th><th>Měsíční revenue</th><th>Roční revenue</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Konzervativní</strong></td><td>1 projekt</td><td>~20K CZK</td><td>~240K CZK</td></tr>
+        <tr><td><strong>Realistický (Q3&ndash;Q4)</strong></td><td>1.5&ndash;2 projekty</td><td>~35&ndash;45K CZK</td><td>~420&ndash;540K CZK</td></tr>
+        <tr><td><strong>Optimistický (2027)</strong></td><td>2&ndash;3 projekty</td><td>~70K CZK</td><td>~840K CZK</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>+ SYMBIO retainer jako stabilní základ v přechodném období.</p>
+
+  <h3>Break-even pro odchod od SYMBIO</h3>
+  <div class="card card--amber">
+    <p>Potřeba: ~50&ndash;70K/měsíc. To vyžaduje ~1× Brand & Web (56K) + 1× Research Sprint (15K) měsíčně. <strong>Realistický timeline: 6&ndash;12 měsíců po spuštění webu s case studies.</strong></p>
+  </div>
+
+  <h3>Pricing doporučení</h3>
+  <p><strong>Teď:</strong> Aktuální pricing je pro CZ trh správný.<br>
+  <strong>Po 3&ndash;5 projektech:</strong> Research Sprint → 20K, Starter Pack → 35K, Brand & Web → 75K+<br>
+  <strong>Buga signal:</strong> &bdquo;50K je reálné, jen logo stálo 70K&ldquo; → trh unese vyšší ceny s portfoliem.</p>
+</section>
+
+<!-- ─── 12 SYNTÉZA ─── -->
+<section class="section" id="synteza">
+  <div class="section-label">12 &mdash; Syntéza</div>
+  <h2>Top 10 findings</h2>
+  <p class="section-desc">Validované závěry z celého výzkumu.</p>
+
+  <div class="finding-grid">
+    <div class="finding">
+      <div class="finding-num">1</div>
+      <h4>Unikátní positioning v ČR</h4>
+      <p>Nikdo nekombinuje strategii + web dev + AI. Potvrzeno analýzou 5 konkurentů.</p>
+    </div>
+    <div class="finding">
+      <div class="finding-num">2</div>
+      <h4>Obrovský trh SMB</h4>
+      <p>~15&ndash;20K firem bez marketingu. Trend od agentur tento trh zvětšuje.</p>
+    </div>
+    <div class="finding">
+      <div class="finding-num">3</div>
+      <h4>AI = páka, ne produkt</h4>
+      <p>Fáborský/Dřímalka učí O AI. Jakub S AI DĚLÁ. Implementační vrstva.</p>
+    </div>
+    <div class="finding">
+      <div class="finding-num">4</div>
+      <h4>Productized tiers fungují</h4>
+      <p>DesignJoy = $1.2M/rok, 1 člověk. Jakubovy 3 tiery jsou správně strukturované.</p>
+    </div>
+    <div class="finding">
+      <div class="finding-num">5</div>
+      <h4>Pricing je adekvátní</h4>
+      <p>56K za Brand & Web = mezera mezi freelancerem (15&ndash;30K) a agenturou (200K+).</p>
+    </div>
+    <div class="finding">
+      <div class="finding-num">6</div>
+      <h4>Web bez case studies = #1 problém</h4>
+      <p>Dokud není web s case studies live, žádný positioning nefunguje naplno.</p>
+    </div>
+    <div class="finding">
+      <div class="finding-num">7</div>
+      <h4>Referrals > LinkedIn > SEO</h4>
+      <p>Martin Vymětal jako uzel je cennější než jakýkoli marketing.</p>
+    </div>
+    <div class="finding">
+      <div class="finding-num">8</div>
+      <h4>Insider Notes = blue ocean</h4>
+      <p>Datově podložené vhledy z B2B marketingu nemá v ČR nikdo.</p>
+    </div>
+    <div class="finding">
+      <div class="finding-num">9</div>
+      <h4>Globálně validovaný model</h4>
+      <p>Solo operátoři s AI: $100K&ndash;$1.2M/rok. Jakub je na začátku této křivky.</p>
+    </div>
+    <div class="finding">
+      <div class="finding-num">10</div>
+      <h4>Claim je 70% cesty</h4>
+      <p>Nahradit &bdquo;obsahové systémy&ldquo; za &bdquo;weby&ldquo;. Přidat časový argument.</p>
+    </div>
+  </div>
+
+  <h3>Tensions (napětí v datech)</h3>
+  <div class="card card--red" style="margin-bottom:12px">
+    <h4>1. &bdquo;Agentury končí&ldquo; vs. realita</h4>
+    <p>Pro SMB ano, pro enterprise ne. Nekomunikovat &bdquo;agentury jsou mrtvé&ldquo; &mdash; spíš &bdquo;pro vaši velikost je efektivnější jeden chytrý člověk.&ldquo;</p>
+  </div>
+  <div class="card card--red" style="margin-bottom:12px">
+    <h4>2. Productized vs. scope creep</h4>
+    <p>Striktní separace tierů je klíčová. Jinak se z productized stane custom (lekce ze Šimrání a Matadoru).</p>
+  </div>
+  <div class="card card--red" style="margin-bottom:12px">
+    <h4>3. Generalista vs. specialista</h4>
+    <p>Trh odměňuje specialisty. Řešení: komunikuj jako &bdquo;specialista na průsečík&ldquo; (category creation).</p>
+  </div>
+  <div class="card card--red" style="margin-bottom:12px">
+    <h4>4. České ceny vs. globální hodnota</h4>
+    <p>Globální kvalita za české ceny = výhoda pro klienty, limit pro revenue. Postupně zvyšovat.</p>
+  </div>
+  <div class="card card--red">
+    <h4>5. Solo = hustler vs. Solo = premium</h4>
+    <p>Messaging musí jasně komunikovat &bdquo;elitní operátor s AI pákou&ldquo;, ne &bdquo;nemůže si dovolit tým&ldquo;.</p>
+  </div>
+
+  <h3>5 nových výzkumných otázek</h3>
+  <p><strong>1.</strong> Kolik projektů &bdquo;brand + web&ldquo; ročně vzniká v ČR v segmentu 50&ndash;150K?<br>
+  <strong>2.</strong> Jaký je reálný conversion rate z LinkedIn na platícího klienta pro B2B služby?<br>
+  <strong>3.</strong> Jak rychle se komoditizuje &bdquo;AI-powered branding&ldquo;? Co bude diferenciátor za 12&ndash;18 měsíců?<br>
+  <strong>4.</strong> Existuje poptávka po &bdquo;research as a service&ldquo; mimo agentury?<br>
+  <strong>5.</strong> Jaký je lifetime value klienta v modelu &bdquo;Brand & Web + ongoing retainer&ldquo;?</p>
+</section>
+
+<!-- ─── 13 NEXT STEPS ─── -->
+<section class="section" id="next-steps">
+  <div class="section-label">13 &mdash; Akční plán</div>
+  <h2>Next Steps</h2>
+  <p class="section-desc">Prioritizovaná doporučení na základě celého výzkumu.</p>
+
+  <div class="step">
+    <div class="step-priority step-priority--now">Tento<br>týden</div>
+    <div class="step-content">
+      <h4>Dokončit jakubskupin.cz</h4>
+      <p>Tři tiery, viditelný pricing, sekce &bdquo;Mimo rozsah&ldquo; u každého tieru.</p>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-priority step-priority--now">Tento<br>týden</div>
+    <div class="step-content">
+      <h4>Case study Martin Vymětal</h4>
+      <p>Challenge → Solution → Impact formát. Screenshot testimonial.</p>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-priority step-priority--month">Březen</div>
+    <div class="step-content">
+      <h4>První Insider Note</h4>
+      <p>&bdquo;Kolik stojí brand + web pro střední firmu v ČR: reálná čísla z 2026&ldquo;</p>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-priority step-priority--month">Březen</div>
+    <div class="step-content">
+      <h4>Pilot Simply5</h4>
+      <p>Dokončit a dokumentovat jako case study.</p>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-priority step-priority--month">Březen</div>
+    <div class="step-content">
+      <h4>Buga</h4>
+      <p>Připravit návrh pro Martina &mdash; zmíněno 4. března.</p>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-priority step-priority--q2">Q2 2026</div>
+    <div class="step-content">
+      <h4>LinkedIn 2×/týden</h4>
+      <p>Carousel + storytelling. Insider Notes na web, sdílet na LinkedIn.</p>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-priority step-priority--q2">Q2 2026</div>
+    <div class="step-content">
+      <h4>Zvýšit pricing</h4>
+      <p>Po 3&ndash;5 projektech: Research Sprint → 20K, Starter Pack → 35K, Brand & Web → 75K+</p>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-priority step-priority--q2">Q2 2026</div>
+    <div class="step-content">
+      <h4>Expert Sprint pilot</h4>
+      <p>1 event s expertním hostem. 990&ndash;1&nbsp;990 Kč, 20&ndash;30 účastníků.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+</div><!-- /layout -->
+</div><!-- /container -->
+
+<!-- ─── FOOTER ─── -->
+<footer class="footer">
+  <div class="container">
+    <p>Hluboký výzkum v1.0 &mdash; 6. března 2026 &mdash; Jakub Skupin</p>
+  </div>
+</footer>
+
+<!-- ─── SCROLL SPY ─── -->
+<script>
+(function(){
+  const links = document.querySelectorAll('.sidebar nav a');
+  const sections = [];
+  links.forEach(function(link) {
+    const id = link.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if (el) sections.push({ id: id, el: el, link: link });
+  });
+
+  function onScroll() {
+    const scrollY = window.scrollY + 100;
+    let current = sections[0];
+    for (let i = 0; i < sections.length; i++) {
+      if (sections[i].el.offsetTop <= scrollY) {
+        current = sections[i];
+      }
+    }
+    links.forEach(function(l) { l.classList.remove('active'); });
+    if (current) current.link.classList.add('active');
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // smooth scroll
+  links.forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const id = this.getAttribute('href').slice(1);
+      const target = document.getElementById(id);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.pushState(null, '', '#' + id);
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
