@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion, type Easing } from "framer-motion";
 import { works } from "@/lib/data";
 
@@ -27,7 +26,7 @@ export default function WorkCards() {
       </div>
       <div className="mb-[140px] grid grid-cols-1 gap-5 sm:grid-cols-2">
         {works.map((work, i) => (
-          <Link key={work.slug} href={`/work/${work.slug}`}>
+          <a key={work.slug} href={work.externalUrl ?? `/work/${work.slug}`} target="_blank" rel="noopener noreferrer">
             <motion.div
               className="cursor-pointer overflow-hidden rounded-3xl border border-border bg-card-bg transition-colors duration-300 hover:border-[#CDCBC5]"
               {...stagger(i)}
@@ -73,7 +72,7 @@ export default function WorkCards() {
                 </span>
               </div>
             </motion.div>
-          </Link>
+          </a>
         ))}
       </div>
     </section>

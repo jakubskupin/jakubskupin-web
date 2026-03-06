@@ -10,6 +10,7 @@ export const works: Work[] = [
     description: "Personal brand a web pro marketéra a podcastera.",
     tag: "Strategie → Web",
     screenshot: "/work/martin-vymetal.png",
+    externalUrl: "https://martinvymetal.cz",
   },
   {
     slug: "simrani",
@@ -19,6 +20,7 @@ export const works: Work[] = [
       "Brand strategie, vizuální identita a web pro podcast o intimitě.",
     tag: "Research → Brand → Web",
     screenshot: "/work/simrani.png",
+    externalUrl: "https://simrani-web.vercel.app/",
   },
 ];
 
