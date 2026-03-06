@@ -40,9 +40,9 @@ const personas = [
     label: "Creator",
     title: "Rostete a potřebujete škálovat",
     bullets: [
-      "Podcast, newsletter nebo YouTube — publikum máte, ale nestíháte produkci",
-      "Aby tvůrce zůstal relevantní, musí se věnovat tématům, ne editaci",
-      "Budu vaše pomocná ruka: podklady pro kampaně, zpracování epizod, AI-native content systém",
+      "Podcaster, YouTuber nebo tvůrce kurzů — publikum roste, ale nestíháte produkci a hledáte dalšího člena do týmu",
+      "Zpracuji výstupy z podcastů a videí, připravím podklady pro kampaně a vybuduji AI-native content systém",
+      "Vy se věnujete obsahu a tématům — já řeším produkci a distribuci",
     ],
   },
 ];
