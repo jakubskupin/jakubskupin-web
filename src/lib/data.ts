@@ -36,9 +36,12 @@ export const tiers: Tier[] = [
     features: [
       "Hloubkový research + AI analýza",
       "Primární a sekundární cílová skupina a jejich painpointy",
+      "Mapa konkurentů",
+      "Rizika",
       "Váš x-factor — pojmenovaný a zasazený do kontextu",
       "Positioning & messaging",
       "Tonalita",
+      "Návrhy témat",
       "Vizuální šablona",
       "Hotová online přítomnost — single-page web, LinkedIn, první obsah",
     ],
