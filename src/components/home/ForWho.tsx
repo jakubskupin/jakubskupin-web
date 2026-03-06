@@ -19,7 +19,7 @@ function stagger(index: number) {
 const personas = [
   {
     label: "Expert",
-    title: "Máte expertízu, ale online to nevidíte",
+    title: "Jste expert, ale online to není vidět",
     bullets: [
       "Konzultant, lékař, právník nebo architekt — lidé vás doporučují, ale web tomu neodpovídá",
       "Pomůžu vám sestavit případovky a ukázky prací, které mluví za vás",
