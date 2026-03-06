@@ -51,7 +51,9 @@ export default function XFactor() {
           Jak pracuji
         </div>
         <h2 className="mb-3 font-heading text-[clamp(28px,4vw,38px)] font-bold tracking-[-0.03em] max-w-[600px]">
-          Každý má něco unikátního. Já to najdu a postavím na tom
+          Každý má něco unikátního.
+          <br />
+          Já to najdu
         </h2>
         <p className="max-w-[460px] text-base leading-[1.6] text-text-secondary">
           Nejdřív pojmenuju tvůj x-factor. Pak kolem něj postavím strategii,
