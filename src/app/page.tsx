@@ -8,6 +8,7 @@ import XFactor from "@/components/home/XFactor";
 import Pricing from "@/components/home/Pricing";
 import OngoingServices from "@/components/home/OngoingServices";
 import KnowledgeAthlete from "@/components/home/KnowledgeAthlete";
+import ForWho from "@/components/home/ForWho";
 import ClosingCTA from "@/components/home/ClosingCTA";
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
       <Hero />
       <WorkCards />
       <Testimonials />
+      <ForWho />
       <XFactor />
       <Pricing />
       <OngoingServices />
