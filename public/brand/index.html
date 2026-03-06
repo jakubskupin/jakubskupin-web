@@ -246,24 +246,102 @@ tbody tr:hover { background: var(--highlight); }
 .finding p { font-size: 13px; color: var(--text-secondary); margin: 0; }
 
 /* ─── POSITIONING MAP ─── */
-.map-wrap {
+.pos-map {
+  position: relative;
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 24px;
   margin: 24px 0;
-  overflow-x: auto;
+  padding: 48px 32px;
+  min-height: 480px;
+  overflow: hidden;
 }
-.map-wrap pre {
-  font-family: 'Courier New', monospace;
+.pos-map-grid {
+  position: relative;
+  width: 100%;
+  height: 400px;
+}
+.pos-map-axis {
+  position: absolute;
+  background: var(--border);
+}
+.pos-map-axis--h {
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+}
+.pos-map-axis--v {
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+}
+.pos-map-label {
+  position: absolute;
+  font-family: 'Manrope', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+.pos-map-label--top { top: 0; left: 50%; transform: translateX(-50%); }
+.pos-map-label--bottom { bottom: 0; left: 50%; transform: translateX(-50%); }
+.pos-map-label--left { left: 0; top: 50%; transform: translateY(-50%); }
+.pos-map-label--right { right: 0; top: 50%; transform: translateY(-50%); }
+.pos-map-zone {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 50%;
+  border: 1.5px dashed var(--border);
+  border-radius: 12px;
+}
+.pos-dot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+.pos-dot-circle {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-tertiary);
+  flex-shrink: 0;
+}
+.pos-dot-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+.pos-dot--jakub .pos-dot-circle {
+  width: 14px;
+  height: 14px;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(26, 26, 24, 0.1);
+}
+.pos-dot--jakub .pos-dot-label {
   font-size: 13px;
-  line-height: 1.5;
-  white-space: pre;
+  font-weight: 700;
+  color: var(--text);
+}
+.pos-dot--jakub .pos-dot-sub {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
   color: var(--text-secondary);
 }
-.map-wrap .highlight-text {
-  color: var(--text);
-  font-weight: 700;
+@media (max-width: 640px) {
+  .pos-map { padding: 32px 16px; min-height: 380px; }
+  .pos-map-grid { height: 340px; }
+  .pos-map-label { font-size: 9px; }
+  .pos-dot-label { font-size: 11px; }
+  .pos-dot--jakub .pos-dot-label { font-size: 12px; }
 }
 
 /* ─── PILLS ─── */
@@ -680,28 +758,57 @@ tbody tr:hover { background: var(--highlight); }
   </div>
 
   <h3>Positioning mapa</h3>
-  <div class="map-wrap">
-<pre>
-                        STRATEGIE
-                            │
-         Fractional CMO ●   │    ● Rostecký (mentor)
-                            │
-                            │    ● Dřímalka (AI education)
-                            │
-        ┌───────────────────┼───────────────────────┐
-        │                   │                       │
-SPECIALISTA ────────────────┼──────────────── GENERALISTA
-        │                   │                       │
-        │   ● Kodér         │  <span class="highlight-text">★ JAKUB SKUPIN</span>       │
-        │   ● Designer      │  <span class="highlight-text">  (strategie +</span>       │
-        │   ● Copywriter    │  <span class="highlight-text">   exekuce + AI)</span>      │
-        │                   │                       │
-        └───────────────────┼───────────────────────┘
-                            │
-        Fiverr/Upwork ●     │    ● Taste/agentury
-                            │
-                        EXEKUCE
-</pre>
+  <div class="pos-map">
+    <div class="pos-map-grid">
+      <div class="pos-map-axis pos-map-axis--h"></div>
+      <div class="pos-map-axis pos-map-axis--v"></div>
+      <div class="pos-map-label pos-map-label--top">Strategie</div>
+      <div class="pos-map-label pos-map-label--bottom">Exekuce</div>
+      <div class="pos-map-label pos-map-label--left">Specialista</div>
+      <div class="pos-map-label pos-map-label--right">Generalista</div>
+      <div class="pos-map-zone"></div>
+      <!-- Quadrant: strategie + generalista -->
+      <div class="pos-dot" style="top: 22%; left: 68%;">
+        <span class="pos-dot-circle"></span>
+        <span class="pos-dot-label">Rostecký (mentor)</span>
+      </div>
+      <div class="pos-dot" style="top: 32%; left: 65%;">
+        <span class="pos-dot-circle"></span>
+        <span class="pos-dot-label">Dřímalka (AI education)</span>
+      </div>
+      <!-- Quadrant: strategie + specialista -->
+      <div class="pos-dot" style="top: 20%; left: 28%;">
+        <span class="pos-dot-circle"></span>
+        <span class="pos-dot-label">Fractional CMO</span>
+      </div>
+      <!-- Quadrant: exekuce + specialista -->
+      <div class="pos-dot" style="top: 58%; left: 30%;">
+        <span class="pos-dot-circle"></span>
+        <span class="pos-dot-label">Kodér</span>
+      </div>
+      <div class="pos-dot" style="top: 65%; left: 28%;">
+        <span class="pos-dot-circle"></span>
+        <span class="pos-dot-label">Designer</span>
+      </div>
+      <div class="pos-dot" style="top: 72%; left: 32%;">
+        <span class="pos-dot-circle"></span>
+        <span class="pos-dot-label">Copywriter</span>
+      </div>
+      <div class="pos-dot" style="top: 82%; left: 25%;">
+        <span class="pos-dot-circle"></span>
+        <span class="pos-dot-label">Fiverr / Upwork</span>
+      </div>
+      <!-- Quadrant: exekuce + generalista -->
+      <div class="pos-dot" style="top: 80%; left: 70%;">
+        <span class="pos-dot-circle"></span>
+        <span class="pos-dot-label">Agentury</span>
+      </div>
+      <!-- JAKUB — prázdný kvadrant: generalista + exekuce blízko středu -->
+      <div class="pos-dot pos-dot--jakub" style="top: 60%; left: 66%;">
+        <span class="pos-dot-circle"></span>
+        <span class="pos-dot-label">Jakub Skupin<span class="pos-dot-sub">Strategie + exekuce + AI</span></span>
+      </div>
+    </div>
   </div>
   <p>Jakub sedí v prázdném kvadrantu &mdash; <strong>generalista-stratég, který zároveň exekuuje</strong>. Nikdo jiný v ČR tuto pozici neobsazuje.</p>
 </section>
