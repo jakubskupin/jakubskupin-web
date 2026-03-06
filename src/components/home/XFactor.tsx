@@ -56,7 +56,7 @@ export default function XFactor() {
           Já to pojmenuju a ukážu světu
         </h2>
         <p className="max-w-[460px] text-base leading-[1.6] text-text-secondary">
-          Čtyři kroky. Jeden člověk. Žádné meetingy. Ta rychlost vás překvapí.
+          Jeden člověk. Žádné meetingy. Ta rychlost vás překvapí.
         </p>
       </motion.div>
 
