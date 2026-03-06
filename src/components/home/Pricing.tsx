@@ -35,7 +35,7 @@ export default function Pricing() {
         {...fadeUp}
         whileHover={{ y: -2 }}
       >
-        <div className="absolute right-[-28px] top-[24px] z-10 rotate-45 bg-text px-10 py-1.5 text-center text-[10px] font-bold uppercase tracking-[0.08em] text-bg shadow-sm">
+        <div className="absolute right-[-36px] top-[18px] z-10 rotate-45 bg-text px-12 py-1 text-center text-[9px] font-bold uppercase tracking-[0.08em] text-bg shadow-sm">
           Zaváděcí cena
         </div>
         <div className="mb-1.5 font-heading text-xl font-bold tracking-[-0.02em]">
