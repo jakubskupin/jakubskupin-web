@@ -45,7 +45,7 @@ export default function KnowledgeAthlete() {
           Knowledge Athlete
         </div>
         <h2 className="mb-3 font-heading text-[clamp(28px,4vw,38px)] font-bold tracking-[-0.03em] max-w-[600px]">
-          Pracuju jako atlet. Trénuju, sprintuju, vyhodnocuju.
+          Pracuju jako atlet. Trénuju, sprintuju, vyhodnocuju
         </h2>
         <p className="max-w-[520px] text-base leading-[1.65] text-text-secondary">
           Konzultace, jak je znáte, jsou mrtvé — na většinu otázek se dá zeptat

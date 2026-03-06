@@ -17,7 +17,7 @@ export default function ClosingCTA() {
       {...fadeUp}
     >
       <h2 className="mb-4 font-heading text-[clamp(28px,4vw,38px)] font-bold tracking-[-0.03em]">
-        Máte co říct. Pojďme tomu dát formu.
+        Máte co říct. Pojďme tomu dát formu
       </h2>
       <p className="mx-auto mb-8 max-w-[420px] text-base leading-[1.6] text-text-secondary">
         Napište mi na LinkedIn — domluvíme se na prvním kroku.

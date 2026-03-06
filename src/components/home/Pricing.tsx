@@ -26,7 +26,7 @@ export default function Pricing() {
           Spolupráce
         </div>
         <h2 className="mb-3 font-heading text-[clamp(28px,4vw,38px)] font-bold tracking-[-0.03em]">
-          Tři způsoby, jak začít.
+          Tři způsoby, jak začít
         </h2>
         <p className="max-w-[460px] text-base leading-[1.6] text-text-secondary">
           Od rychlé rešerše po kompletní brand. Vyberte si úroveň, kterou teď
