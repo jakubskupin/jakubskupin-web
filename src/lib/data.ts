@@ -21,6 +21,7 @@ export const works: Work[] = [
     tag: "Research → Brand → Web",
     screenshot: "/work/simrani.png",
     externalUrl: "https://simrani-web.vercel.app/",
+    concept: true,
   },
 ];
 

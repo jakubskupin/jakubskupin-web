@@ -6,6 +6,7 @@ export interface Work {
   tag: string;
   screenshot?: string;
   externalUrl?: string;
+  concept?: boolean;
 }
 
 export interface Tier {

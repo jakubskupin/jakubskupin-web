@@ -28,10 +28,15 @@ export default function WorkCards() {
         {works.map((work, i) => (
           <a key={work.slug} href={work.externalUrl ?? `/work/${work.slug}`} target="_blank" rel="noopener noreferrer">
             <motion.div
-              className="cursor-pointer overflow-hidden rounded-3xl border border-border bg-card-bg transition-colors duration-300 hover:border-[#CDCBC5]"
+              className="relative cursor-pointer overflow-hidden rounded-3xl border border-border bg-card-bg transition-colors duration-300 hover:border-[#CDCBC5]"
               {...stagger(i)}
               whileHover={{ y: -3 }}
             >
+              {work.concept && (
+                <div className="absolute right-[-34px] top-[22px] z-10 rotate-45 bg-text-tertiary px-10 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-white shadow-sm">
+                  Koncept
+                </div>
+              )}
               {/* Browser chrome */}
               <div className="flex items-center gap-2 border-b border-border bg-[#F4F3F0] px-4 py-3">
                 <div className="browser-dots flex gap-1.5">
