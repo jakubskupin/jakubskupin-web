@@ -51,13 +51,12 @@ export default function XFactor() {
           Jak pracuji
         </div>
         <h2 className="mb-3 font-heading text-[clamp(28px,4vw,38px)] font-bold tracking-[-0.03em] max-w-[600px]">
-          Každý má něco unikátního.
+          Vy to žijete.
           <br />
-          Já to najdu
+          Já to pojmenuju a ukážu světu
         </h2>
         <p className="max-w-[460px] text-base leading-[1.6] text-text-secondary">
-          Nejdřív pojmenuju váš x-factor. Pak kolem něj postavím strategii,
-          značku, web i obsah.
+          Čtyři kroky. Jeden člověk. Žádné meetingy. Ta rychlost vás překvapí.
         </p>
       </motion.div>
 
