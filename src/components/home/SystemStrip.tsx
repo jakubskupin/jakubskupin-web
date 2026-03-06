@@ -31,7 +31,7 @@ export default function SystemStrip() {
           ))}
         </div>
         <p className="text-[13px] tracking-[0.02em] text-text-tertiary">
-          Jeden člověk, celý systém
+          Jeden člověk × AI. Rychlost, kterou nečekáte
         </p>
       </div>
     </motion.div>
