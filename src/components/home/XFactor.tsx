@@ -12,7 +12,7 @@ const fadeUp = {
 function stagger(index: number) {
   return {
     ...fadeUp,
-    transition: { ...fadeUp.transition, delay: index * 0.1 },
+    transition: { ...fadeUp.transition, delay: index * 0.15 },
   };
 }
 
@@ -46,7 +46,7 @@ const steps = [
 export default function XFactor() {
   return (
     <section className="mx-auto max-w-[960px] px-6 mb-[140px]" id="proces">
-      <motion.div className="mb-12" {...fadeUp}>
+      <motion.div className="mb-14" {...fadeUp}>
         <div className="mb-8 text-[13px] font-semibold uppercase tracking-[0.06em] text-text-tertiary">
           Jak pracuji
         </div>
@@ -60,24 +60,35 @@ export default function XFactor() {
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
-        {steps.map((step, i) => (
-          <motion.div
-            key={step.num}
-            className="rounded-2xl border border-border bg-card-bg px-6 py-7 transition-colors duration-250 hover:border-[#CDCBC5]"
-            {...stagger(i)}
-          >
-            <div className="mb-4 text-[11px] font-bold uppercase tracking-[0.08em] text-text-tertiary">
-              {step.num}
-            </div>
-            <h3 className="mb-2 font-heading text-base font-bold tracking-[-0.01em]">
-              {step.title}
-            </h3>
-            <p className="text-[13px] leading-[1.55] text-text-secondary">
-              {step.description}
-            </p>
-          </motion.div>
-        ))}
+      <div className="relative ml-4 md:ml-8">
+        {/* Vertical line */}
+        <div className="absolute left-[7px] top-2 bottom-2 w-px bg-border" />
+
+        <div className="space-y-10">
+          {steps.map((step, i) => (
+            <motion.div
+              key={step.num}
+              className="relative pl-10"
+              {...stagger(i)}
+            >
+              {/* Dot */}
+              <div className="absolute left-0 top-1 flex h-[15px] w-[15px] items-center justify-center">
+                <div className="h-[7px] w-[7px] rounded-full bg-text" />
+              </div>
+
+              {/* Content */}
+              <div className="text-[11px] font-bold uppercase tracking-[0.08em] text-text-tertiary mb-1.5">
+                {step.num}
+              </div>
+              <h3 className="mb-2 font-heading text-[17px] font-bold tracking-[-0.01em]">
+                {step.title}
+              </h3>
+              <p className="text-[14px] leading-[1.6] text-text-secondary max-w-[480px]">
+                {step.description}
+              </p>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
