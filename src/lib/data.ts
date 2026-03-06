@@ -32,7 +32,7 @@ export const tiers: Tier[] = [
     tagline:
       "Pojmenuju, čím jste výjimeční — a dám tomu tvar.",
     price: "40 000",
-    priceNote: "jednorázově · nejsme plátce DPH",
+    priceNote: "jednorázově",
     features: [
       "Hloubkový research + AI analýza",
       "Primární a sekundární cílová skupina a jejich painpointy",
