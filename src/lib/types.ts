@@ -4,6 +4,7 @@ export interface Work {
   title: string;
   description: string;
   tag: string;
+  screenshot?: string;
 }
 
 export interface Tier {

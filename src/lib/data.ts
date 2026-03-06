@@ -9,6 +9,7 @@ export const works: Work[] = [
     title: "Martin Vymětal",
     description: "Personal brand a web pro marketéra a podcastera.",
     tag: "Strategie → Web",
+    screenshot: "/work/martin-vymetal.png",
   },
   {
     slug: "simrani",

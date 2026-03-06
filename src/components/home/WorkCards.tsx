@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { motion, type Easing } from "framer-motion";
 import { works } from "@/lib/data";
@@ -43,10 +44,22 @@ export default function WorkCards() {
                   {work.url}
                 </div>
               </div>
-              {/* Screenshot placeholder */}
-              <div className="flex aspect-[4/3] w-full items-center justify-center bg-gradient-to-b from-[#EEECEA] to-[#E4E2DE] text-[13px] font-medium text-text-tertiary">
-                screenshot — brzy
-              </div>
+              {/* Screenshot */}
+              {work.screenshot ? (
+                <div className="aspect-[4/3] w-full overflow-hidden">
+                  <Image
+                    src={work.screenshot}
+                    alt={`${work.title} — ${work.url}`}
+                    width={1200}
+                    height={900}
+                    className="h-full w-full object-cover object-top"
+                  />
+                </div>
+              ) : (
+                <div className="flex aspect-[4/3] w-full items-center justify-center bg-gradient-to-b from-[#EEECEA] to-[#E4E2DE] text-[13px] font-medium text-text-tertiary">
+                  screenshot — brzy
+                </div>
+              )}
               {/* Info */}
               <div className="px-6 py-5">
                 <h3 className="mb-1 font-heading text-[17px] font-semibold tracking-[-0.01em]">
