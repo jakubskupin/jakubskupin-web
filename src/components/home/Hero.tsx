@@ -16,13 +16,13 @@ export default function Hero() {
       {...fadeUp}
     >
       <div className="mb-6 text-[13px] font-semibold uppercase tracking-[0.06em] text-text-tertiary">
-        Personal brand × Web × AI
+        Personal brand × AI × Marketing
       </div>
       <h1 className="mb-7 font-heading text-[clamp(36px,5.5vw,52px)] font-bold leading-[1.12] tracking-[-0.03em]">
-        Tvořím osobní značky a weby pro lidi, kteří mají co říct
+        Pojmenuju, čím jste výjimeční
       </h1>
       <p className="max-w-[520px] text-lg leading-[1.65] text-text-secondary">
-        Pojmenuju váš x-factor a postavím kolem něj strategii, web i obsah.
+        A postavím kolem toho strategii i obsah.
       </p>
     </motion.section>
   );
