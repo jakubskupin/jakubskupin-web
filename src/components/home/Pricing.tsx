@@ -54,6 +54,9 @@ export default function Pricing() {
         </div>
 
         {/* Features */}
+        <div className="mb-3 text-[11px] font-bold uppercase tracking-[0.08em] text-text-tertiary">
+          Co dostanete
+        </div>
         <ul className="features mb-6 flex flex-col gap-2.5">
           {tier.features.map((f) => (
             <li
