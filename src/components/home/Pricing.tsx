@@ -26,15 +26,14 @@ export default function Pricing() {
           Spolupráce
         </div>
         <h2 className="mb-3 font-heading text-[clamp(28px,4vw,38px)] font-bold tracking-[-0.03em]">
-          Tři způsoby, jak začít
+          Dva způsoby, jak začít
         </h2>
         <p className="max-w-[460px] text-base leading-[1.6] text-text-secondary">
-          Od rychlé rešerše po kompletní brand. Vyberte si úroveň, kterou teď
-          potřebujete.
+          Od pojmenování vašeho x-faktoru po kompletní digitální přítomnost.
         </p>
       </motion.div>
 
-      <div className="mb-12 grid grid-cols-1 gap-4 md:grid-cols-3">
+      <div className="mb-12 grid grid-cols-1 gap-4 md:grid-cols-2">
         {tiers.map((tier, i) => (
           <motion.div
             key={tier.num}
