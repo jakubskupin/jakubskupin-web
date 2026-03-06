@@ -65,7 +65,7 @@ export default function ForWho() {
             className="rounded-2xl border border-border bg-card-bg px-6 py-7 transition-colors duration-250 hover:border-[#CDCBC5]"
             {...stagger(i)}
           >
-            <div className="mb-4 text-[11px] font-bold uppercase tracking-[0.08em] text-text-tertiary">
+            <div className="mb-5 inline-block rounded-full border border-border bg-[#F4F3F0] px-4 py-1.5 text-[12px] font-bold uppercase tracking-[0.06em] text-text">
               {p.label}
             </div>
             <h3 className="mb-4 font-heading text-[15px] font-bold leading-[1.35] tracking-[-0.01em]">
