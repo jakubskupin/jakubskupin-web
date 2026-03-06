@@ -24,9 +24,9 @@ export default function Pricing() {
           Jak to funguje
         </h2>
         <p className="max-w-[520px] text-base leading-[1.6] text-text-secondary">
-          Doba se změnila. Dostat se k hotové single page je dnes rychlejší,
-          než byste čekali — a je to skvělý výchozí bod k ujasnění si, kdo
-          jste, pro koho děláte a jak o sobě mluvit online.
+          Doba se změnila. Ujasnit si, kdo jste, pro koho děláte a jak
+          o sobě mluvit online — a mít to celé hotové — je dnes rychlejší,
+          než byste čekali.
         </p>
       </motion.div>
 
