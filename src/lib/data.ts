@@ -28,7 +28,7 @@ export const works: Work[] = [
 export const tiers: Tier[] = [
   {
     num: "",
-    name: "X-Factor System",
+    name: "X-Factor Sprint",
     tagline:
       "Pojmenuju, čím jste výjimeční — a postavím kolem toho celý systém.",
     price: "40 000",
@@ -39,7 +39,7 @@ export const tiers: Tier[] = [
       "Váš x-factor — pojmenovaný a zasazený do kontextu",
       "Positioning & messaging",
       "Tonalita",
-      "Vizuální směr — barva, font",
+      "Vizuální šablona",
       "Hotová online přítomnost — single page, LinkedIn, první obsah",
     ],
     delivery: "Do 5 pracovních dní",
