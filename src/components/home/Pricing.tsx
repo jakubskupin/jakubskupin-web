@@ -23,8 +23,10 @@ export default function Pricing() {
         <h2 className="mb-3 font-heading text-[clamp(28px,4vw,38px)] font-bold tracking-[-0.03em]">
           Jak to funguje
         </h2>
-        <p className="max-w-[460px] text-base leading-[1.6] text-text-secondary">
-          Jeden proces. Od výzkumu po hotový web a obsah.
+        <p className="max-w-[520px] text-base leading-[1.6] text-text-secondary">
+          Doba se změnila. Dostat se k hotové single page je dnes rychlejší,
+          než byste čekali — a je to skvělý výchozí bod k ujasnění si, kdo
+          jste, pro koho děláte a jak o sobě mluvit online.
         </p>
       </motion.div>
 
