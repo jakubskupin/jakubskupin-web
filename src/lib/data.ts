@@ -18,6 +18,7 @@ export const works: Work[] = [
     description:
       "Brand strategie, vizuální identita a web pro podcast o intimitě.",
     tag: "Research → Brand → Web",
+    screenshot: "/work/simrani.png",
   },
 ];
 
