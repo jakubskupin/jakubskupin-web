@@ -25,7 +25,7 @@ export default function SystemStrip() {
                 {step}
               </span>
               {i < steps.length - 1 && (
-                <span className="text-[11px] text-text-tertiary">→</span>
+                <span className="text-[12px] text-text-tertiary">→</span>
               )}
             </span>
           ))}

@@ -44,7 +44,7 @@ export default function Pricing() {
             {...stagger(i)}
             whileHover={{ y: -2 }}
           >
-            <div className="mb-2.5 text-[11px] font-bold uppercase tracking-[0.08em] text-text-tertiary">
+            <div className="mb-2.5 text-[12px] font-bold uppercase tracking-[0.08em] text-text-tertiary">
               {tier.num}
             </div>
             <div className="mb-1.5 font-heading text-xl font-bold tracking-[-0.02em]">
@@ -101,7 +101,7 @@ export default function Pricing() {
 
             {/* Exclusions */}
             <div className="mt-3 border-t border-border pt-4">
-              <div className="mb-1 text-[10px] font-bold uppercase tracking-[0.08em] text-text-tertiary">
+              <div className="mb-1 text-[11px] font-bold uppercase tracking-[0.08em] text-text-tertiary">
                 Mimo rozsah
               </div>
               <p className="text-xs leading-[1.5] text-text-tertiary">

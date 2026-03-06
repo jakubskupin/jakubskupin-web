@@ -77,7 +77,7 @@ export default function XFactor() {
               </div>
 
               {/* Content */}
-              <div className="text-[11px] font-bold uppercase tracking-[0.08em] text-text-tertiary mb-1.5">
+              <div className="text-[12px] font-bold uppercase tracking-[0.08em] text-text-tertiary mb-1.5">
                 {step.num}
               </div>
               <h3 className="mb-2 font-heading text-[17px] font-bold tracking-[-0.01em]">
