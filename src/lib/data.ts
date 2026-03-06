@@ -35,6 +35,7 @@ export const tiers: Tier[] = [
     priceNote: "jednorázově",
     features: [
       "Hloubkový research + AI analýza",
+      "Primární a sekundární cílová skupina a jejich painpointy",
       "Váš x-factor — pojmenovaný a zasazený do kontextu",
       "Positioning & messaging",
       "Tonalita",
