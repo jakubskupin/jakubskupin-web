@@ -19,11 +19,10 @@ export default function Hero() {
         Personal brand × Web × AI
       </div>
       <h1 className="mb-7 font-heading text-[clamp(36px,5.5vw,52px)] font-bold leading-[1.12] tracking-[-0.03em]">
-        Stavím osobní značky a weby pro lidi, kteří mají co říct
+        Tvořím osobní značky a weby pro lidi, kteří mají co říct
       </h1>
       <p className="max-w-[520px] text-lg leading-[1.65] text-text-secondary">
-        Propojuji to, co ostatní dělají odděleně — research, strategii, obsah
-        i web.
+        Pojmenuju váš x-factor a postavím kolem něj strategii, web i obsah.
       </p>
     </motion.section>
   );
