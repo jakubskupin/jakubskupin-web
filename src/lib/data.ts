@@ -36,9 +36,10 @@ export const tiers: Tier[] = [
     features: [
       "Hloubkový research + AI analýza",
       "Váš x-factor — pojmenovaný a zasazený do kontextu",
-      "Positioning, messaging a tone of voice",
-      "Vizuální směr — barvy, typografie, vizuální jazyk",
-      "Hotová online přítomnost — web, LinkedIn, první obsah",
+      "Positioning & messaging",
+      "Tonalita",
+      "Vizuální směr — barva, font",
+      "Hotová online přítomnost — single page, LinkedIn, první obsah",
     ],
     delivery: "Do 5 pracovních dní",
     cta: "Začít spolupráci",
