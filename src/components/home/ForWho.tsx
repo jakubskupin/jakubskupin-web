@@ -23,7 +23,7 @@ const personas = [
     bullets: [
       "Konzultant, lékař, právník nebo architekt — lidé vás doporučují, ale web tomu neodpovídá",
       "Pomůžu vám sestavit případovky a ukázky prací, které mluví za vás",
-      "Postavím online přítomnost, která pracuje i když vy ne — a přináší nové zakázky",
+      "Postavím online přítomnost, která pracuje i když vy ne",
     ],
   },
   {
