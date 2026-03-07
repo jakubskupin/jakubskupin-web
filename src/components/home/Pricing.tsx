@@ -99,13 +99,19 @@ export default function Pricing() {
         </div>
       </motion.div>
 
-      <motion.p
-        className="max-w-[540px] text-[15px] leading-[1.7] text-text-secondary"
+      <motion.div
+        className="max-w-[540px] border-l-2 border-border pl-5"
         {...fadeUp}
       >
-        Věřím, že hotovo je víc než dokonalo. Dvě rychlé iterace a máte v ruce
-        něco, s čím jdete za cílovkou — ne za dalším kolem interních revizí.
-      </motion.p>
+        <p className="text-[15px] leading-[1.7] text-text-secondary">
+          Věřím, že hotovo je víc než dokonalo. Jedna rychlá iterace a máte
+          v ruce něco, s čím jdete za cílovkou — ne za dalším kolem interních
+          revizí.
+        </p>
+        <div className="mt-3 text-[13px] font-semibold text-text-tertiary">
+          — Jakub
+        </div>
+      </motion.div>
     </section>
   );
 }
