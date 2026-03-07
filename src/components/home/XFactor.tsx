@@ -33,7 +33,7 @@ const steps = [
     num: "03",
     title: "Design a single-page web",
     description:
-      "Vizuální základ a web postavený kolem vašeho x-faktoru. Messaging, struktura, první obsah — všechno propojené.",
+      "Vizuální základ a web postavený kolem vašeho x-faktoru.\nMessaging, struktura, první obsah — všechno propojené.",
   },
   {
     num: "04",
@@ -83,7 +83,7 @@ export default function XFactor() {
               <h3 className="mb-2 font-heading text-[17px] font-bold tracking-[-0.01em]">
                 {step.title}
               </h3>
-              <p className="text-[14px] leading-[1.6] text-text-secondary max-w-[480px]">
+              <p className="text-[14px] leading-[1.6] text-text-secondary max-w-[480px] whitespace-pre-line">
                 {step.description}
               </p>
             </motion.div>
