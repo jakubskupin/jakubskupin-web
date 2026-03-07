@@ -60,7 +60,7 @@ export default function ForWho() {
           Máte co nabídnout, ale online to není vidět
         </h3>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
+        <div className="space-y-6">
           {sections.map((s) => (
             <div key={s.label}>
               <div className="mb-3 text-[11px] font-bold uppercase tracking-[0.06em] text-text-tertiary">
