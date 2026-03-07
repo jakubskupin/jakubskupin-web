@@ -36,15 +36,6 @@ const personas = [
       "Navrhuji témata, zpracovávám vaše výstupy a starám se, aby rezonovala",
     ],
   },
-  {
-    label: "Creator",
-    title: "Tvoříte obsah a potřebujete škálovat",
-    bullets: [
-      "Podcaster, YouTuber nebo tvůrce kurzů — publikum roste, ale nestíháte produkci a hledáte dalšího člena do týmu",
-      "Zpracuji výstupy z podcastů a videí, připravím podklady pro kampaně a vybuduji AI-native content systém",
-      "Vy se věnujete obsahu a tématům — já řeším produkci a distribuci",
-    ],
-  },
 ];
 
 export default function ForWho() {
@@ -59,7 +50,7 @@ export default function ForWho() {
         </h2>
       </motion.div>
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         {personas.map((p, i) => (
           <motion.div
             key={p.label}
