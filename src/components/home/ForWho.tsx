@@ -9,31 +9,29 @@ const fadeUp = {
   transition: { duration: 0.5, ease: "easeOut" as Easing },
 };
 
-function stagger(index: number) {
-  return {
-    ...fadeUp,
-    transition: { ...fadeUp.transition, delay: index * 0.1 },
-  };
-}
-
-const personas = [
+const sections = [
   {
-    label: "Expert",
-    title: "Jste expert, ale online to není vidět",
-    bullets: [
-      "Konzultant, lékař, právník nebo architekt — lidé vás doporučují, ale web tomu neodpovídá",
-      "Pomůžu vám sestavit případovky a ukázky prací, které mluví za vás",
-      "Postavím online přítomnost, která pracuje i když vy ne",
+    label: "S čím se trápíte",
+    items: [
+      "Lidé vás doporučují — ale web tomu neodpovídá",
+      "Nemáte čas řešit marketing a nechcete",
+      "Nevíte, kde začít a co je důležité",
     ],
   },
   {
-    label: "CEO",
-    title: "Máte firmu — a uvědomujete si, že jste její tvář",
-    bullets: [
-      "Obsah přes váš profil má 561× větší dosah než firemní stránka",
-      "Personal brand podporuje PR, pozvání do podcastů a speaking",
-      "Vytáhnu z vás obsah jednoduše — vy ho doladíte a publikujete",
-      "Navrhuji témata, zpracovávám vaše výstupy a starám se, aby rezonovala",
+    label: "Co potřebujete",
+    items: [
+      "Online přítomnost, která pracuje i když vy ne",
+      "Jasný positioning — proč zrovna vy",
+      "Případovky a ukázky, které mluví za vás",
+    ],
+  },
+  {
+    label: "Co udělám",
+    items: [
+      "Pojmenuju váš x-factor a postavím kolem něj web",
+      "Připravím strukturu, messaging a první obsah",
+      "Vy dodáte minimum — zbytek vyřeším já",
     ],
   },
 ];
@@ -54,33 +52,35 @@ export default function ForWho() {
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        {personas.map((p, i) => (
-          <motion.div
-            key={p.label}
-            className="rounded-2xl border border-border bg-card-bg px-6 py-7 transition-colors duration-250 hover:border-[#CDCBC5]"
-            {...stagger(i)}
-          >
-            <div className="mb-5 inline-block rounded-full border border-border bg-[#F4F3F0] px-4 py-1.5 text-[12px] font-bold uppercase tracking-[0.06em] text-text">
-              {p.label}
+      <motion.div
+        className="rounded-2xl border border-border bg-card-bg px-6 py-7 md:px-8 md:py-9"
+        {...fadeUp}
+      >
+        <h3 className="mb-6 font-heading text-[17px] font-bold leading-[1.35] tracking-[-0.01em]">
+          Máte co nabídnout, ale online to není vidět
+        </h3>
+
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
+          {sections.map((s) => (
+            <div key={s.label}>
+              <div className="mb-3 text-[11px] font-bold uppercase tracking-[0.06em] text-text-tertiary">
+                {s.label}
+              </div>
+              <ul className="space-y-2">
+                {s.items.map((item) => (
+                  <li
+                    key={item}
+                    className="flex items-start gap-2.5 text-[13px] leading-[1.5] text-text-secondary"
+                  >
+                    <span className="mt-[6px] block h-1.5 w-1.5 shrink-0 rounded-full bg-text-tertiary" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
-            <h3 className="mb-4 font-heading text-[15px] font-bold leading-[1.35] tracking-[-0.01em]">
-              {p.title}
-            </h3>
-            <ul className="space-y-2">
-              {p.bullets.map((b) => (
-                <li
-                  key={b}
-                  className="flex items-start gap-2.5 text-[13px] leading-[1.5] text-text-secondary"
-                >
-                  <span className="mt-[6px] block h-1.5 w-1.5 shrink-0 rounded-full bg-text-tertiary" />
-                  {b}
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </motion.div>
     </section>
   );
 }
