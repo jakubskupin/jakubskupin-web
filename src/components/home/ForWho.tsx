@@ -53,7 +53,7 @@ export default function ForWho() {
       </motion.div>
 
       <motion.div
-        className="rounded-2xl border border-border bg-card-bg px-6 py-7 md:px-8 md:py-9"
+        className="max-w-[540px] rounded-2xl border border-border bg-card-bg px-6 py-7 md:px-8 md:py-9"
         {...fadeUp}
       >
         <h3 className="mb-6 font-heading text-[17px] font-bold leading-[1.35] tracking-[-0.01em]">
