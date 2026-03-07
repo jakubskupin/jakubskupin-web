@@ -37,9 +37,9 @@ const steps = [
   },
   {
     num: "04",
-    title: "Obsahový systém",
+    title: "Launch",
     description:
-      "LinkedIn strategie, formáty, první obsah. Víte co, kam a proč publikovat.",
+      "Web je live, LinkedIn aktualizovaný, první obsah publikovaný. Jdete do světa.",
   },
 ];
 
