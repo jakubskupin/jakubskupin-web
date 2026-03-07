@@ -49,8 +49,8 @@ export default function ForWho() {
           Roky to odkládáte
         </h2>
         <p className="max-w-[520px] text-base leading-[1.6] text-text-secondary">
-          Poznáváte se? Teď se to ale změní.{" "}
-          <strong className="font-bold text-text">Stane se to.</strong>
+          Poznáváte se?{" "}
+          <strong className="font-bold text-text">Teď se to stane.</strong>
         </p>
       </motion.div>
 
