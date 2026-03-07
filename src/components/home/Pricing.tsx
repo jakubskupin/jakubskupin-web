@@ -21,11 +21,10 @@ export default function Pricing() {
           Služba
         </div>
         <h2 className="mb-3 font-heading text-[clamp(28px,4vw,38px)] font-bold tracking-[-0.03em]">
-          Nechte to na mně
+          Nemáte čas to řešit sami
         </h2>
         <p className="max-w-[520px] text-base leading-[1.6] text-text-secondary">
-          Řeknete mi, čím se živíte a pro koho. Zbytek — research, strategie,
-          persony, positioning, web — vznikne za dva dny.
+          A nemusíte. Vy dodáte minimum — já dodám maximum.
         </p>
       </motion.div>
 
