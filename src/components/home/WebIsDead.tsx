@@ -15,13 +15,14 @@ export default function WebIsDead() {
       className="mx-auto max-w-[960px] px-6 mb-[140px]"
       {...fadeUp}
     >
-      <h2 className="mb-3 font-heading text-[clamp(28px,4vw,38px)] font-bold tracking-[-0.03em] max-w-[600px]">
-        Web je mrtvý
-      </h2>
-      <p className="max-w-[520px] text-base leading-[1.6] text-text-secondary">
-        Ale současně vás donutí přemýšlet. O sobě. O službě.{" "}
-        <strong className="font-bold text-text">O cílovce.</strong>
-      </p>
+      <div className="max-w-[540px] border-l-2 border-border pl-5">
+        <p className="mb-1 font-heading text-[17px] font-bold leading-[1.35] tracking-[-0.01em]">
+          Web je mrtvý
+        </p>
+        <p className="text-[15px] leading-[1.7] text-text-secondary">
+          Ale současně vás donutí přemýšlet. O sobě. O službě. O cílovce.
+        </p>
+      </div>
     </motion.section>
   );
 }
