@@ -55,8 +55,10 @@ export default function XFactor() {
           <br />
           Já to pojmenuju a ukážu světu
         </h2>
-        <p className="max-w-[460px] text-base leading-[1.6] text-text-secondary">
-          Jeden člověk. Žádné meetingy. Ta rychlost vás překvapí.
+        <p className="max-w-[520px] text-base leading-[1.6] text-text-secondary">
+          Za dva dny máte funkční základ.
+          <br />
+          Ne plán, ale hotové věci, se kterými jdete za prvními klienty.
         </p>
       </motion.div>
 
