@@ -41,13 +41,13 @@ export default function ForWho() {
     <section className="mx-auto max-w-[960px] px-6 mb-[140px]">
       <motion.div className="mb-10" {...fadeUp}>
         <div className="mb-4 text-[13px] font-semibold uppercase tracking-[0.06em] text-text-tertiary">
-          Pro koho
+          Poznáváte se?
         </div>
         <h2 className="mb-3 font-heading text-[clamp(28px,4vw,38px)] font-bold tracking-[-0.03em] max-w-[600px]">
           Roky to odkládáte
         </h2>
         <p className="max-w-[520px] text-base leading-[1.6] text-text-secondary">
-          Poznáváte se? Doba se změnila.{" "}
+          Doba se změnila.{" "}
           <strong className="font-bold text-text">Teď se to stane.</strong>
         </p>
       </motion.div>
