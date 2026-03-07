@@ -68,14 +68,24 @@ export const services: Service[] = [
       "Vytipuju seznam lidí z vaší cílové skupiny pro propojení na LinkedInu.",
   },
   {
-    title: "Short videa",
+    title: "Zpracování podcastu",
     description:
-      "Z podcastů a rozhovorů sestříhám reelsy s titulky.",
+      "Vytvořím z nich reelsy s titulky. Ne genericky, ale vyberu přesně to sdělení, které podporuje váš positioning.",
   },
   {
-    title: "Rozvoj webu",
+    title: "Případové studie",
     description:
-      "Nové sekce, landing pages pro testování nabídek, průběžné vylepšování.",
+      "Pošlete mi hrubá data, sepíšu to do čitelné podoby.",
+  },
+  {
+    title: "Experimenty",
+    description:
+      "Vytvořím landing page a micro-kampaň pro testování vašeho řešení.",
+  },
+  {
+    title: "AI research sprint",
+    description:
+      "Velmi rychle vám dodám hlubokou rešerši na vámi vybrané téma, firmu nebo příležitost. Včetně vizualizací. Pomůže vám to se zorientovat.",
   },
 ];
 
