@@ -20,7 +20,7 @@ export default function WebIsDead() {
           Web je mrtvý
         </p>
         <p className="text-[15px] leading-[1.7] text-text-secondary">
-          Ale současně vás donutí přemýšlet. O sobě. O službě. O cílovce.
+          Současně vás donutí přemýšlet. O sobě. O službě. O cílovce.
         </p>
       </div>
     </motion.section>
