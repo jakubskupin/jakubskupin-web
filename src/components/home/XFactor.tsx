@@ -39,7 +39,7 @@ const steps = [
     num: "04",
     title: "Launch",
     description:
-      "Web je live, LinkedIn aktualizovaný, první obsah publikovaný. Jdete do světa.",
+      "Web je live, LinkedIn aktualizovaný, první obsah publikovaný.\nZačínáte sbírat první feedback (nebo zakázky).",
   },
 ];
 
