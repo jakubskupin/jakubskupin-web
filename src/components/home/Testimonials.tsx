@@ -22,7 +22,11 @@ export default function Testimonials() {
         Reference
       </div>
       <p className="mb-6 text-xl leading-[1.65]">„{t.quote}"</p>
-      <div className="text-sm font-semibold">{t.author}</div>
+      {t.url ? (
+        <a href={t.url} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold underline decoration-border underline-offset-2 hover:decoration-text-tertiary transition-colors">{t.author}</a>
+      ) : (
+        <div className="text-sm font-semibold">{t.author}</div>
+      )}
       <div className="text-[13px] text-text-tertiary">{t.role}</div>
     </motion.section>
   );

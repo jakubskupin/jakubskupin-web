@@ -32,6 +32,7 @@ export interface Testimonial {
   quote: string;
   author: string;
   role: string;
+  url?: string;
 }
 
 export interface CaseStudy {

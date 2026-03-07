@@ -85,6 +85,7 @@ export const testimonials: Testimonial[] = [
     quote:
       "Pošlete mu SMS a máte web. Nadiktujete zadání v autě a dostanete první návrh projektu. Umí přerámovat vaši vizi tak, aby začala fungovat.",
     author: "Martin Vymětal",
-    role: "Marketér, podcaster",
+    role: "Co-founder, Boomerang Communication",
+    url: "https://www.linkedin.com/in/martinvymetal",
   },
 ];
