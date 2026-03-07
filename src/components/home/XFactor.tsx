@@ -27,7 +27,7 @@ const steps = [
     num: "02",
     title: "X-factor",
     description:
-      "Z výzkumu pojmenuju, čím jste výjimeční — to, co sami nevidíte, protože je to pro vás samozřejmé.",
+      "Z výzkumu pojmenuju, čím jste výjimeční. To, co sami nevidíte, protože je to pro vás samozřejmé.",
   },
   {
     num: "03",
@@ -56,7 +56,7 @@ export default function XFactor() {
           máte funkční základ
         </h2>
         <p className="max-w-[520px] text-base leading-[1.6] text-text-secondary">
-          Ne plán, ale hotové věci. Ukážete je světu{" "}<strong className="font-bold text-text">a sledujete, co funguje.</strong>
+          Ne plán. Hotové věci. Ukážete je světu{" "}<strong className="font-bold text-text">a sledujete, co funguje.</strong>
         </p>
       </motion.div>
 

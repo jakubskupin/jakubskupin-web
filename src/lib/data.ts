@@ -29,7 +29,7 @@ export const tiers: Tier[] = [
     num: "",
     name: "X-Factor Sprint",
     tagline:
-      "Pojmenuju, čím jste výjimeční — a dám tomu tvar.",
+      "Pojmenuju, čím jste výjimeční. A dám tomu tvar.",
     price: "42 500",
     priceNote: "jednorázově",
     features: [

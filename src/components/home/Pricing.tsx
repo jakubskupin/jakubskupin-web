@@ -24,7 +24,7 @@ export default function Pricing() {
           Nemáte čas to řešit sami
         </h2>
         <p className="max-w-[520px] text-base leading-[1.6] text-text-secondary">
-          A nemusíte. Vy dodáte minimum — zbytek{" "}
+          A nemusíte. Vy dodáte minimum. Zbytek{" "}
           <strong className="font-bold text-text">vyřeším já.</strong>
         </p>
       </motion.div>
