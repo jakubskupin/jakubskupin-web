@@ -29,7 +29,7 @@ export default function OngoingServices() {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
         {services.map((s) => (
           <div
             key={s.title}

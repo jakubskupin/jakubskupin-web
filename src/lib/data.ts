@@ -59,19 +59,24 @@ export const services: Service[] = [
       "LinkedIn posty, bio, speaker profily v tone of voice vaší značky.",
   },
   {
-    title: "Slide decky",
+    title: "Sociální sítě",
     description:
-      "Pitch decky, sales decky, interní prezentace. Struktura i vizuál.",
+      "Vizuální obsah, carousely, stories. Konzistentní brand napříč platformami.",
   },
   {
-    title: "Instagram",
+    title: "Sales Navigator",
     description:
-      "Vizuální obsah, carousely, stories. Konzistentní brand na sítích.",
+      "Vytipuju seznam lidí z vaší cílové skupiny pro propojení na LinkedInu.",
   },
   {
-    title: "Podcasty & video",
+    title: "Short videa",
     description:
-      "Zpracování epizod, reelsy, krátká videa. Od nahrávky k obsahu.",
+      "Z podcastů a rozhovorů sestříhám reelsy s titulky.",
+  },
+  {
+    title: "Rozvoj webu",
+    description:
+      "Nové sekce, landing pages pro testování nabídek, průběžné vylepšování.",
   },
 ];
 
