@@ -54,7 +54,7 @@ export default function XFactor() {
           Za dva dny máte funkční základ
         </h2>
         <p className="max-w-[520px] text-base leading-[1.6] text-text-secondary">
-          Ne plán, ale hotové věci. Ukážete je světu a sledujete, co funguje.
+          Ne plán, ale hotové věci. Ukážete je světu a <strong className="font-bold text-text">sledujete, co funguje.</strong>
         </p>
       </motion.div>
 
