@@ -46,10 +46,11 @@ export default function ForWho() {
           Pro koho
         </div>
         <h2 className="mb-3 font-heading text-[clamp(28px,4vw,38px)] font-bold tracking-[-0.03em] max-w-[600px]">
-          Poznáváte se?
+          Roky to odkládáte
         </h2>
         <p className="max-w-[520px] text-base leading-[1.6] text-text-secondary">
-          Roky to odkládáte. Doba se změnila.
+          Poznáváte se? Teď se to ale změní.{" "}
+          <strong className="font-bold text-text">Stane se to.</strong>
         </p>
       </motion.div>
 
