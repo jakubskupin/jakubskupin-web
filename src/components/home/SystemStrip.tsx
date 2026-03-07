@@ -9,7 +9,7 @@ const fadeUp = {
   transition: { duration: 0.5, ease: "easeOut" as Easing },
 };
 
-const steps = ["Výzkum", "Strategie", "Vizuální styl", "Copywriting", "Web", "Obsah"];
+const steps = ["Výzkum", "Strategie", "Design", "Copywriting", "Web", "Obsah"];
 
 export default function SystemStrip() {
   return (
