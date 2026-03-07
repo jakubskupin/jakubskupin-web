@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useInView, type Easing } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { motion, useScroll, useTransform, type Easing } from "framer-motion";
+import { useRef } from "react";
 import { LINKEDIN_URL } from "@/lib/data";
 
 const fadeUp = {
@@ -13,18 +13,13 @@ const fadeUp = {
 
 export default function ClosingCTA() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-  const [showY, setShowY] = useState(false);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
 
-  useEffect(() => {
-    if (!isInView) return;
-    const t1 = setTimeout(() => setShowY(true), 1500);
-    const t2 = setTimeout(() => setShowY(false), 3500);
-    return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-    };
-  }, [isInView]);
+  const zOpacity = useTransform(scrollYProgress, [0.35, 0.45], [1, 0]);
+  const yOpacity = useTransform(scrollYProgress, [0.35, 0.45], [0, 1]);
 
   return (
     <motion.section
@@ -35,17 +30,8 @@ export default function ClosingCTA() {
       <h2 className="mb-4 font-heading text-[clamp(28px,4vw,38px)] font-bold tracking-[-0.03em]">
         V
         <span className="relative inline-block">
-          <motion.span
-            animate={{ opacity: showY ? 0 : 1 }}
-            transition={{ duration: 0.4 }}
-          >
-            z
-          </motion.span>
-          <motion.span
-            className="absolute inset-0"
-            animate={{ opacity: showY ? 1 : 0 }}
-            transition={{ duration: 0.4 }}
-          >
+          <motion.span style={{ opacity: zOpacity }}>z</motion.span>
+          <motion.span className="absolute inset-0" style={{ opacity: yOpacity }}>
             y
           </motion.span>
         </span>
