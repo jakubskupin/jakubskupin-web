@@ -56,6 +56,9 @@ export default function ForWho() {
         className="max-w-[540px] rounded-2xl border border-border bg-card-bg px-6 py-7 md:px-8 md:py-9"
         {...fadeUp}
       >
+        <div className="mb-5 inline-block rounded-full border border-border bg-[#F4F3F0] px-4 py-1.5 text-[12px] font-bold uppercase tracking-[0.06em] text-text">
+          Expert
+        </div>
         <h3 className="mb-6 font-heading text-[17px] font-bold leading-[1.35] tracking-[-0.01em]">
           Máte co nabídnout, ale online to není vidět
         </h3>
