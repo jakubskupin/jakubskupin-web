@@ -21,7 +21,7 @@ const steps = [
     num: "01",
     title: "Research a strategie",
     description:
-      "Rešerše trhu, cílových skupin a tónu. AI analýza + lidský úsudek. Do 48 hodin máte jasno.",
+      "Rešerše trhu, cílových skupin a tonality. AI analýza + lidský úsudek.",
   },
   {
     num: "02",
