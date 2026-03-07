@@ -18,15 +18,14 @@ export default function Pricing() {
     <section className="mx-auto max-w-[960px] px-6 mb-[140px]" id="pricing">
       <motion.div className="mb-12" {...fadeUp}>
         <div className="mb-8 text-[13px] font-semibold uppercase tracking-[0.06em] text-text-tertiary">
-          Spolupráce
+          Služba
         </div>
         <h2 className="mb-3 font-heading text-[clamp(28px,4vw,38px)] font-bold tracking-[-0.03em]">
-          Jak to funguje
+          Nechte to na mně
         </h2>
         <p className="max-w-[520px] text-base leading-[1.6] text-text-secondary">
-          Doba se změnila. Ujasnit si, kdo jste, pro koho děláte a jak
-          o sobě mluvit online — a mít to celé hotové — je dnes rychlejší,
-          než byste čekali.
+          Řeknete mi, čím se živíte a pro koho. Zbytek — research, strategie,
+          persony, positioning, web — vznikne za dva dny.
         </p>
       </motion.div>
 
