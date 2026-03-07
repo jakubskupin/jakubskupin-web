@@ -24,8 +24,8 @@ export default function OngoingServices() {
           Průběžná spolupráce
         </h2>
         <p className="max-w-[460px] text-[15px] text-text-secondary">
-          Navazuje na kterýkoliv balíček — nebo funguje samostatně. Rozsah a
-          cenu řešíme individuálně.
+          Po sprintu nebo kdykoliv potřebujete. Rozsah a cenu řešíme
+          individuálně.
         </p>
       </div>
 
