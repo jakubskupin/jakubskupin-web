@@ -69,9 +69,11 @@ export default function WorkCards() {
                 <h3 className="mb-1 font-heading text-[17px] font-semibold tracking-[-0.01em]">
                   {work.title}
                 </h3>
-                <p className="text-[13.5px] leading-[1.5] text-text-secondary">
-                  {work.description}
-                </p>
+                {work.description && (
+                  <p className="text-[13.5px] leading-[1.5] text-text-secondary">
+                    {work.description}
+                  </p>
+                )}
                 <span className="mt-3 inline-block rounded-md bg-accent-soft px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.04em] text-text-tertiary">
                   {work.tag}
                 </span>
