@@ -10,6 +10,7 @@ import Pricing from "@/components/home/Pricing";
 import OngoingServices from "@/components/home/OngoingServices";
 import ForWho from "@/components/home/ForWho";
 import ClosingCTA from "@/components/home/ClosingCTA";
+import WebIsDead from "@/components/home/WebIsDead";
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
       <WorkCards />
       <Testimonials />
       <ForWho />
+      <WebIsDead />
       <XFactor />
       <Pricing />
       <OngoingServices />
