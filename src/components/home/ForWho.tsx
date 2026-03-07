@@ -45,9 +45,12 @@ export default function ForWho() {
         <div className="mb-4 text-[13px] font-semibold uppercase tracking-[0.06em] text-text-tertiary">
           Pro koho
         </div>
-        <h2 className="font-heading text-[clamp(28px,4vw,38px)] font-bold tracking-[-0.03em] max-w-[600px]">
+        <h2 className="mb-3 font-heading text-[clamp(28px,4vw,38px)] font-bold tracking-[-0.03em] max-w-[600px]">
           Poznáváte se?
         </h2>
+        <p className="max-w-[520px] text-base leading-[1.6] text-text-secondary">
+          Roky to odkládáte. Doba se změnila.
+        </p>
       </motion.div>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
