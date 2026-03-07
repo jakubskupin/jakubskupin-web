@@ -31,9 +31,9 @@ const steps = [
   },
   {
     num: "03",
-    title: "Brand a web",
+    title: "Design a single-page web",
     description:
-      "Vizuální identita a web postavený kolem vašeho x-faktoru. Ne šablona — systém, který dává smysl.",
+      "Vizuální základ a web postavený kolem vašeho x-faktoru. Messaging, struktura, první obsah — všechno propojené.",
   },
   {
     num: "04",
