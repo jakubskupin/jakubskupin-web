@@ -31,7 +31,7 @@ export default function SystemStrip() {
           ))}
         </div>
         <p className="text-[13px] tracking-[0.02em] text-text-tertiary">
-          AI mi dává rychlost a hloubku, kterou od jednotlivce nečekáte
+          Jeden člověk, <strong className="font-bold text-text-secondary">dva dny</strong> — AI mi dává rychlost a hloubku, kterou od jednotlivce nečekáte
         </p>
       </div>
     </motion.div>

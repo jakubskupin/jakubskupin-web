@@ -44,7 +44,7 @@ export const tiers: Tier[] = [
       "Vizuální základ",
       "Hotová online přítomnost — single-page web, LinkedIn, první obsah",
     ],
-    delivery: "Do 5 pracovních dní",
+    delivery: "Do 2 pracovních dní",
     cta: "To mě zajímá",
     ctaStyle: "solid",
     exclusions: "Správa obsahu, placená reklama, SEO",
