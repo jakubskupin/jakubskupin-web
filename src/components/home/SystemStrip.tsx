@@ -30,7 +30,7 @@ export default function SystemStrip() {
             </span>
           ))}
         </div>
-        <p className="text-[14px] tracking-[0.02em] text-text-tertiary">
+        <p className="text-[14px] tracking-[0.02em] text-text-tertiary text-center">
           Jeden člověk, <strong className="font-bold text-text-secondary">dva dny</strong>.<br className="sm:hidden" /> AI mi dává rychlost a hloubku, kterou od jednotlivce nečekáte.
         </p>
       </div>
