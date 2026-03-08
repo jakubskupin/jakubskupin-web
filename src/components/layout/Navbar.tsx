@@ -41,11 +41,11 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`sticky top-0 z-40 py-4 transition-[background-color,border-color,backdrop-filter,transform] duration-300 ${
+      className={`sticky top-0 z-40 py-4 transition-[background-color,border-color,backdrop-filter,transform,opacity] duration-500 ${
         scrolled
           ? "border-b border-border bg-bg/80 backdrop-blur-lg"
           : "border-b border-transparent bg-transparent"
-      } ${visible ? "translate-y-0" : "-translate-y-full"}`}
+      } ${visible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}`}
     >
       <div className="mx-auto flex max-w-[960px] items-center justify-between px-6">
         <a
