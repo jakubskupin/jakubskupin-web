@@ -19,7 +19,7 @@ const siteUrl = "https://jakubskupin.cz";
 export const metadata: Metadata = {
   title: "Jakub Skupin — Personal brand × AI × Marketing",
   description:
-    "Stavím osobní značky a obsahové systémy, které dávají náskok. Research, strategie, obsah i web.",
+    "Pojmenuju, čím jste výjimeční — a dám tomu tvar. Strategie, web a obsah pro experty, kteří mají co říct, ale online to není vidět.",
   metadataBase: new URL(siteUrl),
   openGraph: {
     title: "Jakub Skupin — Personal brand × AI × Marketing",
@@ -32,9 +32,6 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Jakub Skupin — Personal brand × AI × Marketing",
-    description:
-      "Pojmenuju, čím jste výjimeční. A dám tomu tvar.",
   },
 };
 
