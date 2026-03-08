@@ -38,7 +38,7 @@ export const tiers: Tier[] = [
       "Váš x-factor — jasně pojmenovaný",
       "Positioning, messaging, tonalita",
       "Návrhy témat a vizuální základ",
-      "Hotový web, upravený LinkedIn, první obsah",
+      "Hotový single-page web, upravený LinkedIn, první obsah",
     ],
     delivery: "Do 2 pracovních dní",
     cta: "To mě zajímá",

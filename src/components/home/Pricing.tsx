@@ -88,15 +88,6 @@ export default function Pricing() {
           {tier.cta}
         </a>
 
-        {/* Exclusions */}
-        <div className="mt-3 border-t border-border pt-4">
-          <div className="mb-1 text-[11px] font-bold uppercase tracking-[0.08em] text-text-tertiary">
-            Mimo rozsah
-          </div>
-          <p className="text-xs leading-[1.5] text-text-tertiary">
-            {tier.exclusions}
-          </p>
-        </div>
       </motion.div>
 
       <motion.div

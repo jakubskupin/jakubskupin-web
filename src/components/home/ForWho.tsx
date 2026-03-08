@@ -15,22 +15,22 @@ const sections = [
     items: [
       "Lidé vás doporučují. Ale kdo vás hledá, ten vás nenajde.",
       "Na marketing nemáte čas — a nechcete ho dělat špatně.",
-      "Nevíte, co je důležité a co je zbytečné",
+      "Nevíte, co je důležité a co je zbytečné.",
     ],
   },
   {
     label: "Co potřebujete",
     items: [
-      "Online přítomnost, kterou byste sami najali",
-      "Jasné sdělení: kdo jste, pro koho a proč",
-      "Důkazy vaší práce na jednom místě",
+      "Online přítomnost, kterou byste sami najali.",
+      "Jasné sdělení: kdo jste, pro koho a proč.",
+      "Důkazy vaší práce na jednom místě.",
     ],
   },
   {
     label: "Co udělám",
     items: [
-      "Vytáhnu z vás to, co klienti kupují — a sestavím to online",
-      "Připravím strukturu, messaging a první obsah",
+      "Vytáhnu z vás to, co klienti kupují — a sestavím to online.",
+      "Připravím strukturu, messaging a první obsah.",
       "Vy dodáte minimum. Zbytek vyřeším já.",
     ],
   },
@@ -60,7 +60,7 @@ export default function ForWho() {
           Expert
         </div>
         <h3 className="mb-6 font-heading text-[17px] font-bold leading-[1.35] tracking-[-0.01em]">
-          Jste skvělí v tom, co děláte. Online to ale nikdo nevidí.
+          Jste skvělí, online to ale nikdo nevidí.
         </h3>
 
         <div className="space-y-6">
