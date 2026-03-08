@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Brand manuál — Jakub Skupin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAFAF8;
+  --text: #1A1A18;
+  --text-secondary: #6B6964;
+  --text-tertiary: #96948E;
+  --border: #E8E6E1;
+  --card-bg: #FFFFFF;
+  --accent: #1A1A18;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Manrope', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ─── HEADER ─── */
+.header {
+  padding: 56px 0 40px;
+  border-bottom: 1px solid var(--border);
+}
+.header-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.badge--version { background: var(--accent); color: var(--bg); }
+.badge--date { background: #E8E6E1; color: var(--text-secondary); }
+.header h1 {
+  font-size: clamp(28px, 5vw, 40px);
+  margin-bottom: 8px;
+}
+.header p {
+  color: var(--text-secondary);
+  font-size: 15px;
+  max-width: 560px;
+}
+
+/* ─── SECTIONS ─── */
+.section {
+  padding: 56px 0;
+  border-bottom: 1px solid var(--border);
+}
+.section:last-child { border-bottom: none; }
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 8px;
+}
+.section h2 {
+  font-size: clamp(22px, 4vw, 30px);
+  margin-bottom: 8px;
+}
+.section-desc {
+  color: var(--text-secondary);
+  font-size: 15px;
+  margin-bottom: 32px;
+  max-width: 560px;
+}
+.section h3 {
+  font-size: 17px;
+  margin: 32px 0 16px;
+}
+.section h3:first-of-type {
+  margin-top: 0;
+}
+
+/* ─── COLOR SWATCHES ─── */
+.swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.swatch {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--card-bg);
+}
+.swatch-color {
+  height: 80px;
+  position: relative;
+}
+.swatch-info {
+  padding: 14px 16px;
+}
+.swatch-name {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+.swatch-hex {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.swatch-hex:hover { color: var(--text); }
+.swatch-hex .copy-icon {
+  opacity: 0;
+  transition: opacity 0.2s;
+  font-size: 12px;
+}
+.swatch-hex:hover .copy-icon { opacity: 1; }
+.swatch-use {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+/* ─── FONT CARDS ─── */
+.font-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 16px;
+  background: var(--card-bg);
+}
+.font-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.font-pill {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 600;
+  background: #E8E6E1;
+  color: var(--text-secondary);
+}
+.font-pill--name {
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 700;
+}
+.font-preview {
+  margin-bottom: 16px;
+}
+.font-preview-heading {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+.font-preview-body {
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+.font-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.font-table th {
+  text-align: left;
+  padding: 8px 0;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  border-bottom: 1px solid var(--border);
+}
+.font-table td {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.font-table td:first-child { font-weight: 600; }
+.font-table .sample { color: var(--text-secondary); }
+
+/* ─── COPY BOX ─── */
+.copy-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-family: 'Courier New', monospace;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.copy-box:hover { border-color: var(--text-tertiary); }
+.copy-box .label {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  min-width: 70px;
+}
+.copy-box .value {
+  flex: 1;
+  color: var(--text);
+  font-weight: 600;
+}
+.copy-box .copy-btn {
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.copy-box:hover .copy-btn { opacity: 1; }
+
+/* ─── USAGE RULES ─── */
+.rules-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+.rule {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  background: var(--card-bg);
+}
+.rule--do { border-left: 3px solid #2D6A4F; }
+.rule--dont { border-left: 3px solid #991B1B; }
+.rule-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+.rule--do .rule-label { color: #2D6A4F; }
+.rule--dont .rule-label { color: #991B1B; }
+.rule p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ─── FOOTER ─── */
+.footer {
+  padding: 40px 0;
+  text-align: center;
+  color: var(--text-tertiary);
+  font-size: 13px;
+}
+
+/* ─── TOAST ─── */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: var(--accent);
+  color: var(--bg);
+  padding: 10px 20px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 600;
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  z-index: 50;
+  pointer-events: none;
+}
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* ─── MOBILE ─── */
+@media (max-width: 640px) {
+  .swatch-grid { grid-template-columns: 1fr 1fr; }
+  .rules-grid { grid-template-columns: 1fr; }
+  .header { padding: 40px 0 32px; }
+  .section { padding: 40px 0; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header class="header">
+  <div class="header-meta">
+    <span class="badge badge--version">v1.0</span>
+    <span class="badge badge--date">8. března 2026</span>
+  </div>
+  <h1>Brand manuál</h1>
+  <p>Barvy, typografie a pravidla použití pro jakubskupin.cz. Všechno na jednom místě, připravené ke zkopírování do Canvy, Figmy nebo kódu.</p>
+</header>
+
+<!-- ═══════════════ 01 BARVY ═══════════════ -->
+<section class="section" id="barvy">
+  <div class="section-label">01 &mdash; Barvy</div>
+  <h2>Barevná paleta</h2>
+  <p class="section-desc">7 barev. Kliknutím na hex kód ho zkopírujete do schránky.</p>
+
+  <h3>Základní barvy</h3>
+  <div class="swatch-grid">
+    <div class="swatch">
+      <div class="swatch-color" style="background: #FAFAF8;border-bottom:1px solid #E8E6E1"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Pozadí</div>
+        <div class="swatch-hex" onclick="copyText('#FAFAF8')">#FAFAF8 <span class="copy-icon">kopírovat</span></div>
+        <div class="swatch-use">Pozadí celého webu a OG image. V Canvě: barva pozadí.</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #1A1A18"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Text</div>
+        <div class="swatch-hex" onclick="copyText('#1A1A18')">#1A1A18 <span class="copy-icon">kopírovat</span></div>
+        <div class="swatch-use">Hlavní text, nadpisy, logo. Téměř černá s teplým nádechem.</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #6B6964"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Text sekundární</div>
+        <div class="swatch-hex" onclick="copyText('#6B6964')">#6B6964 <span class="copy-icon">kopírovat</span></div>
+        <div class="swatch-use">Odstavce, popisy, delší texty. Hlavní barva body copy.</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #96948E"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Text terciární</div>
+        <div class="swatch-hex" onclick="copyText('#96948E')">#96948E <span class="copy-icon">kopírovat</span></div>
+        <div class="swatch-use">Labels, meta info, čísla kroků, pomocný text.</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Povrchy a ohraničení</h3>
+  <div class="swatch-grid">
+    <div class="swatch">
+      <div class="swatch-color" style="background: #FFFFFF;border-bottom:1px solid #E8E6E1"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Karta</div>
+        <div class="swatch-hex" onclick="copyText('#FFFFFF')">#FFFFFF <span class="copy-icon">kopírovat</span></div>
+        <div class="swatch-use">Pricing karta, tooltip, karty služeb.</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #E8E6E1"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Ohraničení</div>
+        <div class="swatch-hex" onclick="copyText('#E8E6E1')">#E8E6E1 <span class="copy-icon">kopírovat</span></div>
+        <div class="swatch-use">Bordery karet, linky, oddělovače. Teplá šedá.</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: rgba(26, 26, 24, 0.06);border-bottom:1px solid #E8E6E1"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Accent soft</div>
+        <div class="swatch-hex" onclick="copyText('rgba(26, 26, 24, 0.06)')">rgba(26,26,24,0.06) <span class="copy-icon">kopírovat</span></div>
+        <div class="swatch-use">Jemné pozadí pro hover stavy, aktivní prvky.</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Rychlé kopírování</h3>
+  <div class="copy-box" onclick="copyText('#FAFAF8')">
+    <span class="label">Pozadí</span>
+    <span class="value">#FAFAF8</span>
+    <span class="copy-btn">kopírovat</span>
+  </div>
+  <div class="copy-box" onclick="copyText('#1A1A18')">
+    <span class="label">Text</span>
+    <span class="value">#1A1A18</span>
+    <span class="copy-btn">kopírovat</span>
+  </div>
+  <div class="copy-box" onclick="copyText('#6B6964')">
+    <span class="label">Secondary</span>
+    <span class="value">#6B6964</span>
+    <span class="copy-btn">kopírovat</span>
+  </div>
+  <div class="copy-box" onclick="copyText('#96948E')">
+    <span class="label">Tertiary</span>
+    <span class="value">#96948E</span>
+    <span class="copy-btn">kopírovat</span>
+  </div>
+  <div class="copy-box" onclick="copyText('#FFFFFF')">
+    <span class="label">Karta</span>
+    <span class="value">#FFFFFF</span>
+    <span class="copy-btn">kopírovat</span>
+  </div>
+  <div class="copy-box" onclick="copyText('#E8E6E1')">
+    <span class="label">Border</span>
+    <span class="value">#E8E6E1</span>
+    <span class="copy-btn">kopírovat</span>
+  </div>
+</section>
+
+<!-- ═══════════════ 02 TYPOGRAFIE ═══════════════ -->
+<section class="section" id="typografie">
+  <div class="section-label">02 &mdash; Typografie</div>
+  <h2>Fonty</h2>
+  <p class="section-desc">Dva fonty. Syne pro nadpisy, Manrope pro tělo. Oba z Google Fonts, oba zdarma.</p>
+
+  <!-- SYNE -->
+  <div class="font-card">
+    <div class="font-meta">
+      <span class="font-pill font-pill--name">Syne</span>
+      <span class="font-pill">Heading</span>
+      <span class="font-pill">Bold 700</span>
+      <span class="font-pill">Google Fonts</span>
+    </div>
+    <div class="font-preview">
+      <div class="font-preview-heading">Pojmenuju, čím jste výjimeční</div>
+    </div>
+
+    <h3 style="margin-top:0">Kde se používá</h3>
+    <table class="font-table">
+      <thead>
+        <tr><th>Element</th><th>Velikost</th><th>Poznámka</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Hero headline</td>
+          <td class="sample">clamp(34px, 5.5vw, 52px)</td>
+          <td class="sample">Bold 700, tracking -0.03em, leading 1.12</td>
+        </tr>
+        <tr>
+          <td>Sekce headline</td>
+          <td class="sample">clamp(28px, 4vw, 38px)</td>
+          <td class="sample">Bold 700, tracking -0.03em</td>
+        </tr>
+        <tr>
+          <td>Karta headline</td>
+          <td class="sample">17&ndash;20px</td>
+          <td class="sample">Bold 700, tracking -0.01em</td>
+        </tr>
+        <tr>
+          <td>Logo &bdquo;Jakub Skupin&ldquo;</td>
+          <td class="sample">18px (text-lg)</td>
+          <td class="sample">Bold 700, tight tracking</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Kopírovat do Canvy / Figmy</h3>
+    <div class="copy-box" onclick="copyText('Syne')">
+      <span class="label">Název</span>
+      <span class="value">Syne</span>
+      <span class="copy-btn">kopírovat</span>
+    </div>
+    <div class="copy-box" onclick="copyText('https://fonts.google.com/specimen/Syne')">
+      <span class="label">Google</span>
+      <span class="value">fonts.google.com/specimen/Syne</span>
+      <span class="copy-btn">kopírovat</span>
+    </div>
+    <div class="copy-box" onclick="copyText('700')">
+      <span class="label">Weight</span>
+      <span class="value">700 (Bold)</span>
+      <span class="copy-btn">kopírovat</span>
+    </div>
+  </div>
+
+  <!-- MANROPE -->
+  <div class="font-card">
+    <div class="font-meta">
+      <span class="font-pill font-pill--name">Manrope</span>
+      <span class="font-pill">Body</span>
+      <span class="font-pill">400 / 500 / 600 / 700</span>
+      <span class="font-pill">Google Fonts</span>
+    </div>
+    <div class="font-preview">
+      <div class="font-preview-body">Pro experty a tvůrce, kteří mají co říct &mdash; ale online to není vidět. Pojmenuju, čím jste výjimeční, a dám tomu tvar.</div>
+    </div>
+
+    <h3 style="margin-top:0">Kde se používá</h3>
+    <table class="font-table">
+      <thead>
+        <tr><th>Element</th><th>Velikost</th><th>Weight</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Body text</td>
+          <td class="sample">15&ndash;16px</td>
+          <td class="sample">400 Regular</td>
+        </tr>
+        <tr>
+          <td>Body text (zvýrazněný)</td>
+          <td class="sample">15&ndash;16px</td>
+          <td class="sample">700 Bold</td>
+        </tr>
+        <tr>
+          <td>Labels (uppercase)</td>
+          <td class="sample">11&ndash;13px</td>
+          <td class="sample">600&ndash;700, tracking 0.06em</td>
+        </tr>
+        <tr>
+          <td>Pricing / čísla</td>
+          <td class="sample">36&ndash;42px</td>
+          <td class="sample">700 Bold</td>
+        </tr>
+        <tr>
+          <td>CTA button</td>
+          <td class="sample">14px</td>
+          <td class="sample">500&ndash;600 Medium/SemiBold</td>
+        </tr>
+        <tr>
+          <td>Testimonial citát</td>
+          <td class="sample">16&ndash;17px</td>
+          <td class="sample">400 Regular, italic</td>
+        </tr>
+        <tr>
+          <td>Footer / meta</td>
+          <td class="sample">13px</td>
+          <td class="sample">400&ndash;600</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Kopírovat do Canvy / Figmy</h3>
+    <div class="copy-box" onclick="copyText('Manrope')">
+      <span class="label">Název</span>
+      <span class="value">Manrope</span>
+      <span class="copy-btn">kopírovat</span>
+    </div>
+    <div class="copy-box" onclick="copyText('https://fonts.google.com/specimen/Manrope')">
+      <span class="label">Google</span>
+      <span class="value">fonts.google.com/specimen/Manrope</span>
+      <span class="copy-btn">kopírovat</span>
+    </div>
+    <div class="copy-box" onclick="copyText('400, 500, 600, 700')">
+      <span class="label">Weights</span>
+      <span class="value">400, 500, 600, 700</span>
+      <span class="copy-btn">kopírovat</span>
+    </div>
+  </div>
+
+  <!-- FONT PAIRING -->
+  <h3>Font pairing &mdash; proč tato kombinace</h3>
+  <div class="rules-grid">
+    <div class="rule rule--do">
+      <div class="rule-label">Proč Syne</div>
+      <p>Geometrický, sebevědomý, moderní. Nízký x-height vytváří vizuální napětí. Funguje skvěle pro krátké, silné nadpisy. Česká diakritika je čistá.</p>
+    </div>
+    <div class="rule rule--do">
+      <div class="rule-label">Proč Manrope</div>
+      <p>Neutrální geometrický sans-serif s jemným humanistickým nádechem. Výborná čitelnost i v malých velikostech. Dobré kerning s českou diakritikou.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 03 PRAVIDLA ═══════════════ -->
+<section class="section" id="pravidla">
+  <div class="section-label">03 &mdash; Pravidla</div>
+  <h2>Jak používat</h2>
+  <p class="section-desc">Stručná pravidla pro konzistentní vizuál napříč kanály.</p>
+
+  <h3>Barvy</h3>
+  <div class="rules-grid">
+    <div class="rule rule--do">
+      <div class="rule-label">Ano</div>
+      <p>Pozadí vždy #FAFAF8 (teplá bílá). Text na pozadí #1A1A18. Sekundární text pro delší odstavce. Karty na bílém pozadí #FFFFFF s borderem #E8E6E1.</p>
+    </div>
+    <div class="rule rule--dont">
+      <div class="rule-label">Ne</div>
+      <p>Čistě bílé pozadí (#FFFFFF) pro celou stránku. Výrazné barvy, gradienty, neonové akcenty. Šedý text na šedém pozadí (nedostatečný kontrast).</p>
+    </div>
+  </div>
+
+  <h3>Typografie</h3>
+  <div class="rules-grid">
+    <div class="rule rule--do">
+      <div class="rule-label">Ano</div>
+      <p>Syne pouze pro nadpisy (H1&ndash;H3) a logo. Manrope pro vše ostatní. Labels vždy uppercase s letter-spacing 0.06em. Velký kontrast velikostí (52px headline vs 13px label).</p>
+    </div>
+    <div class="rule rule--dont">
+      <div class="rule-label">Ne</div>
+      <p>Syne pro body text nebo dlouhé odstavce. Manrope jako heading font. Více než 2 fonty. Syne v light/regular weightu (používat pouze Bold 700).</p>
+    </div>
+  </div>
+
+  <h3>Canva &mdash; rychlý setup</h3>
+  <table class="font-table" style="margin-top:12px">
+    <thead>
+      <tr><th>Co</th><th>Hodnota</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Barva pozadí</td><td class="sample">#FAFAF8</td></tr>
+      <tr><td>Barva hlavního textu</td><td class="sample">#1A1A18</td></tr>
+      <tr><td>Barva popisků</td><td class="sample">#96948E</td></tr>
+      <tr><td>Heading font</td><td class="sample">Syne &mdash; Bold</td></tr>
+      <tr><td>Body font</td><td class="sample">Manrope &mdash; Regular / SemiBold</td></tr>
+      <tr><td>Label font</td><td class="sample">Manrope &mdash; SemiBold, uppercase, spacing +6%</td></tr>
+    </tbody>
+  </table>
+</section>
+
+</div><!-- /container -->
+
+<!-- TOAST -->
+<div class="toast" id="toast">Zkopírováno</div>
+
+<!-- ─── FOOTER ─── -->
+<footer class="footer">
+  <div class="container">
+    <p>Brand manuál v1.0 &mdash; 8. března 2026 &mdash; Jakub Skupin</p>
+  </div>
+</footer>
+
+<script>
+function copyText(text) {
+  navigator.clipboard.writeText(text).then(function() {
+    var toast = document.getElementById('toast');
+    toast.textContent = text + ' zkopírováno';
+    toast.classList.add('show');
+    setTimeout(function() { toast.classList.remove('show'); }, 1800);
+  });
+}
+</script>
+
+</body>
+</html>
