@@ -45,8 +45,8 @@ const steps = [
 
 export default function XFactor() {
   return (
-    <section className="mx-auto max-w-[960px] px-6 mb-[140px]" id="proces">
-      <motion.div className="mb-14" {...fadeUp}>
+    <section className="mx-auto max-w-[960px] px-6 mb-[80px] sm:mb-[140px]" id="proces">
+      <motion.div className="mb-10 sm:mb-14" {...fadeUp}>
         <div className="mb-8 text-[13px] font-semibold uppercase tracking-[0.06em] text-text-tertiary">
           Jak pracuji
         </div>

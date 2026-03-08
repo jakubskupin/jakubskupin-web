@@ -24,7 +24,7 @@ export default function WorkCards() {
       <div className="mb-8 text-[13px] font-semibold uppercase tracking-[0.06em] text-text-tertiary">
         Vybraná práce
       </div>
-      <div className="mb-[140px] grid grid-cols-1 gap-5 sm:grid-cols-2">
+      <div className="mb-[80px] sm:mb-[140px] grid grid-cols-1 gap-5 sm:grid-cols-2">
         {works.map((work, i) => (
           <a key={work.slug} href={work.externalUrl ?? `/work/${work.slug}`} target="_blank" rel="noopener noreferrer">
             <motion.div

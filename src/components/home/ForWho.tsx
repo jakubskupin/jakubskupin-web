@@ -38,7 +38,7 @@ const sections = [
 
 export default function ForWho() {
   return (
-    <section className="mx-auto max-w-[960px] px-6 mb-[140px]" id="pro-koho">
+    <section className="mx-auto max-w-[960px] px-6 mb-[80px] sm:mb-[140px]" id="pro-koho">
       <motion.div className="mb-10" {...fadeUp}>
         <div className="mb-4 text-[13px] font-semibold uppercase tracking-[0.06em] text-text-tertiary">
           Poznáváte se?

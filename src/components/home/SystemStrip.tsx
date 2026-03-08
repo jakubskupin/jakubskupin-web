@@ -14,7 +14,7 @@ const steps = ["Výzkum", "Strategie", "Design", "Copywriting", "Web", "Obsah"];
 export default function SystemStrip() {
   return (
     <motion.div
-      className="mx-auto max-w-[960px] px-6 mb-[120px]"
+      className="mx-auto max-w-[960px] px-6 mb-[80px] sm:mb-[120px]"
       {...fadeUp}
     >
       <div className="flex flex-col items-center gap-5">

@@ -12,7 +12,7 @@ const fadeUp = {
 export default function Hero() {
   return (
     <motion.section
-      className="mx-auto max-w-[960px] px-6 pb-[120px] pt-[100px]"
+      className="mx-auto max-w-[960px] px-6 pb-[72px] pt-[72px] sm:pb-[120px] sm:pt-[100px]"
       {...fadeUp}
     >
       <div className="mb-6 text-[13px] font-semibold uppercase tracking-[0.06em] text-text-tertiary">

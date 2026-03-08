@@ -12,7 +12,7 @@ const fadeUp = {
 export default function WebIsDead() {
   return (
     <motion.section
-      className="mx-auto max-w-[600px] px-6 mb-[140px]"
+      className="mx-auto max-w-[600px] px-6 mb-[80px] sm:mb-[140px]"
       {...fadeUp}
     >
       <p className="mb-1 font-heading text-[17px] font-bold leading-[1.35] tracking-[-0.01em]">

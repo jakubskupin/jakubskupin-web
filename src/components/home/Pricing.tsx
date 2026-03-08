@@ -15,7 +15,7 @@ export default function Pricing() {
   const tier = tiers[0];
 
   return (
-    <section className="mx-auto max-w-[960px] px-6 mb-[140px]" id="pricing">
+    <section className="mx-auto max-w-[960px] px-6 mb-[80px] sm:mb-[140px]" id="pricing">
       <motion.div className="mb-12" {...fadeUp}>
         <div className="mb-8 text-[13px] font-semibold uppercase tracking-[0.06em] text-text-tertiary">
           Služba

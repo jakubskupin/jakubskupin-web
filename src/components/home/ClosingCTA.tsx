@@ -24,7 +24,7 @@ export default function ClosingCTA() {
   return (
     <motion.section
       ref={ref}
-      className="mx-auto max-w-[960px] px-6 mb-[140px] text-center"
+      className="mx-auto max-w-[960px] px-6 mb-[80px] sm:mb-[140px] text-center"
       {...fadeUp}
     >
       <h2 className="mb-4 font-heading text-[clamp(28px,4vw,38px)] font-bold tracking-[-0.03em]">

@@ -32,7 +32,7 @@ export default function OngoingServices() {
 
   return (
     <motion.section
-      className="mx-auto max-w-[960px] px-6 mb-[140px]"
+      className="mx-auto max-w-[960px] px-6 mb-[80px] sm:mb-[140px]"
       id="system"
       {...fadeUp}
     >
