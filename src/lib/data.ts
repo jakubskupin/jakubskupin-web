@@ -55,12 +55,12 @@ export const serviceGroups: ServiceGroup[] = [
       {
         title: "LinkedIn presence",
         description:
-          "Posty, bio, speaker profil. Psaný vaším hlasem, ne šablonou.",
+          "Posty psané vaší tonalitou — tu máme ze sprintu. AI se jí drží, já kontroluju.",
       },
       {
         title: "Podcast → obsah",
         description:
-          "Z jedné epizody vytáhnu reelsy, citáty, posty. AI + ruční selekce.",
+          "Z jedné epizody reelsy, citáty, posty. V tónu a messagingu ze sprintu.",
       },
     ],
   },
@@ -70,12 +70,12 @@ export const serviceGroups: ServiceGroup[] = [
       {
         title: "Případovky",
         description:
-          "Pošlete hrubá data, vrátím hotovou studii.",
+          "Pošlete hrubá data, vrátím hotovou studii. Vizuály ve vašem vizuálním základu ze sprintu.",
       },
       {
         title: "AI rešerše",
         description:
-          "Hluboká analýza tématu, firmy nebo příležitosti. Vizualizace + shrnutí.",
+          "Hluboká analýza cílená na váš positioning a x-factor. Vizualizace + shrnutí.",
       },
     ],
   },
@@ -85,12 +85,12 @@ export const serviceGroups: ServiceGroup[] = [
       {
         title: "Prospecting",
         description:
-          "Sales Navigator + AI. Vytipuju lidi z vaší cílovky. Vy se jen propojíte.",
+          "Cílovku známe ze sprintu. Sales Navigator + AI vytipují lidi — vy se jen propojíte.",
       },
       {
         title: "Micro-experimenty",
         description:
-          "Landing page + kampaň pro otestování nápadu. Rychle.",
+          "Landing page + kampaň. Messaging a vizuál ze sprintu, otestováno rychle.",
       },
     ],
   },

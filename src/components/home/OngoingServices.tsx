@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, type Easing } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence, type Easing } from "framer-motion";
 import { serviceGroups } from "@/lib/data";
 
 const fadeUp = {
@@ -11,6 +12,8 @@ const fadeUp = {
 };
 
 export default function OngoingServices() {
+  const [showTooltip, setShowTooltip] = useState(false);
+
   return (
     <motion.section
       className="mx-auto max-w-[960px] px-6 mb-[140px]"
@@ -24,8 +27,35 @@ export default function OngoingServices() {
           Sprint je katalyzátor
         </h2>
         <p className="max-w-[460px] text-[15px] text-text-secondary">
-          Pak nastupuje systém poháněný AI. Jeden člověk, síla celého
-          týmu.
+          Pak nastupuje{" "}
+          <span
+            className="relative inline"
+            onMouseEnter={() => setShowTooltip(true)}
+            onMouseLeave={() => setShowTooltip(false)}
+          >
+            <strong className="font-bold text-text cursor-help border-b border-dashed border-text-tertiary">
+              AI-native content systém
+            </strong>
+            <AnimatePresence>
+              {showTooltip && (
+                <motion.span
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 6 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute left-0 top-full z-50 mt-2 w-[340px] rounded-xl border border-border bg-card-bg px-5 py-4 text-[12.5px] leading-[1.6] text-text-secondary shadow-lg"
+                >
+                  Kontext je nejdražší vstup pro AI — bez něj
+                  generuje průměr. X-Factor Sprint definuje váš
+                  specifický kontext (tonalita, vizuál, cílovka,
+                  positioning). AI pak drží konzistentní výstupy bez
+                  opakovaného vysvětlování.
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </span>{" "}
+          — drží konzistenci tonality, vizuálu i cílovky ze sprintu.
+          Jeden člověk, síla celého týmu.
         </p>
       </div>
 
