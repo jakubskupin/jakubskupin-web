@@ -28,6 +28,11 @@ export interface Service {
   description: string;
 }
 
+export interface ServiceGroup {
+  label: string;
+  services: Service[];
+}
+
 export interface Testimonial {
   quote: string;
   author: string;

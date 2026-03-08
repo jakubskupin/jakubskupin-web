@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, type Easing } from "framer-motion";
-import { services } from "@/lib/data";
+import { serviceGroups } from "@/lib/data";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -29,18 +29,27 @@ export default function OngoingServices() {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-        {services.map((s) => (
-          <div
-            key={s.title}
-            className="rounded-2xl border border-border bg-card-bg px-5 py-6 transition-colors duration-250 hover:border-[#CDCBC5]"
-          >
-            <h3 className="mb-1.5 font-heading text-sm font-bold tracking-[-0.01em]">
-              {s.title}
-            </h3>
-            <p className="text-[12.5px] leading-[1.5] text-text-secondary">
-              {s.description}
-            </p>
+      <div className="space-y-6">
+        {serviceGroups.map((group) => (
+          <div key={group.label}>
+            <div className="mb-3 text-[11px] font-bold uppercase tracking-[0.08em] text-text-tertiary">
+              {group.label}
+            </div>
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              {group.services.map((s) => (
+                <div
+                  key={s.title}
+                  className="rounded-2xl border border-border bg-card-bg px-5 py-6 transition-colors duration-250 hover:border-[#CDCBC5]"
+                >
+                  <h3 className="mb-1.5 font-heading text-sm font-bold tracking-[-0.01em]">
+                    {s.title}
+                  </h3>
+                  <p className="text-[12.5px] leading-[1.5] text-text-secondary">
+                    {s.description}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         ))}
       </div>

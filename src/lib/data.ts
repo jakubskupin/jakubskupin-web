@@ -1,4 +1,4 @@
-import type { Work, Tier, Service, Testimonial } from "./types";
+import type { Work, Tier, Service, ServiceGroup, Testimonial } from "./types";
 
 export const LINKEDIN_URL = "https://www.linkedin.com/in/jakubskupin/";
 
@@ -48,41 +48,51 @@ export const tiers: Tier[] = [
   },
 ];
 
-export const services: Service[] = [
+export const serviceGroups: ServiceGroup[] = [
   {
-    title: "Copywriting",
-    description:
-      "LinkedIn posty, bio, speaker profily v tone of voice vaší značky.",
+    label: "Viditelnost",
+    services: [
+      {
+        title: "LinkedIn presence",
+        description:
+          "Posty, bio, speaker profil. Psaný vaším hlasem, ne šablonou.",
+      },
+      {
+        title: "Podcast → obsah",
+        description:
+          "Z jedné epizody vytáhnu reelsy, citáty, posty. AI + ruční selekce.",
+      },
+    ],
   },
   {
-    title: "Sociální sítě",
-    description:
-      "Vizuální obsah, carousely, stories. Konzistentní brand napříč platformami.",
+    label: "Autorita",
+    services: [
+      {
+        title: "Případovky",
+        description:
+          "Pošlete hrubá data, vrátím hotovou studii.",
+      },
+      {
+        title: "AI rešerše",
+        description:
+          "Hluboká analýza tématu, firmy nebo příležitosti. Vizualizace + shrnutí.",
+      },
+    ],
   },
   {
-    title: "Sales Navigator",
-    description:
-      "Vytipuju seznam lidí z vaší cílové skupiny pro propojení na LinkedInu.",
-  },
-  {
-    title: "Zpracování podcastu",
-    description:
-      "Vytvořím z nich reelsy s titulky. Ne genericky, ale vyberu přesně to sdělení, které podporuje váš positioning.",
-  },
-  {
-    title: "Případové studie",
-    description:
-      "Pošlete mi hrubá data, sepíšu to do čitelné podoby.",
-  },
-  {
-    title: "Experimenty",
-    description:
-      "Vytvořím landing page a micro-kampaň pro testování vašeho řešení.",
-  },
-  {
-    title: "AI research sprint",
-    description:
-      "Velmi rychle vám dodám hlubokou rešerši na vámi vybrané téma, firmu nebo příležitost. Včetně vizualizací. Pomůže vám to se zorientovat.",
+    label: "Pipeline",
+    services: [
+      {
+        title: "Prospecting",
+        description:
+          "Vytipuju lidi z vaší cílovky na LinkedInu. Vy se jen propojíte.",
+      },
+      {
+        title: "Micro-experimenty",
+        description:
+          "Landing page + kampaň pro otestování nápadu. Rychle, levně.",
+      },
+    ],
   },
 ];
 
