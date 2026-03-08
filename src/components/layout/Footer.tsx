@@ -8,7 +8,7 @@ export default function Footer() {
         href={LINKEDIN_URL}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-[13px] font-semibold text-text"
+        className="hidden sm:inline text-[13px] font-semibold text-text"
       >
         {"LinkedIn \u2197\uFE0E"}
       </a>
