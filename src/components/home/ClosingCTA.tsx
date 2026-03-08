@@ -46,7 +46,7 @@ export default function ClosingCTA() {
         rel="noopener noreferrer"
         className="inline-block rounded-full bg-text px-8 py-3.5 text-sm font-bold text-bg transition-all duration-250 hover:opacity-85"
       >
-        Napsat na LinkedIn ↗
+        {"Napsat na LinkedIn \u2197\uFE0E"}
       </a>
     </motion.section>
   );

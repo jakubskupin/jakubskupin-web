@@ -21,17 +21,17 @@ export default function SystemStrip() {
         <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2">
           {steps.map((step, i) => (
             <span key={step} className="flex items-center gap-3">
-              <span className="text-[13px] font-semibold tracking-[0.02em] text-text-secondary">
+              <span className="text-[14px] font-semibold tracking-[0.02em] text-text-secondary">
                 {step}
               </span>
               {i < steps.length - 1 && (
-                <span className="text-[12px] text-text-tertiary">→</span>
+                <span className="text-[13px] text-text-tertiary">→</span>
               )}
             </span>
           ))}
         </div>
-        <p className="text-[13px] tracking-[0.02em] text-text-tertiary">
-          Jeden člověk, <strong className="font-bold text-text-secondary">dva dny</strong>. AI mi dává rychlost a hloubku, kterou od jednotlivce nečekáte.
+        <p className="text-[14px] tracking-[0.02em] text-text-tertiary">
+          Jeden člověk, <strong className="font-bold text-text-secondary">dva dny</strong>.<br className="sm:hidden" /> AI mi dává rychlost a hloubku, kterou od jednotlivce nečekáte.
         </p>
       </div>
     </motion.div>

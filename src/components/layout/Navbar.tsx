@@ -45,7 +45,7 @@ export default function Navbar() {
           rel="noopener noreferrer"
           className="rounded-full border border-border px-5 py-2 text-sm font-medium text-text-secondary transition-all duration-250 hover:border-text hover:text-text"
         >
-          Spolupráce ↗
+          {"Spolupráce \u2197\uFE0E"}
         </a>
       </div>
     </nav>

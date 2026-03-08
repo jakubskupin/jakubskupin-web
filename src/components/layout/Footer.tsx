@@ -10,7 +10,7 @@ export default function Footer() {
         rel="noopener noreferrer"
         className="text-[13px] font-semibold text-text"
       >
-        LinkedIn ↗
+        {"LinkedIn \u2197\uFE0E"}
       </a>
     </footer>
   );
