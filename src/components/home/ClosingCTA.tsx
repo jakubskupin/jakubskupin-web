@@ -18,8 +18,8 @@ export default function ClosingCTA() {
     offset: ["start end", "start 0.6"],
   });
 
-  const zOpacity = useTransform(scrollYProgress, [0.2, 0.5], [1, 0]);
-  const yOpacity = useTransform(scrollYProgress, [0.2, 0.5], [0, 1]);
+  const zOpacity = useTransform(scrollYProgress, [0.35, 0.65], [1, 0]);
+  const yOpacity = useTransform(scrollYProgress, [0.35, 0.65], [0, 1]);
 
   return (
     <motion.section
