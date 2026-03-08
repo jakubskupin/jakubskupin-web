@@ -15,11 +15,11 @@ export default function ClosingCTA() {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "end start"],
+    offset: ["start end", "start 0.6"],
   });
 
-  const zOpacity = useTransform(scrollYProgress, [0.35, 0.45], [1, 0]);
-  const yOpacity = useTransform(scrollYProgress, [0.35, 0.45], [0, 1]);
+  const zOpacity = useTransform(scrollYProgress, [0.2, 0.5], [1, 0]);
+  const yOpacity = useTransform(scrollYProgress, [0.2, 0.5], [0, 1]);
 
   return (
     <motion.section
