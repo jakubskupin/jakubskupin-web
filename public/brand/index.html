@@ -303,6 +303,59 @@ h1, h2, h3 {
   font-size: 13px;
 }
 
+/* ─── EXAMPLES ─── */
+.example-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.example {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.example-preview {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+.example-meta {
+  padding: 14px 24px;
+}
+.example-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+.example-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+.spec {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+  background: #E8E6E1;
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.spec:hover { background: #D8D6D1; }
+.spec-quiet {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
 /* ─── TOAST ─── */
 .toast {
   position: fixed;
@@ -648,6 +701,207 @@ h1, h2, h3 {
       <tr><td>Label font</td><td class="sample">Manrope &mdash; SemiBold, uppercase, spacing +6%</td></tr>
     </tbody>
   </table>
+</section>
+
+<!-- ═══════════════ 04 PŘÍKLADY ═══════════════ -->
+<section class="section" id="priklady">
+  <div class="section-label">04 &mdash; Příklady z webu</div>
+  <h2>Reálné elementy</h2>
+  <p class="section-desc">Přesné hodnoty každého textového elementu na webu. Kliknutím zkopírujete celý řádek.</p>
+
+  <h3>Nadpisy</h3>
+  <div class="example-grid">
+    <div class="example">
+      <div class="example-preview" style="font-family:'Syne',sans-serif;font-weight:700;font-size:36px;letter-spacing:-0.03em;line-height:1.12;color:#1A1A18">Pojmenuju, čím jste výjimeční</div>
+      <div class="example-meta">
+        <div class="example-label">Hero headline</div>
+        <div class="example-specs">
+          <span class="spec" onclick="copyText('Syne')">Syne</span>
+          <span class="spec" onclick="copyText('700')">Bold 700</span>
+          <span class="spec" onclick="copyText('clamp(34px, 5.5vw, 52px)')">clamp(34–52px)</span>
+          <span class="spec" onclick="copyText('#1A1A18')">#1A1A18</span>
+          <span class="spec-quiet">tracking -0.03em &middot; leading 1.12</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="example-preview" style="font-family:'Syne',sans-serif;font-weight:700;font-size:26px;letter-spacing:-0.03em;line-height:1.2;color:#1A1A18">Za 2 dny máte funkční základ</div>
+      <div class="example-meta">
+        <div class="example-label">Sekce headline</div>
+        <div class="example-specs">
+          <span class="spec" onclick="copyText('Syne')">Syne</span>
+          <span class="spec" onclick="copyText('700')">Bold 700</span>
+          <span class="spec" onclick="copyText('clamp(28px, 4vw, 38px)')">clamp(28–38px)</span>
+          <span class="spec" onclick="copyText('#1A1A18')">#1A1A18</span>
+          <span class="spec-quiet">tracking -0.03em</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="example-preview" style="font-family:'Syne',sans-serif;font-weight:700;font-size:17px;letter-spacing:-0.01em;line-height:1.2;color:#1A1A18">Research a strategie</div>
+      <div class="example-meta">
+        <div class="example-label">Karta / krok headline</div>
+        <div class="example-specs">
+          <span class="spec" onclick="copyText('Syne')">Syne</span>
+          <span class="spec" onclick="copyText('700')">Bold 700</span>
+          <span class="spec" onclick="copyText('17px')">17px</span>
+          <span class="spec" onclick="copyText('#1A1A18')">#1A1A18</span>
+          <span class="spec-quiet">tracking -0.01em</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Labels</h3>
+  <div class="example-grid">
+    <div class="example">
+      <div class="example-preview" style="font-family:'Manrope',sans-serif;font-weight:600;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;color:#96948E">Personal brand × AI × Marketing</div>
+      <div class="example-meta">
+        <div class="example-label">Hero label</div>
+        <div class="example-specs">
+          <span class="spec" onclick="copyText('Manrope')">Manrope</span>
+          <span class="spec" onclick="copyText('600')">SemiBold 600</span>
+          <span class="spec" onclick="copyText('13px')">13px</span>
+          <span class="spec" onclick="copyText('#96948E')">#96948E</span>
+          <span class="spec-quiet">uppercase &middot; tracking 0.06em</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="example-preview" style="font-family:'Manrope',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#96948E">01</div>
+      <div class="example-meta">
+        <div class="example-label">Čísla kroků</div>
+        <div class="example-specs">
+          <span class="spec" onclick="copyText('Manrope')">Manrope</span>
+          <span class="spec" onclick="copyText('700')">Bold 700</span>
+          <span class="spec" onclick="copyText('12px')">12px</span>
+          <span class="spec" onclick="copyText('#96948E')">#96948E</span>
+          <span class="spec-quiet">uppercase &middot; tracking 0.08em</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="example-preview" style="font-family:'Manrope',sans-serif;font-weight:600;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;color:#96948E">Jak pracuji</div>
+      <div class="example-meta">
+        <div class="example-label">Sekce label</div>
+        <div class="example-specs">
+          <span class="spec" onclick="copyText('Manrope')">Manrope</span>
+          <span class="spec" onclick="copyText('600')">SemiBold 600</span>
+          <span class="spec" onclick="copyText('13px')">13px</span>
+          <span class="spec" onclick="copyText('#96948E')">#96948E</span>
+          <span class="spec-quiet">uppercase &middot; tracking 0.06em</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Body text</h3>
+  <div class="example-grid">
+    <div class="example">
+      <div class="example-preview" style="font-family:'Manrope',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#6B6964;max-width:480px">Pro experty a tvůrce, kteří mají co říct &mdash; ale online to není vidět.</div>
+      <div class="example-meta">
+        <div class="example-label">Hero popis</div>
+        <div class="example-specs">
+          <span class="spec" onclick="copyText('Manrope')">Manrope</span>
+          <span class="spec" onclick="copyText('400')">Regular 400</span>
+          <span class="spec" onclick="copyText('18px')">18px (text-lg)</span>
+          <span class="spec" onclick="copyText('#6B6964')">#6B6964</span>
+          <span class="spec-quiet">leading 1.65</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="example-preview" style="font-family:'Manrope',sans-serif;font-weight:400;font-size:14px;line-height:1.6;color:#6B6964;max-width:480px">Rešerše trhu, cílových skupin a tonality. AI analýza + lidský úsudek.</div>
+      <div class="example-meta">
+        <div class="example-label">Krok / karta popis</div>
+        <div class="example-specs">
+          <span class="spec" onclick="copyText('Manrope')">Manrope</span>
+          <span class="spec" onclick="copyText('400')">Regular 400</span>
+          <span class="spec" onclick="copyText('14px')">14px</span>
+          <span class="spec" onclick="copyText('#6B6964')">#6B6964</span>
+          <span class="spec-quiet">leading 1.6</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="example-preview" style="font-family:'Manrope',sans-serif;font-weight:400;font-size:14px;line-height:1.6;color:#96948E;text-align:center">Jeden člověk, <strong style="font-weight:700;color:#6B6964">2 dny</strong>.</div>
+      <div class="example-meta">
+        <div class="example-label">SystemStrip text</div>
+        <div class="example-specs">
+          <span class="spec" onclick="copyText('Manrope')">Manrope</span>
+          <span class="spec" onclick="copyText('400')">Regular 400</span>
+          <span class="spec" onclick="copyText('14px')">14px</span>
+          <span class="spec" onclick="copyText('#96948E')">#96948E</span>
+          <span class="spec-quiet">zvýrazněné: Bold 700 v #6B6964</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Speciální elementy</h3>
+  <div class="example-grid">
+    <div class="example">
+      <div class="example-preview" style="font-family:'Manrope',sans-serif;font-weight:600;font-size:14px;line-height:1.6;color:#6B6964">Výzkum <span style="color:#96948E;font-size:13px">&rarr;</span> Strategie <span style="color:#96948E;font-size:13px">&rarr;</span> Design <span style="color:#96948E;font-size:13px">&rarr;</span> Web</div>
+      <div class="example-meta">
+        <div class="example-label">Process strip</div>
+        <div class="example-specs">
+          <span class="spec" onclick="copyText('Manrope')">Manrope</span>
+          <span class="spec" onclick="copyText('600')">SemiBold 600</span>
+          <span class="spec" onclick="copyText('14px')">14px</span>
+          <span class="spec" onclick="copyText('#6B6964')">#6B6964</span>
+          <span class="spec-quiet">šipky: 13px v #96948E</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="example-preview"><span style="font-family:'Manrope',sans-serif;font-weight:500;font-size:14px;color:#6B6964;border:1px solid #E8E6E1;border-radius:100px;padding:8px 20px;display:inline-block">Spolupráce &nearr;&#xFE0E;</span></div>
+      <div class="example-meta">
+        <div class="example-label">CTA button (navbar)</div>
+        <div class="example-specs">
+          <span class="spec" onclick="copyText('Manrope')">Manrope</span>
+          <span class="spec" onclick="copyText('500')">Medium 500</span>
+          <span class="spec" onclick="copyText('14px')">14px</span>
+          <span class="spec" onclick="copyText('#6B6964')">#6B6964</span>
+          <span class="spec-quiet">border #E8E6E1 &middot; pill shape</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="example-preview" style="font-family:'Syne',sans-serif;font-weight:700;font-size:18px;letter-spacing:-0.02em;color:#1A1A18">Jakub Skupin</div>
+      <div class="example-meta">
+        <div class="example-label">Logo (text)</div>
+        <div class="example-specs">
+          <span class="spec" onclick="copyText('Syne')">Syne</span>
+          <span class="spec" onclick="copyText('700')">Bold 700</span>
+          <span class="spec" onclick="copyText('18px')">18px</span>
+          <span class="spec" onclick="copyText('#1A1A18')">#1A1A18</span>
+          <span class="spec-quiet">tight tracking</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="example-preview" style="font-family:'Manrope',sans-serif;font-weight:700;font-size:36px;letter-spacing:-0.02em;color:#1A1A18">42 500 <span style="font-size:14px;font-weight:500;color:#96948E">Kč</span></div>
+      <div class="example-meta">
+        <div class="example-label">Pricing číslo</div>
+        <div class="example-specs">
+          <span class="spec" onclick="copyText('Manrope')">Manrope</span>
+          <span class="spec" onclick="copyText('700')">Bold 700</span>
+          <span class="spec" onclick="copyText('42px')">42px</span>
+          <span class="spec" onclick="copyText('#1A1A18')">#1A1A18</span>
+          <span class="spec-quiet">&bdquo;Kč&ldquo;: 14px Medium v #96948E</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 </div><!-- /container -->
