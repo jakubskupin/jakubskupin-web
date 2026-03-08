@@ -21,11 +21,11 @@ export default function OngoingServices() {
           A pak?
         </div>
         <h2 className="mb-2 font-heading text-[clamp(24px,3vw,30px)] font-bold tracking-[-0.02em]">
-          Průběžná spolupráce
+          Sprint je katalyzátor
         </h2>
         <p className="max-w-[460px] text-[15px] text-text-secondary">
-          Po sprintu nebo kdykoliv potřebujete. Rozsah a cenu řešíme
-          individuálně.
+          Pak nastupuje systém poháněný AI. Jeden člověk, síla celého
+          týmu.
         </p>
       </div>
 
@@ -53,6 +53,10 @@ export default function OngoingServices() {
           </div>
         ))}
       </div>
+
+      <p className="mt-8 text-[13px] text-text-tertiary">
+        Rozsah a cenu řešíme individuálně.
+      </p>
     </motion.section>
   );
 }

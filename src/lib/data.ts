@@ -85,12 +85,12 @@ export const serviceGroups: ServiceGroup[] = [
       {
         title: "Prospecting",
         description:
-          "Vytipuju lidi z vaší cílovky na LinkedInu. Vy se jen propojíte.",
+          "Sales Navigator + AI. Vytipuju lidi z vaší cílovky. Vy se jen propojíte.",
       },
       {
         title: "Micro-experimenty",
         description:
-          "Landing page + kampaň pro otestování nápadu. Rychle, levně.",
+          "Landing page + kampaň pro otestování nápadu. Rychle.",
       },
     ],
   },
