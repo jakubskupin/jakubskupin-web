@@ -13,7 +13,7 @@ const fadeUp = {
 
 export default function OngoingServices() {
   const [showTooltip, setShowTooltip] = useState(false);
-  const tooltipRef = useRef<HTMLSpanElement>(null);
+  const tooltipRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!showTooltip) return;
@@ -43,39 +43,40 @@ export default function OngoingServices() {
         <h2 className="mb-2 font-heading text-[clamp(24px,3vw,30px)] font-bold tracking-[-0.02em]">
           Sprint je katalyzátor
         </h2>
-        <p className="max-w-[460px] text-[15px] text-text-secondary max-sm:relative">
-          Pak nastupuje{" "}
-          <span
-            ref={tooltipRef}
-            className="sm:relative inline"
-            onMouseEnter={() => setShowTooltip(true)}
-            onMouseLeave={() => setShowTooltip(false)}
-            onClick={() => setShowTooltip((v) => !v)}
-          >
-            <strong className="font-bold text-text cursor-help border-b border-dashed border-text-tertiary">
-              AI-native content systém
-            </strong>
-            <AnimatePresence>
-              {showTooltip && (
-                <motion.span
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 6 }}
-                  transition={{ duration: 0.2 }}
-                  className="absolute left-0 top-full z-50 mt-2 w-[min(340px,calc(100vw-48px))] rounded-xl border border-border bg-card-bg px-5 py-4 text-[12.5px] leading-[1.6] text-text-secondary shadow-lg"
-                >
-                  Kontext je nejdražší vstup pro AI — bez něj
-                  generuje průměr. X-Factor Sprint definuje váš
-                  specifický kontext (tonalita, vizuál, cílovka,
-                  positioning). AI pak drží konzistentní výstupy bez
-                  opakovaného vysvětlování.
-                </motion.span>
-              )}
-            </AnimatePresence>
-          </span>{" "}
-          — drží konzistenci tonality, vizuálu i cílovky ze sprintu.
-          Jeden člověk, síla celého týmu.
-        </p>
+        <div ref={tooltipRef} className="max-w-[460px]">
+          <p className="text-[15px] text-text-secondary">
+            Pak nastupuje{" "}
+            <span
+              className="inline"
+              onMouseEnter={() => setShowTooltip(true)}
+              onMouseLeave={() => setShowTooltip(false)}
+              onClick={() => setShowTooltip((v) => !v)}
+            >
+              <strong className="font-bold text-text cursor-help border-b border-dashed border-text-tertiary">
+                AI-native content systém
+              </strong>
+            </span>{" "}
+            — drží konzistenci tonality, vizuálu i cílovky ze sprintu.
+            Jeden člověk, síla celého týmu.
+          </p>
+          <AnimatePresence>
+            {showTooltip && (
+              <motion.div
+                initial={{ opacity: 0, y: -4 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -4 }}
+                transition={{ duration: 0.2 }}
+                className="mt-3 rounded-xl border border-border bg-card-bg px-5 py-4 text-[12.5px] leading-[1.6] text-text-secondary shadow-lg"
+              >
+                Kontext je nejdražší vstup pro AI — bez něj
+                generuje průměr. X-Factor Sprint definuje váš
+                specifický kontext (tonalita, vizuál, cílovka,
+                positioning). AI pak drží konzistentní výstupy bez
+                opakovaného vysvětlování.
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
 
       <div className="space-y-6">
