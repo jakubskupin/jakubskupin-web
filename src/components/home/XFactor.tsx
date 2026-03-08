@@ -51,7 +51,7 @@ export default function XFactor() {
           Jak pracuji
         </div>
         <h2 className="mb-3 font-heading text-[clamp(28px,4vw,38px)] font-bold tracking-[-0.03em] max-w-[600px]">
-          Za dva dny
+          Za 2 dny
           <br />
           máte funkční základ
         </h2>
