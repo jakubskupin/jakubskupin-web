@@ -16,6 +16,7 @@ export default function Testimonials() {
   return (
     <motion.section
       className="mx-auto max-w-[600px] px-6 mb-[140px]"
+      id="reference"
       {...fadeUp}
     >
       <div className="mb-8 text-[13px] font-semibold uppercase tracking-[0.06em] text-text-tertiary">

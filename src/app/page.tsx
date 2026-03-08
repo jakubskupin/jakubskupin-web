@@ -17,16 +17,18 @@ export default function Home() {
     <>
       <GrainOverlay />
       <Navbar />
-      <Hero />
-      <SystemStrip />
-      <WorkCards />
-      <Testimonials />
-      <ForWho />
-      <WebIsDead />
-      <XFactor />
-      <Pricing />
-      <OngoingServices />
-      <ClosingCTA />
+      <main id="main">
+        <Hero />
+        <SystemStrip />
+        <WorkCards />
+        <Testimonials />
+        <ForWho />
+        <WebIsDead />
+        <XFactor />
+        <Pricing />
+        <OngoingServices />
+        <ClosingCTA />
+      </main>
       <Footer />
     </>
   );

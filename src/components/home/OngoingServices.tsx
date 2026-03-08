@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, type Easing } from "framer-motion";
 import { serviceGroups } from "@/lib/data";
 
@@ -13,10 +13,27 @@ const fadeUp = {
 
 export default function OngoingServices() {
   const [showTooltip, setShowTooltip] = useState(false);
+  const tooltipRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    if (!showTooltip) return;
+    const handleOutside = (e: MouseEvent | TouchEvent) => {
+      if (tooltipRef.current && !tooltipRef.current.contains(e.target as Node)) {
+        setShowTooltip(false);
+      }
+    };
+    document.addEventListener("mousedown", handleOutside);
+    document.addEventListener("touchstart", handleOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleOutside);
+      document.removeEventListener("touchstart", handleOutside);
+    };
+  }, [showTooltip]);
 
   return (
     <motion.section
       className="mx-auto max-w-[960px] px-6 mb-[140px]"
+      id="system"
       {...fadeUp}
     >
       <div className="mb-9">
@@ -29,9 +46,11 @@ export default function OngoingServices() {
         <p className="max-w-[460px] text-[15px] text-text-secondary">
           Pak nastupuje{" "}
           <span
+            ref={tooltipRef}
             className="relative inline"
             onMouseEnter={() => setShowTooltip(true)}
             onMouseLeave={() => setShowTooltip(false)}
+            onClick={() => setShowTooltip((v) => !v)}
           >
             <strong className="font-bold text-text cursor-help border-b border-dashed border-text-tertiary">
               AI-native content systém
@@ -43,7 +62,7 @@ export default function OngoingServices() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 6 }}
                   transition={{ duration: 0.2 }}
-                  className="absolute left-0 top-full z-50 mt-2 w-[340px] rounded-xl border border-border bg-card-bg px-5 py-4 text-[12.5px] leading-[1.6] text-text-secondary shadow-lg"
+                  className="absolute left-0 top-full z-50 mt-2 w-[min(340px,calc(100vw-48px))] rounded-xl border border-border bg-card-bg px-5 py-4 text-[12.5px] leading-[1.6] text-text-secondary shadow-lg sm:left-0 max-sm:-left-4"
                 >
                   Kontext je nejdražší vstup pro AI — bez něj
                   generuje průměr. X-Factor Sprint definuje váš

@@ -30,12 +30,14 @@ export default function Pricing() {
       </motion.div>
 
       <motion.div
-        className="relative mb-12 max-w-[560px] overflow-hidden rounded-3xl border border-border bg-card-bg p-8 transition-colors duration-300 hover:border-[#CDCBC5]"
+        className="relative mb-12 max-w-[560px] rounded-3xl border border-border bg-card-bg p-8 transition-colors duration-300 hover:border-[#CDCBC5]"
         {...fadeUp}
         whileHover={{ y: -2 }}
       >
-        <div className="absolute right-[-40px] top-[20px] z-10 rotate-45 bg-text px-12 py-1 text-center text-[9px] font-bold uppercase tracking-[0.04em] text-bg shadow-sm">
-          Zaváděcí cena
+        <div className="absolute inset-0 overflow-hidden rounded-3xl pointer-events-none">
+          <div className="absolute right-[-40px] top-[20px] z-10 rotate-45 bg-text px-12 py-1 text-center text-[9px] font-bold uppercase tracking-[0.04em] text-bg shadow-sm">
+            Zaváděcí cena
+          </div>
         </div>
         <div className="mb-1.5 font-heading text-xl font-bold tracking-[-0.02em]">
           {tier.name}
