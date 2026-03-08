@@ -43,11 +43,11 @@ export default function OngoingServices() {
         <h2 className="mb-2 font-heading text-[clamp(24px,3vw,30px)] font-bold tracking-[-0.02em]">
           Sprint je katalyzátor
         </h2>
-        <p className="max-w-[460px] text-[15px] text-text-secondary">
+        <p className="max-w-[460px] text-[15px] text-text-secondary max-sm:relative">
           Pak nastupuje{" "}
           <span
             ref={tooltipRef}
-            className="relative inline"
+            className="sm:relative inline"
             onMouseEnter={() => setShowTooltip(true)}
             onMouseLeave={() => setShowTooltip(false)}
             onClick={() => setShowTooltip((v) => !v)}
@@ -62,7 +62,7 @@ export default function OngoingServices() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 6 }}
                   transition={{ duration: 0.2 }}
-                  className="absolute left-0 top-full z-50 mt-2 w-[min(340px,calc(100vw-48px))] rounded-xl border border-border bg-card-bg px-5 py-4 text-[12.5px] leading-[1.6] text-text-secondary shadow-lg sm:left-0 max-sm:-left-4"
+                  className="absolute left-0 top-full z-50 mt-2 w-[min(340px,calc(100vw-48px))] rounded-xl border border-border bg-card-bg px-5 py-4 text-[12.5px] leading-[1.6] text-text-secondary shadow-lg"
                 >
                   Kontext je nejdražší vstup pro AI — bez něj
                   generuje průměr. X-Factor Sprint definuje váš
