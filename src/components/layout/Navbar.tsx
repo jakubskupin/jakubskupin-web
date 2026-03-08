@@ -5,16 +5,35 @@ import { LINKEDIN_URL } from "@/lib/data";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [visible, setVisible] = useState(true);
   const scrolledRef = useRef(false);
+  const lastY = useRef(0);
 
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY;
+
+      // Background blur
       const next = scrolledRef.current ? y > 20 : y > 40;
       if (next !== scrolledRef.current) {
         scrolledRef.current = next;
         setScrolled(next);
       }
+
+      // Show/hide based on scroll direction
+      const delta = y - lastY.current;
+      if (y < 100) {
+        // Near top — always show
+        setVisible(true);
+      } else if (delta < -5) {
+        // Scrolling up
+        setVisible(true);
+      } else if (delta > 10) {
+        // Scrolling down (larger threshold to avoid jitter)
+        setVisible(false);
+      }
+
+      lastY.current = y;
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -22,11 +41,11 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`sticky top-0 z-40 py-4 transition-[background-color,border-color,backdrop-filter] duration-300 ${
+      className={`sticky top-0 z-40 py-4 transition-[background-color,border-color,backdrop-filter,transform] duration-300 ${
         scrolled
           ? "border-b border-border bg-bg/80 backdrop-blur-lg"
           : "border-b border-transparent bg-transparent"
-      }`}
+      } ${visible ? "translate-y-0" : "-translate-y-full"}`}
     >
       <div className="mx-auto flex max-w-[960px] items-center justify-between px-6">
         <a
