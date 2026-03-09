@@ -74,7 +74,7 @@ export default function AboutMe() {
             Stratég, který kóduje. Rešeršér, který designuje.
           </p>
           <p className="mb-4 text-[15px] leading-[1.7] text-text">
-            Jeden člověk od rešerše po hotové výstupy — nic se neztratí cestou.
+            Jeden člověk od rešerše po hotové výstupy. Eliminuju meetingy a šum.
             AI používám ne jako zkratku. Jako nástroj pro hloubku, kterou
             nečekáte.
           </p>
