@@ -94,7 +94,7 @@ export default function AboutMe() {
                 className="inline-flex items-center gap-1 rounded-full border border-border px-2.5 py-1 text-[10px] font-medium text-text-tertiary transition-colors duration-200 hover:border-text-tertiary hover:text-text-secondary"
               >
                 {link.label}
-                <span className="text-[9px]">↗</span>
+                <span className="text-[9px]">{"\u2197\uFE0E"}</span>
               </a>
             ))}
           </div>
