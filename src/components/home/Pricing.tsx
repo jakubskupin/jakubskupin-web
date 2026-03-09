@@ -59,12 +59,27 @@ export default function Pricing() {
           </div>
         </div>
 
-        {/* Features */}
+        {/* Knowledge */}
         <div className="mb-3 text-[11px] font-bold uppercase tracking-[0.08em] text-text-tertiary">
-          Výstupy
+          Budete vědět
         </div>
         <ul className="features mb-6 flex flex-col gap-2.5">
-          {tier.features.map((f) => (
+          {tier.knowledge.map((f) => (
+            <li
+              key={f}
+              className="text-[13.5px] leading-[1.45] text-text-secondary"
+            >
+              {f}
+            </li>
+          ))}
+        </ul>
+
+        {/* Artifacts */}
+        <div className="mb-3 text-[11px] font-bold uppercase tracking-[0.08em] text-text-tertiary">
+          A budete mít
+        </div>
+        <ul className="features mb-6 flex flex-col gap-2.5">
+          {tier.artifacts.map((f) => (
             <li
               key={f}
               className="text-[13.5px] leading-[1.45] text-text-secondary"

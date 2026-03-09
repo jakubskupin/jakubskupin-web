@@ -32,13 +32,15 @@ export const tiers: Tier[] = [
       "Pojmenuju, čím jste výjimeční. A dám tomu tvar.",
     price: "42 500",
     priceNote: "jednorázově",
-    features: [
-      "Cílové skupiny a jejich skutečné problémy",
-      "Konkurence — kdo, co a kde máte šanci",
-      "Váš x-factor — jasně pojmenovaný",
-      "Positioning, messaging, tonalita",
-      "Návrhy témat a vizuální základ",
-      "Hotový single-page web, upravený LinkedIn, první obsah",
+    knowledge: [
+      "Víte, kdo jsou vaši lidi a co doopravdy řeší",
+      "Víte, kde máte šanci vyhrát",
+      "Umíte jednou větou říct, čím jste výjimeční",
+      "Máte jasný positioning, messaging a tonalitu",
+    ],
+    artifacts: [
+      "Témata a vizuální směr",
+      "Single-page web na vaší doméně, LinkedIn a první obsah — hotové, ne naplánované",
     ],
     delivery: "Do 2 pracovních dní",
     cta: "To mě zajímá",

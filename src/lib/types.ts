@@ -15,7 +15,8 @@ export interface Tier {
   tagline: string;
   price: string;
   priceNote: string;
-  features: string[];
+  knowledge: string[];
+  artifacts: string[];
   delivery: string;
   cta: string;
   ctaStyle: "solid" | "outline";
