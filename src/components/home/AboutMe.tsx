@@ -75,12 +75,12 @@ export default function AboutMe() {
           </p>
           <p className="mb-4 text-[15px] leading-[1.7] text-text-secondary">
             Jeden člověk od rešerše po hotové výstupy — nic se neztratí cestou.
-            AI používám ne jako zkratku. Jako nástroj pro hloubku, kterou byste
-            nečekali.
+            AI používám ne jako zkratku. Jako nástroj pro hloubku, kterou
+            nečekáte.
           </p>
           <p className="mb-6 text-[15px] leading-[1.7] text-text-secondary">
-            Snižuju frikci, aby se věci staly. Nejlepší feedback dostanete od
-            trhu, ne od dalšího kola revizí.
+            Snižuju frikci, aby věci vznikly — a pak vynikly. Nejlepší feedback
+            dostanete od trhu, ne od dalšího kola revizí.
           </p>
 
           {/* Proof links */}
