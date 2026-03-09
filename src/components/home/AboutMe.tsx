@@ -73,12 +73,12 @@ export default function AboutMe() {
           <p className="mb-4 text-[13.5px] leading-[1.5] text-text-secondary">
             Stratég, který kóduje. Rešeršér, který designuje.
           </p>
-          <p className="mb-4 text-[15px] leading-[1.7] text-text-secondary">
+          <p className="mb-4 text-[15px] leading-[1.7] text-text">
             Jeden člověk od rešerše po hotové výstupy — nic se neztratí cestou.
             AI používám ne jako zkratku. Jako nástroj pro hloubku, kterou
             nečekáte.
           </p>
-          <p className="mb-6 text-[15px] leading-[1.7] text-text-secondary">
+          <p className="mb-6 text-[15px] leading-[1.7] text-text">
             Snižuju frikci, aby věci vznikly — a pak vynikly. Nejlepší feedback
             dostaneme od trhu, ne od dalšího kola revizí.
           </p>
