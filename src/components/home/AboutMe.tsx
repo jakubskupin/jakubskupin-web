@@ -91,10 +91,10 @@ export default function AboutMe() {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 rounded-full border border-border px-3 py-1.5 text-[11px] font-semibold text-text-tertiary transition-colors duration-200 hover:border-text-tertiary hover:text-text-secondary"
+                className="inline-flex items-center gap-1 rounded-full border border-border px-2.5 py-1 text-[10px] font-medium text-text-tertiary transition-colors duration-200 hover:border-text-tertiary hover:text-text-secondary"
               >
                 {link.label}
-                <span className="text-[10px]">↗</span>
+                <span className="text-[9px]">↗</span>
               </a>
             ))}
           </div>
