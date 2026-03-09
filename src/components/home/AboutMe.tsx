@@ -80,7 +80,7 @@ export default function AboutMe() {
           </p>
           <p className="mb-6 text-[15px] leading-[1.7] text-text-secondary">
             Snižuju frikci, aby věci vznikly — a pak vynikly. Nejlepší feedback
-            dostanete od trhu, ne od dalšího kola revizí.
+            dostaneme od trhu, ne od dalšího kola revizí.
           </p>
 
           {/* Proof links */}
