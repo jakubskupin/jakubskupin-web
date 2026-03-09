@@ -18,7 +18,7 @@ export default function WebIsDead() {
       <p className="mb-1 font-heading text-[17px] font-bold leading-[1.35] tracking-[-0.01em]">
         Web je mrtvý
       </p>
-      <p className="text-[15px] leading-[1.7] text-text-secondary">
+      <p className="text-[15px] leading-[1.7] text-text">
         Současně vás donutí přemýšlet. O sobě. O službě. O cílovce.
       </p>
     </motion.section>

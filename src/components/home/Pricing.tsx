@@ -23,7 +23,7 @@ export default function Pricing() {
         <h2 className="mb-3 font-heading text-[clamp(28px,4vw,38px)] font-bold tracking-[-0.03em]">
           Nemáte čas<br className="sm:hidden" /> to řešit sami
         </h2>
-        <p className="max-w-[520px] text-base leading-[1.6] text-text-secondary">
+        <p className="max-w-[520px] text-base leading-[1.6] text-text">
           A nemusíte. Vy dodáte minimum.<br className="sm:hidden" /> Zbytek{" "}
           <strong className="font-bold text-text">vyřeším já.</strong>
         </p>
@@ -67,7 +67,7 @@ export default function Pricing() {
           {tier.knowledge.map((f) => (
             <li
               key={f}
-              className="text-[13.5px] leading-[1.45] text-text-secondary"
+              className="text-[13.5px] leading-[1.45] text-text"
             >
               {f}
             </li>
@@ -82,7 +82,7 @@ export default function Pricing() {
           {tier.artifacts.map((f) => (
             <li
               key={f}
-              className="text-[13.5px] leading-[1.45] text-text-secondary"
+              className="text-[13.5px] leading-[1.45] text-text"
             >
               {f}
             </li>
@@ -96,7 +96,7 @@ export default function Pricing() {
         </div>
 
         {/* Transformation closer */}
-        <p className="mb-6 text-[13.5px] leading-[1.5] text-text-secondary">
+        <p className="mb-6 text-[13.5px] leading-[1.5] text-text">
           Konečně víte, co říct. A máte kde to ukázat.
         </p>
 

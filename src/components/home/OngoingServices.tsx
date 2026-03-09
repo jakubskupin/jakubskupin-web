@@ -44,7 +44,7 @@ export default function OngoingServices() {
           Sprint je katalyzátor
         </h2>
         <div ref={tooltipRef} className="max-w-[460px]">
-          <p className="text-[15px] text-text-secondary">
+          <p className="text-[15px] text-text">
             Pak nastupuje{" "}
             <span
               className="inline"
@@ -94,7 +94,7 @@ export default function OngoingServices() {
                   <h3 className="mb-1.5 font-heading text-sm font-bold tracking-[-0.01em]">
                     {s.title}
                   </h3>
-                  <p className="text-[12.5px] leading-[1.5] text-text-secondary">
+                  <p className="text-[12.5px] leading-[1.5] text-text">
                     {s.description}
                   </p>
                 </div>

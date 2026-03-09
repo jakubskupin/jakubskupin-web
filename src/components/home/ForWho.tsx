@@ -46,7 +46,7 @@ export default function ForWho() {
         <h2 className="mb-3 font-heading text-[clamp(28px,4vw,38px)] font-bold tracking-[-0.03em] max-w-[600px]">
           Roky to odkládáte
         </h2>
-        <p className="max-w-[520px] text-base leading-[1.6] text-text-secondary">
+        <p className="max-w-[520px] text-base leading-[1.6] text-text">
           Doba se změnila.{" "}
           <strong className="font-bold text-text">Teď se to stane.</strong>
         </p>
@@ -73,7 +73,7 @@ export default function ForWho() {
                 {s.items.map((item) => (
                   <li
                     key={item}
-                    className="flex items-start gap-2.5 text-[13px] leading-[1.5] text-text-secondary"
+                    className="flex items-start gap-2.5 text-[13px] leading-[1.5] text-text"
                   >
                     <span className="mt-[6px] block h-1.5 w-1.5 shrink-0 rounded-full bg-text-tertiary" />
                     {item}

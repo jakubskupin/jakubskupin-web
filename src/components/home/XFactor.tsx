@@ -55,7 +55,7 @@ export default function XFactor() {
           <br />
           máte funkční základ
         </h2>
-        <p className="max-w-[520px] text-base leading-[1.6] text-text-secondary">
+        <p className="max-w-[520px] text-base leading-[1.6] text-text">
           Ne plán. Hotové věci. Ukážete je světu<br className="sm:hidden" /> <strong className="font-bold text-text">a sledujete, co funguje.</strong>
         </p>
       </motion.div>
@@ -83,7 +83,7 @@ export default function XFactor() {
               <h3 className="mb-2 font-heading text-[17px] font-bold tracking-[-0.01em]">
                 {step.title}
               </h3>
-              <p className="text-[14px] leading-[1.6] text-text-secondary max-w-[480px] whitespace-pre-line">
+              <p className="text-[14px] leading-[1.6] text-text max-w-[480px] whitespace-pre-line">
                 {step.description}
               </p>
             </motion.div>
