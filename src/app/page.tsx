@@ -11,6 +11,7 @@ import OngoingServices from "@/components/home/OngoingServices";
 import ForWho from "@/components/home/ForWho";
 import ClosingCTA from "@/components/home/ClosingCTA";
 import WebIsDead from "@/components/home/WebIsDead";
+import AboutMe from "@/components/home/AboutMe";
 
 export default function Home() {
   return (
@@ -26,6 +27,7 @@ export default function Home() {
         <WebIsDead />
         <XFactor />
         <Pricing />
+        <AboutMe />
         <OngoingServices />
         <ClosingCTA />
       </main>
