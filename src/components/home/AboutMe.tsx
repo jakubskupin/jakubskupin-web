@@ -84,14 +84,14 @@ export default function AboutMe() {
           </p>
 
           {/* Proof links */}
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2">
             {PROOF_LINKS.map((link) => (
               <a
                 key={link.url}
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 rounded-full border border-border px-2.5 py-1 text-[10px] font-medium text-text-tertiary transition-colors duration-200 hover:border-text-tertiary hover:text-text-secondary"
+                className="inline-flex w-fit items-center gap-1 rounded-full border border-border px-2.5 py-1 text-[10px] font-medium text-text-tertiary transition-colors duration-200 hover:border-text-tertiary hover:text-text-secondary"
               >
                 {link.label}
                 <span className="text-[9px]">{"\u2197\uFE0E"}</span>
