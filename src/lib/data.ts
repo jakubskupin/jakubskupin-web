@@ -33,7 +33,7 @@ export const tiers: Tier[] = [
     price: "42 500",
     priceNote: "jednorázově",
     knowledge: [
-      "Kdo jsou vaši lidi a co doopravdy potřebují",
+      "Kdo jsou vaši lidi a co potřebují",
       "Kdo je konkurence a kde máte šanci vyhrát",
       "Umíte jednou větou říct, čím jste výjimeční",
       "Máte jasný positioning, messaging a tonalitu",
