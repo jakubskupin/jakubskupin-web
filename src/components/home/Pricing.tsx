@@ -48,9 +48,9 @@ export default function Pricing() {
 
         {/* Price */}
         <div className="mb-6 border-b border-border pb-6">
-          <div className="font-heading text-[32px] font-bold leading-none tracking-[-0.03em]">
+          <div className="font-heading text-[36px] font-bold leading-none tracking-[-0.03em]">
             {tier.price}{" "}
-            <span className="text-base font-semibold text-text-secondary">
+            <span className="text-sm font-medium text-text-tertiary">
               Kč
             </span>
           </div>
@@ -96,8 +96,13 @@ export default function Pricing() {
         </div>
 
         {/* Transformation closer */}
-        <p className="mb-6 text-[13.5px] leading-[1.5] text-text">
+        <p className="mb-4 text-[13.5px] leading-[1.5] text-text">
           Konečně víte, co říct. A máte kde to ukázat.
+        </p>
+
+        {/* Guarantee */}
+        <p className="mb-6 text-xs text-text-tertiary">
+          Výstupy vás nepřesvědčí? Vrátím vám zálohu, žádné otázky.
         </p>
 
         {/* CTA */}
