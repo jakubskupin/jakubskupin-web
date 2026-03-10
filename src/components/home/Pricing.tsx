@@ -96,13 +96,8 @@ export default function Pricing() {
         </div>
 
         {/* Transformation closer */}
-        <p className="mb-4 text-[13.5px] leading-[1.5] text-text">
+        <p className="mb-6 text-[13.5px] leading-[1.5] text-text">
           Konečně víte, co říct. A máte kde to ukázat.
-        </p>
-
-        {/* Guarantee */}
-        <p className="mb-6 text-xs text-text-tertiary">
-          Výstupy vás nepřesvědčí? Vrátím vám zálohu, žádné otázky.
         </p>
 
         {/* CTA */}
@@ -114,6 +109,11 @@ export default function Pricing() {
         >
           {tier.cta}
         </a>
+
+        {/* Guarantee */}
+        <p className="mt-4 text-center text-xs text-text-tertiary">
+          Výstupy vás nepřesvědčí? Vrátím vám zálohu, žádné otázky.
+        </p>
 
       </motion.div>
     </section>
