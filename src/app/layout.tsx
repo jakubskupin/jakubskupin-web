@@ -35,6 +35,32 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Jakub Skupin",
+  url: siteUrl,
+  description:
+    "Pojmenuju, čím jste výjimeční — a dám tomu tvar. Strategie, web a obsah pro experty, kteří mají co říct, ale online to není vidět.",
+  jobTitle: "Personal Brand Strategist",
+  knowsAbout: [
+    "Personal branding",
+    "AI v marketingu",
+    "Positioning",
+    "Brand strategie",
+    "Web development",
+  ],
+  sameAs: ["https://www.linkedin.com/in/jakubskupin/"],
+  offers: {
+    "@type": "Offer",
+    name: "X-Factor Sprint",
+    description:
+      "Pojmenuju, čím jste výjimeční. A dám tomu tvar. Positioning, messaging, vizuální směr a web do 2 pracovních dní.",
+    priceCurrency: "CZK",
+    price: "42500",
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -42,6 +68,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="cs">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body
         className={`${syne.variable} ${manrope.variable} antialiased`}
       >
