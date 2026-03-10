@@ -394,8 +394,8 @@ h1, h2, h3 {
 <!-- ═══════════════ HEADER ═══════════════ -->
 <header class="header">
   <div class="header-meta">
-    <span class="badge badge--version">v1.0</span>
-    <span class="badge badge--date">8. března 2026</span>
+    <span class="badge badge--version">v1.1</span>
+    <span class="badge badge--date">10. března 2026</span>
   </div>
   <h1>Brand manuál</h1>
   <p>Barvy, typografie a pravidla použití pro jakubskupin.cz. Všechno na jednom místě, připravené ke zkopírování do Canvy, Figmy nebo kódu.</p>
@@ -904,6 +904,98 @@ h1, h2, h3 {
   </div>
 </section>
 
+<!-- ═══════════════ 05 KALKULACE ═══════════════ -->
+<section class="section" id="kalkulace">
+  <div class="section-label">05 &mdash; Dokumenty</div>
+  <h2>Kalkulace / nabídka</h2>
+  <p class="section-desc">A4 formát pro cenové nabídky klientům. Stejná paleta a typografie jako web &mdash; klient pozná, že dokument patří ke značce.</p>
+
+  <h3>Struktura dokumentu</h3>
+  <div class="example-grid">
+    <div class="example">
+      <div class="example-preview" style="font-size:13px;color:var(--text-secondary);line-height:1.8">
+        <span style="font-family:'Manrope',sans-serif;font-weight:600;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:#96948E">KALKULACE</span><br>
+        <span style="font-size:10px;color:#96948E">10. března 2026</span><br>
+        <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:22px;color:#1A1A18;letter-spacing:-0.03em">Název projektu</span><br>
+        <span style="font-size:11px;color:#6B6964">odkaz-na-hotovou-praci.vercel.app</span>
+      </div>
+      <div class="example-meta">
+        <div class="example-label">Hlavička</div>
+        <div class="example-specs">
+          <span class="spec" onclick="copyText('Manrope SemiBold 11px uppercase')">Label</span>
+          <span class="spec" onclick="copyText('Syne Bold 30px')">Název: Syne 30px</span>
+          <span class="spec" onclick="copyText('Manrope 10px')">Datum: 10px</span>
+          <span class="spec-quiet">URL hotové práce pod názvem</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="example-preview" style="font-size:13px;line-height:1.8">
+        <span style="font-family:'Manrope',sans-serif;font-weight:600;font-size:10px;letter-spacing:0.06em;color:#96948E">01</span><br>
+        <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:#1A1A18">Název položky</span><br>
+        <span style="font-size:11px;color:#6B6964;border-bottom:1px solid #E8E6E1;display:block;padding:4px 0">Popis řádku &middot; detail</span>
+        <span style="font-size:11px;color:#6B6964;border-bottom:1px solid #E8E6E1;display:block;padding:4px 0">Další řádek &middot; detail</span>
+        <span style="display:inline-block;margin-top:8px;background:#F0EFEB;border-radius:6px;padding:4px 10px;font-family:'Manrope',sans-serif;font-weight:700;font-size:13px;color:#1A1A18">35 000 Kč</span>
+      </div>
+      <div class="example-meta">
+        <div class="example-label">Sekce s položkami</div>
+        <div class="example-specs">
+          <span class="spec" onclick="copyText('Syne Bold 17px')">Nadpis: Syne 17px</span>
+          <span class="spec" onclick="copyText('Manrope 11px')">Řádky: 11px</span>
+          <span class="spec" onclick="copyText('#F0EFEB')">Cenovka: #F0EFEB pill</span>
+          <span class="spec-quiet">řádky oddělené border #E8E6E1</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="example-preview" style="display:flex;justify-content:space-between;align-items:center">
+        <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:17px;color:#1A1A18">Celkem</span>
+        <span style="display:inline-block;background:#1A1A18;border-radius:8px;padding:6px 14px;font-family:'Manrope',sans-serif;font-weight:700;font-size:16px;color:#FAFAF8">57 500 Kč</span>
+      </div>
+      <div class="example-meta">
+        <div class="example-label">Celková cena</div>
+        <div class="example-specs">
+          <span class="spec" onclick="copyText('Syne Bold 20px')">Label: Syne 20px</span>
+          <span class="spec" onclick="copyText('#1A1A18 bg + #FAFAF8 text')">Dark pill</span>
+          <span class="spec" onclick="copyText('Manrope Bold 22px')">Cena: 22px</span>
+          <span class="spec-quiet">jediný tmavý akcent na celé stránce</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Pravidla formátu</h3>
+  <div class="rules-grid">
+    <div class="rule rule--do">
+      <div class="rule-label">Ano</div>
+      <p>A4, pozadí #FAFAF8. Padding 50/60/42/60. Footer vždy dole (jméno, IČO, DIČ, web). Datum vystavení. URL hotové práce. Poznámky kurzívou v #96948E. Jedna tmavá pill na celkovou cenu.</p>
+    </div>
+    <div class="rule rule--dont">
+      <div class="rule-label">Ne</div>
+      <p>Víc než jeden tmavý element. Barevné akcenty. Loga nebo grafika. Tučný text v poznámkách. Více než 2 úrovně fontové hierarchie v tabulce.</p>
+    </div>
+  </div>
+
+  <h3>Typografická hierarchie</h3>
+  <table class="font-table" style="margin-top:12px">
+    <thead>
+      <tr><th>Element</th><th>Font</th><th>Velikost</th><th>Barva</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Label (KALKULACE, 01, 02)</td><td class="sample">Manrope SemiBold</td><td class="sample">10&ndash;11px, uppercase</td><td class="sample">#96948E</td></tr>
+      <tr><td>Název projektu</td><td class="sample">Syne Bold</td><td class="sample">30px</td><td class="sample">#1A1A18</td></tr>
+      <tr><td>Název sekce</td><td class="sample">Syne Bold</td><td class="sample">17px</td><td class="sample">#1A1A18</td></tr>
+      <tr><td>Řádky položek</td><td class="sample">Manrope Regular</td><td class="sample">11px</td><td class="sample">#6B6964</td></tr>
+      <tr><td>Cenovka (sekce)</td><td class="sample">Manrope Bold</td><td class="sample">16px</td><td class="sample">#1A1A18 na #F0EFEB pill</td></tr>
+      <tr><td>Celková cena</td><td class="sample">Manrope Bold</td><td class="sample">22px</td><td class="sample">#FAFAF8 na #1A1A18 pill</td></tr>
+      <tr><td>Poznámky</td><td class="sample">Manrope Regular Italic</td><td class="sample">11px</td><td class="sample">#96948E</td></tr>
+      <tr><td>Patička</td><td class="sample">Syne Bold + Manrope</td><td class="sample">8&ndash;10px</td><td class="sample">#1A1A18 / #96948E</td></tr>
+    </tbody>
+  </table>
+</section>
+
 </div><!-- /container -->
 
 <!-- TOAST -->
@@ -912,7 +1004,7 @@ h1, h2, h3 {
 <!-- ─── FOOTER ─── -->
 <footer class="footer">
   <div class="container">
-    <p>Brand manuál v1.0 &mdash; 8. března 2026 &mdash; Jakub Skupin</p>
+    <p>Brand manuál v1.1 &mdash; 10. března 2026 &mdash; Jakub Skupin</p>
   </div>
 </footer>
 
