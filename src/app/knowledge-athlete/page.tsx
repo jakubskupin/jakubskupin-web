@@ -27,7 +27,7 @@ export default function KnowledgeAthletePage() {
           Knowledge Athlete
         </div>
         <h1 className="mb-6 font-heading text-[clamp(36px,5.5vw,52px)] font-bold leading-[1.12] tracking-[-0.03em]">
-          Tým odborných hlav
+          Na hraně znalostí
         </h1>
         <p className="mb-12 max-w-[520px] text-lg leading-[1.65] text-text-secondary">
           Síť doménových expertů a specialistů, kteří pomáhají doručit lepší
