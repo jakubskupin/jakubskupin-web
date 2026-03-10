@@ -97,7 +97,7 @@ export default function Pricing() {
 
         {/* Transformation closer */}
         <p className="mb-6 text-[13.5px] leading-[1.5] text-text">
-          Konečně víte, co říct. A máte kde to ukázat.
+          Hotové, ne naplánované.
         </p>
 
         {/* CTA */}
