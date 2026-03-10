@@ -39,7 +39,7 @@ export const tiers: Tier[] = [
       "Máte jasný positioning, messaging a tonalitu",
     ],
     artifacts: [
-      "Strategické dokumenty — kontext pro AI, který vás nutí zpřesňovat",
+      "Strategické dokumenty → kontext pro AI",
       "Vizuální směr",
       "Single-page web na vaší doméně",
       "Aktualizovaný LinkedIn a první obsah",
