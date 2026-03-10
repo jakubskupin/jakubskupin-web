@@ -24,8 +24,8 @@ export default function Pricing() {
           Nemáte čas<br className="sm:hidden" /> to řešit sami
         </h2>
         <p className="max-w-[520px] text-base leading-[1.6] text-text">
-          A nemusíte. Vy dodáte minimum.<br className="sm:hidden" /> Zbytek{" "}
-          <strong className="font-bold text-text">vyřeším já.</strong>
+          A nemusíte.{" "}
+          <strong className="font-bold text-text">Vyřeším to.</strong>
         </p>
       </motion.div>
 
