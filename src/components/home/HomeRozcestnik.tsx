@@ -41,10 +41,7 @@ export default function HomeRozcestnik() {
               Jakub Skupin
             </h1>
             <p className="mt-4 max-w-[520px] text-lg text-text-secondary">
-              Pojmenuju, čím jste výjimeční. A pak to ukážu světu.
-            </p>
-            <p className="mt-2 text-sm text-text-tertiary">
-              Jeden člověk. AI jako páka. Výstupy za dny, ne měsíce.
+              Rešerše. Strategie. Výstupy. Jeden člověk, AI jako páka.
             </p>
           </motion.div>
         </div>
