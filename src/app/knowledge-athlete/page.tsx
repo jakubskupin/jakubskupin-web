@@ -31,7 +31,7 @@ export default function KnowledgeAthletePage() {
         </h1>
         <p className="mb-12 max-w-[520px] text-lg leading-[1.65] text-text-secondary">
           Síť doménových expertů a specialistů, kteří pomáhají doručit lepší
-          výsledky pro klienty. Záznamy z akcí a profily členů brzy.
+          výsledky pro klienty.
         </p>
 
         <div className="rounded-2xl border border-border bg-card-bg px-8 py-10 text-center">
@@ -39,8 +39,7 @@ export default function KnowledgeAthletePage() {
             Připravujeme
           </div>
           <p className="text-base leading-[1.6] text-text-secondary">
-            Tato stránka se plní obsahem. Záznamy z prvních setkání a profily
-            expertů přibudou brzy.
+            Připravuji.
           </p>
         </div>
       </main>
