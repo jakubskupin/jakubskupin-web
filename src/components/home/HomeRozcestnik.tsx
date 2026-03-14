@@ -7,26 +7,26 @@ import { fadeUp, stagger } from "@/lib/animations";
 const services = [
   {
     href: "/personal-brand",
-    headline: "Online to není vidět? Za 2 dny to změníme.",
+    headline: "Online to není vidět? Za 2 dny to změníme",
     subheadline:
-      "Web + LinkedIn + positioning pro experty a tvůrce",
+      "Web + LinkedIn + positioning pro experty a tvůrce.",
     label: "X-Factor Sprint",
     cta: "Chci svůj brand",
     featured: true,
   },
   {
     href: "/research-sprint",
-    headline: "Strategická analýza za dny, ne týdny.",
+    headline: "Strategická analýza za dny, ne týdny",
     subheadline:
-      "Hloubková rešerše pro firmy, agentury i freelancery",
+      "Hloubková rešerše pro firmy, agentury i freelancery.",
     label: "AI Research Sprint",
     cta: "Chci rešerši",
     featured: false,
   },
   {
     href: "/content-partner",
-    headline: "Máte brand, ale nestíháte tvořit?",
-    subheadline: "Sparring partner pro tvůrce a CEO",
+    headline: "Máte brand, ale nestíháte tvořit",
+    subheadline: "Sparring partner pro tvůrce a CEO.",
     label: "Content Partner",
     cta: "Chci obsah",
     featured: false,
