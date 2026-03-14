@@ -66,7 +66,7 @@ const jsonLd = {
       description:
         "Hloubková strategická analýza za dny, ne týdny.",
       priceCurrency: "CZK",
-      price: "8000",
+      price: "12500",
     },
     {
       "@type": "Offer",

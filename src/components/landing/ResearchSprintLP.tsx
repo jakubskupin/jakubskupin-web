@@ -16,12 +16,12 @@ const howItWorks = [
   {
     num: "01",
     title: "Zadání",
-    desc: "Krátký call nebo brief. Řeknete mi, co potřebujete vědět.",
+    desc: "Krátký brief, kde popíšete, co potřebujete vědět.",
   },
   {
     num: "02",
     title: "Hloubková rešerše",
-    desc: "AI analýza + 15 let zkušeností v B2B marketingu + Second Brain se stovkami zdrojů.",
+    desc: "Desk research z desítek zdrojů — AI analýza + 15 let zkušeností v B2B marketingu + Second Brain se stovkami zdrojů.",
   },
   {
     num: "03",
@@ -41,11 +41,11 @@ export default function ResearchSprintLP() {
               AI Research Sprint
             </span>
             <h1 className="font-heading text-[clamp(30px,5vw,46px)] font-bold leading-[1.1] tracking-[-0.03em]">
-              Hloubková rešerše. Za dny, ne týdny.
+              Hloubková rešerše za dny, ne týdny
             </h1>
             <p className="mt-5 max-w-[520px] text-lg leading-relaxed text-text-secondary">
-              Potřebujete rozhodnutí teď, ne za měsíc. Doručím strategickou
-              analýzu, která vám ušetří týdny hledání a hádání.
+              Potřebujete rozhodnutí teď, ne za týden. Doručím strategickou
+              analýzu, která vám ušetří týdny hledání.
             </p>
           </motion.div>
         </div>
@@ -126,7 +126,7 @@ export default function ResearchSprintLP() {
             </span>
             <div className="mt-2 flex items-baseline gap-2">
               <span className="font-heading text-[36px] font-bold tracking-[-0.03em]">
-                od 8 000
+                od 12 500
               </span>
               <span className="text-sm font-medium text-text-tertiary">Kč</span>
             </div>
