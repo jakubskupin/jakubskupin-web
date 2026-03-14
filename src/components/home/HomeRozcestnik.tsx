@@ -11,14 +11,16 @@ const services = [
     subheadline:
       "Web + LinkedIn + positioning pro experty a tvůrce",
     label: "X-Factor Sprint",
+    cta: "Chci svůj brand",
     featured: true,
   },
   {
     href: "/research-sprint",
-    headline: "Strategická analýza za dny, ne měsíce.",
+    headline: "Strategická analýza za dny, ne týdny.",
     subheadline:
       "Hloubková rešerše pro firmy, agentury i freelancery",
-    label: "Research Sprint",
+    label: "AI Research Sprint",
+    cta: "Chci rešerši",
     featured: false,
   },
   {
@@ -26,13 +28,14 @@ const services = [
     headline: "Máte brand, ale nestíháte tvořit?",
     subheadline: "Sparring partner pro tvůrce a CEO",
     label: "Content Partner",
+    cta: "Chci obsah",
     featured: false,
   },
 ];
 
 export default function HomeRozcestnik() {
   return (
-    <main className="flex min-h-[100dvh] flex-col">
+    <main className="flex flex-col">
       {/* Header */}
       <header className="px-6 pt-16 pb-12 md:pt-24 md:pb-16">
         <div className="mx-auto max-w-[960px]">
@@ -48,7 +51,7 @@ export default function HomeRozcestnik() {
       </header>
 
       {/* Service cards */}
-      <section className="flex-1 px-6 pb-12">
+      <section className="px-6 pb-4">
         <div className="mx-auto max-w-[960px]">
           {/* Featured card (X-Factor Sprint) */}
           <motion.div {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.1 }}>
@@ -66,7 +69,7 @@ export default function HomeRozcestnik() {
                 {services[0].subheadline}
               </p>
               <span className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-text-tertiary transition-colors duration-200 group-hover:text-text">
-                Zjistit více
+                {services[0].cta}
                 <svg
                   width="16"
                   height="16"
@@ -108,7 +111,7 @@ export default function HomeRozcestnik() {
                     {service.subheadline}
                   </p>
                   <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-text-tertiary transition-colors duration-200 group-hover:text-text">
-                    Zjistit více
+                    {service.cta}
                     <svg
                       width="16"
                       height="16"
@@ -133,7 +136,7 @@ export default function HomeRozcestnik() {
       </section>
 
       {/* Knowledge Athlete teaser */}
-      <section className="px-6 pb-16">
+      <section className="mt-4 px-6 pb-12">
         <div className="mx-auto max-w-[960px]">
           <motion.div
             {...fadeUp}
