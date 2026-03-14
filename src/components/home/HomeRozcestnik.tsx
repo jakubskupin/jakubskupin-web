@@ -44,7 +44,7 @@ export default function HomeRozcestnik() {
               Jakub Skupin
             </h1>
             <p className="mt-4 max-w-[520px] text-lg text-text-secondary">
-              Rešerše. Strategie. Výstupy. Jeden člověk, AI jako páka.
+              Snižuju frikci, aby věci vznikly. A pak vynikly.
             </p>
           </motion.div>
         </div>
