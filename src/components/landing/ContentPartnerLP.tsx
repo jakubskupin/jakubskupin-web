@@ -6,9 +6,9 @@ import { fadeUp, stagger } from "@/lib/animations";
 import { LINKEDIN_URL } from "@/lib/data";
 
 const basePackage = [
-  "2–4 sparring sessions měsíčně (60–90 min)",
-  "LinkedIn posty v klientově tonalitě",
-  "Async feedback na koncepty a drafty",
+  "2 sparring sessions měsíčně (45 min) + async komunikace",
+  "LinkedIn posty ve vaší tonalitě",
+  "Feedback na koncepty a drafty",
   "Strategický přehled: co funguje, co ne, kam dál",
 ];
 
