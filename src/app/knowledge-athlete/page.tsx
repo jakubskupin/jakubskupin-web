@@ -35,12 +35,9 @@ export default function KnowledgeAthletePage() {
         </p>
 
         <div className="rounded-2xl border border-border bg-card-bg px-8 py-10 text-center">
-          <div className="mb-2 text-[13px] font-semibold uppercase tracking-[0.06em] text-text-tertiary">
-            Připravujeme
+          <div className="text-[13px] font-semibold uppercase tracking-[0.06em] text-text-tertiary">
+            Připravuji
           </div>
-          <p className="text-base leading-[1.6] text-text-secondary">
-            Připravuji.
-          </p>
         </div>
       </main>
       <Footer />
