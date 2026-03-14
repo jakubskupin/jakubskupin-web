@@ -81,35 +81,45 @@ export default function ResearchSprintLP() {
       {/* Jak to funguje */}
       <section className="border-t border-border px-6 py-16 md:py-20">
         <div className="mx-auto max-w-[720px]">
-          <motion.div {...fadeUp}>
-            <span className="mb-2 text-[11px] font-bold uppercase tracking-[0.1em] text-text-tertiary">
+          <motion.div className="mb-10" {...fadeUp}>
+            <span className="mb-2 block text-[11px] font-bold uppercase tracking-[0.1em] text-text-tertiary">
               Jak to funguje
             </span>
             <h2 className="font-heading text-[clamp(22px,3.5vw,30px)] font-bold leading-tight tracking-[-0.02em]">
               3 kroky k výsledku
             </h2>
           </motion.div>
-          <div className="mt-10 space-y-8">
-            {howItWorks.map((step, i) => (
-              <motion.div
-                key={step.num}
-                className="flex gap-5"
-                {...fadeUp}
-                transition={{ ...fadeUp.transition, delay: stagger(i + 1).transition.delay }}
-              >
-                <span className="mt-0.5 text-[13px] font-bold text-text-tertiary">
-                  {step.num}
-                </span>
-                <div>
-                  <h3 className="font-heading text-[17px] font-bold">
+
+          <div className="relative ml-4 md:ml-8">
+            {/* Vertical line */}
+            <div className="absolute left-[7px] top-2 bottom-2 w-px bg-border" />
+
+            <div className="space-y-10">
+              {howItWorks.map((step, i) => (
+                <motion.div
+                  key={step.num}
+                  className="relative pl-10"
+                  {...fadeUp}
+                  transition={{ ...fadeUp.transition, delay: stagger(i + 1).transition.delay }}
+                >
+                  {/* Dot */}
+                  <div className="absolute left-0 top-1 flex h-[15px] w-[15px] items-center justify-center">
+                    <div className="h-[7px] w-[7px] rounded-full bg-text" />
+                  </div>
+
+                  {/* Content */}
+                  <div className="mb-1.5 text-[12px] font-bold uppercase tracking-[0.08em] text-text-tertiary">
+                    {step.num}
+                  </div>
+                  <h3 className="mb-2 font-heading text-[17px] font-bold tracking-[-0.01em]">
                     {step.title}
                   </h3>
-                  <p className="mt-1 text-sm leading-relaxed text-text-secondary">
+                  <p className="max-w-[480px] text-[14px] leading-[1.6] text-text-secondary">
                     {step.desc}
                   </p>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
