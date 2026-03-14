@@ -136,13 +136,12 @@ export default function ResearchSprintLP() {
             </span>
             <div className="mt-2 flex items-baseline gap-2">
               <span className="font-heading text-[36px] font-bold tracking-[-0.03em]">
-                od 12 500
+                15 600
               </span>
               <span className="text-sm font-medium text-text-tertiary">Kč</span>
             </div>
             <p className="mt-3 text-sm text-text-secondary">
-              Rozsah určíte briefem. Cena závisí na hloubce a šíři
-              analýzy.
+              Fixní cena. Rozsah určíte briefem.
             </p>
             <a
               href={LINKEDIN_URL}
