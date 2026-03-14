@@ -62,7 +62,7 @@ const jsonLd = {
     },
     {
       "@type": "Offer",
-      name: "Research Sprint",
+      name: "AI Research Sprint",
       description:
         "Hloubková strategická analýza za dny, ne týdny.",
       priceCurrency: "CZK",

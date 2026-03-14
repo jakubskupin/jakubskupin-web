@@ -38,7 +38,7 @@ export default function ResearchSprintLP() {
         <div className="mx-auto max-w-[720px]">
           <motion.div {...fadeUp}>
             <span className="mb-4 inline-block text-[12px] font-bold uppercase tracking-[0.1em] text-text-tertiary">
-              Research Sprint
+              AI Research Sprint
             </span>
             <h1 className="font-heading text-[clamp(30px,5vw,46px)] font-bold leading-[1.1] tracking-[-0.03em]">
               Hloubková rešerše. Za dny, ne týdny.
