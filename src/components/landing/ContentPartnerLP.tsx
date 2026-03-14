@@ -31,11 +31,11 @@ export default function ContentPartnerLP() {
               Content Partner
             </span>
             <h1 className="font-heading text-[clamp(30px,5vw,46px)] font-bold leading-[1.1] tracking-[-0.03em]">
-              Váš obsahový partner. Ne copywriter. Ne agentura.
+              Máte co říct, ale nestíháte to tvořit
             </h1>
             <p className="mt-5 max-w-[520px] text-lg leading-relaxed text-text-secondary">
-              Máte brand, víte co říct — ale nestíháte. Potřebujete partnera,
-              který zná vaši tonalitu, cílovku a rozumí kontextu.
+              Znám váš brand, cílovku i tonalitu. Vy dodáte minimum — já se
+              postarám o zbytek.
             </p>
           </motion.div>
         </div>
