@@ -79,7 +79,7 @@ export default function ContentPartnerLP() {
               Přidejte, co potřebujete
             </h2>
             <p className="mt-3 text-sm text-text-secondary">
-              Za příplatek k základnímu balíčku. Řešíme individuálně.
+              Řešíme individuálně.
             </p>
           </motion.div>
           <ul className="mt-8 space-y-4">
@@ -117,8 +117,7 @@ export default function ContentPartnerLP() {
               </span>
             </div>
             <p className="mt-3 text-sm text-text-secondary">
-              Méně klientů, větší hloubka. Vy dodáte minimum — já se postarám o
-              zbytek.
+              Vy dodáte minimum — já se postarám o zbytek.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-4">
               <a
