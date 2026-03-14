@@ -51,14 +51,32 @@ const jsonLd = {
     "Web development",
   ],
   sameAs: ["https://www.linkedin.com/in/jakubskupin/"],
-  offers: {
-    "@type": "Offer",
-    name: "X-Factor Sprint",
-    description:
-      "Pojmenuju, čím jste výjimeční. A dám tomu tvar. Positioning, messaging, vizuální směr a web do 2 pracovních dní.",
-    priceCurrency: "CZK",
-    price: "42500",
-  },
+  offers: [
+    {
+      "@type": "Offer",
+      name: "X-Factor Sprint",
+      description:
+        "Positioning, messaging, vizuální směr a web do 2 pracovních dní.",
+      priceCurrency: "CZK",
+      price: "42500",
+    },
+    {
+      "@type": "Offer",
+      name: "Research Sprint",
+      description:
+        "Hloubková strategická analýza za dny, ne týdny.",
+      priceCurrency: "CZK",
+      price: "8000",
+    },
+    {
+      "@type": "Offer",
+      name: "Content Partner",
+      description:
+        "Obsahový sparring partner pro tvůrce a CEO.",
+      priceCurrency: "CZK",
+      price: "35000",
+    },
+  ],
 };
 
 export default function RootLayout({

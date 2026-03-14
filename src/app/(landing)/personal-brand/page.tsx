@@ -1,6 +1,4 @@
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
-import GrainOverlay from "@/components/motion/GrainOverlay";
+import type { Metadata } from "next";
 import Hero from "@/components/home/Hero";
 import SystemStrip from "@/components/home/SystemStrip";
 import WorkCards from "@/components/home/WorkCards";
@@ -13,25 +11,26 @@ import ClosingCTA from "@/components/home/ClosingCTA";
 import WebIsDead from "@/components/home/WebIsDead";
 import AboutMe from "@/components/home/AboutMe";
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: "X-Factor Sprint — Jakub Skupin",
+  description:
+    "Pojmenuju, čím jste výjimeční. A dám tomu tvar. Positioning, messaging, vizuální směr a web do 2 pracovních dní.",
+};
+
+export default function PersonalBrandPage() {
   return (
-    <>
-      <GrainOverlay />
-      <Navbar />
-      <main id="main">
-        <Hero />
-        <SystemStrip />
-        <WorkCards />
-        <Testimonials />
-        <ForWho />
-        <WebIsDead />
-        <XFactor />
-        <Pricing />
-        <AboutMe />
-        <OngoingServices />
-        <ClosingCTA />
-      </main>
-      <Footer />
-    </>
+    <main id="main">
+      <Hero />
+      <SystemStrip />
+      <WorkCards />
+      <Testimonials />
+      <ForWho />
+      <WebIsDead />
+      <XFactor />
+      <Pricing />
+      <AboutMe />
+      <OngoingServices />
+      <ClosingCTA />
+    </main>
   );
 }

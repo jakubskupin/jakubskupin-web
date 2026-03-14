@@ -49,11 +49,7 @@ export default function Navbar() {
     >
       <div className="mx-auto flex max-w-[960px] items-center justify-between px-6">
         <a
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          }}
+          href="/"
           className="font-heading text-lg font-bold tracking-tight"
         >
           Jakub Skupin
