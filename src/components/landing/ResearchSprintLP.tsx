@@ -131,7 +131,7 @@ export default function ResearchSprintLP() {
               <span className="text-sm font-medium text-text-tertiary">Kč</span>
             </div>
             <p className="mt-3 text-sm text-text-secondary">
-              Rozsah řešíme na krátkém callu. Cena závisí na hloubce a šíři
+              Rozsah určíte briefem. Cena závisí na hloubce a šíři
               analýzy.
             </p>
             <a
