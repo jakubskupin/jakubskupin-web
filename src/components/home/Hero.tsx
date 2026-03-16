@@ -24,9 +24,9 @@ export default function Hero() {
         className="mb-5 font-heading text-[clamp(36px,6vw,56px)] font-bold leading-[1.1] tracking-[-0.03em]"
         {...stagger(1)}
       >
-        Vznikne to.
+        Vznikne to
         <br />
-        A&nbsp;pak <em className="font-heading italic text-text-secondary">vynikne.</em>
+        A&nbsp;pak <em className="font-heading italic">vynikne</em>
       </motion.h1>
       <motion.p
         className="mb-8 max-w-[540px] text-lg leading-[1.65] text-text-secondary"

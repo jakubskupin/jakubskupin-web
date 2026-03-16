@@ -26,7 +26,7 @@ export default function ClosingCTA() {
         Máte v&nbsp;hlavě něco,
         <br />
         co chce{" "}
-        <em className="font-heading italic text-text-secondary">
+        <em className="font-heading italic">
           v
           <span className="relative inline-block">
             <motion.span style={{ opacity: zOpacity }}>z</motion.span>
@@ -45,7 +45,7 @@ export default function ClosingCTA() {
         href={LINKEDIN_URL}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 bg-text px-7 py-3.5 text-sm font-semibold text-bg transition-all duration-300 hover:opacity-85"
+        className="inline-flex items-center gap-2 rounded-full bg-text px-8 py-3.5 text-sm font-bold text-bg transition-all duration-300 hover:opacity-85"
       >
         Ozvěte se mi
         <span>→</span>
