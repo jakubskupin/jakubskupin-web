@@ -25,17 +25,14 @@ export default function ClosingCTA() {
       <h2 className="mb-4 font-heading text-[clamp(28px,4.5vw,40px)] font-bold leading-[1.2] tracking-[-0.03em]">
         Máte v&nbsp;hlavě něco,
         <br />
-        co chce{" "}
-        <em className="font-heading italic">
-          v
-          <span className="relative inline-block">
-            <motion.span style={{ opacity: zOpacity }}>z</motion.span>
-            <motion.span className="absolute inset-0" style={{ opacity: yOpacity }}>
-              y
-            </motion.span>
-          </span>
-          niknout?
-        </em>
+        co chce v
+        <span className="relative inline-block">
+          <motion.span style={{ opacity: zOpacity }}>z</motion.span>
+          <motion.span className="absolute inset-0" style={{ opacity: yOpacity }}>
+            y
+          </motion.span>
+        </span>
+        niknout?
       </h2>
       <a
         href={LINKEDIN_URL}
