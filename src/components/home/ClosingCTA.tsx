@@ -33,7 +33,7 @@ export default function ClosingCTA() {
         nikne to
       </h2>
       <p className="mx-auto mb-8 max-w-[420px] text-base leading-[1.6] text-text">
-        Máte co říct — pojďme tomu dát tvar.
+        Vy víte co. Já vím jak.
       </p>
       <a
         href={LINKEDIN_URL}
