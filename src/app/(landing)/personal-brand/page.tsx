@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Hero from "@/components/home/Hero";
+import LandingHero from "@/components/home/LandingHero";
 import SystemStrip from "@/components/home/SystemStrip";
 import WorkCards from "@/components/home/WorkCards";
 import Testimonials from "@/components/home/Testimonials";
@@ -7,7 +7,7 @@ import XFactor from "@/components/home/XFactor";
 import Pricing from "@/components/home/Pricing";
 import OngoingServices from "@/components/home/OngoingServices";
 import ForWho from "@/components/home/ForWho";
-import ClosingCTA from "@/components/home/ClosingCTA";
+import LandingClosingCTA from "@/components/home/LandingClosingCTA";
 import WebIsDead from "@/components/home/WebIsDead";
 import AboutMe from "@/components/home/AboutMe";
 
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 export default function PersonalBrandPage() {
   return (
     <main id="main">
-      <Hero />
+      <LandingHero />
       <SystemStrip />
       <WorkCards />
       <Testimonials />
@@ -30,7 +30,7 @@ export default function PersonalBrandPage() {
       <Pricing />
       <AboutMe />
       <OngoingServices />
-      <ClosingCTA />
+      <LandingClosingCTA />
     </main>
   );
 }
