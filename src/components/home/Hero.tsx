@@ -5,7 +5,7 @@ import { fadeUp, stagger } from "@/lib/animations";
 
 export default function Hero() {
   return (
-    <section className="mx-auto max-w-[960px] px-6 pb-[72px] pt-12 sm:pt-16 sm:pb-[120px]">
+    <section className="mx-auto max-w-[960px] px-6 pb-[72px] pt-[72px] sm:pb-[120px] sm:pt-[100px]">
       <motion.div
         className="mb-12 sm:mb-16"
         {...fadeUp}
