@@ -9,7 +9,7 @@ import OngoingServices from "@/components/home/OngoingServices";
 import ForWho from "@/components/home/ForWho";
 import LandingClosingCTA from "@/components/home/LandingClosingCTA";
 import WebIsDead from "@/components/home/WebIsDead";
-import AboutMe from "@/components/home/AboutMe";
+import LandingAboutMe from "@/components/home/LandingAboutMe";
 
 export const metadata: Metadata = {
   title: "X-Factor Sprint — Jakub Skupin",
@@ -28,7 +28,7 @@ export default function PersonalBrandPage() {
       <WebIsDead />
       <XFactor />
       <Pricing />
-      <AboutMe />
+      <LandingAboutMe />
       <OngoingServices />
       <LandingClosingCTA />
     </main>
