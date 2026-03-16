@@ -16,8 +16,8 @@ const services = [
   },
   {
     href: "/content-partner",
-    tag: "Sparring partner",
-    title: "Kreativní partner pro tvůrce a\u00a0lídry",
+    tag: "Creator partner",
+    title: "Partner pro tvůrce a\u00a0CEO",
     description:
       "Přemýšlím s\u00a0vámi, ne za vás. Koncepty, obsahová strategie, reframing — aby z\u00a0vašich myšlenek vzniklo něco konkrétního.",
     delivery: "Průběžně",
@@ -25,12 +25,12 @@ const services = [
   },
   {
     href: "/research-sprint",
-    tag: "Research Sprint",
-    title: "Hloubkový výzkum za zlomek času",
+    tag: "AI Research Sprint",
+    title: "Hluboká rešerše za zlomek času",
     description:
-      "Strategická analýza v\u00a0rozsahu, na který tým potřebuje týdny. Vy ji máte za\u00a0den nebo dva.",
+      "Strategická analýza v\u00a0rozsahu, na který tým potřeboval týden. Vy ji máte za\u00a0den nebo dva.",
     delivery: "1–2 dny",
-    result: "30+ sekcí analýzy",
+    result: "Strategický dokument",
   },
 ];
 

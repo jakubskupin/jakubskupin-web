@@ -37,10 +37,6 @@ export default function ClosingCTA() {
           niknout?
         </em>
       </h2>
-      <p className="mx-auto mb-8 max-w-[440px] text-base leading-[1.6] text-text-secondary">
-        Napište mi. Domluvíme se na 30minutovém callu — zdarma, bez závazků.
-        Uvidíme, jestli to spolu dává smysl.
-      </p>
       <a
         href={LINKEDIN_URL}
         target="_blank"

@@ -7,7 +7,7 @@ const steps = [
   {
     num: "01",
     title: "Posbírám",
-    text: "Vaše vstupy, data, kontext. Vidím v\u00a0nich vzorce a\u00a0hledám vhledy.",
+    text: "Vaše vstupy, data, kontext. Vidím v\u00a0nich vzorce a\u00a0hledám insighty.",
   },
   {
     num: "02",

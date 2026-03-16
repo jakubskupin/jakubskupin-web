@@ -16,17 +16,15 @@ export default function Hero() {
         className="mb-5 font-heading text-[clamp(36px,6vw,56px)] font-bold leading-[1.1] tracking-[-0.03em]"
         {...stagger(1)}
       >
-        Vznikne to
+        Vznikne to.
         <br />
-        A&nbsp;pak <em className="font-heading italic">vynikne</em>
+        A&nbsp;pak vynikne
       </motion.h1>
       <motion.p
         className="mb-8 max-w-[540px] text-lg leading-[1.65] text-text-secondary"
         {...stagger(2)}
       >
-        Posbírám informace, propojím je a&nbsp;zhmotním do&nbsp;konceptu,
-        který předtím neexistoval. Osobní značku, strategii, rešerši —
-        rychle, do hloubky a&nbsp;s&nbsp;vámi.
+        Osobní značka, strategie, obsah.
       </motion.p>
       <motion.a
         href="#sluzby"
