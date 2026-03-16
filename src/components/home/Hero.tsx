@@ -7,14 +7,6 @@ export default function Hero() {
   return (
     <section className="mx-auto max-w-[960px] px-6 pb-[72px] pt-[72px] sm:pb-[120px] sm:pt-[100px]">
       <motion.div
-        className="mb-6"
-        {...fadeUp}
-      >
-        <span className="font-heading text-lg font-bold tracking-tight">
-          Jakub Skupin
-        </span>
-      </motion.div>
-      <motion.div
         className="mb-6 text-[11px] font-semibold uppercase tracking-[0.1em] text-text-tertiary"
         {...fadeUp}
       >
