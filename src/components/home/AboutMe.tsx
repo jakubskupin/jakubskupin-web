@@ -1,103 +1,39 @@
 "use client";
 
-import { motion, type Easing } from "framer-motion";
-import { useState } from "react";
-import Image from "next/image";
-import { LINKEDIN_URL } from "@/lib/data";
-
-const fadeUp = {
-  initial: { opacity: 0, y: 20 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.5, ease: "easeOut" as Easing },
-};
-
-const PROOF_LINKS = [
-  {
-    label: "150+ účastníků AI workshopů",
-    url: "https://www.linkedin.com/posts/jakubskupin_ai-workflow-activity-7057580781249933312-L8gw",
-  },
-  {
-    label: "AI v kreativním procesu",
-    url: "https://www.forendors.cz/p/ef04914547f4449dc6b01beff56cde43",
-  },
-  {
-    label: "Jak používám AI",
-    url: "https://www.linkedin.com/in/jakubskupin/recent-activity/all/",
-  },
-];
+import { motion } from "framer-motion";
+import { fadeUp } from "@/lib/animations";
 
 export default function AboutMe() {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
-    <section className="mx-auto max-w-[960px] px-6 mb-[80px] sm:mb-[140px]">
+    <section className="mx-auto max-w-[960px] border-t border-border px-6 py-[72px] sm:py-[100px]">
       <motion.div
-        className="flex flex-col sm:flex-row items-start gap-8 sm:gap-12"
+        className="grid gap-6 sm:grid-cols-[240px_1fr] sm:gap-12"
         {...fadeUp}
       >
-        {/* Photo with wink on hover */}
-        <a
-          href={LINKEDIN_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="relative shrink-0 w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] rounded-2xl overflow-hidden"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          <Image
-            src="/jakub-skupin.png"
-            alt="Jakub Skupin"
-            width={240}
-            height={240}
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-200 ${
-              isHovered ? "opacity-0" : "opacity-100"
-            }`}
-          />
-          <Image
-            src="/jakub.skupin-wink.png"
-            alt="Jakub Skupin — wink"
-            width={240}
-            height={240}
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-200 ${
-              isHovered ? "opacity-100" : "opacity-0"
-            }`}
-          />
-        </a>
-
-        {/* Text */}
+        <div className="text-[11px] font-semibold uppercase tracking-[0.1em] text-text-tertiary pt-1">
+          Kdo za tím stojí
+        </div>
         <div className="max-w-[520px]">
-          <h3 className="mb-1 font-heading text-xl font-bold tracking-[-0.02em]">
+          <h2 className="mb-4 font-heading text-[1.6rem] font-bold tracking-[-0.02em]">
             Jakub Skupin
-          </h3>
-          <p className="mb-4 text-[13.5px] leading-[1.5] text-text-secondary">
-            Stratég, který kóduje. Rešeršér, který designuje.
+          </h2>
+          <p className="mb-4 text-[15px] leading-[1.7] text-text-secondary">
+            Celý profesní život propojuju světy — marketing, strategii, výzkum,
+            technologie. Nejsem specialista na jedno. Jsem ten, kdo vidí spojení
+            mezi všemi a&nbsp;<strong className="font-medium text-text">zhmotní je do&nbsp;věci, která funguje.</strong>
           </p>
-          <p className="mb-4 text-[15px] leading-[1.7] text-text">
-            Jeden člověk od rešerše po hotové výstupy. Eliminuju meetingy a šum.
-            AI používám ne jako zkratku. Jako nástroj pro hloubku, kterou
-            nečekáte.
+          <p className="mb-4 text-[15px] leading-[1.7] text-text-secondary">
+            Pracuju s&nbsp;AI jako s&nbsp;nástrojem, ne jako s&nbsp;náhražkou
+            myšlení. Moje síla není v&nbsp;promptech — je v&nbsp;tom, že vím,{" "}
+            <strong className="font-medium text-text">co se ptát a&nbsp;kam to vede.</strong>
           </p>
-          <p className="mb-6 text-[15px] leading-[1.7] text-text">
-            Snižuju frikci, aby věci vznikly — a pak vynikly. Nejlepší feedback
-            dostaneme od trhu, ne od dalšího kola revizí.
+          <p className="text-[15px] leading-[1.7] text-text-secondary">
+            Miluju ten moment, kdy z&nbsp;chaosu informací najednou
+            vykrystalizuje tvar. Kdy klient řekne:{" "}
+            <strong className="font-medium text-text">
+              „Tak tohle jsem nevěděl, že potřebuju."
+            </strong>
           </p>
-
-          {/* Proof links */}
-          <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2">
-            {PROOF_LINKS.map((link) => (
-              <a
-                key={link.url}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex w-fit items-center gap-1 rounded-full border border-border px-2.5 py-1 text-[10px] font-medium text-text-tertiary transition-colors duration-200 hover:border-text-tertiary hover:text-text-secondary"
-              >
-                {link.label}
-                <span className="text-[9px]">{"\u2197\uFE0E"}</span>
-              </a>
-            ))}
-          </div>
         </div>
       </motion.div>
     </section>

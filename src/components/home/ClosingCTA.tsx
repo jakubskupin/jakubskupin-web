@@ -1,15 +1,9 @@
 "use client";
 
-import { motion, useScroll, useTransform, type Easing } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { LINKEDIN_URL } from "@/lib/data";
-
-const fadeUp = {
-  initial: { opacity: 0, y: 20 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.5, ease: "easeOut" as Easing },
-};
+import { fadeUp } from "@/lib/animations";
 
 export default function ClosingCTA() {
   const ref = useRef(null);
@@ -24,29 +18,37 @@ export default function ClosingCTA() {
   return (
     <motion.section
       ref={ref}
-      className="mx-auto max-w-[960px] px-6 mb-[80px] sm:mb-[140px] text-center"
+      id="kontakt"
+      className="relative mx-auto max-w-[960px] border-t border-border px-6 py-[96px] sm:py-[140px] text-center"
       {...fadeUp}
     >
-      <h2 className="mb-4 font-heading text-[clamp(28px,4vw,38px)] font-bold tracking-[-0.03em]">
-        V
-        <span className="relative inline-block">
-          <motion.span style={{ opacity: zOpacity }}>z</motion.span>
-          <motion.span className="absolute inset-0" style={{ opacity: yOpacity }}>
-            y
-          </motion.span>
-        </span>
-        nikne to
+      <h2 className="mb-4 font-heading text-[clamp(28px,4.5vw,40px)] font-bold leading-[1.2] tracking-[-0.03em]">
+        Máte v&nbsp;hlavě něco,
+        <br />
+        co chce{" "}
+        <em className="font-heading italic text-text-secondary">
+          v
+          <span className="relative inline-block">
+            <motion.span style={{ opacity: zOpacity }}>z</motion.span>
+            <motion.span className="absolute inset-0" style={{ opacity: yOpacity }}>
+              y
+            </motion.span>
+          </span>
+          niknout?
+        </em>
       </h2>
-      <p className="mx-auto mb-8 max-w-[420px] text-base leading-[1.6] text-text">
-        Máte co říct — pojďme tomu dát tvar.
+      <p className="mx-auto mb-8 max-w-[440px] text-base leading-[1.6] text-text-secondary">
+        Napište mi. Domluvíme se na 30minutovém callu — zdarma, bez závazků.
+        Uvidíme, jestli to spolu dává smysl.
       </p>
       <a
         href={LINKEDIN_URL}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-block rounded-full bg-text px-8 py-3.5 text-sm font-bold text-bg transition-all duration-250 hover:opacity-85"
+        className="inline-flex items-center gap-2 bg-text px-7 py-3.5 text-sm font-semibold text-bg transition-all duration-300 hover:opacity-85"
       >
-        {"Napsat na LinkedIn \u2197\uFE0E"}
+        Ozvěte se mi
+        <span>→</span>
       </a>
     </motion.section>
   );

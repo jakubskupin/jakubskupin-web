@@ -1,30 +1,50 @@
 "use client";
 
-import { motion, type Easing } from "framer-motion";
-
-const fadeUp = {
-  initial: { opacity: 0, y: 20 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.5, ease: "easeOut" as Easing },
-};
+import { motion } from "framer-motion";
+import { fadeUp, stagger } from "@/lib/animations";
 
 export default function Hero() {
   return (
-    <motion.section
-      className="mx-auto max-w-[960px] px-6 pb-[72px] pt-[72px] sm:pb-[120px] sm:pt-[100px]"
-      {...fadeUp}
-    >
-      <div className="mb-6 text-[13px] font-semibold uppercase tracking-[0.06em] text-text-tertiary">
-        Personal brand × AI × Marketing
-      </div>
-      <h1 className="mb-7 font-heading text-[clamp(34px,5.5vw,52px)] font-bold leading-[1.12] tracking-[-0.03em]">
-        Pojmenuju,<br className="sm:hidden" /> čím jste výjimeční
-      </h1>
-      <p className="max-w-[520px] text-lg leading-[1.65] text-text">
-        Pro experty a tvůrce, kteří mají co říct — ale online to není
-        vidět.
-      </p>
-    </motion.section>
+    <section className="mx-auto max-w-[960px] px-6 pb-[72px] pt-12 sm:pt-16 sm:pb-[120px]">
+      <motion.div
+        className="mb-12 sm:mb-16"
+        {...fadeUp}
+      >
+        <span className="font-heading text-lg font-bold tracking-tight">
+          Jakub Skupin
+        </span>
+      </motion.div>
+      <motion.div
+        className="mb-6 text-[11px] font-semibold uppercase tracking-[0.1em] text-text-tertiary"
+        {...fadeUp}
+      >
+        Rešerše · Strategie · Koncept
+      </motion.div>
+      <motion.h1
+        className="mb-5 font-heading text-[clamp(36px,6vw,56px)] font-bold leading-[1.1] tracking-[-0.03em]"
+        {...stagger(1)}
+      >
+        Vznikne to.
+        <br />
+        A&nbsp;pak <em className="font-heading italic text-text-secondary">vynikne.</em>
+      </motion.h1>
+      <motion.p
+        className="mb-8 max-w-[540px] text-lg leading-[1.65] text-text-secondary"
+        {...stagger(2)}
+      >
+        Posbírám informace, propojím je a&nbsp;zhmotním do&nbsp;konceptu,
+        který předtím neexistoval. Osobní značku, strategii, rešerši —
+        rychle, do hloubky a&nbsp;s&nbsp;vámi.
+      </motion.p>
+      <motion.a
+        href="#sluzby"
+        className="mt-4 inline-flex animate-bounce items-center justify-center text-text-tertiary transition-colors duration-300 hover:text-text"
+        {...stagger(3)}
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 5v14M5 12l7 7 7-7" />
+        </svg>
+      </motion.a>
+    </section>
   );
 }
