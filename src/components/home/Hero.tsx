@@ -10,7 +10,7 @@ export default function Hero() {
         className="mb-6 text-[13px] font-semibold uppercase tracking-[0.06em] text-text-tertiary"
         {...fadeUp}
       >
-        Rešerše · Strategie · Koncept
+        Rešerše × Strategie × Koncept
       </motion.div>
       <motion.h1
         className="mb-5 font-heading text-[clamp(36px,6vw,56px)] font-bold leading-[1.1] tracking-[-0.03em]"
