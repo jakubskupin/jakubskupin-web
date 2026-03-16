@@ -24,7 +24,7 @@ export default function Hero() {
         className="mb-8 max-w-[540px] text-lg leading-[1.65] text-text-secondary"
         {...stagger(2)}
       >
-        Posbírám informace, propojím je a&nbsp;zhmotním do&nbsp;konceptu k&nbsp;otestování.
+        Z&nbsp;vašich myšlenek udělám něco, co se dá ukázat, sdílet, prodat.
       </motion.p>
       <motion.a
         href="#sluzby"

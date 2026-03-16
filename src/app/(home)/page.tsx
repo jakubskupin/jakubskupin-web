@@ -7,7 +7,7 @@ import ClosingCTA from "@/components/home/ClosingCTA";
 export const metadata: Metadata = {
   title: "Jakub Skupin — Vznikne to. A pak vynikne.",
   description:
-    "Posbírám informace, propojím je a zhmotním do konceptu, který předtím neexistoval. Osobní značku, strategii, rešerši — rychle, do hloubky a s vámi.",
+    "Z vašich myšlenek udělám něco, co se dá ukázat, sdílet, prodat. Osobní značka, strategie, rešerše — rychle a do hloubky.",
 };
 
 export default function HomePage() {
