@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mask Reveal Prototype</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0a0a; color: #fff; font-family: system-ui, -apple-system, sans-serif; overflow: hidden; }
+
+  .hero {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    cursor: none;
+  }
+
+  .hero .layer {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+  }
+
+  /* Layer 0 (bottom): Mask image — always there, revealed when canvas is erased */
+  .hero .masked { z-index: 0; }
+  .hero .masked img {
+    width: 40%;
+    max-width: 480px;
+    height: auto;
+    object-fit: contain;
+    transform: translateY(12%);
+    filter: none;
+  }
+
+  /* Layer 1: Canvas — draws Jakub's photo + bg, mouse erases to reveal mask below */
+  #coverCanvas {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Layer 2+: UI on top */
+  .hero .vignette {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    background:
+      radial-gradient(ellipse at center, transparent 30%, rgba(10,10,10,0.6) 100%),
+      linear-gradient(to bottom, #0a0a0a 0%, transparent 12%, transparent 88%, #0a0a0a 100%);
+  }
+
+  .cursor-glow {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 160, 40, 0.25);
+    pointer-events: none;
+    z-index: 100;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.4s;
+    box-shadow: 0 0 20px rgba(255, 160, 40, 0.1);
+    opacity: 0;
+  }
+  .cursor-glow.active { opacity: 1; }
+
+  .hero .text-overlay {
+    position: absolute;
+    bottom: 12%;
+    left: 8%;
+    z-index: 3;
+    pointer-events: none;
+  }
+  .hero .text-overlay .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #96948E;
+    margin-bottom: 12px;
+  }
+  .hero .text-overlay .headline {
+    font-size: clamp(28px, 4vw, 56px);
+    font-weight: 800;
+    line-height: 1.1;
+    color: #FAFAF8;
+  }
+
+  .hint {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    font-size: 12px;
+    color: #444;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    animation: pulse 2s ease-in-out infinite;
+    transition: opacity 0.5s;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero" id="hero">
+  <!-- Bottom: mask image (revealed when canvas erased) -->
+  <div class="layer masked" id="masked">
+    <img src="/maska.png" alt="">
+  </div>
+
+  <!-- Canvas: draws Jakub's photo + dark bg. Mouse erases holes. -->
+  <canvas id="coverCanvas"></canvas>
+
+  <div class="vignette"></div>
+
+  <div class="text-overlay">
+    <div class="label">Rešerše × Strategie × Koncept</div>
+    <div class="headline">Vznikne to.<br>A pak vynikne.</div>
+  </div>
+
+  <div class="hint" id="hint">Stiskni D pro debug režim</div>
+</div>
+
+<div class="cursor-glow" id="cursor"></div>
+
+<!-- Debug HUD -->
+<div id="debug-hud" style="display:none; position:fixed; top:20px; left:20px; z-index:999; background:rgba(0,0,0,0.85); color:#0f0; font-family:monospace; font-size:14px; padding:16px 20px; border-radius:8px; border:1px solid #333; line-height:1.8;">
+  <div><strong style="color:#ff0">DEBUG MODE</strong></div>
+  <div>↑↓ posun masky vertikálně</div>
+  <div>←→ posun masky horizontálně</div>
+  <div>+/- změna šířky masky</div>
+  <div style="margin-top:8px">Shift = jemný posun (1px)</div>
+  <div style="margin-top:8px; color:#0ff" id="debug-info">offsetY: 0px | offsetX: 0px | scale: 100%</div>
+</div>
+
+<script>
+  const BG = '#0a0a0a';
+  const BRUSH_RADIUS = 80;
+  const FADE_DELAY = 2500;
+  const FADE_ALPHA = 0.015;
+
+  const hero = document.getElementById('hero');
+  const masked = document.getElementById('masked');
+  const cursor = document.getElementById('cursor');
+  const hint = document.getElementById('hint');
+  const canvas = document.getElementById('coverCanvas');
+  const ctx = canvas.getContext('2d');
+
+  // Preload Jakub's photo
+  const jakubImg = new Image();
+  jakubImg.src = '/jakub-skupin.png';
+
+  let W, H, imgW, imgH, imgX, imgY;
+  let ready = false;
+
+  function calcLayout() {
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width = W;
+    canvas.height = H;
+
+    // Match CSS: width 40%, max 480px, centered
+    imgW = Math.min(W * 0.4, 480);
+    imgH = imgW; // square photo
+    imgX = (W - imgW) / 2;
+    imgY = (H - imgH) / 2;
+  }
+
+  function drawFull() {
+    // Fill entire canvas with dark bg + Jakub's photo
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = BG;
+    ctx.fillRect(0, 0, W, H);
+    if (ready) {
+      ctx.drawImage(jakubImg, imgX, imgY, imgW, imgH);
+    }
+  }
+
+  jakubImg.onload = () => {
+    ready = true;
+    calcLayout();
+    drawFull();
+  };
+
+  window.addEventListener('resize', () => {
+    calcLayout();
+    drawFull();
+  });
+
+  let lastMoveTime = 0;
+  let hintHidden = false;
+  let hasHoles = false; // track if any erasing happened
+
+  // Mouse erases the canvas, revealing mask underneath
+  hero.addEventListener('mousemove', (e) => {
+    const x = e.clientX;
+    const y = e.clientY;
+    lastMoveTime = Date.now();
+    hasHoles = true;
+
+    // Erase soft circle
+    ctx.globalCompositeOperation = 'destination-out';
+    const grad = ctx.createRadialGradient(x, y, 0, x, y, BRUSH_RADIUS);
+    grad.addColorStop(0, 'rgba(0,0,0,1)');
+    grad.addColorStop(0.5, 'rgba(0,0,0,0.6)');
+    grad.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(x - BRUSH_RADIUS, y - BRUSH_RADIUS, BRUSH_RADIUS * 2, BRUSH_RADIUS * 2);
+    ctx.globalCompositeOperation = 'source-over';
+
+    cursor.style.left = x + 'px';
+    cursor.style.top = y + 'px';
+    cursor.classList.add('active');
+
+    if (!hintHidden) {
+      hint.style.opacity = '0';
+      hintHidden = true;
+    }
+  });
+
+  hero.addEventListener('mouseleave', () => {
+    cursor.classList.remove('active');
+    lastMoveTime = Date.now() - FADE_DELAY + 800;
+  });
+
+  hero.addEventListener('mouseenter', () => {
+    cursor.classList.add('active');
+  });
+
+  // Fade-back: gradually redraw the full canvas (photo + bg) on top
+  function animate() {
+    if (hasHoles && Date.now() - lastMoveTime > FADE_DELAY) {
+      // Draw full image at low opacity to slowly cover holes
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.globalAlpha = FADE_ALPHA;
+      ctx.fillStyle = BG;
+      ctx.fillRect(0, 0, W, H);
+      if (ready) {
+        ctx.drawImage(jakubImg, imgX, imgY, imgW, imgH);
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  // === DEBUG MODE ===
+  let debugMode = false;
+  let offsetY = 0;
+  let offsetX = 0;
+  let maskScale = 100;
+  const maskedImg = document.querySelector('.masked img');
+  const debugHud = document.getElementById('debug-hud');
+  const debugInfo = document.getElementById('debug-info');
+
+  function updateDebugTransform() {
+    maskedImg.style.transform = `translateY(calc(12% + ${offsetY}px)) translateX(${offsetX}px) scale(${maskScale / 100})`;
+    debugInfo.textContent = `offsetY: ${offsetY}px | offsetX: ${offsetX}px | scale: ${maskScale}%`;
+  }
+
+  function toggleDebug() {
+    debugMode = !debugMode;
+    debugHud.style.display = debugMode ? 'block' : 'none';
+
+    if (debugMode) {
+      canvas.style.display = 'none';
+      masked.style.opacity = '0.7';
+      maskedImg.style.filter = 'brightness(2.5) drop-shadow(0 0 80px rgba(255, 160, 40, 0.3))';
+      hero.style.cursor = 'default';
+    } else {
+      canvas.style.display = 'block';
+      drawFull();
+      hasHoles = false;
+      masked.style.opacity = '1';
+      maskedImg.style.filter = 'drop-shadow(0 0 80px rgba(255, 160, 40, 0.3))';
+      hero.style.cursor = 'none';
+    }
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'd' || e.key === 'D') { toggleDebug(); return; }
+    if (!debugMode) return;
+    const step = e.shiftKey ? 1 : 5;
+    switch (e.key) {
+      case 'ArrowUp':    offsetY -= step; break;
+      case 'ArrowDown':  offsetY += step; break;
+      case 'ArrowLeft':  offsetX -= step; break;
+      case 'ArrowRight': offsetX += step; break;
+      case '+': case '=': maskScale += 2; break;
+      case '-': case '_': maskScale -= 2; break;
+      default: return;
+    }
+    e.preventDefault();
+    updateDebugTransform();
+  });
+</script>
+
+</body>
+</html>
