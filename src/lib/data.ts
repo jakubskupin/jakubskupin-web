@@ -19,7 +19,16 @@ export const works: Work[] = [
     description: "",
     tag: "Brand & web",
     screenshot: "/work/simrani.png",
-    externalUrl: "https://simrani-web.vercel.app/",
+    externalUrl: "https://simrani.cz",
+  },
+  {
+    slug: "alice-hejzlarova",
+    url: "alice-hejzlarova.cz",
+    title: "Alice Hejzlarová",
+    description: "",
+    tag: "Brand & web",
+    screenshot: "/work/alice-hejzlar.png",
+    externalUrl: "https://alice-hejzlar.vercel.app/",
     concept: true,
   },
 ];
