@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { motion, type Easing } from "framer-motion";
 import { LINKEDIN_URL } from "@/lib/data";
 
@@ -23,85 +24,183 @@ const CTA = LINKEDIN_URL;
 /*  Data                                                            */
 /* ---------------------------------------------------------------- */
 
-const archetypes = [
-  {
-    title: "Nenapodobitelná persona",
-    insight:
-      "X-factor je sama osoba. Nezkopíruješ ji, ale ani nedoškáluješ. Systém se staví kolem člověka, ne člověk kolem systému.",
-    names: ["Mikýř", "Koběrský", "Kovy"],
-  },
-  {
-    title: "Vlastník formátu",
-    insight:
-      "Distinctive není tvář, ale formát. To se přenáší a škáluje dál.",
-    names: ["Čestmír", "Veselovský"],
-  },
-  {
-    title: "Niche autorita",
-    insight:
-      "Malé publikum, vysoká konverze. Pravý opak honby za dosahem.",
-    names: ["Tom Brzobohatý", "Vojta Žižka"],
-  },
-  {
-    title: "Systematik a edukátor",
-    insight:
-      "Monetizuje metodu, ne pozornost. Tím obchází past, kdy dosah neznamená příjem.",
-    names: ["Rob Lennon", "Ruben Hassid", "Losekoot", "Rostecký"],
-  },
-];
-
-const proofQuotes = [
-  {
-    quote: "Nejlepší příprava ever.",
-    author: "Vilém Franěk",
-    role: "spoluzakladatel, Close Friends",
-    big: true,
-  },
-  {
-    quote: "Švýcarský nožík.",
-    author: "Petr Rubáček",
-    role: "",
-    big: false,
-  },
-  {
-    quote: "Unicorn. Pokrývá 98 % toho, co potřebuju.",
-    author: "Martin Vymětal",
-    role: "co-founder, Boomerang Communication",
-    big: false,
-  },
-];
-
-const cases = [
-  {
-    title: "Alice Hejzlarová",
-    desc: "Strategická rešerše a osobní web pro advokátku s HNW klientelou. Za 2 dny, bez zapojení klientky.",
-  },
-  {
-    title: "BUGA",
-    desc: "30sekční strategická analýza slow-fashion značky. Přesně ten reusovatelný artefakt, který tým spustí znovu pro každého.",
-  },
-  {
-    title: "Markéta Fáberová / Šimrání",
-    desc: "Obsahová a vizuální identita pro intimní, osobní téma. Důkaz, že umím dát formu citlivému materiálu.",
-  },
-];
-
-const pilots = [
+const reasons: { num: string; title: string; body: React.ReactNode }[] = [
   {
     num: "01",
-    title: "Koncepty a rešerše — váš přípravář",
-    desc: "30sekční strategická analýza tvůrce nebo segmentu za 1 až 2 dny. Podklady před produkcí. Na tohle už jsme jednu schůzku měli, tady bych přirozeně pokračoval.",
-    href: "/research-sprint",
-    linkLabel: "AI Research Sprint",
+    title: "Zajímám se o creator economy",
+    body: (
+      <>
+        Tvůrce, formáty a monetizaci si mapuju roky. Vlastní rešerše, vlastní
+        pokusy, vlastní fail. A s personal brandem pomáhám i klientům: hledám
+        jim{" "}
+        <a
+          href="/personal-brand"
+          className="font-semibold text-text underline decoration-border underline-offset-2 transition-colors hover:decoration-text-tertiary"
+        >
+          x-factor
+        </a>{" "}
+        a stavím na něm obsah.
+      </>
+    ),
   },
   {
     num: "02",
-    title: "X-Factor onboarding artefakt",
-    desc: "Pojmenuju, čím je tvůrce nebo projekt výjimečný. Úhel, obsahové pilíře, tvar. Reusovatelný podklad pro každého nového člověka, kterého berete.",
-    href: "/personal-brand",
-    linkLabel: "X-Factor Sprint",
+    title: "Připojím se, když potřebujete",
+    body: "Jsem freelancer. Žádný nábor, žádné fixní náklady, žádný zácvik. Rychle se zorientuju a doručuju výstupy.",
+  },
+  {
+    num: "03",
+    title: "Exekuce",
+    body: "Nepotřebuju meetingy. Řeším výstupy a jejich validaci na cílovce. Klidně vyrobím lo-fi prototyp k vaší oponentuře. Jde mi o rychlost.",
   },
 ];
+
+const craft = [
+  "Newslettery",
+  "IG carousely",
+  "LinkedIn posty",
+  "Obsah na sítě",
+  "Reels s titulky",
+  "Landing pages",
+  "Case studies",
+  "Thumbnaily",
+  "Scénáře a osnovy",
+  "Koncepty",
+];
+
+const blackItems = [
+  {
+    title: "Cokoli kolem vaší agentury",
+    body: "Agenturní svět sleduju. Když víte, čím se chcete odlišit, a chybí na to kapacita, tohle mě bude bavit nejvíc.",
+  },
+  {
+    title: "Case studies",
+    body: "Řeknete, co má zaznít, nebo to necháte na mně. Zpracuju.",
+  },
+  {
+    title: "Rešerše a koncept",
+    body: "Máte to v hlavě, ale není čas to zhmotnit. Zhmotním.",
+  },
+  {
+    title: "Využití AI",
+    body: "Use-casy máte definované, ale nemáte čas je zkoušet. Projdu je, ověřím a předám.",
+  },
+];
+
+// Štítky z Roamu propojené s tvůrci a podcasty. Texty jsou drafty k Jakubově kontrole.
+const topics = [
+  {
+    id: "dosah",
+    label: "dosah ≠ příjem",
+    insight:
+      "3,46 milionu zhlédnutí a 18 platících předplatitelů. Pozornost se na příjem nepřeklápí sama, někdo ji musí přeložit.",
+  },
+  {
+    id: "borrowed",
+    label: "borrowed credibility",
+    insight:
+      "Propůjčená důvěryhodnost a pozornost pořád funguje. Čerstvě jsem to viděl u Šimůnka.",
+  },
+  {
+    id: "growth",
+    label: "growth-period",
+    insight:
+      "Tvůrce neroste lineárně. Jsou okna, kdy se vyplatí přitlačit, a mrtvá období, kdy je tlak marný.",
+  },
+  {
+    id: "hostovani",
+    label: "strategické hostování",
+    insight:
+      "Nechodit všude. V každém podcastu jiný příběh pro jinou cílovku, jinak se host vyčerpá a značce to škodí.",
+  },
+  {
+    id: "income",
+    label: "income-stream",
+    insight:
+      "Tvůrce nežije z jednoho příjmu. Partnerství, předplatné, workshopy, konference, knihy. Broňa Sobotka je učebnice, jak ty streamy skládat dohromady.",
+  },
+  {
+    id: "thumb",
+    label: "thumbnail reverse-engineering",
+    insight:
+      "Thumbnail rozhoduje o kliku. Než navrhnu vlastní, rozeberu, proč fungují ty konkurenční.",
+  },
+  {
+    id: "niche",
+    label: "niche > dosah",
+    insight:
+      "Úzké publikum konvertuje. Positioning zpřesňuje obsah a vymezení vůči konkurenci staví strategický příkop.",
+  },
+  {
+    id: "podcaster",
+    label: "podcaster ≠ novinář",
+    insight:
+      "Novinář zpovídá, podcaster staví vztah a show. Jiné řemeslo, jiná příprava, jiný výsledek.",
+  },
+];
+
+/* ---------------------------------------------------------------- */
+/*  Capacity chart (hero visual)                                    */
+/* ---------------------------------------------------------------- */
+
+function CapacityChart() {
+  const demand =
+    "M 0 185 C 60 175, 95 92, 145 78 C 195 65, 215 182, 265 191 C 305 198, 335 72, 395 58 C 450 46, 475 166, 528 176 C 572 184, 592 96, 646 92 C 696 89, 732 150, 760 157";
+  const demandArea = `${demand} L 760 240 L 0 240 Z`;
+
+  return (
+    <motion.div
+      className="mt-12 rounded-3xl border border-border bg-card-bg p-6 sm:p-8"
+      {...fadeUp}
+    >
+      <div className="relative">
+        <svg
+          viewBox="0 0 760 240"
+          className="block w-full"
+          role="img"
+          aria-label="Poptávka po obsahu kolísá nad kapacitou stálého týmu"
+        >
+          {/* plocha pod křivkou */}
+          <path d={demandArea} fill="#EFEDEA" />
+          {/* špičky nad kapacitou týmu */}
+          <clipPath id="peaks">
+            <rect x="0" y="0" width="760" height="150" />
+          </clipPath>
+          <path d={demandArea} fill="#1A1A18" clipPath="url(#peaks)" />
+          {/* křivka poptávky */}
+          <path d={demand} fill="none" stroke="#1A1A18" strokeWidth="2" />
+          {/* kapacita týmu */}
+          <line
+            x1="0"
+            y1="150"
+            x2="760"
+            y2="150"
+            stroke="#96948E"
+            strokeWidth="1.5"
+            strokeDasharray="5 5"
+          />
+          {/* ukazatel na špičku */}
+          <line x1="395" y1="42" x2="395" y2="78" stroke="#1A1A18" strokeWidth="1" />
+        </svg>
+
+        {/* Popisky jako HTML, aby byly čitelné na jakékoli šířce (i mobil) */}
+        <span className="absolute left-1/2 top-[1%] -translate-x-1/2 whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.08em] text-text sm:text-[11px]">
+          Tady se připojím já
+        </span>
+        <span className="absolute right-[2%] top-[50%] rounded bg-card-bg/80 px-1 text-[10px] font-bold uppercase tracking-[0.06em] text-text-tertiary sm:text-[11px]">
+          Stálý tým
+        </span>
+        <span className="absolute bottom-[8%] left-[3%] text-[10px] font-bold uppercase tracking-[0.06em] text-text-tertiary sm:text-[11px]">
+          Poptávka po obsahu
+        </span>
+      </div>
+      <p className="mt-5 max-w-[560px] text-[14.5px] leading-[1.6] text-text-secondary">
+        Poptávka po obsahu skáče. Stálý tým je rovná čára. Ten rozdíl nahoře
+        jsem já: bez náboru a bez fixních nákladů.
+      </p>
+    </motion.div>
+  );
+}
 
 /* ---------------------------------------------------------------- */
 /*  Sections                                                        */
@@ -114,281 +213,492 @@ function Hero() {
       {...fadeUp}
     >
       <div className="mb-6 text-[13px] font-semibold uppercase tracking-[0.06em] text-text-tertiary">
-        Pro Close Friends × MÚPI
+        Pro Close Friends
       </div>
-      <h1 className="mb-7 font-heading text-[clamp(34px,5.5vw,52px)] font-bold leading-[1.12] tracking-[-0.03em]">
-        Vy škálujete dosah.
-        <br />
-        Já hlídám úhel.
+      <h1 className="mb-7 font-heading text-[clamp(42px,7.5vw,68px)] font-bold leading-[1.08] tracking-[-0.03em]">
+        Plug &amp; work
       </h1>
-      <p className="mb-9 max-w-[560px] text-lg leading-[1.65] text-text">
-        Vyhlásili jste 4 produkční pozice. Do žádné se nehodím, a je to
-        schválně. Píšu na to, co inzerát nepokrývá: koncept a positioning,
-        dřív než se začne natáčet.
+      <p className="max-w-[560px] text-lg leading-[1.65] text-text">
+        Pomůžu vám tvořit a škálovat obsah. Kapacitu připojíte, když ji
+        potřebujete.
       </p>
-      <a
-        href={CTA}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-block rounded-full bg-text px-8 py-3.5 text-sm font-bold text-bg transition-all duration-250 hover:opacity-85"
-      >
-        {"Pojďme na kafe ↗︎"}
-      </a>
-    </motion.section>
-  );
-}
 
-function Why() {
-  return (
-    <motion.section
-      className="mx-auto max-w-[600px] px-6 mb-[80px] sm:mb-[120px]"
-      {...fadeUp}
-    >
-      <div className="mb-8 text-[13px] font-semibold uppercase tracking-[0.06em] text-text-tertiary">
-        Proč vám píšu
-      </div>
-      <p className="mb-5 text-xl leading-[1.6]">
-        Creator economy mě netáhne jako gig. Je to téma, ke kterému se vracím
-        roky. Mapuju ho, sleduju, kdo v něm jak hraje. Tohle je svět, ve kterém
-        chci být.
-      </p>
-      <p className="text-base leading-[1.7] text-text-secondary">
-        S Vildou jsme spolu už mluvili. O mojí přípravě řekl „nejlepší příprava
-        ever". Tohle není studený pitch, je to pokračování toho rozhovoru.
-      </p>
-    </motion.section>
-  );
-}
+      <CapacityChart />
 
-function CreatorMap() {
-  return (
-    <section className="mx-auto max-w-[960px] px-6 mb-[80px] sm:mb-[140px]">
-      <motion.div className="mb-10 sm:mb-12" {...fadeUp}>
-        <div className="mb-8 text-[13px] font-semibold uppercase tracking-[0.06em] text-text-tertiary">
-          Jak čtu creator trh
-        </div>
-        <h2 className="mb-3 font-heading text-[clamp(28px,4vw,38px)] font-bold tracking-[-0.03em] max-w-[600px]">
-          Nesleduju tvůrce.
-          <br />
-          Čtu, čím je kdo nenahraditelný
-        </h2>
-        <p className="max-w-[520px] text-base leading-[1.6] text-text">
-          Trh mám rozsekaný podle toho, na čem stojí hodnota každého tvůrce. Ne
-          podle počtu sledujících.
-        </p>
-      </motion.div>
-
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        {archetypes.map((a, i) => (
-          <motion.div
-            key={a.title}
-            className="rounded-3xl border border-border bg-card-bg p-6"
-            {...stagger(i)}
+      <div className="mt-12 text-center">
+        <a
+          href="#duvody"
+          aria-label="Posunout na 3 důvody proč já"
+          className="inline-flex animate-bounce items-center justify-center text-text-tertiary transition-colors duration-300 hover:text-text"
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
-            <h3 className="mb-2.5 font-heading text-[18px] font-bold tracking-[-0.01em]">
-              {a.title}
-            </h3>
-            <p className="mb-4 text-[14px] leading-[1.6] text-text-secondary">
-              {a.insight}
-            </p>
-            <div className="flex flex-wrap gap-1.5">
-              {a.names.map((n) => (
-                <span
-                  key={n}
-                  className="rounded-md bg-accent-soft px-2.5 py-1 text-[11px] font-semibold tracking-[0.02em] text-text-tertiary"
-                >
-                  {n}
-                </span>
-              ))}
-            </div>
-          </motion.div>
-        ))}
+            <path d="M12 5v14M5 12l7 7 7-7" />
+          </svg>
+        </a>
       </div>
+    </motion.section>
+  );
+}
 
-      <motion.div
-        className="mt-8 rounded-3xl border border-border bg-card-bg p-7 sm:p-8"
+function Reasons() {
+  return (
+    <section
+      id="duvody"
+      className="mx-auto max-w-[960px] px-6 mb-[80px] sm:mb-[140px] scroll-mt-24"
+    >
+      <motion.h2
+        className="mb-10 font-heading text-[clamp(28px,4vw,38px)] font-bold tracking-[-0.03em] sm:mb-14"
         {...fadeUp}
       >
-        <p className="mb-5 text-[15px] leading-[1.65] text-text">
-          <strong className="font-bold">
-            3,46 milionu zhlédnutí a 18 platících předplatitelů.
-          </strong>{" "}
-          Dosah a příjem nejsou totéž. Tohle napětí mě na trhu baví nejvíc,
-          protože koncept, který ho neřeší, je jen hezká nula.
-        </p>
-        <div className="h-px w-full bg-border" />
-        <p className="mt-5 text-[15px] leading-[1.65] text-text">
-          A Tom Brzobohatý není náhoda. Je to scouting niche autority dřív, než
-          ji najde trh. Tu samou connecting-dots vrstvu dělám systematicky a
-          před produkcí.
-        </p>
-      </motion.div>
-    </section>
-  );
-}
-
-function Layer() {
-  const points = [
-    {
-      label: "Nahoře — úhel",
-      text: "Čím je tenhle tvůrce vlastně výjimečný. Váš vlastní slib zní „najdeme, v čem jste unikátní“. Tohle dělám jako hloubkový positioning ještě před natáčením: úhel, obsahové pilíře, tvar formátu.",
-    },
-    {
-      label: "Dole — fit na příjem",
-      text: "Proč zrovna tahle pozornost povede k penězům. Nedělám hezký koncept pro hezký koncept. Dělám koncept, který ví, jak se pozornost mění v příjem.",
-    },
-    {
-      label: "Napříč — jeden směr",
-      text: "Vás je víc a tvůrců ještě víc. Umím z pěti názorů udělat jeden směr a držet ho i tam, kde se to rozjíždí na dvě značky. A když má být tvůrce před kamerou zranitelný, vytvářím klid, u kterého neztuhne. To mi nezávisle potvrdil kdekdo.",
-    },
-  ];
-  return (
-    <section className="mx-auto max-w-[960px] px-6 mb-[80px] sm:mb-[140px]">
-      <motion.div className="mb-10 sm:mb-12" {...fadeUp}>
-        <div className="mb-8 text-[13px] font-semibold uppercase tracking-[0.06em] text-text-tertiary">
-          Kde do vás zapadám
-        </div>
-        <h2 className="mb-3 font-heading text-[clamp(28px,4vw,38px)] font-bold tracking-[-0.03em] max-w-[600px]">
-          Co se nedá
-          <br />
-          doškálovat rukama
-        </h2>
-        <p className="max-w-[540px] text-base leading-[1.6] text-text">
-          Close Friends rostou produkcí a dosahem přes víc tvůrců. Dvě věci v tom
-          modelu nepřidáte produkčníma rukama. Jsem ta třetí.
-        </p>
-      </motion.div>
+        3 důvody proč já
+      </motion.h2>
 
       <div className="relative ml-4 md:ml-8">
-        <div className="absolute left-[7px] top-2 bottom-2 w-px bg-border" />
-        <div className="space-y-9">
-          {points.map((p, i) => (
-            <motion.div key={p.label} className="relative pl-10" {...stagger(i)}>
+        {/* svislá linka spojující důvody až k tečce */}
+        <div className="absolute bottom-10 left-[7px] top-2 w-px bg-border" />
+
+        <div className="space-y-10">
+          {reasons.map((r, i) => (
+            <motion.div key={r.title} className="relative pl-10" {...stagger(i)}>
               <div className="absolute left-0 top-1 flex h-[15px] w-[15px] items-center justify-center">
                 <div className="h-[7px] w-[7px] rounded-full bg-text" />
               </div>
-              <h3 className="mb-2 font-heading text-[17px] font-bold tracking-[-0.01em]">
-                {p.label}
+              <div className="mb-1.5 text-[12px] font-bold uppercase tracking-[0.08em] text-text-tertiary">
+                {r.num}
+              </div>
+              <h3 className="mb-2 font-heading text-[19px] font-bold tracking-[-0.01em]">
+                {r.title}
               </h3>
-              <p className="max-w-[520px] text-[14px] leading-[1.65] text-text">
-                {p.text}
+              <p className="max-w-[520px] text-[14.5px] leading-[1.65] text-text-secondary">
+                {r.body}
               </p>
             </motion.div>
           ))}
+
+          {/* Tečka: nejsilnější výhoda, černě */}
+          <motion.div className="relative pl-10" {...stagger(3)}>
+            <div className="absolute left-0 top-5 flex h-[15px] w-[15px] items-center justify-center">
+              <div className="h-[15px] w-[15px] rounded-full bg-text" />
+            </div>
+            <div className="rounded-3xl bg-text p-6 text-bg sm:p-8">
+              <div className="mb-2 text-[11px] font-bold uppercase tracking-[0.1em] text-bg/50">
+                Moje nejsilnější výhoda
+              </div>
+              <h3 className="mb-2.5 font-heading text-[22px] font-bold tracking-[-0.01em]">
+                End-to-end
+              </h3>
+              <p className="max-w-[600px] text-[14.5px] leading-[1.65] text-bg/70">
+                Beru projekty, které dodám od začátku do konce. Eliminuju šum,
+                nic se neztratí v překladu a můžu iterovat uvnitř procesu za
+                nejlepším výsledkem.
+              </p>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
   );
 }
 
-function Proof() {
+/* ----------------------- Ukázky práce --------------------------- */
+
+function BeforeAfter() {
+  const [pos, setPos] = useState(52);
+  const ref = useRef<HTMLDivElement>(null);
+  const dragging = useRef(false);
+
+  const setFromX = (clientX: number) => {
+    const el = ref.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    setPos(Math.max(0, Math.min(100, ((clientX - r.left) / r.width) * 100)));
+  };
+
   return (
-    <section className="mx-auto max-w-[960px] px-6 mb-[80px] sm:mb-[140px]">
-      <motion.div
-        className="mb-8 text-[13px] font-semibold uppercase tracking-[0.06em] text-text-tertiary"
-        {...fadeUp}
+    <div
+      ref={ref}
+      className="relative aspect-[4/3] w-full cursor-ew-resize select-none overflow-hidden rounded-2xl border border-border"
+      onPointerDown={(e) => {
+        dragging.current = true;
+        (e.target as HTMLElement).setPointerCapture?.(e.pointerId);
+        setFromX(e.clientX);
+      }}
+      onPointerMove={(e) => dragging.current && setFromX(e.clientX)}
+      onPointerUp={() => (dragging.current = false)}
+    >
+      {/* PO — nová verze (skutečný screenshot) */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/work/simrani.png"
+        alt="Šimrání, nová verze webu"
+        className="absolute inset-0 h-full w-full object-cover object-top"
+      />
+      <span className="absolute bottom-3 right-3 rounded-md bg-text/80 px-2 py-1 text-[10px] font-bold uppercase tracking-[0.06em] text-bg">
+        Po
+      </span>
+
+      {/* PŘED — stará verze (Google Sites) */}
+      <div
+        className="absolute inset-0"
+        style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}
       >
-        Důkazy
-      </motion.div>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/work/simrani-old.png"
+          alt="Šimrání, stará verze webu na Google Sites"
+          className="absolute inset-0 h-full w-full object-cover object-top"
+        />
+        <span className="absolute bottom-3 left-3 rounded-md bg-black/70 px-2 py-1 text-[10px] font-bold uppercase tracking-[0.06em] text-white">
+          Před
+        </span>
+      </div>
 
-      <motion.div className="mb-12 max-w-[600px]" {...fadeUp}>
-        <p className="mb-4 font-heading text-[clamp(24px,3.4vw,32px)] font-bold leading-[1.2] tracking-[-0.02em]">
-          „Nejlepší příprava ever."
-        </p>
-        <div className="text-sm font-semibold">{proofQuotes[0].author}</div>
-        <div className="text-[13px] text-text-tertiary">
-          {proofQuotes[0].role}
+      {/* Táhlo */}
+      <div
+        className="pointer-events-none absolute bottom-0 top-0 w-0.5 bg-white shadow-[0_0_8px_rgba(0,0,0,0.3)]"
+        style={{ left: `${pos}%` }}
+      >
+        <div className="absolute left-1/2 top-1/2 flex h-9 w-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-white text-[11px] font-bold text-text-tertiary shadow-md">
+          ⟷
         </div>
-      </motion.div>
-
-      <div className="mb-12 grid grid-cols-1 gap-4 sm:grid-cols-2">
-        {proofQuotes.slice(1).map((q, i) => (
-          <motion.div
-            key={q.author}
-            className="rounded-3xl border border-border bg-card-bg p-6"
-            {...stagger(i)}
-          >
-            <p className="mb-3 text-lg leading-[1.5]">„{q.quote}"</p>
-            <div className="text-sm font-semibold">{q.author}</div>
-            {q.role && (
-              <div className="text-[13px] text-text-tertiary">{q.role}</div>
-            )}
-          </motion.div>
-        ))}
       </div>
-
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-        {cases.map((c, i) => (
-          <motion.div key={c.title} className="rounded-3xl border border-border bg-card-bg p-6" {...stagger(i)}>
-            <h3 className="mb-2 font-heading text-[16px] font-bold tracking-[-0.01em]">
-              {c.title}
-            </h3>
-            <p className="text-[13.5px] leading-[1.55] text-text-secondary">
-              {c.desc}
-            </p>
-          </motion.div>
-        ))}
-      </div>
-    </section>
+    </div>
   );
 }
 
-function Menu() {
+function Reference() {
+  const [carouselH, setCarouselH] = useState(680);
+  useEffect(() => {
+    const onMsg = (e: MessageEvent) => {
+      const h = (e.data as { cfCarouselHeight?: number })?.cfCarouselHeight;
+      if (typeof h === "number" && h > 200) setCarouselH(h);
+    };
+    window.addEventListener("message", onMsg);
+    return () => window.removeEventListener("message", onMsg);
+  }, []);
+
+  const proof: { text: string; href?: string }[] = [
+    { text: "Hack: analýza recenzí ze Spotify a Apple Podcasts pomohla zostřit popis podcastu a zpřesnit personu Markéty" },
+    { text: "Celý web od nuly: copy, storytelling i vizuál" },
+    { text: "Studiové fotky vygenerované ze screenshotů" },
+    {
+      text: "Landing page pro firmy, cílí na nový zdroj příjmu",
+      href: "https://simrani.cz/pro-firmy",
+    },
+    {
+      text: "Landing page pro konzultace, další zdroj příjmu",
+      href: "https://simrani.cz/konzultace",
+    },
+    { text: "Jeden obsah na maximum: pasáž z YouTube běží přímo na landing page (časová kotva)" },
+    {
+      text: "IG post ke konzultacím, grafiku i text jsem dělal já: 100+ reakcí",
+      href: "https://www.instagram.com/p/DW28CZGApdX/",
+    },
+    { text: "Platby přes QR kód pro ověřený nákup" },
+  ];
+
   return (
     <section className="mx-auto max-w-[960px] px-6 mb-[80px] sm:mb-[140px]">
       <motion.div className="mb-10 sm:mb-12 max-w-[600px]" {...fadeUp}>
         <div className="mb-8 text-[13px] font-semibold uppercase tracking-[0.06em] text-text-tertiary">
-          Vyber, jak mě zkusit
+          Ukázky práce
         </div>
-        <p className="text-base leading-[1.65] text-text">
-          Beru surový materiál, tvůrce, projekt nebo nápad, a dávám mu tvar a
-          slova. Vlastním jeden úsudek od konceptu po finální podobu. Dva
-          nízkorizikové způsoby, jak to vyzkoušet:
-        </p>
+        <h2 className="mb-3 font-heading text-[clamp(28px,4vw,38px)] font-bold tracking-[-0.03em]">
+          Dvě ukázky.
+          <br />
+          Jedna vyšla, jedna ne
+        </h2>
       </motion.div>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        {pilots.map((p, i) => (
-          <motion.div
-            key={p.num}
-            className="flex flex-col rounded-3xl border border-border bg-card-bg p-6"
-            {...stagger(i)}
-          >
-            <div className="mb-3 text-[12px] font-bold uppercase tracking-[0.08em] text-text-tertiary">
-              {p.num}
-            </div>
-            <h3 className="mb-2.5 font-heading text-[18px] font-bold tracking-[-0.01em]">
-              {p.title}
-            </h3>
-            <p className="mb-5 flex-1 text-[14px] leading-[1.6] text-text-secondary">
-              {p.desc}
-            </p>
-            <a
-              href={p.href}
-              className="text-[13px] font-semibold underline decoration-border underline-offset-2 transition-colors hover:decoration-text-tertiary"
-            >
-              {p.linkLabel} →
-            </a>
-          </motion.div>
-        ))}
-      </div>
-
-      <motion.p
-        className="mt-6 text-[14px] leading-[1.6] text-text-tertiary"
+      {/* Case 1 — Markéta / Šimrání */}
+      <motion.div
+        className="mb-6 grid grid-cols-1 gap-6 rounded-3xl border border-border bg-card-bg p-6 sm:grid-cols-2 sm:p-8"
         {...fadeUp}
       >
-        A taky: případovky pro váš web, LinkedIn a thought leadership jako
-        ghostwriter, landing pages a osobní weby. Stejná páteř, jiný povrch.{" "}
-        <a
-          href="/content-partner"
-          className="font-semibold text-text-secondary underline decoration-border underline-offset-2 transition-colors hover:decoration-text-tertiary"
-        >
-          Creator partner →
-        </a>
-      </motion.p>
+        <div>
+          <BeforeAfter />
+          <p className="mt-3 text-[12px] text-text-tertiary">
+            Táhněte. Vlevo stará verze, vpravo to, co jsme z toho udělali.
+          </p>
+        </div>
+        <div className="flex flex-col">
+          <span className="mb-3 inline-block w-fit rounded-md bg-accent-soft px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.04em] text-text-tertiary">
+            Podcast Šimrání · Markéta Fáberová
+          </span>
+          <h3 className="mb-2.5 font-heading text-[20px] font-bold tracking-[-0.01em]">
+            Z Google Sites na fungující web
+          </h3>
+          <ul className="flex flex-col gap-2">
+            {proof.map((p) => (
+              <li
+                key={p.text}
+                className="relative pl-5 text-[13.5px] leading-[1.5] text-text-secondary before:absolute before:left-0 before:top-[7px] before:h-[5px] before:w-[5px] before:rounded-full before:bg-text-tertiary"
+              >
+                {p.href ? (
+                  <a
+                    href={p.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-text underline decoration-border underline-offset-2 transition-colors hover:decoration-text-tertiary"
+                  >
+                    {p.text} ↗
+                  </a>
+                ) : (
+                  p.text
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="border-t border-border pt-6 sm:col-span-2">
+          <h4 className="mb-1 font-heading text-[16px] font-bold tracking-[-0.01em]">
+            Instagram carousely
+          </h4>
+          <p className="mb-5 text-[13px] text-text-tertiary">
+            Projeďte slidy v každém z nich.
+          </p>
+
+          <iframe
+            src="/closefriends-carousels.html"
+            title="Instagram carousely pro Šimrání"
+            className="w-full"
+            style={{ height: carouselH, border: "none" }}
+            scrolling="no"
+          />
+
+          <div className="mt-5 grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <div>
+              <div className="mb-2.5 text-[13px] font-bold text-text">
+                Carousel pro launch, jak vznikl
+              </div>
+              <ul className="flex flex-col gap-1.5">
+                {[
+                  "Z přepisu jsem nechal navrhnout sérii distinktivních textů pro carousel (Claude Code)",
+                  "Grafiku jsem nechal generovat v Pencil.dev",
+                  "Ručně jsem vybral nejsilnější verze, začistil a finalizoval",
+                  "Cíl: automatizovat obsah a zrychlit jeho dodání",
+                ].map((s) => (
+                  <li
+                    key={s}
+                    className="relative pl-4 text-[13px] leading-[1.5] text-text-secondary before:absolute before:left-0 before:top-[7px] before:h-[4px] before:w-[4px] before:rounded-full before:bg-text-tertiary"
+                  >
+                    {s}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <div className="mb-2.5 text-[13px] font-bold text-text">
+                La Perla, jak vznikla
+              </div>
+              <ul className="flex flex-col gap-1.5">
+                {[
+                  "Z jedné nepěkné fotky na bílém pozadí jsem pomocí AI vygeneroval sérii promo fotek",
+                  "V Claude Code jsem vymyslel různé typy moodu a pozice",
+                  "Pak kombinace Midjourney, Google AI Studio a Nano Banana",
+                ].map((s) => (
+                  <li
+                    key={s}
+                    className="relative pl-4 text-[13px] leading-[1.5] text-text-secondary before:absolute before:left-0 before:top-[7px] before:h-[4px] before:w-[4px] before:rounded-full before:bg-text-tertiary"
+                  >
+                    {s}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Case 2 — Fail */}
+      <motion.div
+        className="grid grid-cols-1 gap-6 rounded-3xl border border-border bg-card-bg p-6 sm:grid-cols-[1fr_400px] sm:gap-8 sm:p-8"
+        {...fadeUp}
+      >
+        <div className="flex flex-col">
+          <span className="mb-3 inline-block w-fit rounded-md bg-accent-soft px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.04em] text-text-tertiary">
+            Vlastní projekt · co mě to naučilo
+          </span>
+          <h3 className="mb-3 font-heading text-[20px] font-bold tracking-[-0.01em]">
+            Můj fail, ze kterého mám nejvíc
+          </h3>
+          <p className="mb-4 text-[14.5px] leading-[1.65] text-text-secondary">
+            Sám jsem zkusil postavit creator-economy model: skládané financování
+            drahého expertního B2B obsahu na HeroHero. Co jsem v tom doopravdy
+            udělal:
+          </p>
+          <ul className="mb-4 flex flex-col gap-2">
+            {[
+              "Navrhl celý model: skládané financování drahého expertního obsahu (crowdfunding)",
+              "Rozkreslil proces od výběru palčivého tématu přes poptání a kalibraci experta po krokový video-návod a společnou oponenturu",
+              "Nacenil to (500 Kč/měsíc) a postavil pravidla: účinkující rok zdarma, refund při nespokojenosti",
+              "Promyslel positioning: niche use-casy s předem ověřeným zájmem, odlišení od masterclass a webinářů",
+              "Veřejně koncept validoval na LinkedInu, sehnal zájem i konkrétní zpětnou vazbu",
+            ].map((item) => (
+              <li
+                key={item}
+                className="relative pl-5 text-[13.5px] leading-[1.5] text-text-secondary before:absolute before:left-0 before:top-[7px] before:h-[5px] before:w-[5px] before:rounded-full before:bg-text-tertiary"
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="overflow-hidden rounded-2xl border border-border">
+          <iframe
+            src="https://www.linkedin.com/embed/feed/update/urn:li:activity:7282701938507284480"
+            title="LinkedIn post: můj fail projekt"
+            className="h-[560px] w-full"
+            loading="lazy"
+            allowFullScreen
+          />
+        </div>
+      </motion.div>
     </section>
   );
 }
+
+/* ----------------------- Kompetence ----------------------------- */
+
+function Craft() {
+  return (
+    <section className="mx-auto max-w-[960px] px-6 mb-[80px] sm:mb-[140px]">
+      <motion.div className="mb-8 max-w-[600px]" {...fadeUp}>
+        <div className="mb-8 text-[13px] font-semibold uppercase tracking-[0.06em] text-text-tertiary">
+          Kompetence v detailu
+        </div>
+        <h2 className="mb-3 font-heading text-[clamp(28px,4vw,38px)] font-bold tracking-[-0.03em]">
+          Z jednoho natáčení
+          <br />
+          celá škála
+        </h2>
+        <p className="max-w-[520px] text-base leading-[1.6] text-text">
+          Co z jednoho přepisu umím sám vytěžit:
+        </p>
+      </motion.div>
+
+      <motion.div className="flex flex-wrap gap-2.5" {...fadeUp}>
+        {craft.map((c) => (
+          <span
+            key={c}
+            className="rounded-full border border-border bg-card-bg px-4 py-2 text-[14px] text-text"
+          >
+            {c}
+          </span>
+        ))}
+      </motion.div>
+    </section>
+  );
+}
+
+/* ----------------------- Černé pole ----------------------------- */
+
+function BlackBox() {
+  return (
+    <section className="mx-auto max-w-[960px] px-6 mb-[80px] sm:mb-[140px]">
+      <motion.div
+        className="rounded-3xl bg-text p-7 text-bg sm:p-10"
+        {...fadeUp}
+      >
+        <div className="mb-3 text-[11px] font-bold uppercase tracking-[0.12em] text-bg/50">
+          Co bych u vás dělal nejradši
+        </div>
+        <p className="mb-8 max-w-[640px] font-heading text-[clamp(20px,2.8vw,26px)] font-bold leading-[1.3] tracking-[-0.01em]">
+          V hlavách zakladatelů leží nápady, na které není čas a nejsou lidi.
+          Já jsem ten, komu je zadáte
+        </p>
+
+        <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+          {blackItems.map((item) => (
+            <div key={item.title}>
+              <h3 className="mb-1.5 text-[15px] font-bold">{item.title}</h3>
+              <p className="text-[13.5px] leading-[1.6] text-bg/60">
+                {item.body}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <p className="mt-9 font-heading text-[17px] font-bold">Vznikne to.</p>
+      </motion.div>
+    </section>
+  );
+}
+
+/* ----------------------- Štítky / pojmy ------------------------- */
+
+function Topics() {
+  const [active, setActive] = useState<string | null>(null);
+  const current = topics.find((t) => t.id === active);
+
+  return (
+    <section className="mx-auto max-w-[960px] px-6 mb-[80px] sm:mb-[140px]">
+      <motion.div className="mb-8 max-w-[620px]" {...fadeUp}>
+        <div className="mb-8 text-[13px] font-semibold uppercase tracking-[0.06em] text-text-tertiary">
+          Pozorování
+        </div>
+        <h2 className="mb-3 font-heading text-[clamp(28px,4vw,38px)] font-bold tracking-[-0.03em]">
+          Jak nad creator economy
+          <br />
+          přemýšlím
+        </h2>
+        <p className="max-w-[560px] text-base leading-[1.6] text-text">
+          Pojmy, přes které čtu tvůrce a podcasty. U každého krátký vhled.
+        </p>
+      </motion.div>
+
+      <motion.div className="mb-4 flex flex-wrap gap-2.5" {...fadeUp}>
+        {topics.map((t) => (
+          <button
+            key={t.id}
+            type="button"
+            onMouseEnter={() => setActive(t.id)}
+            onClick={() => setActive((a) => (a === t.id ? null : t.id))}
+            className={`rounded-full border px-4 py-2 text-[14px] transition-all duration-200 ${
+              active === t.id
+                ? "border-text bg-text text-bg"
+                : "border-border bg-card-bg text-text hover:border-[#CDCBC5]"
+            }`}
+          >
+            #{t.label}
+          </button>
+        ))}
+      </motion.div>
+
+      <motion.div
+        className="min-h-[92px] rounded-2xl border border-border bg-card-bg px-5 py-4"
+        {...fadeUp}
+      >
+        {current ? (
+          <>
+            <div className="mb-1 text-[11px] font-bold uppercase tracking-[0.1em] text-text-tertiary">
+              #{current.label}
+            </div>
+            <p className="max-w-[640px] text-[14.5px] leading-[1.6] text-text">
+              {current.insight}
+            </p>
+          </>
+        ) : (
+          <p className="text-[14px] leading-[1.6] text-text-tertiary">
+            Vyberte štítek. Ukážu, proč ho tam mám.
+          </p>
+        )}
+      </motion.div>
+    </section>
+  );
+}
+
+/* ----------------------- Closing -------------------------------- */
 
 function Closing() {
   return (
@@ -396,22 +706,19 @@ function Closing() {
       className="mx-auto max-w-[960px] px-6 mb-[80px] sm:mb-[140px] text-center"
       {...fadeUp}
     >
-      <h2 className="mb-4 font-heading text-[clamp(28px,4vw,38px)] font-bold tracking-[-0.03em]">
-        Pojďme na kafe
+      <h2 className="mb-8 font-heading text-[clamp(28px,4vw,38px)] font-bold tracking-[-0.03em]">
+        Kafe v Holešovicích?
       </h2>
-      <p className="mx-auto mb-8 max-w-[440px] text-base leading-[1.6] text-text">
-        Nebo si rovnou vyberte jeden pilot. Cíl je rozhovor, ne závazek.
-      </p>
       <a
         href={CTA}
         target="_blank"
         rel="noopener noreferrer"
         className="inline-block rounded-full bg-text px-8 py-3.5 text-sm font-bold text-bg transition-all duration-250 hover:opacity-85"
       >
-        {"Napsat Jakubovi ↗︎"}
+        {"Spolu na kafe ↗︎"}
       </a>
       <p className="mt-10 text-[13px] uppercase tracking-[0.12em] text-text-tertiary">
-        Vznikne to. A pak vynikne.
+        Vznikne to. A pak vynikne
       </p>
     </motion.section>
   );
@@ -421,11 +728,11 @@ export default function CloseFriendsLanding() {
   return (
     <>
       <Hero />
-      <Why />
-      <CreatorMap />
-      <Layer />
-      <Proof />
-      <Menu />
+      <Reasons />
+      <Reference />
+      <Craft />
+      <BlackBox />
+      <Topics />
       <Closing />
     </>
   );
