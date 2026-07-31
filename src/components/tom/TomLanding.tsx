@@ -185,7 +185,7 @@ function TastePlayer() {
   }
 
   return (
-    <div className="mt-8 inline-flex items-center gap-3 rounded-full border border-border bg-card-bg py-2 pr-5 pl-2">
+    <div className="mt-8 flex max-w-full items-center gap-3 rounded-full border border-border bg-card-bg py-2 pr-5 pl-2 sm:inline-flex">
       <audio
         ref={audioRef}
         src="https://lennys-greatest-hits.vercel.app/audio/taste.mp3"
@@ -196,7 +196,7 @@ function TastePlayer() {
         type="button"
         onClick={toggle}
         aria-label={playing ? "Pauza" : "Přehrát Taste"}
-        className="flex h-10 w-10 items-center justify-center rounded-full bg-text text-bg transition-transform hover:scale-105"
+        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-text text-bg transition-transform hover:scale-105"
       >
         {playing ? (
           <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
@@ -270,7 +270,7 @@ function LinkedInPostCard({ sample }: { sample: Sample }) {
           href={sample.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-start gap-2.5 px-4 pt-3"
+          className="flex w-full items-start gap-2.5 px-4 pt-3"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -295,7 +295,7 @@ function LinkedInPostCard({ sample }: { sample: Sample }) {
         </a>
 
         {/* Text postu */}
-        <div className="px-4 pt-2 pb-3 text-sm leading-[1.4]">
+        <div className="px-4 pt-2 pb-3 text-sm leading-[1.4] break-words">
           <a href={sample.url} target="_blank" rel="noopener noreferrer">
             <p
               className={
@@ -336,7 +336,7 @@ function LinkedInPostCard({ sample }: { sample: Sample }) {
             alt={sample.title}
             width={post.media.w}
             height={post.media.h}
-            className="w-full"
+            className="block w-full"
             style={{ maxHeight: 560, objectFit: "cover" }}
             loading="lazy"
           />
@@ -369,7 +369,7 @@ function LinkedInPostCard({ sample }: { sample: Sample }) {
 
 export default function TomLanding() {
   return (
-    <div className="mx-auto max-w-6xl px-5 md:px-8">
+    <div className="mx-auto max-w-6xl overflow-x-hidden px-5 md:px-8">
       {/* ---- Hero ---- */}
       <section className="pt-16 pb-14 md:pt-24 md:pb-20">
         <motion.p
