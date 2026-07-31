@@ -260,7 +260,7 @@ function LinkedInPostCard({ sample }: { sample: Sample }) {
           : `${post.comments} komentářů`;
 
   return (
-    <div>
+    <div className="min-w-0">
       <div
         className="overflow-hidden rounded-lg border border-[#e0dfdc] bg-white text-[rgba(0,0,0,0.9)] shadow-[0_1px_2px_rgba(0,0,0,0.08)]"
         style={{ fontFamily: LI_FONT }}
@@ -336,7 +336,7 @@ function LinkedInPostCard({ sample }: { sample: Sample }) {
             alt={sample.title}
             width={post.media.w}
             height={post.media.h}
-            className="block w-full"
+            className="block h-auto w-full max-w-full"
             style={{ maxHeight: 560, objectFit: "cover" }}
             loading="lazy"
           />
@@ -440,7 +440,7 @@ export default function TomLanding() {
               {...stagger(1)}
               className="grid items-start gap-6 md:grid-cols-[1fr_520px] md:gap-12"
             >
-              <div className="md:pt-2">
+              <div className="min-w-0 md:pt-2">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-text-tertiary">
                   {String(i + 1).padStart(2, "0")}
                 </p>
