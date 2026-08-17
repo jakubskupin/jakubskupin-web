@@ -316,21 +316,6 @@ export default function BrandManual() {
             fontu místo použití hotového souboru.
           </Rule>
         </div>
-
-        <h3 className="mb-4 font-heading text-[17px] font-bold">
-          Kompletní sada
-        </h3>
-        <p className="max-w-[560px] text-[14px] text-text-secondary">
-          Všechny varianty ve formátu SVG i PNG jsou na samostatné stránce{" "}
-          <a
-            href="/brand/logo/index.html"
-            className="font-semibold text-text underline underline-offset-2"
-          >
-            jakubskupin.cz/brand/logo
-          </a>
-          , kterou lze poslat komukoli, kdo logo potřebuje. Zdroj a
-          přegenerování jsou v repozitáři webu ve složce brand-source/logo-js.
-        </p>
       </section>
 
       {/* 02 BARVY */}
