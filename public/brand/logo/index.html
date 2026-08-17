@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Značka JS ke stažení | Jakub Skupin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#FAFAF8; --text:#1A1A18; --sec:#6B6964; --ter:#96948E;
+    --border:#E8E6E1; --card:#FFFFFF;
+  }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:'Manrope',-apple-system,BlinkMacSystemFont,sans-serif;
+    font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  .wrap { max-width:1080px; margin:0 auto; padding:72px 24px 96px; }
+  h1 {
+    font-family:'Syne',sans-serif; font-weight:700; font-size:clamp(32px,5vw,48px);
+    letter-spacing:-.03em; line-height:1.12; margin:0 0 12px;
+  }
+  .lead { color:var(--sec); font-size:17px; max-width:600px; margin:0 0 8px; }
+  .meta { color:var(--ter); font-size:13px; margin:0 0 56px; }
+  h2 {
+    font-size:11px; text-transform:uppercase; letter-spacing:.14em; font-weight:600;
+    color:var(--ter); margin:56px 0 20px; padding-bottom:12px; border-bottom:1px solid var(--border);
+  }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:20px; }
+  .card {
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    overflow:hidden; transition:box-shadow .25s ease, transform .25s ease;
+  }
+  .card:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(26,26,24,.08); }
+  .thumb {
+    display:flex; align-items:center; justify-content:center;
+    aspect-ratio:1/1; padding:28px;
+  }
+  .thumb.dark { background:#1A1A18; }
+  .thumb.light { background:#FFFFFF; }
+  .thumb img { width:100%; height:100%; object-fit:contain; }
+  .info { padding:14px 16px 16px; border-top:1px solid var(--border); }
+  .name { font-size:13px; font-weight:600; letter-spacing:-.01em; }
+  .desc { font-size:12px; color:var(--sec); margin-top:2px; line-height:1.45; }
+  .links { display:flex; gap:8px; margin-top:12px; }
+  .links a {
+    flex:1; text-align:center; text-decoration:none; font-size:12px; font-weight:600;
+    padding:7px 10px; border-radius:999px; border:1px solid var(--border);
+    color:var(--text); transition:background .2s ease, color .2s ease, border-color .2s ease;
+  }
+  .links a:hover { background:var(--text); color:var(--bg); border-color:var(--text); }
+  .note {
+    margin-top:64px; padding:24px; border-radius:16px; background:rgba(26,26,24,.04);
+    font-size:14px; color:var(--sec);
+  }
+  .note strong { color:var(--text); font-weight:600; }
+  .note code {
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:13px;
+    background:var(--card); padding:2px 6px; border-radius:5px; border:1px solid var(--border);
+  }
+  .note p { margin:0 0 10px; }
+  .note p:last-child { margin-bottom:0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Značka JS</h1>
+  <p class="lead">Monogram ze Syne 700, písmena převedená na křivky. SVG nepotřebuje font, PNG jsou 1024 × 1024 s průhledným pozadím tam, kde to dává smysl</p>
+  <p class="meta">Barvy: #1A1A18 (text webu) a #FAFAF8 (pozadí webu). Zaoblení rohů 22 % hrany, stejné jako favicon</p>
+
+  <h2>Čtverec, písmena vyříznutá</h2>
+  <p class="lead" style="margin:-8px 0 20px;font-size:14px">Skrz písmena prosvítá podklad. Nejčistší varianta, funguje na jednobarevném pozadí</p>
+  <div class="grid">
+    <div class="card">
+      <div class="thumb light"><img src="js-square-black.svg" alt="JS knockout černá"></div>
+      <div class="info">
+        <div class="name">Černá</div>
+        <div class="desc">Na světlé pozadí</div>
+        <div class="links"><a href="js-square-black.svg" download>SVG</a><a href="png/js-square-black.png" download>PNG</a></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="thumb dark"><img src="js-square-white.svg" alt="JS knockout bílá"></div>
+      <div class="info">
+        <div class="name">Bílá</div>
+        <div class="desc">Na tmavé pozadí</div>
+        <div class="links"><a href="js-square-white.svg" download>SVG</a><a href="png/js-square-white.png" download>PNG</a></div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Čtverec plný</h2>
+  <p class="lead" style="margin:-8px 0 20px;font-size:14px">Neprůhledné pozadí. Pro avatary, favicon a všude, kde nesmí nic prosvítat</p>
+  <div class="grid">
+    <div class="card">
+      <div class="thumb light"><img src="js-linkedin.svg" alt="JS černý čtverec, bílá písmena"></div>
+      <div class="info">
+        <div class="name">Černá, bílá písmena</div>
+        <div class="desc">LinkedIn, sociální sítě</div>
+        <div class="links"><a href="js-linkedin.svg" download>SVG</a><a href="png/js-linkedin-1024.png" download>PNG</a><a href="png/js-linkedin-400.png" download>400</a></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="thumb light"><img src="js-square-black-filled.svg" alt="JS černý čtverec, krémová písmena"></div>
+      <div class="info">
+        <div class="name">Černá, krémová písmena</div>
+        <div class="desc">Písmena #FAFAF8 jako web</div>
+        <div class="links"><a href="js-square-black-filled.svg" download>SVG</a><a href="png/js-square-black-filled.png" download>PNG</a></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="thumb dark"><img src="js-square-white-filled.svg" alt="JS bílý čtverec"></div>
+      <div class="info">
+        <div class="name">Bílá, černá písmena</div>
+        <div class="desc">Na tmavé pozadí</div>
+        <div class="links"><a href="js-square-white-filled.svg" download>SVG</a><a href="png/js-square-white-filled.png" download>PNG</a></div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Samotná písmena</h2>
+  <p class="lead" style="margin:-8px 0 20px;font-size:14px">Bez čtverce, průhledné pozadí. Do dokumentů, hlaviček a podpisů</p>
+  <div class="grid">
+    <div class="card">
+      <div class="thumb light"><img src="js-letters-black.svg" alt="JS písmena černá"></div>
+      <div class="info">
+        <div class="name">Černá</div>
+        <div class="desc">Na světlé pozadí</div>
+        <div class="links"><a href="js-letters-black.svg" download>SVG</a><a href="png/js-letters-black.png" download>PNG</a></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="thumb dark"><img src="js-letters-white.svg" alt="JS písmena bílá"></div>
+      <div class="info">
+        <div class="name">Bílá</div>
+        <div class="desc">Na tmavé pozadí</div>
+        <div class="links"><a href="js-letters-white.svg" download>SVG</a><a href="png/js-letters-white.png" download>PNG</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    <p><strong>Jak stahovat</strong>: klikni na SVG nebo PNG u konkrétní varianty. Když prohlížeč soubor místo stažení otevře, použij pravé tlačítko a „Uložit odkaz jako"</p>
+    <p><strong>SVG nebo PNG</strong>: pro web, tisk a cokoli, co se bude zvětšovat, ber SVG. PNG jen tam, kde vektor neprojde, typicky avatary na sociálních sítích</p>
+    <p><strong>Regenerace</strong>: zdroj je v repozitáři webu ve složce <code>brand-source/logo-js</code>, přegenerování je <code>python3 build.py</code></p>
+  </div>
+</div>
+</body>
+</html>
