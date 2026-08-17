@@ -171,6 +171,58 @@ function Example({
   );
 }
 
+function LogoCard({
+  file,
+  png,
+  name,
+  use,
+  dark,
+}: {
+  file: string;
+  png: string;
+  name: string;
+  use: string;
+  dark: boolean;
+}) {
+  return (
+    <div className="overflow-hidden rounded-xl border border-border bg-card-bg">
+      <div
+        className="flex aspect-square items-center justify-center p-7"
+        style={{ background: dark ? "#1A1A18" : "#FFFFFF" }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={`/brand/logo/${file}.svg`}
+          alt={`Logo JS, varianta ${name}`}
+          className="h-full w-full object-contain"
+        />
+      </div>
+      <div className="border-t border-border px-4 py-3.5">
+        <div className="text-[13px] font-semibold">{name}</div>
+        <div className="mt-0.5 text-[12px] leading-snug text-text-secondary">
+          {use}
+        </div>
+        <div className="mt-3 flex gap-2">
+          <a
+            href={`/brand/logo/${file}.svg`}
+            download
+            className="flex-1 rounded-full border border-border py-1.5 text-center text-[12px] font-semibold transition-colors hover:bg-text hover:text-bg"
+          >
+            SVG
+          </a>
+          <a
+            href={`/brand/logo/png/${png}.png`}
+            download
+            className="flex-1 rounded-full border border-border py-1.5 text-center text-[12px] font-semibold transition-colors hover:bg-text hover:text-bg"
+          >
+            PNG
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ─── Main component ─── */
 
 export default function BrandManual() {
@@ -182,10 +234,10 @@ export default function BrandManual() {
       <header className="border-b border-border pb-10 pt-14 max-sm:pb-8 max-sm:pt-10">
         <div className="mb-4 flex items-center gap-3">
           <span className="inline-block rounded-full bg-accent px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-bg">
-            v1.2
+            v1.3
           </span>
           <span className="inline-block rounded-full bg-[#E8E6E1] px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-text-secondary">
-            10. března 2026
+            17. srpna 2026
           </span>
         </div>
         <h1 className="mb-2 font-heading text-[clamp(28px,5vw,40px)] font-bold leading-tight">
@@ -197,13 +249,97 @@ export default function BrandManual() {
         </p>
       </header>
 
-      {/* 01 BARVY */}
+      {/* 01 ZNAČKA */}
+      <section
+        id="znacka"
+        className="border-b border-border py-14 max-sm:py-10"
+      >
+        <div className="mb-2 text-[11px] font-bold uppercase tracking-[0.12em] text-text-tertiary">
+          01 &mdash; Značka
+        </div>
+        <h2 className="mb-2 font-heading text-[clamp(22px,4vw,30px)] font-bold leading-tight">
+          Logo JS
+        </h2>
+        <p className="mb-8 max-w-[560px] text-[15px] text-text-secondary">
+          Monogram ze Syne 700, písmena převedená na křivky. SVG proto
+          nepotřebuje font a vykreslí se všude stejně. Kliknutím stáhnete.
+        </p>
+
+        <h3 className="mb-4 font-heading text-[17px] font-bold">
+          Čtverec, písmena vyříznutá
+        </h3>
+        <p className="mb-4 max-w-[560px] text-[14px] text-text-secondary">
+          Skrz písmena prosvítá podklad. Základní varianta pro jednobarevné
+          pozadí.
+        </p>
+        <div className="mb-8 grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4 max-sm:grid-cols-2">
+          <LogoCard file="js-square-black" png="js-square-black" name="Černá" use="Na světlé pozadí" dark={false} />
+          <LogoCard file="js-square-white" png="js-square-white" name="Bílá" use="Na tmavé pozadí" dark />
+        </div>
+
+        <h3 className="mb-4 font-heading text-[17px] font-bold">
+          Čtverec plný
+        </h3>
+        <p className="mb-4 max-w-[560px] text-[14px] text-text-secondary">
+          Neprůhledné pozadí. Pro avatary, favicon a všude, kde nesmí nic
+          prosvítat.
+        </p>
+        <div className="mb-8 grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4 max-sm:grid-cols-2">
+          <LogoCard file="js-linkedin" png="js-linkedin-1024" name="Bílá písmena" use="LinkedIn, sociální sítě" dark={false} />
+          <LogoCard file="js-square-black-filled" png="js-square-black-filled" name="Krémová písmena" use="Písmena #FAFAF8 jako web" dark={false} />
+          <LogoCard file="js-square-white-filled" png="js-square-white-filled" name="Bílý čtverec" use="Na tmavé pozadí" dark />
+        </div>
+
+        <h3 className="mb-4 font-heading text-[17px] font-bold">
+          Samotná písmena
+        </h3>
+        <p className="mb-4 max-w-[560px] text-[14px] text-text-secondary">
+          Bez čtverce, průhledné pozadí. Do dokumentů, hlaviček a podpisů.
+        </p>
+        <div className="mb-8 grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4 max-sm:grid-cols-2">
+          <LogoCard file="js-letters-black" png="js-letters-black" name="Černá" use="Na světlé pozadí" dark={false} />
+          <LogoCard file="js-letters-white" png="js-letters-white" name="Bílá" use="Na tmavé pozadí" dark />
+        </div>
+
+        <h3 className="mb-4 font-heading text-[17px] font-bold">
+          Pravidla použití
+        </h3>
+        <div className="mb-8 grid grid-cols-2 gap-4 max-sm:grid-cols-1">
+          <Rule type="do" label="Ano">
+            Kolem značky nechat volný prostor alespoň ve výšce písmene J. Pro
+            web a tisk používat SVG. PNG jen tam, kde vektor neprojde, typicky
+            avatary na sítích. Zaoblení rohů 22 % hrany, stejné jako favicon.
+          </Rule>
+          <Rule type="dont" label="Ne">
+            Přebarvovat na jinou barvu než #1A1A18 a bílou. Deformovat poměr
+            stran. Přidávat stín, obrys nebo gradient. Sázet písmena znovu z
+            fontu místo použití hotového souboru.
+          </Rule>
+        </div>
+
+        <h3 className="mb-4 font-heading text-[17px] font-bold">
+          Kompletní sada
+        </h3>
+        <p className="max-w-[560px] text-[14px] text-text-secondary">
+          Všechny varianty ve formátu SVG i PNG jsou na samostatné stránce{" "}
+          <a
+            href="/brand/logo/index.html"
+            className="font-semibold text-text underline underline-offset-2"
+          >
+            jakubskupin.cz/brand/logo
+          </a>
+          , kterou lze poslat komukoli, kdo logo potřebuje. Zdroj a
+          přegenerování jsou v repozitáři webu ve složce brand-source/logo-js.
+        </p>
+      </section>
+
+      {/* 02 BARVY */}
       <section
         id="barvy"
         className="border-b border-border py-14 max-sm:py-10"
       >
         <div className="mb-2 text-[11px] font-bold uppercase tracking-[0.12em] text-text-tertiary">
-          01 &mdash; Barvy
+          02 &mdash; Barvy
         </div>
         <h2 className="mb-2 font-heading text-[clamp(22px,4vw,30px)] font-bold leading-tight">
           Barevná paleta
@@ -242,13 +378,13 @@ export default function BrandManual() {
         <CopyBox label="Border" value="#E8E6E1" onCopy={copy} />
       </section>
 
-      {/* 02 TYPOGRAFIE */}
+      {/* 03 TYPOGRAFIE */}
       <section
         id="typografie"
         className="border-b border-border py-14 max-sm:py-10"
       >
         <div className="mb-2 text-[11px] font-bold uppercase tracking-[0.12em] text-text-tertiary">
-          02 &mdash; Typografie
+          03 &mdash; Typografie
         </div>
         <h2 className="mb-2 font-heading text-[clamp(22px,4vw,30px)] font-bold leading-tight">
           Fonty
@@ -443,13 +579,13 @@ export default function BrandManual() {
         </div>
       </section>
 
-      {/* 03 PRAVIDLA */}
+      {/* 04 PRAVIDLA */}
       <section
         id="pravidla"
         className="border-b border-border py-14 max-sm:py-10"
       >
         <div className="mb-2 text-[11px] font-bold uppercase tracking-[0.12em] text-text-tertiary">
-          03 &mdash; Pravidla
+          04 &mdash; Pravidla
         </div>
         <h2 className="mb-2 font-heading text-[clamp(22px,4vw,30px)] font-bold leading-tight">
           Jak používat
@@ -483,7 +619,7 @@ export default function BrandManual() {
           </Rule>
           <Rule type="dont" label="Ne">
             Syne pro body text nebo dlouhé odstavce. Manrope jako heading font.
-            Více než 2 fonty. Syne v light/regular weightu (používat pouze Bold
+            Třetí font. Syne v light/regular weightu (používat pouze Bold
             700).
           </Rule>
         </div>
@@ -515,13 +651,13 @@ export default function BrandManual() {
         </div>
       </section>
 
-      {/* 04 PŘÍKLADY Z WEBU */}
+      {/* 05 PŘÍKLADY Z WEBU */}
       <section
         id="priklady"
         className="border-b border-border py-14 max-sm:py-10"
       >
         <div className="mb-2 text-[11px] font-bold uppercase tracking-[0.12em] text-text-tertiary">
-          04 &mdash; Příklady z webu
+          05 &mdash; Příklady z webu
         </div>
         <h2 className="mb-2 font-heading text-[clamp(22px,4vw,30px)] font-bold leading-tight">
           Reálné elementy
@@ -714,10 +850,10 @@ export default function BrandManual() {
         </div>
       </section>
 
-      {/* 05 KALKULACE */}
+      {/* 06 KALKULACE */}
       <section id="kalkulace" className="py-14 max-sm:py-10">
         <div className="mb-2 text-[11px] font-bold uppercase tracking-[0.12em] text-text-tertiary">
-          05 &mdash; Dokumenty
+          06 &mdash; Dokumenty
         </div>
         <h2 className="mb-2 font-heading text-[clamp(22px,4vw,30px)] font-bold leading-tight">
           Kalkulace / nabídka
@@ -796,9 +932,8 @@ export default function BrandManual() {
             kurzívou v #96948E. Jedna tmavá pill na celkovou cenu.
           </Rule>
           <Rule type="dont" label="Ne">
-            Víc než jeden tmavý element. Barevné akcenty. Loga nebo grafika.
-            Tučný text v poznámkách. Více než 2 úrovně fontové hierarchie v
-            tabulce.
+            Druhý tmavý element. Barevné akcenty. Loga nebo grafika. Tučný
+            text v poznámkách. Třetí úroveň fontové hierarchie v tabulce.
           </Rule>
         </div>
 
@@ -831,7 +966,7 @@ export default function BrandManual() {
 
       {/* FOOTER */}
       <footer className="py-10 text-center text-[13px] text-text-tertiary">
-        Brand manuál v1.2 &mdash; 10. března 2026 &mdash; Jakub Skupin
+        Brand manuál v1.3 · 17. srpna 2026 · Jakub Skupin
       </footer>
 
       <Toast message={toast.message} visible={toast.visible} />
