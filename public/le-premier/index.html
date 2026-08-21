@@ -414,18 +414,14 @@ section{padding:64px 0;border-top:1px solid var(--border)}
 .opp b{color:var(--text);font-weight:700}
 .opp a{color:inherit;text-decoration:none;border-bottom:1px solid var(--border);transition:border-color .25s}
 .opp a:hover{border-color:var(--text-3)}
-/* download */
-.dl{display:flex;flex-direction:column;gap:28px}
-
-.dl .btn{display:inline-flex;align-items:center;gap:12px;background:transparent;color:var(--text);text-decoration:none;font-family:var(--h);font-weight:700;font-size:15px;letter-spacing:-.01em;padding:13px 20px;border-radius:10px;border:1px solid var(--border);transition:border-color .25s ease,background .25s ease;align-self:flex-start}
-.dl .btn:hover{border-color:var(--text-3);background:var(--accent-soft)}
-.dl .btn svg{width:18px;height:18px;flex:0 0 auto}
-.dl .btn small{display:block;font-family:var(--b);font-weight:500;font-size:11.5px;letter-spacing:0;color:var(--text-3);margin-top:2px}
-.dl .files{margin:0;padding:0;list-style:none;border-top:1px solid var(--border);font-size:14px;color:var(--text-2)}
-.dl .files li{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid var(--border)}
-.dl .files li span:last-child{color:var(--text-3);white-space:nowrap;font-variant-numeric:tabular-nums}
-.dl .copy{display:flex;flex-direction:column;gap:18px}
-.dl .copy p{color:var(--text-2)}
+/* download (kompaktni) */
+.dlmini{padding:30px 0}
+.dlmini p{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;font-size:14px;color:var(--text-2)}
+.dlbl{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3)}
+.dlmini a{color:var(--text);font-weight:600;text-decoration:none;border-bottom:1px solid var(--border);transition:border-color .25s}
+.dlmini a:hover{border-color:var(--text-3)}
+.dmeta{font-size:12.5px;color:var(--text-3)}
+@media(max-width:899px){.dlmini{padding:26px 0}}
 
 /* quote */
 .quote{display:grid;grid-template-columns:72px 1fr;gap:22px;align-items:start;max-width:860px}
@@ -696,17 +692,9 @@ section{padding:64px 0;border-top:1px solid var(--border)}
 </section>
 
 <!-- STÁHNOUT -->
-<section id="stahnout">
-  <div class="w dl">
-    <div class="copy">
-      <span class="eyebrow rv">K testování</span>
-      <h2 class="rv">Všechen obsah je rovnou váš</h2>
-      <p class="rv">Použijte ho kdekoli.</p>
-      <a class="btn rv" href="/le-premier/assets/le-premier-ukazky.zip" download>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
-        <span>Stáhnout podklady<small>37 fotek a 2 videa · ZIP, 43 MB</small></span>
-      </a>
-    </div>
+<section id="stahnout" class="dlmini">
+  <div class="w">
+    <p class="rv"><span class="dlbl">K testování</span><span>Všechen obsah je rovnou váš, použijte ho kdekoli.</span><a href="/le-premier/assets/le-premier-ukazky.zip" download>Stáhnout ZIP</a><span class="dmeta">37 fotek a 2 videa · 43 MB</span></p>
   </div>
 </section>
 
