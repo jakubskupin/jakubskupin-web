@@ -384,7 +384,7 @@ section{padding:64px 0;border-top:1px solid var(--border)}
 }
 @media(max-width:899px),(max-height:739px),(prefers-reduced-motion:reduce){
   .btwscroll{height:auto}
-  .btwstage{position:static;height:auto;overflow:visible;display:flex;flex-direction:column;gap:20px;padding:0 20px}
+  .btwstage{position:static;height:auto;overflow:visible;display:flex;flex-direction:column;gap:38px;padding:0 20px}
   .btwcopy{display:contents}
   .btwcopy .num{order:0}
   .btwcopy h2{order:1}
@@ -395,12 +395,12 @@ section{padding:64px 0;border-top:1px solid var(--border)}
   #b-169{order:6;max-height:none;overflow:visible}
   .btwcopy .bnote.bstat{order:7;margin-top:-12px}
   #b-11{order:8}
-  .btwstage .bcard{position:static;min-width:0;width:100%!important;max-width:420px;margin-left:auto;margin-right:auto;left:auto!important;top:auto!important;transform:none!important;opacity:1!important}
+  .btwstage .bcard{position:relative;min-width:0;width:100%!important;max-width:420px;margin-left:auto;margin-right:auto;left:auto!important;top:auto!important;transform:none!important;opacity:1!important}
   #b-169::after{display:none}
   .siteh .rez{display:none}
   #b-vid .b916in video{width:100%}
-  .bnote{position:static;opacity:1!important;margin-top:6px;white-space:normal;text-align:center;left:auto}
-  #b-m45 .bnote{position:static;color:var(--text-3);text-shadow:none;left:auto;bottom:auto;text-align:center}
+  .bnote{position:absolute;top:calc(100% + 8px);bottom:auto;left:50%;transform:translateX(-50%);width:max-content;max-width:100%;margin:0;opacity:1!important;white-space:nowrap;text-align:center}
+  #b-m45 .bnote{color:var(--text-3);text-shadow:none}
   .btwcopy .bnote.bstat{position:static;opacity:1!important;white-space:normal;max-width:420px;margin-left:auto;margin-right:auto;width:100%;text-align:center}
   .only-anim{display:none}
 }
