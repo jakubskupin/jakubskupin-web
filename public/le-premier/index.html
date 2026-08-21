@@ -1,0 +1,936 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Pro Le Premier · Jakub Skupin</title>
+<meta property="og:type" content="website">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:site_name" content="Jakub Skupin">
+<meta property="og:title" content="Pro Le Premier · Jakub Skupin">
+<meta property="og:description" content="Čtyři kusy z vašeho webu: reel, kampaňová série, formáty i digitální látkovník. Produkt je reálný, AI dělá prostředí.">
+<meta property="og:url" content="https://jakubskupin.cz/le-premier/">
+<meta property="og:image" content="https://jakubskupin.cz/le-premier/assets/og/og-lepremier.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Vyšité logo Le Premier na šedé látce, AI vizuály šité na míru">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Pro Le Premier · Jakub Skupin">
+<meta name="twitter:image" content="https://jakubskupin.cz/le-premier/assets/og/og-lepremier.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Syne:wght@700;800&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAFAF8; --text:#1A1A18; --text-2:#6B6964; --text-3:#6F6D68;
+  --border:#E8E6E1; --card:#FFFFFF; --accent:#1A1A18; --accent-soft:rgba(26,26,24,.06);
+  --h:'Syne',sans-serif; --b:'Manrope',ui-sans-serif,system-ui,sans-serif;
+  --ui:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --lp:'Playfair Display',Georgia,serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;overflow-x:hidden;background:var(--bg);color:var(--text);font-family:var(--b);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img,video{max-width:100%;display:block}
+.w{max-width:1120px;margin:0 auto;padding:0 20px}
+@media(min-width:768px){.w{padding:0 32px}}
+h1,h2,h3{font-family:var(--h);font-weight:700;letter-spacing:-.03em;margin:0;text-wrap:balance}
+h1{font-size:clamp(34px,5.5vw,56px);line-height:1.06}
+h2{font-size:clamp(26px,3.6vw,38px);line-height:1.1}
+h3{font-size:18px;letter-spacing:-.02em;line-height:1.3}
+p{margin:0}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--text-3)}
+.lede{font-size:clamp(17px,2.1vw,20px);line-height:1.6;color:var(--text-2);max-width:58ch}
+.muted{color:var(--text-2)}
+.fine{font-size:13px;line-height:1.6;color:var(--text-3);max-width:62ch}
+strong{font-weight:600;color:var(--text)}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+/* top bar */
+.top{display:flex;justify-content:space-between;align-items:center;padding:22px 0;font-size:13px;color:var(--text-2)}
+.top .brand{font-family:var(--h);font-weight:700;letter-spacing:-.02em;color:var(--text);text-decoration:none;font-size:15px}
+.top .for{display:flex;align-items:center;gap:12px}
+.top .for img{height:34px;width:auto}
+
+/* hero */
+.hero{padding:40px 0 56px;display:grid;gap:34px;align-items:center}
+@media(min-width:900px){.hero{grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);gap:56px;padding:52px 0 72px}}
+.herotext{display:flex;flex-direction:column;gap:22px;max-width:640px;min-width:0}
+.heroslot{display:flex;justify-content:center;min-width:0}
+.phoneslot{width:min(375px,86vw,40vh);aspect-ratio:9/19.2;position:relative;display:flex}
+#flyphone{position:fixed;top:0;left:0;z-index:30;pointer-events:none;will-change:transform}
+#flyphone .phone{margin:0}
+@media(min-width:768px){.hero{padding:64px 0 72px}}
+.hero .note{display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--text-2);max-width:52ch;padding-top:4px}
+.hero .note::before{content:"";flex:0 0 28px;height:1px;background:var(--text-3);margin-top:11px}
+
+/* use case sections */
+section{padding:64px 0;border-top:1px solid var(--border)}
+@media(min-width:768px){section{padding:88px 0}}
+.uc{display:grid;gap:40px;align-items:center}
+@media(min-width:900px){.uc{grid-template-columns:1fr 1.1fr;gap:72px}.uc.flip .copy{order:2}.uc.flip .mock{order:1}}
+.uc .copy{display:flex;flex-direction:column;gap:18px;max-width:52ch}
+.uc .num,.sec-head .num,.btwcopy .num{display:flex;align-items:center;gap:14px}
+.uc .num b,.sec-head .num b,.btwcopy .num b{font-family:var(--h);font-weight:700;font-size:13px;color:var(--text-3);letter-spacing:.06em}
+.uc .num span,.sec-head .num span,.btwcopy .num span{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:4px 9px;border-radius:999px;border:1px solid var(--border);color:var(--text-2)}
+.uc .copy p{color:var(--text-2)}
+.uc .copy p.big{font-size:17px}
+.uc .split{display:grid;grid-template-columns:1fr 1fr;gap:14px;border-top:1px solid var(--border);padding-top:16px;font-size:13.5px;line-height:1.5;color:var(--text-2)}
+.uc .split b{display:block;font-family:var(--h);font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);margin-bottom:4px}
+.uc .next{font-size:13px;color:var(--text-3);border-left:2px solid var(--border);padding-left:14px;line-height:1.55}
+.uc .next b{color:var(--text-2);font-weight:600}
+.mock{display:flex;flex-direction:column;align-items:center;gap:16px;min-width:0}
+.cap{font-size:13px;color:var(--text-3);text-align:center;max-width:46ch;line-height:1.5}
+
+/* phone (IG reel) */
+.phone{position:relative;width:min(375px,86vw,40vh);aspect-ratio:9/19.2;background:#000;border-radius:44px;padding:10px;
+  box-shadow:0 30px 80px rgba(26,26,24,.22);border:1px solid #2a2a28}
+.phone::before{content:"";position:absolute;top:16px;left:50%;transform:translateX(-50%);width:96px;height:26px;background:#000;border-radius:20px;z-index:5}
+.screen{position:relative;width:100%;height:100%;border-radius:36px;overflow:hidden;background:#000;font-family:var(--ui);color:#fff}
+.screen video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ig-top{position:absolute;top:0;left:0;right:0;padding:58px 16px 0;display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:17px;z-index:3;background:linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,0))}
+.ig-top span{padding-bottom:12px}
+.ig-top svg{width:24px;height:24px}
+.ig-right{position:absolute;right:12px;bottom:118px;display:flex;flex-direction:column;gap:18px;align-items:center;z-index:3;font-size:12px;font-weight:600}
+.ig-right div{display:flex;flex-direction:column;align-items:center;gap:4px;text-shadow:0 1px 6px rgba(0,0,0,.6)}
+.ig-right svg{width:27px;height:27px;filter:drop-shadow(0 1px 4px rgba(0,0,0,.5))}
+.ig-right .cover{width:26px;height:26px;border-radius:6px;border:2px solid #fff;background:#1a1a18 url(assets/le-premier-mark-white.png) center/70% no-repeat}
+.ig-bottom{position:absolute;left:0;right:0;bottom:0;padding:40px 72px 22px 14px;z-index:3;background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.55));font-size:13px;line-height:1.35}
+.ig-user{display:flex;align-items:center;gap:9px;margin-bottom:9px;font-weight:700;font-size:13.5px}
+.av{width:32px;height:32px;border-radius:50%;background:#fff url(assets/le-premier-mark-black.png) center/62% no-repeat;border:1px solid rgba(0,0,0,.08);flex:0 0 auto}
+.ig-user .follow{font-weight:600;font-size:12px;padding:4px 9px;border:1px solid rgba(255,255,255,.8);border-radius:7px;margin-left:2px}
+.ig-cap{text-shadow:0 1px 6px rgba(0,0,0,.5)}
+.ig-cap .more{color:rgba(255,255,255,.7)}
+.ig-audio{display:flex;align-items:center;gap:7px;margin-top:9px;font-size:12.5px}
+.ig-audio svg{width:13px;height:13px}
+.ig-bar{position:absolute;left:0;right:0;bottom:0;height:2px;background:rgba(255,255,255,.25);z-index:4}
+.ig-bar i{display:block;height:100%;width:0;background:#fff;animation:prog 15.04s linear infinite}
+@keyframes prog{from{width:0}to{width:100%}}
+.ig-home{position:absolute;left:50%;bottom:7px;transform:translateX(-50%);width:120px;height:4px;border-radius:4px;background:rgba(255,255,255,.9);z-index:5}
+
+/* 01: packshot za telefonem, klik = vysunout a porovnat */
+.cmp{position:relative;display:flex;justify-content:center;width:100%}
+.cmp .phoneslot{position:relative;z-index:2;transition:transform .55s cubic-bezier(.22,.8,.24,1)}
+.cmp .ref{margin:0;position:absolute;left:50%;top:50%;z-index:1;width:min(320px,80vw);cursor:pointer;
+  transform:translate(calc(-50% - 205px),-56%) rotate(-9deg) scale(.7);
+  transition:transform .55s cubic-bezier(.22,.8,.24,1);outline:none}
+.cmp .ref .pic{position:relative;background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden;aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;padding:6%;
+  box-shadow:0 22px 60px rgba(26,26,24,.16)}
+.cmp .ref .pic img{width:100%;height:100%;object-fit:contain}
+.cmp .ref .peek{position:absolute;left:12px;top:12px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;background:var(--text);color:#fff;padding:6px 10px;border-radius:999px;white-space:nowrap;transition:opacity .3s}
+.cmp .ref figcaption{font-size:12.5px;color:var(--text-2);text-align:left;line-height:1.4;margin-top:10px;max-width:82%;opacity:0;visibility:hidden;transition:opacity .35s .15s,visibility 0s .6s}
+.cmp .ref figcaption span{display:block;color:var(--text-3);font-size:11.5px}
+.cmp .ref figcaption a{color:var(--text);text-decoration:none;border-bottom:1px solid var(--border);pointer-events:none}
+.cmp.open .ref figcaption a{pointer-events:auto}
+.cmp .ref:focus-visible .pic{box-shadow:0 0 0 3px var(--text-3),0 22px 60px rgba(26,26,24,.16)}
+.cmp.open .ref{z-index:3;transform:translate(calc(-50% - 155px),-50%) rotate(0deg) scale(.96)}
+.cmp.open .phoneslot{transform:translateX(120px)}
+.cmp.open .ref .peek{opacity:0}
+.cmp.open .ref figcaption{opacity:1;visibility:visible;transition-delay:.15s,0s}
+@media(min-width:900px) and (max-width:1120px){.cmp .ref{transform:translate(calc(-50% - 165px),-56%) rotate(-9deg) scale(.62)}}
+.cmphint{display:none;font-size:13px;color:var(--text-2);text-align:center;margin-top:12px;max-width:40ch;margin-left:auto;margin-right:auto}
+@media(max-width:899px){
+  .cmp .ref{width:min(280px,78vw);transform:translate(calc(-50% - 120px),-58%) rotate(-9deg) scale(.62)}
+  .cmp .ref .peek{display:none}
+  .cmphint{display:block}
+  .cmp.open .ref{transform:translate(-50%,-50%) rotate(0) scale(1)}
+  .cmp.open .phoneslot{transform:none}
+}
+@media(prefers-reduced-motion:reduce){.cmp .ref,.cmp .phone,.cmp .ref figcaption,.cmp .ref .peek{transition:none}}
+
+/* browser (e-shop PDP) */
+.browser{width:100%;max-width:640px;background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 24px 60px rgba(26,26,24,.12);font-family:var(--ui)}
+.browser .bar{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--border);background:#F6F5F2}
+.browser .bar i{width:10px;height:10px;border-radius:50%;background:#DDDBD6;display:block}
+.browser .bar .url{margin-left:8px;flex:1;font-size:11.5px;color:var(--text-3);background:#fff;border:1px solid var(--border);border-radius:6px;padding:4px 10px}
+.pdp{display:grid;grid-template-columns:1fr;gap:0}
+@media(min-width:560px){.pdp{grid-template-columns:1.05fr 1fr}}
+.pdp .gal{position:relative;background:#F1EFEA;min-height:360px}
+.pdp .gal>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top}
+@media(max-width:559px){.pdp .gal{aspect-ratio:3/4;min-height:0}}
+.pdp .gal .badge{position:absolute;left:12px;top:12px;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;background:rgba(255,255,255,.95);padding:5px 9px;border-radius:999px;color:var(--text)}
+.pdp .thumbs{position:absolute;left:12px;bottom:12px;display:flex;gap:6px}
+.pdp .thumbs span{width:38px;height:48px;border-radius:5px;overflow:hidden;border:2px solid rgba(255,255,255,.9);background:#fff}
+.pdp .thumbs span img{width:100%;height:100%;object-fit:cover;aspect-ratio:auto}
+.pdp .thumbs span.sel{border-color:var(--text)}
+.pdp .info{padding:22px 22px 20px;display:flex;flex-direction:column;gap:14px;font-size:13px;color:var(--text-2)}
+.pdp .info .crumbs{font-size:11px;color:var(--text-3)}
+.pdp .info h4{margin:0;font-family:var(--lp);font-weight:500;font-size:20px;color:var(--text);letter-spacing:0;line-height:1.2}
+.pdp .info .sub{font-size:12.5px}
+.pdp .lbl{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:8px;display:flex;justify-content:space-between}
+.pdp .lbl em{font-style:normal;color:var(--text);letter-spacing:0;text-transform:none;font-weight:500}
+.sw{display:flex;gap:8px;flex-wrap:wrap}
+.sw span{width:34px;height:34px;border-radius:50%;border:2px solid transparent;position:relative;display:block}
+.sw span.sel{border-color:var(--text);box-shadow:0 0 0 2px #fff inset}
+.sw span.todo{border:1.5px dashed #C9C6BF;background:transparent}
+.sw span.todo::after{content:"+";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#B5B2AA;font-size:16px;font-weight:500}
+.pdp .btn{display:block;text-align:center;background:var(--text);color:#fff;font-weight:600;font-size:13px;padding:12px;border-radius:6px;margin-top:4px}
+/* 04 latkovnik */
+.fabbleed{max-width:1280px;margin:0 auto;padding:0 20px}
+.fabhead{max-width:1056px;margin-left:auto;margin-right:auto}
+@media(min-width:768px){.fabbleed{padding:0 32px}}
+.fabhead{display:flex;flex-direction:column;gap:14px;margin-bottom:40px;max-width:1056px;margin-left:auto;margin-right:auto}
+.fabhead .num{display:flex;align-items:center;gap:14px}
+.fabhead .num b{font-family:var(--h);font-weight:700;font-size:13px;color:var(--text-3);letter-spacing:.06em}
+.fabhead .num span{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:4px 9px;border-radius:999px;border:1px solid var(--border);color:var(--text-2)}
+.fabhead p.big{font-size:17px;color:var(--text-2)}
+.fabwide{display:grid;gap:36px}
+@media(min-width:960px){.fabwide{grid-template-columns:minmax(0,1.55fr) minmax(260px,1fr);gap:56px;align-items:start}}
+.fabview{min-width:0}
+.fabstage{position:relative;aspect-ratio:4/5;background:#F1EFEA;border:1px solid var(--border);border-radius:14px;overflow:hidden}
+@media(hover:hover){.fabstage{cursor:zoom-in}}
+.fabstage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .45s ease,transform .25s ease-out;will-change:transform}
+.fabstage img.on{opacity:1}
+.fabstage.zoom img.on{transform:scale(2.1)}
+.fabmeta{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:16px 4px 0;min-height:36px}
+.fabmeta b{font-family:var(--lp);font-weight:500;font-size:19px;letter-spacing:0}
+.fabmeta span{color:var(--text-3);font-size:12.5px;text-align:right}
+.fabchips{display:flex;gap:10px;flex-wrap:wrap;padding:12px 0 0}
+.fabchips button{width:56px;height:56px;padding:0;border-radius:9px;overflow:hidden;border:2px solid var(--border);background:#fff;cursor:pointer;transition:border-color .2s ease,transform .2s ease}
+.fabchips button img{width:100%;height:100%;object-fit:cover;display:block}
+.fabchips button:hover{transform:translateY(-2px)}
+.fabchips button.sel{border-color:var(--text)}
+.fabchips button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
+.fabpick{border-top:1px solid var(--border);padding-top:16px;display:flex;flex-direction:column;gap:12px}
+.fablbl{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
+.fabpick .fabchips{padding:0}
+.fabpick .fabmeta{padding:0;min-height:0}
+.fabpick .cap{font-size:12.5px;color:var(--text-3);line-height:1.5;text-align:left;max-width:none;margin:0}
+.fabcopy{display:flex;flex-direction:column;gap:18px}
+.fabcopy p{color:var(--text-2)}
+.fabcopy .split{display:grid;grid-template-columns:1fr 1fr;gap:14px;border-top:1px solid var(--border);padding-top:16px;font-size:13.5px;line-height:1.5;color:var(--text-2)}
+.fabcopy .split b{display:block;font-family:var(--h);font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);margin-bottom:4px}
+.fabcopy .next{font-size:13px;color:var(--text-3);border-left:2px solid var(--border);padding-left:14px;line-height:1.55}
+.fabcopy .next b{color:var(--text-2);font-weight:600}
+@media(prefers-reduced-motion:reduce){.fabstage img,.fabchips button{transition:none}}
+.pdp .btn2{display:block;text-align:center;border:1px solid var(--border);color:var(--text);font-weight:600;font-size:13px;padding:11px;border-radius:6px}
+.pdp .row{display:flex;justify-content:space-between;font-size:12.5px;border-top:1px solid var(--border);padding-top:10px}
+.pdp .todo-note{font-size:11.5px;color:var(--text-3);line-height:1.45}
+
+/* IG feed post (campaign) */
+.feedwrap{display:flex;gap:18px;align-items:flex-end;justify-content:center;width:100%}
+.post{width:min(360px,80vw);background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden;font-family:var(--ui);box-shadow:0 24px 60px rgba(26,26,24,.12);color:var(--text)}
+.post .hd{display:flex;align-items:center;gap:10px;padding:10px 12px;font-size:13px}
+.post .hd .av{width:32px;height:32px}
+.post .hd b{display:block;font-weight:600;line-height:1.15}
+.post .hd small{display:block;font-size:11px;color:var(--text-3)}
+.post .hd .dots{margin-left:auto;color:var(--text-2);font-weight:700;letter-spacing:1px}
+.post .vis{position:relative;aspect-ratio:4/5;overflow:hidden;background:#1a1a18}
+.post .vis img{width:100%;height:100%;object-fit:cover;object-position:center 12%}
+.post .vis .ov{position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,0) 45%,rgba(0,0,0,.55));display:flex;flex-direction:column;justify-content:flex-end;padding:18px;color:#fff}
+.post .vis .ov .claim{font-family:var(--lp);font-weight:500;font-size:30px;letter-spacing:-.005em;line-height:1.1;max-width:10ch}
+.post .vis .ov .sub{font-size:12px;opacity:.85;margin-top:8px}
+.post .vis .ov img.logo{position:absolute;right:16px;top:16px;height:34px;width:auto;filter:drop-shadow(0 1px 4px rgba(0,0,0,.4))}
+.post .ctabar{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;font-size:13px;font-weight:600;background:#F4F3F0;border-top:1px solid var(--border)}
+.post .ctabar svg{width:14px;height:14px}
+.post .acts{display:flex;gap:14px;padding:10px 12px 4px}
+.post .acts svg{width:24px;height:24px}
+.post .acts .save{margin-left:auto}
+.post .likes{padding:2px 12px;font-size:13px;font-weight:600}
+.post .cap{text-align:left;max-width:none;padding:2px 12px 12px;font-size:13px;color:var(--text);line-height:1.4}
+.post .cap b{font-weight:600;margin-right:4px}
+.post .cap .more{color:var(--text-3)}
+.story{width:min(150px,34vw);aspect-ratio:9/16;border-radius:16px;overflow:hidden;position:relative;background:#1a1a18;box-shadow:0 18px 44px rgba(26,26,24,.14);flex:0 0 auto}
+.story img{width:100%;height:100%;object-fit:cover;object-position:center 10%}
+.story .ov{position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,.25),rgba(0,0,0,0) 30%,rgba(0,0,0,0) 55%,rgba(0,0,0,.6));padding:12px 10px;display:flex;flex-direction:column;justify-content:space-between;color:#fff}
+.story .ov .bar{height:2px;background:rgba(255,255,255,.35);border-radius:2px;overflow:hidden}
+.story .ov .bar i{display:block;height:100%;width:45%;background:#fff}
+.story .ov .claim{font-family:var(--lp);font-weight:500;font-size:15px;letter-spacing:0;line-height:1.15}
+.story .ov .cta{font-size:9.5px;font-weight:600;text-align:center;background:#fff;color:var(--text);border-radius:999px;padding:5px;margin-top:8px}
+@media(max-width:520px){.feedwrap{flex-direction:column;align-items:center}}
+
+/* 02: IG feed carousel (vzor Šimrání: scroll-snap track + tečky) */
+.cpost{width:min(380px,88vw)}
+.cwrap{position:relative}
+.ctrack{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;background:#1a1a18}
+.ctrack::-webkit-scrollbar{display:none}
+.cslide{min-width:100%;aspect-ratio:4/5;scroll-snap-align:center}
+.cslide img{width:100%;height:100%;object-fit:cover}
+.ccount{position:absolute;top:12px;right:12px;background:rgba(26,26,24,.75);color:#fff;font-size:12px;font-weight:600;padding:5px 11px;border-radius:999px;font-variant-numeric:tabular-nums;z-index:2}
+.cdots{display:flex;justify-content:center;gap:4px;padding:10px 0 2px}
+.cdots i{width:6px;height:6px;border-radius:50%;background:#D8D6D1;transition:background .2s,transform .2s}
+.cdots i.on{background:#4193EF;transform:scale(1.15)}
+
+.cslide.cintro{position:relative}
+.cintro .cov{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:22px 96px 22px 22px;background:linear-gradient(rgba(0,0,0,0) 45%,rgba(0,0,0,.62));color:#fff}
+.cintro .clogo{position:absolute;right:14px;top:50px;height:28px;width:auto;filter:drop-shadow(0 1px 5px rgba(0,0,0,.5))}
+.cintro .cclaim{font-family:var(--lp);font-weight:500;font-size:30px;line-height:1.12;letter-spacing:-.005em}
+.cintro .csub{font-size:12.5px;opacity:.85;margin-top:8px}
+
+/* 05: Back to Work, formaty se vynoruji z fotky (full-bleed sticky) */
+.btwsec{border-top:1px solid var(--border)}
+.btwscroll{height:220vh;position:relative}
+.btwstage{position:sticky;top:0;height:100vh;overflow:hidden}
+.btwcopy{position:absolute;left:max(20px,calc(50vw - 528px));top:9vh;width:min(33vw,430px);display:flex;flex-direction:column;gap:14px;z-index:4}
+.btwcopy p{color:var(--text-2);font-size:15.5px}
+.btwsub{font-family:var(--h);font-weight:700;font-size:clamp(17px,1.5vw,21px);letter-spacing:-.025em;color:var(--text-3);line-height:1.2;margin-top:-6px}
+.bcard{position:absolute;will-change:transform,opacity;border-radius:12px;box-shadow:0 20px 55px rgba(26,26,24,.18);background:#141412}
+.bcard img{width:100%;display:block;object-fit:cover}
+.bnote{position:absolute;top:calc(100% + 8px);left:2px;font-size:12px;color:var(--text-3);white-space:nowrap;opacity:0;transition:opacity .4s}
+#b-11 .bnote{top:auto;bottom:calc(100% + 8px)}
+.btwcopy .bnote.bstat{position:static;display:block;margin-top:8px;opacity:1}
+
+/* master: cista fotka vedle textu, nehybe se */
+#b-m45{left:calc(50vw - 60px);top:4vh;width:min(24vw,38vh);z-index:3;border-radius:14px;background:transparent}
+#b-m45 .bnote{top:auto;bottom:10px;left:12px;color:#fff;text-shadow:0 1px 5px rgba(0,0,0,.65)}
+#b-m45>img{aspect-ratio:4/5;height:auto;border-radius:14px}
+/* 16:9 v mini prohlizeci */
+#b-169{position:relative;width:100%;max-width:430px;margin-top:22px;background:#fff;border:1px solid var(--border);z-index:1;max-height:calc(92vh - 430px);min-height:150px;overflow:hidden}
+#b-169::after{content:"";position:absolute;left:0;right:0;bottom:0;height:30px;background:linear-gradient(rgba(255,255,255,0),#fff);pointer-events:none}
+.bbar{display:flex;gap:5px;align-items:center;padding:7px 10px;background:#F6F5F2;border-bottom:1px solid var(--border);border-radius:11px 11px 0 0}
+.bbar i{width:8px;height:8px;border-radius:50%;background:#DDDBD6;flex:0 0 auto}
+.bbar .u{margin-left:6px;flex:1;background:#fff;border:1px solid var(--border);border-radius:5px;font-size:10px;color:var(--text-3);padding:2px 8px;font-family:var(--ui)}
+#b-169>img{aspect-ratio:16/9;border-radius:0}
+.siteh{display:flex;align-items:center;gap:10px;padding:7px 12px;background:#fff;border-bottom:1px solid #F0EEE9}
+.siteh img{height:15px;width:auto}
+.siteh nav{display:flex;gap:9px;font-family:var(--ui);font-size:8.5px;color:#333;margin-left:auto;white-space:nowrap}
+.siteh .rez{font-family:var(--ui);font-size:8px;font-weight:600;background:#111;color:#fff;padding:5px 8px;border-radius:3px;white-space:nowrap}
+.sitestrip{position:relative;padding:10px 12px 16px;background:#fff;border-radius:0 0 11px 11px;overflow:hidden}
+.sh1{display:block;font-family:var(--lp);font-weight:500;font-size:15px;color:#111}
+.sh2{display:block;font-family:var(--ui);font-size:9px;color:#777;margin-top:2px}
+.sitestrip::after{content:"";position:absolute;left:0;right:0;bottom:0;height:14px;background:linear-gradient(rgba(255,255,255,0),#fff)}
+/* 1:1 jako konkretni FB reklama */
+#b-11{left:calc(50vw - 60px);top:auto;bottom:7vh;width:min(17vw,26vh);background:#fff;border:1px solid var(--border);z-index:2;font-family:var(--ui)}
+.fbhd{display:flex;gap:8px;align-items:center;padding:8px 10px 6px}
+.fbhd .fav{width:26px;height:26px;border-radius:50%;background:#fff url(assets/le-premier-mark-black.png) center/58% no-repeat;border:1px solid var(--border);flex:0 0 auto}
+.fbhd b{display:block;font-size:11px;line-height:1.2;color:var(--text)}
+.fbhd small{display:block;font-size:9px;color:var(--text-3)}
+.fbtxt{padding:0 10px 8px;font-size:10.5px;line-height:1.35;color:var(--text)}
+#b-11>img{aspect-ratio:1/1}
+.fblink{display:flex;align-items:center;gap:8px;padding:8px 10px;background:#F2F1EE;border-top:1px solid var(--border);border-radius:0 0 11px 11px}
+.fblink span{min-width:0;flex:1}
+.fblink .d{display:block;font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3)}
+.fblink .h{display:block;font-size:10.5px;font-weight:600;color:var(--text);line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fblink .btn{font-size:9.5px;font-weight:600;background:#E4E6EB;color:#050505;padding:6px 9px;border-radius:6px;white-space:nowrap;flex:0 0 auto}
+/* 9:16 staticka story */
+.b916in{position:relative;border-radius:14px;overflow:hidden}
+.b916in img{aspect-ratio:9/16}
+.sbar{position:absolute;top:7px;left:9px;right:9px;height:2px;border-radius:2px;background:rgba(255,255,255,.35)}
+.sbar i{display:block;width:40%;height:100%;background:#fff;border-radius:2px}
+.suser{position:absolute;top:13px;left:9px;display:flex;align-items:center;gap:5px;color:#fff;font-size:9.5px;font-family:var(--ui);text-shadow:0 1px 4px rgba(0,0,0,.55)}
+.suser .sav{width:15px;height:15px;border-radius:50%;background:#fff url(assets/le-premier-mark-black.png) center/58% no-repeat}
+/* story video = dominanta */
+#b-vid{left:auto;right:3vw;top:20vh;width:min(26vw,44vh);background:#111;border-radius:26px;padding:6px;z-index:3;box-shadow:0 30px 70px rgba(26,26,24,.28)}
+#b-vid .b916in{border-radius:21px}
+#b-vid .b916in video{width:100%;display:block;aspect-ratio:9/16;object-fit:cover}
+#b-vid .bnote{font-weight:600;color:var(--text-2)}
+/* Zlata varianta: kollaz ve stylu uvodni sceny */
+.golddiv{font-family:var(--h);font-weight:700;font-size:clamp(24px,3.2vw,36px);letter-spacing:-.03em;color:var(--text);padding:26px 0 8px}
+.goldstage{position:relative;height:96vh;min-height:660px;overflow:hidden}
+.gcard{position:absolute;border-radius:12px;box-shadow:0 24px 60px rgba(26,26,24,.2)}
+.gnote{position:absolute;top:calc(100% + 8px);left:2px;font-size:12px;color:var(--text-3);white-space:nowrap}
+/* FB reklama */
+#g-fb{left:2vw;top:4vh;width:min(24vw,42vh);background:#fff;border:1px solid var(--border);border-radius:12px;font-family:var(--ui);z-index:2}
+.fbwrap{display:flex;flex-direction:column}
+#g-fb .zmhd{display:flex;gap:8px;align-items:center;padding:9px 11px}
+.gav{width:28px;height:28px;border-radius:50%;background:#fff url(assets/le-premier-mark-black.png) center/58% no-repeat;border:1px solid var(--border);flex:0 0 auto}
+#g-fb .zmhd b{display:block;font-size:12px;line-height:1.2;color:var(--text)}
+#g-fb .zmhd small{display:block;font-size:10px;color:var(--text-3)}
+.gfbtx{padding:0 11px 9px;font-size:12px;line-height:1.4;color:#050505}
+#g-fb img{width:100%;display:block;aspect-ratio:4/5;object-fit:cover}
+.gfblink{display:flex;align-items:center;gap:8px;padding:9px 11px;background:#F2F1EE;border-top:1px solid var(--border)}
+.gfblink span{min-width:0;flex:1}
+.gfblink .d{display:block;font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3)}
+.gfblink .h{display:block;font-size:11.5px;font-weight:600;color:#050505}
+.gfblink .b{font-size:10.5px;font-weight:600;background:#E4E6EB;color:#050505;padding:7px 11px;border-radius:6px;flex:0 0 auto}
+.gfbre{display:flex;justify-content:space-between;align-items:center;padding:7px 11px;font-size:10.5px;color:#65676B;border-bottom:1px solid #E4E6EB}
+.gfbre .ic{display:inline-flex;align-items:center;gap:4px}
+.gfbre .dot{width:15px;height:15px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:8.5px;color:#fff}
+.gfbre .dot.l{background:#1877F2;margin-right:-5px;z-index:2;position:relative}
+.gfbre .dot.h{background:#F33E58}
+.gfbact{display:flex;justify-content:space-around;padding:5px 8px;font-size:11px;font-weight:600;color:#65676B}
+/* IG feed */
+#g-ig{left:29.5vw;top:13vh;width:min(26vw,44vh);background:#fff;border:1px solid var(--border);border-radius:12px;font-family:var(--ui);z-index:3}
+#g-ig .zmhd{display:flex;gap:8px;align-items:center;padding:9px 11px}
+#g-ig .zmhd b{display:block;font-size:12px;line-height:1.2;color:var(--text)}
+#g-ig .zmhd small{display:block;font-size:10px;color:var(--text-3)}
+#g-ig img{width:100%;display:block;aspect-ratio:4/5;object-fit:cover}
+.gigcta{display:flex;justify-content:space-between;align-items:center;padding:9px 11px;background:#0095F6;color:#fff;font-size:12px;font-weight:600}
+.gigacts{display:flex;gap:13px;padding:8px 11px 3px;align-items:center}
+.gigacts svg{width:21px;height:21px;color:#050505}
+.gigacts .sv{margin-left:auto}
+.giglikes{padding:1px 11px;font-size:12px;font-weight:600;color:#050505}
+.gigcap{padding:2px 11px 11px;font-size:12px;line-height:1.4;color:#050505}
+.gigcap b{font-weight:600;margin-right:4px}
+.gigcap .mr{color:#8E8E8E}
+/* telefony */
+.gphone{background:#111;border-radius:22px;padding:5px;z-index:2}
+.gscr{position:relative;border-radius:17px;overflow:hidden}
+.gscr img{width:100%;display:block;aspect-ratio:9/16;object-fit:cover}
+#g-reel{left:58.5vw;top:3vh;width:min(19vw,40vh)}
+#g-story{left:80vw;top:19vh;width:min(17vw,36vh)}
+.greellbl{position:absolute;top:10px;left:11px;color:#fff;font-weight:700;font-size:13px;font-family:var(--ui);text-shadow:0 1px 4px rgba(0,0,0,.5)}
+.gside{position:absolute;right:9px;bottom:96px;display:flex;flex-direction:column;gap:13px}
+.gside svg{width:19px;height:19px;filter:drop-shadow(0 1px 3px rgba(0,0,0,.5))}
+.guser{position:absolute;left:11px;bottom:64px;display:flex;align-items:center;gap:6px;color:#fff;font-family:var(--ui);text-shadow:0 1px 4px rgba(0,0,0,.55)}
+.guser .gav{width:20px;height:20px;border-color:rgba(255,255,255,.6)}
+.guser b{font-size:11px;display:block;line-height:1.15}
+.guser small{font-size:9px;display:block;opacity:.85}
+.gcap9{position:absolute;left:11px;right:11px;bottom:44px;color:#fff;font-size:10.5px;font-family:var(--ui);text-shadow:0 1px 4px rgba(0,0,0,.55)}
+.gcap9 .mr{opacity:.7}
+.gctapill{position:absolute;left:11px;right:11px;bottom:10px;background:rgba(255,255,255,.95);color:#050505;font-family:var(--ui);font-size:11px;font-weight:600;text-align:center;padding:8px;border-radius:8px}
+.gbar{position:absolute;top:8px;left:10px;right:10px;height:2px;border-radius:2px;background:rgba(255,255,255,.35)}
+.gbar i{display:block;width:45%;height:100%;background:#fff;border-radius:2px}
+.guser.top{top:16px;bottom:auto}
+@media(max-width:899px){
+  .goldstage{position:static;height:auto;min-height:0;overflow:visible;display:grid;grid-template-columns:1fr;gap:34px;justify-items:center;padding:0 20px}
+  .goldstage .gcard{position:static;width:100%!important;max-width:340px}
+  .gnote{position:static;margin-top:6px;white-space:normal}
+}
+@media(max-width:899px),(max-height:739px),(prefers-reduced-motion:reduce){
+  .btwscroll{height:auto}
+  .btwstage{position:static;height:auto;overflow:visible;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:26px 14px;padding:0 20px}
+  .btwcopy{position:static;width:auto;grid-column:1/-1}
+  .btwstage .bcard{position:static;min-width:0;width:100%!important;left:auto!important;top:auto!important;transform:none!important;opacity:1!important}
+  #b-m45{grid-column:1/-1;max-width:420px;justify-self:center}
+  #b-169{grid-column:1/-1;max-height:none;overflow:visible}
+  #b-169::after{display:none}
+  .siteh .rez{display:none}
+  #b-vid .b916in video{width:100%}
+  .bnote{position:static;opacity:1;margin-top:6px;white-space:normal}
+  .only-anim{display:none}
+}
+
+.cta a.li{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;margin-top:6px;font-size:15px;color:var(--text-2);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:3px;transition:color .25s,border-color .25s}
+.cta a.li:hover{color:var(--text);border-color:var(--text-3)}
+.cta a.li svg{width:18px;height:18px;flex:0 0 auto}
+
+/* Prilezitost radek */
+.opp{border-left:2px solid var(--text);padding-left:14px;font-size:15px;line-height:1.55;color:var(--text-2);max-width:52ch}
+.opp b{color:var(--text);font-weight:700}
+.opp a{color:inherit;text-decoration:none;border-bottom:1px solid var(--border);transition:border-color .25s}
+.opp a:hover{border-color:var(--text-3)}
+/* download */
+.dl{display:flex;flex-direction:column;gap:28px}
+
+.dl .btn{display:inline-flex;align-items:center;gap:14px;background:var(--text);color:#fff;text-decoration:none;font-family:var(--h);font-weight:700;font-size:18px;letter-spacing:-.02em;padding:18px 26px;border-radius:14px;transition:transform .2s ease,box-shadow .2s ease;box-shadow:0 10px 30px rgba(26,26,24,.18);align-self:flex-start}
+.dl .btn:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(26,26,24,.24)}
+.dl .btn svg{width:22px;height:22px;flex:0 0 auto}
+.dl .btn small{display:block;font-family:var(--b);font-weight:500;font-size:12px;letter-spacing:0;opacity:.75;margin-top:2px}
+.dl .files{margin:0;padding:0;list-style:none;border-top:1px solid var(--border);font-size:14px;color:var(--text-2)}
+.dl .files li{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid var(--border)}
+.dl .files li span:last-child{color:var(--text-3);white-space:nowrap;font-variant-numeric:tabular-nums}
+.dl .copy{display:flex;flex-direction:column;gap:18px}
+.dl .copy p{color:var(--text-2)}
+
+/* quote */
+.quote{display:grid;grid-template-columns:72px 1fr;gap:22px;align-items:start;max-width:860px}
+@media(min-width:768px){.quote{grid-template-columns:96px 1fr;gap:32px}}
+.quote img{width:72px;height:72px;border-radius:50%;object-fit:cover;background:#000}
+@media(min-width:768px){.quote img{width:96px;height:96px}}
+.quote blockquote{margin:0;display:flex;flex-direction:column;gap:14px}
+.quote blockquote p{font-family:var(--h);font-weight:700;font-size:clamp(19px,2.4vw,26px);letter-spacing:-.025em;line-height:1.3;color:var(--text);text-wrap:pretty}
+.quote cite{font-style:normal;font-size:14px;color:var(--text-2)}
+.quote cite b{font-weight:600;color:var(--text)}
+.who img{width:44px;height:44px;border-radius:50%;object-fit:cover;flex:0 0 auto;background:#000}
+
+.closing{border-top:1px solid var(--border);padding:96px 0 130px;text-align:center}
+.closing .w{display:flex;flex-direction:column;align-items:center;gap:0}
+.closing h2.vz{font-size:clamp(28px,4vw,38px);letter-spacing:-.03em;margin-bottom:16px}
+.closing .swap{position:relative;display:inline-block}
+.closing .swap .z,.closing .swap .y{display:inline-block;transition:opacity .25s linear}
+.closing .swap .y{position:absolute;left:0;top:0;opacity:0}
+.closing p{max-width:420px;font-size:16px;line-height:1.6;color:var(--text);margin-bottom:32px}
+.closing .libtn{display:inline-block;border-radius:999px;background:var(--text);color:var(--bg);text-decoration:none;
+  font-family:var(--h);font-weight:700;font-size:14px;letter-spacing:-.01em;padding:14px 32px;transition:opacity .25s ease,transform .25s ease}
+.closing .libtn:hover{opacity:.85;transform:translateY(-1px)}
+.closing .tel{display:inline-block;margin-top:18px;font-size:15px;color:var(--text-2);text-decoration:none;font-variant-numeric:tabular-nums;border-bottom:1px solid var(--border);padding-bottom:2px;transition:color .25s}
+.closing .tel:hover{color:var(--text)}
+
+/* Prilezitost radek */
+.opp{border-left:2px solid var(--text);padding-left:14px;font-size:15px;line-height:1.55;color:var(--text-2);max-width:52ch}
+.opp b{color:var(--text);font-weight:700}
+.opp a{color:inherit;text-decoration:none;border-bottom:1px solid var(--border);transition:border-color .25s}
+.opp a:hover{border-color:var(--text-3)}
+<noscript><style>.rv{opacity:1!important;transform:none!important}#flyphone{display:none}.heroslot .phoneslot{display:none}</style></noscript>
+</head>
+<body>
+
+<div class="w">
+  <div class="top">
+    <a class="brand" href="https://jakubskupin.cz">Jakub Skupin</a>
+    <div class="for"><span>připraveno pro</span><img src="assets/le-premier-black.png" alt="Le Premier"></div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="w">
+  <div class="hero">
+    <div class="herotext">
+    <span class="eyebrow rv">Pro Jakuba Lohniského · Le Premier · srpen 2026</span>
+    <h1 class="rv">Čtyři způsoby, jak AI ukáže vaše řemeslo</h1>
+    <p class="lede rv">Všechny produkty ve vizualizacích jsou Le Premier.<br>Zaměřte se na jejich reálnost.<br>A vydržte až do konce.</p>
+    </div>
+    <div class="heroslot rv"><div class="phoneslot" id="slot-hero"></div></div>
+  </div>
+</div>
+
+<!-- 01 REEL -->
+<section id="uc1">
+  <div class="w uc">
+    <div class="copy">
+      <div class="num rv"><b>01</b></div>
+      <h2 class="rv">Z fotky video na modelovi</h2>
+      <p class="big rv">Z jediné fotky vzniklo 15s promo video, prezentující reálnou vestu i detaily. Bez termínu, studia, stylisty.</p>
+      <p class="opp rv"><b>Příležitost:</b> každý model z <a href="https://lepremier.cz/lookbook" target="_blank" rel="noopener">lookbooku Spring '26</a> se dá rozpohybovat stejně.</p>
+    </div>
+    <div class="mock rv">
+      <div class="cmp">
+      <figure class="ref" role="button" tabindex="0" aria-expanded="false" aria-label="Vysunout packshot a porovnat s reelem">
+        <div class="pic"><span class="peek">Porovnat originál</span><img src="assets/gilet-packshot-upscale.jpg" alt="Restaurovaný packshot oboustranné vesty Le Premier"></div>
+        <figcaption><a href="https://lepremier.cz/na-miru/bundy#:~:text=Panelled%20Reversible%20Gilet" target="_blank" rel="noopener">Panelled Reversible Gilet</a></figcaption>
+      </figure>
+      <div class="phoneslot" id="slot-uc1"></div>
+      </div>
+      <p class="cmphint rv">Klepněte na kartu vlevo a porovnejte video s originálem z webu.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 02 KAMPAŇOVÁ SÉRIE -->
+<section id="serie">
+  <div class="w uc flip">
+    <div class="copy">
+      <div class="num rv"><b>02</b></div>
+      <h2 class="rv">Z jednoho kusu celé focení</h2>
+      <p class="big rv">Prostředí navíc zůstalo konzistentní s webem.</p>
+      <p class="opp rv"><b>Příležitost:</b> kdyby byl <a href="https://www.instagram.com/lepremiercz/" target="_blank" rel="noopener">Instagram</a> jeden z prodejních kanálů, tohle by mohla být cesta k pravidelnějšímu publikování.</p>
+    </div>
+    <div class="mock rv">
+      <div class="post cpost">
+        <div class="hd"><span class="av"></span><div><b>lepremiercz</b><small>Praha · Na Příkopě 12</small></div><span class="dots">···</span></div>
+        <div class="cwrap">
+          <span class="ccount" id="ccount">1/9</span>
+          <div class="ctrack" id="ctrack">
+            <div class="cslide cintro">
+              <img src="assets/carousel/krb-06-cela-postava.jpg" alt="Kampaňová série, celá postava u krbu">
+              <span class="cov">
+                <img class="clogo" src="assets/le-premier-white.png" alt="">
+                <span class="cclaim">Jeden kus.<br>Dvě nálady.</span>
+                <span class="csub">Oboustranná vesta na míru, Na Příkopě 12</span>
+              </span>
+            </div>
+            <div class="cslide"><img src="assets/carousel/krb-04-portret-trictvrtecni.jpg" alt="Kampaňová série, portrét ze tří čtvrtin" loading="lazy"></div>
+            <div class="cslide"><img src="assets/carousel/krb-02-candid-ruka.jpg" alt="Kampaňová série, candid s rukou ve vlasech" loading="lazy"></div>
+            <div class="cslide"><img src="assets/carousel/krb-01-zada.jpg" alt="Kampaňová série, pohled zezadu" loading="lazy"></div>
+            <div class="cslide"><img src="assets/carousel/krb-08-profil.jpg" alt="Kampaňová série, profil" loading="lazy"></div>
+            <div class="cslide"><img src="assets/carousel/krb-05-limec-zip-detail.jpg" alt="Kampaňová série, detail límce a zipu" loading="lazy"></div>
+            <div class="cslide"><img src="assets/carousel/krb-03-vnitrek-detail.jpg" alt="Kampaňová série, detail rubu, reversible" loading="lazy"></div>
+            <div class="cslide"><img src="assets/carousel/krb-07-portret-celni.jpg" alt="Kampaňová série, čelní portrét" loading="lazy"></div>
+            <div class="cslide"><img src="assets/carousel/krb-09-vesta-v-ruce.jpg" alt="Kampaňová série, vesta v ruce" loading="lazy"></div>
+          </div>
+        </div>
+        <div class="cdots" id="cdots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="acts">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l8.8 8.8 8.8-8.8a5.5 5.5 0 0 0 0-7.8Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-3.8-.9L3 21l1.9-5.2A8.4 8.4 0 1 1 21 11.5Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4Z"/></svg>
+          <svg class="save" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2Z"/></svg>
+        </div>
+        <div class="likes">Líbí se 2 318</div>
+        <p class="cap"><b>lepremiercz</b>Reversible vesta z nové kolekce. Navy na jednu stranu, ocelová modř na druhou <span class="more">… více</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 BACK TO WORK: formaty z fotky -->
+<section id="btw" class="btwsec">
+  <div class="btwscroll" id="btwscroll">
+    <div class="btwstage" id="btwstage">
+      <div class="btwcopy">
+        <div class="num rv"><b>03</b></div>
+        <h2 class="rv">Kampaň, která se převléká</h2>
+        <p class="rv">AI umožňuje škálu: jeden oblek lze ukázat v nejrůznějších situacích, přizpůsobit reklamy aktuálnímu počasí, svátkům nebo fázi dne.</p>
+        <p class="opp rv"><b>Příležitost:</b> lze A/B testovat kreativa eye-catching a stop-scrolling formátu (jako je níže zlatá).</p>
+        <div class="bcard" id="b-169">
+        <div class="bbar"><i></i><i></i><i></i><span class="u">lepremier.cz</span></div>
+        <div class="siteh">
+          <img src="assets/le-premier-black.png" alt="Le Premier logo">
+          <nav><span>Na míru</span><span>Svatba</span><span>Lookbook</span><span>O nás</span><span>Kontakt</span></nav>
+          <span class="rez">Rezervovat schůzku</span>
+        </div>
+        <img src="assets/btw/f-16x9.jpg" alt="Back to Work 2026, hero banner na lepremier.cz" loading="lazy">
+        <div class="sitestrip"><span class="sh1">Šijeme na míru.</span><span class="sh2">Dejte sbohem konfekci a začněte se oblékat opravdu podle sebe.</span></div>
+      </div>
+      <span class="bnote bstat">Banner na webu lepremier.cz · 16:9</span>
+      </div>
+      <div class="bcard" id="b-m45"><img src="assets/btw/master-4x5.jpg" alt="Back to Work 2026, klíčový vizuál"><span class="bnote">Klíčový vizuál, bez úprav</span></div>
+
+      <div class="bcard" id="b-11">
+        <div class="fbhd"><span class="fav"></span><span><b>Le Premier</b><small>Sponzorováno · <span aria-hidden="true">🌐</span></small></span></div>
+        <p class="fbtxt">Sako na míru ušijeme za čtyři týdny. Měření na Příkopě, bez závazku.</p>
+        <img src="assets/btw/f-1x1.jpg" alt="Back to Work 2026, čtverec 1:1" loading="lazy">
+        <div class="fblink"><span><span class="d">lepremier.cz</span><span class="h">Back to Work 2026</span></span><span class="btn">Rezervovat</span></div>
+        <span class="bnote">Facebook reklama · 1:1</span>
+      </div>
+      <div class="bcard" id="b-vid">
+        <div class="b916in">
+          <video src="assets/btw/story-oblek.mp4" poster="assets/btw/story-oblek-poster.jpg" autoplay muted loop playsinline></video>
+          <span class="sbar"><i></i></span>
+          <span class="suser"><span class="sav"></span>lepremiercz</span>
+        </div>
+        <span class="bnote">Instagram story video · 9:16, 15 s</span>
+      </div>
+    </div>
+  </div>
+  <div class="w"><p class="golddiv rv">…třeba do zlata</p></div>
+  <div class="goldstage rv">
+    <div class="gcard" id="g-fb">
+      <div class="zmhd"><span class="gav"></span><span><b>Le Premier</b><small>Sponzorováno · <span aria-hidden="true">🌐</span></small></span></div>
+      <p class="gfbtx">Back to Work 2026. Sako na míru ušijeme za čtyři týdny, měření Na Příkopě je bez závazku.</p>
+      <img src="assets/zlate/fb-4x5.jpg" alt="Zlatá varianta, Facebook reklama 4:5" loading="lazy">
+      <div class="gfblink"><span><span class="d">lepremier.cz</span><span class="h">Back to Work 2026</span></span><span class="b">Rezervovat</span></div>
+      <div class="gfbre"><span class="ic"><span class="dot l">&#128077;&#xFE0E;</span><span class="dot h">&#10084;&#xFE0E;</span>&nbsp;218</span><span>17 komentářů · 6 sdílení</span></div>
+      <div class="gfbact"><span>To se mi líbí</span><span>Okomentovat</span><span>Sdílet</span></div>
+      <span class="gnote">Facebook reklama · 4:5</span>
+    </div>
+    <div class="gcard" id="g-ig">
+      <div class="zmhd"><span class="gav"></span><span><b>lepremiercz</b><small>Sponzorováno</small></span></div>
+      <img src="assets/zlate/ig-4x5.jpg" alt="Zlatá varianta, Instagram feed 4:5" loading="lazy">
+      <div class="gigcta"><span>Zjistit více</span><span>&#8250;</span></div>
+      <div class="gigacts">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l8.8 8.8 8.8-8.8a5.5 5.5 0 0 0 0-7.8Z"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-3.8-.9L3 21l1.9-5.2A8.4 8.4 0 1 1 21 11.5Z"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4Z"/></svg>
+        <svg class="sv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2Z"/></svg>
+      </div>
+      <div class="giglikes">Líbí se 2 318</div>
+      <p class="gigcap"><b>lepremiercz</b>Back to Work 2026. Návrat, který je radost si obléknout <span class="mr">… více</span></p>
+      <span class="gnote">Instagram feed · 4:5</span>
+    </div>
+    <div class="gcard gphone" id="g-reel">
+      <div class="gscr">
+        <img src="assets/zlate/reel-9x16.jpg" alt="Zlatá varianta, Instagram Reels 9:16" loading="lazy">
+        <span class="greellbl">Reels</span>
+        <span class="gside">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l8.8 8.8 8.8-8.8a5.5 5.5 0 0 0 0-7.8Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-3.8-.9L3 21l1.9-5.2A8.4 8.4 0 1 1 21 11.5Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4Z"/></svg>
+        </span>
+        <span class="guser"><span class="gav"></span><span><b>lepremiercz</b><small>Sponzorováno</small></span></span>
+        <p class="gcap9">Back to Work 2026 <span class="mr">… více</span></p>
+        <span class="gctapill">Zjistit více</span>
+      </div>
+      <span class="gnote">Instagram Reels · 9:16</span>
+    </div>
+    <div class="gcard gphone" id="g-story">
+      <div class="gscr">
+        <img src="assets/zlate/story-9x16.jpg" alt="Zlatá varianta, Instagram story 9:16" loading="lazy">
+        <span class="gbar"><i></i></span>
+        <span class="guser top"><span class="gav"></span><span><b>lepremiercz</b><small>Sponzorováno</small></span></span>
+        <span class="gctapill">Zjistit více</span>
+      </div>
+      <span class="gnote">Instagram story · 9:16</span>
+    </div>
+  </div>
+</section>
+
+<!-- 04 LATKOVNIK -->
+<section id="latky">
+  <div class="fabbleed">
+    <div class="fabhead">
+      <div class="num rv"><b>04</b></div>
+      <h2 class="rv">Digitální látkovník</h2>
+    </div>
+    <div class="fabwide">
+      <div class="fabview rv">
+        <div class="fabstage" id="fabstage">
+          <img src="assets/latkovnik/sako-tr908.jpg" alt="Sako ve fleur-de-lis jacquardu TR908" class="on">
+          <img src="assets/latkovnik/sako-tra028.jpg" alt="Sako v modro-bílém káru TRA028" loading="lazy" decoding="async">
+          <img src="assets/latkovnik/sako-tra029.jpg" alt="Sako v béžovém tartanu TRA029" loading="lazy" decoding="async">
+          <img src="assets/latkovnik/sako-tra030.jpg" alt="Sako v šedo-modrém káru TRA030" loading="lazy" decoding="async">
+          <img src="assets/latkovnik/sako-tra031.jpg" alt="Sako v šedém káru s červenou TRA031" loading="lazy" decoding="async">
+          <img src="assets/latkovnik/sako-tra041.jpg" alt="Sako v navy křídovém proužku TRA041" loading="lazy" decoding="async">
+          <img src="assets/latkovnik/sako-00-navy.jpg" alt="Navy sako Le Premier podle fotek z webu" loading="lazy" decoding="async">
+        </div>
+      </div>
+      <aside class="fabcopy">
+        <p class="rv">Velkou příležitost využití AI vnímám ve vizualizaci kombinací, které uvádíte na webu. To by mohlo pomoci nejen klientům v průběhu procesu, ale jako inspirace celé škály možností.</p>
+        <p class="rv">Vzorky jsou z reálného <a href="http://fabric.ustyylit.com/f.html?m=TR908" target="_blank" rel="noopener">látkového katalogu</a>.</p>
+        <p class="rv">Další by znamenaly generování v „minutách“, ne focení.</p>
+        <div class="fabpick rv">
+          <span class="fablbl">Ušili jsme digitálně</span>
+          <div class="fabchips" id="fabchips" role="group" aria-label="Výběr látky">
+            <button type="button" class="sel" data-name="Fleur-de-lis jacquard" data-info="vzorek TR908 · večerní sako" aria-label="Fleur-de-lis jacquard TR908"><img src="assets/latkovnik/chip-tr908.jpg" alt=""></button>
+            <button type="button" data-name="Modro-bílé káro" data-info="100% vlna · 270 g · TRA028" aria-label="Modro-bílé káro TRA028"><img src="assets/latkovnik/chip-tra028.jpg" alt=""></button>
+            <button type="button" data-name="Béžový tartan" data-info="100% vlna · 275 g · skladem 85 m" aria-label="Béžový tartan TRA029"><img src="assets/latkovnik/chip-tra029.jpg" alt=""></button>
+            <button type="button" data-name="Šedo-modré káro" data-info="100% vlna · 270 g · skladem 45 m" aria-label="Šedo-modré káro TRA030"><img src="assets/latkovnik/chip-tra030.jpg" alt=""></button>
+            <button type="button" data-name="Káro s červenou" data-info="100% vlna · 275 g · skladem 73 m" aria-label="Šedé káro s červenou TRA031"><img src="assets/latkovnik/chip-tra031.jpg" alt=""></button>
+            <button type="button" data-name="Křídový proužek" data-info="100% vlna · 270 g · TRA041" aria-label="Navy křídový proužek TRA041"><img src="assets/latkovnik/chip-tra041.jpg" alt=""></button>
+            <button type="button" data-name="Navy vlna" data-info="vaše sako z lepremier.cz" aria-label="Navy vlna"><img src="assets/latkovnik/chip-navy.jpg" alt=""></button>
+          </div>
+          <div class="fabmeta"><b id="fabname">Fleur-de-lis jacquard</b><span id="fabinfo">vzorek TR908 · večerní sako</span></div>
+        </div>
+            </aside>
+    </div>
+  </div>
+</section>
+
+<!-- KDE TO DNES JE -->
+<section id="stav">
+  <div class="w">
+    <div class="quote rv">
+      <img src="assets/jakub-skupin.png" alt="Jakub Skupin">
+      <blockquote>
+        <p>„Berte to jako předfinální výsledek. Světlo, výrazy ve tvářích a detaily se dají doladit, ale to už je postprodukce, která zabírá čas, a pustím se do ní, až když vám to bude dávat smysl.“</p>
+        <cite><b>Jakub Skupin</b></cite>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- STÁHNOUT -->
+<section id="stahnout">
+  <div class="w dl">
+    <div class="copy">
+      <span class="eyebrow rv">K testování</span>
+      <h2 class="rv">Všechen obsah je rovnou váš</h2>
+      <p class="rv">Použijte ho kdekoli.</p>
+      <a class="btn rv" href="assets/le-premier-ukazky.zip" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+        <span>Stáhnout podklady<small>37 fotek a 2 videa · ZIP, 43 MB</small></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ZAVER -->
+<section id="kontakt" class="closing">
+  <div class="w">
+    <h2 class="vz rv" aria-label="Vznikne to">V<span class="swap" aria-hidden="true"><span class="z">z</span><span class="y">y</span></span>nikne to</h2>
+    <p class="rv">Vy víte co. Já vím jak.</p>
+    <a class="libtn rv" href="https://www.linkedin.com/in/jakubskupin/" target="_blank" rel="noopener">Napsat na LinkedIn &#8599;&#xFE0E;</a>
+    <a class="tel rv" href="tel:+420723770932">723 770 932</a>
+  </div>
+</section>
+
+<div id="flyphone">
+  <div class="phone">
+    <div class="screen">
+      <video src="assets/gilet-reel-v3a.mp4" poster="assets/gilet-reel-poster.jpg" autoplay muted loop playsinline></video>
+      <div class="ig-top">
+        <span>Reels</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+      </div>
+      <div class="ig-right">
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l8.8 8.8 8.8-8.8a5.5 5.5 0 0 0 0-7.8Z"/></svg><span>12,4 tis.</span></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-3.8-.9L3 21l1.9-5.2A8.4 8.4 0 1 1 21 11.5Z"/></svg><span>184</span></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4Z"/></svg><span>2 061</span></div>
+        <div><svg viewBox="0 0 24 24" fill="#fff"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></div>
+        <div><span class="cover"></span></div>
+      </div>
+      <div class="ig-bottom">
+        <div class="ig-user"><span class="av"></span><span>lepremiercz</span><span class="follow">Sledovat</span></div>
+        <p class="ig-cap">Výběr z letní kolekce. Oboustranná prošívaná vesta, béžová a oranžová, jeden kus na dvě nálady <span class="more">… více</span></p>
+        <div class="ig-audio"><svg viewBox="0 0 24 24" fill="#fff"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg><span>lepremiercz · Původní zvuk</span></div>
+      </div>
+      <div class="ig-bar"><i></i></div>
+      <div class="ig-home"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.rv');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);} });
+  },{rootMargin:'0px 0px -8% 0px',threshold:.08});
+  els.forEach(function(e,i){ e.style.transitionDelay=(Math.min(i%6,5)*60)+'ms'; io.observe(e); });
+})();
+
+(function(){
+  var cmp=document.querySelector('.cmp'); if(!cmp) return;
+  var ref=cmp.querySelector('.ref');
+  function toggle(){
+    window.dispatchEvent(new CustomEvent('cmp-toggled'));
+    var open=cmp.classList.toggle('open');
+    ref.setAttribute('aria-expanded', open?'true':'false');
+    ref.setAttribute('aria-label', open?'Zasunout packshot zpět':'Vysunout packshot a porovnat s reelem');
+  }
+  ref.querySelector('.pic').addEventListener('click',toggle);
+  ref.addEventListener('keydown',function(e){ if(e.target.closest('a')) return; if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();} });
+})();
+
+(function(){
+  var track=document.getElementById('ctrack'); if(!track) return;
+  var dots=[].slice.call(document.getElementById('cdots').children);
+  var count=document.getElementById('ccount');
+  var n=track.children.length, idx=0, hold=false, holdT=null, timer=null;
+  function paint(i){ idx=i; dots.forEach(function(d,k){d.className=k===i?'on':''}); count.textContent=(i+1)+'/'+n; }
+  track.addEventListener('scroll',function(){ var i=Math.round(track.scrollLeft/track.clientWidth); if(i!==idx&&i>=0&&i<n) paint(i); },{passive:true});
+  function pause(ms){ hold=true; clearTimeout(holdT); if(ms) holdT=setTimeout(function(){hold=false},ms); }
+  track.addEventListener('pointerdown',function(){pause(5000)},{passive:true});
+  var post=track.closest('.post');
+  post.addEventListener('mouseenter',function(){hold=true});
+  post.addEventListener('mouseleave',function(){hold=false});
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    timer=setInterval(function(){
+      if(hold||document.hidden) return;
+      var r=track.getBoundingClientRect();
+      if(r.bottom<0||r.top>window.innerHeight) return;
+      track.scrollTo({left:((idx+1)%n)*track.clientWidth,behavior:'smooth'});
+    },2800);
+  }
+})();
+
+(function(){
+  var wrap=document.getElementById('btwscroll'); if(!wrap) return;
+  var mqs=[window.matchMedia('(max-width: 899px)'),window.matchMedia('(max-height: 739px)'),window.matchMedia('(prefers-reduced-motion: reduce)')];
+  function small(){return mqs.some(function(m){return m.matches})}
+  var master=document.getElementById('b-m45');
+  var defs=[
+    {el:document.getElementById('b-vid'), d:0},
+    {el:document.getElementById('b-169'), d:.30},
+    {el:document.getElementById('b-11'),  d:.50}
+  ];
+  var geo=null;
+  function measure(){
+    defs.forEach(function(c){c.el.style.transform='';c.el.style.opacity='';});
+    var m=master.getBoundingClientRect();
+    geo=defs.map(function(c){
+      var r=c.el.getBoundingClientRect();
+      return {dx:(m.left+m.width/2)-(r.left+r.width/2), dy:(m.top+m.height/2)-(r.top+r.height/2)};
+    });
+  }
+  function ease(t){return t<0?0:t>1?1:1-Math.pow(1-t,3)}
+  var ticking=false;
+  function update(){
+    ticking=false;
+    if(small()){ defs.forEach(function(c){c.el.style.transform='';c.el.style.opacity='';}); geo=null; return; }
+    if(!geo) measure();
+    var r=wrap.getBoundingClientRect();
+    var total=r.height-window.innerHeight;
+    var p=total>0?Math.min(1,Math.max(0,-r.top/total)):1;
+    defs.forEach(function(c,i){
+      var pe=ease((p-c.d)/(.72-c.d));
+      c.el.style.transform='translate('+(geo[i].dx*(1-pe)).toFixed(1)+'px,'+(geo[i].dy*(1-pe)).toFixed(1)+'px) scale('+(.4+.6*pe).toFixed(3)+')';
+      c.el.style.opacity=Math.min(1,pe*2).toFixed(2);
+      var n=c.el.querySelector('.bnote'); if(n) n.style.opacity=p>.72?1:0;
+    });
+    var mn=master.querySelector('.bnote'); if(mn) mn.style.opacity=p>.72?1:0;
+  }
+  function onS(){ if(!ticking){ticking=true;requestAnimationFrame(update);} }
+  window.addEventListener('scroll',onS,{passive:true});
+  window.addEventListener('resize',function(){geo=null;onS();});
+  update();
+})();
+
+(function(){
+  var fly=document.getElementById('flyphone');
+  var a=document.getElementById('slot-hero'), b=document.getElementById('slot-uc1');
+  if(!fly||!a||!b) return;
+  var mq=window.matchMedia('(max-width: 899px)');
+  var endScroll=1, ticking=false, loop=null;
+  function measure(){
+    var rb=b.getBoundingClientRect();
+    var docTop=rb.top+window.scrollY;
+    endScroll=Math.max(1, docTop+rb.height/2-window.innerHeight/2);
+  }
+  function place(){
+    ticking=false;
+    if(mq.matches) return;
+    var ra=a.getBoundingClientRect(), rb=b.getBoundingClientRect();
+    var p=Math.min(1,Math.max(0,window.scrollY/endScroll));
+    var x=ra.left+(rb.left-ra.left)*p;
+    var y=ra.top+(rb.top-ra.top)*p;
+    fly.style.transform='translate('+x.toFixed(1)+'px,'+y.toFixed(1)+'px)';
+  }
+  function onS(){ if(!ticking){ticking=true;requestAnimationFrame(place);} }
+  function mode(){
+    if(mq.matches){
+      if(fly.parentNode!==b) b.appendChild(fly);
+      fly.style.position='static'; fly.style.transform='';
+      a.parentNode.style.display='none';
+    } else {
+      if(fly.parentNode!==document.body) document.body.appendChild(fly);
+      fly.style.position='fixed'; a.parentNode.style.display='';
+      measure(); place();
+    }
+  }
+  // pri otevirani packshotu se slot posouva bez scrollu, drz krok
+  var cmp=document.querySelector('.cmp');
+  if(cmp){
+    var trackSlot=function(){
+      var t0=Date.now();
+      cancelAnimationFrame(loop);
+      (function tick(){ place(); if(Date.now()-t0<800) loop=requestAnimationFrame(tick); })();
+    };
+    cmp.addEventListener('click',trackSlot);
+    window.addEventListener('cmp-toggled',trackSlot);
+  }
+  window.addEventListener('scroll',onS,{passive:true});
+  window.addEventListener('resize',function(){mode();});
+  window.addEventListener('load',function(){mode();});
+  if(mq.addEventListener) mq.addEventListener('change',mode);
+  mode();
+})();
+
+(function(){
+  var sec=document.getElementById('kontakt'); if(!sec) return;
+  var z=sec.querySelector('.swap .z'), y=sec.querySelector('.swap .y');
+  if(!z||!y) return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){ z.style.opacity=0; y.style.opacity=1; return; }
+  var ticking=false;
+  function upd(){
+    ticking=false;
+    var r=sec.getBoundingClientRect(), vh=window.innerHeight||1;
+    var p=(vh-r.top)/(vh*0.4);
+    p=p<0?0:p>1?1:p;
+    var t=(p-0.35)/0.30; t=t<0?0:t>1?1:t;
+    z.style.opacity=(1-t).toFixed(3);
+    y.style.opacity=t.toFixed(3);
+  }
+  function onS(){ if(!ticking){ticking=true;requestAnimationFrame(upd);} }
+  window.addEventListener('scroll',onS,{passive:true});
+  window.addEventListener('resize',onS);
+  upd();
+})();
+
+(function(){
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    document.querySelectorAll('video[autoplay]').forEach(function(v){v.removeAttribute('autoplay');v.pause();});
+  }
+})();
+
+(function(){
+  var stage=document.getElementById('fabstage'); if(!stage) return;
+  var imgs=stage.querySelectorAll('img');
+  var chips=document.querySelectorAll('#fabchips button');
+  var nm=document.getElementById('fabname'), inf=document.getElementById('fabinfo');
+  var meta=document.querySelector('.fabmeta'); if(meta) meta.setAttribute('aria-live','polite');
+  for(var a=0;a<chips.length;a++) chips[a].setAttribute('aria-pressed', a===0?'true':'false');
+  var cur=0;
+  function sel(i){
+    if(i===cur) return;
+    for(var k=0;k<imgs.length;k++) imgs[k].classList.toggle('on',k===i);
+    for(var k=0;k<chips.length;k++){ chips[k].classList.toggle('sel',k===i); chips[k].setAttribute('aria-pressed', k===i?'true':'false'); }
+    nm.textContent=chips[i].getAttribute('data-name');
+    inf.textContent=chips[i].getAttribute('data-info');
+    cur=i;
+  }
+  for(var i=0;i<chips.length;i++)(function(i){
+    chips[i].addEventListener('click',function(){sel(i)});
+    chips[i].addEventListener('mouseenter',function(){sel(i)});
+    chips[i].addEventListener('focus',function(){sel(i)});
+  })(i);
+  // lupa na strukturu latky
+  if(window.matchMedia('(hover:hover)').matches){
+    stage.addEventListener('mousemove',function(e){
+      var r=stage.getBoundingClientRect();
+      var x=((e.clientX-r.left)/r.width*100).toFixed(2), y=((e.clientY-r.top)/r.height*100).toFixed(2);
+      for(var k=0;k<imgs.length;k++) imgs[k].style.transformOrigin=x+'% '+y+'%';
+      stage.classList.add('zoom');
+    });
+    stage.addEventListener('mouseleave',function(){stage.classList.remove('zoom')});
+  }
+})();
+</script>
+</body>
+</html>
