@@ -417,10 +417,10 @@ section{padding:64px 0;border-top:1px solid var(--border)}
 /* download */
 .dl{display:flex;flex-direction:column;gap:28px}
 
-.dl .btn{display:inline-flex;align-items:center;gap:14px;background:var(--text);color:#fff;text-decoration:none;font-family:var(--h);font-weight:700;font-size:18px;letter-spacing:-.02em;padding:18px 26px;border-radius:14px;transition:transform .2s ease,box-shadow .2s ease;box-shadow:0 10px 30px rgba(26,26,24,.18);align-self:flex-start}
-.dl .btn:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(26,26,24,.24)}
-.dl .btn svg{width:22px;height:22px;flex:0 0 auto}
-.dl .btn small{display:block;font-family:var(--b);font-weight:500;font-size:12px;letter-spacing:0;opacity:.75;margin-top:2px}
+.dl .btn{display:inline-flex;align-items:center;gap:12px;background:transparent;color:var(--text);text-decoration:none;font-family:var(--h);font-weight:700;font-size:15px;letter-spacing:-.01em;padding:13px 20px;border-radius:10px;border:1px solid var(--border);transition:border-color .25s ease,background .25s ease;align-self:flex-start}
+.dl .btn:hover{border-color:var(--text-3);background:var(--accent-soft)}
+.dl .btn svg{width:18px;height:18px;flex:0 0 auto}
+.dl .btn small{display:block;font-family:var(--b);font-weight:500;font-size:11.5px;letter-spacing:0;color:var(--text-3);margin-top:2px}
 .dl .files{margin:0;padding:0;list-style:none;border-top:1px solid var(--border);font-size:14px;color:var(--text-2)}
 .dl .files li{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid var(--border)}
 .dl .files li span:last-child{color:var(--text-3);white-space:nowrap;font-variant-numeric:tabular-nums}
