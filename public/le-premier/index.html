@@ -201,6 +201,7 @@ section{padding:64px 0;border-top:1px solid var(--border)}
 .fabpick .fabmeta{padding:0;min-height:0}
 .fabpick .cap{font-size:12.5px;color:var(--text-3);line-height:1.5;text-align:left;max-width:none;margin:0}
 .fabcopy{display:flex;flex-direction:column;gap:18px}
+@media(max-width:959px){.fabpick{order:-1;border-top:0;padding-top:0;border-bottom:1px solid var(--border);padding-bottom:16px}}
 .fabcopy p{color:var(--text-2)}
 .fabcopy .split{display:grid;grid-template-columns:1fr 1fr;gap:14px;border-top:1px solid var(--border);padding-top:16px;font-size:13.5px;line-height:1.5;color:var(--text-2)}
 .fabcopy .split b{display:block;font-family:var(--h);font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);margin-bottom:4px}
@@ -272,7 +273,7 @@ section{padding:64px 0;border-top:1px solid var(--border)}
 .bcard img{width:100%;display:block;object-fit:cover}
 .bnote{position:absolute;top:calc(100% + 8px);left:2px;font-size:12px;color:var(--text-3);white-space:nowrap;opacity:0;transition:opacity .4s}
 #b-11 .bnote{top:auto;bottom:calc(100% + 8px)}
-.btwcopy .bnote.bstat{position:static;display:block;margin-top:8px;opacity:1}
+.btwcopy .bnote.bstat{position:static;display:block;margin-top:8px;opacity:0;transition:opacity .4s}
 
 /* master: cista fotka vedle textu, nehybe se */
 #b-m45{left:calc(50vw - 60px);top:4vh;width:min(24vw,38vh);z-index:3;border-radius:14px;background:transparent}
@@ -391,7 +392,7 @@ section{padding:64px 0;border-top:1px solid var(--border)}
   #b-169::after{display:none}
   .siteh .rez{display:none}
   #b-vid .b916in video{width:100%}
-  .bnote{position:static;opacity:1;margin-top:6px;white-space:normal}
+  .bnote{position:static;opacity:1!important;margin-top:6px;white-space:normal}
   .only-anim{display:none}
 }
 
@@ -462,9 +463,9 @@ section{padding:64px 0;border-top:1px solid var(--border)}
 <div class="w">
   <div class="hero">
     <div class="herotext">
-    <span class="eyebrow rv">Pro Jakuba Lohniského · Le Premier · srpen 2026</span>
+    <span class="eyebrow rv">Pro Jakuba Lohniského · Le Premier</span>
     <h1 class="rv">Čtyři způsoby, jak AI ukáže vaše řemeslo</h1>
-    <p class="lede rv">Všechny produkty ve vizualizacích jsou Le Premier.<br>Zaměřte se na jejich reálnost.<br>A vydržte až do konce.</p>
+    <p class="lede rv">Všechny produkty jsou Le Premier.<br>Zaměřte se na jejich reálnost.<br>A vydržte až do konce.</p>
     </div>
     <div class="heroslot rv"><div class="phoneslot" id="slot-hero"></div></div>
   </div>
@@ -498,7 +499,7 @@ section{padding:64px 0;border-top:1px solid var(--border)}
     <div class="copy">
       <div class="num rv"><b>02</b></div>
       <h2 class="rv">Z jednoho kusu celé focení</h2>
-      <p class="big rv">Prostředí navíc zůstalo konzistentní s webem.</p>
+      <p class="big rv">Prostředí zůstalo konzistentní s webem.</p>
       <p class="opp rv"><b>Příležitost:</b> kdyby byl <a href="https://www.instagram.com/lepremiercz/" target="_blank" rel="noopener">Instagram</a> jeden z prodejních kanálů, tohle by mohla být cesta k pravidelnějšímu publikování.</p>
     </div>
     <div class="mock rv">
@@ -804,7 +805,7 @@ section{padding:64px 0;border-top:1px solid var(--border)}
   var ticking=false;
   function update(){
     ticking=false;
-    if(small()){ defs.forEach(function(c){c.el.style.transform='';c.el.style.opacity='';}); geo=null; return; }
+    if(small()){ defs.forEach(function(c){c.el.style.transform='';c.el.style.opacity='';}); var bs2=document.querySelector('.bnote.bstat'); if(bs2) bs2.style.opacity=''; geo=null; return; }
     if(!geo) measure();
     var r=wrap.getBoundingClientRect();
     var total=r.height-window.innerHeight;
@@ -816,6 +817,7 @@ section{padding:64px 0;border-top:1px solid var(--border)}
       var n=c.el.querySelector('.bnote'); if(n) n.style.opacity=p>.72?1:0;
     });
     var mn=master.querySelector('.bnote'); if(mn) mn.style.opacity=p>.72?1:0;
+    var bs=document.querySelector('.bnote.bstat'); if(bs) bs.style.opacity=p>.72?1:0;
   }
   function onS(){ if(!ticking){ticking=true;requestAnimationFrame(update);} }
   window.addEventListener('scroll',onS,{passive:true});
