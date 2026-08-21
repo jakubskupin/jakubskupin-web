@@ -384,15 +384,24 @@ section{padding:64px 0;border-top:1px solid var(--border)}
 }
 @media(max-width:899px),(max-height:739px),(prefers-reduced-motion:reduce){
   .btwscroll{height:auto}
-  .btwstage{position:static;height:auto;overflow:visible;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:26px 14px;padding:0 20px}
-  .btwcopy{position:static;width:auto;grid-column:1/-1}
-  .btwstage .bcard{position:static;min-width:0;width:100%!important;left:auto!important;top:auto!important;transform:none!important;opacity:1!important}
-  #b-m45{grid-column:1/-1;max-width:420px;justify-self:center}
-  #b-169{grid-column:1/-1;max-height:none;overflow:visible}
+  .btwstage{position:static;height:auto;overflow:visible;display:flex;flex-direction:column;gap:20px;padding:0 20px}
+  .btwcopy{display:contents}
+  .btwcopy .num{order:0}
+  .btwcopy h2{order:1}
+  .btwcopy p.rv:not(.opp){order:2}
+  .btwcopy .opp{order:3;margin-bottom:8px}
+  #b-m45{order:4}
+  #b-vid{order:5}
+  #b-169{order:6;max-height:none;overflow:visible}
+  .btwcopy .bnote.bstat{order:7;margin-top:-12px}
+  #b-11{order:8}
+  .btwstage .bcard{position:static;min-width:0;width:100%!important;max-width:420px;margin-left:auto;margin-right:auto;left:auto!important;top:auto!important;transform:none!important;opacity:1!important}
   #b-169::after{display:none}
   .siteh .rez{display:none}
   #b-vid .b916in video{width:100%}
   .bnote{position:static;opacity:1!important;margin-top:6px;white-space:normal}
+  #b-m45 .bnote{position:static;color:var(--text-3);text-shadow:none;left:auto;bottom:auto}
+  .btwcopy .bnote.bstat{position:static;opacity:1!important;white-space:normal;max-width:420px;margin-left:auto;margin-right:auto;width:100%}
   .only-anim{display:none}
 }
 
