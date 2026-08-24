@@ -132,10 +132,6 @@ nav a.on{color:var(--text)}
   .zoom .snd,.zoom .fs{opacity:1}
   .zoom .fs{display:block}
   .zcap{position:static;opacity:1!important;margin:40px 0 0}
-  .frow{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:end;justify-items:center}
-  .fmt{width:100%}
-  .fmt .box{margin:0 auto}
-  .fmt small{max-width:100%}
   .card[style*="grid-template-columns"]{grid-template-columns:1fr!important}
 }
 
@@ -171,10 +167,6 @@ html.no-js .zoom video{position:static;opacity:1!important}
 html.no-js .zoom .snd,html.no-js .zoom .fs{opacity:1}
 html.no-js .zoom .fs{display:block}
 html.no-js .zcap{position:static;opacity:1!important;margin:40px 0 0}
-html.no-js .frow{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:end;justify-items:center}
-html.no-js .fmt{width:100%}
-html.no-js .fmt .box{margin:0 auto}
-html.no-js .fmt small{max-width:100%}
 html.no-js .card[style*="grid-template-columns"]{grid-template-columns:1fr!important}
 
 
@@ -187,11 +179,19 @@ html.no-js .card[style*="grid-template-columns"]{grid-template-columns:1fr!impor
 .fmt .box{position:relative;overflow:hidden;border-radius:6px;border:1.5px solid var(--text);background:transparent;display:grid;place-items:center;cursor:pointer}
 .fmt .box i{font-style:normal;font-size:12px;color:var(--text);position:relative;z-index:1;transition:opacity .3s}
 .fmt .box img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .35s ease}
-.fmt .box:hover img,.fmt .box:active img{opacity:1}
-.fmt .box:hover i,.fmt .box:active i{opacity:0}
+.fmt .box:hover img,.fmt .box.on img{opacity:1}
+.fmt .box:hover i,.fmt .box.on i{opacity:0}
+.fmt .box:focus-visible{outline:2px solid var(--text);outline-offset:3px}
 .fmt b{font-weight:500;font-size:13px;margin-top:12px}
 .fmt small{font-size:12px;color:var(--text-tertiary);margin-top:2px;text-align:center}
-@media (max-width:767px){.formats{--u:0.085px}.frow{gap:14px}.fmt .box img{opacity:1}.fmt .box i{opacity:0}}
+@media (max-width:767px){
+  .formats{--u:0.085px}
+  .frow{display:grid;grid-template-columns:1fr 1fr;gap:22px 14px;align-items:end;justify-items:center}
+  .fmt{width:100%}
+  .fmt .box{margin:0 auto}
+  .fmt small{max-width:100%}
+}
+@media (max-width:767px){html.no-js .fmt .box img{opacity:1}html.no-js .fmt .box i{opacity:0}}
 
 /* ručně psané anotace (šipky + poznámky) */
 .anot{position:absolute;pointer-events:none;color:var(--ink);font-family:Caveat,cursive;font-weight:600;font-size:27px;line-height:1.05;letter-spacing:.01em;white-space:nowrap;z-index:6}
@@ -377,11 +377,12 @@ footer{padding:60px 0;border-top:1px solid var(--border);color:var(--text-tertia
   <div class="kicker">Připraveno na formáty</div>
   <h2 style="font-size:32px;max-width:22ch">Každý záběr rovnou ve formátech, kam ho pošlete</h2>
   <p class="lead" style="margin-top:14px">Jedna scéna, ořezy pro sítě, e-shop i reklamu. Soubory dostanete pojmenované podle kanálu, nic nedořezáváte.</p>
+  <p style="margin-top:10px;font-size:13px;color:var(--text-tertiary)">Klepnutím na formát se v něm ukáže scéna</p>
   <div class="frow rel">
-    <div class="fmt"><div class="box" style="width:calc(1080*var(--u));height:calc(1920*var(--u))"><img src="/vizualy/assets/9_16_0805.jpg" alt="Hodinky v tyrkysové studiové scéně s plovoucími ozubenými koly, formát na výšku" width="495" height="880" loading="lazy" decoding="async"><i>9:16</i></div><b>Reels, Stories, TikTok</b><small>1080 × 1920</small></div>
-    <div class="fmt"><div class="box" style="width:calc(1080*var(--u));height:calc(1350*var(--u))"><img src="/vizualy/assets/4.jpg" alt="Hodinky na šedozeleném pozadí s mosaznými koly a hodinářskou lupou" width="880" height="880" loading="lazy" decoding="async"><i>4:5</i></div><b>Instagram a Meta feed</b><small>1080 × 1350</small></div>
-    <div class="fmt"><div class="box" style="width:calc(1080*var(--u));height:calc(1080*var(--u))"><img src="/vizualy/assets/1_1_08056.jpg" alt="Hodinky v tyrkysové scéně se skleněnými kameny a ozubenými koly" width="880" height="880" loading="lazy" decoding="async"><i>1:1</i></div><b>Feed, carousel, e-shop</b><small>1080 × 1080</small></div>
-    <div class="fmt"><div class="box" style="width:calc(1920*var(--u));height:calc(1080*var(--u))"><img src="/vizualy/assets/8.jpg" alt="Hodinky na tmavé látce s drobnými ozubenými koly" width="880" height="880" loading="lazy" decoding="async"><i>16:9</i></div><b>YouTube, web, prezentace</b><small>1920 × 1080</small></div>
+    <div class="fmt"><div class="box" role="button" tabindex="0" aria-pressed="false" style="width:calc(1080*var(--u));height:calc(1920*var(--u))"><img src="/vizualy/assets/9_16_0805.jpg" alt="Hodinky v tyrkysové studiové scéně s plovoucími ozubenými koly, formát na výšku" width="495" height="880" loading="lazy" decoding="async"><i>9:16</i></div><b>Reels, Stories, TikTok</b><small>1080 × 1920</small></div>
+    <div class="fmt"><div class="box" role="button" tabindex="0" aria-pressed="false" style="width:calc(1080*var(--u));height:calc(1350*var(--u))"><img src="/vizualy/assets/4.jpg" alt="Hodinky na šedozeleném pozadí s mosaznými koly a hodinářskou lupou" width="880" height="880" loading="lazy" decoding="async"><i>4:5</i></div><b>Instagram a Meta feed</b><small>1080 × 1350</small></div>
+    <div class="fmt"><div class="box" role="button" tabindex="0" aria-pressed="false" style="width:calc(1080*var(--u));height:calc(1080*var(--u))"><img src="/vizualy/assets/1_1_08056.jpg" alt="Hodinky v tyrkysové scéně se skleněnými kameny a ozubenými koly" width="880" height="880" loading="lazy" decoding="async"><i>1:1</i></div><b>Feed, carousel, e-shop</b><small>1080 × 1080</small></div>
+    <div class="fmt"><div class="box" role="button" tabindex="0" aria-pressed="false" style="width:calc(1920*var(--u));height:calc(1080*var(--u))"><img src="/vizualy/assets/8.jpg" alt="Hodinky na tmavé látce s drobnými ozubenými koly" width="880" height="880" loading="lazy" decoding="async"><i>16:9</i></div><b>YouTube, web, prezentace</b><small>1920 × 1080</small></div>
   </div>
 </div></section>
 
@@ -612,6 +613,15 @@ P('vP').textContent=p;P('vV').textContent=v;P('vC').textContent=c;
 P('calcTotal').innerHTML=total.toLocaleString('cs-CZ').replace(/\u00a0/g,' ')+' Kč <span class="tagz">zaváděcí cena</span>';
 P('calcSub').textContent=p+' '+(p===1?'produkt':p<5?'produkty':'produktů')+' × '+v+' '+(v===1?'vizuál':v<5?'vizuály':'vizuálů')+' + '+c+' '+(c===1?'video':(c>1&&c<5)?'videa':'videí')+' do 30 s';}
 [rP,rV,rC].forEach(r=>r.addEventListener('input',calc));calc();
+})();
+</script>
+<script>
+(function(){
+document.querySelectorAll('.fmt .box').forEach(b=>{
+  const t=()=>{const on=b.classList.toggle('on');b.setAttribute('aria-pressed',on?'true':'false')};
+  b.addEventListener('click',t);
+  b.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();t()}});
+});
 })();
 </script>
 </body>
