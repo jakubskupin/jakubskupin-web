@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Pro Equator · Jakub Skupin</title>
+<meta property="og:type" content="website">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:site_name" content="Jakub Skupin">
+<meta property="og:title" content="Pro Equator · Jakub Skupin">
+<meta property="og:description" content="Reels a Instagram carousel pro Equator Wavy 50C. Kolo je skutečné, scéna kolem něj vznikla v AI.">
+<meta property="og:url" content="https://jakubskupin.cz/equator/">
+<meta property="og:image" content="https://jakubskupin.cz/equator/assets/og/og-equator.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Equator Wavy 50C ve světle, headline Dva formáty, které vznikly bez focení">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Pro Equator · Jakub Skupin">
+<meta name="twitter:image" content="https://jakubskupin.cz/equator/assets/og/og-equator.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0A0A0B; --bg-2:#121214; --card:#161618;
+  --text:#F3F3F1; --text-2:#9C9C98; --text-3:#6E6E6B;
+  --border:#26262A; --line:#1D1D20;
+  --h:'Syne',sans-serif; --b:'Manrope',ui-sans-serif,system-ui,sans-serif;
+  --ui:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{margin:0;overflow-x:hidden;background:var(--bg);color:var(--text);font-family:var(--b);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img,video{max-width:100%;height:auto;display:block}
+.w{max-width:1120px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+@media(min-width:768px){.w{padding:0 32px}}
+h1,h2{font-family:var(--h);font-weight:700;letter-spacing:-.03em;margin:0;text-wrap:balance}
+h1{font-size:clamp(32px,5.4vw,54px);line-height:1.06}
+h2{font-size:clamp(25px,3.5vw,36px);line-height:1.12}
+p{margin:0}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--text-3)}
+.lede{font-size:clamp(16.5px,2.1vw,19px);line-height:1.6;color:var(--text-2);max-width:52ch}
+.nb{white-space:nowrap}
+b,strong{font-weight:600;color:var(--text)}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+/* zrno pres celou stranku */
+.grain{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* horni lista */
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 0;font-size:13px;color:var(--text-2)}
+.top .brand{font-family:var(--h);font-weight:700;letter-spacing:-.02em;color:var(--text);text-decoration:none;font-size:15px;white-space:nowrap}
+.top .for{display:flex;align-items:center;gap:12px;min-width:0}
+.top .for span{white-space:nowrap}
+.top .for img{height:17px;width:auto;opacity:.92}
+@media(max-width:479px){.top{font-size:12px}.top .for span{display:none}.top .for img{height:15px}}
+
+/* hero */
+.hero{padding:26px 0 56px;display:grid;gap:34px;align-items:center}
+@media(min-width:900px){.hero{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:56px;padding:44px 0 84px}}
+.herotext{display:flex;flex-direction:column;gap:22px;max-width:620px;min-width:0}
+.herofig{position:relative;min-width:0;display:flex;justify-content:center}
+.herofig img{width:auto;height:auto;max-height:min(580px,66vh);max-width:100%;
+  -webkit-mask-image:linear-gradient(to right,rgba(0,0,0,0),#000 16%,#000 84%,rgba(0,0,0,0)),linear-gradient(to bottom,rgba(0,0,0,0),#000 11%,#000 87%,rgba(0,0,0,0));
+  -webkit-mask-composite:source-in;
+  mask-image:linear-gradient(to right,rgba(0,0,0,0),#000 16%,#000 84%,rgba(0,0,0,0)),linear-gradient(to bottom,rgba(0,0,0,0),#000 11%,#000 87%,rgba(0,0,0,0));
+  mask-composite:intersect}
+.heroglow{position:absolute;left:50%;top:50%;width:min(760px,120vw);aspect-ratio:1;transform:translate(-50%,-50%);
+  background:radial-gradient(circle,rgba(150,160,175,.10),rgba(10,10,11,0) 62%);pointer-events:none;z-index:0}
+
+@media(max-width:899px){
+  .herofig{width:100%}
+  .herofig img{width:min(330px,86vw);height:min(400px,46vh);object-fit:cover;object-position:center 44%;max-height:none}
+  .heroglow{width:min(560px,116vw)}
+}
+
+/* sekce */
+section{padding:56px 0;border-top:1px solid var(--line);position:relative}
+@media(min-width:768px){section{padding:84px 0}}
+.uc{display:grid;gap:36px;align-items:center}
+@media(min-width:900px){.uc{grid-template-columns:1fr 1.05fr;gap:64px}.uc.flip .copy{order:2}.uc.flip .mock{order:1}}
+.uc .copy{display:flex;flex-direction:column;gap:18px;max-width:48ch}
+.num{display:flex;align-items:center;gap:14px}
+.num b{font-family:var(--h);font-weight:700;font-size:13px;color:var(--text-3);letter-spacing:.06em}
+.num span{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:4px 9px;border-radius:999px;border:1px solid var(--border);color:var(--text-2)}
+.uc .copy p.big{font-size:17px;color:var(--text-2);line-height:1.58}
+.meta{display:flex;flex-wrap:wrap;gap:8px;padding-top:2px}
+.meta span{font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);
+  border:1px solid var(--border);border-radius:999px;padding:5px 10px}
+.mock{display:flex;flex-direction:column;align-items:center;gap:14px;min-width:0;width:100%}
+.cap{font-size:13px;color:var(--text-3);text-align:center;max-width:42ch;line-height:1.5}
+
+/* telefon s reelem */
+.phone{position:relative;width:min(340px,84vw,42vh);aspect-ratio:9/19.2;background:#000;border-radius:42px;padding:9px;
+  box-shadow:0 34px 90px rgba(0,0,0,.6),0 0 0 1px #303034;border:1px solid #35353a}
+.phone::before{content:"";position:absolute;top:15px;left:50%;transform:translateX(-50%);width:92px;height:25px;background:#000;border-radius:20px;z-index:5}
+.screen{position:relative;width:100%;height:100%;border-radius:34px;overflow:hidden;background:#000;font-family:var(--ui);color:#fff}
+.screen video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ig-top{position:absolute;top:0;left:0;right:0;padding:54px 15px 0;display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:16px;z-index:3;background:linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,0))}
+.ig-top span{padding-bottom:12px}
+.ig-top svg{width:22px;height:22px}
+.ig-right{position:absolute;right:11px;bottom:112px;display:flex;flex-direction:column;gap:17px;align-items:center;z-index:3;font-size:11.5px;font-weight:600}
+.ig-right div{display:flex;flex-direction:column;align-items:center;gap:4px;text-shadow:0 1px 6px rgba(0,0,0,.6)}
+.ig-right svg{width:25px;height:25px;filter:drop-shadow(0 1px 4px rgba(0,0,0,.5))}
+.ig-right .cover{width:25px;height:25px;border-radius:6px;border:2px solid #fff;background:#0d0d0e center/76% no-repeat url(/equator/assets/equator-logo.png)}
+.ig-bottom{position:absolute;left:0;right:0;bottom:0;padding:38px 66px 20px 13px;z-index:3;background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.6));font-size:12.5px;line-height:1.35}
+.ig-user{display:flex;align-items:center;gap:9px;margin-bottom:8px;font-weight:700;font-size:13px}
+.av{width:30px;height:30px;border-radius:50%;background:#131315 center/74% no-repeat url(/equator/assets/equator-logo.png);border:1px solid rgba(255,255,255,.22);flex:0 0 auto}
+.ig-user .follow{font-weight:600;font-size:11.5px;padding:4px 9px;border:1px solid rgba(255,255,255,.8);border-radius:7px}
+.ig-cap{text-shadow:0 1px 6px rgba(0,0,0,.5)}
+.ig-cap .more{color:rgba(255,255,255,.7)}
+.ig-audio{display:flex;align-items:center;gap:7px;margin-top:8px;font-size:12px}
+.ig-audio svg{width:12px;height:12px}
+.ig-bar{position:absolute;left:0;right:0;bottom:0;height:2px;background:rgba(255,255,255,.25);z-index:4}
+.ig-bar i{display:block;height:100%;width:0;background:#fff;animation:prog 14.76s linear infinite}
+@keyframes prog{from{width:0}to{width:100%}}
+.ig-home{position:absolute;left:50%;bottom:6px;transform:translateX(-50%);width:112px;height:4px;border-radius:4px;background:rgba(255,255,255,.9);z-index:5}
+
+/* instagram post s carouselem */
+.post{width:min(390px,88vw);background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;
+  font-family:var(--ui);box-shadow:0 28px 70px rgba(0,0,0,.55);color:var(--text)}
+.post .hd{display:flex;align-items:center;gap:10px;padding:11px 12px;font-size:13px}
+.post .hd b{display:block;font-weight:600;line-height:1.15}
+.post .hd small{display:block;font-size:11px;color:var(--text-3)}
+.post .hd .dots{margin-left:auto;color:var(--text-2);font-weight:700;letter-spacing:1px}
+.cwrap{position:relative;background:#000}
+.ctrack{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.ctrack::-webkit-scrollbar{display:none}
+.cslide{min-width:100%;aspect-ratio:4/5;scroll-snap-align:center;background:#000}
+.cslide img{width:100%;height:100%;object-fit:cover}
+.ccount{position:absolute;top:11px;right:11px;background:rgba(0,0,0,.68);color:#fff;font-size:12px;font-weight:600;
+  padding:5px 11px;border-radius:999px;font-variant-numeric:tabular-nums;z-index:2;backdrop-filter:blur(4px)}
+.carr{position:absolute;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;border:0;cursor:pointer;
+  background:rgba(0,0,0,.5);color:#fff;display:none;align-items:center;justify-content:center;z-index:3;backdrop-filter:blur(4px);
+  transition:background .2s ease}
+.carr:hover{background:rgba(0,0,0,.78)}
+.carr svg{width:16px;height:16px}
+.carr.prev{left:9px}.carr.next{right:9px}
+@media(hover:hover) and (min-width:700px){.cwrap:hover .carr{display:flex}}
+.post .acts{position:relative;display:flex;gap:15px;padding:11px 12px 4px;align-items:center}
+.post .acts svg{width:23px;height:23px}
+.post .acts .save{margin-left:auto}
+.cdots{position:absolute;left:50%;transform:translateX(-50%);display:flex;gap:5px}
+.cdots i{width:6px;height:6px;border-radius:50%;background:var(--text-3);transition:background .25s ease}
+.cdots i.on{background:#4a9bf5}
+.post .likes{padding:3px 12px;font-size:13px;font-weight:600}
+.post .cap{text-align:left;padding:3px 12px 13px;font-size:13px;color:var(--text-2);line-height:1.45}
+.post .cap b{font-weight:600;margin-right:5px;color:var(--text)}
+.post .cap .more{color:var(--text-3)}
+
+/* zaver */
+.closing{text-align:center;padding:76px 0 88px}
+.closing h2{font-size:clamp(30px,5vw,48px);margin-bottom:14px}
+.closing p{color:var(--text-2);margin-bottom:30px}
+.closing .btn{display:inline-block;font-size:14px;font-weight:600;text-decoration:none;padding:13px 24px;border-radius:999px;
+  border:1px solid var(--border);color:var(--text);transition:border-color .25s ease,background .25s ease}
+.closing .btn:hover{border-color:#4a4a52;background:#161618}
+.closing .tel{display:block;margin-top:18px;font-size:13.5px;color:var(--text-3);text-decoration:none}
+</style>
+<noscript><style>.rv{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body>
+<div class="grain"></div>
+
+<div class="w">
+  <div class="top">
+    <a class="brand" href="https://jakubskupin.cz">Jakub Skupin</a>
+    <div class="for"><span>připraveno pro</span><img src="/equator/assets/equator-logo.png" alt="Equator"></div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="w">
+  <div class="hero">
+    <div class="herotext">
+      <span class="eyebrow rv">Draft · Equator Wavy 50C</span>
+      <h1 class="rv">Dva formáty, které vznikly bez focení</h1>
+      <p class="lede rv">Kolo je vaše. Scény nejsou. Vzniklo to z packshotů z <span class="nb">e-shopu</span>, obraz je generovaný AI.</p>
+    </div>
+    <div class="herofig rv">
+      <div class="heroglow"></div>
+      <img src="/equator/assets/hero-kolo.jpg" alt="Equator Wavy 50C ve světle tmavé komory" width="1080" height="1920">
+    </div>
+  </div>
+</div>
+
+<!-- 01 REELS -->
+<section id="reels">
+  <div class="w uc">
+    <div class="copy">
+      <div class="num rv"><b>01</b><span>Reels</span></div>
+      <h2 class="rv">Z fotek video</h2>
+      <p class="big rv">Vypadá to jako natáčení. <b>Nic se nenatáčelo.</b> Klipy generoval Seedance 2.5, střih vznikl mimo generátor. Co statická fotka na vlnitém ráfku ztratí, pohyb ukáže.</p>
+      <div class="meta rv"><span>Seedance 2.5</span><span>Střih mimo generátor</span></div>
+    </div>
+    <div class="mock rv">
+      <div class="phone">
+        <div class="screen">
+          <video src="/equator/assets/equator-reel.mp4" poster="/equator/assets/equator-reel-poster.jpg" autoplay muted loop playsinline preload="metadata"></video>
+          <div class="ig-top">
+            <span>Reels</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+          </div>
+          <div class="ig-right">
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l8.8 8.8 8.8-8.8a5.5 5.5 0 0 0 0-7.8Z"/></svg><span>3 412</span></div>
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-3.8-.9L3 21l1.9-5.2A8.4 8.4 0 1 1 21 11.5Z"/></svg><span>96</span></div>
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4Z"/></svg><span>571</span></div>
+            <div><svg viewBox="0 0 24 24" fill="#fff"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></div>
+            <div><span class="cover"></span></div>
+          </div>
+          <div class="ig-bottom">
+            <div class="ig-user"><span class="av"></span><span>equatorcycling</span><span class="follow">Sledovat</span></div>
+            <p class="ig-cap">Wavy 50C. Hloubka ráfku kolísá, 24 period, jedna na paprsek. Vizuál generovaný AI <span class="more">… více</span></p>
+            <div class="ig-audio"><svg viewBox="0 0 24 24" fill="#fff"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg><span>equatorcycling · Původní zvuk</span></div>
+          </div>
+          <div class="ig-bar"><i></i></div>
+          <div class="ig-home"></div>
+        </div>
+      </div>
+      <p class="cap">Instagram Reels · 9:16 · 14,8 s</p>
+    </div>
+  </div>
+</section>
+
+<!-- 02 CAROUSEL -->
+<section id="carousel">
+  <div class="w uc flip">
+    <div class="copy">
+      <div class="num rv"><b>02</b><span>Carousel</span></div>
+      <h2 class="rv">Z packshotů do kouře</h2>
+      <p class="big rv">Studio nikdo neobjednával. <b>Stačily packshoty.</b> Nové je pozadí, kouř a světlo. Pět snímků, jeden rukopis, od celku přes vlnu po náboj.</p>
+      <div class="meta rv"><span>Z e-shopových packshotů</span><span>Pozadí z AI</span></div>
+    </div>
+    <div class="mock rv">
+      <div class="post">
+        <div class="hd">
+          <span class="av"></span>
+          <div><b>equatorcycling</b><small>Zlín</small></div>
+          <span class="dots">···</span>
+        </div>
+        <div class="cwrap">
+          <span class="ccount" id="ccount">1/5</span>
+          <button class="carr prev" type="button" aria-label="Předchozí snímek"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
+          <button class="carr next" type="button" aria-label="Další snímek"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
+          <div class="ctrack" id="ctrack">
+            <div class="cslide"><img src="/equator/assets/carousel/eq-01.jpg" alt="Celé kolo Equator Wavy 50C zepředu v kouři" width="1080" height="1340"></div>
+            <div class="cslide"><img src="/equator/assets/carousel/eq-02.jpg" alt="Makro vlnitého profilu ráfku" width="1080" height="1340" loading="lazy"></div>
+            <div class="cslide"><img src="/equator/assets/carousel/eq-03.jpg" alt="Detail náboje a paprsků" width="1080" height="1340" loading="lazy"></div>
+            <div class="cslide"><img src="/equator/assets/carousel/eq-04.jpg" alt="Kolo v kouři pod úhlem" width="1080" height="1340" loading="lazy"></div>
+            <div class="cslide"><img src="/equator/assets/carousel/eq-05.jpg" alt="Pár kol Equator Wavy 50C" width="1080" height="1340" loading="lazy"></div>
+          </div>
+        </div>
+        <div class="acts">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l8.8 8.8 8.8-8.8a5.5 5.5 0 0 0 0-7.8Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-3.8-.9L3 21l1.9-5.2A8.4 8.4 0 1 1 21 11.5Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4Z"/></svg>
+          <span class="cdots" id="cdots"><i class="on"></i><i></i><i></i><i></i><i></i></span>
+          <svg class="save" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1Z"/></svg>
+        </div>
+        <p class="likes">412 To se mi líbí</p>
+        <p class="cap"><b>equatorcycling</b>Set váží 1 480 g. Ráfek 50 mm, karbon, paprsky SAPIM CX-Ray, zaplétáno ve Zlíně <span class="more">… více</span></p>
+      </div>
+      <p class="cap">Instagram carousel · 4:5 · 5 snímků</p>
+    </div>
+  </div>
+</section>
+
+<!-- ZAVER -->
+<section class="closing">
+  <div class="w">
+    <h2 class="rv">Vznikne to. A pak vynikne</h2>
+    <p class="rv">Vy dodáte fotku. Zbytek vyrobím.</p>
+    <a class="btn rv" href="https://www.linkedin.com/in/jakubskupin/" target="_blank" rel="noopener">Napsat na LinkedIn &#8599;&#xFE0E;</a>
+    <a class="tel rv" href="tel:+420723770932">723 770 932</a>
+  </div>
+</section>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.rv');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);} });
+  },{rootMargin:'0px 0px -8% 0px',threshold:.08});
+  els.forEach(function(e,i){ e.style.transitionDelay=(Math.min(i%5,4)*70)+'ms'; io.observe(e); });
+})();
+
+(function(){
+  var track=document.getElementById('ctrack'); if(!track) return;
+  var count=document.getElementById('ccount');
+  var dots=[].slice.call(document.querySelectorAll('#cdots i'));
+  var n=track.children.length, idx=0, hold=false, holdT;
+  function paint(i){ idx=i; dots.forEach(function(d,k){d.className=k===i?'on':''}); count.textContent=(i+1)+'/'+n; }
+  function go(i){ track.scrollTo({left:((i+n)%n)*track.clientWidth,behavior:'smooth'}); }
+  track.addEventListener('scroll',function(){
+    var i=Math.round(track.scrollLeft/track.clientWidth);
+    if(i!==idx&&i>=0&&i<n) paint(i);
+  },{passive:true});
+  function pause(ms){ hold=true; clearTimeout(holdT); if(ms) holdT=setTimeout(function(){hold=false},ms); }
+  track.addEventListener('pointerdown',function(){pause(6000)},{passive:true});
+  var post=track.closest('.post');
+  post.addEventListener('mouseenter',function(){hold=true});
+  post.addEventListener('mouseleave',function(){hold=false});
+  document.querySelector('.carr.prev').addEventListener('click',function(){pause(6000);go(idx-1)});
+  document.querySelector('.carr.next').addEventListener('click',function(){pause(6000);go(idx+1)});
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    setInterval(function(){
+      if(hold||document.hidden) return;
+      var r=track.getBoundingClientRect();
+      if(r.bottom<0||r.top>window.innerHeight) return;
+      go(idx+1);
+    },3000);
+  }
+})();
+</script>
+</body>
+</html>
