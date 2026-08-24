@@ -82,6 +82,7 @@ nav a.on{color:var(--text)}
 .ph2 .ph{width:100%;height:100%;border-radius:0}
 .tall{grid-row:span 2}.wide{grid-column:span 2}
 .set2,.setM{position:absolute;inset:0;opacity:0;pointer-events:none}
+.mobsrc,.mobh{display:none}
 .hint{position:absolute;right:0;bottom:28px;font-size:13px;color:var(--text-tertiary);transition:opacity .3s}
 .ph2.pick{outline:2px solid var(--text);outline-offset:3px;transform:scale(1.03)!important;z-index:2}
 .cursor{position:absolute;left:0;top:0;width:22px;height:22px;opacity:0;pointer-events:none;z-index:6;will-change:transform;filter:drop-shadow(0 2px 4px rgba(0,0,0,.25))}
@@ -98,7 +99,7 @@ nav a.on{color:var(--text)}
 .zcap h3{font-size:clamp(24px,2.6vw,34px)}
 .zcap p{font-size:13px;color:var(--text-tertiary);margin-top:4px}
 
-/* mobil: bez sticky, vše pod sebou */
+/* mobil: bez sticky, tři bloky model + jeho série */
 @media (max-width:767px){
   section{padding:64px 0}
   .g3,.g2,.g4,.two-col{grid-template-columns:1fr}
@@ -107,27 +108,38 @@ nav a.on{color:var(--text)}
   .split{height:auto}
   .stage{position:static;height:auto;overflow:visible}
   .stage>.wrap{height:auto}
-  .steps{position:static;grid-template-columns:1fr;gap:10px;margin-bottom:28px}
-  .step{white-space:normal;font-size:14px}
-  .step .bar{margin-top:6px}
-  .src{position:static;width:min(300px,100%);margin:0 auto 32px;transform:none!important}
-  .src .frame #src2,.src .frame #src3{display:none}
+  .steps{display:none}
+  .src{display:none}
+  .anot,.cursor,.hint{display:none!important}
   .right{position:static;transform:none;opacity:1!important}
-  .set1{opacity:1!important}
+  .set1,.set2,.setM{position:static;opacity:1!important;pointer-events:auto}
+  .setM,.set2{margin-top:56px;padding-top:40px;border-top:1px solid var(--border)}
+  .right h3{min-height:0;font-size:22px}
+  .right .sub{min-height:0}
+  #gtitle,#gsub{display:none}
+  .mobsrc,.mobh{display:block}
+  .mobsrc{width:min(300px,100%);margin:0 auto 20px}
+  .mobsrc .frame{position:relative;height:380px;background:#fff;border:1px solid var(--border);border-radius:16px;display:grid;place-items:center;padding:20px;overflow:hidden}
+  .mobsrc .frame img{position:absolute;inset:20px;width:auto;height:auto;max-width:calc(100% - 40px);max-height:calc(100% - 40px);margin:auto;object-fit:contain}
+  .mobsrc .cap{font-size:13px;color:var(--text-tertiary);margin-top:10px;text-align:center}
+  h3.mobh{font-size:22px;margin-bottom:4px}
+  .sub.mobh{font-size:14px;color:var(--text-secondary);margin-bottom:16px}
   .m{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px}
   .ph2{opacity:1!important;transform:none!important}
-  .set2,.setM{position:static;opacity:1!important;margin-top:40px}
-  .hint{display:none}
-  .cursor{display:none}
-  .zoom{position:static;width:min(360px,100%)!important;height:auto!important;aspect-ratio:9/16;margin:32px auto 0;opacity:1!important}
-  .zoom img{display:none}.zoom video{position:static;opacity:1!important}
-  .zoom{position:relative}.zoom .snd,.zoom .fs{opacity:1}.zoom .fs{display:block}
-  .zcap{position:static;opacity:1!important;margin:32px 0 14px}
-  .steps{opacity:1!important}
+  .zoom{position:relative;width:min(340px,100%)!important;height:auto!important;aspect-ratio:9/16;margin:32px auto 0;opacity:1!important;left:auto;top:auto}
+  .zoom img{display:none}
+  .zoom video{position:static;opacity:1!important}
+  .zoom .snd,.zoom .fs{opacity:1}
+  .zoom .fs{display:block}
+  .zcap{position:static;opacity:1!important;margin:40px 0 0}
+  .frow{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:end;justify-items:center}
+  .fmt{width:100%}
+  .fmt .box{margin:0 auto}
+  .fmt small{max-width:100%}
   .card[style*="grid-template-columns"]{grid-template-columns:1fr!important}
 }
 
-/* bez JavaScriptu: příběh se složí pod sebe, nic nezůstane skryté */
+/* bez JavaScriptu: stejné složení jako na mobilu */
 html.no-js section{padding:64px 0}
 html.no-js .g3,html.no-js .g2,html.no-js .g4,html.no-js .two-col{grid-template-columns:1fr}
 html.no-js .hero{padding:72px 0 48px}
@@ -135,28 +147,36 @@ html.no-js nav .wrap a:not(.brand){display:none}
 html.no-js .split{height:auto}
 html.no-js .stage{position:static;height:auto;overflow:visible}
 html.no-js .stage>.wrap{height:auto}
-html.no-js .steps{position:static;grid-template-columns:1fr;gap:10px;margin-bottom:28px}
-html.no-js .step{white-space:normal;font-size:14px}
-html.no-js .step .bar{margin-top:6px}
-html.no-js .src{position:static;width:min(300px,100%);margin:0 auto 32px;transform:none!important}
-html.no-js .src .frame #src2,html.no-js .src .frame #src3{display:none}
+html.no-js .steps{display:none}
+html.no-js .src{display:none}
+html.no-js .anot,html.no-js .cursor,html.no-js .hint{display:none!important}
 html.no-js .right{position:static;transform:none;opacity:1!important}
-html.no-js .set1{opacity:1!important}
+html.no-js .set1,html.no-js .set2,html.no-js .setM{position:static;opacity:1!important;pointer-events:auto}
+html.no-js .setM,html.no-js .set2{margin-top:56px;padding-top:40px;border-top:1px solid var(--border)}
+html.no-js .right h3{min-height:0;font-size:22px}
+html.no-js .right .sub{min-height:0}
+html.no-js #gtitle,html.no-js #gsub{display:none}
+html.no-js .mobsrc,html.no-js .mobh{display:block}
+html.no-js .mobsrc{width:min(300px,100%);margin:0 auto 20px}
+html.no-js .mobsrc .frame{position:relative;height:380px;background:#fff;border:1px solid var(--border);border-radius:16px;display:grid;place-items:center;padding:20px;overflow:hidden}
+html.no-js .mobsrc .frame img{position:absolute;inset:20px;width:auto;height:auto;max-width:calc(100% - 40px);max-height:calc(100% - 40px);margin:auto;object-fit:contain}
+html.no-js .mobsrc .cap{font-size:13px;color:var(--text-tertiary);margin-top:10px;text-align:center}
+html.no-js h3.mobh{font-size:22px;margin-bottom:4px}
+html.no-js .sub.mobh{font-size:14px;color:var(--text-secondary);margin-bottom:16px}
 html.no-js .m{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px}
 html.no-js .ph2{opacity:1!important;transform:none!important}
-html.no-js .set2,html.no-js .setM{position:static;opacity:1!important;margin-top:40px}
-html.no-js .hint{display:none}
-html.no-js .cursor{display:none}
-html.no-js .zoom{position:static;width:min(360px,100%)!important;height:auto!important;aspect-ratio:9/16;margin:32px auto 0;opacity:1!important}
+html.no-js .zoom{position:relative;width:min(340px,100%)!important;height:auto!important;aspect-ratio:9/16;margin:32px auto 0;opacity:1!important;left:auto;top:auto}
 html.no-js .zoom img{display:none}
 html.no-js .zoom video{position:static;opacity:1!important}
-html.no-js .zoom{position:relative}
 html.no-js .zoom .snd,html.no-js .zoom .fs{opacity:1}
 html.no-js .zoom .fs{display:block}
-html.no-js .zcap{position:static;opacity:1!important;margin:32px 0 14px}
-html.no-js .steps{opacity:1!important}
+html.no-js .zcap{position:static;opacity:1!important;margin:40px 0 0}
+html.no-js .frow{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:end;justify-items:center}
+html.no-js .fmt{width:100%}
+html.no-js .fmt .box{margin:0 auto}
+html.no-js .fmt small{max-width:100%}
 html.no-js .card[style*="grid-template-columns"]{grid-template-columns:1fr!important}
-html.no-js .anot,html.no-js .cursor,html.no-js .hint{display:none!important}
+
 
 
 
@@ -270,6 +290,12 @@ footer{padding:60px 0;border-top:1px solid var(--border);color:var(--text-tertia
 
     <div class="right" id="right">
       <div class="set1" id="set1">
+        <div class="mobsrc">
+          <div class="frame"><img src="/vizualy/assets/original.jpg" alt="Originální produktová fotka hodinek na bílém pozadí" width="900" height="900" loading="lazy" decoding="async"></div>
+          <p class="cap">Vstup: vaše produktovka</p>
+        </div>
+        <h3 class="mobh">Z jedné fotky celá série</h3>
+        <div class="sub mobh">Scény, materiály, produkt na ruce i v detailu</div>
         <h3 id="gtitle">Scény a barevná pozadí</h3>
         <div class="sub" id="gsub">Stejné hodinky, jiný svět. Sezóna, kampaň, nálada</div>
         <div class="m">
@@ -289,6 +315,10 @@ footer{padding:60px 0;border-top:1px solid var(--border);color:var(--text-tertia
       </div>
 
       <div class="setM" id="setM">
+        <div class="mobsrc">
+          <div class="frame"><img src="/vizualy/assets/original3.jpg" alt="Originální produktová fotka hodinek se zlatým číselníkem na bílém pozadí" width="900" height="900" loading="lazy" decoding="async"></div>
+          <p class="cap">Vstup: další model, který dodáte</p>
+        </div>
         <h3>Mánes: malíř, jiné motivy</h3>
         <div class="sub">Jiné úhly, jiné světlo, jiné motivy. Každý model má svůj svět, postup je stejný</div>
         <div class="m">
@@ -308,6 +338,10 @@ footer{padding:60px 0;border-top:1px solid var(--border);color:var(--text-tertia
       </div>
 
       <div class="set2" id="set2">
+        <div class="mobsrc">
+          <div class="frame"><img src="/vizualy/assets/original2.jpg" alt="Originální produktová fotka chronografu na bílém pozadí" width="900" height="900" loading="lazy" decoding="async"></div>
+          <p class="cap">Vstup: třetí model</p>
+        </div>
         <h3>Jánský: chronograf</h3>
         <div class="sub">Pohledy z boku, rozložený strojek, ruka, sklo i beton. Z jedné scény pak i video</div>
         <div class="m">
@@ -565,7 +599,8 @@ const nav=document.querySelector('nav');let lastY=scrollY;
 function navTick(){const y=scrollY;if(y>lastY+2&&y>120)nav.classList.add('hide');else if(y<lastY-2||y<=120)nav.classList.remove('hide');lastY=y;}
 function onScroll(){navTick();if(!ticking){ticking=true;requestAnimationFrame(render)}}
 addEventListener('scroll',onScroll,{passive:true});addEventListener('resize',onScroll);render();
-document.addEventListener('visibilitychange',()=>{if(document.hidden&&!vplayer.paused){vplayer.pause();vplayer.muted=true;snd.classList.remove('on')}});
+document.addEventListener('visibilitychange',()=>{if(document.hidden){if(!vplayer.paused){vplayer.pause();vplayer.muted=true;snd.classList.remove('on')}}else{ticking=false;render()}});
+addEventListener('pageshow',()=>{ticking=false;render()});
 /* mobil: video se přehraje, jakmile je vidět */
 if('IntersectionObserver' in window){new IntersectionObserver(es=>es.forEach(e=>{if(mobile()){e.isIntersecting?vplayer.play().catch(()=>{}):vplayer.pause()}}),{threshold:.4}).observe(zoom)}
 })();
