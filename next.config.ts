@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
       { source: "/le-premier", destination: "/le-premier/index.html" },
       { source: "/equator", destination: "/equator/index.html" },
       { source: "/vizualy", destination: "/vizualy/index.html" },
+      { source: "/prim", destination: "/prim/index.html" },
     ];
   },
 };

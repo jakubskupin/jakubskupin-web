@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="cs" class="no-js">
+<head>
+<meta charset="utf-8">
+<script>document.documentElement.className="js"</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Hodinky Prim · ukázka produktových vizuálů · Jakub Skupin</title>
+<meta name="description" content="Tři modely hodinek Prim. Z jedné produktové fotky scény, materiály, záběry na ruce i video. Ukázka služby produktové vizuály.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:site_name" content="Jakub Skupin">
+<meta property="og:title" content="Hodinky Prim · ukázka produktových vizuálů">
+<meta property="og:description" content="Tři modely hodinek. Z jedné produktové fotky scény, materiály, záběry na ruce i video.">
+<meta property="og:url" content="https://jakubskupin.cz/prim/">
+<meta property="og:image" content="https://jakubskupin.cz/vizualy/assets/og/og-vizualy.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Produktová fotka hodinek na bílém a sada scén, které z ní vznikly">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hodinky Prim · ukázka produktových vizuálů">
+<meta name="twitter:image" content="https://jakubskupin.cz/vizualy/assets/og/og-vizualy.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Syne:wght@600;700&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1A1A18;--bg:#FAFAF8;--text:#1A1A18;--text-secondary:#6B6964;--text-tertiary:#78766F;--border:#E8E6E1;--card-bg:#FFF;--accent:#1A1A18;--accent-soft:rgba(26,26,24,.06);--radius:16px;--radius-lg:24px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:Manrope,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:Syne,sans-serif;font-weight:700;line-height:1.15;letter-spacing:-.02em}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+section{padding:96px 0}
+.kicker{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:16px}
+.lead{color:var(--text-secondary);font-size:18px;max-width:38em}
+.btn{display:inline-block;background:var(--accent);color:#FAFAF8;padding:14px 24px;border-radius:999px;text-decoration:none;font-weight:500;font-size:15px}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--border)}
+
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(250,250,248,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);transition:transform .35s ease}
+nav.hide{transform:translateY(-100%)}
+body{padding-top:64px}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+nav a{color:var(--text-secondary);text-decoration:none;font-size:14px;margin-left:22px}
+nav a.brand{color:var(--text);font-family:Syne;font-weight:700;margin:0;font-size:16px}
+
+/* hero */
+.hero{padding:120px 0 80px}
+.hero h1{font-size:clamp(38px,5.4vw,64px);max-width:15ch}
+.hero h1 .b{color:var(--text)}
+.hero h1 .a{color:var(--text-tertiary)}
+.hero .lead{margin:24px 0 32px}
+.hero .meta{margin-top:20px;font-size:13px;color:var(--text-tertiary)}
+
+/* scroll story (vzor vizcom.com) */
+.split{position:relative;height:820vh}
+.stage{position:sticky;top:0;height:100vh;overflow:hidden}
+.stage>.wrap{position:relative;height:100%;max-width:1240px}
+.steps{position:absolute;top:36px;left:0;right:0;display:grid;grid-template-columns:repeat(4,1fr);gap:28px;z-index:5}
+.step{display:flex;flex-direction:column;font-size:15px;color:var(--text-tertiary);transition:color .3s;white-space:nowrap}
+.step.on{color:var(--text)}
+.step .bar{height:2px;background:#E1DFD8;border-radius:2px;margin-top:10px;overflow:hidden}
+.step .bar i{display:block;height:100%;width:0;background:var(--text)}
+.src{position:absolute;left:0;top:0;width:560px;transform-origin:0 0;will-change:transform}
+.src .frame{position:relative;aspect-ratio:3/4;background:#fff;border:1px solid var(--border);border-radius:16px;display:grid;place-items:center;padding:24px;overflow:hidden}
+.src .frame img{position:absolute;inset:24px;width:auto;height:auto;max-width:calc(100% - 48px);max-height:calc(100% - 48px);margin:auto;object-fit:contain;transition:opacity .4s}
+.src .frame #src2{opacity:0}
+.src .frame #src3{opacity:0}
+.src .cap{font-size:13px;color:var(--text-tertiary);margin-top:12px;text-align:center;transition:opacity .3s}
+.right{position:absolute;left:520px;right:0;top:50%;transform:translateY(-50%);opacity:0}
+.right h3{font-size:24px;margin-bottom:4px;min-height:30px}
+.right .sub{font-size:14px;color:var(--text-secondary);margin-bottom:16px;min-height:22px}
+.m{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:clamp(110px,15.5vh,150px);gap:10px;grid-auto-flow:dense}
+.ph2{position:relative;border-radius:12px;overflow:hidden;opacity:0;transform:translateY(18px) scale(.96);transition:opacity .45s ease,transform .45s ease}
+.ph2.in{opacity:1;transform:none}
+.ph2 img{width:100%;height:100%;object-fit:cover;display:block}
+.tall{grid-row:span 2}.wide{grid-column:span 2}
+.set2,.setM{position:absolute;inset:0;opacity:0;pointer-events:none}
+.mobsrc,.mobh{display:none}
+.hint{position:absolute;right:0;bottom:28px;font-size:13px;color:var(--text-tertiary);transition:opacity .3s}
+.ph2.pick{outline:2px solid var(--text);outline-offset:3px;transform:scale(1.03)!important;z-index:2}
+.cursor{position:absolute;left:0;top:0;width:22px;height:22px;opacity:0;pointer-events:none;z-index:6;will-change:transform;filter:drop-shadow(0 2px 4px rgba(0,0,0,.25))}
+.zoom{position:absolute;left:0;top:0;width:0;height:0;border-radius:14px;overflow:hidden;opacity:0;background:#1A1A18;z-index:4;will-change:left,top,width,height}
+.zoom img,.zoom video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.zoom video{opacity:0}
+.zoom .snd,.zoom .fs{position:absolute;bottom:14px;font:500 12px/1 Manrope,sans-serif;padding:9px 12px;border-radius:999px;border:1px solid rgba(250,250,248,.45);background:rgba(26,26,24,.55);color:#FAFAF8;cursor:pointer;backdrop-filter:blur(6px);opacity:0;transition:opacity .3s;z-index:2}
+.zoom .snd{left:14px;width:38px;height:38px;padding:0;display:grid;place-items:center}
+.zoom .snd .w1,.zoom .snd .w2{display:none}.zoom .snd.on .w1,.zoom .snd.on .w2{display:block}.zoom .snd.on .mute{display:none}
+.zoom .fs{right:14px;display:none}
+.zoom.live .snd,.zoom.live .fs{opacity:1}
+.zoom .snd.on{background:#FAFAF8;color:#1A1A18}
+.zcap{position:absolute;left:0;right:0;top:9vh;text-align:center;opacity:0;transition:opacity .4s;z-index:5}
+.zcap h3{font-size:clamp(24px,2.6vw,34px)}
+.zcap p{font-size:13px;color:var(--text-tertiary);margin-top:4px}
+
+/* mobil: bez sticky, tři bloky model + jeho série */
+@media (max-width:767px){
+  section{padding:64px 0}
+  .hero{padding:72px 0 48px}
+  nav .wrap a:not(.brand){display:none}
+  .split{height:auto}
+  .stage{position:static;height:auto;overflow:visible}
+  .stage>.wrap{height:auto}
+  .steps{display:none}
+  .src{display:none}
+  .anot,.cursor,.hint{display:none!important}
+  .right{position:static;transform:none;opacity:1!important}
+  .set1,.set2,.setM{position:static;opacity:1!important;pointer-events:auto}
+  .setM,.set2{margin-top:56px;padding-top:40px;border-top:1px solid var(--border)}
+  .right h3{min-height:0;font-size:22px}
+  .right .sub{min-height:0}
+  #gtitle,#gsub{display:none}
+  .mobsrc,.mobh{display:block}
+  .mobsrc{width:min(300px,100%);margin:0 auto 20px}
+  .mobsrc .frame{position:relative;height:380px;background:#fff;border:1px solid var(--border);border-radius:16px;display:grid;place-items:center;padding:20px;overflow:hidden}
+  .mobsrc .frame img{position:absolute;inset:20px;width:calc(100% - 40px);height:calc(100% - 40px);max-width:none;max-height:none;margin:0;object-fit:contain}
+  .mobsrc .cap{font-size:13px;color:var(--text-tertiary);margin-top:10px;text-align:center}
+  h3.mobh{font-size:22px;margin-bottom:4px}
+  .sub.mobh{font-size:14px;color:var(--text-secondary);margin-bottom:16px}
+  .m{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px}
+  .ph2{opacity:1!important;transform:none!important}
+  .zoom{position:relative;width:min(340px,100%)!important;height:auto!important;aspect-ratio:9/16;margin:32px auto 0;opacity:1!important;left:auto;top:auto}
+  .zoom img{display:none}
+  .zoom video{position:static;opacity:1!important}
+  .zoom .snd,.zoom .fs{opacity:1}
+  .zoom .fs{display:block}
+  .zcap{position:static;opacity:1!important;margin:40px 0 0}
+}
+
+/* bez JavaScriptu: stejné složení jako na mobilu */
+html.no-js section{padding:64px 0}
+html.no-js .hero{padding:72px 0 48px}
+html.no-js nav .wrap a:not(.brand){display:none}
+html.no-js .split{height:auto}
+html.no-js .stage{position:static;height:auto;overflow:visible}
+html.no-js .stage>.wrap{height:auto}
+html.no-js .steps{display:none}
+html.no-js .src{display:none}
+html.no-js .anot,html.no-js .cursor,html.no-js .hint{display:none!important}
+html.no-js .right{position:static;transform:none;opacity:1!important}
+html.no-js .set1,html.no-js .set2,html.no-js .setM{position:static;opacity:1!important;pointer-events:auto}
+html.no-js .setM,html.no-js .set2{margin-top:56px;padding-top:40px;border-top:1px solid var(--border)}
+html.no-js .right h3{min-height:0;font-size:22px}
+html.no-js .right .sub{min-height:0}
+html.no-js #gtitle,html.no-js #gsub{display:none}
+html.no-js .mobsrc,html.no-js .mobh{display:block}
+html.no-js .mobsrc{width:min(300px,100%);margin:0 auto 20px}
+html.no-js .mobsrc .frame{position:relative;height:380px;background:#fff;border:1px solid var(--border);border-radius:16px;display:grid;place-items:center;padding:20px;overflow:hidden}
+html.no-js .mobsrc .frame img{position:absolute;inset:20px;width:calc(100% - 40px);height:calc(100% - 40px);max-width:none;max-height:none;margin:0;object-fit:contain}
+html.no-js .mobsrc .cap{font-size:13px;color:var(--text-tertiary);margin-top:10px;text-align:center}
+html.no-js h3.mobh{font-size:22px;margin-bottom:4px}
+html.no-js .sub.mobh{font-size:14px;color:var(--text-secondary);margin-bottom:16px}
+html.no-js .m{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px}
+html.no-js .ph2{opacity:1!important;transform:none!important}
+html.no-js .zoom{position:relative;width:min(340px,100%)!important;height:auto!important;aspect-ratio:9/16;margin:32px auto 0;opacity:1!important;left:auto;top:auto}
+html.no-js .zoom img{display:none}
+html.no-js .zoom video{position:static;opacity:1!important}
+html.no-js .zoom .snd,html.no-js .zoom .fs{opacity:1}
+html.no-js .zoom .fs{display:block}
+html.no-js .zcap{position:static;opacity:1!important;margin:40px 0 0}
+
+/* formáty: jedna scéna, ořezy pro každý kanál */
+.formats{--u:0.139px}
+.frow{display:flex;align-items:flex-end;justify-content:center;gap:22px;flex-wrap:wrap;margin-top:44px}
+.fmt{display:flex;flex-direction:column;align-items:center}
+.fmt .box{position:relative;overflow:hidden;border-radius:6px;border:1.5px solid var(--text);background:transparent;display:grid;place-items:center;cursor:pointer}
+.fmt .box i{font-style:normal;font-size:12px;color:var(--text);position:relative;z-index:1;transition:opacity .3s}
+.fmt .box img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .35s ease}
+.fmt .box:hover img,.fmt .box.on img{opacity:1}
+.fmt .box:hover i,.fmt .box.on i{opacity:0}
+.fmt .box:focus-visible{outline:2px solid var(--text);outline-offset:3px}
+.fmt b{font-weight:500;font-size:13px;margin-top:12px}
+.fmt small{font-size:12px;color:var(--text-tertiary);margin-top:2px;text-align:center}
+@media (max-width:767px){
+  .formats{--u:0.085px}
+  .frow{display:grid;grid-template-columns:1fr 1fr;gap:22px 14px;align-items:end;justify-items:center}
+  .fmt{width:100%}
+  .fmt .box{margin:0 auto}
+  .fmt small{max-width:100%}
+}
+@media (max-width:767px){html.no-js .fmt .box img{opacity:1}html.no-js .fmt .box i{opacity:0}}
+
+/* ručně psané anotace (šipky + poznámky) */
+.anot{position:absolute;pointer-events:none;color:var(--ink);font-family:Caveat,cursive;font-weight:600;font-size:27px;line-height:1.05;letter-spacing:.01em;white-space:nowrap;z-index:6}
+.anot .txt{display:block;transform:rotate(-3deg)}
+.anot svg{display:block;overflow:visible;stroke:var(--ink);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.anot.st{transition:opacity .35s}
+.rel{position:relative}
+@media (max-width:767px){.anot{display:none}}
+
+/* misc */
+footer{padding:60px 0;border-top:1px solid var(--border);color:var(--text-tertiary);font-size:13px}
+.secnum{font-size:12px;color:var(--text-tertiary);font-family:Syne;margin-bottom:8px}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="a-curve-r" viewBox="0 0 140 70"><path d="M4 52 C 30 22, 78 10, 128 24"/><path d="M114 12 L 131 25 L 116 38"/></symbol>
+  <symbol id="a-curve-d" viewBox="0 0 90 110"><path d="M12 6 C 60 26, 78 62, 60 100"/><path d="M45 88 L 59 103 L 74 90"/></symbol>
+  <symbol id="a-swoop" viewBox="0 0 160 80"><path d="M4 22 C 40 8, 92 8, 130 34 C 140 41, 146 46, 152 52"/><path d="M137 52 L 153 53 L 149 38"/></symbol>
+  <symbol id="a-loop-r" viewBox="0 0 170 80"><path d="M6 60 C 30 20, 60 14, 62 40 C 64 66, 30 66, 40 40 C 52 12, 110 8, 158 30"/><path d="M144 18 L 161 31 L 146 44"/></symbol>
+  <symbol id="a-short-l" viewBox="0 0 90 40"><path d="M84 20 C 60 8, 36 10, 8 22"/><path d="M20 10 L 6 23 L 22 33"/></symbol>
+</svg>
+
+<nav><div class="wrap">
+  <a href="/" class="brand">Jakub Skupin</a>
+  <div><a href="/vizualy/">Zpět na vizuály</a><a href="#kontakt">Kontakt</a></div>
+</div></nav>
+
+<!-- 01 HERO -->
+<header class="hero"><div class="wrap">
+  <div class="kicker">Ukázka produktových vizuálů &middot; hodinky</div>
+  <h1><span class="a">Tři modely Prim na bílém.</span> <span class="b">Z každé fotky celá série</span></h1>
+  <p class="lead">Vstupem byla vždy jedna produktová fotka. Scény, materiály, záběry na ruce i video vznikly z ní.</p>
+  <p class="meta">Tři modely, jeden postup: scény, materiály, na ruce, video</p>
+</div></header>
+
+<!-- 02 SCROLL STORY (vzor vizcom.com): fotka v centru → uhne stranou, přibývají záběry → jiné hodinky → video -->
+<div class="split" id="split">
+  <div class="stage"><div class="wrap">
+    <div class="steps">
+      <div class="step on" data-s="0">1 Vaše fotka<div class="bar"><i></i></div></div>
+      <div class="step" data-s="1">2 Záběry podle použití<div class="bar"><i></i></div></div>
+      <div class="step" data-s="2">3 Další modely, stejný postup<div class="bar"><i></i></div></div>
+      <div class="step" data-s="3">4 Z fotky video<div class="bar"><i></i></div></div>
+    </div>
+
+    <div class="src" id="src">
+      <div class="frame">
+        <img id="src1" src="/vizualy/assets/original.jpg" alt="Originální produktová fotka" width="414" height="900">
+        <img id="src2" src="/vizualy/assets/original2.jpg" alt="Originální fotka druhého modelu" width="455" height="900" loading="lazy" decoding="async">
+        <img id="src3" src="/vizualy/assets/original3.jpg" alt="Originální fotka modelu Mánes" width="489" height="900" loading="lazy" decoding="async">
+      </div>
+      <div class="cap" id="cap">Vstup: jedna produktovka, kterou už máte</div>
+    </div>
+
+    <div class="right" id="right">
+      <div class="set1" id="set1">
+        <div class="mobsrc">
+          <div class="frame"><img src="/vizualy/assets/original.jpg" alt="Originální produktová fotka hodinek na bílém pozadí" width="414" height="900" decoding="async"></div>
+          <p class="cap">Vstup: vaše produktovka</p>
+        </div>
+        <h3 class="mobh">Z jedné fotky celá série</h3>
+        <div class="sub mobh">Scény, materiály, produkt na ruce i v detailu</div>
+        <h3 id="gtitle">Scény a barevná pozadí</h3>
+        <div class="sub" id="gsub">Stejné hodinky, jiný svět. Sezóna, kampaň, nálada</div>
+        <div class="m">
+          <div class="ph2 tall" data-g="0"><img src="/vizualy/assets/9_16_0805.jpg" alt="Hodinky v tyrkysové studiové scéně s plovoucími ozubenými koly, formát na výšku" width="495" height="880" loading="lazy" decoding="async"></div>
+          <div class="ph2" data-g="0"><img src="/vizualy/assets/1_1_08056.jpg" alt="Hodinky v tyrkysové scéně se skleněnými kameny a ozubenými koly" width="880" height="880" loading="lazy" decoding="async"></div>
+          <div class="ph2" data-g="0"><img src="/vizualy/assets/5.jpg" alt="Hodinky na tmavém pozadí se světelnými oblouky" width="880" height="880" loading="lazy" decoding="async"></div>
+          <div class="ph2" data-g="0"><img src="/vizualy/assets/8.jpg" alt="Hodinky na tmavé látce s drobnými ozubenými koly" width="880" height="880" loading="lazy" decoding="async"></div>
+          <div class="ph2 tall" data-g="1"><img src="/vizualy/assets/wsx.jpg" alt="Hodinky v cákanci vody na tmavém pozadí" width="491" height="880" loading="lazy" decoding="async"></div>
+          <div class="ph2" data-g="1"><img src="/vizualy/assets/1_1_0805.jpg" alt="Hodinky na tmavém dřevě vedle mosazné lupy" width="880" height="880" loading="lazy" decoding="async"></div>
+          <div class="ph2" data-g="1"><img src="/vizualy/assets/3.jpg" alt="Hodinky na dřevěném stole mezi hodinářskými nástroji" width="880" height="880" loading="lazy" decoding="async"></div>
+          <div class="ph2" data-g="1"><img src="/vizualy/assets/rgd.jpg" alt="Hodinky mezi šedými kamennými bloky" width="709" height="880" loading="lazy" decoding="async"></div>
+          <div class="ph2 tall" data-g="2"><img src="/vizualy/assets/tgn.jpg" alt="Hodinky na šedé ploše vedle pinzety a ozubených kol, formát na výšku" width="495" height="880" loading="lazy" decoding="async"></div>
+          <div class="ph2 wide" data-g="2"><img src="/vizualy/assets/sds.jpg" alt="Hodinky na zápěstí, světlé pozadí" width="880" height="880" loading="lazy" decoding="async"></div>
+          <div class="ph2" data-g="2"><img src="/vizualy/assets/qsd.jpg" alt="Hodinky na tmavém kameni ve světelném kuželu" width="709" height="880" loading="lazy" decoding="async"></div>
+          <div class="ph2" data-g="2"><img src="/vizualy/assets/rrr.jpg" alt="Hodinky na břidlicové desce" width="709" height="880" loading="lazy" decoding="async"></div>
+        </div>
+      </div>
+
+      <div class="setM" id="setM">
+        <div class="mobsrc">
+          <div class="frame"><img src="/vizualy/assets/original3.jpg" alt="Originální produktová fotka hodinek se zlatým číselníkem na bílém pozadí" width="489" height="900" decoding="async"></div>
+          <p class="cap">Vstup: další model, který dodáte</p>
+        </div>
+        <h3>Mánes: malíř, jiné motivy</h3>
+        <div class="sub">Jiné úhly, jiné světlo, jiné motivy. Každý model má svůj svět, postup je stejný</div>
+        <div class="m">
+          <div class="ph2 tall"><img src="/vizualy/assets/m2.jpg" alt="Hodinky se zlatým číselníkem ve světelném pruhu, teplé hnědé pozadí" width="709" height="880" loading="lazy" decoding="async"></div>
+          <div class="ph2"><img src="/vizualy/assets/m3.jpg" alt="Hodinky se zlatým číselníkem před malovanou krajinou" width="880" height="657" loading="lazy" decoding="async"></div>
+          <div class="ph2"><img src="/vizualy/assets/m4.jpg" alt="Hodinky se zlatým číselníkem na písku s ostrým stínem" width="880" height="880" loading="lazy" decoding="async"></div>
+          <div class="ph2 tall"><img src="/vizualy/assets/m7.jpg" alt="Hodinky se zlatým číselníkem před tmavou malovanou krajinou, formát na výšku" width="709" height="880" loading="lazy" decoding="async"></div>
+          <div class="ph2"><img src="/vizualy/assets/m1.jpg" alt="Hodinky se zlatým číselníkem ve zlatém cákanci" width="657" height="880" loading="lazy" decoding="async"></div>
+          <div class="ph2"><img src="/vizualy/assets/m9.jpg" alt="Hodinky se zlatým číselníkem na kožené sedačce v interiéru auta" width="880" height="880" loading="lazy" decoding="async"></div>
+          <div class="ph2 tall"><img src="/vizualy/assets/m8.jpg" alt="Hodinky se zlatým číselníkem na tmavém koženém diáři" width="704" height="880" loading="lazy" decoding="async"></div>
+          <div class="ph2"><img src="/vizualy/assets/m10.jpg" alt="Hodinky se zlatým číselníkem mezi zelenými stébly" width="657" height="880" loading="lazy" decoding="async"></div>
+          <div class="ph2"><img src="/vizualy/assets/m11.jpg" alt="Hodinky se zlatým číselníkem ve smetanovém cákanci" width="657" height="880" loading="lazy" decoding="async"></div>
+          <div class="ph2"><img src="/vizualy/assets/m12.jpg" alt="Hodinky se zlatým číselníkem ve zlatém víru" width="657" height="880" loading="lazy" decoding="async"></div>
+          <div class="ph2 wide"><img src="/vizualy/assets/m13.jpg" alt="Hodinky se zlatým číselníkem v širokém záběru se zlatou tekutinou" width="880" height="491" loading="lazy" decoding="async"></div>
+          <div class="ph2"><img src="/vizualy/assets/m6.jpg" alt="Hodinky se zlatým číselníkem v čokoládovém cákanci" width="880" height="880" loading="lazy" decoding="async"></div>
+        </div>
+      </div>
+
+      <div class="set2" id="set2">
+        <div class="mobsrc">
+          <div class="frame"><img src="/vizualy/assets/original2.jpg" alt="Originální produktová fotka chronografu na bílém pozadí" width="455" height="900" decoding="async"></div>
+          <p class="cap">Vstup: třetí model</p>
+        </div>
+        <h3>Jánský: chronograf</h3>
+        <div class="sub">Pohledy z boku, rozložený strojek, ruka, sklo i beton. Z jedné scény pak i video</div>
+        <div class="m">
+          <div class="ph2 tall" id="pick"><img src="/vizualy/assets/j6.jpg" alt="Chronograf před červenými skleněnými panely, formát na výšku" width="491" height="880" loading="lazy" decoding="async"></div>
+          <div class="ph2"><img src="/vizualy/assets/j4.jpg" alt="Chronograf na zápěstí, světlé pozadí" width="704" height="880" loading="lazy" decoding="async"></div>
+          <div class="ph2"><img src="/vizualy/assets/j7.jpg" alt="Chronograf na šedých dlaždicích" width="880" height="880" loading="lazy" decoding="async"></div>
+          <div class="ph2 tall"><img src="/vizualy/assets/j10.jpg" alt="Rozložený strojek chronografu na tmavém pozadí, formát na výšku" width="491" height="880" loading="lazy" decoding="async"></div>
+          <div class="ph2"><img src="/vizualy/assets/j1.jpg" alt="Chronograf mezi červenými skleněnými panely na krémovém pozadí" width="880" height="880" loading="lazy" decoding="async"></div>
+          <div class="ph2"><img src="/vizualy/assets/j5.jpg" alt="Ruka s chronografem opřená o barevné kvádry" width="491" height="880" loading="lazy" decoding="async"></div>
+          <div class="ph2 tall"><img src="/vizualy/assets/j2.jpg" alt="Chronograf mezi šedými betonovými bloky" width="491" height="880" loading="lazy" decoding="async"></div>
+          <div class="ph2"><img src="/vizualy/assets/j11.jpg" alt="Ruce v zelených rukavicích držící chronograf" width="880" height="880" loading="lazy" decoding="async"></div>
+          <div class="ph2"><img src="/vizualy/assets/j8.jpg" alt="Chronograf mezi červenými kvádry ve slunečním světle" width="880" height="880" loading="lazy" decoding="async"></div>
+          <div class="ph2 tall"><img src="/vizualy/assets/j9.jpg" alt="Chronograf z boku na červeném pozadí, formát na výšku" width="491" height="880" loading="lazy" decoding="async"></div>
+          <div class="ph2"><img src="/vizualy/assets/j3.jpg" alt="Chronograf uprostřed spleti ocelových jehel" width="491" height="880" loading="lazy" decoding="async"></div>
+          <div class="ph2"><img src="/vizualy/assets/j12.jpg" alt="Chronograf s odrazem na červené ploše" width="491" height="880" loading="lazy" decoding="async"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="anot" id="an1" style="display:flex;align-items:flex-start;gap:8px"><span class="txt" style="margin-top:6px">vaše fotka</span><svg width="150" height="60" style="transform:rotate(16deg);transform-origin:0 50%"><use href="#a-swoop"/></svg></div>
+    <div class="anot" id="an2"><span class="txt">tohle už máte</span><svg width="120" height="60" style="margin:2px 0 0 70px;transform:rotate(38deg)"><use href="#a-curve-r"/></svg></div>
+    <div class="anot" id="an3"><span class="txt">tohle dodám</span><svg width="70" height="86" style="margin:-2px 0 0 10px;transform:scaleX(-1) rotate(-10deg)"><use href="#a-curve-d"/></svg></div>
+    <svg class="cursor" id="cursor" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l14 8-6 2-3 6z" fill="#1A1A18" stroke="#FAFAF8" stroke-width="1.5" stroke-linejoin="round"/></svg>
+    <div class="zcap" id="zcap"><h3>Ze stejné scény vznikne i video</h3><p>Krátké video do 30 sekund, na sítě i do reklamy</p></div>
+    <div class="zoom" id="zoom"><img src="/vizualy/assets/j6.jpg" alt="Chronograf před červenými skleněnými panely, formát na výšku" width="491" height="880" loading="lazy" decoding="async"><video id="vplayer" src="/vizualy/assets/video-zvuk.mp4" muted loop playsinline preload="metadata"></video><button class="snd" id="snd" type="button" aria-label="Zapnout zvuk"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 9.5a4 4 0 0 1 0 5"/><path class="w2" d="M18.5 7a7.5 7.5 0 0 1 0 10"/><path class="mute" d="M16 9l5 6M21 9l-5 6"/></svg></button><button class="fs" id="fs" type="button" aria-label="Celá obrazovka">Celá obrazovka</button></div>
+    <div class="hint" id="hint">Scrollujte</div>
+  </div></div>
+</div>
+
+<!-- 03 FORMÁTY: rovnou připravené na kanály -->
+<section class="formats" style="padding-top:72px"><div class="wrap">
+  <div class="kicker">Připraveno na formáty</div>
+  <h2 style="font-size:32px;max-width:22ch">Každý záběr rovnou ve formátech, kam ho pošlete</h2>
+  <p class="lead" style="margin-top:14px">Jedna scéna, ořezy pro sítě, e-shop i reklamu. Soubory dostanete pojmenované podle kanálu, nic nedořezáváte.</p>
+  <p style="margin-top:10px;font-size:13px;color:var(--text-tertiary)">Klepnutím na formát se v něm ukáže scéna</p>
+  <div class="frow rel">
+    <div class="fmt"><div class="box" role="button" tabindex="0" aria-pressed="false" style="width:calc(1080*var(--u));height:calc(1920*var(--u))"><img src="/vizualy/assets/9_16_0805.jpg" alt="Hodinky v tyrkysové studiové scéně s plovoucími ozubenými koly, formát na výšku" width="495" height="880" loading="lazy" decoding="async"><i>9:16</i></div><b>Reels, Stories, TikTok</b><small>1080 × 1920</small></div>
+    <div class="fmt"><div class="box" role="button" tabindex="0" aria-pressed="false" style="width:calc(1080*var(--u));height:calc(1350*var(--u))"><img src="/vizualy/assets/4.jpg" alt="Hodinky na šedozeleném pozadí s mosaznými koly a hodinářskou lupou" width="880" height="880" loading="lazy" decoding="async"><i>4:5</i></div><b>Instagram a Meta feed</b><small>1080 × 1350</small></div>
+    <div class="fmt"><div class="box" role="button" tabindex="0" aria-pressed="false" style="width:calc(1080*var(--u));height:calc(1080*var(--u))"><img src="/vizualy/assets/1_1_08056.jpg" alt="Hodinky v tyrkysové scéně se skleněnými kameny a ozubenými koly" width="880" height="880" loading="lazy" decoding="async"><i>1:1</i></div><b>Feed, carousel, e-shop</b><small>1080 × 1080</small></div>
+    <div class="fmt"><div class="box" role="button" tabindex="0" aria-pressed="false" style="width:calc(1920*var(--u));height:calc(1080*var(--u))"><img src="/vizualy/assets/8.jpg" alt="Hodinky na tmavé látce s drobnými ozubenými koly" width="880" height="880" loading="lazy" decoding="async"><i>16:9</i></div><b>YouTube, web, prezentace</b><small>1920 × 1080</small></div>
+  </div>
+</div></section>
+
+<!-- 04 ZÁVĚR -->
+<section id="kontakt" style="padding-top:0"><div class="wrap" style="text-align:center">
+  <h2 style="font-size:clamp(30px,4vw,44px);max-width:20ch;margin:0 auto 18px">Chcete tohle pro svůj produkt?</h2>
+  <p class="lead" style="margin:0 auto 28px">Celá služba, výhody a cena jsou na stránce produktových vizuálů. Nebo rovnou pošlete odkaz na produkt, na kterém to chcete vidět.</p>
+  <a href="/vizualy/" class="btn" style="margin-right:10px">Prohlédnout službu</a>
+  <a href="https://www.linkedin.com/in/jakubskupin/" class="btn ghost" target="_blank" rel="noopener">Napsat na LinkedIn &#8599;&#xFE0E;</a>
+</div></section>
+
+<footer><div class="wrap" style="display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap">
+  <span>Jakub Skupin &middot; ukázka je součástí služby <a href="/vizualy/" style="color:inherit">produktové vizuály</a></span>
+  <span><a href="https://www.linkedin.com/in/jakubskupin/" style="color:inherit" target="_blank" rel="noopener">LinkedIn</a> &middot; <a href="/" style="color:inherit">jakubskupin.cz</a></span>
+</div></footer>
+
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const split=$('split'),stage=split.querySelector('.stage'),wrap=stage.querySelector('.wrap');
+const src=$('src'),src1=$('src1'),src2=$('src2'),src3=$('src3'),cap=$('cap'),right=$('right'),set1=$('set1'),set2=$('set2'),setM=$('setM');
+const photos=[...set1.querySelectorAll('.ph2')],photosM=[...setM.querySelectorAll('.ph2')],photos2=[...set2.querySelectorAll('.ph2')],hint=$('hint');
+const gtitle=$('gtitle'),gsub=$('gsub'),steps=[...document.querySelectorAll('.step')];
+const pick=$('pick'),cursor=$('cursor'),zoom=$('zoom'),vplayer=$('vplayer'),zcap=$('zcap'),snd=$('snd'),fsb=$('fs');
+function toggleSound(){vplayer.muted=!vplayer.muted;snd.classList.toggle('on',!vplayer.muted);snd.setAttribute('aria-label',vplayer.muted?'Zapnout zvuk':'Ztlumit');if(vplayer.paused)vplayer.play().catch(()=>{});}
+function goFull(){vplayer.muted=false;snd.classList.add('on');snd.setAttribute('aria-label','Ztlumit');const el=vplayer;if(el.webkitEnterFullscreen)el.webkitEnterFullscreen();else if(el.requestFullscreen)el.requestFullscreen().catch(()=>{});else if(zoom.requestFullscreen)zoom.requestFullscreen().catch(()=>{});vplayer.play().catch(()=>{});}
+snd.addEventListener('click',e=>{e.stopPropagation();toggleSound()});
+fsb.addEventListener('click',e=>{e.stopPropagation();goFull()});
+vplayer.addEventListener('click',()=>{if(matchMedia('(max-width:767px)').matches)goFull();else toggleSound()});
+const G=[['Scény a barevná pozadí','Stejné hodinky, jiný svět. Sezóna, kampaň, nálada'],['Materiál a prostředí','Dřevo, kámen, voda, hodinářský stůl. Kontext, ve kterém produkt dává smysl'],['Na ruce a v detailu','Produkt v reálném použití, aby si ho zákazník uměl představit u sebe']];
+const CAP=40,AR=3/4;
+const clamp=(v,a,b)=>Math.min(b,Math.max(a,v)),ease=t=>t<.5?2*t*t:-1+(4-2*t)*t,seg=(p,a,b)=>clamp((p-a)/(b-a),0,1),mix=(a,b,t)=>a+(b-a)*t;
+const mobile=()=>matchMedia('(max-width:767px)').matches;
+/* časová osa (podíl scrollu sekce):
+   .00-.10 fotka velká ve středu · .10-.24 uhne doleva · .22-.48 přibývá 12 záběrů
+   .50-.55 přehození na druhý model · .55-.68 přibývá jeho sada
+   .70-.77 kurzor najede na jednu fotku a „klikne" · .78-.87 fotka se zvětší do středu, zbytek zmizí
+   .87-.93 fotka se prolne do videa · .93-1 video hraje, popisek */
+let ticking=false,pickRect=null;
+function render(){
+  ticking=false; if(mobile())return;
+  const r=split.getBoundingClientRect(),H=stage.clientHeight,W=wrap.clientWidth,wr=wrap.getBoundingClientRect();
+  const p=clamp(-r.top/(split.offsetHeight-window.innerHeight),0,1);
+  /* 1) fotka: velká ve středu → vlevo, vysoká jako galerie (obdélník na výšku) */
+  const gridH=set1.querySelector('.m').offsetHeight,BIGH=Math.min(H*.78,760),BIGW=BIGH*AR,SMALLH=gridH,SMALLW=SMALLH*AR;
+  src.style.width=BIGW+'px';right.style.left=(SMALLW+48)+'px';
+  const t=ease(seg(p,.02,.09)),s=mix(1,SMALLH/BIGH,t);
+  const gridTop=set1.querySelector('.m').getBoundingClientRect().top-stage.getBoundingClientRect().top;
+  src.style.transform='translate('+mix((W-BIGW)/2,0,t)+'px,'+mix((H-BIGH-CAP)/2,gridTop,t)+'px) scale('+s+')';
+  hint.style.opacity=p<.02?1:0;
+  /* ručně psané anotace */
+  const an1=$('an1'),an2=$('an2'),an3=$('an3');
+  an1.style.left=((W-BIGW)/2-232)+'px';an1.style.top=((H-BIGH-CAP)/2+2)+'px';an1.style.opacity=1-seg(p,.015,.05);
+  an2.style.left='6px';an2.style.top=(gridTop-112)+'px';an2.style.opacity=Math.min(seg(p,.11,.15),1-seg(p,.36,.40));
+  an3.style.left=(SMALLW+48+540)+'px';an3.style.top=(gridTop-112)+'px';an3.style.opacity=Math.min(seg(p,.14,.18),1-seg(p,.36,.40));
+  /* 2) záběry podle použití (Laguna) */
+  const n=Math.round(seg(p,.09,.36)*photos.length);
+  photos.forEach((ph,i)=>ph.classList.toggle('in',i<n));
+  const g=n<=0?0:+photos[Math.min(n,photos.length)-1].dataset.g;
+  if(gtitle.textContent!==G[g][0]){gtitle.textContent=G[g][0];gsub.textContent=G[g][1];}
+  /* 3) další modely: Mánes, pak Jánský */
+  const swM=seg(p,.38,.42),sw=seg(p,.57,.61);
+  set1.style.opacity=1-swM;
+  setM.style.opacity=swM*(1-sw);
+  src1.style.opacity=1-swM;src3.style.opacity=swM*(1-sw);src2.style.opacity=sw;
+  cap.textContent=sw>.5?'Vstup: originál třetího modelu':swM>.5?'Vstup: originál dalšího modelu':'Vstup: jedna produktovka, kterou už máte';
+  const nM=Math.round(seg(p,.41,.55)*photosM.length);
+  photosM.forEach((ph,i)=>ph.classList.toggle('in',i<nM));
+  const n2=Math.round(seg(p,.60,.74)*photos2.length);
+  photos2.forEach((ph,i)=>ph.classList.toggle('in',i<n2));
+  /* 4) kurzor vybere jednu fotku */
+  const c=ease(seg(p,.76,.82));
+  if(c>0&&c<1||p<.76){pickRect=null}
+  const pr=pick.getBoundingClientRect();
+  const tx=pr.left-wr.left+pr.width*.55,ty=pr.top-wr.top+pr.height*.55;
+  cursor.style.opacity=p>.74&&p<.86?1:0;
+  cursor.style.transform='translate('+mix(W-80,tx,c)+'px,'+mix(H-60,ty,c)+'px) scale('+(c>=1?.9:1)+')';
+  pick.classList.toggle('pick',c>=1&&p<.86);
+  /* 5) vybraná fotka roste do středu, zbytek mizí */
+  const z=ease(seg(p,.84,.91));
+  const fade=1-seg(p,.84,.89);
+  right.style.opacity=Math.min(seg(p,.06,.11),fade);
+  set2.style.opacity=sw*fade;
+  src.style.opacity=fade;cap.style.opacity=fade;
+  if(z>0){
+    if(!pickRect)pickRect={l:pr.left-wr.left,t:pr.top-wr.top,w:pr.width,h:pr.height};
+    const th=Math.min(H*.66,(W)*.9*16/9),tw=th*9/16,tl=(W-tw)/2,tt=H*.26;
+    zoom.style.opacity=1;
+    zoom.style.left=mix(pickRect.l,tl,z)+'px';zoom.style.top=mix(pickRect.t,tt,z)+'px';
+    zoom.style.width=mix(pickRect.w,tw,z)+'px';zoom.style.height=mix(pickRect.h,th,z)+'px';
+    zoom.style.borderRadius=mix(12,16,z)+'px';
+  }else{zoom.style.opacity=0}
+  /* 6) fotka se prolne do videa */
+  const v=seg(p,.91,.95);
+  vplayer.style.opacity=v;
+  const stageOn=r.bottom>innerHeight*.5&&r.top<innerHeight*.5; /* sekce je opravdu na obrazovce */
+  if(v>.2&&stageOn&&vplayer.paused)vplayer.play().catch(()=>{});
+  if((v===0||!stageOn)&&!vplayer.paused){vplayer.pause();vplayer.currentTime=0;vplayer.muted=true;snd.classList.remove('on');snd.setAttribute('aria-label','Zapnout zvuk')}
+  zoom.classList.toggle('live',v>.9);
+  zcap.style.opacity=seg(p,.90,.95);
+  document.querySelector('.steps').style.opacity=fade;
+  /* kroky nahoře */
+  const fills=[seg(p,0,.09),seg(p,.09,.38),seg(p,.38,.76),seg(p,.76,1)];
+  steps.forEach((st,i)=>{st.querySelector('.bar i').style.width=fills[i]*100+'%';st.classList.toggle('on',(i===0&&p<.09)||(i===1&&p>=.09&&p<.38)||(i===2&&p>=.38&&p<.76)||(i===3&&p>=.76))});
+}
+const nav=document.querySelector('nav');let lastY=scrollY;
+function navTick(){const y=scrollY;if(y>lastY+2&&y>120)nav.classList.add('hide');else if(y<lastY-2||y<=120)nav.classList.remove('hide');lastY=y;}
+function onScroll(){navTick();if(!ticking){ticking=true;requestAnimationFrame(render)}}
+addEventListener('scroll',onScroll,{passive:true});addEventListener('resize',onScroll);render();
+document.addEventListener('visibilitychange',()=>{if(document.hidden){if(!vplayer.paused){vplayer.pause();vplayer.muted=true;snd.classList.remove('on')}}else{ticking=false;render()}});
+addEventListener('pageshow',()=>{ticking=false;render()});
+/* mobil: video se přehraje, jakmile je vidět */
+if('IntersectionObserver' in window){new IntersectionObserver(es=>es.forEach(e=>{if(mobile()){e.isIntersecting?vplayer.play().catch(()=>{}):vplayer.pause()}}),{threshold:.4}).observe(zoom)}
+})();
+</script>
+<script>
+(function(){
+document.querySelectorAll('.fmt .box').forEach(b=>{
+  const t=()=>{const on=b.classList.toggle('on');b.setAttribute('aria-pressed',on?'true':'false')};
+  b.addEventListener('click',t);
+  b.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();t()}});
+});
+})();
+</script>
+</body>
+</html>

@@ -4,13 +4,23 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { fadeUp, stagger } from "@/lib/animations";
 
-const services = [
+type Service = {
+  href: string;
+  tag: string;
+  title: string;
+  description: string;
+  delivery: string;
+  result: string;
+  staticPage?: boolean;
+};
+
+const services: Service[] = [
   {
     href: "/personal-brand",
     tag: "X-Factor Sprint",
     title: "Osobní značka, která vynikne",
     description:
-      "Za dva dny vznikne váš web a\u00a0LinkedIn profil. Ne šablona — zhmotněná esence toho, čím jste.",
+      "Za dva dny vznikne váš web a\u00a0LinkedIn profil. Ne šablona, zhmotněná esence toho, čím jste.",
     delivery: "2 dny",
     result: "Hotová značka",
   },
@@ -19,7 +29,7 @@ const services = [
     tag: "Creator partner",
     title: "Partner pro tvůrce a\u00a0CEO",
     description:
-      "Přemýšlím s\u00a0vámi, ne za vás. Koncepty, obsahová strategie, reframing — aby z\u00a0vašich myšlenek vzniklo něco konkrétního.",
+      "Přemýšlím s\u00a0vámi, ne za vás. Koncepty, obsahová strategie, reframing, aby z\u00a0vašich myšlenek vzniklo něco konkrétního.",
     delivery: "Průběžně",
     result: "Jasný směr",
   },
@@ -31,6 +41,16 @@ const services = [
       "Strategická analýza v\u00a0rozsahu, na který tým potřeboval týden. Vy ji máte za\u00a0den nebo dva.",
     delivery: "1–2 dny",
     result: "Strategický dokument",
+  },
+  {
+    href: "/vizualy/",
+    tag: "Produktové vizuály",
+    title: "Produkt máte. Chybí scény a video",
+    description:
+      "Z jedné produktovky vyrobím scény, produkt v reálném použití i video. Na sítě, do e-shopu a na testování reklam.",
+    delivery: "Do 5 dnů",
+    result: "Sada vizuálů",
+    staticPage: true,
   },
 ];
 
@@ -47,35 +67,38 @@ export default function Services() {
         Co vznikne
       </motion.div>
 
-      <div className="grid gap-4 sm:grid-cols-3">
-        {services.map((service, i) => (
-          <motion.div key={service.href} {...stagger(i + 1)}>
-            <Link
-              href={service.href}
-              className="group flex h-full flex-col justify-between rounded-2xl border border-border bg-card-bg p-7 transition-all duration-300 hover:border-text/20 hover:shadow-[0_8px_30px_rgba(26,26,24,0.08)]"
-            >
-              <div>
-                <div className="mb-4 font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-text-tertiary">
-                  {service.tag}
+      <div className="grid gap-4 sm:grid-cols-2">
+        {services.map((service, i) => {
+          const CardTag = service.staticPage ? "a" : Link;
+          return (
+            <motion.div key={service.href} {...stagger(i + 1)}>
+              <CardTag
+                href={service.href}
+                className="group flex h-full flex-col justify-between rounded-2xl border border-border bg-card-bg p-7 transition-all duration-300 hover:border-text/20 hover:shadow-[0_8px_30px_rgba(26,26,24,0.08)]"
+              >
+                <div>
+                  <div className="mb-4 font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-text-tertiary">
+                    {service.tag}
+                  </div>
+                  <h3 className="mb-2 font-heading text-[1.2rem] font-bold leading-tight tracking-[-0.02em]">
+                    {service.title}
+                  </h3>
+                  <p className="text-[14px] leading-[1.6] text-text-secondary">
+                    {service.description}
+                  </p>
                 </div>
-                <h3 className="mb-2 font-heading text-[1.2rem] font-bold leading-tight tracking-[-0.02em]">
-                  {service.title}
-                </h3>
-                <p className="text-[14px] leading-[1.6] text-text-secondary">
-                  {service.description}
-                </p>
-              </div>
-              <div className="mt-6 flex items-end justify-between border-t border-border pt-4">
-                <span className="font-mono text-[11px] text-text-tertiary">
-                  {service.delivery}
-                </span>
-                <span className="font-heading text-[15px] font-bold tracking-[-0.01em]">
-                  {service.result}
-                </span>
-              </div>
-            </Link>
-          </motion.div>
-        ))}
+                <div className="mt-6 flex items-end justify-between border-t border-border pt-4">
+                  <span className="font-mono text-[11px] text-text-tertiary">
+                    {service.delivery}
+                  </span>
+                  <span className="font-heading text-[15px] font-bold tracking-[-0.01em]">
+                    {service.result}
+                  </span>
+                </div>
+              </CardTag>
+            </motion.div>
+          );
+        })}
       </div>
     </section>
   );
