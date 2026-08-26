@@ -218,6 +218,19 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
 .lbclose:hover{background:rgba(255,255,255,.14)}
 @media(prefers-reduced-motion:reduce){.tile{transition:none}.tile:hover{transform:none}}
 
+/* citace klienta */
+.ref{background:var(--bg-2);border:1px solid var(--border);border-radius:10px;
+  padding:30px 26px;display:flex;gap:24px;align-items:flex-start;max-width:920px;margin:0 auto}
+@media(max-width:679px){.ref{flex-direction:column;gap:18px;padding:24px 20px;text-align:left}}
+.reffoto{flex:0 0 auto;width:76px;height:76px;border-radius:50%;overflow:hidden;
+  border:1px solid #33333a;background:#1c1c20;display:flex;align-items:center;justify-content:center}
+.reffoto img{width:100%;height:100%;object-fit:cover;display:block}
+.reffoto span{font-family:var(--h);font-weight:700;font-size:24px;letter-spacing:.02em;color:var(--text-3)}
+.ref blockquote{margin:0;min-width:0}
+.ref blockquote p{font-size:clamp(15.5px,1.7vw,17.5px);line-height:1.62;color:var(--text)}
+.ref cite{display:block;margin-top:16px;font-style:normal;font-size:13.5px;color:var(--text-3)}
+.ref cite b{display:block;font-family:var(--h);font-weight:700;font-size:15px;color:var(--text);letter-spacing:-.01em;margin-bottom:2px}
+
 /* zaver */
 .closing{text-align:center;padding:76px 0 88px}
 .closing h2{font-size:clamp(30px,5vw,48px);margin-bottom:14px}
@@ -496,6 +509,19 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
   </div>
   <div class="w">
     <p class="fmtnote rv">Klepnutím se obrázek zvětší. Popisek u každého říká, který směr se zkoušel.</p>
+  </div>
+</section>
+
+<!-- CITACE KLIENTA -->
+<section id="citace">
+  <div class="w">
+    <div class="ref rv">
+      <span class="reffoto"><span>JH</span></span>
+      <blockquote>
+        <p>&bdquo;Jakubova práce nás absolutně nadchla. Umožní nám odprezentovat produkty zajímavěji a prémiověji na webu, i na sociálních sítích. Z pěti fotek produktu na bílém pozadí připravil kampaňové vizuály i video srovnatelné s kvalitní 3D produkcí. Celý proces navíc odřídil samostatně a už první výstupy dodal v produkční kvalitě, čímž si nás pro AI proces okamžitě získal.&ldquo;</p>
+        <cite><b>Jan Habich</b>Equator</cite>
+      </blockquote>
+    </div>
   </div>
 </section>
 
