@@ -187,49 +187,15 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
   .sechead{margin-bottom:30px}
 }
 
-/* 04 board pokusu: husta mozaika, hustota je tu sdeleni */
-.board{columns:4;column-gap:14px}
-@media(max-width:1100px){.board{columns:3}}
-@media(max-width:767px){.board{columns:2;column-gap:10px}}
-.tile{display:block;width:100%;break-inside:avoid;margin:0 0 14px;padding:0;position:relative;
-  border:1px solid var(--border);border-radius:4px;overflow:hidden;background:#000;cursor:zoom-in;
-  font:inherit;color:inherit;text-align:left;
-  transition:transform .25s ease,border-color .25s ease}
-@media(max-width:767px){.tile{margin-bottom:10px}}
-.tile img{width:100%;height:auto;display:block;opacity:.92;transition:opacity .25s ease}
-.tile:hover,.tile:focus-visible{transform:translateY(-3px);border-color:#43434c;z-index:2}
-.tile:hover img,.tile:focus-visible img{opacity:1}
-.tile:focus-visible{outline:2px solid #fff;outline-offset:2px}
-.tcap{position:absolute;left:0;right:0;bottom:0;padding:26px 9px 8px;
-  font-size:10.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:#EDEDEB;
-  background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.82));
-  opacity:0;transition:opacity .25s ease}
-.tile:hover .tcap,.tile:focus-visible .tcap{opacity:1}
-
-/* zvetseni */
-.lb{position:fixed;inset:0;z-index:60;background:rgba(6,6,7,.94);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
-  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;padding:28px 20px}
-.lb[hidden]{display:none}
-.lb img{max-width:min(1100px,92vw);max-height:78vh;width:auto;height:auto;border-radius:4px;border:1px solid var(--border)}
-.lbcap{font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-2);text-align:center}
-.lbclose{position:absolute;top:18px;right:20px;width:40px;height:40px;border-radius:50%;padding:0;cursor:pointer;
-  border:1px solid var(--border);background:rgba(255,255,255,.06);color:var(--text);font-size:22px;line-height:1;
-  display:flex;align-items:center;justify-content:center;transition:background .2s ease}
-.lbclose:hover{background:rgba(255,255,255,.14)}
-@media(prefers-reduced-motion:reduce){.tile{transition:none}.tile:hover{transform:none}}
-
-/* citace klienta */
-.ref{background:var(--bg-2);border:1px solid var(--border);border-radius:10px;
-  padding:30px 26px;display:flex;gap:24px;align-items:flex-start;max-width:920px;margin:0 auto}
-@media(max-width:679px){.ref{flex-direction:column;gap:18px;padding:24px 20px;text-align:left}}
-.reffoto{flex:0 0 auto;width:76px;height:76px;border-radius:50%;overflow:hidden;
-  border:1px solid #33333a;background:#1c1c20;display:flex;align-items:center;justify-content:center}
-.reffoto img{width:100%;height:100%;object-fit:cover;display:block}
-.reffoto span{font-family:var(--h);font-weight:700;font-size:24px;letter-spacing:.02em;color:var(--text-3)}
-.ref blockquote{margin:0;min-width:0}
-.ref blockquote p{font-size:clamp(15.5px,1.7vw,17.5px);line-height:1.62;color:var(--text)}
-.ref cite{display:block;margin-top:16px;font-style:normal;font-size:13.5px;color:var(--text-3)}
-.ref cite b{display:block;font-family:var(--h);font-weight:700;font-size:15px;color:var(--text);letter-spacing:-.01em;margin-bottom:2px}
+/* citace klienta, format pripadovky (predloha /work/simrani) */
+.ref{max-width:600px;margin:0 auto;text-align:center}
+.ref blockquote{margin:0}
+.ref blockquote p{font-family:var(--h);font-weight:700;font-size:clamp(18px,2.5vw,22px);
+  line-height:1.5;letter-spacing:-.02em;color:var(--text);margin-bottom:24px;text-wrap:pretty}
+.ref cite{font-style:normal;font-size:14px;color:var(--text-2)}
+.ref cite a{color:var(--text);text-decoration:none;border-bottom:1px solid var(--border);
+  transition:border-color .2s ease}
+.ref cite a:hover{border-color:var(--text-2)}
 
 /* zaver */
 .closing{text-align:center;padding:76px 0 88px}
@@ -389,137 +355,13 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
   </div>
 </section>
 
-<!-- 04 POKUSY -->
-<section id="board">
-  <div class="w">
-    <div class="sechead">
-      <div class="num rv"><b>04</b><span>Pokusy</span></div>
-      <h2 class="rv">Předtím to vypadalo takhle</h2>
-      <p class="big rv">Hotové výstupy vypadají samozřejmě. <b>Samozřejmé nebyly.</b> Ráfek se ohýbal, karbon se rozutekl do vláken, kolo vycházelo do vejce. Než tvar sedl, musel se změřit a porovnat.</p>
-      <div class="meta rv"><span>194 obrázků v archivu</span><span>10 na této stránce</span></div>
-    </div>
-  </div>
-  <div class="fmtwide">
-    <div class="board rv">
-        <button class="tile" type="button" data-velky="/equator/assets/board/a1-proud.jpg" data-popis="Směr A: proudění">
-          <img src="/equator/assets/board/a1-proud-t.jpg" width="512" height="640" alt="Směr A: proudění, jeden z pokusů" loading="lazy" decoding="async">
-          <span class="tcap">Směr A: proudění</span>
-        </button>
-        <button class="tile" type="button" data-velky="/equator/assets/board/a3-vlakno.jpg" data-popis="Směr A: vlákno">
-          <img src="/equator/assets/board/a3-vlakno-t.jpg" width="512" height="640" alt="Směr A: vlákno, jeden z pokusů" loading="lazy" decoding="async">
-          <span class="tcap">Směr A: vlákno</span>
-        </button>
-        <button class="tile" type="button" data-velky="/equator/assets/board/t2-tkanina.jpg" data-popis="Směr T: tkanina, přechod">
-          <img src="/equator/assets/board/t2-tkanina-t.jpg" width="512" height="640" alt="Směr T: tkanina, přechod, jeden z pokusů" loading="lazy" decoding="async">
-          <span class="tcap">Směr T: tkanina, přechod</span>
-        </button>
-        <button class="tile" type="button" data-velky="/equator/assets/board/s2-zvuk.jpg" data-popis="Test: zvuková stopa">
-          <img src="/equator/assets/board/s2-zvuk-t.jpg" width="357" height="640" alt="Test: zvuková stopa, jeden z pokusů" loading="lazy" decoding="async">
-          <span class="tcap">Test: zvuková stopa</span>
-        </button>
-        <button class="tile" type="button" data-velky="/equator/assets/board/u2-tunel-makro.jpg" data-popis="Směr U: tunel s daty, makro">
-          <img src="/equator/assets/board/u2-tunel-makro-t.jpg" width="512" height="640" alt="Směr U: tunel s daty, makro, jeden z pokusů" loading="lazy" decoding="async">
-          <span class="tcap">Směr U: tunel s daty, makro</span>
-        </button>
-        <button class="tile" type="button" data-velky="/equator/assets/board/a4-rez.jpg" data-popis="Směr A: řez vzduchem">
-          <img src="/equator/assets/board/a4-rez-t.jpg" width="512" height="640" alt="Směr A: řez vzduchem, jeden z pokusů" loading="lazy" decoding="async">
-          <span class="tcap">Směr A: řez vzduchem</span>
-        </button>
-        <button class="tile" type="button" data-velky="/equator/assets/board/t4-vlakna.jpg" data-popis="Směr T: tkanina, vlákna">
-          <img src="/equator/assets/board/t4-vlakna-t.jpg" width="512" height="640" alt="Směr T: tkanina, vlákna, jeden z pokusů" loading="lazy" decoding="async">
-          <span class="tcap">Směr T: tkanina, vlákna</span>
-        </button>
-        <button class="tile" type="button" data-velky="/equator/assets/board/s5-voda.jpg" data-popis="Test: voda">
-          <img src="/equator/assets/board/s5-voda-t.jpg" width="357" height="640" alt="Test: voda, jeden z pokusů" loading="lazy" decoding="async">
-          <span class="tcap">Test: voda</span>
-        </button>
-        <button class="tile" type="button" data-velky="/equator/assets/board/s3-svetlo.jpg" data-popis="Test: světelná stopa">
-          <img src="/equator/assets/board/s3-svetlo-t.jpg" width="357" height="640" alt="Test: světelná stopa, jeden z pokusů" loading="lazy" decoding="async">
-          <span class="tcap">Test: světelná stopa</span>
-        </button>
-        <button class="tile" type="button" data-velky="/equator/assets/board/u4-tunel-celek.jpg" data-popis="Směr U: tunel s daty, celek">
-          <img src="/equator/assets/board/u4-tunel-celek-t.jpg" width="512" height="640" alt="Směr U: tunel s daty, celek, jeden z pokusů" loading="lazy" decoding="async">
-          <span class="tcap">Směr U: tunel s daty, celek</span>
-        </button>
-        <button class="tile" type="button" data-velky="/equator/assets/board/a2-stopa.jpg" data-popis="Směr A: světelná stopa">
-          <img src="/equator/assets/board/a2-stopa-t.jpg" width="512" height="640" alt="Směr A: světelná stopa, jeden z pokusů" loading="lazy" decoding="async">
-          <span class="tcap">Směr A: světelná stopa</span>
-        </button>
-        <button class="tile" type="button" data-velky="/equator/assets/board/kv-01.jpg" data-popis="První key visual">
-          <img src="/equator/assets/board/kv-01-t.jpg" width="640" height="357" alt="První key visual, jeden z pokusů" loading="lazy" decoding="async">
-          <span class="tcap">První key visual</span>
-        </button>
-        <button class="tile" type="button" data-velky="/equator/assets/board/s4-vrstevnice.jpg" data-popis="Test: vrstevnice">
-          <img src="/equator/assets/board/s4-vrstevnice-t.jpg" width="357" height="640" alt="Test: vrstevnice, jeden z pokusů" loading="lazy" decoding="async">
-          <span class="tcap">Test: vrstevnice</span>
-        </button>
-        <button class="tile" type="button" data-velky="/equator/assets/board/s1-zebra.jpg" data-popis="Test: zebra">
-          <img src="/equator/assets/board/s1-zebra-t.jpg" width="357" height="640" alt="Test: zebra, jeden z pokusů" loading="lazy" decoding="async">
-          <span class="tcap">Test: zebra</span>
-        </button>
-        <button class="tile" type="button" data-velky="/equator/assets/board/s6-bocni.jpg" data-popis="Test: boční světlo">
-          <img src="/equator/assets/board/s6-bocni-t.jpg" width="357" height="640" alt="Test: boční světlo, jeden z pokusů" loading="lazy" decoding="async">
-          <span class="tcap">Test: boční světlo</span>
-        </button>
-        <button class="tile" type="button" data-velky="/equator/assets/board/mini-test.jpg" data-popis="Levný test pohybu">
-          <img src="/equator/assets/board/mini-test-t.jpg" width="367" height="640" alt="Levný test pohybu, jeden z pokusů" loading="lazy" decoding="async">
-          <span class="tcap">Levný test pohybu</span>
-        </button>
-        <button class="tile" type="button" data-velky="/equator/assets/board/mrizka.jpg" data-popis="Měření tvaru v mřížce">
-          <img src="/equator/assets/board/mrizka-t.jpg" width="516" height="640" alt="Měření tvaru v mřížce, jeden z pokusů" loading="lazy" decoding="async">
-          <span class="tcap">Měření tvaru v mřížce</span>
-        </button>
-        <button class="tile" type="button" data-velky="/equator/assets/board/parametricky.jpg" data-popis="Parametrický ráfek, 24 period">
-          <img src="/equator/assets/board/parametricky-t.jpg" width="640" height="640" alt="Parametrický ráfek, 24 period, jeden z pokusů" loading="lazy" decoding="async">
-          <span class="tcap">Parametrický ráfek, 24 period</span>
-        </button>
-        <button class="tile" type="button" data-velky="/equator/assets/board/srovnani.jpg" data-popis="Srovnání upscalerů na 100 %">
-          <img src="/equator/assets/board/srovnani-t.jpg" width="600" height="640" alt="Srovnání upscalerů na 100 %, jeden z pokusů" loading="lazy" decoding="async">
-          <span class="tcap">Srovnání upscalerů na 100 %</span>
-        </button>
-        <button class="tile" type="button" data-velky="/equator/assets/board/predpo-1.jpg" data-popis="Před a po: náboj a dráty">
-          <img src="/equator/assets/board/predpo-1-t.jpg" width="640" height="329" alt="Před a po: náboj a dráty, jeden z pokusů" loading="lazy" decoding="async">
-          <span class="tcap">Před a po: náboj a dráty</span>
-        </button>
-        <button class="tile" type="button" data-velky="/equator/assets/board/predpo-2.jpg" data-popis="Před a po: popisek">
-          <img src="/equator/assets/board/predpo-2-t.jpg" width="640" height="329" alt="Před a po: popisek, jeden z pokusů" loading="lazy" decoding="async">
-          <span class="tcap">Před a po: popisek</span>
-        </button>
-        <button class="tile" type="button" data-velky="/equator/assets/board/predpo-3.jpg" data-popis="Před a po: dráty a vlna">
-          <img src="/equator/assets/board/predpo-3-t.jpg" width="640" height="329" alt="Před a po: dráty a vlna, jeden z pokusů" loading="lazy" decoding="async">
-          <span class="tcap">Před a po: dráty a vlna</span>
-        </button>
-        <button class="tile" type="button" data-velky="/equator/assets/board/edit-02.jpg" data-popis="Editorial ráfku">
-          <img src="/equator/assets/board/edit-02-t.jpg" width="516" height="640" alt="Editorial ráfku, jeden z pokusů" loading="lazy" decoding="async">
-          <span class="tcap">Editorial ráfku</span>
-        </button>
-        <button class="tile" type="button" data-velky="/equator/assets/board/edit-03.jpg" data-popis="Editorial ráfku">
-          <img src="/equator/assets/board/edit-03-t.jpg" width="516" height="640" alt="Editorial ráfku, jeden z pokusů" loading="lazy" decoding="async">
-          <span class="tcap">Editorial ráfku</span>
-        </button>
-        <button class="tile" type="button" data-velky="/equator/assets/board/edit-04.jpg" data-popis="Editorial ráfku">
-          <img src="/equator/assets/board/edit-04-t.jpg" width="516" height="640" alt="Editorial ráfku, jeden z pokusů" loading="lazy" decoding="async">
-          <span class="tcap">Editorial ráfku</span>
-        </button>
-        <button class="tile" type="button" data-velky="/equator/assets/board/edit-06.jpg" data-popis="Editorial ráfku">
-          <img src="/equator/assets/board/edit-06-t.jpg" width="516" height="640" alt="Editorial ráfku, jeden z pokusů" loading="lazy" decoding="async">
-          <span class="tcap">Editorial ráfku</span>
-        </button>
-    </div>
-  </div>
-  <div class="w">
-    <p class="fmtnote rv">Klepnutím se obrázek zvětší. Popisek u každého říká, který směr se zkoušel.</p>
-  </div>
-</section>
-
 <!-- CITACE KLIENTA -->
 <section id="citace">
   <div class="w">
     <div class="ref rv">
-      <span class="reffoto"><span>JH</span></span>
       <blockquote>
         <p>&bdquo;Jakubova práce nás absolutně nadchla. Umožní nám odprezentovat produkty zajímavěji a prémiověji na webu, i na sociálních sítích. Z pěti fotek produktu na bílém pozadí připravil kampaňové vizuály i video srovnatelné s kvalitní 3D produkcí. Celý proces navíc odřídil samostatně a už první výstupy dodal v produkční kvalitě, čímž si nás pro AI proces okamžitě získal.&ldquo;</p>
-        <cite><b>Jan Habich</b>Equator</cite>
+        <cite><a href="https://www.linkedin.com/in/janhabich/" target="_blank" rel="noopener">Jan Habich</a> · Strategic Advisor, Equator</cite>
       </blockquote>
     </div>
   </div>
@@ -535,12 +377,6 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
   </div>
 </section>
 
-<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Zvětšený pokus">
-  <button class="lbclose" type="button" id="lbclose" aria-label="Zavřít">&times;</button>
-  <img id="lbimg" src="" alt="">
-  <p class="lbcap" id="lbcap"></p>
-</div>
-
 <script>
 (function(){
   var els=document.querySelectorAll('.rv');
@@ -549,30 +385,6 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
     entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);} });
   },{rootMargin:'0px 0px -8% 0px',threshold:.08});
   els.forEach(function(e,i){ e.style.transitionDelay=(Math.min(i%5,4)*70)+'ms'; io.observe(e); });
-})();
-
-(function(){
-  var lb=document.getElementById('lb'), img=document.getElementById('lbimg'),
-      cap=document.getElementById('lbcap'), zav=document.getElementById('lbclose');
-  if(!lb) return;
-  var spustil=null;
-  function otevri(t){
-    spustil=t;
-    img.src=t.getAttribute('data-velky');
-    img.alt=t.getAttribute('data-popis')+', zvětšeno';
-    cap.textContent=t.getAttribute('data-popis');
-    lb.hidden=false; document.body.style.overflow='hidden'; zav.focus();
-  }
-  function zavri(){
-    lb.hidden=true; img.src=''; document.body.style.overflow='';
-    if(spustil) spustil.focus();
-  }
-  document.querySelectorAll('.tile').forEach(function(t){
-    t.addEventListener('click',function(){otevri(t)});
-  });
-  zav.addEventListener('click',zavri);
-  lb.addEventListener('click',function(e){ if(e.target===lb) zavri(); });
-  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&!lb.hidden) zavri(); });
 })();
 
 (function(){
