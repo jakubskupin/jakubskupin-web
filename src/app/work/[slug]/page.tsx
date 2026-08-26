@@ -2,15 +2,15 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 import type { CaseStudy } from "@/lib/types";
-import martinVymetal from "@/content/work/martin-vymetal";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import GrainOverlay from "@/components/motion/GrainOverlay";
 import CaseStudyContent from "@/components/work/CaseStudyContent";
 
-const caseStudies: Record<string, CaseStudy> = {
-  "martin-vymetal": martinVymetal,
-};
+// Pripadovky jsou stazene z webu (24. 8. 2026, Jakubuv pokyn).
+// Obsah zustava v src/content/work/. Vraceni = pridat radek zpet sem
+// a zaznam do src/app/sitemap.ts.
+const caseStudies: Record<string, CaseStudy> = {};
 
 export function generateStaticParams() {
   return Object.keys(caseStudies).map((slug) => ({ slug }));

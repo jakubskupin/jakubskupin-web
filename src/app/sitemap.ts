@@ -29,12 +29,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${siteUrl}/work/martin-vymetal`,
-      lastModified: new Date("2026-03-08"),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
       url: `${siteUrl}/knowledge-athlete`,
       lastModified: new Date("2026-03-10"),
       changeFrequency: "monthly",
