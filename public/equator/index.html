@@ -192,7 +192,10 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
 .ref blockquote{margin:0}
 .ref blockquote p{font-family:var(--h);font-weight:700;font-size:clamp(18px,2.5vw,22px);
   line-height:1.5;letter-spacing:-.02em;color:var(--text);margin-bottom:24px;text-wrap:pretty}
-.ref cite{font-style:normal;font-size:14px;color:var(--text-2)}
+.ref cite{font-style:normal;font-size:14px;color:var(--text-2);
+  display:flex;align-items:center;gap:12px}
+.ref cite img{width:44px;height:44px;border-radius:50%;flex:0 0 auto;
+  border:1px solid #2e2e34;background:#17171a}
 .ref cite a{color:var(--text);text-decoration:none;border-bottom:1px solid var(--border);
   transition:border-color .2s ease}
 .ref cite a:hover{border-color:var(--text-2)}
@@ -361,7 +364,10 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
     <div class="ref rv">
       <blockquote>
         <p>&bdquo;Jakubova práce nás absolutně nadchla. Umožní nám odprezentovat produkty zajímavěji a prémiověji na webu, i na sociálních sítích. Z pěti fotek produktu na bílém pozadí připravil kampaňové vizuály i video srovnatelné s kvalitní 3D produkcí. Celý proces navíc odřídil samostatně a už první výstupy dodal v produkční kvalitě, čímž si nás pro AI proces okamžitě získal.&ldquo;</p>
-        <cite><a href="https://www.linkedin.com/in/janhabich/" target="_blank" rel="noopener">Jan Habich</a> · Strategic Advisor, Equator</cite>
+        <cite>
+          <img src="/equator/assets/lide/jan-habich.jpg" srcset="/equator/assets/lide/jan-habich.jpg 1x, /equator/assets/lide/jan-habich@2x.jpg 2x" width="44" height="44" alt="Jan Habich" loading="lazy" decoding="async">
+          <span><a href="https://www.linkedin.com/in/janhabich/" target="_blank" rel="noopener">Jan Habich</a> · Strategic Advisor, Equator</span>
+        </cite>
       </blockquote>
     </div>
   </div>
