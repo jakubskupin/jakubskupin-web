@@ -65,6 +65,12 @@ nav a.on{color:var(--text)}
 .show h3{font-size:20px;margin-bottom:6px}
 .show .sc-body p{font-size:14px;color:var(--text-secondary);line-height:1.5}
 .show .sc-link{margin-top:auto;padding-top:16px;font-size:14px;font-weight:500;color:var(--text)}
+.show.locked{cursor:default}
+.show.locked:hover{border-color:var(--border);box-shadow:none;transform:none}
+.show.locked .thumb{position:relative}
+.show.locked .thumb img{filter:blur(16px);transform:scale(1.12)}
+.show.locked:hover .thumb img{transform:scale(1.12)}
+.lock-tag{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(26,26,24,.78);color:#FAFAF8;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:9px 16px;border-radius:999px;backdrop-filter:blur(4px);white-space:nowrap}
 
 /* postup: vodorovně, minimalisticky */
 .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:44px;border-top:1px solid var(--border)}
@@ -132,15 +138,15 @@ html.no-js .card[style*="grid-template-columns"]{grid-template-columns:1fr!impor
         <span class="sc-link">Otevřít ukázku &#8594;</span>
       </div>
     </a>
-    <a class="card show" href="/le-premier/">
-      <div class="thumb"><img src="/le-premier/assets/lookbook-gilet.jpg" alt="Vesta Le Premier na modelovi" loading="lazy" decoding="async"></div>
+    <div class="card show locked">
+      <div class="thumb"><img src="/vizualy/assets/moda.jpg" alt="Rozmazaný náhled připravované ukázky pro módní značku" loading="lazy" decoding="async"><span class="lock-tag">Připravujeme</span></div>
       <div class="sc-body">
         <div class="kicker" style="margin-bottom:6px">Móda</div>
-        <h3>Le Premier</h3>
-        <p>Obleky a vesty na míru. Z jedné fotky video na modelovi, celé focení i kampaň.</p>
-        <span class="sc-link">Otevřít ukázku &#8594;</span>
+        <h3>Módní značka</h3>
+        <p>Obleky šité na míru. Ukázku zveřejním, jakmile ji značka schválí.</p>
+        <span class="sc-link" style="color:var(--text-tertiary)">Už brzy</span>
       </div>
-    </a>
+    </div>
     <a class="card show" href="/equator/">
       <div class="thumb"><img src="/equator/assets/hero-kolo.jpg" alt="Karbonové zapletené kolo Equator v tmavé scéně" loading="lazy" decoding="async"></div>
       <div class="sc-body">
@@ -189,7 +195,7 @@ html.no-js .card[style*="grid-template-columns"]{grid-template-columns:1fr!impor
 
   <div class="card" style="margin-top:28px;display:flex;gap:24px;align-items:baseline;flex-wrap:wrap">
     <h3 style="font-size:18px;white-space:nowrap">Video je navazující krok</h3>
-    <p style="color:var(--text-secondary);font-size:15px;flex:1;min-width:260px">Ze schválených scén pak vznikají videa do 30 sekund, na sítě i do reklamy. Výroba videa je znatelně náročnější než statika, proto navazuje ve chvíli, kdy série funguje. Jak vypadá, uvidíte u <a href="/prim/" style="color:inherit">Prim</a> a <a href="/le-premier/" style="color:inherit">Le Premier</a>.</p>
+    <p style="color:var(--text-secondary);font-size:15px;flex:1;min-width:260px">Ze schválených scén pak vznikají videa do 30 sekund, na sítě i do reklamy. Výroba videa je znatelně náročnější než statika, proto navazuje ve chvíli, kdy série funguje. Jak vypadá, uvidíte u <a href="/prim/" style="color:inherit">Prim</a>.</p>
   </div>
 </div></section>
 
