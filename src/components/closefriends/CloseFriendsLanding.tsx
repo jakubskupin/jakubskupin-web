@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { motion, type Easing } from "framer-motion";
 import { LINKEDIN_URL } from "@/lib/data";
 
@@ -376,16 +376,6 @@ function BeforeAfter() {
 }
 
 function Reference() {
-  const [carouselH, setCarouselH] = useState(680);
-  useEffect(() => {
-    const onMsg = (e: MessageEvent) => {
-      const h = (e.data as { cfCarouselHeight?: number })?.cfCarouselHeight;
-      if (typeof h === "number" && h > 200) setCarouselH(h);
-    };
-    window.addEventListener("message", onMsg);
-    return () => window.removeEventListener("message", onMsg);
-  }, []);
-
   const proof: { text: string; href?: string }[] = [
     { text: "Hack: analýza recenzí ze Spotify a Apple Podcasts pomohla zostřit popis podcastu a zpřesnit personu Markéty" },
     { text: "Celý web od nuly: copy, storytelling i vizuál" },
@@ -461,22 +451,7 @@ function Reference() {
         </div>
 
         <div className="border-t border-border pt-6 sm:col-span-2">
-          <h4 className="mb-1 font-heading text-[16px] font-bold tracking-[-0.01em]">
-            Instagram carousely
-          </h4>
-          <p className="mb-5 text-[13px] text-text-tertiary">
-            Projeďte slidy v každém z nich.
-          </p>
-
-          <iframe
-            src="/closefriends-carousels.html"
-            title="Instagram carousely pro Šimrání"
-            className="w-full"
-            style={{ height: carouselH, border: "none" }}
-            scrolling="no"
-          />
-
-          <div className="mt-5 grid grid-cols-1 gap-6 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <div>
               <div className="mb-2.5 text-[13px] font-bold text-text">
                 Carousel pro launch, jak vznikl
