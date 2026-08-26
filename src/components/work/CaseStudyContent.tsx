@@ -24,8 +24,8 @@ export default function CaseStudyContent({
   nextSlug,
 }: {
   cs: CaseStudy;
-  nextCs: CaseStudy;
-  nextSlug: string;
+  nextCs?: CaseStudy;
+  nextSlug?: string;
 }) {
   return (
     <main className="mx-auto max-w-[960px] px-6 pb-[120px] pt-[100px]">
@@ -165,22 +165,25 @@ export default function CaseStudyContent({
       )}
 
       {/* Next Project */}
-      <motion.section className="text-center" {...fadeUp}>
-        <div className="mb-3 text-[13px] font-semibold uppercase tracking-[0.06em] text-text-tertiary">
-          Další projekt
-        </div>
-        <Link
-          href={`/work/${nextSlug}`}
-          className="group inline-block"
-        >
-          <h2 className="font-heading text-[clamp(28px,4vw,38px)] font-bold tracking-[-0.03em] transition-opacity duration-250 group-hover:opacity-70">
-            {nextCs.title} →
-          </h2>
-          <p className="mt-2 text-[14px] text-text-secondary">
-            {nextCs.tag}
-          </p>
-        </Link>
-      </motion.section>
+      {nextCs && nextSlug && (
+        <motion.section className="text-center" {...fadeUp}>
+          <div className="mb-3 text-[13px] font-semibold uppercase tracking-[0.06em] text-text-tertiary">
+            Další projekt
+          </div>
+          <Link
+            href={`/work/${nextSlug}`}
+            className="group inline-block"
+          >
+            <h2 className="font-heading text-[clamp(28px,4vw,38px)] font-bold tracking-[-0.03em] transition-opacity duration-250 group-hover:opacity-70">
+              {nextCs.title} →
+            </h2>
+            <p className="mt-2 text-[14px] text-text-secondary">
+              {nextCs.tag}
+            </p>
+          </Link>
+        </motion.section>
+      )}
+
     </main>
   );
 }

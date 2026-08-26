@@ -3,7 +3,6 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import type { CaseStudy } from "@/lib/types";
 import martinVymetal from "@/content/work/martin-vymetal";
-import simrani from "@/content/work/simrani";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import GrainOverlay from "@/components/motion/GrainOverlay";
@@ -11,7 +10,6 @@ import CaseStudyContent from "@/components/work/CaseStudyContent";
 
 const caseStudies: Record<string, CaseStudy> = {
   "martin-vymetal": martinVymetal,
-  simrani: simrani,
 };
 
 export function generateStaticParams() {
@@ -43,8 +41,9 @@ export default async function CaseStudyPage({
 
   const slugs = Object.keys(caseStudies);
   const currentIndex = slugs.indexOf(slug);
-  const nextSlug = slugs[(currentIndex + 1) % slugs.length];
-  const nextCs = caseStudies[nextSlug];
+  const nextSlug =
+    slugs.length > 1 ? slugs[(currentIndex + 1) % slugs.length] : undefined;
+  const nextCs = nextSlug ? caseStudies[nextSlug] : undefined;
 
   return (
     <>
