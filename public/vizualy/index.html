@@ -151,6 +151,13 @@ footer{padding:60px 0;border-top:1px solid var(--border);color:var(--text-tertia
 .concept-badge{position:absolute;right:-34px;top:22px;z-index:2;transform:rotate(45deg);background:var(--text-tertiary,#96948E);color:#fff;padding:4px 40px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;box-shadow:0 1px 2px rgba(0,0,0,.15);pointer-events:none}
 .card{overflow:hidden}
 
+/* easter egg: slozite* -> drahe */
+.egg{cursor:help}
+.egg .w2{display:none}
+.egg:hover .w1,.egg:focus .w1{display:none}
+.egg:hover .w2,.egg:focus .w2{display:inline}
+.egg sup{font-size:.6em;color:var(--text-tertiary,#96948E)}
+
 /* bez JavaScriptu: stejné složení jako na mobilu */
 html.no-js section{padding:64px 0}
 html.no-js .g3,html.no-js .g2{grid-template-columns:1fr}
@@ -223,7 +230,7 @@ html.no-js .card[style*="grid-template-columns"]{grid-template-columns:1fr!impor
   <h2 style="font-size:32px;max-width:26ch">Kdy to použijete</h2>
   <div class="uses">
     <div class="usecell"><h3>Podklady pro výkonnostní kampaně</h3></div>
-    <div class="usecell"><h3>Vizualizace použití, které je složité nebo drahé nafotit</h3></div>
+    <div class="usecell"><h3>Vizualizace použití, které je <span class="egg" tabindex="0" aria-label="složité, tedy drahé" title="čti: drahé"><span class="w1">složité</span><span class="w2">drahé</span><sup>*</sup></span> nafotit</h3></div>
     <div class="usecell"><h3>Podklady pro launch ještě předtím, než proběhne reálné focení</h3></div>
     <div class="usecell"><h3>Konečně mít video</h3></div>
   </div>
