@@ -84,7 +84,8 @@ b,strong{font-weight:600;color:var(--text)}
 
 /* promitani scrollem (sekvence snimku z videa, technika REV1) */
 .stage{position:relative;height:440vh;background:#000}
-.pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+.pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
 #film{position:absolute;inset:0;width:100%;height:100%;display:block}
 .topwrap{position:absolute;top:0;left:0;right:0;z-index:3}
 .stagetext{position:absolute;left:0;right:0;bottom:7vh;bottom:7svh;z-index:2;pointer-events:none}
@@ -264,7 +265,7 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
     </div>
     <div class="popisek" id="pop3">
       <b>50C disk</b>
-      <span>Celokarbonový, japonská vlákna Toray T700 a&nbsp;T800</span>
+      <span>Celokarbonový, japonská vlákna<br>Toray T700 a&nbsp;T800</span>
     </div>
     <div class="klepni" id="klepni">
       <!-- skutecny rez rafku Wavy 50C: boky z namerenych souradnic (28 x 50 mm), nahore luzko s haky pro plast -->
@@ -499,8 +500,8 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
     namalovany=i;
     var im=imgs[i], cw=canvas.width, ch=canvas.height, iw=im.naturalWidth, ih=im.naturalHeight;
     if(!iw||!cw) return;
-    var s=Math.max(cw/iw,ch/ih);      /* cover */
-    s=Math.min(s,(cw/iw)*1.45);      /* na vysku kolo neorezavat, pas zapadne do cerne */
+    var s=Math.max(cw/iw,ch/ih);              /* cover */
+    s=Math.min(s,(cw/iw)*(mobil?1.6:1.45));  /* na vysku kolo neorezavat, pas zapadne do cerne */
     var w=iw*s,h=ih*s;
     ctx.fillStyle='#000';ctx.fillRect(0,0,cw,ch);
     ctx.drawImage(im,(cw-w)/2,(ch-h)/2,w,h);
@@ -510,7 +511,7 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
   /* vykresove popisky: kotva ve snimku (frakce 1920x1080), offset stitku, okno na scrollu */
   var POPISKY=[
     {el:'pop2', fx:602/1920, fy:535/1080, ox:250, oy:-70, mfx:602/1920, mfy:535/1080, mox:30,  moy:190, w0:0.465, w1:0.585},
-    {el:'pop3', fx:588/1920, fy:478/1080, ox:-155,oy:-40, mfx:680/1920, mfy:818/1080, mox:-40, moy:110, w0:0.905, w1:2}
+    {el:'pop3', fx:820/1920, fy:882/1080, ox:-150,oy:95, mfx:820/1920, mfy:882/1080, mox:-30, moy:95, w0:0.905, w1:2}
   ];
   var FADE=0.03, svgNS='http://www.w3.org/2000/svg', anot=document.getElementById('anot');
   POPISKY.forEach(function(c){
