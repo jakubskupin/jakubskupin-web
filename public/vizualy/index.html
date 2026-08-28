@@ -185,7 +185,8 @@ footer{padding:60px 0;border-top:1px solid var(--border);color:var(--text-tertia
 /* hover nahled: zelene puntiky -> screenshot vyberu */
 .puntiky{position:relative;text-decoration:underline;text-decoration-color:var(--border);text-decoration-thickness:2px;text-underline-offset:4px}
 .puntiky img{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:min(800px,90vw);height:auto;border-radius:14px;box-shadow:0 30px 90px rgba(26,26,24,.45);z-index:40;pointer-events:none}
-.puntiky:hover img,.puntiky:focus img{display:block}
+@media (hover:hover){.puntiky:hover img{display:block}}
+.puntiky:focus-visible img,.puntiky.open img{display:block}
 
 /* vyuzijete to kdyz: radky s carou */
 .whenlist{margin-top:36px;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:32px}
@@ -325,6 +326,12 @@ html.no-js .card[style*="grid-template-columns"]{grid-template-columns:1fr!impor
 const nav=document.querySelector('nav');let lastY=scrollY;
 function navTick(){const y=scrollY;if(y>lastY+2&&y>120)nav.classList.add('hide');else if(y<lastY-2||y<=120)nav.classList.remove('hide');lastY=y;}
 addEventListener('scroll',navTick,{passive:true});
+const p=document.querySelector('.puntiky');
+if(p){
+  p.addEventListener('click',function(e){p.classList.toggle('open');e.stopPropagation();});
+  document.addEventListener('click',function(e){if(!p.contains(e.target))p.classList.remove('open');});
+  addEventListener('keydown',function(e){if(e.key==='Escape')p.classList.remove('open');});
+}
 })();
 </script>
 </body>
