@@ -158,6 +158,30 @@ footer{padding:60px 0;border-top:1px solid var(--border);color:var(--text-tertia
 .egg:hover sup,.egg:focus sup{display:none}
 .egg sup{font-size:.6em;color:var(--text-tertiary,#96948E)}
 
+/* effortless citace */
+.effq h2{font-size:32px}
+.effq blockquote{margin:0;font-family:Syne,sans-serif;font-weight:600;font-size:clamp(18px,2.5vw,22px);line-height:1.55;letter-spacing:-.01em;color:var(--text);max-width:44ch}
+.effq blockquote strong{font-weight:800;letter-spacing:-.02em}
+.effq .qname{margin-top:14px;font-size:14px;color:var(--text-tertiary);font-weight:600}
+.effq cite{font-style:normal;font-size:14px;color:var(--text-secondary);display:flex;align-items:center;gap:10px;margin-top:18px}
+.effq cite img{width:44px;height:44px;border-radius:50%;flex:0 0 auto;object-fit:cover}
+.effq cite a{color:var(--text);text-decoration:none;border-bottom:1px solid var(--border)}
+.effq cite a:hover{border-color:var(--text-secondary)}
+.effq .prooflinks{margin-top:14px}
+.effq .prooflinks{gap:4px 14px}
+.effq .prooflinks a{font-size:12px;padding:0;border:0;border-radius:0;color:var(--text-tertiary);text-decoration:underline;text-decoration-color:var(--border);text-underline-offset:3px}
+.effq .prooflinks a:hover{color:var(--text);text-decoration-color:var(--text)}
+
+/* hover nahled: zelene puntiky -> screenshot vyberu */
+.puntiky{position:relative;text-decoration:underline;text-decoration-color:var(--border);text-decoration-thickness:2px;text-underline-offset:4px}
+.puntiky img{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:min(800px,90vw);height:auto;border-radius:14px;box-shadow:0 30px 90px rgba(26,26,24,.45);z-index:40;pointer-events:none}
+.puntiky:hover img,.puntiky:focus img{display:block}
+
+/* vyuzijete to kdyz: radky s carou */
+.whenlist{margin-top:36px;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:32px}
+.when{font-family:Syne,sans-serif;font-weight:700;font-size:18px;line-height:1.4;letter-spacing:-.01em}
+@media(max-width:720px){.whenlist{gap:22px}}
+
 /* bez JavaScriptu: stejné složení jako na mobilu */
 html.no-js section{padding:64px 0}
 html.no-js .g3,html.no-js .g2{grid-template-columns:1fr}
@@ -170,7 +194,7 @@ html.no-js .card[style*="grid-template-columns"]{grid-template-columns:1fr!impor
 
 <nav><div class="wrap">
   <a href="/" class="brand">Jakub Skupin</a>
-  <div><a href="#ukazky">Ukázky</a><a href="#postup">Postup</a><a href="#cenik">Cena</a><a href="#kontakt">Kontakt</a></div>
+  <div><a href="#ukazky">Ukázky</a><a href="#postup">Postup</a><a href="#kontakt">Kontakt</a></div>
 </div></nav>
 
 <!-- 01 HERO -->
@@ -188,10 +212,9 @@ html.no-js .card[style*="grid-template-columns"]{grid-template-columns:1fr!impor
 <!-- 02 UKÁZKY PODLE ODVĚTVÍ -->
 <section id="ukazky" style="padding-top:24px"><div class="wrap">
   <h2 style="font-size:32px;max-width:24ch">Takhle ten svět vypadá</h2>
-  <p class="lead" style="margin-top:14px">Tři řemeslné značky, stejný vstup: produktové fotky, které už měly.</p>
   <div class="grid g3" style="margin-top:36px">
     <a class="card show" href="/equator/">
-      <div class="thumb"><img src="/equator/assets/hero-kolo.jpg" alt="Karbonové zapletené kolo Equator v tmavé scéně" style="object-position:50% 43%" loading="lazy" decoding="async"></div>
+      <div class="thumb"><img src="/vizualy/assets/thumb-equator.jpg" alt="Karbonové zapletené kolo Equator v tmavé scéně" width="2400" height="1800" loading="lazy" decoding="async"></div>
       <div class="sc-body">
         <div class="kicker" style="margin-bottom:6px">Sport</div>
         <h3>Equator</h3>
@@ -201,7 +224,7 @@ html.no-js .card[style*="grid-template-columns"]{grid-template-columns:1fr!impor
     </a>
     <a class="card show" href="/prim/">
       <span class="concept-badge">Koncept</span>
-      <div class="thumb"><img src="/vizualy/assets/j12.jpg" alt="Hodinky Prim na zrcadlové ploše v červeném světle" loading="lazy" decoding="async"></div>
+      <div class="thumb"><img src="/vizualy/assets/thumb-prim.jpg" alt="Hodinky na červeném pozadí z matných skleněných panelů" width="2400" height="1800" loading="lazy" decoding="async"></div>
       <div class="sc-body">
         <div class="kicker" style="margin-bottom:6px">Hodinky</div>
         <h3>Tři modely hodinek</h3>
@@ -223,16 +246,14 @@ html.no-js .card[style*="grid-template-columns"]{grid-template-columns:1fr!impor
 
 <!-- 02b K CEMU TO POUZIJETE -->
 <section id="kcemu" style="padding-top:0"><div class="wrap">
-  <h2 style="font-size:32px;max-width:26ch">Kdy to využijete</h2>
-  <div class="uses">
-    <div class="usecell"><h3>Podklady pro výkonnostní kampaně</h3></div>
-    <div class="usecell"><h3>Vizualizace použití, které je <span class="egg" tabindex="0" aria-label="složité, tedy drahé"><span class="w1">složité</span><span class="w2">drahé</span><sup>*</sup></span> nafotit</h3></div>
-    <div class="usecell"><h3>Podklady pro launch ještě předtím, než proběhne reálné focení</h3></div>
-    <div class="usecell"><h3>Video, na které dřív nebyl rozpočet</h3></div>
+  <h2 style="font-size:32px;max-width:26ch">Využijete to, když&hellip;</h2>
+  <div class="whenlist">
+    <div class="when">výkonnostní agentura zase píše, že potřebuje nové kreativy</div>
+    <div class="when">svět, kam produkt patří, se složitě vytváří</div>
+    <div class="when">video by váš produkt vysvětlilo násobně líp</div>
+    <div class="when">launch produktu<br>chcete zrychlit</div>
   </div>
-</div>
 </div></section>
-
 
 <!-- 03 POSTUP -->
 <section id="postup" style="padding-top:0"><div class="wrap">
@@ -265,16 +286,32 @@ html.no-js .card[style*="grid-template-columns"]{grid-template-columns:1fr!impor
 </div></section>
 
 
-<!-- 04 CENA -->
-<section id="cenik" style="padding-top:0"><div class="wrap">
-  <h2 style="font-size:32px">Cena</h2>
-  <p class="lead" style="margin-top:14px">Nabídku připravuji na míru.</p>
+<!-- EFFORTLESS CITACE -->
+<section id="effortless" style="padding-top:0"><div class="wrap effq">
+  <h2>Effortless</h2>
+  <div style="margin-top:26px;max-width:720px">
+    <div>
+      <blockquote><span style="display:block">Kolik práce vám to zabere?</span>
+      <span style="display:block;margin-top:10px">V&nbsp;pondělí pošlete odkaz na produkt, ve&nbsp;středu posunete pár <span class="puntiky" tabindex="0">zelených puntíků<img src="/vizualy/assets/vyber-vizualu.jpg" alt="Výběr vizuálů: varianty scén se zelenými puntíky u vybraných" loading="lazy" decoding="async"></span>. V&nbsp;pátek spouštíte kampaň.</span>
+      <span style="display:block;margin-top:10px"><strong>Prostě to vznikne.</strong></span></blockquote>
+      <cite>
+        <img src="/jakub-skupin.png" alt="Jakub Skupin" width="88" height="88" loading="lazy" decoding="async">
+        <span><a href="https://www.linkedin.com/in/jakubskupin/" target="_blank" rel="noopener">Jakub Skupin</a></span>
+      </cite>
+      <div class="prooflinks">
+        <a href="https://www.linkedin.com/posts/jakubskupin_ai-workflow-activity-7057580781249933312-L8gw" target="_blank" rel="noopener">150+ účastníků AI workshopů</a>
+        <a href="https://www.forendors.cz/p/ef04914547f4449dc6b01beff56cde43" target="_blank" rel="noopener">AI v kreativním procesu</a>
+        <a href="https://www.linkedin.com/in/jakubskupin/recent-activity/all/" target="_blank" rel="noopener">Jak používám AI</a>
+      </div>
+    </div>
+  </div>
 </div></section>
+
 
 <!-- 09 ZÁVĚR -->
 <section id="kontakt" style="padding-top:0"><div class="wrap" style="text-align:center">
-  <h2 style="font-size:clamp(30px,4vw,44px);max-width:20ch;margin:0 auto 18px">Pošlete odkaz na produkt, na kterém to chcete vidět</h2>
-  <p class="lead" style="margin:0 auto 28px">Ať je to produkt, na kterém vám záleží a který byste uměli hned použít, kdyby se vám výsledek líbil.</p>
+  <h2 style="font-size:clamp(30px,4vw,44px);max-width:20ch;margin:0 auto 18px">Pošlete odkaz na produkt</h2>
+  <p class="lead" style="margin:0 auto 28px">Vyberte produkt, na kterém vám záleží.</p>
   <a href="https://www.linkedin.com/in/jakubskupin/" class="btn" target="_blank" rel="noopener">Napsat na LinkedIn &#8599;&#xFE0E;</a>
 </div></section>
 
