@@ -503,9 +503,11 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
     var s=Math.max(cw/iw,ch/ih);              /* cover */
     s=Math.min(s,(cw/iw)*(mobil?1.6:1.45));  /* na vysku kolo neorezavat, pas zapadne do cerne */
     var w=iw*s,h=ih*s;
+    var px=(cw-w)/2, py=(ch-h)/2;
+    if(mobil&&h<ch) py=(ch-h)*0.38;          /* na mobilu pas mirne vys k horni hrane */
     ctx.fillStyle='#000';ctx.fillRect(0,0,cw,ch);
-    ctx.drawImage(im,(cw-w)/2,(ch-h)/2,w,h);
-    tr={s:s/dpr, x:(cw-w)/2/dpr, y:(ch-h)/2/dpr, iw:iw, ih:ih};
+    ctx.drawImage(im,px,py,w,h);
+    tr={s:s/dpr, x:px/dpr, y:py/dpr, iw:iw, ih:ih};
   }
 
   /* vykresove popisky: kotva ve snimku (frakce 1920x1080), offset stitku, okno na scrollu */
