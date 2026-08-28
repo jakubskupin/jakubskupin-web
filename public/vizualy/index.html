@@ -26,7 +26,8 @@
 <style>
 :root{--ink:#1A1A18;--bg:#FAFAF8;--text:#1A1A18;--text-secondary:#6B6964;--text-tertiary:#78766F;--border:#E8E6E1;--card-bg:#FFF;--accent:#1A1A18;--accent-soft:rgba(26,26,24,.06);--radius:16px;--radius-lg:24px}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:Manrope,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+html{overflow-x:clip}
+body{overflow-x:hidden;background:var(--bg);color:var(--text);font-family:Manrope,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
 h1,h2,h3{font-family:Syne,sans-serif;font-weight:700;line-height:1.15;letter-spacing:-.02em}
 .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
 section{padding:96px 0}
@@ -101,6 +102,11 @@ footer{padding:60px 0;border-top:1px solid var(--border);color:var(--text-tertia
   .mhide{display:none}
 }
 @media (min-width:768px){.mbr{display:none}}
+
+/* hint nad CTA tlačítkem */
+#kontakt .btn{position:relative}
+#kontakt .btn::after{content:"Zpráva na LinkedIn";position:absolute;left:50%;bottom:calc(100% + 12px);transform:translateX(-50%);white-space:nowrap;font-family:Inter,sans-serif;font-size:13px;font-weight:500;color:var(--text-tertiary);opacity:0;transition:opacity .25s ease;pointer-events:none}
+#kontakt .btn:hover::after,#kontakt .btn:focus-visible::after{opacity:1}
 
 /* timeline (vzor personal-brand) */
 .tl{position:relative;margin-left:8px;margin-top:36px}

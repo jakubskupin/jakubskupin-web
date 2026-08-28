@@ -31,6 +31,7 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;background:var(--bg)}
+html{overflow-x:clip}
 body{margin:0;overflow-x:hidden;background:var(--bg);color:var(--text);font-family:var(--b);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
 a{color:inherit}
 img,video{max-width:100%;height:auto;display:block}
@@ -74,7 +75,7 @@ b,strong{font-weight:600;color:var(--text)}
   background:radial-gradient(circle,rgba(150,160,175,.10),rgba(10,10,11,0) 62%);pointer-events:none;z-index:0}
 
 @media(max-width:899px){
-  .herofig{width:100%}
+  .herofig{width:100%;overflow:hidden}
   .herofig img{width:min(330px,86vw);height:min(400px,46vh);object-fit:cover;object-position:center 44%;max-height:none}
   .heroglow{width:min(560px,116vw)}
 }
