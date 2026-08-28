@@ -21,6 +21,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="/equator/assets/scroll/d/f-000.webp" media="(min-width:700px)">
+<link rel="preload" as="image" href="/equator/assets/scroll/m/f-000.webp" media="(max-width:699px)">
 <style>
 :root{
   --bg:#0A0A0B; --bg-2:#121214; --card:#161618;
@@ -32,7 +34,7 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;background:var(--bg)}
 html{overflow-x:clip}
-body{margin:0;overflow-x:hidden;background:var(--bg);color:var(--text);font-family:var(--b);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body{margin:0;overflow-x:clip;background:var(--bg);color:var(--text);font-family:var(--b);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
 a{color:inherit}
 img,video{max-width:100%;height:auto;display:block}
 .w{max-width:1120px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
@@ -79,6 +81,42 @@ b,strong{font-weight:600;color:var(--text)}
   .herofig img{width:min(330px,86vw);height:min(400px,46vh);object-fit:cover;object-position:center 44%;max-height:none}
   .heroglow{width:min(560px,116vw)}
 }
+
+/* promitani scrollem (sekvence snimku z videa, technika REV1) */
+.stage{position:relative;height:440vh;background:#000}
+.pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+#film{position:absolute;inset:0;width:100%;height:100%;display:block}
+.topwrap{position:absolute;top:0;left:0;right:0;z-index:3}
+.stagetext{position:absolute;left:0;right:0;bottom:7vh;bottom:7svh;z-index:2;pointer-events:none}
+.stagetext .inner{display:flex;flex-direction:column;gap:20px;max-width:620px}
+.hint{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);z-index:2;display:flex;align-items:center;gap:8px;
+  font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3);pointer-events:none}
+.hint svg{width:14px;height:14px;animation:hintdown 1.7s ease-in-out infinite}
+@keyframes hintdown{0%,100%{transform:translateY(-2px);opacity:.45}50%{transform:translateY(3px);opacity:1}}
+@media(prefers-reduced-motion:reduce){.hint svg{animation:none}}
+@media(max-width:479px){.stagetext{bottom:9vh;bottom:9svh}}
+
+/* vykresove popisky nad filmem (bod + cara + text) */
+.anot{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;overflow:visible}
+.anot line{stroke:rgba(255,255,255,.55);stroke-width:1}
+.anot circle.tecka{fill:#fff}
+.anot circle.kruh{fill:none;stroke:rgba(255,255,255,.35);stroke-width:1}
+.popisek{position:absolute;z-index:2;max-width:300px;opacity:0;pointer-events:none;
+  text-shadow:0 1px 10px rgba(0,0,0,.9),0 0 2px rgba(0,0,0,.8)}
+.popisek b{display:block;font-size:11.5px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--text);margin-bottom:6px}
+.popisek span{display:block;font-size:13.5px;line-height:1.55;color:var(--text-2)}
+@media(max-width:699px){.popisek{max-width:240px}.popisek span{font-size:12.5px}}
+
+/* easter egg: poklep na karbon */
+.klepni{position:absolute;left:0;top:0;z-index:2;display:flex;align-items:center;gap:9px;opacity:0;visibility:hidden;
+  font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--text-2);cursor:pointer;
+  text-shadow:0 1px 10px rgba(0,0,0,.9)}
+.klepni svg{width:13px;height:21px;flex:0 0 auto;animation:klepnuti 1.9s ease-in-out infinite}
+@keyframes klepnuti{0%,100%{transform:scale(1);opacity:.55}50%{transform:scale(1.18);opacity:1}}
+@media(prefers-reduced-motion:reduce){.klepni svg{animation:none}}
+.vlnka{position:absolute;z-index:2;width:16px;height:16px;border-radius:50%;border:1.5px solid rgba(255,255,255,.75);
+  pointer-events:none;animation:vlnka .55s ease-out forwards}
+@keyframes vlnka{from{transform:translate(-50%,-50%) scale(.4);opacity:.9}to{transform:translate(-50%,-50%) scale(4.2);opacity:0}}
 
 /* sekce */
 section{padding:56px 0;border-top:1px solid var(--line);position:relative}
@@ -215,24 +253,46 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
 <body>
 <div class="grain"></div>
 
-<div class="w">
-  <div class="top">
-    <a class="brand" href="https://jakubskupin.cz">Jakub Skupin</a>
-    <div class="for"><span>připraveno pro</span><img src="/equator/assets/equator-logo.png" alt="Equator"></div>
-  </div>
-</div>
-
-<!-- HERO -->
-<div class="w">
-  <div class="hero">
-    <div class="herotext">
-      <span class="eyebrow rv">Draft · Equator Wavy 50C</span>
-      <h1 class="rv">Video, carousel a bannery bez focení</h1>
-      <p class="lede rv">Kolo je vaše. Scény nejsou. Všechno vzniklo z packshotů z <span class="nb">e-shopu</span>, obraz je generovaný AI.</p>
+<!-- HERO · PROMITANI SCROLLEM -->
+<div class="stage" id="stage">
+  <div class="pin">
+    <canvas id="film" aria-hidden="true"></canvas>
+    <svg class="anot" id="anot" aria-hidden="true"></svg>
+    <div class="popisek" id="pop2">
+      <b>Wavy</b>
+      <span>Konvexním tvarem bočnic zlepšuje aerodynamiku a&nbsp;snižuje váhu o&nbsp;90&nbsp;gramů</span>
     </div>
-    <div class="herofig rv">
-      <div class="heroglow"></div>
-      <img src="/equator/assets/hero-kolo.jpg" alt="Equator Wavy 50C ve světle tmavé komory" width="1080" height="1920">
+    <div class="popisek" id="pop3">
+      <b>50C disk</b>
+      <span>Celokarbonový, japonská vlákna Toray T700 a&nbsp;T800</span>
+    </div>
+    <div class="klepni" id="klepni">
+      <!-- skutecny rez rafku Wavy 50C: boky z namerenych souradnic (28 x 50 mm), nahore luzko s haky pro plast -->
+      <svg viewBox="-2 -2 32.6 54" fill="currentColor" fill-opacity=".16" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true">
+        <path d="M28.0 0.0 L27.7 1.6 L27.9 3.2 L28.1 4.9 L28.3 6.5 L28.4 8.1 L28.4 9.7 L28.4 11.3 L28.4 12.9 L28.4 14.6 L28.4 16.2 L28.4 17.8 L28.4 19.4 L28.4 21.0 L28.3 22.7 L28.2 24.3 L28.0 25.9 L27.7 27.5 L27.6 29.1 L27.3 30.7 L27.0 32.4 L26.7 34.0 L26.3 35.6 L25.9 37.2 L25.5 38.8 L24.9 40.5 L24.1 42.1 L22.9 43.7 L21.1 45.3 L18.1 46.9 L14.4 48.5 L14.4 50.0 L14.2 50.0 L14.2 48.5 L10.5 46.9 L7.5 45.3 L5.7 43.7 L4.5 42.1 L3.7 40.5 L3.1 38.8 L2.7 37.2 L2.3 35.6 L1.9 34.0 L1.6 32.4 L1.3 30.7 L1.0 29.1 L0.9 27.5 L0.6 25.9 L0.4 24.3 L0.3 22.7 L0.2 21.0 L0.2 19.4 L0.2 17.8 L0.2 16.2 L0.2 14.6 L0.2 12.9 L0.2 11.3 L0.2 9.7 L0.2 8.1 L0.3 6.5 L0.5 4.9 L0.7 3.2 L0.9 1.6 L0.6 0.0 L6.1 0.0 L6.3 1.6 L3.7 3.2 L3.7 8.0 L5.6 11.0 L9.6 12.2 L14.3 12.5 L19.0 12.2 L23.0 11.0 L24.9 8.0 L24.9 3.2 L22.3 1.6 L22.5 0.0 Z"/>
+      </svg>
+      <span>Poklepej</span>
+    </div>
+    <div class="stagetext" id="stagetext">
+      <div class="w">
+        <div class="inner">
+          <span class="eyebrow rv">Draft · Equator Wavy 50C</span>
+          <h1 class="rv">Video, carousel a bannery bez focení</h1>
+          <p class="lede rv">Kolo je vaše. Scény nejsou. Všechno vzniklo z packshotů z <span class="nb">e-shopu</span>, obraz je generovaný AI.</p>
+        </div>
+      </div>
+    </div>
+    <div class="hint" id="hint">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+      <span>Scrollujte</span>
+    </div>
+  </div>
+  <div class="topwrap">
+    <div class="w">
+      <div class="top">
+        <a class="brand" href="https://jakubskupin.cz">Jakub Skupin</a>
+        <div class="for"><span>připraveno pro</span><img src="/equator/assets/equator-logo.png" alt="Equator"></div>
+      </div>
     </div>
   </div>
 </div>
@@ -386,6 +446,226 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
 </section>
 
 <script>
+/* promitani scrollem: 241 snimku z videa, kanon REV1 (intro smycka -> prevzeti scrollem) */
+(function(){
+  var stage=document.getElementById('stage'), canvas=document.getElementById('film');
+  if(!stage||!canvas||!canvas.getContext) return;
+  var ctx=canvas.getContext('2d');
+  var N=241, INTRO=36;
+  var mobil=window.innerWidth<700;
+  var base='/equator/assets/scroll/'+(mobil?'m':'d')+'/f-';
+  var txt=document.getElementById('stagetext'), hint=document.getElementById('hint');
+  var klid=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var imgs=new Array(N), ok=new Array(N);
+  function nazev(i){return base+('00'+i).slice(-3)+'.webp'}
+  function nacti(i,pri){
+    if(imgs[i]) return;
+    var im=new Image();
+    if('fetchPriority' in im) im.fetchPriority=pri;
+    im.decoding='async';
+    im.onload=function(){ ok[i]=true; if(i===0) kresli(zobrazeny,true); };
+    im.src=nazev(i);
+    imgs[i]=im;
+  }
+  nacti(0,'high');
+  for(var i=1;i<=INTRO;i++) nacti(i,'high');
+  function zbytek(){ for(var j=INTRO+1;j<N;j++) nacti(j,'low'); }
+  if(document.readyState==='complete') zbytek();
+  else window.addEventListener('load',function(){ setTimeout(zbytek,120); });
+
+  var dpr=Math.min(window.devicePixelRatio||1,2);
+  function rozmer(){
+    var pw=canvas.parentNode.clientWidth, ph=canvas.parentNode.clientHeight;
+    canvas.width=Math.round(pw*dpr);
+    canvas.height=Math.round(ph*dpr);
+    anot.setAttribute('viewBox','0 0 '+pw+' '+ph);
+    kresli(zobrazeny,true);
+  }
+
+  var namalovany=-1, tr=null;
+  function nejblizsi(f){
+    var i=Math.max(0,Math.min(N-1,Math.round(f)));
+    if(ok[i]) return i;
+    for(var d=1;d<N;d++){
+      if(i-d>=0&&ok[i-d]) return i-d;
+      if(i+d<N&&ok[i+d]) return i+d;
+    }
+    return -1;
+  }
+  function kresli(f,vzdy){
+    var i=nejblizsi(f);
+    if(i<0||(i===namalovany&&!vzdy)) return;
+    namalovany=i;
+    var im=imgs[i], cw=canvas.width, ch=canvas.height, iw=im.naturalWidth, ih=im.naturalHeight;
+    if(!iw||!cw) return;
+    var s=Math.max(cw/iw,ch/ih);      /* cover */
+    s=Math.min(s,(cw/iw)*1.45);      /* na vysku kolo neorezavat, pas zapadne do cerne */
+    var w=iw*s,h=ih*s;
+    ctx.fillStyle='#000';ctx.fillRect(0,0,cw,ch);
+    ctx.drawImage(im,(cw-w)/2,(ch-h)/2,w,h);
+    tr={s:s/dpr, x:(cw-w)/2/dpr, y:(ch-h)/2/dpr, iw:iw, ih:ih};
+  }
+
+  /* vykresove popisky: kotva ve snimku (frakce 1920x1080), offset stitku, okno na scrollu */
+  var POPISKY=[
+    {el:'pop2', fx:602/1920, fy:535/1080, ox:250, oy:-70, mfx:602/1920, mfy:535/1080, mox:30,  moy:190, w0:0.465, w1:0.585},
+    {el:'pop3', fx:588/1920, fy:478/1080, ox:-155,oy:-40, mfx:680/1920, mfy:818/1080, mox:-40, moy:110, w0:0.905, w1:2}
+  ];
+  var FADE=0.03, svgNS='http://www.w3.org/2000/svg', anot=document.getElementById('anot');
+  POPISKY.forEach(function(c){
+    c.lab=document.getElementById(c.el);
+    c.g=document.createElementNS(svgNS,'g');
+    c.line=document.createElementNS(svgNS,'line');
+    c.kruh=document.createElementNS(svgNS,'circle'); c.kruh.setAttribute('class','kruh');
+    c.tec=document.createElementNS(svgNS,'circle'); c.tec.setAttribute('class','tecka');
+    c.g.appendChild(c.line); c.g.appendChild(c.kruh); c.g.appendChild(c.tec);
+    c.g.setAttribute('opacity','0');
+    anot.appendChild(c.g);
+  });
+  function popisky(p){
+    if(!tr) return;
+    var W=canvas.parentNode.clientWidth, H=canvas.parentNode.clientHeight;
+    POPISKY.forEach(function(c){
+      var a=Math.max(0,Math.min(1,Math.min((p-c.w0)/FADE,(c.w1-p)/FADE)));
+      c.g.setAttribute('opacity',a.toFixed(3));
+      c.lab.style.opacity=a.toFixed(3);
+      if(a<=0){ c.lab.style.visibility='hidden'; return; }
+      c.lab.style.visibility='visible';
+      var fx=mobil?c.mfx:c.fx, fy=mobil?c.mfy:c.fy, ox=mobil?c.mox:c.ox, oy=mobil?c.moy:c.oy;
+      var dx=tr.x+fx*tr.iw*tr.s, dy=tr.y+fy*tr.ih*tr.s;
+      var Lx=dx+ox, Ly=dy+oy;
+      var lw=c.lab.offsetWidth, lh=c.lab.offsetHeight, lx, ly, svisle=Math.abs(oy)>Math.abs(ox);
+      if(svisle){ lx=Lx-lw/2; ly=oy>=0?Ly+10:Ly-10-lh; }
+      else{ lx=ox>=0?Lx+10:Lx-10-lw; ly=Ly-lh/2; }
+      lx=Math.max(14,Math.min(W-14-lw,lx));
+      ly=Math.max(14,Math.min(H-14-lh,ly));
+      c.lab.style.transform='translate('+lx.toFixed(1)+'px,'+(ly+6*(1-a)).toFixed(1)+'px)';
+      /* cara konci na nejblizsim bode obrysu popisku (drzi i po oriznuti do okna) */
+      var cilX=Math.min(Math.max(dx,lx-8),lx+lw+8);
+      var cilY=Math.min(Math.max(dy,ly-8),ly+lh+8);
+      var e=klid?1:(a*a*(3-2*a));  /* smoothstep, cara se dokresluje */
+      c.line.setAttribute('x1',dx); c.line.setAttribute('y1',dy);
+      c.line.setAttribute('x2',dx+(cilX-dx)*e); c.line.setAttribute('y2',dy+(cilY-dy)*e);
+      c.tec.setAttribute('cx',dx); c.tec.setAttribute('cy',dy); c.tec.setAttribute('r',(3.5*e).toFixed(2));
+      c.kruh.setAttribute('cx',dx); c.kruh.setAttribute('cy',dy); c.kruh.setAttribute('r',(8*e).toFixed(2));
+    });
+  }
+
+  /* easter egg: poklep na karbon, zvuk je skutecny rafek z recenze */
+  var klepEl=document.getElementById('klepni');
+  /* stred a polomer kola ve snimku 240; klepat jde JEN na samotnem rafku:
+     vnitrni hrana profilu je na ~84 % polomeru (hloubka 50 mm na 311 mm), u dratu se neklepe */
+  var KOLO={fx:958/1920, fy:537/1080, fr:400/1080};
+  function naRafku(x,y,k){
+    var d2=(x-k.x)*(x-k.x)+(y-k.y)*(y-k.y);
+    return d2<=(k.r*1.05)*(k.r*1.05) && d2>=(k.r*0.83)*(k.r*0.83);
+  }
+  var klepAktivni=false;
+  var zvukKlep=new Audio('/equator/assets/klep.mp3'); zvukKlep.preload='auto';
+  function koloStred(){
+    return {x:tr.x+KOLO.fx*tr.iw*tr.s, y:tr.y+KOLO.fy*tr.ih*tr.s, r:KOLO.fr*tr.ih*tr.s};
+  }
+  function klepni(x,y){
+    var s=zvukKlep.cloneNode();
+    s.playbackRate=0.94+Math.random()*0.12;
+    s.volume=0.9;
+    var pr=s.play(); if(pr&&pr.catch) pr.catch(function(){});
+    var v=document.createElement('div'); v.className='vlnka';
+    v.style.left=x+'px'; v.style.top=y+'px';
+    canvas.parentNode.appendChild(v);
+    v.addEventListener('animationend',function(){ v.remove(); });
+  }
+  canvas.parentNode.addEventListener('click',function(ev){
+    if(!klepAktivni||!tr) return;
+    var r=canvas.parentNode.getBoundingClientRect();
+    var x=ev.clientX-r.left, y=ev.clientY-r.top, k=koloStred();
+    if(naRafku(x,y,k)||klepEl.contains(ev.target)) klepni(x,y);
+  });
+  canvas.parentNode.addEventListener('mousemove',function(ev){
+    if(!klepAktivni||!tr){ canvas.parentNode.style.cursor=''; return; }
+    var r=canvas.parentNode.getBoundingClientRect();
+    var x=ev.clientX-r.left, y=ev.clientY-r.top, k=koloStred();
+    canvas.parentNode.style.cursor=naRafku(x,y,k)?'pointer':'';
+  });
+  function klepUpdate(p){
+    klepAktivni = p>=0.88;
+    if(!tr) return;
+    var a=Math.max(0,Math.min(1,(p-0.93)/FADE));
+    klepEl.style.opacity=a.toFixed(3);
+    klepEl.style.visibility=a<=0?'hidden':'visible';
+    if(a>0){
+      var k=koloStred(), lx, ly;
+      if(mobil){ lx=k.x+k.r*0.30; ly=k.y+k.r+24; }
+      else{ lx=k.x+k.r*0.72; ly=k.y+k.r*0.82; }
+      var W=canvas.parentNode.clientWidth, lw=klepEl.offsetWidth;
+      lx=Math.max(14,Math.min(W-14-lw,lx));
+      klepEl.style.transform='translate('+lx.toFixed(1)+'px,'+ly.toFixed(1)+'px)';
+    }
+  }
+
+  function prubeh(){
+    var celkem=stage.offsetHeight-window.innerHeight;
+    if(celkem<=0) return 0;
+    return Math.max(0,Math.min(1,-stage.getBoundingClientRect().top/celkem));
+  }
+
+  /* scroll -> snimek: plata u vlny (108) a na konci (240), zacatek navazuje na intro */
+  function mapa(p){
+    var M=[[0,startFrame],[0.45,108],[0.60,108],[0.88,N-1],[1,N-1]];
+    for(var k=1;k<M.length;k++){
+      if(p<=M[k][0]){
+        var a=M[k-1],b=M[k];
+        return a[1]+(b[1]-a[1])*((p-a[0])/(b[0]-a[0]||1));
+      }
+    }
+    return N-1;
+  }
+
+  var rezim='intro', t0=null, startFrame=0, cil=0, zobrazeny=0;
+  function tik(ted){
+    var p=prubeh();
+    if(rezim==='intro'){
+      if(p>0.002){ rezim='scrub'; startFrame=Math.round(zobrazeny); }
+      else if(klid){ cil=0; }
+      else{
+        if(t0===null) t0=ted;
+        var t=((ted-t0)/3600)%2, tri=t<1?t:2-t;
+        cil=(0.5-0.5*Math.cos(Math.PI*tri))*INTRO;
+      }
+    }
+    if(rezim==='scrub'){
+      if(p<0.0001){ rezim='intro'; t0=null; startFrame=0; }
+      else cil=mapa(p);
+    }
+    if(klid){ zobrazeny=cil; }
+    else{
+      zobrazeny+=(cil-zobrazeny)*0.24;
+      if(Math.abs(cil-zobrazeny)<0.4) zobrazeny=cil;
+    }
+    kresli(zobrazeny,false);
+    popisky(p);
+    klepUpdate(p);
+    var kryti=Math.max(0,1-p/0.12);
+    txt.style.opacity=kryti;
+    txt.style.visibility=kryti<0.01?'hidden':'visible';
+    hint.style.opacity=kryti;
+    requestAnimationFrame(tik);
+  }
+  rozmer();
+  window.addEventListener('resize',rozmer);
+  requestAnimationFrame(tik);
+
+  /* testovaci kotva pro QA: /equator/?scrollp=0.5 nastavi prubeh filmu */
+  var qp=new URLSearchParams(location.search).get('scrollp');
+  if(qp){
+    document.documentElement.style.scrollBehavior='auto';
+    window.addEventListener('load',function(){
+      window.scrollTo(0, stage.offsetTop+(stage.offsetHeight-window.innerHeight)*parseFloat(qp));
+    });
+  }
+})();
+
 (function(){
   var els=document.querySelectorAll('.rv');
   if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
