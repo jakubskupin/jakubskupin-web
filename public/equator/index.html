@@ -451,8 +451,7 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
 (function(){
   var stage=document.getElementById('stage'), canvas=document.getElementById('film');
   if(!stage||!canvas||!canvas.getContext) return;
-  var ctx=canvas.getContext('2d',{alpha:false,desynchronized:true})||canvas.getContext('2d');
-  if('imageSmoothingQuality' in ctx) ctx.imageSmoothingQuality='high';
+  var ctx=canvas.getContext('2d');
   var N=241, INTRO=36;
   var mobil=window.innerWidth<700;
   var base='/equator/assets/scroll/'+(mobil?'m':'d')+'/f-';
@@ -485,38 +484,7 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
     kresli(zobrazeny,true);
   }
 
-  /* --- ImageBitmap cache s klouzavym oknem: dekodovani bezi mimo hlavni vlakno a kresli se
-     hotova bitmapa (GPU blit). Bez toho muze prohlizec WEBP dekodovat znovu pri kazdem
-     drawImage na hlavnim vlakne, a presne to dela zaseky pri scrubu. --- */
-  var umiBmp=typeof createImageBitmap==='function';
-  var bmp=new Map(), bmpCeka=new Set();
-  var BEATY=[0,108,240];                 /* plata drzet dekodovana porad */
-  var OKNO=mobil?30:18, SOUBEZNE=4;
-  function chtejBmp(i){
-    if(!umiBmp||i<0||i>=N||bmp.has(i)||bmpCeka.has(i)||!ok[i]) return;
-    if(bmpCeka.size>=SOUBEZNE) return;
-    bmpCeka.add(i);
-    createImageBitmap(imgs[i]).then(function(b){
-      bmpCeka.delete(i);
-      if(bmp.has(i)){ b.close(); return; }
-      bmp.set(i,b);
-    }).catch(function(){ bmpCeka.delete(i); });
-  }
-  function spravujOkno(f,smer){
-    if(!umiBmp) return;
-    var stred=Math.round(f);
-    bmp.forEach(function(b,i){
-      if(BEATY.indexOf(i)<0&&Math.abs(i-stred)>OKNO+8){ b.close(); bmp.delete(i); }
-    });
-    chtejBmp(stred); chtejBmp(stred+1); chtejBmp(stred-1);
-    for(var d=2;d<=OKNO;d++){
-      chtejBmp(stred+d*smer);
-      if(d<=OKNO>>1) chtejBmp(stred-d*smer);
-    }
-    for(var k=0;k<BEATY.length;k++) chtejBmp(BEATY[k]);
-  }
-
-  var posledniF=-9, tr=null;
+  var namalovany=-1, tr=null;
   function nejblizsi(f){
     var i=Math.max(0,Math.min(N-1,Math.round(f)));
     if(ok[i]) return i;
@@ -526,52 +494,20 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
     }
     return -1;
   }
-  function poloz(im,iw,ih,alfa){
-    var cw=canvas.width, ch=canvas.height;
+  function kresli(f,vzdy){
+    var i=nejblizsi(f);
+    if(i<0||(i===namalovany&&!vzdy)) return;
+    namalovany=i;
+    var im=imgs[i], cw=canvas.width, ch=canvas.height, iw=im.naturalWidth, ih=im.naturalHeight;
+    if(!iw||!cw) return;
     var s=Math.max(cw/iw,ch/ih);              /* cover */
     s=Math.min(s,(cw/iw)*(mobil?1.6:1.45));  /* na vysku kolo neorezavat, pas zapadne do cerne */
     var w=iw*s,h=ih*s;
     var px=(cw-w)/2, py=(ch-h)/2;
     if(mobil&&h<ch) py=(ch-h)*0.38;          /* na mobilu pas mirne vys k horni hrane */
-    ctx.globalAlpha=alfa;
+    ctx.fillStyle='#000';ctx.fillRect(0,0,cw,ch);
     ctx.drawImage(im,px,py,w,h);
-    ctx.globalAlpha=1;
     tr={s:s/dpr, x:px/dpr, y:py/dpr, iw:iw, ih:ih};
-  }
-  /* samoladeni: prumerny cas kresleni; kdyz je stroj pomaly, crossfade se sam vypne */
-  var kresliPrumer=4, crossfadeOk=true;
-  function kresli(f,vzdy){
-    if(!canvas.width) return;
-    if(!vzdy&&Math.abs(f-posledniF)<0.02) return;
-    var start=performance.now();
-    var i0=Math.max(0,Math.min(N-1,Math.floor(f)));
-    var i1=Math.min(N-1,i0+1), t=f-i0;
-    var b0=bmp.get(i0), b1=(crossfadeOk&&t>0.01&&i1!==i0)?bmp.get(i1):null;
-    ctx.fillStyle='#000';ctx.fillRect(0,0,canvas.width,canvas.height);
-    if(b0&&b1){
-      /* sub-frame crossfade: mezi sousednimi snimky se prolne desetinna cast pozice,
-         pomaly scrub tak nedela diskretni skoky po celych snimcich */
-      poloz(b0,b0.width,b0.height,1);
-      poloz(b1,b1.width,b1.height,t);
-      posledniF=f;
-    }else if(b0){
-      poloz(b0,b0.width,b0.height,1);
-      posledniF=crossfadeOk?f:i0;
-    }else{
-      var i=nejblizsi(f);
-      if(i<0) return;
-      var b=bmp.get(i);
-      if(b){ poloz(b,b.width,b.height,1); }
-      else{
-        var im=imgs[i];
-        if(!im.naturalWidth) return;
-        poloz(im,im.naturalWidth,im.naturalHeight,1);
-      }
-      posledniF=i;
-    }
-    kresliPrumer=kresliPrumer*0.9+(performance.now()-start)*0.1;
-    if(crossfadeOk&&kresliPrumer>7) crossfadeOk=false;
-    else if(!crossfadeOk&&kresliPrumer<3.5) crossfadeOk=true;
   }
 
   /* vykresove popisky: kotva ve snimku (frakce 1920x1080), offset stitku, okno na scrollu */
@@ -708,9 +644,8 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
     if(klid){ zobrazeny=cil; }
     else{
       zobrazeny+=(cil-zobrazeny)*0.24;
-      if(Math.abs(cil-zobrazeny)<0.05) zobrazeny=cil;
+      if(Math.abs(cil-zobrazeny)<0.4) zobrazeny=cil;
     }
-    spravujOkno(zobrazeny,(cil>=zobrazeny)?1:-1);
     kresli(zobrazeny,false);
     popisky(p);
     klepUpdate(p);
