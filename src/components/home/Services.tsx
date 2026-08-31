@@ -125,16 +125,6 @@ export default function Services() {
           );
         })}
       </div>
-
-      <motion.p className="mt-7 text-[14px] text-text-secondary" {...stagger(4)}>
-        Potřebujete jen hloubkovou rešerši?{" "}
-        <Link
-          href="/research-sprint"
-          className="font-semibold text-text underline decoration-border underline-offset-4 transition-colors duration-250 hover:decoration-text"
-        >
-          {"AI Research Sprint →"}
-        </Link>
-      </motion.p>
     </section>
   );
 }
