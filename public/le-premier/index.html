@@ -884,7 +884,7 @@ section{padding:64px 0;border-top:1px solid var(--border)}
     var r=sec.getBoundingClientRect(), vh=window.innerHeight||1;
     var p=(vh-r.top)/(vh*0.4);
     p=p<0?0:p>1?1:p;
-    var t=(p-0.35)/0.30; t=t<0?0:t>1?1:t;
+    var t=(p-0.6)/0.35; t=t<0?0:t>1?1:t;
     z.style.opacity=(1-t).toFixed(3);
     y.style.opacity=t.toFixed(3);
   }
