@@ -243,10 +243,7 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
 
 /* zaver: prvek z homepage, na cerne stranky */
 .closing{text-align:center;padding:76px 0 110px}
-.closing h2.vz{font-size:clamp(28px,4vw,38px);letter-spacing:-.03em;margin-bottom:14px}
-.closing .swap{position:relative;display:inline-block}
-.closing .swap .z,.closing .swap .y{display:inline-block;transition:opacity .25s linear}
-.closing .swap .y{position:absolute;left:0;top:0;opacity:0}
+.closing h2{font-size:clamp(30px,4vw,44px);letter-spacing:-.03em;max-width:20ch;margin:0 auto 18px}
 .closing p{color:var(--text-2);margin-bottom:30px}
 .closing .btn{display:inline-block;font-size:14px;font-weight:600;text-decoration:none;padding:13px 24px;border-radius:999px;
   border:1px solid var(--border);color:var(--text);transition:border-color .25s ease,background .25s ease}
@@ -296,7 +293,7 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
     <div class="stagetext" id="stagetext">
       <div class="w">
         <div class="inner">
-          <span class="eyebrow rv">Draft · Equator Wavy 50C</span>
+          <span class="eyebrow rv">Produktové vizuály pro Equator</span>
           <h1 class="rv">Video, carousel a bannery bez focení</h1>
           <p class="lede rv">Všechno vzniklo z fotek na bílém pozadí, které už Equator měl.</p>
         </div>
@@ -440,9 +437,9 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
 <!-- ZAVER -->
 <section class="closing" id="kontakt">
   <div class="w">
-    <h2 class="vz rv" aria-label="Vznikne to">V<span class="swap" aria-hidden="true"><span class="z">z</span><span class="y">y</span></span>nikne to</h2>
-    <p class="rv">Vy dodáte fotku. Zbytek vyrobím.</p>
-    <a class="btn rv" href="https://www.linkedin.com/in/jakubskupin/" target="_blank" rel="noopener">Napsat na LinkedIn &#8599;&#xFE0E;</a>
+    <h2 class="rv">Vyberte produkt,<br>na kterém vám záleží</h2>
+    <p class="rv"><strong>Ať vynikne.</strong></p>
+    <a class="btn rv" href="https://www.linkedin.com/in/jakubskupin/" target="_blank" rel="noopener">Poslat odkaz &#8599;&#xFE0E;</a>
     <p class="rv" style="margin-top:36px;font-size:13px"><a class="viz" href="/vizualy/#ukazky">Ukázka je součástí služby produktové vizuály &#8594;</a></p>
   </div>
 </section>
@@ -762,28 +759,6 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
   }
 })();
 
-/* zaver: z -> y pri doscrollovani, stejna krivka jako na homepage */
-(function(){
-  var sec=document.getElementById('kontakt'); if(!sec) return;
-  var box=sec.querySelector('.w');
-  var z=sec.querySelector('.swap .z'), y=sec.querySelector('.swap .y');
-  if(!box||!z||!y) return;
-  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){ z.style.opacity=0; y.style.opacity=1; return; }
-  var ticking=false;
-  function upd(){
-    ticking=false;
-    var r=box.getBoundingClientRect(), vh=window.innerHeight||1;
-    var p=(vh-r.bottom)/(vh*0.22);
-    p=p<0?0:p>1?1:p;
-    var t=(p-0.1)/0.8; t=t<0?0:t>1?1:t;
-    z.style.opacity=(1-t).toFixed(3);
-    y.style.opacity=t.toFixed(3);
-  }
-  function onS(){ if(!ticking){ticking=true;requestAnimationFrame(upd);} }
-  window.addEventListener('scroll',onS,{passive:true});
-  window.addEventListener('resize',onS);
-  upd();
-})();
 </script>
 </body>
 </html>
