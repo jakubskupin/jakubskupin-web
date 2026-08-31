@@ -678,7 +678,8 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
     var plato=Math.max(0,Math.min(1,Math.min((p-0.465)/0.05,(0.60-p)/0.05)));
     var konec=Math.max(0,Math.min(1,(p-0.90)/0.05));
     hint.style.opacity=Math.max(kryti,plato,konec);
-    hintText.style.opacity=(konec>0&&kryti<=0&&plato<=0)?0:1;
+    /* na zaveru jde text pryc i z layoutu, aby sipka sedela na stredu */
+    hintText.style.display=(konec>0&&kryti<=0&&plato<=0)?'none':'';
     requestAnimationFrame(tik);
   }
   rozmer();
