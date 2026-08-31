@@ -5,28 +5,22 @@ import { fadeUp, stagger } from "@/lib/animations";
 
 const steps = [
   {
-    num: "01",
     title: "Posbírám",
     text: "Vaše vstupy, data, kontext. Vidím v\u00a0nich vzorce a\u00a0hledám insighty.",
   },
   {
-    num: "02",
     title: "Propojím",
     text: "Křížím obory, zdroje a perspektivy. Z\u00a0roztříštěného vzniká celek.",
   },
   {
-    num: "03",
     title: "Zhmotním",
-    text: "Koncept, web, analýza, strategie — hotová věc, která se dá použít. Hned.",
+    text: "Koncept, web, analýza, strategie. Hotová věc, která se dá použít. Hned.",
   },
 ];
 
 function Step({ step, index }: { step: (typeof steps)[number]; index: number }) {
   return (
     <motion.div className="sm:px-4 sm:text-center" {...stagger(index + 1)}>
-      <div className="mb-2 font-heading text-[2.8rem] leading-none text-border">
-        {step.num}
-      </div>
       <h3 className="mb-2 font-heading text-xl font-bold tracking-[-0.02em]">
         {step.title}
       </h3>

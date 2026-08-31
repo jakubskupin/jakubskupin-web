@@ -18,25 +18,21 @@ function stagger(index: number) {
 
 const steps = [
   {
-    num: "01",
     title: "Research a strategie",
     description:
       "Rešerše trhu, cílových skupin a tonality. AI analýza + lidský úsudek. Strategický dokument, který vás překvapí svou hloubkou a užitečností.",
   },
   {
-    num: "02",
     title: "X-factor",
     description:
       "Z výzkumu pojmenuju, čím jste výjimeční. To, co sami nevidíte, protože je to pro vás samozřejmé.",
   },
   {
-    num: "03",
     title: "Design a single-page web",
     description:
-      "Vizuální základ a web postavený kolem vašeho x-faktoru.\nMessaging, struktura, první obsah — všechno propojené.",
+      "Vizuální základ a web postavený kolem vašeho x-faktoru.\nMessaging, struktura, první obsah, všechno propojené.",
   },
   {
-    num: "04",
     title: "Launch",
     description:
       "Web je live, LinkedIn aktualizovaný, první obsah publikovaný.\nZačínáte sbírat první feedback (nebo zakázky).",
@@ -67,7 +63,7 @@ export default function XFactor() {
         <div className="space-y-10">
           {steps.map((step, i) => (
             <motion.div
-              key={step.num}
+              key={step.title}
               className="relative pl-10"
               {...stagger(i)}
             >
@@ -76,10 +72,6 @@ export default function XFactor() {
                 <div className="h-[7px] w-[7px] rounded-full bg-text" />
               </div>
 
-              {/* Content */}
-              <div className="text-[12px] font-bold uppercase tracking-[0.08em] text-text-tertiary mb-1.5">
-                {step.num}
-              </div>
               <h3 className="mb-2 font-heading text-[17px] font-bold tracking-[-0.01em]">
                 {step.title}
               </h3>

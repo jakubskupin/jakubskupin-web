@@ -58,10 +58,12 @@ b,strong{font-weight:600;color:var(--text)}
 /* horni lista */
 .top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 0;font-size:13px;color:var(--text-2)}
 .top .brand{font-family:var(--h);font-weight:700;letter-spacing:-.02em;color:var(--text);text-decoration:none;font-size:15px;white-space:nowrap}
-.top .for{display:flex;align-items:center;gap:12px;min-width:0}
-.top .for span{white-space:nowrap}
-.top .for img{height:17px;width:auto;opacity:.92}
-@media(max-width:479px){.top{font-size:12px}.top .for span{display:none}.top .for img{height:15px}}
+.top .links{display:flex;align-items:center;gap:20px}
+.top .links a{color:var(--text-2);text-decoration:none;white-space:nowrap;transition:color .25s ease}
+.top .links a:hover{color:var(--text)}
+.top .links .navbtn{border:1px solid var(--border);border-radius:999px;padding:8px 20px;font-weight:500;transition:border-color .25s ease,color .25s ease}
+.top .links .navbtn:hover{border-color:var(--text-3);color:var(--text)}
+@media(max-width:479px){.top{font-size:12px}.top .links{gap:14px}.top .links a:not(.navbtn){display:none}.top .links .navbtn{padding:7px 14px}}
 
 /* hero */
 .hero{padding:26px 0 56px;display:grid;gap:34px;align-items:center}
@@ -126,12 +128,8 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
 @media(min-width:900px){.uc{grid-template-columns:1fr 1.05fr;gap:64px}.uc.flip .copy{order:2}.uc.flip .mock{order:1}}
 .uc .copy{display:flex;flex-direction:column;gap:18px;max-width:48ch}
 .num{display:flex;align-items:center;gap:14px}
-.num b{font-family:var(--h);font-weight:700;font-size:13px;color:var(--text-3);letter-spacing:.06em}
 .num span{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:4px 9px;border-radius:999px;border:1px solid var(--border);color:var(--text-2)}
 .uc .copy p.big{font-size:17px;color:var(--text-2);line-height:1.58}
-.meta{display:flex;flex-wrap:wrap;gap:8px;padding-top:2px}
-.meta span{font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);
-  border:1px solid var(--border);border-radius:999px;padding:5px 10px}
 .mock{display:flex;flex-direction:column;align-items:center;gap:14px;min-width:0;width:100%}
 .cap{font-size:13px;color:var(--text-3);text-align:center;max-width:42ch;line-height:1.5}
 
@@ -266,7 +264,7 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
     <svg class="anot" id="anot" aria-hidden="true"></svg>
     <div class="popisek" id="pop2">
       <b>Wavy</b>
-      <span>Konvexním tvarem bočnic zlepšuje aerodynamiku a&nbsp;snižuje váhu o&nbsp;90&nbsp;gramů</span>
+      <span>Konvexní tvar boční stěny zlepšuje aerodynamiku a&nbsp;snižuje váhu o&nbsp;90&nbsp;gramů</span>
     </div>
     <div class="popisek" id="pop3">
       <b>50C disk</b>
@@ -284,7 +282,7 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
         <div class="inner">
           <span class="eyebrow rv">Draft · Equator Wavy 50C</span>
           <h1 class="rv">Video, carousel a bannery bez focení</h1>
-          <p class="lede rv">Kolo je vaše. Scény nejsou. Všechno vzniklo z packshotů z <span class="nb">e-shopu</span>, obraz je generovaný AI.</p>
+          <p class="lede rv">Všechno vzniklo z fotek na bílém pozadí, které už Equator měl.</p>
         </div>
       </div>
     </div>
@@ -297,7 +295,10 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
     <div class="w">
       <div class="top">
         <a class="brand" href="https://jakubskupin.cz">Jakub Skupin</a>
-        <div class="for"><span>připraveno pro</span><img src="/equator/assets/equator-logo.png" alt="Equator"></div>
+        <div class="links">
+          <a href="/vizualy/">Produktové vizuály</a>
+          <a class="navbtn" href="https://www.linkedin.com/in/jakubskupin/" target="_blank" rel="noopener">Spolupráce &#8599;&#xFE0E;</a>
+        </div>
       </div>
     </div>
   </div>
@@ -307,10 +308,9 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
 <section id="reels">
   <div class="w uc">
     <div class="copy">
-      <div class="num rv"><b>01</b><span>Reels</span></div>
+      <div class="num rv"><span>Reels</span></div>
       <h2 class="rv">Z fotek video</h2>
       <p class="big rv">Vypadá to jako natáčení. <b>Nic se nenatáčelo.</b> Záběry jsou generované, střih vznikl mimo generátor. Co statická fotka na vlnitém ráfku ztratí, pohyb ukáže.</p>
-      <div class="meta rv"><span>Střih mimo generátor</span></div>
     </div>
     <div class="mock rv">
       <div class="phone">
@@ -349,10 +349,9 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
 <section id="carousel">
   <div class="w uc flip">
     <div class="copy">
-      <div class="num rv"><b>02</b><span>Carousel</span></div>
+      <div class="num rv"><span>Carousel</span></div>
       <h2 class="rv">Z packshotů do kouře</h2>
       <p class="big rv">Studio nikdo neobjednával. <b>Stačily packshoty.</b> Nové je pozadí, kouř a světlo. Pět snímků, jeden rukopis, od celku přes vlnu po náboj.</p>
-      <div class="meta rv"><span>Z e-shopových packshotů</span><span>Pozadí z AI</span></div>
     </div>
     <div class="mock rv">
       <div class="post">
@@ -392,7 +391,7 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
 <section id="bannery">
   <div class="w">
     <div class="sechead">
-      <div class="num rv"><b>03</b><span>Bannery</span></div>
+      <div class="num rv"><span>Bannery</span></div>
       <h2 class="rv">Tři poměry, jedno kolo</h2>
       <p class="big rv">Ořez z jednoho obrázku to není. <b>Každý poměr má vlastní generaci.</b> Vstup byl pokaždé týž packshot, proto je kolo na všech třech stejné. Typografie se nalepila navrch, generátorem neprošla.</p>
     </div>
@@ -660,7 +659,9 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
     var kryti=Math.max(0,1-p/0.12);
     txt.style.opacity=kryti;
     txt.style.visibility=kryti<0.01?'hidden':'visible';
-    hint.style.opacity=kryti;
+    /* sipka se vraci u plata s popiskem Wavy, aby bylo jasne, ze se pokracuje scrollem */
+    var plato=Math.max(0,Math.min(1,Math.min((p-0.465)/0.05,(0.60-p)/0.05)));
+    hint.style.opacity=Math.max(kryti,plato);
     requestAnimationFrame(tik);
   }
   rozmer();
