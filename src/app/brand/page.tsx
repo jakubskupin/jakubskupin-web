@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import BrandManual from "@/components/brand/BrandManual";
+import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
   title: "Brand manuál — Jakub Skupin",
@@ -7,5 +8,10 @@ export const metadata: Metadata = {
 };
 
 export default function BrandPage() {
-  return <BrandManual />;
+  return (
+    <>
+      <BrandManual />
+      <Footer />
+    </>
+  );
 }

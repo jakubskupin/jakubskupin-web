@@ -240,14 +240,19 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
   transition:border-color .2s ease}
 .ref cite a:hover{border-color:var(--text-2)}
 
-/* zaver */
-.closing{text-align:center;padding:76px 0 88px}
-.closing h2{font-size:clamp(30px,5vw,48px);margin-bottom:14px}
+/* zaver: prvek z homepage, na cerne stranky */
+.closing{text-align:center;padding:76px 0 110px}
+.closing h2.vz{font-size:clamp(28px,4vw,38px);letter-spacing:-.03em;margin-bottom:14px}
+.closing .swap{position:relative;display:inline-block}
+.closing .swap .z,.closing .swap .y{display:inline-block;transition:opacity .25s linear}
+.closing .swap .y{position:absolute;left:0;top:0;opacity:0}
 .closing p{color:var(--text-2);margin-bottom:30px}
 .closing .btn{display:inline-block;font-size:14px;font-weight:600;text-decoration:none;padding:13px 24px;border-radius:999px;
   border:1px solid var(--border);color:var(--text);transition:border-color .25s ease,background .25s ease}
 .closing .btn:hover{border-color:#4a4a52;background:#161618}
-.closing .tel{display:block;margin-top:18px;font-size:13.5px;color:var(--text-3);text-decoration:none}
+.closing .viz{color:var(--text-3);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:2px}
+.pata{position:relative;z-index:1;max-width:960px;margin:0 auto 40px;padding:48px 24px;border-top:1px solid var(--border);text-align:center}
+.pata p{font-size:13px;color:var(--text-3)}
 </style>
 <noscript><style>.rv{opacity:1!important;transform:none!important}</style></noscript>
 </head>
@@ -436,15 +441,18 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
 </section>
 
 <!-- ZAVER -->
-<section class="closing">
+<section class="closing" id="kontakt">
   <div class="w">
-    <h2 class="rv">Vznikne to. A pak vynikne</h2>
+    <h2 class="vz rv" aria-label="Vznikne to">V<span class="swap" aria-hidden="true"><span class="z">z</span><span class="y">y</span></span>nikne to</h2>
     <p class="rv">Vy dodáte fotku. Zbytek vyrobím.</p>
     <a class="btn rv" href="https://www.linkedin.com/in/jakubskupin/" target="_blank" rel="noopener">Napsat na LinkedIn &#8599;&#xFE0E;</a>
-    <a class="tel rv" href="tel:+420723770932">723 770 932</a>
-    <p class="rv" style="margin-top:36px;font-size:13px"><a href="/vizualy/#ukazky" style="color:var(--text-3);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:2px">Ukázka je součástí služby produktové vizuály &#8594;</a></p>
+    <p class="rv" style="margin-top:36px;font-size:13px"><a class="viz" href="/vizualy/#ukazky">Ukázka je součástí služby produktové vizuály &#8594;</a></p>
   </div>
 </section>
+
+<footer class="pata">
+  <p>© 2026 Jakub Skupin</p>
+</footer>
 
 <script>
 /* promitani scrollem: 241 snimku z videa, kanon REV1 (intro smycka -> prevzeti scrollem) */
@@ -716,6 +724,29 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
       go(idx+1);
     },3000);
   }
+})();
+
+/* zaver: z -> y pri doscrollovani, stejna krivka jako na homepage */
+(function(){
+  var sec=document.getElementById('kontakt'); if(!sec) return;
+  var box=sec.querySelector('.w');
+  var z=sec.querySelector('.swap .z'), y=sec.querySelector('.swap .y');
+  if(!box||!z||!y) return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){ z.style.opacity=0; y.style.opacity=1; return; }
+  var ticking=false;
+  function upd(){
+    ticking=false;
+    var r=box.getBoundingClientRect(), vh=window.innerHeight||1;
+    var p=(vh-r.bottom)/(vh*0.22);
+    p=p<0?0:p>1?1:p;
+    var t=(p-0.1)/0.8; t=t<0?0:t>1?1:t;
+    z.style.opacity=(1-t).toFixed(3);
+    y.style.opacity=t.toFixed(3);
+  }
+  function onS(){ if(!ticking){ticking=true;requestAnimationFrame(upd);} }
+  window.addEventListener('scroll',onS,{passive:true});
+  window.addEventListener('resize',onS);
+  upd();
 })();
 </script>
 </body>
