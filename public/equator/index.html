@@ -86,18 +86,19 @@ b,strong{font-weight:600;color:var(--text)}
 
 /* promitani scrollem (sekvence snimku z videa, technika REV1) */
 .stage{position:relative;height:440vh;background:#000}
-.pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;
+.pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;flex-direction:column;
   touch-action:manipulation;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
+.topwrap{position:relative;z-index:3;flex:0 0 auto}
+.filmbox{position:relative;flex:1;min-height:0;overflow:hidden}
 #film{position:absolute;inset:0;width:100%;height:100%;display:block}
-.topwrap{position:absolute;top:0;left:0;right:0;z-index:3}
-.stagetext{position:absolute;left:0;right:0;bottom:7vh;bottom:7svh;z-index:2;pointer-events:none}
+.stagetext{position:absolute;left:0;right:0;bottom:12vh;bottom:12svh;z-index:2;pointer-events:none}
 .stagetext .inner{display:flex;flex-direction:column;gap:20px;max-width:620px}
 .hint{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);z-index:2;display:flex;align-items:center;gap:8px;
-  font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3);pointer-events:none}
+  font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#fff;pointer-events:none}
 .hint svg{width:14px;height:14px;animation:hintdown 1.7s ease-in-out infinite}
 @keyframes hintdown{0%,100%{transform:translateY(-2px);opacity:.45}50%{transform:translateY(3px);opacity:1}}
 @media(prefers-reduced-motion:reduce){.hint svg{animation:none}}
-@media(max-width:479px){.stagetext{bottom:9vh;bottom:9svh}}
+@media(max-width:479px){.stagetext{bottom:13vh;bottom:13svh}}
 
 /* vykresove popisky nad filmem (bod + cara + text) */
 .anot{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;overflow:visible}
@@ -158,18 +159,20 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
 .ig-bar i{display:block;height:100%;width:0;background:#fff;animation:prog 14.76s linear infinite}
 @keyframes prog{from{width:0}to{width:100%}}
 .ig-home{position:absolute;left:50%;bottom:6px;transform:translateX(-50%);width:112px;height:4px;border-radius:4px;background:rgba(255,255,255,.9);z-index:5}
-.sound{position:absolute;top:92px;right:12px;z-index:6;width:34px;height:34px;border-radius:50%;padding:0;
-  border:1px solid rgba(255,255,255,.34);background:rgba(0,0,0,.42);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
-  display:flex;align-items:center;justify-content:center;cursor:pointer;
-  transition:background .2s ease,border-color .2s ease,transform .2s ease}
-.sound:hover{background:rgba(0,0,0,.72);border-color:rgba(255,255,255,.62);transform:scale(1.06)}
-.sound:focus-visible{outline:2px solid #fff;outline-offset:3px}
-.sound svg{width:17px;height:17px;display:block}
-.sound .zap{display:none}
-.sound.hraje .zap{display:block}
-.sound.hraje .vyp{display:none}
-.caphint{display:block;margin-top:6px;font-size:12.5px;color:var(--text-3);opacity:.85}
-@media(prefers-reduced-motion:reduce){.sound{transition:none}.sound:hover{transform:none}}
+/* ovladani videa, vzor /prim; tlacitka pod telefonem */
+.screen video{cursor:pointer}
+.screen video:fullscreen{object-fit:contain;background:#000}
+.screen video:-webkit-full-screen{object-fit:contain;background:#000}
+.screen:fullscreen video{object-fit:contain;background:#000}
+.vidbtns{display:flex;align-items:center;justify-content:center;gap:10px}
+.vidbtns .snd,.vidbtns .fs{font:500 12px/1 var(--b);padding:10px 16px;border-radius:999px;
+  border:1px solid rgba(250,250,248,.45);background:rgba(26,26,24,.55);color:#FAFAF8;cursor:pointer;
+  transition:border-color .25s ease,background .25s ease,color .25s ease}
+.vidbtns .snd{width:38px;height:38px;padding:0;display:grid;place-items:center}
+.vidbtns .snd .w1,.vidbtns .snd .w2{display:none}.vidbtns .snd.on .w1,.vidbtns .snd.on .w2{display:block}.vidbtns .snd.on .mute{display:none}
+.vidbtns .snd.on{background:#FAFAF8;color:#1A1A18}
+.vidbtns .snd:hover,.vidbtns .fs:hover{border-color:rgba(250,250,248,.8)}
+.vidbtns .snd:focus-visible,.vidbtns .fs:focus-visible{outline:2px solid #fff;outline-offset:3px}
 
 /* instagram post s carouselem */
 .post{width:min(390px,88vw);background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;
@@ -207,8 +210,6 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
 .fmtwide{max-width:1420px;margin:0 auto;padding:0 20px}
 .bboard{margin:0 0 44px}
 .bboard img{width:100%;height:auto;border-radius:6px;border:1px solid var(--border)}
-.bboard figcaption{margin-top:12px;font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
-.bboard figcaption b{display:block;font-weight:600;letter-spacing:.06em;text-transform:none;font-size:12.5px;color:var(--text-2);margin-top:3px}
 @media(max-width:767px){.bboard{margin-bottom:32px}.bboard img{border-radius:4px}}
 @media(min-width:768px){.fmtwide{padding:0 32px}}
 .fmts{display:grid;grid-template-columns:1.778fr 1fr .5625fr;gap:20px;align-items:end;width:100%}
@@ -217,8 +218,6 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
 .fmt figcaption{margin-top:11px;font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
 .fmt figcaption b{display:block;font-weight:600;letter-spacing:.06em;text-transform:none;font-size:12.5px;color:var(--text-2);margin-top:3px}
 .sechead{display:flex;flex-direction:column;gap:18px;max-width:56ch;margin-bottom:40px}
-.sechead p.big{font-size:17px;color:var(--text-2);line-height:1.58}
-.fmtnote{margin-top:26px;font-size:13px;color:var(--text-3);line-height:1.55;border-left:2px solid var(--border);padding-left:14px;max-width:60ch}
 @media(max-width:767px){
   .fmts{grid-template-columns:1fr;gap:26px;align-items:stretch}
   .fmt img{border-radius:4px}
@@ -260,6 +259,18 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
 <!-- HERO · PROMITANI SCROLLEM -->
 <div class="stage" id="stage">
   <div class="pin">
+    <div class="topwrap">
+      <div class="w">
+        <div class="top">
+          <a class="brand" href="https://jakubskupin.cz">Jakub Skupin</a>
+          <div class="links">
+            <a href="/vizualy/">Produktové vizuály</a>
+            <a class="navbtn" href="https://www.linkedin.com/in/jakubskupin/" target="_blank" rel="noopener">Spolupráce &#8599;&#xFE0E;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="filmbox">
     <canvas id="film" aria-hidden="true"></canvas>
     <svg class="anot" id="anot" aria-hidden="true"></svg>
     <div class="popisek" id="pop2">
@@ -277,6 +288,7 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
       </svg>
       <span>Poklepej</span>
     </div>
+    </div>
     <div class="stagetext" id="stagetext">
       <div class="w">
         <div class="inner">
@@ -291,17 +303,6 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
       <span>Scrollujte</span>
     </div>
   </div>
-  <div class="topwrap">
-    <div class="w">
-      <div class="top">
-        <a class="brand" href="https://jakubskupin.cz">Jakub Skupin</a>
-        <div class="links">
-          <a href="/vizualy/">Produktové vizuály</a>
-          <a class="navbtn" href="https://www.linkedin.com/in/jakubskupin/" target="_blank" rel="noopener">Spolupráce &#8599;&#xFE0E;</a>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
 
 <!-- 01 REELS -->
@@ -310,7 +311,7 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
     <div class="copy">
       <div class="num rv"><span>Reels</span></div>
       <h2 class="rv">Z fotek video</h2>
-      <p class="big rv">Vypadá to jako natáčení. <b>Nic se nenatáčelo.</b> Záběry jsou generované, střih vznikl mimo generátor. Co statická fotka na vlnitém ráfku ztratí, pohyb ukáže.</p>
+      <p class="big rv">Vypadá to jako natáčení. <b>Nic se nenatáčelo.</b> Záběry jsou generované. Co statická fotka na vlnitém ráfku ztratí, pohyb ukáže.</p>
     </div>
     <div class="mock rv">
       <div class="phone">
@@ -329,18 +330,17 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
           </div>
           <div class="ig-bottom">
             <div class="ig-user"><span class="av"></span><span>equatorcycling</span><span class="follow">Sledovat</span></div>
-            <p class="ig-cap">Wavy 50C. Hloubka ráfku kolísá, 24 period, jedna na paprsek. Vizuál generovaný AI <span class="more">… více</span></p>
+            <p class="ig-cap">Wavy 50C. Hloubka ráfku kolísá, 24 period, jedna na paprsek. Celokarbon z vláken Toray T700 a T800 <span class="more">… více</span></p>
             <div class="ig-audio"><svg viewBox="0 0 24 24" fill="#fff"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg><span>equatorcycling · Původní zvuk</span></div>
           </div>
-          <button class="sound" type="button" aria-pressed="false" aria-label="Zapnout zvuk">
-            <svg class="vyp" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4Z"/><path d="m23 9-6 6"/><path d="m17 9 6 6"/></svg>
-            <svg class="zap" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4Z"/><path d="M15.6 8.4a5 5 0 0 1 0 7.2"/><path d="M18.7 5.3a9 9 0 0 1 0 13.4"/></svg>
-          </button>
           <div class="ig-bar"><i></i></div>
           <div class="ig-home"></div>
         </div>
       </div>
-      <p class="cap">Instagram Reels · 9:16 · 14,8 s<span class="caphint">Zvuk zapnete ikonou v rohu videa</span></p>
+      <div class="vidbtns">
+        <button class="snd" id="snd" type="button" aria-label="Zapnout zvuk"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 9.5a4 4 0 0 1 0 5"/><path class="w2" d="M18.5 7a7.5 7.5 0 0 1 0 10"/><path class="mute" d="M16 9l5 6M21 9l-5 6"/></svg></button>
+        <button class="fs" id="fs" type="button" aria-label="Celá obrazovka">Celá obrazovka</button>
+      </div>
     </div>
   </div>
 </section>
@@ -351,7 +351,7 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
     <div class="copy">
       <div class="num rv"><span>Carousel</span></div>
       <h2 class="rv">Z packshotů do kouře</h2>
-      <p class="big rv">Studio nikdo neobjednával. <b>Stačily packshoty.</b> Nové je pozadí, kouř a světlo. Pět snímků, jeden rukopis, od celku přes vlnu po náboj.</p>
+      <p class="big rv">Studio nikdo neobjednával. <b>Stačily packshoty.</b> Nové je pozadí, kouř a světlo. Pět snímků, jeden svět, od celku přes vlnu po náboj.</p>
     </div>
     <div class="mock rv">
       <div class="post">
@@ -382,7 +382,6 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
         <p class="likes">412 To se mi líbí</p>
         <p class="cap"><b>equatorcycling</b>Set váží 1 480 g. Ráfek 50 mm, karbon, paprsky SAPIM CX-Ray, zaplétáno ve Zlíně <span class="more">… více</span></p>
       </div>
-      <p class="cap">Instagram carousel · 4:5 · 5 snímků</p>
     </div>
   </div>
 </section>
@@ -393,7 +392,6 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
     <div class="sechead">
       <div class="num rv"><span>Bannery</span></div>
       <h2 class="rv">Tři poměry, jedno kolo</h2>
-      <p class="big rv">Ořez z jednoho obrázku to není. <b>Každý poměr má vlastní generaci.</b> Vstup byl pokaždé týž packshot, proto je kolo na všech třech stejné. Typografie se nalepila navrch, generátorem neprošla.</p>
     </div>
   </div>
   <div class="fmtwide">
@@ -402,7 +400,6 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
            srcset="/equator/assets/bannery/billboard-1400.jpg 1400w, /equator/assets/bannery/billboard-2800.jpg 2800w"
            sizes="(min-width:1420px) 1356px, (min-width:768px) calc(100vw - 64px), calc(100vw - 40px)"
            alt="Banner Equator Wavy 50C v osvětleném rámu na betonové stěně" loading="lazy">
-      <figcaption>Mockup<b>Jak 16:9 vypadá v osvětleném rámu. Vizualizace, ne fotka z ulice</b></figcaption>
     </figure>
     <div class="fmts rv">
       <figure class="fmt">
@@ -418,9 +415,6 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
         <figcaption>9:16<b>1080 × 1920 · story</b></figcaption>
       </figure>
     </div>
-  </div>
-  <div class="w">
-    <p class="fmtnote rv">Ze stejných tří scén padnou ořezem i leaderboard 970 × 250, Instagram 4:5 a širokoúhlý billboard 2520 × 1080, bez dalšího generování.</p>
   </div>
 </section>
 
@@ -463,6 +457,7 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
   var mobil=window.innerWidth<700;
   var base='/equator/assets/scroll/'+(mobil?'m':'d')+'/f-';
   var txt=document.getElementById('stagetext'), hint=document.getElementById('hint');
+  var hintText=hint.querySelector('span');
   var klid=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var imgs=new Array(N), ok=new Array(N);
@@ -507,8 +502,8 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
     namalovany=i;
     var im=imgs[i], cw=canvas.width, ch=canvas.height, iw=im.naturalWidth, ih=im.naturalHeight;
     if(!iw||!cw) return;
-    var s=Math.max(cw/iw,ch/ih);              /* cover */
-    s=Math.min(s,(cw/iw)*(mobil?1.6:1.45));  /* na vysku kolo neorezavat, pas zapadne do cerne */
+    var s=Math.max(cw/iw,ch/ih);              /* cover: na desktopu vzdy plne pokryti, zadne pasy */
+    if(mobil) s=Math.min(s,(cw/iw)*1.6);      /* jen na mobilu drzime pas, at se kolo neorezava */
     var w=iw*s,h=ih*s;
     var px=(cw-w)/2, py=(ch-h)/2;
     if(mobil&&h<ch) py=(ch-h)*0.38;          /* na mobilu pas mirne vys k horni hrane */
@@ -659,9 +654,11 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
     var kryti=Math.max(0,1-p/0.12);
     txt.style.opacity=kryti;
     txt.style.visibility=kryti<0.01?'hidden':'visible';
-    /* sipka se vraci u plata s popiskem Wavy, aby bylo jasne, ze se pokracuje scrollem */
+    /* sipka se vraci u plata s popiskem Wavy a na zaverecnem platu (tam uz bez textu) */
     var plato=Math.max(0,Math.min(1,Math.min((p-0.465)/0.05,(0.60-p)/0.05)));
-    hint.style.opacity=Math.max(kryti,plato);
+    var konec=Math.max(0,Math.min(1,(p-0.90)/0.05));
+    hint.style.opacity=Math.max(kryti,plato,konec);
+    hintText.style.opacity=(konec>0&&kryti<=0&&plato<=0)?0:1;
     requestAnimationFrame(tik);
   }
   rozmer();
@@ -687,16 +684,39 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
   els.forEach(function(e,i){ e.style.transitionDelay=(Math.min(i%5,4)*70)+'ms'; io.observe(e); });
 })();
 
+/* zvuk + cela obrazovka, vzor /prim */
 (function(){
-  var btn=document.querySelector('.sound'), v=document.querySelector('.phone video');
-  if(!btn||!v) return;
-  btn.addEventListener('click',function(){
+  var v=document.querySelector('.phone video'), snd=document.getElementById('snd'), fsb=document.getElementById('fs');
+  if(!v||!snd||!fsb) return;
+  var scr=v.closest('.screen');
+  function toggleSound(){
     v.muted=!v.muted;
-    btn.classList.toggle('hraje',!v.muted);
-    btn.setAttribute('aria-pressed', v.muted?'false':'true');
-    btn.setAttribute('aria-label', v.muted?'Zapnout zvuk':'Vypnout zvuk');
-    if(!v.muted){ var p=v.play(); if(p&&p.catch) p.catch(function(){}); }
-  });
+    snd.classList.toggle('on',!v.muted);
+    snd.setAttribute('aria-label', v.muted?'Zapnout zvuk':'Ztlumit');
+    if(v.paused){ var p=v.play(); if(p&&p.catch) p.catch(function(){}); }
+  }
+  function goFull(){
+    v.muted=false; snd.classList.add('on'); snd.setAttribute('aria-label','Ztlumit');
+    if(v.webkitEnterFullscreen) v.webkitEnterFullscreen();
+    else if(v.requestFullscreen) v.requestFullscreen().catch(function(){});
+    else if(scr&&scr.requestFullscreen) scr.requestFullscreen().catch(function(){});
+    var p=v.play(); if(p&&p.catch) p.catch(function(){});
+  }
+  snd.addEventListener('click',function(e){e.stopPropagation();toggleSound()});
+  fsb.addEventListener('click',function(e){e.stopPropagation();goFull()});
+  v.addEventListener('click',function(){ if(window.matchMedia('(max-width:767px)').matches) goFull(); else toggleSound(); });
+  /* odscrolluje-li divak pryc, zvuk se sam vypne (mimo fullscreen) */
+  function vypniMimo(){
+    if(v.muted||document.fullscreenElement||v.webkitDisplayingFullscreen) return;
+    var r=v.getBoundingClientRect();
+    if(r.bottom<0||r.top>window.innerHeight){
+      v.muted=true; snd.classList.remove('on'); snd.setAttribute('aria-label','Zapnout zvuk');
+    }
+  }
+  var mtck=false;
+  window.addEventListener('scroll',function(){ if(!mtck){mtck=true;requestAnimationFrame(function(){mtck=false;vypniMimo();});} },{passive:true});
+  document.addEventListener('fullscreenchange',vypniMimo);
+  v.addEventListener('webkitendfullscreen',vypniMimo);
 })();
 
 (function(){
