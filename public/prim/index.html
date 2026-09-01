@@ -194,6 +194,30 @@ html.no-js .zcap{position:static;opacity:1!important;margin:40px 0 0}
 /* misc */
 footer{padding:60px 0;border-top:1px solid var(--border);color:var(--text-tertiary);font-size:13px}
 .secnum{font-size:12px;color:var(--text-tertiary);font-family:Syne;margin-bottom:8px}
+
+/* kotvy: skryta vrstva pro sdileni odkazu na mista ve strance, navstevnik ji nevidi (viz JS na konci) */
+#kot{position:fixed;left:18px;bottom:18px;z-index:100000;width:288px;padding:12px;border-radius:14px;
+  background:rgba(255,255,255,.97);border:1px solid var(--border);box-shadow:0 20px 50px rgba(26,26,24,.18);
+  font-family:Manrope,sans-serif;font-size:12.5px;color:var(--text-secondary);backdrop-filter:blur(8px)}
+#kot h6{display:flex;align-items:center;justify-content:space-between;margin:0 0 8px 2px;
+  font-family:Syne,sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-tertiary)}
+#kot .x{width:22px;height:22px;padding:0;border:0;border-radius:6px;background:transparent;
+  color:var(--text-tertiary);font:400 15px/1 Manrope,sans-serif;cursor:pointer}
+#kot .x:hover{background:var(--accent-soft);color:var(--text)}
+#kot button.r{display:flex;justify-content:space-between;gap:10px;width:100%;padding:7px 8px;margin:0 0 2px;
+  border:0;border-radius:8px;background:transparent;color:var(--text-secondary);font:inherit;text-align:left;cursor:pointer;
+  transition:background .15s ease,color .15s ease}
+#kot button.r:hover{background:var(--accent-soft);color:var(--text)}
+#kot button.r b{font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#kot button.r i{flex:none;min-width:84px;text-align:right;font-style:normal;color:var(--text-tertiary);white-space:nowrap}
+#kot button.hotovo i{color:#2E7D4F}
+#kot p{margin:8px 2px 0;font-size:11px;color:var(--text-tertiary);line-height:1.5}
+#kottoast{position:fixed;right:18px;bottom:18px;z-index:100001;padding:9px 14px;border-radius:999px;
+  background:var(--ink);color:#FAFAF8;font-family:Manrope,sans-serif;font-size:12.5px;font-weight:600;
+  box-shadow:0 14px 34px rgba(26,26,24,.28);opacity:0;transform:translateY(6px);
+  transition:opacity .2s ease,transform .2s ease;pointer-events:none}
+#kottoast.in{opacity:1;transform:none}
+@media(max-width:520px){#kot{left:12px;right:12px;bottom:12px;width:auto}#kottoast{right:12px;bottom:auto;top:76px}}
 </style>
 </head>
 <body>
@@ -324,7 +348,7 @@ footer{padding:60px 0;border-top:1px solid var(--border);color:var(--text-tertia
 </div>
 
 <!-- 03 FORMÁTY: rovnou připravené na kanály -->
-<section class="formats" style="padding-top:72px"><div class="wrap">
+<section class="formats" id="formaty" style="padding-top:72px"><div class="wrap">
   <div class="kicker">Připraveno na formáty</div>
   <h2 style="font-size:32px;max-width:22ch">Každý záběr rovnou ve formátech, kam ho pošlete</h2>
   <p class="lead" style="margin-top:14px">Jedna scéna, ořezy pro sítě, e-shop i reklamu. Soubory dostanete pojmenované podle kanálu, nic nedořezáváte.</p>
@@ -457,27 +481,132 @@ document.querySelectorAll('.fmt .box').forEach(b=>{
 });
 })();
 
-/* kotva #video: video je uvnitr scrollytelling sceny, takze se nedoskace na prvek,
-   ale na konkretni bod scrollu (96 % scény = video hraje, popisek i ovladani jsou videt).
-   Na mobilu je scena rozlozena do bezneho toku, tam staci doskocit na prvek. */
+/* kotvy na mista ve strance (skryta vrstva, jen pro sdileni odkazu)
+   Cast mist neni samostatna sekce, ale okamzik uvnitr scrollytelling sceny,
+   takze se na ne nedoskace na prvek, ale na podil scrollu sceny (BODY nize).
+   Alt+klik na nadpis = zapise kotvu a zkopiruje cistou adresu
+   Alt+K nebo /prim/?kotvy = prehled vsech kotev, Esc, x nebo klik mimo zavira
+   Bez Altu se nestane nic, aby navstevnik nesdilel odkaz doprostred stranky. */
 (function(){
-  var split=document.getElementById('split'), zoom=document.getElementById('zoom');
-  if(!split||!zoom) return;
-  var CIL=0.96;
+  var split=document.getElementById('split'), zoom=document.getElementById('zoom'), set1=document.getElementById('set1');
+  var BODY={'#serie':0.36,'#video':0.96};      /* podil scrollu sceny */
+  var NAMOBILU={'#serie':set1,'#video':zoom};  /* na mobilu je scena rozlozena do bezneho toku */
+  var SEKCE=[
+    {h:'',         p:'Začátek stránky'},
+    {h:'#serie',   p:'Z jedné fotky série'},
+    {h:'#video',   p:'Video ze stejné scény'},
+    {h:'#formaty', p:'Formáty pro kanály'},
+    {h:'#kontakt', p:'Závěr a kontakt'}
+  ];
+  var cesta=location.pathname.replace(/index\.html$/,'');
+  function odkaz(h){ return location.origin+cesta.replace(/\/$/,'')+h }
+  function zapis(h){ history.replaceState(null,'',location.pathname+h) }
   function mobil(){ return matchMedia('(max-width:767px)').matches }
-  function dojed(hladce){
-    var y;
-    if(mobil()){
-      var r=zoom.getBoundingClientRect();
-      y=r.top+window.scrollY-Math.max(24,(window.innerHeight-r.height)/2);
-    } else {
-      y=split.offsetTop+(split.offsetHeight-window.innerHeight)*CIL;
+  var panel=null;
+
+  function dojed(h,hladce){
+    if(!h) return window.scrollTo({top:0,behavior:hladce?'smooth':'auto'});
+    var y=null;
+    if(BODY[h]!=null&&split){
+      if(mobil()){
+        var el=NAMOBILU[h];
+        if(el){ var r=el.getBoundingClientRect(); y=r.top+window.scrollY-Math.max(24,(window.innerHeight-r.height)/2) }
+      } else y=split.offsetTop+(split.offsetHeight-window.innerHeight)*BODY[h];
     }
-    window.scrollTo({top:Math.round(y), behavior:hladce?'smooth':'auto'});
+    if(y===null){
+      var c=document.querySelector(h);
+      if(!c) return;
+      y=c.getBoundingClientRect().top+window.scrollY;
+    }
+    window.scrollTo({top:Math.round(y),behavior:hladce?'smooth':'auto'});
   }
-  function zkus(hladce){ if(location.hash==='#video') dojed(hladce) }
-  if(location.hash==='#video') window.addEventListener('load',function(){ zkus(false) });
-  window.addEventListener('hashchange',function(){ zkus(true) });
+
+  /* nadpisy uvnitr sceny patri k okamziku, ne k sekci */
+  function kotvaNadpisu(nad){
+    if(nad.closest('.zcap')) return '#video';
+    if(split&&split.contains(nad)) return '#serie';
+    var sek=nad.closest('section[id]');
+    return sek?('#'+sek.id):'';
+  }
+
+  function zkopiruj(text,hotovo){
+    function nouzove(){
+      var t=document.createElement('textarea');
+      t.value=text; t.setAttribute('readonly',''); t.style.cssText='position:fixed;top:-200px;opacity:0';
+      document.body.appendChild(t); t.select();
+      var ok=false;
+      try{ ok=document.execCommand('copy') }catch(e){}
+      document.body.removeChild(t); hotovo(ok);
+    }
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){hotovo(true)},nouzove);
+    } else nouzove();
+  }
+
+  var toastEl,toastT;
+  function toast(zprava){
+    if(!toastEl){ toastEl=document.createElement('div'); toastEl.id='kottoast'; document.body.appendChild(toastEl); }
+    toastEl.textContent=zprava;
+    void toastEl.offsetHeight;
+    toastEl.classList.add('in');
+    clearTimeout(toastT);
+    toastT=setTimeout(function(){ toastEl.classList.remove('in') },1600);
+  }
+
+  document.addEventListener('click',function(e){
+    if(!e.altKey||e.ctrlKey||e.metaKey) return;
+    if(panel&&panel.contains(e.target)) return;
+    var nad=e.target.closest&&e.target.closest('h1,h2,h3');
+    if(!nad) return;
+    var h=kotvaNadpisu(nad);
+    zapis(h);
+    zkopiruj(odkaz(h),function(ok){ toast(ok?'Odkaz zkopírován':'Kopie se nepovedla') });
+  });
+
+  function zavri(){ if(panel){ panel.remove(); panel=null } }
+  function otevri(){
+    if(panel) return zavri();
+    panel=document.createElement('div');
+    panel.id='kot';
+    var html='<h6>Kotvy na stránce<button type="button" class="x" aria-label="Zavřít">&#215;</button></h6>';
+    SEKCE.forEach(function(s){
+      html+='<button type="button" class="r" data-h="'+s.h+'"><b>'+s.p+'</b><i>'+(s.h||'/')+'</i></button>';
+    });
+    html+='<p>Klik na řádek zkopíruje odkaz. Alt+klik na nadpis udělá totéž.</p>';
+    panel.innerHTML=html;
+    panel.addEventListener('click',function(e){
+      if(e.target.closest('.x')) return zavri();
+      var b=e.target.closest('button.r'); if(!b) return;
+      var h=b.getAttribute('data-h');
+      zkopiruj(odkaz(h),function(ok){
+        var i=b.querySelector('i');
+        b.classList.toggle('hotovo',ok);
+        i.textContent=ok?'zkopírováno':'nelze';
+        clearTimeout(b._t);
+        b._t=setTimeout(function(){ b.classList.remove('hotovo'); i.textContent=h||'/' },1400);
+      });
+      if(h) zapis(h);
+    });
+    document.body.appendChild(panel);
+  }
+  document.addEventListener('pointerdown',function(e){
+    if(panel&&!panel.contains(e.target)) zavri();
+  },true);
+
+  document.addEventListener('keydown',function(e){
+    if(e.repeat) return;
+    if(e.altKey&&!e.ctrlKey&&!e.metaKey&&!e.shiftKey&&e.code==='KeyK'){ e.preventDefault(); otevri(); return; }
+    if(e.key==='Escape') zavri();
+  });
+
+  if(new URLSearchParams(location.search).has('kotvy')){
+    otevri();
+    zapis(location.hash);
+  }
+
+  /* prichozi odkaz s kotvou: doskocit az po nacteni, at cil neuteče s dosazujicimi obrazky */
+  if(location.hash) window.addEventListener('load',function(){ dojed(location.hash,false) });
+  window.addEventListener('hashchange',function(){ dojed(location.hash,true) });
 })();
 </script>
 </body>
