@@ -340,7 +340,7 @@ footer{padding:60px 0;border-top:1px solid var(--border);color:var(--text-tertia
     <div class="anot" id="an2"><span class="txt">tohle už máte</span><svg width="120" height="60" style="margin:2px 0 0 70px;transform:rotate(38deg)"><use href="#a-curve-r"/></svg></div>
     <div class="anot" id="an3"><span class="txt">tohle dodám</span><svg width="70" height="86" style="margin:-2px 0 0 10px;transform:scaleX(-1) rotate(-10deg)"><use href="#a-curve-d"/></svg></div>
     <svg class="cursor" id="cursor" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l14 8-6 2-3 6z" fill="#1A1A18" stroke="#FAFAF8" stroke-width="1.5" stroke-linejoin="round"/></svg>
-    <span id="video" aria-hidden="true" style="display:block;height:0"></span>
+    <span id="reels" aria-hidden="true" style="display:block;height:0"></span>
     <div class="zcap" id="zcap"><h3>Ze stejné scény vznikne i video</h3><p>Krátké video do 30 sekund, na sítě i do reklamy</p></div>
     <div class="zoom" id="zoom"><img src="/vizualy/assets/j6.jpg" alt="Chronograf před červenými skleněnými panely, formát na výšku" width="491" height="880" loading="lazy" decoding="async"><video id="vplayer" src="/vizualy/assets/video-zvuk.mp4" muted loop playsinline preload="metadata"></video><button class="snd" id="snd" type="button" aria-label="Zapnout zvuk"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 9.5a4 4 0 0 1 0 5"/><path class="w2" d="M18.5 7a7.5 7.5 0 0 1 0 10"/><path class="mute" d="M16 9l5 6M21 9l-5 6"/></svg></button><button class="fs" id="fs" type="button" aria-label="Celá obrazovka">Celá obrazovka</button></div>
     <div class="hint" id="hint">Scrollujte</div>
@@ -489,12 +489,12 @@ document.querySelectorAll('.fmt .box').forEach(b=>{
    Bez Altu se nestane nic, aby navstevnik nesdilel odkaz doprostred stranky. */
 (function(){
   var split=document.getElementById('split'), zoom=document.getElementById('zoom'), set1=document.getElementById('set1');
-  var BODY={'#serie':0.36,'#video':0.96};      /* podil scrollu sceny */
-  var NAMOBILU={'#serie':set1,'#video':zoom};  /* na mobilu je scena rozlozena do bezneho toku */
+  var BODY={'#serie':0.36,'#reels':0.96,'#video':0.96};   /* podil scrollu sceny; #video je stara kotva, drzime ji funkcni */
+  var NAMOBILU={'#serie':set1,'#reels':zoom,'#video':zoom}; /* na mobilu je scena rozlozena do bezneho toku */
   var SEKCE=[
     {h:'',         p:'Začátek stránky'},
     {h:'#serie',   p:'Z jedné fotky série'},
-    {h:'#video',   p:'Video ze stejné scény'},
+    {h:'#reels',   p:'Video ze stejné scény'},
     {h:'#formaty', p:'Formáty pro kanály'},
     {h:'#kontakt', p:'Závěr a kontakt'}
   ];
@@ -523,7 +523,7 @@ document.querySelectorAll('.fmt .box').forEach(b=>{
 
   /* nadpisy uvnitr sceny patri k okamziku, ne k sekci */
   function kotvaNadpisu(nad){
-    if(nad.closest('.zcap')) return '#video';
+    if(nad.closest('.zcap')) return '#reels';
     if(split&&split.contains(nad)) return '#serie';
     var sek=nad.closest('section[id]');
     return sek?('#'+sek.id):'';
