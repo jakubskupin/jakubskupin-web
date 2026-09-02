@@ -481,7 +481,7 @@ section{padding:64px 0;border-top:1px solid var(--border)}
   <div class="w uc">
     <div class="copy">
       <h2 class="rv">Z fotky video na modelovi</h2>
-      <p class="big rv">Z jediné fotky vzniklo 15s promo video, prezentující reálnou vestu i detaily. Bez termínu, studia, stylisty.</p>
+      <p class="big rv">Z vašich fotek vzniklo 15s promo video, prezentující reálnou vestu i detaily. Bez termínu, studia, stylisty.</p>
       <p class="opp rv"><b>Příležitost:</b> každý model z <a href="https://lepremier.cz/lookbook" target="_blank" rel="noopener">lookbooku Spring '26</a> se dá rozpohybovat stejně.</p>
     </div>
     <div class="mock rv">
@@ -670,6 +670,59 @@ section{padding:64px 0;border-top:1px solid var(--border)}
           <div class="fabmeta"><b id="fabname">Fleur-de-lis jacquard</b><span id="fabinfo">vzorek TR908 · večerní sako</span></div>
         </div>
             </aside>
+    </div>
+  </div>
+</section>
+
+<!-- CENÍK (karta ve stylu Pricing z /personal-brand; přesunuto z /vizualy 2. 9. 2026) -->
+<style>
+#cenik .cenik{margin-top:36px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:24px}
+#cenik .pcard{position:relative;background:var(--card);border:1px solid var(--border);border-radius:24px;padding:32px;transition:border-color .3s ease;min-width:0;display:flex;flex-direction:column}
+#cenik .pcard:hover{border-color:#CDCBC5}
+#cenik .pcard-clip{position:absolute;inset:0;overflow:hidden;border-radius:24px;pointer-events:none}
+#cenik .pcard-ribbon{position:absolute;right:-40px;top:20px;z-index:1;transform:rotate(45deg);background:var(--text);color:var(--bg);padding:4px 48px;text-align:center;font-size:9px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;box-shadow:0 1px 2px rgba(0,0,0,.08);white-space:nowrap}
+#cenik .pcard-kicker{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);margin-bottom:14px;padding-right:72px}
+#cenik .pcard-price{font-family:var(--h);font-weight:700;font-size:36px;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums;white-space:nowrap;margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+#cenik .pcard-label{margin-bottom:12px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)}
+#cenik ul.features{list-style:none;margin:0 0 20px;padding:0;display:flex;flex-direction:column;gap:10px}
+#cenik ul.features li{position:relative;padding-left:18px;font-size:13.5px;line-height:1.45;color:var(--text)}
+#cenik ul.features li::before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:50%;background:var(--text-3)}
+#cenik .pcard-delivery{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--text-2);margin-bottom:20px}
+#cenik .pcard-delivery svg{color:var(--text-3);flex-shrink:0}
+#cenik .pcard-extra{margin-top:auto;font-size:13px;line-height:1.5;color:var(--text-3);border-top:1px solid var(--border);padding-top:14px}
+</style>
+<section id="cenik">
+  <div class="w">
+    <h2 class="rv">Kolik to stojí</h2>
+    <div class="cenik">
+      <div class="pcard rv">
+        <div class="pcard-clip"><div class="pcard-ribbon">Zaváděcí cena</div></div>
+        <div class="pcard-kicker">Zkouška na jednom produktu</div>
+        <div class="pcard-price">9&nbsp;900&nbsp;Kč</div>
+        <div class="pcard-label">Obsah</div>
+        <ul class="features">
+          <li>pro 1 produkt</li>
+          <li>1&times; video 15&nbsp;s pro Reels</li>
+          <li>1&times; klíčový vizuál pro bannery</li>
+          <li>1&times; IG carousel (6 až 9 fotek)</li>
+        </ul>
+        <div class="pcard-delivery"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Do 7 pracovních dnů</div>
+        <div class="pcard-extra">Započítá se do Kolekce při objednávce do 14 dnů od dodání.</div>
+      </div>
+      <div class="pcard rv">
+        <div class="pcard-clip"><div class="pcard-ribbon">Zaváděcí cena</div></div>
+        <div class="pcard-kicker">Kolekce v pohybu</div>
+        <div class="pcard-price">34&nbsp;900&nbsp;Kč</div>
+        <div class="pcard-label">Obsah</div>
+        <ul class="features">
+          <li>pro 4 produkty</li>
+          <li>4&times; video 15&nbsp;s pro Reels</li>
+          <li>4&times; klíčový vizuál pro bannery</li>
+          <li>4&times; IG carousel (6 až 9 fotek)</li>
+        </ul>
+        <div class="pcard-delivery"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Do 15 pracovních dnů</div>
+        <div class="pcard-extra">Poměr videí, vizuálů a carouselů upravím podle toho, co vám funguje lépe.</div>
+      </div>
     </div>
   </div>
 </section>
