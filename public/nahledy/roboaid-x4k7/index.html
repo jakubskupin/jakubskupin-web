@@ -106,6 +106,16 @@
     text-transform:uppercase;color:#07090F;background:var(--accent);padding:1px 6px;
     border-radius:3px;white-space:nowrap;transform:translate(-50%,-50%)}
 
+  /* termo pohled: NENÍ to naměřená teplota, je to přebarvení jasu obrazu.
+     Proto je u toho natvrdo napsané slovo vizualizace, stejně jako u LiDARu. */
+  #hterm{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .termsplit{position:absolute;top:0;bottom:0;width:1px;background:var(--accent);
+    box-shadow:0 0 12px rgba(77,163,255,.7)}
+  .termlab{position:absolute;top:8%;font-family:var(--mono);font-size:10px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink);background:rgba(7,9,15,.72);
+    border:1px solid var(--line);padding:3px 8px;border-radius:4px;white-space:nowrap}
+  .termlab.pravy{color:var(--hot);border-color:rgba(255,180,84,.42)}
+
   /* detekční rámeček nad hero videem, stejný jazyk jako ve scrollu */
   .hbox{position:absolute;border:1.5px solid var(--hot);border-radius:3px;
     box-shadow:0 0 0 1px rgba(7,9,15,.55)}
@@ -278,6 +288,13 @@
     </div>
     <div class="hfx" data-hfx="light">
       <div class="hcap hot">14 000 lm ve 4 ovladatelných segmentech</div>
+    </div>
+    <div class="hfx" data-hfx="termo">
+      <canvas id="hterm"></canvas>
+      <div class="termsplit"></div>
+      <div class="termlab levy">RGB 4K</div>
+      <div class="termlab pravy">termo &middot; vizualizace</div>
+      <div class="hcap">gimbal SIYI ZT6 snímá RGB i termo současně &middot; termo 720p</div>
     </div>
     <div class="hfx" data-hfx="vada">
       <div class="hbox" data-cil="koroze"><span>koroze</span></div>
@@ -716,6 +733,7 @@
       {od: 3.60, do: 5.05, fx: 'lidar'},   // rotace zacina az tady, ne v 2,6 s
       {od: 5.55, do: 6.30, fx: 'light'},   // az za skokem jasu; konci drive,
                                            // nez ve videu zhasne bily zdroj
+      {od: 7.35, do: 8.35, fx: 'termo'},   // az za strihem v 7,23 s, konci pred vadou
       {od: 8.45, do: 9.10, fx: 'vada'},    // ostra vada je az tady, ne v 6,4 s
     ];
     // stred dronu, kolem nej obiha prstenec (cas, x%, y%)
@@ -751,6 +769,72 @@
       return {x: c.x + px/100*c.w, y: c.y + py/100*c.h, c};
     }
 
+    // ---------- termo pohled ----------
+    // Mapuje JAS skutecneho obrazu na ironbow paletu. Neni to mereni teploty a
+    // stranka to tak ani netvrdi, popisek rika "vizualizace". Delam to z obrazu,
+    // ne nalepenym gradientem, aby to reagovalo na to, co je v zaberu.
+    const term = document.getElementById('hterm');
+    const tctx = term ? term.getContext('2d', {alpha:true}) : null;
+    const mini = document.createElement('canvas');       // maly mezikrok, at to staci 30 fps
+    mini.width = 480; mini.height = 270;
+    const mctx = mini.getContext('2d', {willReadFrequently:true});
+    const LUT = (() => {
+      // cerna -> fialova -> purpurova -> cervena -> oranzova -> zluta -> bila
+      const body = [[0,6,8,26],[0.18,58,10,84],[0.36,150,20,110],[0.55,226,52,60],
+                    [0.72,255,140,20],[0.88,255,214,90],[1,255,255,240]];
+      const t = new Uint8ClampedArray(256*3);
+      for (let i = 0; i < 256; i++){
+        const x = i/255;
+        let a = body[0], b = body[body.length-1];
+        for (let k = 1; k < body.length; k++) if (x <= body[k][0]) { a = body[k-1]; b = body[k]; break; }
+        const u = b[0] > a[0] ? (x - a[0])/(b[0] - a[0]) : 0;
+        t[i*3]   = a[1] + u*(b[1]-a[1]);
+        t[i*3+1] = a[2] + u*(b[2]-a[2]);
+        t[i*3+2] = a[3] + u*(b[3]-a[3]);
+      }
+      return t;
+    })();
+
+    function termoKresli(t, b){
+      if (!tctx || !hv.videoWidth) return;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const cw = term.clientWidth, ch = term.clientHeight;
+      if (term.width !== Math.round(cw*dpr)) { term.width = Math.round(cw*dpr); term.height = Math.round(ch*dpr); }
+      tctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      tctx.clearRect(0, 0, cw, ch);
+
+      mctx.drawImage(hv, 0, 0, mini.width, mini.height);
+      let d;
+      try { d = mctx.getImageData(0, 0, mini.width, mini.height); }
+      catch(e){ return; }                                  // jina domena by platno zaspinila
+      const px = d.data;
+      for (let i = 0; i < px.length; i += 4){
+        // jas podle citlivosti oka, pak protazeni kontrastu, at je paleta vyuzita
+        let y = (px[i]*0.2126 + px[i+1]*0.7152 + px[i+2]*0.0722) / 255;
+        y = Math.min(1, Math.max(0, (y - 0.04) / 0.62));
+        const k = (y*255)|0;
+        px[i] = LUT[k*3]; px[i+1] = LUT[k*3+1]; px[i+2] = LUT[k*3+2];
+      }
+      mctx.putImageData(d, 0, 0);
+
+      // stejna cover geometrie jako video, at termo sedi presne na obraz
+      const c = cover();
+      const podil = b ? Math.min(1, Math.max(0, (t - b.od) / Math.max(0.001, b.do - b.od))) : 0.5;
+      const del = c.x + (0.14 + 0.62*podil) * c.w;         // delici cara plyne zleva doprava
+      tctx.save();
+      tctx.beginPath(); tctx.rect(del, 0, cw - del, ch); tctx.clip();
+      tctx.imageSmoothingEnabled = true;
+      tctx.drawImage(mini, c.x, c.y, c.w, c.h);
+      tctx.restore();
+
+      const sp = document.querySelector('#herofx .termsplit');
+      if (sp) sp.style.left = del.toFixed(1) + 'px';
+      const lp = document.querySelector('#herofx .termlab.levy');
+      const pp = document.querySelector('#herofx .termlab.pravy');
+      if (lp) lp.style.left  = Math.max(8, del - 92).toFixed(1) + 'px';
+      if (pp) pp.style.left  = Math.min(cw - 150, del + 10).toFixed(1) + 'px';
+    }
+
     let ktera = null;
     function tik(){
       const t = hv.currentTime || 0;
@@ -770,6 +854,10 @@
         ring.style.top  = (b.y - r).toFixed(1) + 'px';
         if (ringlab){ ringlab.style.left = b.x.toFixed(1) + 'px';
                       ringlab.style.top  = (b.y - r - 14).toFixed(1) + 'px'; }
+      }
+      if (chci === 'termo'){
+        let b = null; for (const x of BEAT) if (x.fx === 'termo') b = x;
+        termoKresli(t, b);
       }
       if (chci === 'vada'){
         const b = bod(VADA, t), c = b.c;
