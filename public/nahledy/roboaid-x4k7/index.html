@@ -677,16 +677,19 @@
     const ringlab = document.querySelector('#herofx .ringlab');
 
     // od/do v sekundách videa
+    // Okna sahaji jen tam, kam saha MERENI. Radeji kratsi a pravdive nez delsi
+    // a napul mimo: vrstva nesmi tvrdit nic, co v tu vterinu na obraze neni.
     const BEAT = [
-      {od: 3.60, do: 5.20, fx: 'lidar'},   // rotace zacina az tady, ne v 2,6 s
-      {od: 5.25, do: 6.45, fx: 'light'},   // jeden skok jasu, ne ctyri segmenty
-      {od: 8.40, do: 9.80, fx: 'vada'},    // ostra vada je az tady, ne v 6,4 s
+      {od: 3.60, do: 5.05, fx: 'lidar'},   // rotace zacina az tady, ne v 2,6 s
+      {od: 5.25, do: 6.30, fx: 'light'},   // jeden skok jasu, ne ctyri segmenty;
+                                           // konci drive, nez ve videu zhasne bily zdroj
+      {od: 8.40, do: 9.45, fx: 'vada'},    // ostra vada je az tady, ne v 6,4 s
     ];
     // stred dronu, kolem nej obiha prstenec (cas, x%, y%)
     const DRON = [[2.5,50.5,49.0],[3.0,50.0,49.0],[3.5,51.5,49.5],
-                  [4.0,50.3,48.5],[4.5,50.0,49.0],[5.2,50.0,49.0]];
+                  [4.0,50.3,48.5],[4.5,50.0,49.0],[5.05,50.0,49.0]];
     // vada je VLEVO, dron vpravo; drzi skoro staticky a pak ujizdi doprava
-    const VADA = [[8.4,27.0,40.0],[8.5,27.0,40.0],[9.0,27.0,38.0],[9.5,34.0,37.0],[9.8,37.0,36.5]];
+    const VADA = [[8.4,27.0,40.0],[8.5,27.0,40.0],[9.0,27.0,38.0],[9.5,34.0,37.0]];
 
     function lerp(tab, t){
       if (t <= tab[0][0]) return [tab[0][1], tab[0][2]];
