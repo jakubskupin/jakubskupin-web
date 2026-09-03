@@ -95,28 +95,63 @@
   .hcap.hot{color:var(--hot);border-color:rgba(255,180,84,.42)}
   .hcap.good{color:var(--good);border-color:rgba(85,230,165,.42)}
 
-  /* skenovací prstenec: sedí na dronu, JS mu dává střed i velikost */
-  .ring{position:absolute;border:1.5px solid rgba(77,163,255,.85);border-radius:50%;
-    box-shadow:0 0 22px rgba(77,163,255,.35),inset 0 0 22px rgba(77,163,255,.16)}
-  .ring::before{content:"";position:absolute;inset:-1.5px;border-radius:50%;
-    border:1.5px solid transparent;border-top-color:rgba(77,163,255,.95);
-    animation:otoc 1.9s linear infinite}
-  @keyframes otoc{to{transform:rotate(360deg)}}
-  .ringlab{position:absolute;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;
-    text-transform:uppercase;color:#07090F;background:var(--accent);padding:1px 6px;
-    border-radius:3px;white-space:nowrap;transform:translate(-50%,-50%)}
+  /* Vypravecky blok. Popisky jsou zamerne velke: hero ma vypravet pribeh,
+     ne delat titulky. Citelnost resi tmavy zavoj vlevo, ne stin na pismu. */
+  #hstories{position:absolute;inset:0;z-index:3;pointer-events:none}
+  .hstory{position:absolute;left:5.5%;top:15%;max-width:min(600px,60%);text-align:left;
+    opacity:0;transition:opacity .45s ease}
+  .hstory.on{opacity:1}
+  .hstory .k{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--accent);border:1px solid rgba(77,163,255,.45);
+    border-radius:99px;padding:4px 12px;margin-bottom:15px;background:rgba(7,9,15,.5)}
+  .hstory strong{display:block;font-weight:600;font-size:clamp(23px,3.5vw,48px);line-height:1.08;
+    color:#fff;letter-spacing:-.018em}
+  .hstory em{display:block;margin-top:12px;font-style:normal;font-family:var(--mono);
+    font-size:clamp(10.5px,1.05vw,14px);letter-spacing:.055em;line-height:1.55;
+    color:rgba(255,255,255,.74);max-width:34em}
+  /* rizeny zlom v nadpisu: na sirokem displeji zalomit tam, kde to dava smysl,
+     na uzkem nechat text tect, jinak by vznikaly osamele kratke radky */
+  .hstory .mbr{display:none}
+  @media (min-width:861px){ .hstory .mbr{display:inline} }
+  .hstory.hot .k{color:var(--hot);border-color:rgba(255,180,84,.5)}
+  .hstory.good .k{color:var(--good);border-color:rgba(85,230,165,.5)}
+  /* zavoj: bez nej by bile pismo na svetlem tunelu zmizelo */
+  #herofx::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;
+    transition:opacity .5s ease;
+    background:linear-gradient(102deg,rgba(4,6,11,.86) 0%,rgba(4,6,11,.6) 34%,rgba(4,6,11,0) 64%)}
+  #herofx.vypravi::before{opacity:1}
 
-  /* termo pohled: NENÍ to naměřená teplota, je to přebarvení jasu obrazu.
-     Proto je u toho natvrdo napsané slovo vizualizace, stejně jako u LiDARu. */
+  /* LiDAR: neni to prstenec na dronu, ale vlna bodu pres cely zaber.
+     Skutecny LiDAR merci mrak taky nekonci na obrysu stroje. */
+  #hlid{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+  /* termo pohled: NENI to namerena teplota, je to prebarveni jasu obrazu.
+     Proto je u toho natvrdo napsane slovo vizualizace. Cely zaber jde do
+     studene palety a jen misto uniku tepla se prebarvi do ironbow. */
   #hterm{position:absolute;inset:0;width:100%;height:100%;display:block}
-  .termsplit{position:absolute;top:0;bottom:0;width:1px;background:var(--accent);
-    box-shadow:0 0 12px rgba(77,163,255,.7)}
-  .termlab{position:absolute;top:8%;font-family:var(--mono);font-size:10px;letter-spacing:.12em;
-    text-transform:uppercase;color:var(--ink);background:rgba(7,9,15,.72);
-    border:1px solid var(--line);padding:3px 8px;border-radius:4px;white-space:nowrap}
-  .termlab.pravy{color:var(--hot);border-color:rgba(255,180,84,.42)}
+  .thot{position:absolute;border:1.5px solid var(--hot);border-radius:50%;
+    box-shadow:0 0 30px rgba(255,180,84,.5),inset 0 0 30px rgba(255,180,84,.18)}
+  .thot span{position:absolute;left:50%;top:-12px;transform:translateX(-50%);
+    font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+    color:#07090F;background:var(--hot);padding:2px 8px;border-radius:3px;white-space:nowrap}
+  @media (max-width:860px){
+    .hstory{left:4.5%;max-width:64%}
+    .hstory .k{font-size:9.5px;letter-spacing:.16em;padding:3px 10px;margin-bottom:10px}
+    .hstory strong{font-size:clamp(20px,3.4vw,30px)}
+    .hstory em{font-size:11px;margin-top:8px;line-height:1.5}
+    .thot span{font-size:9px;letter-spacing:.1em}
+  }
+  /* Na uzkem displeji je hero sloupec: video ma svuj ram 16:9 a je nizke.
+     Vypraveni by na nem lezelo pres znacku nalezu, tak jde POD video.
+     Vsechny bloky sedi v jedne bunce mrizky, takze se stridaji bez poskoku. */
+  @media (max-width:700px){
+    #hstories{position:static;inset:auto;display:grid;padding:0 20px}
+    .hstory{position:static;grid-area:1/1;left:auto;top:auto;max-width:none}
+    .hstory strong{font-size:clamp(21px,6vw,30px)}
+    #herofx::before{display:none}
+  }
 
-  /* detekční rámeček nad hero videem, stejný jazyk jako ve scrollu */
+  /* detekční rámeček (zůstává pro scrollovací plátno) */
   .hbox{position:absolute;border:1.5px solid var(--hot);border-radius:3px;
     box-shadow:0 0 0 1px rgba(7,9,15,.55)}
   .hbox span{position:absolute;left:0;top:-19px;font-family:var(--mono);font-size:9.5px;
@@ -167,7 +202,8 @@
     .hcap{top:10%}
   }
   @media (prefers-reduced-motion: reduce){
-    .ring::before,.scrollhint{animation:none}
+    .scrollhint{animation:none}
+    .hstory{transition:none}
   }
 
   /* ---------- vrstva mechaniky nad canvasem ---------- */
@@ -282,25 +318,29 @@
   </video>
   <button id="hvplay" type="button" hidden aria-label="Přehrát video">Přehrát</button>
   <div id="herofx" aria-hidden="true">
-    <div class="hfx" data-hfx="lidar">
-      <div class="ring"></div><div class="ringlab">LiDAR 360°</div>
-      <div class="hcap">GPS: N/A &middot; orientuje se LiDAR odometrií &middot; Livox MID360</div>
-    </div>
-    <div class="hfx" data-hfx="light">
-      <div class="hcap hot">14 000 lm ve 4 ovladatelných segmentech</div>
-    </div>
+    <div class="hfx" data-hfx="lidar"><canvas id="hlid"></canvas></div>
     <div class="hfx" data-hfx="termo">
       <canvas id="hterm"></canvas>
-      <div class="termsplit"></div>
-      <div class="termlab levy">RGB 4K</div>
-      <div class="termlab pravy">termo &middot; vizualizace</div>
-      <div class="hcap">pohled z palubní kamery &middot; termo je vizualizace jasu, ne měření teploty</div>
-    </div>
-    <div class="hfx" data-hfx="vada">
-      
-      <div class="hcap hot">onboard AI značí nález za letu &middot; Jetson Orin NX 16 GB</div>
+      <div class="thot"><span>únik tepla</span></div>
     </div>
   </div>
+  </div>
+  <div id="hstories" aria-hidden="true">
+    <div data-h="start" class="hstory"><span class="k">01 &middot; vzlet</span>
+        <strong>Vzlétá sám.<br class="mbr"> Nikdo ho neřídí</strong>
+        <em>bez pilota, bez GPS &middot; výšku i kurz si drží z vlastních senzorů</em></div>
+    <div data-h="light" class="hstory hot"><span class="k">02 &middot; světlo</span>
+        <strong>14 000 lumenů<br class="mbr"> do úplné tmy</strong>
+        <em>4 ovladatelné segmenty &middot; svítí si na to, co má zdokumentovat</em></div>
+    <div data-h="kontakt" class="hstory good"><span class="k">03 &middot; klec</span>
+        <strong>Kontakt s konstrukcí<br class="mbr"> let neukončí</strong>
+        <em>karbonová klec drží vrtule mimo dosah stěn &middot; proto smí letět tam, kam se běžný dron nepustí</em></div>
+    <div data-h="lidar" class="hstory"><span class="k">04 &middot; orientace</span>
+        <strong>Mapuje si tunel,<br class="mbr"> kterým letí</strong>
+        <em>LiDAR odometrie &middot; Livox MID360 &middot; GPS uvnitř není a dron ho nepotřebuje</em></div>
+    <div data-h="termo" class="hstory hot"><span class="k">05 &middot; termovize</span>
+        <strong>Vidí, kudy uniká teplo</strong>
+        <em>pohled z palubní kamery &middot; termo je vizualizace jasu, ne měření teploty</em></div>
   </div>
   <div class="herotext">
     <span class="num">RoboAid &middot; autonomní inspekce &middot; v2</span>
@@ -707,40 +747,42 @@
   size(); onScroll();
 })();
 
-  // ================= HERO: vrstvy jede ČAS VIDEA, ne scroll =================
-  // Kotvy NEJSOU přepočtené z Blender draftu. Wan se od draftu rozešel, tak je
-  // každá změřená přímo ve vygenerovaném videu, snímek po snímku (po 0,5 s).
-  // Co draft plánoval a video nevyrobilo, tady vrstvu NEMÁ: žádný náraz do
-  // překážky se nekoná a čtyři světelné segmenty se nerozsvěcují po jednom.
-  // Vrstva nesmí tvrdit něco, co na obraze není, je to podklad pro reálnou firmu.
+  // ================= HERO: vrstvy jedou ČAS VIDEA, ne scroll =================
+  // Kotvy jsou změřené přímo ve spojeném V2 videu, snímek po snímku po 0,5 s.
+  // Nic tu není přepočítané z Blender draftu ani převzaté z předchozí verze:
+  // Wan i Seedance se od draftu rozešly. Vrstva nesmí tvrdit nic, co v tu
+  // vteřinu na obraze není, je to podklad pro reálnou firmu.
   (function(){
     const hv = document.getElementById('hv');
     if (!hv) return;
-    const hfx = {};
+    const box = document.getElementById('herofx');
+    const hfx = {};      // jen to, co se kresli DO obrazu (LiDAR, termo)
     document.querySelectorAll('#herofx .hfx').forEach(el => hfx[el.dataset.hfx] = el);
+    const pribehy = {};  // vypraveni, na uzkem displeji sedi pod videem
+    document.querySelectorAll('#hstories .hstory').forEach(el => pribehy[el.dataset.h] = el);
     const ht = document.getElementById('ht'), hl = document.getElementById('hl');
-    const ring = document.querySelector('#herofx .ring');
-    const ringlab = document.querySelector('#herofx .ringlab');
 
-    // od/do v sekundách videa
-    // Okna sahaji jen tam, kam saha MERENI. Radeji kratsi a pravdive nez delsi
-    // a napul mimo: vrstva nesmi tvrdit nic, co v tu vterinu na obraze neni.
-    // Tvrde strihy jsou zmereny (ffmpeg scene score) jen dva: 3,47 s a 7,23 s.
-    // Zadna vrstva pres ne neprechazi. Skok jasu je v 5,50 s, proto svetlo
-    // zacina az ZA nim: kdyby zacalo v 5,25 s, popisek o 14 000 lm by ctvrt
-    // sekundy visel nad nerozsvicenym dronem.
-    // V2. Video je jine: klip 1 (0 az 13 s) plus POV klip 2 (13 az 16 s).
-    // Casy jsou prepocitane na novy obsah, ne prevzate z predchozi verze.
+    // ZMĚŘENO na v3-web.mp4 (klip 1 = 0–13 s, POV klip 2 = 13–16 s):
+    //  0,0–2,2 s   dron stojí na podlaze, zvedne se, je ve vzduchu (pohled z boku)
+    //  ~2,3 s      střih, pohled zezadu do tunelu
+    //  3,3–4,6 s   světla naskočí naplno, celý záběr se rozzáří
+    //  5,6–6,9 s   proplouvá těsně kolem sloupu vlevo
+    //  8,3–11,0 s  rovný let tunelem, drží kurz
+    //  13,2–15,9 s POV z palubní kamery na potrubí s odhalenou izolací
     const BEAT = [
-      {od: 2.45, do: 4.20, fx: 'light'},   // svetla se rozsvitila ve vzduchu
-      {od: 8.10, do: 10.80, fx: 'lidar'},  // zpomali a otoci se o 40 stupnu
-      {od: 13.15, do: 15.85, fx: 'termo'}, // POV z kamery dronu, cely klip 2
+      {od: 0.45,  do: 2.20,  fx: 'start'},
+      {od: 3.30,  do: 4.60,  fx: 'light'},
+      {od: 5.60,  do: 6.90,  fx: 'kontakt'},
+      {od: 8.30,  do: 11.00, fx: 'lidar'},
+      {od: 13.15, do: 15.90, fx: 'termo'},
     ];
-    // stred dronu, kolem nej obiha prstenec (cas, x%, y%)
-    const DRON = [[2.5,50.5,49.0],[3.0,50.0,49.0],[3.5,51.5,49.5],
-                  [4.0,50.3,48.5],[4.5,50.0,49.0],[5.05,50.0,49.0]];
-    // vada je VLEVO, dron vpravo; drzi skoro staticky a pak ujizdi doprava
-    const VADA = [[8.45,27.5,40.6],[8.5,27.5,40.5],[9.0,28.0,38.5],[9.1,28.2,38.2]];
+    const NAZEV = {start:'vzlet', light:'světlo', kontakt:'klec', lidar:'LiDAR', termo:'termo'};
+
+    // Poloha odhalené izolace v POV klipu, změřená z mřížky po 0,5 s.
+    // Model si uprostřed klipu udělal vlastní střih (~14,15 s), proto je
+    // v tabulce skok: mezi 14,13 a 14,17 s se značka přenese, ne přejede.
+    const TRHLINA = [[13.00,16,52],[13.50,34,53],[14.00,66,53],[14.13,72,53],
+                     [14.17,15,58],[14.50,22,59],[15.00,42,62],[15.50,79,63],[15.90,97,63]];
 
     function lerp(tab, t){
       if (t <= tab[0][0]) return [tab[0][1], tab[0][2]];
@@ -754,8 +796,8 @@
         }
       }
     }
-    // video je 16:9 a hero ho kryje pres object-fit: cover, takze stejny prepocet
-    // jako u platna: procenta ZDROJE prevest na pixely na obrazovce
+    // video je 16:9 a hero ho kryje přes object-fit: cover, takže stejný přepočet
+    // jako u plátna: procenta ZDROJE převést na pixely na obrazovce
     function cover(){
       const cw = hv.clientWidth, ch = hv.clientHeight;
       const ir = (hv.videoWidth || 16) / (hv.videoHeight || 9), cr = cw/ch;
@@ -764,38 +806,99 @@
       else        { h = ch; w = ch*ir; y = 0; x = (cw-w)/2; }
       return {x, y, w, h};
     }
-    function bod(tab, t){
-      const c = cover(), [px, py] = lerp(tab, t);
-      return {x: c.x + px/100*c.w, y: c.y + py/100*c.h, c};
+    function platno(cv){
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const cw = cv.clientWidth, ch = cv.clientHeight;
+      if (cv.width !== Math.round(cw*dpr) || cv.height !== Math.round(ch*dpr)){
+        cv.width = Math.round(cw*dpr); cv.height = Math.round(ch*dpr);
+      }
+      const c = cv.getContext('2d');
+      c.setTransform(dpr, 0, 0, dpr, 0, 0);
+      c.clearRect(0, 0, cw, ch);
+      return {c, cw, ch};
+    }
+
+    // ---------- LiDAR ----------
+    // Skutečný LiDAR nesbírá kroužek kolem stroje, ale mrak bodů po celém
+    // prostoru. Proto je to vlna bodů přes celý záběr, ne prstenec na dronu.
+    const lid = document.getElementById('hlid');
+    const BODY = (() => {
+      const a = []; let s = 1337;
+      const r = () => (s = (s*1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
+      for (let i = 0; i < 1150; i++) a.push({x: r(), y: r(), v: 0.3 + 0.7*r(), f: 0.6 + 0.9*r()});
+      return a;
+    })();
+    // maly odber obrazu: body mraku se drzi tam, kde je plocha, ne ve vzduchu.
+    // Skutecny LiDAR taky nevraci nic z prazdna, vraci odraz od steny.
+    const lmini = document.createElement('canvas');
+    lmini.width = 96; lmini.height = 54;
+    const lmctx = lmini.getContext('2d', {willReadFrequently:true});
+    let lpx = null;
+    function odberObrazu(){
+      if (!hv.videoWidth) { lpx = null; return; }
+      lmctx.drawImage(hv, 0, 0, lmini.width, lmini.height);
+      try { lpx = lmctx.getImageData(0, 0, lmini.width, lmini.height).data; }
+      catch(e){ lpx = null; }
+    }
+    function plocha(u, v){
+      if (!lpx) return 0.6;
+      const x = Math.min(lmini.width-1, Math.max(0, (u*lmini.width)|0));
+      const y = Math.min(lmini.height-1, Math.max(0, (v*lmini.height)|0));
+      const i = (y*lmini.width + x) * 4;
+      const L = (lpx[i]*0.2126 + lpx[i+1]*0.7152 + lpx[i+2]*0.0722) / 255;
+      return Math.min(1, Math.max(0, (L - 0.05) / 0.45));
+    }
+    function lidarKresli(t, b){
+      if (!lid) return;
+      const {c, cw, ch} = platno(lid);
+      const u = (t - b.od) / Math.max(0.001, b.do - b.od);
+      const kryt = Math.min(1, u/0.15, (1-u)/0.15);   // nabeh a dobeh, at nic neproblikne
+      if (kryt <= 0) return;
+      odberObrazu();
+      // stred vlny je dron, ktery leti uprostred zaberu
+      const ox = cw*0.5, oy = ch*0.52;
+      const max = Math.hypot(Math.max(ox, cw-ox), Math.max(oy, ch-oy));
+      const T = t - b.od;
+      const FAZE = [0, 0.5].map(o => ((T*0.5 + o) % 1) * 1.3 - 0.15);
+      c.globalCompositeOperation = 'lighter';
+      // vlnoplocha jako siroky mekky prstenec, ne ostra linka
+      for (const faze of FAZE){
+        const R = Math.max(1, faze*max), s = max*0.12;
+        const gr = c.createRadialGradient(ox, oy, Math.max(0, R-s), ox, oy, R+s);
+        gr.addColorStop(0,   'rgba(77,163,255,0)');
+        gr.addColorStop(0.5, 'rgba(77,163,255,' + (0.1*kryt).toFixed(3) + ')');
+        gr.addColorStop(1,   'rgba(77,163,255,0)');
+        c.fillStyle = gr; c.fillRect(0, 0, cw, ch);
+      }
+      // body mericiho mraku: rozsviti se, kdyz pres ne vlna prejde
+      for (const p of BODY){
+        const px = p.x*cw, py = p.y*ch;
+        const d = Math.hypot(px-ox, py-oy) / max;
+        let g = 0;
+        for (const faze of FAZE){
+          const e = (d - faze) / 0.075;
+          const w = Math.exp(-e*e);
+          if (w > g) g = w;
+        }
+        if (g < 0.03) continue;
+        const al = g * p.v * kryt * (0.18 + 1.05*plocha(p.x, p.y));
+        if (al < 0.02) continue;
+        const s = 1.1 + 2.6*g*p.f;
+        c.fillStyle = 'rgba(126,193,255,' + Math.min(0.95, al).toFixed(3) + ')';
+        c.fillRect(px - s/2, py - s/2, s, s);
+      }
+      c.globalCompositeOperation = 'source-over';
     }
 
     // ---------- termo pohled ----------
-    // Mapuje JAS skutecneho obrazu na ironbow paletu. Neni to mereni teploty a
-    // stranka to tak ani netvrdi, popisek rika "vizualizace". Delam to z obrazu,
-    // ne nalepenym gradientem, aby to reagovalo na to, co je v zaberu.
-    // Termo je to, co vidi DRON, takze dron sam v nem byt nema. Vyriznu ho.
-    // Zmereno z mrizky na snimcich 7,5 a 8,0 s: cas, stred x, stred y, polomer x, polomer y
-    // v procentech zdrojoveho snimku, s malou rezervou, at se neobarvi ani okraj klece.
-    const DRON_VEN = [[7.35,50.5,48.0,20.0,21.5],[7.50,50.5,49.0,20.0,21.5],
-                      [8.00,52.0,52.0,19.0,22.5],[8.35,53.0,52.0,19.0,22.5]];
-    function lerp4(tab, t){
-      if (t <= tab[0][0]) return tab[0].slice(1);
-      const n = tab.length;
-      if (t >= tab[n-1][0]) return tab[n-1].slice(1);
-      for (let i = 1; i < n; i++) if (t <= tab[i][0]){
-        const k = (t - tab[i-1][0]) / (tab[i][0] - tab[i-1][0]);
-        return [1,2,3,4].map(j => tab[i-1][j] + k*(tab[i][j] - tab[i-1][j]));
-      }
-    }
+    // Mapuje JAS skutečného obrazu na paletu. Není to měření teploty a stránka
+    // to tak ani netvrdí. Celý záběr jde do studené palety a jen místo, kudy
+    // uniká teplo, se přebarví do ironbow, aby oko šlo rovnou tam.
     const term = document.getElementById('hterm');
-    const tctx = term ? term.getContext('2d', {alpha:true}) : null;
-    const mini = document.createElement('canvas');       // maly mezikrok, at to staci 30 fps
+    const mini = document.createElement('canvas');       // malý mezikrok, ať to stačí 30 fps
     mini.width = 480; mini.height = 270;
     const mctx = mini.getContext('2d', {willReadFrequently:true});
-    const LUT = (() => {
-      // cerna -> fialova -> purpurova -> cervena -> oranzova -> zluta -> bila
-      const body = [[0,6,8,26],[0.18,58,10,84],[0.36,150,20,110],[0.55,226,52,60],
-                    [0.72,255,140,20],[0.88,255,214,90],[1,255,255,240]];
+    function mkLut(body){
       const t = new Uint8ClampedArray(256*3);
       for (let i = 0; i < 256; i++){
         const x = i/255;
@@ -807,55 +910,65 @@
         t[i*3+2] = a[3] + u*(b[3]-a[3]);
       }
       return t;
-    })();
+    }
+    const LUT_HOT  = mkLut([[0,6,8,26],[0.18,58,10,84],[0.36,150,20,110],[0.55,226,52,60],
+                            [0.72,255,140,20],[0.88,255,214,90],[1,255,255,240]]);
+    const LUT_STUD = mkLut([[0,3,7,18],[0.28,10,38,74],[0.52,16,84,116],[0.74,46,142,158],
+                            [0.9,120,196,206],[1,206,238,244]]);
 
-    function termoKresli(t, b){
-      if (!tctx || !hv.videoWidth) return;
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      const cw = term.clientWidth, ch = term.clientHeight;
-      if (term.width !== Math.round(cw*dpr)) { term.width = Math.round(cw*dpr); term.height = Math.round(ch*dpr); }
-      tctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      tctx.clearRect(0, 0, cw, ch);
-
+    function termoKresli(t){
+      if (!term || !hv.videoWidth) return;
+      const {c: tc, cw, ch} = platno(term);
       mctx.drawImage(hv, 0, 0, mini.width, mini.height);
       let d;
       try { d = mctx.getImageData(0, 0, mini.width, mini.height); }
-      catch(e){ return; }                                  // jina domena by platno zaspinila
-      const px = d.data;
-      for (let i = 0; i < px.length; i += 4){
-        // jas podle citlivosti oka, pak protazeni kontrastu, at je paleta vyuzita
-        let y = (px[i]*0.2126 + px[i+1]*0.7152 + px[i+2]*0.0722) / 255;
-        y = Math.min(1, Math.max(0, (y - 0.04) / 0.62));
-        const k = (y*255)|0;
-        px[i] = LUT[k*3]; px[i+1] = LUT[k*3+1]; px[i+2] = LUT[k*3+2];
+      catch(e){ return; }                                  // jiná doména by plátno zašpinila
+      const px = d.data, MW = mini.width, MH = mini.height;
+      const [hx, hy] = lerp(TRHLINA, t);
+      const stx = hx/100*MW, sty = hy/100*MH;
+      const pul = 1 + 0.09*Math.sin(t*6.5);                // dýchá, ale nebliká
+      const rx = MW*0.135*pul, ry = MH*0.20*pul;
+      let i = 0;
+      for (let y = 0; y < MH; y++){
+        const dy = (y - sty)/ry, dy2 = dy*dy;
+        for (let x = 0; x < MW; x++, i += 4){
+          let L = (px[i]*0.2126 + px[i+1]*0.7152 + px[i+2]*0.0722) / 255;
+          L = Math.min(1, Math.max(0, (L - 0.04) / 0.62));
+          const dx = (x - stx)/rx;
+          const q = dx*dx + dy2;
+          const kc = (L*255)|0;
+          if (q >= 1){
+            px[i] = LUT_STUD[kc*3]; px[i+1] = LUT_STUD[kc*3+1]; px[i+2] = LUT_STUD[kc*3+2];
+          } else {
+            const m = Math.pow(1-q, 1.5);
+            const kh = (Math.min(1, L*(1 + 0.85*m) + 0.30*m)*255)|0;
+            px[i]   = LUT_STUD[kc*3]   + m*(LUT_HOT[kh*3]   - LUT_STUD[kc*3]);
+            px[i+1] = LUT_STUD[kc*3+1] + m*(LUT_HOT[kh*3+1] - LUT_STUD[kc*3+1]);
+            px[i+2] = LUT_STUD[kc*3+2] + m*(LUT_HOT[kh*3+2] - LUT_STUD[kc*3+2]);
+          }
+        }
       }
       mctx.putImageData(d, 0, 0);
-
-      // stejna cover geometrie jako video, at termo sedi presne na obraz
       const c = cover();
-      const podil = b ? Math.min(1, Math.max(0, (t - b.od) / Math.max(0.001, b.do - b.od))) : 0.5;
-      const del = c.x + (0.14 + 0.62*podil) * c.w;         // delici cara plyne zleva doprava
-      tctx.save();
-      tctx.beginPath(); tctx.rect(del, 0, cw - del, ch); tctx.clip();
-      tctx.imageSmoothingEnabled = true;
-      tctx.drawImage(mini, c.x, c.y, c.w, c.h);
+      tc.imageSmoothingEnabled = true;
+      tc.drawImage(mini, c.x, c.y, c.w, c.h);
 
-      // V2: tohle je POV z kamery dronu, stroj v zaberu vubec neni,
-      // takze termo pokryva CELOU pravou polovinu a nic se nevyrezava.
-      tctx.restore();
-
-      const sp = document.querySelector('#herofx .termsplit');
-      if (sp) sp.style.left = del.toFixed(1) + 'px';
-      const lp = document.querySelector('#herofx .termlab.levy');
-      const pp = document.querySelector('#herofx .termlab.pravy');
-      // sirku merit, ne hadat, jinak stitek na uzkem displeji preteklo pres okraj
-      if (lp) lp.style.left = Math.max(8, Math.min(del - lp.offsetWidth - 8, cw - lp.offsetWidth - 8)).toFixed(1) + 'px';
-      if (pp) pp.style.left = Math.max(8, Math.min(del + 8, cw - pp.offsetWidth - 8)).toFixed(1) + 'px';
+      const zn = document.querySelector('#herofx .thot');
+      if (zn){
+        const X = c.x + hx/100*c.w, Y = c.y + hy/100*c.h, R = c.w*0.072;
+        // značka se schová, jakmile by lezla přes okraj, ať nevisí půlka kruhu
+        const ven = X - R < 6 || X + R > cw - 6 || Y - R < 26 || Y + R > ch - 6;
+        zn.style.visibility = ven ? 'hidden' : 'visible';
+        if (ven) return;
+        zn.style.width = zn.style.height = (R*2).toFixed(1) + 'px';
+        zn.style.left = (X-R).toFixed(1) + 'px';
+        zn.style.top  = (Y-R).toFixed(1) + 'px';
+      }
     }
 
-    // Termo i nalez vady jsou v originale prilis rychle na precteni, tak se
-    // stopa v tomhle useku zpomali. Vrstvy jedou z currentTime, takze sedi dal.
-    const POMALU = {od: 7.25, do: 9.25, rychlost: 0.45, najezd: 0.3};
+    // POV klip je originálně příliš rychlý na přečtení, tak se stopa v tomhle
+    // úseku zpomalí. Vrstvy jedou z currentTime, takže sedí dál.
+    const POMALU = {od: 13.25, do: 15.80, rychlost: 0.55, najezd: 0.35};
     function rychlost(t){
       const {od, do: dokdy, rychlost: r, najezd: n} = POMALU;
       if (t <= od - n || t >= dokdy + n) return 1;
@@ -869,50 +982,22 @@
       const t = hv.currentTime || 0;
       const r = rychlost(t);
       if (Math.abs(hv.playbackRate - r) > 0.02) hv.playbackRate = r;
-      let chci = null;
-      for (const b of BEAT) if (t >= b.od && t < b.do) { chci = b.fx; break; }
+      let chci = null, akt = null;
+      for (const b of BEAT) if (t >= b.od && t < b.do) { chci = b.fx; akt = b; break; }
       if (chci !== ktera){
         ktera = chci;
         for (const k in hfx) hfx[k].classList.toggle('on', k === chci);
-        if (hl) hl.textContent = chci ? ({lidar:'LiDAR', light:'světlo', termo:'termo', vada:'vada'})[chci] : '—';
+        for (const k in pribehy) pribehy[k].classList.toggle('on', k === chci);
+        if (box) box.classList.toggle('vypravi', !!chci);
+        if (hl) hl.textContent = chci ? NAZEV[chci] : '—';
       }
       if (ht) ht.textContent = t.toFixed(1).replace('.', ',');
-
-      if (chci === 'lidar' && ring){
-        const b = bod(DRON, t), r = b.c.w * 0.115;      // prstenec kolem dronu
-        ring.style.width = ring.style.height = (r*2).toFixed(1) + 'px';
-        ring.style.left = (b.x - r).toFixed(1) + 'px';
-        ring.style.top  = (b.y - r).toFixed(1) + 'px';
-        if (ringlab){ ringlab.style.left = b.x.toFixed(1) + 'px';
-                      ringlab.style.top  = (b.y - r - 14).toFixed(1) + 'px'; }
-      }
-      if (chci === 'termo'){
-        let b = null; for (const x of BEAT) if (x.fx === 'termo') b = x;
-        termoKresli(t, b);
-      }
-      if (false){
-        const b = bod(VADA, t), c = b.c;
-        // Ramecek je uzsi nez vada zamerne. Vada je siroka 14 az 17 % a plna
-        // sirka se nevejde mezi levy okraj a klec dronu.
-        const bw = c.w * 0.13, bh = c.h * 0.17;
-        document.querySelectorAll('#herofx .hbox').forEach(el => {
-          // TVRDA POJISTKA: prava hrana nikdy pres 34,5 % sirky zdroje.
-          // Nejlevejsi bod klece je v 8,5 s na 34,5 az 35,4 %, takze sirsi
-          // ramecek by na dron najel. Radeji posunout doleva nez prekryt stroj.
-          const strop = c.x + 0.345*c.w;
-          let L = b.x - bw/2; if (L + bw > strop) L = strop - bw;
-          const T = b.y - bh/2;
-          const venku = L < 4 || T < 24 || L+bw > hv.clientWidth-4 || T+bh > hv.clientHeight-4;
-          el.style.visibility = venku ? 'hidden' : 'visible';
-          if (venku) return;
-          el.style.width = bw.toFixed(1)+'px'; el.style.height = bh.toFixed(1)+'px';
-          el.style.left  = L.toFixed(1)+'px';  el.style.top    = T.toFixed(1)+'px';
-        });
-      }
+      if (chci === 'lidar') lidarKresli(t, akt);
+      if (chci === 'termo') termoKresli(t);
     }
-    // rAF drzi plynulost, kdyz video hraje. Ale rAF NEBEZI ve skryte zalozce
-    // a nepribehne ani po pretoceni pauznuteho videa, takze vrstvu prekresluji
-    // i na udalostech videa. Jinak by po navratu na zalozku sedela na starem case.
+    // rAF drží plynulost, když video hraje. Ale rAF NEBĚŽÍ ve skryté záložce
+    // a nepřiběhne ani po přetočení pauznutého videa, takže vrstvu překresluji
+    // i na událostech videa. Jinak by po návratu na záložku seděla na starém čase.
     let raf = 0;
     function smycka(){ tik(); raf = requestAnimationFrame(smycka); }
     function rozjed(){ if (!raf) smycka(); }
@@ -926,8 +1011,8 @@
     tik();
     if (!hv.paused) rozjed();
 
-    // autoplay se v nekterych prohlizecich nespusti bez gesta; nevadi, poster drzi
-    // iOS chce muted nastavene i z kodu, samotny atribut nekdy nestaci
+    // autoplay se v některých prohlížečích nespustí bez gesta; nevadí, poster drží
+    // iOS chce muted nastavené i z kódu, samotný atribut někdy nestačí
     hv.muted = true; hv.defaultMuted = true; hv.setAttribute('muted', '');
     const tlac = document.getElementById('hvplay');
     let hralo = false;
@@ -937,18 +1022,18 @@
                         .catch(() => { if (tlac) tlac.hidden = false; });
       else { hralo = true; rozjed(); }
     }
-    // Safari v uspornem rezimu autoplay odmitne bez ohledu na kodovani, proto
-    // nabidnout dotek. Klepnuti kamkoli do hero taky staci.
+    // Safari v úsporném režimu autoplay odmítne bez ohledu na kódování, proto
+    // nabídnout dotek. Klepnutí kamkoli do hero taky stačí.
     if (tlac) tlac.addEventListener('click', pust);
     document.getElementById('hero').addEventListener('click', () => { if (hv.paused) pust(); });
     hv.addEventListener('loadeddata', () => { if (hv.paused) pust(); });
     pust();
 
-    // dokud je hero mimo obraz, video ani vrstvu nehnat zbytecne
+    // dokud je hero mimo obraz, video ani vrstvu nehnat zbytečně
     if ('IntersectionObserver' in window){
       new IntersectionObserver(es => es.forEach(e => {
         if (e.isIntersecting) { if (hv.paused) pust(); }
-        // pauzovat az kdyz uz nekdy hralo, jinak by observer zabil prvni pokus
+        // pauzovat až když už někdy hrálo, jinak by observer zabil první pokus
         else if (hralo) { hv.pause(); zastav(); }
       }), {threshold: 0.05}).observe(document.getElementById('hero'));
     }
