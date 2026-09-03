@@ -773,6 +773,20 @@
     // Mapuje JAS skutecneho obrazu na ironbow paletu. Neni to mereni teploty a
     // stranka to tak ani netvrdi, popisek rika "vizualizace". Delam to z obrazu,
     // ne nalepenym gradientem, aby to reagovalo na to, co je v zaberu.
+    // Termo je to, co vidi DRON, takze dron sam v nem byt nema. Vyriznu ho.
+    // Zmereno z mrizky na snimcich 7,5 a 8,0 s: cas, stred x, stred y, polomer x, polomer y
+    // v procentech zdrojoveho snimku, s malou rezervou, at se neobarvi ani okraj klece.
+    const DRON_VEN = [[7.35,50.5,48.0,20.0,21.5],[7.50,50.5,49.0,20.0,21.5],
+                      [8.00,52.0,52.0,19.0,22.5],[8.35,53.0,52.0,19.0,22.5]];
+    function lerp4(tab, t){
+      if (t <= tab[0][0]) return tab[0].slice(1);
+      const n = tab.length;
+      if (t >= tab[n-1][0]) return tab[n-1].slice(1);
+      for (let i = 1; i < n; i++) if (t <= tab[i][0]){
+        const k = (t - tab[i-1][0]) / (tab[i][0] - tab[i-1][0]);
+        return [1,2,3,4].map(j => tab[i-1][j] + k*(tab[i][j] - tab[i-1][j]));
+      }
+    }
     const term = document.getElementById('hterm');
     const tctx = term ? term.getContext('2d', {alpha:true}) : null;
     const mini = document.createElement('canvas');       // maly mezikrok, at to staci 30 fps
@@ -825,6 +839,21 @@
       tctx.beginPath(); tctx.rect(del, 0, cw - del, ch); tctx.clip();
       tctx.imageSmoothingEnabled = true;
       tctx.drawImage(mini, c.x, c.y, c.w, c.h);
+
+      // Dron ven, ale MEKCE. Tvrda elipsa byla v obraze videt jako divny oval,
+      // proto se termo v miste dronu odmaze pretavenim do pruhledna a pod nim
+      // zustane puvodni obraz.
+      const e = lerp4(DRON_VEN, t);
+      const sx = c.x + e[0]/100*c.w, sy = c.y + e[1]/100*c.h;
+      const rx = e[2]/100*c.w, ry = e[3]/100*c.h;
+      tctx.globalCompositeOperation = 'destination-out';
+      tctx.translate(sx, sy); tctx.scale(rx, ry);
+      const gr = tctx.createRadialGradient(0, 0, 0, 0, 0, 1);
+      gr.addColorStop(0,    'rgba(0,0,0,1)');
+      gr.addColorStop(0.74, 'rgba(0,0,0,1)');
+      gr.addColorStop(1,    'rgba(0,0,0,0)');
+      tctx.fillStyle = gr;
+      tctx.beginPath(); tctx.arc(0, 0, 1, 0, Math.PI*2); tctx.fill();
       tctx.restore();
 
       const sp = document.querySelector('#herofx .termsplit');
@@ -836,9 +865,22 @@
       if (pp) pp.style.left = Math.max(8, Math.min(del + 8, cw - pp.offsetWidth - 8)).toFixed(1) + 'px';
     }
 
+    // Termo i nalez vady jsou v originale prilis rychle na precteni, tak se
+    // stopa v tomhle useku zpomali. Vrstvy jedou z currentTime, takze sedi dal.
+    const POMALU = {od: 7.25, do: 9.25, rychlost: 0.45, najezd: 0.3};
+    function rychlost(t){
+      const {od, do: dokdy, rychlost: r, najezd: n} = POMALU;
+      if (t <= od - n || t >= dokdy + n) return 1;
+      if (t >= od && t <= dokdy) return r;
+      const k = t < od ? (t - (od - n)) / n : ((dokdy + n) - t) / n;
+      return 1 + (r - 1) * k;
+    }
+
     let ktera = null;
     function tik(){
       const t = hv.currentTime || 0;
+      const r = rychlost(t);
+      if (Math.abs(hv.playbackRate - r) > 0.02) hv.playbackRate = r;
       let chci = null;
       for (const b of BEAT) if (t >= b.od && t < b.do) { chci = b.fx; break; }
       if (chci !== ktera){
