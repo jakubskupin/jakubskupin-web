@@ -138,8 +138,8 @@
      na vysku: video dostane vlastni pomer 16:9, takze se neoreze vubec, a text
      jde pod nej. Vrstvy pak sedi, protoze cover() pocita ze skutecneho ramu. */
   @media (max-width:700px){
-    #hero{height:auto;min-height:100svh;display:flex;flex-direction:column;
-          justify-content:center;gap:20px;padding:78px 0 34px}
+    #hero{height:auto;min-height:0;display:flex;flex-direction:column;
+          justify-content:flex-start;gap:18px;padding:62px 0 26px}
     #hero::after{background:linear-gradient(180deg,rgba(5,7,12,.55) 0%,transparent 14%,transparent 100%)}
     #hvbox{position:relative;inset:auto;width:100%;aspect-ratio:16/9}
     #hv{position:absolute;inset:0}
