@@ -831,8 +831,9 @@
       if (sp) sp.style.left = del.toFixed(1) + 'px';
       const lp = document.querySelector('#herofx .termlab.levy');
       const pp = document.querySelector('#herofx .termlab.pravy');
-      if (lp) lp.style.left  = Math.max(8, del - 92).toFixed(1) + 'px';
-      if (pp) pp.style.left  = Math.min(cw - 150, del + 10).toFixed(1) + 'px';
+      // sirku merit, ne hadat, jinak stitek na uzkem displeji preteklo pres okraj
+      if (lp) lp.style.left = Math.max(8, Math.min(del - lp.offsetWidth - 8, cw - lp.offsetWidth - 8)).toFixed(1) + 'px';
+      if (pp) pp.style.left = Math.max(8, Math.min(del + 8, cw - pp.offsetWidth - 8)).toFixed(1) + 'px';
     }
 
     let ktera = null;
@@ -843,7 +844,7 @@
       if (chci !== ktera){
         ktera = chci;
         for (const k in hfx) hfx[k].classList.toggle('on', k === chci);
-        if (hl) hl.textContent = chci ? ({lidar:'LiDAR', light:'světlo', vada:'vada'})[chci] : '—';
+        if (hl) hl.textContent = chci ? ({lidar:'LiDAR', light:'světlo', termo:'termo', vada:'vada'})[chci] : '—';
       }
       if (ht) ht.textContent = t.toFixed(1).replace('.', ',');
 
