@@ -112,6 +112,11 @@
     letter-spacing:.1em;text-transform:uppercase;color:#07090F;background:var(--hot);
     padding:1px 6px;border-radius:3px;white-space:nowrap}
 
+  #hvplay{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:5;
+    font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink);background:rgba(7,9,15,.72);border:1px solid var(--accent);
+    border-radius:99px;padding:11px 22px;cursor:pointer;backdrop-filter:blur(6px)}
+  #hvplay:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
   .herotext{position:absolute;left:0;right:0;bottom:9%;z-index:3;padding:0 24px;text-align:center}
   .herotext .num{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--accent);
     text-transform:uppercase;display:block;margin-bottom:10px}
@@ -241,8 +246,11 @@
 </div>
 
 <header id="hero">
-  <video id="hv" src="prulet.mp4" poster="prulet-poster.jpg"
-         autoplay muted loop playsinline preload="auto" disablepictureinpicture></video>
+  <video id="hv" poster="prulet-poster.jpg" autoplay muted loop playsinline
+         webkit-playsinline preload="auto" disablepictureinpicture>
+    <source src="prulet.mp4" type="video/mp4">
+  </video>
+  <button id="hvplay" type="button" hidden aria-label="Přehrát video">Přehrát</button>
   <div id="herofx" aria-hidden="true">
     <div class="hfx" data-hfx="lidar">
       <div class="ring"></div><div class="ringlab">LiDAR 360°</div>
@@ -679,17 +687,21 @@
     // od/do v sekundách videa
     // Okna sahaji jen tam, kam saha MERENI. Radeji kratsi a pravdive nez delsi
     // a napul mimo: vrstva nesmi tvrdit nic, co v tu vterinu na obraze neni.
+    // Tvrde strihy jsou zmereny (ffmpeg scene score) jen dva: 3,47 s a 7,23 s.
+    // Zadna vrstva pres ne neprechazi. Skok jasu je v 5,50 s, proto svetlo
+    // zacina az ZA nim: kdyby zacalo v 5,25 s, popisek o 14 000 lm by ctvrt
+    // sekundy visel nad nerozsvicenym dronem.
     const BEAT = [
       {od: 3.60, do: 5.05, fx: 'lidar'},   // rotace zacina az tady, ne v 2,6 s
-      {od: 5.25, do: 6.30, fx: 'light'},   // jeden skok jasu, ne ctyri segmenty;
-                                           // konci drive, nez ve videu zhasne bily zdroj
-      {od: 8.40, do: 9.45, fx: 'vada'},    // ostra vada je az tady, ne v 6,4 s
+      {od: 5.55, do: 6.30, fx: 'light'},   // az za skokem jasu; konci drive,
+                                           // nez ve videu zhasne bily zdroj
+      {od: 8.45, do: 9.10, fx: 'vada'},    // ostra vada je az tady, ne v 6,4 s
     ];
     // stred dronu, kolem nej obiha prstenec (cas, x%, y%)
     const DRON = [[2.5,50.5,49.0],[3.0,50.0,49.0],[3.5,51.5,49.5],
                   [4.0,50.3,48.5],[4.5,50.0,49.0],[5.05,50.0,49.0]];
     // vada je VLEVO, dron vpravo; drzi skoro staticky a pak ujizdi doprava
-    const VADA = [[8.4,27.0,40.0],[8.5,27.0,40.0],[9.0,27.0,38.0],[9.5,34.0,37.0]];
+    const VADA = [[8.45,27.5,40.6],[8.5,27.5,40.5],[9.0,28.0,38.5],[9.1,28.2,38.2]];
 
     function lerp(tab, t){
       if (t <= tab[0][0]) return [tab[0][1], tab[0][2]];
@@ -740,9 +752,16 @@
       }
       if (chci === 'vada'){
         const b = bod(VADA, t), c = b.c;
-        const bw = c.w * 0.18, bh = c.h * 0.22;          // zmerena velikost vady
+        // Ramecek je uzsi nez vada zamerne. Vada je siroka 14 az 17 % a plna
+        // sirka se nevejde mezi levy okraj a klec dronu.
+        const bw = c.w * 0.13, bh = c.h * 0.17;
         document.querySelectorAll('#herofx .hbox').forEach(el => {
-          const L = b.x - bw/2, T = b.y - bh/2;
+          // TVRDA POJISTKA: prava hrana nikdy pres 34,5 % sirky zdroje.
+          // Nejlevejsi bod klece je v 8,5 s na 34,5 az 35,4 %, takze sirsi
+          // ramecek by na dron najel. Radeji posunout doleva nez prekryt stroj.
+          const strop = c.x + 0.345*c.w;
+          let L = b.x - bw/2; if (L + bw > strop) L = strop - bw;
+          const T = b.y - bh/2;
           const venku = L < 4 || T < 24 || L+bw > hv.clientWidth-4 || T+bh > hv.clientHeight-4;
           el.style.visibility = venku ? 'hidden' : 'visible';
           if (venku) return;
@@ -768,12 +787,29 @@
     if (!hv.paused) rozjed();
 
     // autoplay se v nekterych prohlizecich nespusti bez gesta; nevadi, poster drzi
-    hv.play().then(rozjed).catch(() => {});
+    // iOS chce muted nastavene i z kodu, samotny atribut nekdy nestaci
+    hv.muted = true; hv.defaultMuted = true; hv.setAttribute('muted', '');
+    const tlac = document.getElementById('hvplay');
+    let hralo = false;
+    function pust(){
+      const s = hv.play();
+      if (s && s.then) s.then(() => { hralo = true; if (tlac) tlac.hidden = true; rozjed(); })
+                        .catch(() => { if (tlac) tlac.hidden = false; });
+      else { hralo = true; rozjed(); }
+    }
+    // Safari v uspornem rezimu autoplay odmitne bez ohledu na kodovani, proto
+    // nabidnout dotek. Klepnuti kamkoli do hero taky staci.
+    if (tlac) tlac.addEventListener('click', pust);
+    document.getElementById('hero').addEventListener('click', () => { if (hv.paused) pust(); });
+    hv.addEventListener('loadeddata', () => { if (hv.paused) pust(); });
+    pust();
+
     // dokud je hero mimo obraz, video ani vrstvu nehnat zbytecne
     if ('IntersectionObserver' in window){
       new IntersectionObserver(es => es.forEach(e => {
-        if (e.isIntersecting) hv.play().then(rozjed).catch(()=>{});
-        else { hv.pause(); zastav(); }
+        if (e.isIntersecting) { if (hv.paused) pust(); }
+        // pauzovat az kdyz uz nekdy hralo, jinak by observer zabil prvni pokus
+        else if (hralo) { hv.pause(); zastav(); }
       }), {threshold: 0.05}).observe(document.getElementById('hero'));
     }
   })();
