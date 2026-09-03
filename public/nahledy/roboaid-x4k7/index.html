@@ -75,6 +75,67 @@
     padding:10px 12px;color:var(--muted);font-family:var(--body);font-size:14px;margin-top:8px}
   .note{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:12px;line-height:1.6}
 
+  /* ---------- HERO s hotovým videem (vrstvy jede ČAS, ne scroll) ---------- */
+  /* Scrollytelling pod tím zůstává netknutý: hero je mimo <main>, takže se
+     nezmění indexy sekcí a kotvy KOTVY dál sedí. */
+  #hero{position:relative;z-index:10;height:100vh;min-height:520px;overflow:hidden;
+        background:#05070C}
+  #hv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  #hero::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(180deg,rgba(5,7,12,.74) 0%,transparent 24%,transparent 42%,rgba(5,7,12,.72) 68%,rgba(5,7,12,.93) 100%)}
+
+  #herofx{position:absolute;inset:0;z-index:2;pointer-events:none}
+  .hfx{position:absolute;inset:0;opacity:0;transition:opacity .5s ease}
+  .hfx.on{opacity:1}
+  .hcap{position:absolute;left:50%;top:13%;transform:translateX(-50%);font-family:var(--mono);
+    font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);
+    background:rgba(7,9,15,.74);border:1px solid var(--line);border-radius:99px;padding:5px 13px;
+    white-space:nowrap;text-align:center;max-width:92vw;overflow:hidden;text-overflow:ellipsis}
+  .hcap.hot{color:var(--hot);border-color:rgba(255,180,84,.42)}
+  .hcap.good{color:var(--good);border-color:rgba(85,230,165,.42)}
+
+  /* skenovací prstenec: sedí na dronu, JS mu dává střed i velikost */
+  .ring{position:absolute;border:1.5px solid rgba(77,163,255,.85);border-radius:50%;
+    box-shadow:0 0 22px rgba(77,163,255,.35),inset 0 0 22px rgba(77,163,255,.16)}
+  .ring::before{content:"";position:absolute;inset:-1.5px;border-radius:50%;
+    border:1.5px solid transparent;border-top-color:rgba(77,163,255,.95);
+    animation:otoc 1.9s linear infinite}
+  @keyframes otoc{to{transform:rotate(360deg)}}
+  .ringlab{position:absolute;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:#07090F;background:var(--accent);padding:1px 6px;
+    border-radius:3px;white-space:nowrap;transform:translate(-50%,-50%)}
+
+  /* detekční rámeček nad hero videem, stejný jazyk jako ve scrollu */
+  .hbox{position:absolute;border:1.5px solid var(--hot);border-radius:3px;
+    box-shadow:0 0 0 1px rgba(7,9,15,.55)}
+  .hbox span{position:absolute;left:0;top:-19px;font-family:var(--mono);font-size:9.5px;
+    letter-spacing:.1em;text-transform:uppercase;color:#07090F;background:var(--hot);
+    padding:1px 6px;border-radius:3px;white-space:nowrap}
+
+  .herotext{position:absolute;left:0;right:0;bottom:9%;z-index:3;padding:0 24px;text-align:center}
+  .herotext .num{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--accent);
+    text-transform:uppercase;display:block;margin-bottom:10px}
+  .herotext h1{font-family:var(--disp);font-size:clamp(30px,6.6vw,66px);line-height:1.06;
+    margin:0 auto 12px;max-width:16ch;text-wrap:balance}
+  .herotext p{margin:0 auto;max-width:46ch;color:var(--muted);font-size:15px}
+
+  .herohud{position:absolute;right:14px;top:14px;z-index:4;font-family:var(--mono);font-size:10.5px;
+    letter-spacing:.08em;color:var(--muted);background:rgba(7,9,15,.72);border:1px solid var(--line);
+    border-radius:8px;padding:8px 11px;backdrop-filter:blur(6px);text-transform:uppercase}
+  .herohud b{color:var(--accent);font-weight:500}
+  .scrollhint{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:3;
+    font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--muted);animation:dychej 2.4s ease-in-out infinite}
+  @keyframes dychej{0%,100%{opacity:.45;transform:translate(-50%,0)}50%{opacity:1;transform:translate(-50%,5px)}}
+  @media (max-height:720px){
+    .herotext h1{font-size:clamp(26px,5vw,42px)}
+    .herotext p{font-size:14px}
+    .hcap{top:10%}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .ring::before,.scrollhint{animation:none}
+  }
+
   /* ---------- vrstva mechaniky nad canvasem ---------- */
   #fx{position:fixed;inset:0;z-index:6;pointer-events:none}
   .fx{position:absolute;inset:0;opacity:0;transition:opacity .55s ease}
@@ -178,6 +239,31 @@
   <div class="row">snímek <b id="hf">0</b>/189 · sekce <b id="hs">01</b></div>
   <button id="tg" type="button">vodicí linky</button>
 </div>
+
+<header id="hero">
+  <video id="hv" src="prulet.mp4" poster="prulet-poster.jpg"
+         autoplay muted loop playsinline preload="auto" disablepictureinpicture></video>
+  <div id="herofx" aria-hidden="true">
+    <div class="hfx" data-hfx="lidar">
+      <div class="ring"></div><div class="ringlab">LiDAR 360°</div>
+      <div class="hcap">GPS: N/A &middot; orientuje se LiDAR odometrií &middot; Livox MID360</div>
+    </div>
+    <div class="hfx" data-hfx="light">
+      <div class="hcap hot">14 000 lm ve 4 ovladatelných segmentech</div>
+    </div>
+    <div class="hfx" data-hfx="vada">
+      <div class="hbox" data-cil="koroze"><span>koroze</span></div>
+      <div class="hcap hot">onboard AI značí nález za letu &middot; Jetson Orin NX 16 GB</div>
+    </div>
+  </div>
+  <div class="herotext">
+    <span class="num">RoboAid &middot; autonomní inspekce</span>
+    <h1>Uvnitř. Za provozu. Bez signálu</h1>
+    <p>Dron proletí potrubím, halou i tunelem, sám se zorientuje bez GPS a nález označí už za letu.</p>
+  </div>
+  <div class="herohud">čas <b id="ht">0,0</b> s &middot; vrstva <b id="hl">&mdash;</b></div>
+  <div class="scrollhint">scrollujte</div>
+</header>
 
 <main>
   <section class="sec hero"><div class="card">
@@ -374,6 +460,11 @@
 
   function intro(){                       // dokud se nescrolluje, hero zije
     if (scrolled) return;
+    // pod hero videem platno stejne neni videt, at zbytecne nekresli
+    const h = document.getElementById('hero');
+    if (h && h.getBoundingClientRect().bottom > window.innerHeight * 0.2) {
+      introRaf = 0; return;
+    }
     const t0 = performance.now();
     (function tick(now){
       if (scrolled) return;
@@ -569,4 +660,119 @@
   window.addEventListener('resize', () => { size(); if (pcRaf) pcBuild(); });
   size(); onScroll();
 })();
+
+  // ================= HERO: vrstvy jede ČAS VIDEA, ne scroll =================
+  // Kotvy NEJSOU přepočtené z Blender draftu. Wan se od draftu rozešel, tak je
+  // každá změřená přímo ve vygenerovaném videu, snímek po snímku (po 0,5 s).
+  // Co draft plánoval a video nevyrobilo, tady vrstvu NEMÁ: žádný náraz do
+  // překážky se nekoná a čtyři světelné segmenty se nerozsvěcují po jednom.
+  // Vrstva nesmí tvrdit něco, co na obraze není, je to podklad pro reálnou firmu.
+  (function(){
+    const hv = document.getElementById('hv');
+    if (!hv) return;
+    const hfx = {};
+    document.querySelectorAll('#herofx .hfx').forEach(el => hfx[el.dataset.hfx] = el);
+    const ht = document.getElementById('ht'), hl = document.getElementById('hl');
+    const ring = document.querySelector('#herofx .ring');
+    const ringlab = document.querySelector('#herofx .ringlab');
+
+    // od/do v sekundách videa
+    const BEAT = [
+      {od: 3.60, do: 5.20, fx: 'lidar'},   // rotace zacina az tady, ne v 2,6 s
+      {od: 5.25, do: 6.45, fx: 'light'},   // jeden skok jasu, ne ctyri segmenty
+      {od: 8.40, do: 9.80, fx: 'vada'},    // ostra vada je az tady, ne v 6,4 s
+    ];
+    // stred dronu, kolem nej obiha prstenec (cas, x%, y%)
+    const DRON = [[2.5,50.5,49.0],[3.0,50.0,49.0],[3.5,51.5,49.5],
+                  [4.0,50.3,48.5],[4.5,50.0,49.0],[5.2,50.0,49.0]];
+    // vada je VLEVO, dron vpravo; drzi skoro staticky a pak ujizdi doprava
+    const VADA = [[8.4,27.0,40.0],[8.5,27.0,40.0],[9.0,27.0,38.0],[9.5,34.0,37.0],[9.8,37.0,36.5]];
+
+    function lerp(tab, t){
+      if (t <= tab[0][0]) return [tab[0][1], tab[0][2]];
+      const n = tab.length;
+      if (t >= tab[n-1][0]) return [tab[n-1][1], tab[n-1][2]];
+      for (let i = 1; i < n; i++){
+        if (t <= tab[i][0]){
+          const k = (t - tab[i-1][0]) / (tab[i][0] - tab[i-1][0]);
+          return [tab[i-1][1] + k*(tab[i][1]-tab[i-1][1]),
+                  tab[i-1][2] + k*(tab[i][2]-tab[i-1][2])];
+        }
+      }
+    }
+    // video je 16:9 a hero ho kryje pres object-fit: cover, takze stejny prepocet
+    // jako u platna: procenta ZDROJE prevest na pixely na obrazovce
+    function cover(){
+      const cw = hv.clientWidth, ch = hv.clientHeight;
+      const ir = (hv.videoWidth || 16) / (hv.videoHeight || 9), cr = cw/ch;
+      let w, h, x, y;
+      if (cr > ir){ w = cw; h = cw/ir; x = 0; y = (ch-h)/2; }
+      else        { h = ch; w = ch*ir; y = 0; x = (cw-w)/2; }
+      return {x, y, w, h};
+    }
+    function bod(tab, t){
+      const c = cover(), [px, py] = lerp(tab, t);
+      return {x: c.x + px/100*c.w, y: c.y + py/100*c.h, c};
+    }
+
+    let ktera = null;
+    function tik(){
+      const t = hv.currentTime || 0;
+      let chci = null;
+      for (const b of BEAT) if (t >= b.od && t < b.do) { chci = b.fx; break; }
+      if (chci !== ktera){
+        ktera = chci;
+        for (const k in hfx) hfx[k].classList.toggle('on', k === chci);
+        if (hl) hl.textContent = chci ? ({lidar:'LiDAR', light:'světlo', vada:'vada'})[chci] : '—';
+      }
+      if (ht) ht.textContent = t.toFixed(1).replace('.', ',');
+
+      if (chci === 'lidar' && ring){
+        const b = bod(DRON, t), r = b.c.w * 0.115;      // prstenec kolem dronu
+        ring.style.width = ring.style.height = (r*2).toFixed(1) + 'px';
+        ring.style.left = (b.x - r).toFixed(1) + 'px';
+        ring.style.top  = (b.y - r).toFixed(1) + 'px';
+        if (ringlab){ ringlab.style.left = b.x.toFixed(1) + 'px';
+                      ringlab.style.top  = (b.y - r - 14).toFixed(1) + 'px'; }
+      }
+      if (chci === 'vada'){
+        const b = bod(VADA, t), c = b.c;
+        const bw = c.w * 0.18, bh = c.h * 0.22;          // zmerena velikost vady
+        document.querySelectorAll('#herofx .hbox').forEach(el => {
+          const L = b.x - bw/2, T = b.y - bh/2;
+          const venku = L < 4 || T < 24 || L+bw > hv.clientWidth-4 || T+bh > hv.clientHeight-4;
+          el.style.visibility = venku ? 'hidden' : 'visible';
+          if (venku) return;
+          el.style.width = bw.toFixed(1)+'px'; el.style.height = bh.toFixed(1)+'px';
+          el.style.left  = L.toFixed(1)+'px';  el.style.top    = T.toFixed(1)+'px';
+        });
+      }
+    }
+    // rAF drzi plynulost, kdyz video hraje. Ale rAF NEBEZI ve skryte zalozce
+    // a nepribehne ani po pretoceni pauznuteho videa, takze vrstvu prekresluji
+    // i na udalostech videa. Jinak by po navratu na zalozku sedela na starem case.
+    let raf = 0;
+    function smycka(){ tik(); raf = requestAnimationFrame(smycka); }
+    function rozjed(){ if (!raf) smycka(); }
+    function zastav(){ if (raf) { cancelAnimationFrame(raf); raf = 0; } }
+    hv.addEventListener('play', rozjed);
+    hv.addEventListener('playing', rozjed);
+    ['pause','seeked','timeupdate','loadedmetadata','durationchange'].forEach(u =>
+      hv.addEventListener(u, () => { tik(); if (hv.paused) zastav(); }));
+    document.addEventListener('visibilitychange', () => { tik(); if (!document.hidden && !hv.paused) rozjed(); });
+    window.addEventListener('resize', tik);
+    tik();
+    if (!hv.paused) rozjed();
+
+    // autoplay se v nekterych prohlizecich nespusti bez gesta; nevadi, poster drzi
+    hv.play().then(rozjed).catch(() => {});
+    // dokud je hero mimo obraz, video ani vrstvu nehnat zbytecne
+    if ('IntersectionObserver' in window){
+      new IntersectionObserver(es => es.forEach(e => {
+        if (e.isIntersecting) hv.play().then(rozjed).catch(()=>{});
+        else { hv.pause(); zastav(); }
+      }), {threshold: 0.05}).observe(document.getElementById('hero'));
+    }
+  })();
+
 </script>
