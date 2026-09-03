@@ -80,6 +80,7 @@
      nezmění indexy sekcí a kotvy KOTVY dál sedí. */
   #hero{position:relative;z-index:10;height:100vh;min-height:520px;overflow:hidden;
         background:#05070C}
+  #hvbox{position:absolute;inset:0}
   #hv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
   #hero::after{content:"";position:absolute;inset:0;pointer-events:none;
     background:linear-gradient(180deg,rgba(5,7,12,.74) 0%,transparent 24%,transparent 42%,rgba(5,7,12,.72) 68%,rgba(5,7,12,.93) 100%)}
@@ -132,7 +133,25 @@
     font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;
     color:var(--muted);animation:dychej 2.4s ease-in-out infinite}
   @keyframes dychej{0%,100%{opacity:.45;transform:translate(-50%,0)}50%{opacity:1;transform:translate(-50%,5px)}}
-  @media (max-height:720px){
+  /* Na uzkem displeji je 16:9 zaber orezany tak, ze vada na 27 % sirky vypadne
+     z obrazu a cely detekcni beat je k nicemu. Proto se na mobilu hero rozlozi
+     na vysku: video dostane vlastni pomer 16:9, takze se neoreze vubec, a text
+     jde pod nej. Vrstvy pak sedi, protoze cover() pocita ze skutecneho ramu. */
+  @media (max-width:700px){
+    #hero{height:auto;min-height:100svh;display:flex;flex-direction:column;
+          justify-content:center;gap:20px;padding:78px 0 34px}
+    #hero::after{background:linear-gradient(180deg,rgba(5,7,12,.55) 0%,transparent 14%,transparent 100%)}
+    #hvbox{position:relative;inset:auto;width:100%;aspect-ratio:16/9}
+    #hv{position:absolute;inset:0}
+    .herotext{position:static;transform:none;padding:0 20px}
+    .herotext h1{font-size:clamp(27px,7.4vw,40px);max-width:14ch}
+    .herotext p{font-size:14.5px}
+    .hcap{font-size:9px;letter-spacing:.09em;padding:4px 9px;max-width:94%;top:auto;bottom:6%}
+    .scrollhint{position:static;transform:none;margin-top:6px;text-align:center;animation:none}
+    .herohud{top:auto;bottom:10px;right:10px;font-size:9.5px;padding:5px 8px}
+    #hud{font-size:9.5px;padding:5px 8px}
+  }
+  @media (max-height:720px) and (min-width:701px){
     .herotext h1{font-size:clamp(26px,5vw,42px)}
     .herotext p{font-size:14px}
     .hcap{top:10%}
@@ -246,6 +265,7 @@
 </div>
 
 <header id="hero">
+  <div id="hvbox">
   <video id="hv" poster="/nahledy/roboaid-x4k7/prulet-poster.jpg" autoplay muted loop playsinline
          webkit-playsinline preload="auto" disablepictureinpicture>
     <source src="/nahledy/roboaid-x4k7/prulet.mp4" type="video/mp4">
@@ -263,6 +283,7 @@
       <div class="hbox" data-cil="koroze"><span>koroze</span></div>
       <div class="hcap hot">onboard AI značí nález za letu &middot; Jetson Orin NX 16 GB</div>
     </div>
+  </div>
   </div>
   <div class="herotext">
     <span class="num">RoboAid &middot; autonomní inspekce</span>
