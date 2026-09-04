@@ -72,16 +72,6 @@
   /* Text nikdy nestojí sám: vede k němu bílá úsečka z toho místa na obraze,
      kterého se týká, a každý popisek je jinde. Čitelnost dělá vinětace
      a tmavý podklad úsečky, ne stín na písmu. */
-  #hvod{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;
-    opacity:0;transition:opacity .35s ease}
-  #hvod.on{opacity:1}
-  #hvod .stin{fill:none;stroke:rgba(4,6,11,.55);stroke-width:3.4;stroke-linecap:round;stroke-linejoin:round}
-  #hvod .cara{fill:none;stroke:rgba(255,255,255,.92);stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
-  #hvod .terc{fill:#fff;stroke:rgba(4,6,11,.5);stroke-width:1}
-  #hvod .puls{fill:none;stroke:#fff}
-  #hvod.horko .cara{stroke:var(--hot)}
-  #hvod.horko .terc{fill:var(--hot)}
-  #hvod.horko .puls{stroke:var(--hot)}
 
   /* Claim i popisky bydlí v jedné zóně. Na širokém displeji je to průhledná
      vrstva přes video, na úzkém jeden blok pod ním: obojí sedí v téže buňce
@@ -98,13 +88,16 @@
     font-size:clamp(10px,.88vw,12.5px);letter-spacing:.05em;line-height:1.6;
     color:rgba(255,255,255,.74)}
   .popis.hot .k{color:var(--hot)}
-  /* šest různých míst, aby dva popisky po sobě nikdy nestály na stejném rohu */
-  .m-vpravo-dole  {right:6%;bottom:13%;text-align:right}
-  .m-vlevo-dole   {left:6%;bottom:13%}
-  .m-vpravo-nahore{right:6%;top:11%;text-align:right}
-  .m-vlevo-nahore {left:6%;top:11%}
-  .m-vpravo-stred {right:6%;top:52%;text-align:right;max-width:min(390px,30%)}
-  .m-dole-stred   {left:50%;bottom:9%;transform:translateX(-50%);text-align:center;
+  /* šest míst blíž ke středu obrazu, ne v rozích: každý popisek jinde, ale
+     všechny v pásmu, kam oko chodí. Bez vodicích čar, ty působily neklidně. */
+  .m-vpravo-dole  {right:12%;bottom:20%;text-align:right;max-width:min(430px,32%)}
+  .m-vlevo-dole   {left:12%;bottom:20%;max-width:min(430px,32%)}
+  .m-vpravo-nahore{right:12%;top:18%;text-align:right;max-width:min(430px,32%)}
+  .m-vlevo-nahore {left:12%;top:18%;max-width:min(430px,32%)}
+  .m-stred-dole   {left:46%;top:56%;max-width:min(430px,34%)}
+  .m-nahore-stred {left:50%;top:8%;transform:translateX(-50%);text-align:center;max-width:min(680px,64%)}
+  .popis.zaver strong{font-size:clamp(26px,3.4vw,52px)}
+  .popis.zaver .k{color:var(--zlata)}
     max-width:min(560px,54%)}
   /* vinětace: ztmaví rohy, kde bydlí text, a nechá střed se strojem čistý */
   #herofx::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;
@@ -123,9 +116,9 @@
     box-shadow:0 0 0 1px rgba(7,9,15,.55);opacity:0;transform:scale(.92);
     transition:opacity .28s ease,transform .28s ease}
   .hbox.vidno{opacity:1;transform:none}
-  .hbox span{position:absolute;left:0;top:-19px;font-family:var(--mono);font-size:9.5px;
-    letter-spacing:.1em;text-transform:uppercase;color:#07090F;background:var(--hot);
-    padding:1px 6px;border-radius:3px;white-space:nowrap}
+  .hbox span{position:absolute;left:0;top:-42px;font-family:var(--mono);font-size:clamp(15px,1.6vw,24px);
+    letter-spacing:.12em;text-transform:uppercase;color:#07090F;background:var(--hot);
+    padding:5px 14px;border-radius:5px;white-space:nowrap;font-weight:500}
 
   /* claim drží jen úvod videa, pak zmizí, aby na obrazovce byl vždy jen jeden text */
   .herotext,.scrollhint{transition:opacity .5s ease}
@@ -134,15 +127,14 @@
   @media (max-width:860px){
     .popis strong{font-size:clamp(18px,3.2vw,26px)}
     .popis em{font-size:10.5px}
-    .hbox span{font-size:9px;letter-spacing:.06em;top:-16px}
+    .hbox span{font-size:13px;letter-spacing:.08em;top:-30px;padding:3px 9px}
   }
   /* Na úzkém displeji je hero sloupec a video vysoké jen pár set pixelů.
      Popisek by na něm ležel přes stroj i přes nález, tak jde POD video
      a úsečka se schová: nemá co spojovat. Bloky sedí v jedné buňce mřížky,
      takže se střídají bez poskoku layoutu. */
   @media (max-width:700px){
-    #hvod{display:none}
-    #textzona{position:static;inset:auto;display:grid;align-items:start}
+      #textzona{position:static;inset:auto;display:grid;align-items:start}
     #textzona > *{grid-area:1/1}
     #popisky{position:static;inset:auto;display:grid;padding:0 20px}
     .popis{position:static;grid-area:1/1;left:auto;right:auto;top:auto;bottom:auto;
@@ -303,8 +295,6 @@
     <canvas id="hterm"></canvas>
     <div class="hbox" data-box="koroze"><span>koroze</span></div>
     <div class="hbox" data-box="trhlina"><span>trhlina</span></div>
-    <svg id="hvod"><path class="stin"></path><path class="cara"></path>
-      <circle class="puls" r="0"></circle><circle class="terc" r="0"></circle></svg>
   </div>
   </div>
   <div id="textzona">
@@ -321,12 +311,12 @@
     <div class="popis m-vpravo-dole hot" data-p="termo"><span class="k">04 &middot; termovize</span>
       <strong>Vidí, kudy<br class="mbr"> uniká teplo</strong>
       <em>pohled z palubní kamery &middot; termo je vizualizace jasu, ne měření teploty</em></div>
-    <div class="popis m-vlevo-nahore uzky hot" data-p="nalez"><span class="k">05 &middot; nález</span>
+    <div class="popis m-stred-dole hot" data-p="nalez"><span class="k">05 &middot; nález</span>
       <strong>Nález označí<br class="mbr"> už za letu</strong>
       <em>onboard AI čte RGB i termo současně &middot; koroze, netěsnosti, betonové trhliny</em></div>
-    <div class="popis m-dole-stred" data-p="hala"><span class="k">06 &middot; výška</span>
-      <strong>Z tunelu rovnou pod strop haly</strong>
-      <em>jeden stroj, jeden let &middot; regály, ke kterým se člověk dostane jen s plošinou</em></div>
+    <div class="popis m-nahore-stred zaver" data-p="hala"><span class="k">Fly4Future &middot; RoboAid</span>
+      <strong>Plně autonomní<br class="mbr"> inspekční dron</strong>
+      <em>„true pilotless navigation" &middot; „zero operational downtime" &middot; bez GPS, bez pilota, bez odstávky</em></div>
   </div>
   <div class="herotext">
     <span class="num">RoboAid &middot; autonomní inspekce &middot; v3</span>
@@ -739,7 +729,6 @@
     const hv = document.getElementById('hv');
     if (!hv) return;
     const box  = document.getElementById('herofx');
-    const vod  = document.getElementById('hvod');
     const lid  = document.getElementById('hlid');
     const term = document.getElementById('hterm');
     const claim = document.querySelector('.herotext');
@@ -781,10 +770,10 @@
       {od: 8.30,  do: 11.00, fx: 'lidar',   misto: 'vpravo-nahore', kotva: [[8.30,50,42],[11.00,50,42]]},
       {od: 13.02, do: 15.98, fx: 'termo',   misto: 'vpravo-dole',   kotva: IZOLACE, horko: true},
       {od: 16.85, do: 22.35, fx: 'nalez',   misto: 'vlevo-nahore',  horko: true},
-      {od: 25.30, do: 28.85, fx: 'hala',    misto: 'dole-stred',    kotva: [[25.30,50,53],[26.60,50,57],[28.85,50,58]]},
+      {od: 25.00, do: 28.95, fx: 'hala',    misto: 'nahore-stred'},
     ];
     const NAZEV = {claim:'claim', light:'světlo', kontakt:'klec', lidar:'LiDAR',
-                   termo:'termo', nalez:'nález', hala:'výška'};
+                   termo:'termo', nalez:'nález', hala:'RoboAid'};
 
     function lerp(tab, t){
       if (t <= tab[0][0]) return [tab[0][1], tab[0][2]];
@@ -1023,56 +1012,6 @@
     // Popisek nikdy nevisí ve vzduchu: vede k němu lomená čára z místa, kterého
     // se týká. Poslední úsek je vodorovný (u spodního popisku svislý), jak se
     // to dělá v technických výkresech.
-    const cesta = vod && vod.querySelector('.cara');
-    const stin  = vod && vod.querySelector('.stin');
-    const terc  = vod && vod.querySelector('.terc');
-    const puls  = vod && vod.querySelector('.puls');
-    function vodKresli(t, b, kotva){
-      if (!vod || !cesta) return;
-      const el = popisy[b.fx];
-      if (!kotva || !el || getComputedStyle(vod).display === 'none'){ vod.classList.remove('on'); return; }
-      const rv = hv.getBoundingClientRect(), re = el.getBoundingClientRect();
-      if (!re.width){ vod.classList.remove('on'); return; }
-      const c = cover();
-      const ax = c.x + kotva[0]/100*c.w, ay = c.y + kotva[1]/100*c.h;
-      if (ax < 6 || ax > c.cw - 6 || ay < 6 || ay > c.ch - 6){ vod.classList.remove('on'); return; }
-      // popisek v souřadnicích videa
-      const L = re.left - rv.left, T = re.top - rv.top, W = re.width, H = re.height;
-      let bx, by, ex, ey;
-      if (b.misto === 'dole-stred'){
-        bx = L + W/2; by = T - 10; ex = bx; ey = by - 26;
-      } else {
-        const vpravo = (L + W/2) > ax;                    // popisek je vpravo od kotvy
-        bx = vpravo ? L - 10 : L + W + 10;
-        by = T + H/2;
-        ex = bx + (vpravo ? -34 : 34);
-        ey = by;
-      }
-      const d = 'M ' + ax.toFixed(1) + ' ' + ay.toFixed(1) +
-                ' L ' + ex.toFixed(1) + ' ' + ey.toFixed(1) +
-                ' L ' + bx.toFixed(1) + ' ' + by.toFixed(1);
-      cesta.setAttribute('d', d); if (stin) stin.setAttribute('d', d);
-      // úsečka se při nástupu vykreslí, ne naskočí
-      const dl = cesta.getTotalLength();
-      const k = Math.min(1, (t - b.od) / 0.5);
-      const off = (dl * (1 - k)).toFixed(1);
-      cesta.setAttribute('stroke-dasharray', dl.toFixed(1));
-      cesta.setAttribute('stroke-dashoffset', off);
-      if (stin){ stin.setAttribute('stroke-dasharray', dl.toFixed(1)); stin.setAttribute('stroke-dashoffset', off); }
-      if (terc){ terc.setAttribute('cx', ax.toFixed(1)); terc.setAttribute('cy', ay.toFixed(1));
-                 terc.setAttribute('r', '3.4'); }
-      if (puls){
-        const f = ((t - b.od) % 1.6) / 1.6;
-        puls.setAttribute('cx', ax.toFixed(1)); puls.setAttribute('cy', ay.toFixed(1));
-        puls.setAttribute('r', (3.4 + 12*f).toFixed(1));
-        puls.setAttribute('stroke-opacity', (0.55 * (1-f) * k).toFixed(3));
-      }
-      vod.classList.toggle('horko', !!b.horko);
-      vod.classList.add('on');
-    }
-
-    // Termo i nálezy jsou v originále příliš rychlé na přečtení, tak se stopa
-    // v těch úsecích zpomalí. Vrstvy jedou z currentTime, takže sedí dál.
     // POV záběr je na přečtení příliš rychlý, tak se v něm stopa zpomalí.
     // Koroze i trhlina drží v záběru přes tři vteřiny, ty zpomalovat netřeba.
     const POMALU = [
@@ -1124,7 +1063,6 @@
         for (const k in boxy) boxy[k].classList.remove('vidno');
       }
       if (b && Array.isArray(b.kotva)) kotva = lerp(b.kotva, t);
-      if (b && b.fx !== 'claim') vodKresli(t, b, kotva); else if (vod) vod.classList.remove('on');
     }
     // rAF drží plynulost, když video hraje. Ale rAF NEBĚŽÍ ve skryté záložce
     // a nepřiběhne ani po přetočení pauznutého videa, takže vrstvu překresluji
