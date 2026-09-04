@@ -82,17 +82,26 @@
   #pilulka.on{transform:translate(-50%,0)}
   #pilulka b{color:var(--zlata);font-weight:500}
 
-  /* ---------- sticky dron + velké věty za ním ---------- */
-  #slib{padding:0;background:#000}
-  #slib .stick{position:sticky;top:0;height:100vh;display:grid;place-items:center;z-index:2;pointer-events:none;margin-bottom:-100vh}
-  #slib .stick img{width:min(78vw,1100px);height:auto;filter:drop-shadow(0 40px 80px rgba(0,0,0,.8))}
-  #slib .stick .ph{width:min(70vw,900px);aspect-ratio:3/2;min-height:0}
-  #slib .vety{position:relative;z-index:1}
-  #slib .veta{height:100vh;display:grid;place-items:center;text-align:center;padding:0 24px}
-  #slib .veta p{margin:0;font-family:var(--serif);font-size:clamp(46px,10vw,168px);line-height:.95;color:var(--zlata);
-    letter-spacing:-.02em;opacity:.18;transform:translateY(24px);transition:opacity .5s ease,transform .5s ease;max-width:9ch}
-  #slib .veta.on p{opacity:1;transform:none}
-  #slib .veta small{display:block;margin-top:22px;font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--seda)}
+  /* ---------- sticky dron + věty, které vyjíždějí zpoza něj ---------- */
+  /* Dron je nahoře (z-index 2) a zůstává na místě. Každá věta začíná schovaná za ním,
+     se scrollem vyjede nahoru, zjasní se, a když dojde nad dron, zase zmizí. Polohu i
+     průhlednost počítá JS z postupu scrollu, takže to jede plynule s prstem, ne skokem. */
+  #slib{padding:0;background:#000;height:480vh}
+  #slib .stick{position:sticky;top:0;height:100vh;overflow:hidden}
+  #slib .dron{position:absolute;left:50%;top:50%;width:min(52vw,720px);height:auto;
+    transform:translate(-50%,calc(-50% + 6vh));z-index:2;pointer-events:none;
+    filter:drop-shadow(0 40px 80px rgba(0,0,0,.85))}
+  #slib .stick .ph{position:absolute;left:50%;top:50%;width:min(52vw,720px);aspect-ratio:3/2;min-height:0;
+    transform:translate(-50%,calc(-50% + 6vh));z-index:2}
+  #slib .veta{position:absolute;left:50%;top:50%;width:min(92vw,1100px);transform:translate(-50%,-50%);
+    text-align:center;z-index:1;opacity:0;will-change:transform,opacity;pointer-events:none}
+  #slib .veta p{margin:0 auto;font-family:var(--serif);font-size:clamp(40px,7.2vw,118px);line-height:.96;
+    color:var(--zlata);letter-spacing:-.02em;max-width:11ch}
+  #slib .veta small{display:block;margin-top:18px;font-family:var(--mono);font-size:12px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--seda)}
+  #slib .tecky{position:absolute;right:28px;top:50%;transform:translateY(-50%);display:grid;gap:10px;z-index:3}
+  #slib .tecky i{display:block;width:6px;height:6px;border-radius:50%;background:rgba(233,185,74,.25);transition:background .3s}
+  #slib .tecky i.on{background:var(--zlata)}
 
   /* ---------- klec ---------- */
   #klec .obr{aspect-ratio:4/5;background:#fff}
@@ -394,12 +403,11 @@
 <!-- ============ 3 · STICKY DRON + HLAVNÍ VĚTY ============ -->
 <section id="slib" aria-label="Hlavní sdělení">
   <div class="stick">
-    <img id="dronFront" src="/nahledy/roboaid-x4k7/img/front.jpg" alt="RoboAid zepředu na černé skále" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',innerHTML:'<div><div class=t>Obrázek · dron zepředu</div><p>RoboAid z bílého packshotu přenesený na tmavou skálu, černé studio, měkké klíčové světlo zleva, tenký studený rim zezadu. Generuje se v Comfy (Nano Banana 2).</p></div>'}))">
-  </div>
-  <div class="vety">
-    <div class="veta"><div><p>Náraz není konec mise</p><small>karbonová klec snese kontakt a stroj letí dál</small></div></div>
-    <div class="veta"><div><p>Satelit uvnitř nechytíte</p><small>on ho nepotřebuje</small></div></div>
-    <div class="veta"><div><p>Nález máte, než skončí směna</p><small>označí korozi i trhlinu už za letu</small></div></div>
+    <div class="veta"><p>Náraz není konec mise</p><small>karbonová klec snese kontakt a stroj letí dál</small></div>
+    <div class="veta"><p>Satelit uvnitř nechytíte</p><small>on ho nepotřebuje</small></div>
+    <div class="veta"><p>Nález máte, než skončí směna</p><small>označí korozi i trhlinu už za letu</small></div>
+    <img class="dron" id="dronFront" src="/nahledy/roboaid-x4k7/img/front.jpg" alt="RoboAid zepředu na černé skále" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',innerHTML:'<div><div class=t>Obrázek · dron zepředu</div><p>RoboAid z bílého packshotu na tmavé skále, černé studio. Generuje se v Comfy (Nano Banana 2).</p></div>'}))">
+    <div class="tecky"><i></i><i></i><i></i></div>
   </div>
 </section>
 
@@ -1047,13 +1055,38 @@
     if (u && NAZEV[u]) nastav(u);
   })();
 
-  // ---------- sticky věty: rozsvítit tu, která je uprostřed ----------
+  // ---------- sticky dron: věty vyjíždějí zpoza něj podle postupu scrollu ----------
   (function(){
-    const v = document.querySelectorAll('#slib .veta');
-    if (!('IntersectionObserver' in window)) { v.forEach(x => x.classList.add('on')); return; }
-    new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle('on', e.isIntersecting)),
-      {threshold: 0.55}).observe && v.forEach(x => new IntersectionObserver(es => es.forEach(e =>
-        e.target.classList.toggle('on', e.isIntersecting)), {threshold: 0.55}).observe(x));
+    const sec = document.getElementById('slib'); if (!sec) return;
+    const vety = [...sec.querySelectorAll('.veta')], tecky = [...sec.querySelectorAll('.tecky i')];
+    const n = vety.length;
+    const clamp = (x,a,b) => Math.min(b, Math.max(a, x));
+    const smooth = (a,b,x) => { const t = clamp((x-a)/(b-a),0,1); return t*t*(3-2*t); };
+    const easeOut = t => 1 - Math.pow(1-t, 3);
+    function tick(){
+      const r = sec.getBoundingClientRect(), vh = innerHeight;
+      const P = clamp(-r.top / Math.max(1, r.height - vh), 0, 1);   // 0 = sekce přijela, 1 = odjíždí
+      let akt = -1;
+      vety.forEach((el, i) => {
+        // každá věta má svou třetinu postupu; malý přesah, ať se střídají bez díry
+        const t = P*n - i;
+        if (t <= -0.05 || t >= 1.05){ el.style.opacity = 0; el.style.transform = 'translate(-50%,-50%)'; return; }
+        // dráha: zpoza dronu (střed) nahoru nad něj, pak dál a pryč
+        // vyjede nad dron (34 vh), tam chvíli stojí, pak ještě kousek povyjede a zmizí
+        // dřív, než ho ořízne horní hrana okna
+        const up = t < 0.55 ? easeOut(clamp(t/0.55,0,1)) * 34 : 34 + (t-0.55)/0.45 * 10;   // ve vh
+        const op = smooth(0.08, 0.40, t) * (1 - smooth(0.70, 0.92, t));
+        const sc = 0.9 + 0.1*easeOut(clamp(t/0.55,0,1));
+        el.style.opacity = op.toFixed(3);
+        el.style.transform = 'translate(-50%,calc(-50% - ' + up.toFixed(2) + 'vh)) scale(' + sc.toFixed(3) + ')';
+        if (op > 0.2) akt = i;
+      });
+      tecky.forEach((d, i) => d.classList.toggle('on', i === akt));
+    }
+    let raf = 0;
+    const plan = () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; tick(); }); };
+    addEventListener('scroll', plan, {passive:true}); addEventListener('resize', plan); tick();
+    window.slibTick = tick;   // pro ladění: zavolat po ručním posunu
   })();
 
   // ---------- RGB / termo posuvník ----------
