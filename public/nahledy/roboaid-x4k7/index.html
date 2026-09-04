@@ -1,4 +1,4 @@
-<!doctype html><html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow, noarchive"><meta name="referrer" content="no-referrer"><title>RoboAid · landing page prototyp</title><style>:root{color-scheme:dark}body{margin:0;padding:0}img{max-width:100%}</style></head><body>
+<!doctype html><html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow, noarchive"><meta name="referrer" content="no-referrer"><title>RoboAid · landing page v2</title><style>:root{color-scheme:dark}body{margin:0;padding:0}img{max-width:100%}</style></head><body>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap">
 <style>
 
@@ -9,219 +9,191 @@
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased}
-  a{color:inherit}
-  img{max-width:100%;display:block}
+  a{color:inherit} img{max-width:100%;display:block}
 
-  /* ---------- společný jazyk sekcí ---------- */
   .sek{position:relative;padding:clamp(72px,10vw,140px) 24px}
   .rám{max-width:1180px;margin:0 auto}
   .kick{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--zlata);margin:0 0 18px}
   .kick.modra{color:var(--accent)}
-  h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,5.4vw,72px);line-height:1.02;letter-spacing:-.01em;margin:0 0 18px;color:#fff}
+  h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,5.2vw,70px);line-height:1.02;letter-spacing:-.01em;margin:0 0 18px;color:#fff}
   h2 .z{color:var(--zlata)}
-  .pod{font-size:clamp(16px,1.35vw,19px);line-height:1.55;color:var(--muted);max-width:56ch;margin:0}
+  .pod{font-size:clamp(16px,1.3vw,19px);line-height:1.55;color:var(--muted);max-width:58ch;margin:0}
   .pod b{color:var(--ink);font-weight:600}
-  .dva{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,5vw,72px);align-items:center}
-  .dva.obr-vlevo>.text{order:2}
-  .karty{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px}
-  .karta{background:#0B0F19;border:1px solid var(--line);border-radius:14px;padding:22px 22px 24px}
-  .karta .n{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--zlata);text-transform:uppercase}
-  .karta h3{font-family:var(--disp);font-size:20px;margin:10px 0 8px;color:#fff;line-height:1.2}
-  .karta p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.55}
-  .cit{font-family:var(--mono);font-size:11.5px;color:var(--muted);line-height:1.6;margin-top:18px;padding-left:12px;border-left:2px solid var(--line)}
+  .dva{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,5vw,72px);align-items:start}
+  .cit{font-family:var(--mono);font-size:11.5px;color:var(--muted);line-height:1.6;margin-top:16px;padding-left:12px;border-left:2px solid var(--line)}
   .cit em{font-style:normal;color:var(--ink)}
-  .obr{border-radius:16px;overflow:hidden;background:#0B0F19;border:1px solid var(--line);aspect-ratio:16/10}
-  .obr img{width:100%;height:100%;object-fit:cover}
-  /* placeholder: přesně říká, co v něm má být, ať se to dá vygenerovat bez dohadování */
+  .zdroj{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--good);
+    border:1px solid rgba(85,230,165,.35);border-radius:999px;padding:2px 8px;margin-left:8px;vertical-align:middle}
+  .zdroj.demo{color:var(--zlata);border-color:rgba(233,185,74,.4)}
+  .zdroj.nase{color:var(--accent);border-color:rgba(77,163,255,.4)}
   .ph{border:1px dashed rgba(233,185,74,.45);border-radius:16px;background:
       repeating-linear-gradient(135deg,rgba(233,185,74,.05) 0 10px,transparent 10px 22px),#0B0F19;
-      display:grid;place-items:center;text-align:center;padding:26px;min-height:240px;color:var(--muted)}
+      display:grid;place-items:center;text-align:center;padding:26px;min-height:220px;color:var(--muted)}
   .ph .t{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--zlata);margin-bottom:10px}
-  .ph p{margin:0;font-size:13.5px;line-height:1.55;max-width:38ch}
+  .ph p{margin:0;font-size:13.5px;line-height:1.55;max-width:40ch}
   .btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;
     text-transform:uppercase;text-decoration:none;padding:15px 24px;border-radius:999px;border:1px solid var(--zlata);
-    color:#07090F;background:var(--zlata);transition:transform .2s ease,box-shadow .2s ease}
+    color:#07090F;background:var(--zlata);cursor:pointer;transition:transform .2s ease,box-shadow .2s ease}
   .btn:hover{transform:translateY(-1px);box-shadow:0 10px 34px rgba(233,185,74,.28)}
   .btn.duty{background:transparent;color:var(--zlata)}
 
-  /* ---------- personalizace: co kdo vidí ---------- */
+  /* personalizace: dvě persony ze strategie, třetí jen jako odkaz do poptávky */
   [data-per]{display:none}
   html:not([data-kdo]) [data-per~="vse"]{display:revert}
   html[data-kdo="provoz"] [data-per~="provoz"]{display:revert}
   html[data-kdo="sluzba"] [data-per~="sluzba"]{display:revert}
-  html[data-kdo="vyzkum"] [data-per~="vyzkum"]{display:revert}
-  /* pořadí argumentů: každý čte první to, co ho pálí */
-  html[data-kdo="provoz"] #cena .karty{--o1:1;--o2:2;--o3:3}
-  html[data-kdo="sluzba"] #cena .karty{--o1:3;--o2:1;--o3:2}
-  html[data-kdo="vyzkum"] #cena .karty{--o1:2;--o2:3;--o3:1}
-  #cena .karta:nth-child(1){order:var(--o1,1)} #cena .karta:nth-child(2){order:var(--o2,2)} #cena .karta:nth-child(3){order:var(--o3,3)}
 
-  /* ---------- lišta faktů pod foldem ---------- */
-  /* lišta faktů leží PŘES spodek hero videa, ať je nad foldem; text claimu je nad ní */
+  /* lišta faktů přes spodek hero videa, nad foldem */
   #fakta{position:absolute;left:0;right:0;bottom:0;z-index:6;padding:0;border-top:1px solid rgba(255,255,255,.08);
     background:rgba(5,7,12,.58);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
-  #hero .herotext{bottom:14%}
-  #hero .scrollhint{display:none}
-  @media (max-width:700px){ #fakta{position:static;background:#05070C;border-bottom:1px solid var(--line)} }
-  #fakta ul{list-style:none;margin:0;padding:0 24px;display:flex;gap:0;overflow-x:auto;scrollbar-width:none;justify-content:space-between;max-width:1180px;margin:0 auto}
-  #fakta li{flex:0 0 auto;padding:22px 18px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--muted);white-space:nowrap;border-left:1px solid var(--line)}
+  #fakta ul{list-style:none;margin:0 auto;padding:0 24px;display:flex;overflow-x:auto;scrollbar-width:none;justify-content:space-between;max-width:1180px}
+  #fakta li{flex:0 0 auto;padding:20px 18px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--muted);white-space:nowrap;border-left:1px solid var(--line)}
   #fakta li:first-child{border-left:0;padding-left:0}
   #fakta b{display:block;font-family:var(--disp);font-size:20px;letter-spacing:0;color:#fff;margin-bottom:3px}
   #fakta b.z{color:var(--zlata)}
+  #hero .herotext{bottom:14%} #hero .scrollhint{display:none}
+  @media (max-width:700px){ #fakta{position:static;background:#05070C;border-bottom:1px solid var(--line)} }
 
-  /* ---------- kdo jste + syntéza ---------- */
-  #kdo{background:radial-gradient(120% 90% at 50% 0%,#12182A 0%,var(--bg) 60%)}
-  #kdo .rám{text-align:center}
-  #kdo h2{max-width:20ch;margin:0 auto 26px}
-  .jednotka{font-family:var(--serif);font-size:clamp(22px,2.6vw,34px);color:var(--zlata);margin:0 0 42px}
-  .volba{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-  .volba button{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);
-    background:#0B0F19;border:1px solid var(--line);border-radius:999px;padding:14px 22px;cursor:pointer;transition:all .2s ease}
-  .volba button:hover{border-color:var(--zlata)}
-  .volba button.on{background:var(--zlata);color:#07090F;border-color:var(--zlata)}
-  .volba button small{display:block;font-family:var(--body);text-transform:none;letter-spacing:0;font-size:12px;opacity:.7;margin-top:4px}
-  .volba button.on small{opacity:.85}
-  /* pilulka vpravo nahoře: dole by ležela přes lištu faktů v heru */
-  #pilulka{position:fixed;right:18px;top:18px;transform:translate(0,-90px);z-index:50;font-family:var(--mono);font-size:11px;
-    letter-spacing:.12em;text-transform:uppercase;background:rgba(7,9,15,.86);border:1px solid var(--line);color:var(--muted);
-    border-radius:999px;padding:9px 14px;backdrop-filter:blur(8px);transition:transform .35s ease;cursor:pointer;white-space:nowrap}
-  #pilulka.on{transform:translate(0,0)}
-  #pilulka b{color:var(--zlata);font-weight:500}
-
-  /* ---------- sticky dron + věty, které vyjíždějí zpoza něj ---------- */
-  /* Dron je nahoře (z-index 2) a zůstává na místě. Každá věta začíná schovaná za ním,
-     se scrollem vyjede nahoru, zjasní se, a když dojde nad dron, zase zmizí. Polohu i
-     průhlednost počítá JS z postupu scrollu, takže to jede plynule s prstem, ne skokem. */
+  /* sticky dron: nese syntézu, ne beaty videa */
   #slib{padding:0;background:#000;height:480vh}
   #slib .stick{position:sticky;top:0;height:100vh;overflow:hidden}
-  /* Kámen sedí spodní hranou přesně na spodní hraně okna (fotka končí hranou kamene)
-     a nahoře je oříznutá těsně nad vrcholkem klece (PNG s alfou, 1264×710):
-     pozadí je průhledné, takže věty za dronem zakrývá jen stroj a kámen, ne černý obdélník. Výška je stropovaná na
-     67 vh, aby nad dronem zbylo místo pro větu i na nízkém displeji. */
   #slib .dron{position:absolute;left:50%;bottom:0;width:min(78vw,1120px,calc(67vh * 1.731));height:auto;
-    transform:translateX(-50%);z-index:2;pointer-events:none;
-    filter:drop-shadow(0 24px 50px rgba(0,0,0,.9))}
-  #slib .stick .ph{position:absolute;left:50%;bottom:0;width:min(78vw,1120px,calc(67vh * 1.731));aspect-ratio:1264/730;min-height:0;
-    transform:translateX(-50%);z-index:2}
+    transform:translateX(-50%);z-index:2;pointer-events:none;filter:drop-shadow(0 24px 50px rgba(0,0,0,.9))}
   #slib .veta{position:absolute;left:50%;top:50%;width:min(92vw,1100px);transform:translate(-50%,-50%);
     text-align:center;z-index:1;opacity:0;will-change:transform,opacity;pointer-events:none}
-  #slib .veta p{margin:0 auto;font-family:var(--serif);font-size:clamp(40px,7.2vw,118px);line-height:.96;
-    color:var(--zlata);letter-spacing:-.02em;max-width:11ch}
-  #slib .veta small{display:block;margin-top:18px;font-family:var(--mono);font-size:12px;letter-spacing:.2em;
-    text-transform:uppercase;color:var(--seda)}
+  #slib .veta p{margin:0 auto;font-family:var(--serif);font-size:clamp(40px,7.2vw,118px);line-height:.96;color:var(--zlata);letter-spacing:-.02em;max-width:12ch}
+  #slib .veta small{display:block;margin-top:18px;font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--seda)}
   #slib .tecky{position:absolute;right:28px;top:50%;transform:translateY(-50%);display:grid;gap:10px;z-index:3}
   #slib .tecky i{display:block;width:6px;height:6px;border-radius:50%;background:rgba(233,185,74,.25);transition:background .3s}
   #slib .tecky i.on{background:var(--zlata)}
 
-  /* ---------- klec ---------- */
-  #klec .obr{aspect-ratio:4/5;background:#fff}
-  #klec .obr img{object-position:50% 45%}
-  .kota{position:absolute;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#07090F;background:var(--zlata);padding:4px 9px;border-radius:4px}
-  #klec .obr{position:relative}
+  /* 01 kdo jste: jeden řádek */
+  #kdo{padding:26px 24px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#05070C}
+  #kdo .rám{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  #kdo .lab{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+  .volba{display:flex;gap:8px;flex-wrap:wrap}
+  .volba button{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);
+    background:#0B0F19;border:1px solid var(--line);border-radius:999px;padding:11px 18px;cursor:pointer;transition:all .2s ease}
+  .volba button:hover{border-color:var(--zlata)} .volba button.on{background:var(--zlata);color:#07090F;border-color:var(--zlata)}
+  #kdo .jednotka{margin-left:auto;font-family:var(--serif);font-size:clamp(18px,1.7vw,24px);color:var(--zlata)}
+  #kdo .treti{font-size:12.5px;color:var(--muted)} #kdo .treti a{color:var(--zlata);text-decoration:none;border-bottom:1px solid rgba(233,185,74,.4)}
+  #pilulka{position:fixed;right:18px;top:18px;transform:translate(0,-90px);z-index:50;font-family:var(--mono);font-size:11px;
+    letter-spacing:.12em;text-transform:uppercase;background:rgba(7,9,15,.86);border:1px solid var(--line);color:var(--muted);
+    border-radius:999px;padding:9px 14px;backdrop-filter:blur(8px);transition:transform .35s ease;cursor:pointer;white-space:nowrap}
+  #pilulka.on{transform:translate(0,0)} #pilulka b{color:var(--zlata);font-weight:500}
 
-  /* ---------- navigace: dron shora, kolem něj LiDAR ---------- */
-  #navigace{background:#000}
-  #navigace .obr{aspect-ratio:1;background:#000;position:relative;border-color:#111}
-  #navigace .kruh{position:absolute;inset:6%;border-radius:50%;border:1px solid rgba(77,163,255,.35);
-    box-shadow:0 0 0 22px rgba(77,163,255,.04),0 0 0 60px rgba(77,163,255,.025);pointer-events:none}
-  #navigace .kruh::before{content:"";position:absolute;inset:-1px;border-radius:50%;
-    border:1px solid transparent;border-top-color:rgba(77,163,255,.9);animation:otoc 4s linear infinite}
-  @keyframes otoc{to{transform:rotate(360deg)}}
-  #navigace .stit{position:absolute;left:50%;top:3%;transform:translateX(-50%);font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);background:rgba(7,9,15,.7);padding:4px 10px;border-radius:4px;border:1px solid rgba(77,163,255,.35)}
+  /* 02 kalkulačka */
+  .kalk{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:36px;align-items:start}
+  .kalk .vstupy{display:grid;gap:10px}
+  .kalk label{display:grid;gap:6px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .kalk input{width:100%;background:#0B0F19;border:1px solid var(--line);border-radius:10px;color:var(--ink);font:18px var(--disp);padding:12px 14px}
+  .kalk .vysledek{background:#0B0F19;border:1px solid var(--line);border-radius:16px;padding:26px}
+  .kalk .vysledek small{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .kalk .vysledek b{display:block;font-family:var(--disp);font-size:clamp(30px,3.6vw,52px);color:#fff;margin:6px 0 18px;letter-spacing:-.01em}
+  .kalk .vysledek b.z{color:var(--zlata)}
+  .kalk .pozn{font-family:var(--mono);font-size:11px;color:var(--muted);line-height:1.6;margin:0 0 16px}
 
-  /* ---------- vidění: posuvník RGB / termo ---------- */
-  .porov{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:16/9;border:1px solid var(--line)}
-  .porov img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-  .porov .termo{clip-path:inset(0 0 0 var(--x,55%))}
-  .porov input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
-  .porov .del{position:absolute;top:0;bottom:0;left:var(--x,55%);width:1px;background:var(--hot);box-shadow:0 0 14px rgba(255,180,84,.7);pointer-events:none}
-  .porov .del::after{content:"◂ ▸";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:11px;color:#07090F;background:var(--hot);border-radius:999px;padding:6px 8px;letter-spacing:.1em}
-  .porov .lab{position:absolute;top:12px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;padding:4px 9px;border-radius:4px;background:rgba(7,9,15,.72);border:1px solid var(--line);pointer-events:none}
-  .porov .lab.l{left:12px;color:var(--ink)} .porov .lab.r{right:12px;color:var(--hot);border-color:rgba(255,180,84,.42)}
-  /* HUD termokamery jen v termo půlce: stejný ořez jako termo vrstva */
-  .porov .thud{position:absolute;inset:0;pointer-events:none;clip-path:inset(0 0 0 var(--x,55%))}
-  .porov .thud i{position:absolute;width:26px;height:26px;border:1.5px solid rgba(255,255,255,.85)}
-  .porov .thud .tl{left:16px;top:16px;border-right:0;border-bottom:0}
-  .porov .thud .tr{right:16px;top:16px;border-left:0;border-bottom:0}
-  .porov .thud .bl{left:16px;bottom:16px;border-right:0;border-top:0}
-  .porov .thud .br{right:16px;bottom:16px;border-left:0;border-top:0}
-  .porov .skala{position:absolute;right:30px;top:26%;bottom:26%;width:10px}
-  .porov .skala b{display:block;height:100%;border:1px solid rgba(255,255,255,.65);box-shadow:0 0 0 5px rgba(4,6,11,.55);
-    background:linear-gradient(180deg,#fffce2 0%,#ffc040 11%,#f07010 24%,#c63034 38%,#80205a 50%,#3a1044 66%,#120922 84%,#020105 100%)}
-  .porov .skala span{position:absolute;right:0;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.88);white-space:nowrap}
-  .porov .skala span:first-child{bottom:calc(100% + 8px)} .porov .skala span:last-child{top:calc(100% + 8px)}
+  /* 03 otázky v hlase kupujícího */
+  .otz{margin-top:36px;border-top:1px solid var(--line)}
+  .otz details{border-bottom:1px solid var(--line)}
+  .otz summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:56px 1fr auto;gap:16px;align-items:baseline;padding:22px 0;font-family:var(--disp);font-size:clamp(19px,1.8vw,24px);color:#fff}
+  .otz summary::-webkit-details-marker{display:none}
+  .otz summary .n{font-family:var(--serif);font-size:30px;color:var(--zlata)}
+  .otz summary .stav{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;padding:5px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+  .otz summary .stav.ano{color:var(--good);border-color:rgba(85,230,165,.4)} .otz summary .stav.demo{color:var(--zlata);border-color:rgba(233,185,74,.4)}
+  .otz .odp{padding:0 0 24px 72px;display:grid;gap:10px;max-width:70ch}
+  .otz .odp p{margin:0;color:var(--muted);font-size:15px;line-height:1.6}
+  .otz .odp p b{color:var(--ink);font-weight:600}
+  .otz .odp .r{display:grid;grid-template-columns:110px 1fr;gap:12px;align-items:baseline}
+  .otz .odp .r i{font-style:normal;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--zlata)}
 
-  /* ---------- kde už létal ---------- */
-  .dlaz{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:36px}
-  .dlaz figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#0B0F19;aspect-ratio:4/5;position:relative}
-  .dlaz img{width:100%;height:100%;object-fit:cover;filter:saturate(.9)}
-  .dlaz figcaption{position:absolute;left:0;right:0;bottom:0;padding:14px;font-family:var(--disp);font-size:18px;color:#fff;
-    background:linear-gradient(0deg,rgba(4,6,11,.9),transparent)}
-  .dlaz .ph{aspect-ratio:4/5;min-height:0;padding:18px}
+  /* 04 tabulka dvou bez signálu */
+  .tab2{display:grid;grid-template-columns:150px 1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:36px}
+  .tab2 > div{background:#0B0F19;padding:18px 20px;font-size:14.5px;line-height:1.55;color:var(--muted)}
+  .tab2 .h{font-family:var(--disp);font-size:18px;color:#fff;background:#0E1424}
+  .tab2 .h small{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;font-weight:400}
+  .tab2 .rh{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding-top:22px}
+  .tab2 b{color:var(--ink);font-weight:600}
+  .tab2 q{font-family:var(--mono);font-size:12px;color:var(--ink);quotes:"„" "“"}
 
-  /* ---------- citace + ocenění ---------- */
-  #citace{background:#000}
-  blockquote.velka{margin:0;font-family:var(--serif);font-size:clamp(24px,3.4vw,44px);line-height:1.2;color:#fff;max-width:26ch}
+  /* 05 výpis dodávky */
+  .vypis{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:36px}
+  .vypis .sl{background:#0B0F19;border:1px solid var(--line);border-radius:16px;padding:22px}
+  .vypis h3{margin:0 0 14px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--good);font-weight:500}
+  .vypis .sl.demo h3{color:var(--zlata)}
+  .vypis ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+  .vypis li{display:grid;grid-template-columns:18px 1fr;gap:12px;align-items:start;font-size:15px;line-height:1.5;color:var(--ink)}
+  .vypis li::before{content:"";width:12px;height:12px;border-radius:50%;margin-top:6px;background:var(--good)}
+  .vypis .sl.demo li::before{background:transparent;border:1.5px solid var(--zlata)}
+  .vypis li small{display:block;font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:4px;letter-spacing:.04em}
+
+  /* 06 kótovaný packshot */
+  .pack{position:relative;background:#fff;border-radius:16px;overflow:visible;margin-top:36px}
+  .pack img{width:100%;height:auto;border-radius:16px}
+  .hs{position:absolute;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;background:var(--zlata);border:3px solid #fff;
+    box-shadow:0 0 0 1px rgba(0,0,0,.25),0 6px 18px rgba(0,0,0,.35);cursor:pointer;z-index:2}
+  .hs::after{content:"";position:absolute;inset:-9px;border-radius:50%;border:1.5px solid rgba(233,185,74,.6);animation:tep 2.2s ease-out infinite}
+  @keyframes tep{0%{transform:scale(.6);opacity:1}100%{transform:scale(1.5);opacity:0}}
+  .hs .k{position:absolute;left:34px;top:50%;transform:translateY(-50%);width:max-content;max-width:260px;background:#07090F;color:var(--ink);
+    border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:13.5px;line-height:1.45;opacity:0;pointer-events:none;transition:opacity .2s;z-index:3}
+  .hs .k b{display:block;font-family:var(--disp);font-size:17px;color:#fff;margin-bottom:4px}
+  .hs .k small{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--muted);margin-top:6px}
+  .hs.vlevo .k{left:auto;right:34px}
+  .hs:hover .k,.hs.on .k{opacity:1}
+  .radky{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:14px}
+  .radky div{background:#0B0F19;padding:16px 18px}
+  .radky small{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  .radky b{font-family:var(--disp);font-size:17px;color:#fff;font-weight:600}
+
+  /* 07 proč jsme ho vyvíjeli */
+  #proc{background:#000}
+  blockquote.velka{margin:0;font-family:var(--serif);font-size:clamp(24px,3.2vw,42px);line-height:1.2;color:#fff}
   blockquote.velka span{color:var(--zlata)}
-  .kdo-rekl{margin-top:26px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--muted);line-height:1.7}
+  .kdo-rekl{margin-top:22px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--muted);line-height:1.7}
   .kdo-rekl a{color:var(--zlata);text-decoration:none;border-bottom:1px solid rgba(233,185,74,.4)}
-  .ocen{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:36px}
-  .ocen .karta{text-align:center;padding-top:28px}
-  .ocen .ph{min-height:110px;margin:0 auto 16px;padding:14px;width:100%}
+  .scenar{background:#0B0F19;border:1px solid var(--line);border-radius:16px;padding:22px}
+  .scenar h3{margin:0 0 12px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--zlata);font-weight:500}
+  .scenar ol{margin:0;padding-left:20px;color:var(--muted);font-size:14px;line-height:1.7}
+  .scenar ol b{color:var(--ink);font-weight:600}
+  .puvod{margin-top:36px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px}
+  .puvod div{background:#0B0F19;border:1px solid var(--line);border-radius:14px;padding:18px}
+  .puvod small{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--zlata);margin-bottom:6px}
+  .puvod b{display:block;font-family:var(--disp);font-size:16px;color:#fff;font-weight:600}
+  .puvod p{margin:6px 0 0;font-size:13px;color:var(--muted);line-height:1.5}
 
-  /* ---------- parametry ---------- */
-  .spec{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:36px}
-  .spec div{background:#0B0F19;padding:22px}
-  .spec small{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
-  .spec b{font-family:var(--disp);font-size:22px;color:#fff;font-weight:600}
-  .spec b.z{color:var(--zlata)}
-  .spec i{display:block;font-style:normal;font-size:12.5px;color:var(--muted);margin-top:6px;line-height:1.5}
-
-  /* ---------- pět otázek ---------- */
-  .otazky{list-style:none;margin:36px 0 0;padding:0;counter-reset:o}
-  .otazky li{counter-increment:o;display:grid;grid-template-columns:64px 1fr auto;gap:18px;align-items:baseline;padding:22px 0;border-top:1px solid var(--line)}
-  .otazky li::before{content:"0" counter(o);font-family:var(--serif);font-size:34px;color:var(--zlata)}
-  .otazky li:last-child{border-bottom:1px solid var(--line)}
-  .otazky h3{margin:0;font-family:var(--disp);font-size:20px;color:#fff;font-weight:600}
-  .otazky p{margin:6px 0 0;color:var(--muted);font-size:14.5px;line-height:1.55;max-width:60ch}
-  .otazky .stav{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;padding:5px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
-  .otazky .stav.ano{color:var(--good);border-color:rgba(85,230,165,.4)}
-  .otazky .stav.demo{color:var(--zlata);border-color:rgba(233,185,74,.4)}
-
-  /* ---------- demo ---------- */
+  /* 08 poptávka */
   #demo{background:radial-gradient(90% 80% at 80% 50%,#171A12 0%,#000 60%)}
-  #demo .dva{align-items:start}
-  .form{display:grid;gap:10px;margin-top:30px;max-width:460px}
+  .chipy{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+  .chipy button{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);background:#0B0F19;
+    border:1px solid var(--line);border-radius:999px;padding:9px 14px;cursor:pointer;transition:all .2s}
+  .chipy button[data-letal]{border-color:rgba(85,230,165,.4)} .chipy button[data-letal]::after{content:" · létal tu";color:var(--good)}
+  .chipy button:hover,.chipy button.on{border-color:var(--zlata);color:var(--zlata)}
+  .check{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:8px}
+  .check label{display:grid;grid-template-columns:20px 1fr;gap:12px;align-items:start;font-size:14.5px;color:var(--muted);line-height:1.5;cursor:pointer}
+  .check input{margin:4px 0 0;accent-color:var(--zlata)}
+  .form{display:grid;gap:10px;margin-top:18px}
   .form input,.form textarea{width:100%;background:#0B0F19;border:1px solid var(--line);border-radius:10px;color:var(--ink);font:15px var(--body);padding:14px 16px}
-  .form textarea{min-height:110px;resize:vertical}
-  .form .pozn{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.06em;line-height:1.6}
-  .osoba{display:grid;grid-template-columns:120px 1fr;gap:18px;align-items:center;margin-top:34px}
-  .osoba .ph{min-height:120px;aspect-ratio:1;border-radius:50%;padding:12px}
-  .osoba b{display:block;font-family:var(--disp);font-size:18px;color:#fff}
-  .osoba span{font-size:13.5px;color:var(--muted);line-height:1.5}
-
-  /* ---------- rozcestník ---------- */
-  .roz{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:36px}
-  .roz a{text-decoration:none;display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:center;background:#0B0F19;border:1px solid var(--line);border-radius:16px;padding:22px;transition:border-color .2s ease}
-  .roz a:hover{border-color:var(--zlata)}
-  .roz .ph{min-height:170px;aspect-ratio:4/3;padding:14px}
-  .roz h3{margin:6px 0 8px;font-family:var(--disp);font-size:24px;color:#fff}
-  .roz p{margin:0 0 12px;color:var(--muted);font-size:14px;line-height:1.5}
-  .roz .kick{margin:0 0 4px}
-  .roz .dal{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--zlata)}
-  footer{padding:40px 24px 60px;text-align:center;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--muted);border-top:1px solid var(--line)}
+  .form textarea{min-height:150px;resize:vertical}
+  .form .pozn{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.06em;line-height:1.6;margin:0}
+  .osoba{display:grid;grid-template-columns:96px 1fr;gap:16px;align-items:center;margin-top:26px}
+  .osoba .ph{min-height:96px;aspect-ratio:1;border-radius:50%;padding:10px}
+  .osoba b{display:block;font-family:var(--disp);font-size:17px;color:#fff} .osoba span{font-size:13.5px;color:var(--muted);line-height:1.5}
+  footer{padding:36px 24px 60px;border-top:1px solid var(--line)}
+  footer .rám{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--muted)}
+  footer a{color:var(--zlata);text-decoration:none}
 
   @media (max-width:860px){
-    .dva,.karty,.dlaz,.ocen,.spec,.roz,.roz a{grid-template-columns:1fr}
-    .dva.obr-vlevo>.text{order:0}
-    .dlaz{grid-template-columns:1fr 1fr}
-    .otazky li{grid-template-columns:44px 1fr;}
-    .otazky .stav{grid-column:2}
+    .dva,.kalk,.vypis,.puvod{grid-template-columns:1fr}
+    .tab2{grid-template-columns:1fr} .tab2 .rh{display:none} .tab2 .h{position:sticky;top:0}
+    .radky{grid-template-columns:1fr 1fr}
+    .otz summary{grid-template-columns:40px 1fr} .otz summary .stav{grid-column:2} .otz .odp{padding-left:0}
+    .otz .odp .r{grid-template-columns:1fr}
     #slib .dron{width:min(96vw,calc(62vh * 1.731))}
-    .osoba{grid-template-columns:96px 1fr}
+    .hs .k{max-width:200px;font-size:12.5px}
+    #kdo .jednotka{margin-left:0;width:100%}
   }
 
-  /* ---------- hero z V3 (video + popisky na úsečce) ---------- */
+  /* ---------- hero z V3 ---------- */
   #hero{position:relative;z-index:10;height:100vh;min-height:520px;overflow:hidden;
         background:#05070C}
   #hvbox{position:absolute;inset:0}
@@ -312,8 +284,7 @@
     font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
     color:var(--ink);background:rgba(7,9,15,.72);border:1px solid var(--accent);
     border-radius:99px;padding:11px 22px;cursor:pointer;backdrop-filter:blur(6px)}
-  #hvplay:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-  .herotext{position:absolute;left:0;right:0;bottom:9%;z-index:3;padding:0 24px;text-align:center}
+  #hvplay:focus-visible{outline:2px solid var(--accent);outline-offset:3px}  .herotext{position:absolute;left:0;right:0;bottom:9%;z-index:3;padding:0 24px;text-align:center}
   .herotext .num{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--accent);
     text-transform:uppercase;display:block;margin-bottom:10px}
   .herotext h1{font-family:var(--disp);font-size:clamp(30px,6.6vw,66px);line-height:1.06;
@@ -323,8 +294,7 @@
   .scrollhint{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:3;
     font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;
     color:var(--muted);animation:dychej 2.4s ease-in-out infinite}
-  @keyframes dychej  @keyframes dychej{0%,100%{opacity:.45;transform:translate(-50%,0)}50%{opacity:1;transform:translate(-50%,5px)}}
-  @media (max-width:700px){
+  @keyframes dychej  @keyframes dychej{0%,100%{opacity:.45;transform:translate(-50%,0)}50%{opacity:1;transform:translate(-50%,5px)}}  @media (max-width:700px){
     #hero{height:auto;min-height:0;display:flex;flex-direction:column;
           justify-content:flex-start;gap:18px;padding:62px 0 26px}
     #hero::after{background:linear-gradient(180deg,rgba(5,7,12,.55) 0%,transparent 14%,transparent 100%)}
@@ -335,7 +305,6 @@
     .herotext p{font-size:14.5px}
     .scrollhint{position:static;transform:none;margin-top:6px;text-align:center;animation:none}
   }
-
   @media (max-height:720px) and (min-width:701px){
     .herotext h1{font-size:clamp(26px,5vw,42px)}
     .herotext p{font-size:14px}
@@ -395,251 +364,238 @@
   </ul>
 </section>
 </header>
-<!-- ============ 2 · KDO JSTE + SYNTÉZA ============ -->
-<section id="kdo" class="sek">
-  <div class="rám">
-    <p class="kick">Než čtete dál</p>
-    <h2>Nikdo nekupuje dron. <span class="z">Kupujete přístup do prostoru,</span> kam se dnes nedá bez odstávky a člověka uvnitř</h2>
-    <p class="jednotka"><span data-per="vse">Každý si to počítá v jiné jednotce. Vyberte svou</span><span data-per="provoz">Vy to počítáte v hodinách odstávky</span><span data-per="sluzba">Vy to počítáte v zakázkách na jeden stroj</span><span data-per="vyzkum">Vy to počítáte v experimentech, které stroj přežije</span></p>
-    <div class="volba" role="group" aria-label="Kdo jste">
-      <button type="button" data-kdo="provoz">Provozuji aktivum<small>údržba, HSE, technický ředitel</small></button>
-      <button type="button" data-kdo="sluzba">Dělám inspekce jako službu<small>pilot, majitel inspekční firmy</small></button>
-      <button type="button" data-kdo="vyzkum">Stavím na platformě<small>výzkum, integrace, ROS 2</small></button>
-    </div>
-    <p class="cit" style="max-width:52ch;margin:34px auto 0;text-align:left">Stránka si vaši volbu zapamatuje a přeskládá argumenty, příklady i poptávku. Kdykoli ji změníte dole v liště.</p>
-  </div>
-</section>
-
-<!-- ============ 3 · STICKY DRON + HLAVNÍ VĚTY ============ -->
+<!-- ===== 0 · STICKY DRON: syntéza, ne beaty videa ===== -->
 <section id="slib" aria-label="Hlavní sdělení">
   <div class="stick">
-    <div class="veta"><p>Náraz není konec mise</p><small>karbonová klec snese kontakt a stroj letí dál</small></div>
-    <div class="veta"><p>Satelit uvnitř nechytíte</p><small>on ho nepotřebuje</small></div>
-    <div class="veta"><p>Nález máte, než skončí směna</p><small>označí korozi i trhlinu už za letu</small></div>
-    <img class="dron" id="dronFront" src="/nahledy/roboaid-x4k7/img/front.jpg" alt="RoboAid zepředu na černé skále" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',innerHTML:'<div><div class=t>Obrázek · dron zepředu</div><p>RoboAid z bílého packshotu na tmavé skále, černé studio. Generuje se v Comfy (Nano Banana 2).</p></div>'}))">
+    <div class="veta"><div><p>Nikdo nekupuje dron</p><small>ani provozovatel, ani inspekční firma</small></div></div>
+    <div class="veta"><div><p>Kupujete přístup do prostoru</p><small>obraz a nález z místa, kam se nechodí</small></div></div>
+    <div class="veta"><div><p>Kam se dnes nedá bez odstávky a člověka uvnitř</p><small>provoz mezitím běží</small></div></div>
+    <img class="dron" id="dronFront" src="/nahledy/roboaid-x4k7/img/front.jpg" alt="RoboAid zepředu na černé skále">
     <div class="tecky"><i></i><i></i><i></i></div>
   </div>
 </section>
 
-<!-- ============ 4 · CENA SOUČASNÉHO STAVU (personalizované pořadí i text) ============ -->
+<!-- ===== 01 · KDO JSTE (jeden řádek) ===== -->
+<section id="kdo" aria-label="Kdo jste">
+  <div class="rám">
+    <span class="lab">Díváte se jako</span>
+    <div class="volba" role="group" aria-label="Kdo jste">
+      <button type="button" data-kdo="provoz">Provozuji aktivum</button>
+      <button type="button" data-kdo="sluzba">Dělám inspekce jako službu</button>
+    </div>
+    <span class="treti">Stavíte na platformě? <a href="#demo">Napište nám rovnou</a></span>
+    <span class="jednotka"><span data-per="vse">Vyberte, v čem to počítáte</span><span data-per="provoz">Počítáte v hodinách odstávky</span><span data-per="sluzba">Počítáte v zakázkách na jeden stroj</span></span>
+  </div>
+</section>
+
+<!-- ===== 02 · KALKULAČKA ===== -->
 <section id="cena" class="sek">
   <div class="rám">
-    <p class="kick">02 · Dnešní stav</p>
-    <h2>Dnes to stojí <span class="z">odstávku, lešení a člověka uvnitř</span></h2>
-    <p class="pod"><span data-per="vse">Takhle vypadá prohlídka, když se řeší dnešními prostředky. Ne špatně, jen draze.</span><span data-per="provoz">Takhle vypadá jedna prohlídka ve vašem provozu, když se řeší dnešními prostředky.</span><span data-per="sluzba">Takhle vypadá zakázka, kterou dnes buď odmítáte, nebo do ní posíláte stroj, o který se bojíte.</span><span data-per="vyzkum">Takhle vypadá experiment na platformě, která si nemůže dovolit jedinou chybu.</span></p>
-    <div class="karty">
-      <div class="karta"><span class="n">01</span>
-        <h3><span data-per="vse provoz">Odstávka</span><span data-per="sluzba">Stroj, který uvízne</span><span data-per="vyzkum">Jeden dotek a konec</span></h3>
-        <p><span data-per="vse provoz">Provoz stojí, než se dovnitř dostane člověk, a stojí dál, než z toho bude protokol.</span><span data-per="sluzba">Dron uvízlý v šachtě je měsíc bez zakázek a faktura za vyproštění. To je strach, kvůli kterému zakázku nevezmete.</span><span data-per="vyzkum">Běžná platforma po kontaktu se stěnou padá. Experiment končí opravou, ne daty.</span></p></div>
-      <div class="karta"><span class="n">02</span>
-        <h3><span data-per="vse provoz">Lešení a plošina</span><span data-per="sluzba">Den stavby kvůli hodině pohledu</span><span data-per="vyzkum">Uzavřený stack</span></h3>
-        <p><span data-per="vse provoz">Den stavby kvůli hodině pohledu. A stejný den, až se bude bourat.</span><span data-per="sluzba">Do ceny zakázky se vejde lešení, nebo marže. Málokdy obojí.</span><span data-per="vyzkum">Bez přístupu do řízení a plánování mise se na platformě nedá stavět, jen ji používat.</span></p></div>
-      <div class="karta"><span class="n">03</span>
-        <h3><span data-per="vse provoz">Člověk uvnitř</span><span data-per="sluzba">Zakázka, kterou nevezmete</span><span data-per="vyzkum">Data bez opakovatelnosti</span></h3>
-        <p><span data-per="vse provoz">Riziko, které podepisuje bezpečák, a školení, pojistka a dýchací technika k tomu.</span><span data-per="sluzba">Komín, nádrž, kabelový kanál za provozu. Prostor, kam dnes pilota radši nepošlete.</span><span data-per="vyzkum">Ručně řízený let se nedá zopakovat. Dva běhy pak nejdou položit vedle sebe.</span></p></div>
+    <p class="kick">01 · Dnešní stav</p>
+    <h2>Co vás stojí jedna prohlídka dnes. <span class="z">Vaše čísla, ne naše</span></h2>
+    <p class="pod"><span data-per="vse provoz">Odstávka, lešení nebo plošina a člověk uvnitř. Zadejte, co platí u vás; stránka nic nedosazuje.</span><span data-per="sluzba">Zakázky, které dnes odmítáte, protože do nich nepošlete stroj ani pilota. Zadejte, kolik jich za rok je.</span></p>
+    <div class="kalk">
+      <div class="vstupy">
+        <div data-per="vse provoz" style="display:grid;gap:10px">
+          <label>Hodiny odstávky na jednu prohlídku<input type="number" id="k-hod" min="0" step="1" placeholder="např. 8"></label>
+          <label>Cena jedné hodiny odstávky (Kč)<input type="number" id="k-kc" min="0" step="1000" placeholder="např. 25 000"></label>
+          <label>Lešení nebo plošina na jednu prohlídku (Kč)<input type="number" id="k-les" min="0" step="1000" placeholder="např. 40 000"></label>
+          <label>Prohlídek ročně<input type="number" id="k-n" min="0" step="1" placeholder="např. 4"></label>
+        </div>
+        <div data-per="sluzba" style="display:grid;gap:10px">
+          <label>Zakázky ročně, které odmítáte kvůli riziku pro stroj nebo pilota<input type="number" id="s-n" min="0" step="1" placeholder="např. 6"></label>
+          <label>Průměrná cena takové zakázky (Kč)<input type="number" id="s-kc" min="0" step="1000" placeholder="např. 60 000"></label>
+        </div>
+      </div>
+      <div class="vysledek">
+        <small><span data-per="vse provoz">Jedna prohlídka dnes</span><span data-per="sluzba">Jedna odmítnutá zakázka</span></small><b id="v-jedna">—</b>
+        <small>Za rok</small><b class="z" id="v-rok">—</b>
+        <p class="pozn">Cena RoboAidu je na poptávku. Počítáme jen s vašimi čísly, nic z nich neukládáme.</p>
+        <button class="btn duty" type="button" id="k-vlozit">Vložit číslo do poptávky</button>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ============ 5 · KLEC (nejdůležitější sekce) ============ -->
-<section id="klec" class="sek">
+<!-- ===== 03 · CO KDYŽ NÁM TO TAM UVÍZNE ===== -->
+<section id="uvizne" class="sek" style="padding-top:0">
+  <div class="rám">
+    <p class="kick">02 · Otázky, které padnou první</p>
+    <h2>Co když nám to <span class="z">tam uvízne</span></h2>
+    <p class="pod">Strach, který mají provozovatel i inspekční firma společný. Odpovídáme jen tím, co je doložené, a zbytek říkáme na demu.</p>
+    <div class="otz">
+      <details open><summary><span class="n">01</span><span>Co když se dotkne stěny</span><span class="stav ano">doloženo</span></summary>
+        <div class="odp">
+          <p><b>Ochranná klec z uhlíkových profilů</b> drží vrtule mimo dosah stěn. Kontakt se sloupem vidíte ve videu nahoře v 0:06; je to ilustrace, ne doklad.</p>
+          <div class="r"><i>zdroj</i><p>Lupa.cz, 15. 7. 2026: „ochranná klec z uhlíkových profilů"</p></div>
+          <div class="r"><i>na demu</i><p>Kontakt naostro v prostoru, který si vyberete.</p></div>
+        </div></details>
+      <details><summary><span class="n">02</span><span>Co když neprojde otvorem</span><span class="stav ano">doloženo</span></summary>
+        <div class="odp">
+          <p>Stroj se vyrábí ve <b>variantách 6 až 10 palců</b>; s velikostí se mění doba letu (14 až 22 min) i hmotnost (3 200 až 3 800 g). Přesné rozměry pro vaši variantu doplní F4F.</p>
+          <div class="r"><i>zdroj</i><p>Spec list F4F (5/2026 a 7/2026)</p></div>
+          <div class="r"><i>na demu</i><p>Přinesou variantu, která projde vaším nejužším otvorem.</p></div>
+        </div></details>
+      <details><summary><span class="n">03</span><span>Co když nemáme pilota</span><span class="stav ano">doloženo</span></summary>
+        <div class="odp">
+          <p>Misi spustí a sleduje <b>váš tým údržby</b> z pozemní stanice s několika tlačítky. Let, autonomie i vidění se počítají na palubě.</p>
+          <div class="r"><i>zdroj</i><p>F4F: „Your existing maintenance team can launch missions and monitor live feed"</p></div>
+          <div class="r"><i>ověřujeme</i><p>Jestli je při letu vyžadovaný bezpečnostní pilot podle předpisů pro váš prostor.</p></div>
+        </div></details>
+      <details><summary><span class="n">04</span><span>Co když opravdu uvízne nebo se vybije</span><span class="stav demo">na demu</span></summary>
+        <div class="odp">
+          <p>Tuhle otázku vám položí bezpečák. Ptáme se jí dřív než on a odpověď ukážeme naživo, ne v textu.</p>
+          <div class="r"><i>na demu</i><p>Chování při nízké baterii a při ztrátě spojení, vyproštění.</p></div>
+        </div></details>
+    </div>
+    <p class="pod" style="margin-top:22px"><span data-per="provoz">Pro vás: žádná záchranná akce a žádná prodloužená odstávka kvůli stroji, který se zasekl.</span><span data-per="sluzba">Pro vás: zakázka, kterou dnes odmítáte, se dá nacenit.</span></p>
+  </div>
+</section>
+
+<!-- ===== 04 · BEZ SIGNÁLU JSOU DVĚ OTÁZKY ===== -->
+<section id="signal" class="sek">
+  <div class="rám">
+    <p class="kick modra">03 · Pro bezpečáka a IT</p>
+    <h2>„Bez signálu" <span class="z">jsou dvě různé otázky</span></h2>
+    <p class="pod">Zákazník je říká jednou větou. Jedna je vyřešená konstrukčně, druhou ukážeme na demu.</p>
+    <div class="tab2">
+      <div class="rh"></div>
+      <div class="h"><small>otázka 1</small>Satelit uvnitř není</div>
+      <div class="h"><small>otázka 2</small>Spojení s obsluhou vypadne</div>
+      <div class="rh">Čeho se týká</div><div>Navigace: podle čeho stroj ví, kde je.</div><div>Přenosu: co se děje s obrazem a s povely.</div>
+      <div class="rh">Jak to řeší</div>
+      <div><b>Satelitní příjem nemá vůbec.</b> Polohu drží 3D LiDAR Livox MID360 a algoritmus LiDAR-Inertial Odometry, ve tmě, prachu i kouři, s výhledem 360°. <b>Neví, kde je na mapě. Ví přesně, kde je v té šachtě.</b><span class="zdroj nase">naše formulace</span></div>
+      <div><b>Let, autonomie i vidění se počítají na palubě</b>, bez přístupu k síti. Rádio 2,4 a 5 GHz slouží k tomu, aby obsluha sledovala živý obraz. Co stroj udělá při výpadku, zatím nikde nepíšou.</div>
+      <div class="rh">Doloženo čím</div>
+      <div><q>360° FOV for navigation in GNSS-denied environments, darkness, dust, and smoke.</q> GPS v listu: N/A.<span class="zdroj">F4F</span></div>
+      <div><q>Everything regarding flight, autonomy and vision is processed on the computer, locally without any access to the network.</q><span class="zdroj">F4F</span></div>
+      <div class="rh">Na demu</div>
+      <div>Průlet bez signálu ve vašem prostoru.</div>
+      <div>Chování při ztrátě spojení.<span class="zdroj demo">bez odpovědi v textu</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 05 · CO SI Z JEDNOHO LETU ODNESETE ===== -->
+<section id="dodavka" class="sek" style="padding-top:0">
+  <div class="rám">
+    <p class="kick">04 · Dodávka</p>
+    <h2>Co si z jednoho letu <span class="z">odnesete</span></h2>
+    <p class="pod">Dva sloupce, které neumí lhát: co je doložené, a co si musíte nechat ukázat.</p>
+    <div class="vypis">
+      <div class="sl"><h3>Doloženo</h3><ul>
+        <li><span>Video ve 4K a fotky ve vysokém rozlišení<small>F4F: „4K video and high-res images"</small></span></li>
+        <li><span>Termo obraz 720p z téhož letu, oba kanály současně<small>F4F: „RGB 4K and 720p thermal data simultaneously"</small></span></li>
+        <li><span>Nálezy označené už za letu: koroze, netěsnosti, trhliny v betonu<small>F4F: „flags", tedy označí; posudek zůstává na člověku (naše formulace)</small></span></li>
+        <li><span>Misi lze zopakovat bez pilota s vysokou přesností<small>F4F: „repeats missions with high accuracy completely independent of a human pilot"</small></span></li>
+      </ul></div>
+      <div class="sl demo"><h3>Ukážeme na demu</h3><ul>
+        <li><span>Kam se záznam ukládá a jak se dostane do vaší sítě</span></li>
+        <li><span>Uložitelné mračno bodů a 3D mapa, v jakém formátu</span></li>
+        <li><span>Živý obraz pro obsluhu během letu</span></li>
+        <li><span>Jestli je termo radiometrické, nebo jen obraz</span></li>
+        <li><span>Dva lety téhož místa vedle sebe</span></li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 06 · ČÍSLA TAM, KDE NA STROJI SEDÍ ===== -->
+<section id="cisla" class="sek">
+  <div class="rám">
+    <p class="kick">05 · Parametry</p>
+    <h2>Čísla tam, <span class="z">kde na stroji sedí</span></h2>
+    <p class="pod">Najeďte na bod. Jen údaje z oficiálních listů F4F, nic z datasheetů komponent.</p>
+    <div class="pack">
+      <img src="/nahledy/roboaid-x4k7/img/packshot.jpg" alt="RoboAid, bílý packshot">
+      <span class="hs" style="left:51%;top:27%"><span class="k"><b>3D LiDAR Livox MID360</b>Orientace bez satelitu, 360°, LiDAR-Inertial Odometry. GPS: nemá.<small>spec list F4F</small></span></span>
+      <span class="hs vlevo" style="left:37%;top:40%"><span class="k"><b>Gimbal SIYI ZT6</b>RGB 4K a termo 720p současně, 3osá stabilizace, nastavitelný za letu.<small>spec list F4F</small></span></span>
+      <span class="hs vlevo" style="left:19%;top:36%"><span class="k"><b>LED 14 000 lm</b>Čtyři ovladatelné segmenty.<small>leaflet F4F 7/2026</small></span></span>
+      <span class="hs" style="left:80%;top:52%"><span class="k"><b>Klec z uhlíkových profilů</b>3 200 až 3 800 g podle varianty, varianty 6 až 10 palců.<small>spec list F4F, Lupa.cz</small></span></span>
+      <span class="hs" style="left:50%;top:68%"><span class="k"><b>Baterie 6S 15 000 mAh</b>14 až 22 min letu podle varianty.<small>spec list F4F 7/2026</small></span></span>
+    </div>
+    <div class="radky">
+      <div><small>Palubní počítač</small><b>Jetson Orin NX 16 GB</b></div>
+      <div><small>nebo</small><b>ASUS NUC i7</b></div>
+      <div><small>Letový počítač</small><b>Pixhawk 6C Mini, PX4</b></div>
+      <div><small>Rádio</small><b>2,4 a 5 GHz</b></div>
+      <div><small>Stack</small><b>ROS 2</b></div>
+      <div><small>Rychlost</small><b>2 m/s autonomně, 8 m/s ručně</b></div>
+      <div><small>Satelitní navigace</small><b>nemá</b></div>
+      <div><small>Prostředí</small><b>vnitřní</b></div>
+    </div>
+    <p class="cit">Bez řádku úložiště, bez fps a bez měřicího rozsahu termokamery: to jsou čísla výrobců komponent, ne F4F. Dva oficiální listy se liší v době letu (22 min vs. 14 až 22 min), držíme konzervativnější.</p>
+  </div>
+</section>
+
+<!-- ===== 07 · PROČ JSME HO VYVÍJELI ===== -->
+<section id="proc" class="sek">
   <div class="rám dva">
-    <div class="text">
-      <p class="kick">03 · Klec</p>
-      <h2><span class="z">Náraz není</span> konec mise</h2>
-      <p class="pod">Osmiúhelníková karbonová klec drží vrtule mimo dosah stěn. Když se dron dotkne konstrukce, srovná se a letí dál. Kontakt přestává být nehodou a stává se epizodou uvnitř mise.</p>
-      <p class="pod" style="margin-top:16px"><span data-per="vse">Je to jediná obava, kterou mají provozovatel i inspekční firma společnou. A jediná, na kterou má RoboAid tvrdou odpověď.</span><span data-per="provoz">Pro vás to znamená: žádná záchranná akce a žádná prodloužená odstávka kvůli stroji, který se zasekl.</span><span data-per="sluzba">Pro vás to znamená: stroj se vrátí a zakázka, kterou dnes odmítáte, se dá nacenit.</span><span data-per="vyzkum">Pro vás to znamená: platforma přežije chybu v algoritmu. Experiment pokračuje, místo aby končil opravou.</span></p>
-      <p class="cit">Záběr z hero videa v 6,0 s: levý roh klece se dotkne sloupu, dron se srovná. <em>Klec je z uhlíkových profilů</em> (Lupa.cz, 15. 7. 2026).</p>
+    <div>
+      <p class="kick">06 · Věra Sasková, CEO Fly4Future</p>
+      <blockquote class="velka">„RoboAid jsme vyvíjeli právě do situací, kdy je potřeba dostat kvalitní senzoriku do vnitřních prostor, <span>kde není GPS, kde je omezený prostor k manévrování</span> a kde by fyzická kontrola znamenala zbytečné riziko, odstávku nebo vysoké náklady."</blockquote>
+      <p class="kdo-rekl"><a href="https://www.lupa.cz/aktuality/cesi-ukazali-autonomni-inspekcni-dron-pro-prumysl-leta-uvnitr-nepotrebuje-gps-a-hleda-zavady/" target="_blank" rel="noopener">Lupa.cz, 15. 7. 2026</a></p>
     </div>
-    <div class="obr"><img src="/nahledy/roboaid-x4k7/img/packshot.jpg" alt="Detail karbonové klece RoboAid"><span class="kota" style="left:8%;top:38%">karbonová klec</span><span class="kota" style="right:8%;bottom:14%">vrtule uvnitř obrysu</span></div>
+    <div class="scenar">
+      <h3>Scénář nahrávky · 30 s · natočíme při demu</h3>
+      <ol>
+        <li><b>Záběr:</b> Věra Sasková, polocelek, jedno měkké světlo zleva, za ní RoboAid na stole, jinak tma. Telefon na stativu stačí.</li>
+        <li><b>Text:</b> věta výše, přesně jak ji řekla Lupě. Nic víc.</li>
+        <li><b>Titulky:</b> CZ jako první stopa, EN a DE jako titulky. Dabing až s jejím písemným souhlasem a jen z její nahrávky.</li>
+        <li><b>Na stránce:</b> na klik, s posterem, nikdy autoplay; vedle vždy přepis.</li>
+      </ol>
+    </div>
+  </div>
+  <div class="rám puvod">
+    <div><small>Původ</small><b>Spin-off skupiny Multi-robot Systems, FEL ČVUT</b><p>Založeno 2017. Prof. Martin Saska, CTO.</p></div>
+    <div><small>Ocenění týmu · 2024</small><b>SPRIND Funke</b><p>Německá inovační výzva pro plně autonomní drony, výhra.</p></div>
+    <div><small>Ocenění týmu · 2025</small><b>A2RL Abu Dhabi</b><p>Bronz v závodě autonomních dronů.</p></div>
+    <div><small>Ocenění týmu · 2024 a 2025</small><b>AI Awards</b><p>Dvakrát po sobě. Kategorie ověřit u F4F.</p></div>
   </div>
 </section>
 
-<!-- ============ 6 · NAVIGACE BEZ GPS ============ -->
-<section id="navigace" class="sek">
-  <div class="rám dva obr-vlevo">
-    <div class="text">
-      <p class="kick modra">04 · Orientace</p>
-      <h2>Satelit uvnitř nechytíte. <span class="z">On ho nepotřebuje</span></h2>
-      <p class="pod">Satelitní navigaci nemá vůbec. Polohu si drží 3D LiDARem Livox MID360 a algoritmem LiDAR-Inertial Odometry. Funguje ve tmě, v prachu i v kouři, s výhledem 360°.</p>
-      <p class="pod" style="margin-top:16px"><b>Neví, kde je na mapě. Ví přesně, kde je v té šachtě.</b></p>
-      <p class="cit">Z produktové stránky F4F: <em>„360° FOV for navigation in GNSS-denied environments, darkness, dust, and smoke."</em> Parametr GPS je v listu uvedený jako N/A, tedy záměr, ne opomenutí.</p>
-    </div>
-    <div class="obr"><img id="dronTop" src="/nahledy/roboaid-x4k7/img/top.jpg" alt="RoboAid shora" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',style:'aspect-ratio:1;border:0',innerHTML:'<div><div class=t>Obrázek · dron shora</div><p>Půdorys RoboAidu na černém skle, měkké horní světlo, duhové okno LiDARu uprostřed. Generuje se v Comfy (Nano Banana 2).</p></div>'}))"><div class="kruh"></div><span class="stit">LiDAR 360° · Livox MID360</span></div>
-  </div>
-</section>
-
-<!-- ============ 7 · VIDĚNÍ A SVĚTLO ============ -->
-<section id="videni" class="sek">
-  <div class="rám">
-    <p class="kick">05 · Vidění a světlo</p>
-    <h2>Vidí, co je vidět, <span class="z">i to, co vidět není</span></h2>
-    <p class="pod">Barevný obraz ve 4K a termo obraz vznikají zároveň, jedním gimbalem. 14 000 lumenů ve čtyřech ovladatelných segmentech si svítí na to, co má zdokumentovat.</p>
-    <div class="porov" style="margin-top:36px" id="porov">
-      <img src="/nahledy/roboaid-x4k7/img/pov-rgb.jpg" alt="Pohled z palubní kamery, RGB">
-      <img class="termo" src="/nahledy/roboaid-x4k7/img/termo.jpg" alt="Totéž místo, termo vizualizace">
-      <div class="thud" aria-hidden="true"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i>
-        <div class="skala"><span>teplejší</span><b></b><span>chladnější</span></div></div>
-      <div class="del"></div>
-      <span class="lab l">RGB 4K</span><span class="lab r">IR 720p · ironbow · relativní stupnice</span>
-      <input type="range" min="2" max="98" value="55" aria-label="Posuvník RGB a termo">
-    </div>
-    <p class="cit">Termo obraz na této stránce je vizualizace jasu, ne měření teploty. Doložené: <em>„capturing crystal-clear RGB 4K and 720p thermal data simultaneously"</em> (produktová stránka F4F).</p>
-  </div>
-</section>
-
-<!-- ============ 8 · NÁLEZ ZA LETU ============ -->
-<section id="nalez" class="sek">
-  <div class="rám dva">
-    <div class="text">
-      <p class="kick">06 · Nález za letu</p>
-      <h2>Korozi vám <span class="z">nehlásí až protokol</span></h2>
-      <p class="pod">Onboard AI prochází barevný i termo obraz zároveň a už za letu označí korozi, netěsnosti a trhliny v betonu. Počítá to Jetson Orin NX přímo na palubě.</p>
-      <p class="pod" style="margin-top:16px"><span data-per="vse">Nález je označený dřív, než dron přistane.</span><span data-per="provoz">Pro vás: víte to, ještě než skončí směna. Ne za týden, až přijde protokol.</span><span data-per="sluzba">Pro vás: odevzdáváte nález na place a jedete domů. Zakázka je uzavřená týž den.</span><span data-per="vyzkum">Pro vás: detekční modely běží na palubě, na Jetsonu. Vlastní model se dá nasadit na stejné železo.</span></p>
-      <p class="cit">Sloveso je důležité: F4F píše <em>„flags"</em>, tedy označí. Posudek zůstává na člověku a stránka neslibuje nic navíc.</p>
-    </div>
-    <div class="obr"><img src="/nahledy/roboaid-x4k7/img/nalez.jpg" alt="Označená koroze na potrubí"></div>
-  </div>
-</section>
-
-<!-- ============ 9 · OPAKOVATELNOST ============ -->
-<section id="opakovatelnost" class="sek">
-  <div class="rám dva obr-vlevo">
-    <div class="text">
-      <p class="kick">07 · Opakovatelnost</p>
-      <h2>Stejná trasa, stejné snímky, <span class="z">jiný měsíc</span></h2>
-      <p class="pod">Software naplánuje trajektorii a misi zopakuje s vysokou přesností, bez pilota. Dva lety pak jdou položit vedle sebe a sledovat trend, ne jen snímek.</p>
-      <p class="cit">Doložené: <em>„The software plans the flight trajectory and repeats missions with high accuracy completely independent of a human pilot."</em> Jak se trasa pořizuje a ukládá, zatím doložené není, proto to tu nepíšeme.</p>
-    </div>
-    <div class="ph" style="aspect-ratio:16/10"><div><div class="t">Obrázek · dva lety vedle sebe</div><p>Dva snímky téhož místa na potrubí ze dvou letů, měsíc od sebe, stejný rám, stejný úhel. Vlevo popisek „březen", vpravo „duben", mezi nimi rozdíl v rozsahu koroze. Zdroj: archiv F4F, nebo dva průlety stejné trasy z Blender/Wan.</p></div></div>
-  </div>
-</section>
-
-<!-- ============ 10 · KDE UŽ LÉTAL ============ -->
-<section id="kde" class="sek">
-  <div class="rám">
-    <p class="kick">08 · Prostředí</p>
-    <h2>Důl, tunel, sklad, <span class="z">hala s potrubím</span></h2>
-    <p class="pod"><span data-per="vse">Čtyři prostředí, kde RoboAid létal. Držíme se jich a nedomýšlíme další.</span><span data-per="provoz">Ve vašem provozu to bývá kotelna, zásobník, kabelový kanál nebo jeřábová dráha pod střechou haly.</span><span data-per="sluzba">Pro vás jsou to zakázky, které dnes odmítáte: komíny, šachty a nádrže bez odstávky.</span><span data-per="vyzkum">Pro vás je to testovací prostředí bez GPS, kde se dá LIO a plánování mise zkoušet naostro.</span></p>
-    <div class="dlaz">
-      <div class="ph"><div><div class="t">Fotka · důl</div><p>Štola s výdřevou, úplná tma, prostor vytažený jen světlem dronu. Archiv F4F, nebo generovaný záběr ve stylu hero videa.</p></div></div>
-      <figure><img src="/nahledy/roboaid-x4k7/img/tunel.jpg" alt="Tunel"><figcaption>Tunel</figcaption></figure>
-      <figure><img src="/nahledy/roboaid-x4k7/img/hala.jpg" alt="Sklad"><figcaption>Sklad s regály</figcaption></figure>
-      <figure><img src="/nahledy/roboaid-x4k7/img/potrubi.jpg" alt="Hala s potrubím"><figcaption>Hala s potrubím</figcaption></figure>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 11 · CITACE + PR ============ -->
-<section id="citace" class="sek">
-  <div class="rám">
-    <p class="kick">Řečeno nahlas</p>
-    <blockquote class="velka">„RoboAid jsme vyvíjeli právě do situací, kdy je potřeba dostat kvalitní senzoriku do vnitřních prostor, <span>kde není GPS, kde je omezený prostor k manévrování</span> a kde by fyzická kontrola znamenala zbytečné riziko, odstávku nebo vysoké náklady."</blockquote>
-    <p class="kdo-rekl">Věra Sasková, CEO Fly4Future<br><a href="https://www.lupa.cz/aktuality/cesi-ukazali-autonomni-inspekcni-dron-pro-prumysl-leta-uvnitr-nepotrebuje-gps-a-hleda-zavady/" target="_blank" rel="noopener">Lupa.cz, 15. 7. 2026: Češi ukázali autonomní inspekční dron pro průmysl</a></p>
-    <div class="ocen">
-      <div class="karta"><div class="ph"><div><div class="t">Logo soutěže</div></div></div><span class="n">2024</span><h3>SPRIND Funke</h3><p>Výhra v německé inovační výzvě pro plně autonomní drony.</p></div>
-      <div class="karta"><div class="ph"><div><div class="t">Logo soutěže</div></div></div><span class="n">2025</span><h3>A2RL Abu Dhabi</h3><p>Bronz v závodě autonomních dronů.</p></div>
-      <div class="karta"><div class="ph"><div><div class="t">Logo soutěže</div></div></div><span class="n">2024 · 2025</span><h3>AI Awards</h3><p>Dvakrát po sobě mezi oceněnými.</p></div>
-    </div>
-    <p class="cit">Ocenění patří týmu Fly4Future, ne konkrétně RoboAidu. Před spuštěním ověřit u F4F přesné názvy kategorií a doplnit loga.</p>
-  </div>
-</section>
-
-<!-- ============ 12 · PARAMETRY ============ -->
-<section id="parametry" class="sek">
-  <div class="rám">
-    <p class="kick">09 · Parametry</p>
-    <h2>Čísla, <span class="z">až je budete potřebovat</span></h2>
-    <p class="pod">Pro technického schvalovatele. Jen to, co je v oficiálních listech F4F, nic z datasheetů komponent.</p>
-    <div class="spec">
-      <div><small>Doba letu</small><b>14 až 22 min</b><i>podle varianty stroje</i></div>
-      <div><small>Hmotnost</small><b>3 200 až 3 800 g</b><i>podle varianty stroje</i></div>
-      <div><small>Satelitní navigace</small><b class="z">nemá</b><i>GPS: N/A, záměrně</i></div>
-      <div><small>Orientace</small><b>3D LiDAR Livox MID360</b><i>LiDAR-Inertial Odometry, 360°</i></div>
-      <div><small>Kamera</small><b>RGB 4K + termo 720p</b><i>oba kanály současně, na gimbalu</i></div>
-      <div><small>Světlo</small><b>14 000 lm</b><i>4 ovladatelné segmenty</i></div>
-      <div><small>Palubní počítač</small><b>Jetson Orin NX 16 GB</b><i>nebo ASUS NUC i7</i></div>
-      <div><small>Rádio</small><b>2,4 a 5 GHz</b><i>pásma pro spojení s obsluhou</i></div>
-      <div><small>Softwarový stack</small><b>ROS 2</b><i>autonomie, LIO position mode</i></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 13 · ZAPADNE ============ -->
-<section id="zapadne" class="sek" style="padding-top:0">
-  <div class="rám dva">
-    <div class="text">
-      <p class="kick">10 · Integrace</p>
-      <h2>Zapadne do toho, <span class="z">co už provozujete</span></h2>
-      <p class="pod">Let, autonomie i vidění se počítají na palubě, bez přístupu k síti. Pro uzavřené provozní sítě je to argument pro IT, ne jen pro údržbu. Stack je ROS 2.</p>
-      <p class="cit">Doslova: <em>„Everything regarding flight, autonomy and vision is processed on the computer, locally without any access to the network."</em> (F4F)</p>
-    </div>
-    <div class="karty" style="margin-top:0;grid-template-columns:1fr">
-      <div class="karta"><span class="n">Bez sítě</span><h3>Nic neodchází ven, dokud to sami nepošlete</h3><p>Zpracování na palubě. Kde záznam končí a jak se dostane ven, doplníme po potvrzení od F4F.</p></div>
-      <div class="karta"><span class="n">ROS 2</span><h3>Otevřený stack, ne černá skříňka</h3><p><span data-per="vse provoz sluzba">Integrátor se má čeho chytit, provozovatel nekupuje zavřený systém.</span><span data-per="vyzkum">Pro vás: stejný stack, na kterém stojí výzkum skupiny MRS na ČVUT.</span></p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 14 · PĚT OTÁZEK ============ -->
-<section id="otazky" class="sek" style="padding-top:0">
-  <div class="rám">
-    <p class="kick">11 · Než vyberete</p>
-    <h2>Pět otázek, které si položte <span class="z">u každého inspekčního dronu</span></h2>
-    <ul class="otazky">
-      <li><div><h3>Co se stane, když se dotkne stěny</h3><p>Srovná se a letí dál, nebo padá? Tady se rozhoduje, jestli si stroj troufnete poslat do úzkého prostoru.</p></div><span class="stav ano">RoboAid: letí dál</span></li>
-      <li><div><h3>Podle čeho ví, kde je, když není signál</h3><p>Satelit uvnitř nefunguje. Ptejte se na senzor a na algoritmus, ne na slovo „autonomní".</p></div><span class="stav ano">LiDAR + LIO</span></li>
-      <li><div><h3>Vidí termo a barvu zároveň, nebo přepíná</h3><p>Přepínání znamená dva lety, nebo polovinu dat.</p></div><span class="stav ano">současně</span></li>
-      <li><div><h3>Kdy se dozvíte o nálezu</h3><p>Za letu, nebo až z protokolu za týden? Rozdíl je v tom, co stihnete zařídit ještě dnes.</p></div><span class="stav ano">za letu</span></li>
-      <li><div><h3>Co udělá, když ztratí spojení s operátorem</h3><p>Tuhle otázku vám stejně položí bezpečák. Ptáme se jí dřív, než on. Odpověď ukážeme na demu.</p></div><span class="stav demo">na demu</span></li>
-    </ul>
-  </div>
-</section>
-
-<!-- ============ 15 · DEMO ============ -->
+<!-- ===== 08 · POPTÁVKA ===== -->
 <section id="demo" class="sek">
   <div class="rám dva">
-    <div class="text">
-      <p class="kick">12 · Další krok</p>
-      <h2><span data-per="vse provoz">Ukažte nám <span class="z">svůj nejhorší prostor</span></span><span data-per="sluzba">Pošlete nám zakázku, <span class="z">kterou dnes odmítáte</span></span><span data-per="vyzkum">Napište, co chcete <span class="z">na platformě zkoušet</span></span></h2>
-      <p class="pod"><span data-per="vse provoz">Napište, kam se u vás nedá. Ozveme se s tím, jestli to RoboAid uletí, a domluvíme demo přímo u vás.</span><span data-per="sluzba">Řekneme vám, jestli to RoboAid uletí, a domluvíme demo v prostoru, který si vyberete.</span><span data-per="vyzkum">ROS 2 stack, LIO, dokumentace. Domluvíme přístup a demo na vašem pracovišti.</span></p>
-      <form class="form" onsubmit="event.preventDefault();this.querySelector('.pozn').textContent='Prototyp: odesílání není zapojené. Děkujeme, ozveme se.'">
+    <div>
+      <p class="kick">07 · Další krok</p>
+      <h2><span data-per="vse provoz">Označte, <span class="z">kam se u vás nedá</span></span><span data-per="sluzba">Označte zakázku, <span class="z">kterou dnes odmítáte</span></span></h2>
+      <p class="pod">Kde RoboAid prokazatelně létal, a kde by mohl u vás. Klik doplní zprávu.</p>
+      <div class="chipy" id="chipy">
+        <button type="button" data-letal>důlní šachta</button><button type="button" data-letal>tunel</button>
+        <button type="button" data-letal>vysokoregálový sklad</button><button type="button" data-letal>hala s potrubím</button>
+        <button type="button">komín</button><button type="button">nádrž</button><button type="button">kabelový kanál</button>
+        <button type="button">jeřábová dráha</button><button type="button">kotelna</button>
+      </div>
+      <p class="kick" style="margin-top:30px">Chci vidět na demu</p>
+      <ul class="check" id="check">
+        <li><label><input type="checkbox" value="chování při ztrátě spojení"><span>Co stroj udělá při ztrátě spojení s obsluhou</span></label></li>
+        <li><label><input type="checkbox" value="živý obraz pro obsluhu"><span>Živý obraz pro obsluhu během letu</span></label></li>
+        <li><label><input type="checkbox" value="kde záznam končí a jak se dostane ven"><span>Kde záznam končí a jak se dostane do naší sítě</span></label></li>
+        <li><label><input type="checkbox" value="3D mapa a mračno bodů"><span>Uložitelná 3D mapa a mračno bodů</span></label></li>
+        <li><label><input type="checkbox" value="zadání opakovatelné trasy"><span>Jak se zadává trasa, aby šla zopakovat</span></label></li>
+      </ul>
+    </div>
+    <div>
+      <form class="form" onsubmit="event.preventDefault();this.querySelector('.pozn').textContent='Prototyp: odesílání není zapojené. Děkujeme, ozveme se do dvou pracovních dnů.'">
         <input type="text" placeholder="Jméno a firma" aria-label="Jméno a firma">
         <input type="email" placeholder="E-mail" aria-label="E-mail">
         <textarea id="zprava" placeholder="Kam se u vás nedá? Stačí věta." aria-label="Zpráva"></textarea>
         <div><button class="btn" type="submit">Rezervovat demo</button></div>
-        <p class="pozn">Cena je na poptávku. Demo je bez závazku.</p>
+        <p class="pozn">Cena na poptávku. Demo bez závazku. Ozveme se do dvou pracovních dnů.</p>
       </form>
-    </div>
-    <div>
       <div class="osoba">
-        <div class="ph"><div><div class="t">Portrét</div><p style="font-size:11px">Kontaktní osoba F4F, tmavé pozadí, neutrální výraz</p></div></div>
-        <div><b>Jméno Příjmení</b><span>obchod a dema RoboAid<br>Fly4Future, Praha</span></div>
+        <div class="ph"><div><div class="t">Portrét</div></div></div>
+        <div><b>Jméno Příjmení</b><span>obchod a dema RoboAid<br>Fly4Future, Praha · kontakt doplní F4F</span></div>
       </div>
-      <div class="ph" style="margin-top:22px;min-height:280px"><div><div class="t">Fotka · demo v terénu</div><p>Technik F4F s RoboAidem v ruce před vstupem do šachty nebo tunelu, zákazník vedle něj. Reálná fotka z dema, ne stock.</p></div></div>
     </div>
   </div>
 </section>
 
-<!-- ============ 16 · ROZCESTNÍK ============ -->
-<section id="dalsi" class="sek" style="padding-top:0">
-  <div class="rám">
-    <p class="kick">Ze stejné dílny</p>
-    <h2>Dva příbuzné stroje</h2>
-    <div class="roz">
-      <a href="https://fly4future.com/" target="_blank" rel="noopener">
-        <div class="ph"><div><div class="t">Packshot</div><p style="font-size:11px">RoboCore na černé, jejich exploded render</p></div></div>
-        <div><p class="kick">RoboCore</p><h3>Jedno jádro, jakákoli aplikace</h3><p>Modulární platforma. 38 min letu, nosnost 4 kg.</p><span class="dal">Prohlédnout →</span></div>
-      </a>
-      <a href="https://fly4future.com/" target="_blank" rel="noopener">
-        <div class="ph"><div><div class="t">Packshot</div><p style="font-size:11px">PORTOS, noční LED hero (mají)</p></div></div>
-        <div><p class="kick">PORTOS</p><h3>Jedno tělo, čtyři stroje</h3><p>Rekonfigurovatelná platforma pro víc úloh na jednom rámu.</p><span class="dal">Prohlédnout →</span></div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<footer>Prototyp landing page RoboAid · mid-fi · není veřejná stránka Fly4Future</footer>
+<footer><div class="rám">
+  <span>Ze stejné dílny: <a href="https://fly4future.com/" target="_blank" rel="noopener">RoboCore</a> (modulární platforma, 38 min, 4 kg) · <a href="https://fly4future.com/" target="_blank" rel="noopener">PORTOS</a> (jedno tělo, čtyři stroje)</span>
+  <span>Prototyp landing page RoboAid · není veřejná stránka Fly4Future</span>
+</div></footer>
 <div id="pilulka" role="button" tabindex="0">Díváte se jako: <b>—</b> · změnit</div>
 
 <script>
@@ -1031,20 +987,20 @@
     }
   })();
 
-  // ---------- personalizace ----------
+  // ---------- persona ----------
   (function(){
     const H = document.documentElement, tl = document.querySelectorAll('.volba button');
     const pil = document.getElementById('pilulka'), pb = pil && pil.querySelector('b');
-    const NAZEV = {provoz:'provoz', sluzba:'inspekční služba', vyzkum:'výzkum a integrace'};
-    const PLACEHOLDER = {provoz:'Kam se u vás nedá? Stačí věta.', sluzba:'Jakou zakázku dnes odmítáte? Stačí věta.',
-                         vyzkum:'Co chcete na platformě zkoušet? Stačí věta.'};
+    const NAZEV = {provoz:'provoz', sluzba:'inspekční služba'};
+    const PH = {provoz:'Kam se u vás nedá? Stačí věta.', sluzba:'Jakou zakázku dnes odmítáte? Stačí věta.'};
     const zpr = document.getElementById('zprava');
-    function nastav(k, scroll){
+    function nastav(k){
       if (k) H.dataset.kdo = k; else delete H.dataset.kdo;
       tl.forEach(b => b.classList.toggle('on', b.dataset.kdo === k));
       if (pil){ pil.classList.toggle('on', !!k); if (pb) pb.textContent = NAZEV[k] || '—'; }
-      if (zpr) zpr.placeholder = PLACEHOLDER[k] || PLACEHOLDER.provoz;
+      if (zpr) zpr.placeholder = PH[k] || PH.provoz;
       try { k ? localStorage.setItem('roboaid-kdo', k) : localStorage.removeItem('roboaid-kdo'); } catch(e){}
+      if (window.prepocti) window.prepocti();
     }
     tl.forEach(b => b.addEventListener('click', () => nastav(b.dataset.kdo)));
     if (pil) pil.addEventListener('click', () => { nastav(null); document.getElementById('kdo').scrollIntoView({behavior:'smooth'}); });
@@ -1055,23 +1011,18 @@
   // ---------- sticky dron: věty vyjíždějí zpoza něj podle postupu scrollu ----------
   (function(){
     const sec = document.getElementById('slib'); if (!sec) return;
-    const vety = [...sec.querySelectorAll('.veta')], tecky = [...sec.querySelectorAll('.tecky i')];
-    const n = vety.length;
+    const vety = [...sec.querySelectorAll('.veta')], tecky = [...sec.querySelectorAll('.tecky i')], n = vety.length;
     const clamp = (x,a,b) => Math.min(b, Math.max(a, x));
     const smooth = (a,b,x) => { const t = clamp((x-a)/(b-a),0,1); return t*t*(3-2*t); };
     const easeOut = t => 1 - Math.pow(1-t, 3);
     function tick(){
       const r = sec.getBoundingClientRect(), vh = innerHeight;
-      const P = clamp(-r.top / Math.max(1, r.height - vh), 0, 1);   // 0 = sekce přijela, 1 = odjíždí
+      const P = clamp(-r.top / Math.max(1, r.height - vh), 0, 1);
       let akt = -1;
       vety.forEach((el, i) => {
-        // každá věta má svou třetinu postupu; malý přesah, ať se střídají bez díry
         const t = P*n - i;
         if (t <= -0.05 || t >= 1.05){ el.style.opacity = 0; el.style.transform = 'translate(-50%,-50%)'; return; }
-        // dráha: zpoza dronu (střed) nahoru nad něj, pak dál a pryč
-        // vyjede nad dron (34 vh), tam chvíli stojí, pak ještě kousek povyjede a zmizí
-        // dřív, než ho ořízne horní hrana okna
-        const up = t < 0.55 ? easeOut(clamp(t/0.55,0,1)) * 31 : 31 + (t-0.55)/0.45 * 8;   // ve vh
+        const up = t < 0.55 ? easeOut(clamp(t/0.55,0,1)) * 31 : 31 + (t-0.55)/0.45 * 8;
         const op = smooth(0.08, 0.40, t) * (1 - smooth(0.70, 0.92, t));
         const sc = 0.9 + 0.1*easeOut(clamp(t/0.55,0,1));
         el.style.opacity = op.toFixed(3);
@@ -1080,18 +1031,60 @@
       });
       tecky.forEach((d, i) => d.classList.toggle('on', i === akt));
     }
-    let raf = 0;
-    const plan = () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; tick(); }); };
+    let raf = 0; const plan = () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; tick(); }); };
     addEventListener('scroll', plan, {passive:true}); addEventListener('resize', plan); tick();
-    window.slibTick = tick;   // pro ladění: zavolat po ručním posunu
+    window.slibTick = tick;
   })();
 
-  // ---------- RGB / termo posuvník ----------
+  // ---------- kalkulačka: jen čísla čtenáře, nic se neukládá ----------
   (function(){
-    const p = document.getElementById('porov'); if (!p) return;
-    const r = p.querySelector('input');
-    const set = () => p.style.setProperty('--x', r.value + '%');
-    r.addEventListener('input', set); set();
+    const g = id => { const e = document.getElementById(id); return e ? (+e.value || 0) : 0; };
+    const fmt = n => n.toLocaleString('cs-CZ', {maximumFractionDigits:0}) + ' Kč';
+    const vj = document.getElementById('v-jedna'), vr = document.getElementById('v-rok');
+    let posledni = null;
+    function prepocti(){
+      const kdo = document.documentElement.dataset.kdo || 'provoz';
+      let jedna = 0, rok = 0;
+      if (kdo === 'sluzba'){ jedna = g('s-kc'); rok = g('s-n') * g('s-kc'); }
+      else { jedna = g('k-hod') * g('k-kc') + g('k-les'); rok = jedna * g('k-n'); }
+      vj.textContent = jedna ? fmt(jedna) : '—'; vr.textContent = rok ? fmt(rok) : '—';
+      posledni = rok ? {kdo, jedna, rok} : null;
+    }
+    window.prepocti = prepocti;
+    document.querySelectorAll('.kalk input').forEach(i => i.addEventListener('input', prepocti));
+    const tl = document.getElementById('k-vlozit'), zpr = document.getElementById('zprava');
+    if (tl) tl.addEventListener('click', () => {
+      if (!posledni){ tl.textContent = 'Nejdřív vyplňte čísla'; setTimeout(() => tl.textContent = 'Vložit číslo do poptávky', 1800); return; }
+      const v = posledni.kdo === 'sluzba'
+        ? 'Za rok odmítáme zakázky za ' + fmt(posledni.rok) + '.'
+        : 'Jedna prohlídka nás dnes stojí ' + fmt(posledni.jedna) + ', za rok ' + fmt(posledni.rok) + '.';
+      zpr.value = (zpr.value ? zpr.value.trim() + '\n' : '') + v;
+      document.getElementById('demo').scrollIntoView({behavior:'smooth'});
+    });
+    prepocti();
+  })();
+
+  // ---------- hotspoty na packshotu: klik na dotyku, hover na desktopu ----------
+  document.querySelectorAll('.hs').forEach(h => h.addEventListener('click', e => {
+    document.querySelectorAll('.hs.on').forEach(x => x !== h && x.classList.remove('on'));
+    h.classList.toggle('on'); e.stopPropagation();
+  }));
+  document.addEventListener('click', () => document.querySelectorAll('.hs.on').forEach(x => x.classList.remove('on')));
+
+  // ---------- chipy a checklist doplňují zprávu ----------
+  (function(){
+    const zpr = document.getElementById('zprava'); if (!zpr) return;
+    document.querySelectorAll('#chipy button').forEach(b => b.addEventListener('click', () => {
+      b.classList.toggle('on');
+      const v = 'Prostor: ' + b.textContent.trim() + '.';
+      if (b.classList.contains('on')) zpr.value = (zpr.value ? zpr.value.trim() + '\n' : '') + v;
+      else zpr.value = zpr.value.split('\n').filter(l => l.trim() !== v).join('\n');
+    }));
+    document.querySelectorAll('#check input').forEach(c => c.addEventListener('change', () => {
+      const v = 'Na demu chci vidět: ' + c.value + '.';
+      if (c.checked) zpr.value = (zpr.value ? zpr.value.trim() + '\n' : '') + v;
+      else zpr.value = zpr.value.split('\n').filter(l => l.trim() !== v).join('\n');
+    }));
   })();
 
 </script>
