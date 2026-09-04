@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
       { source: "/equator", destination: "/equator/index.html" },
       { source: "/vizualy", destination: "/vizualy/index.html" },
       { source: "/prim", destination: "/prim/index.html" },
+      { source: "/nanoo", destination: "/nanoo/index.html" },
     ];
   },
 };
