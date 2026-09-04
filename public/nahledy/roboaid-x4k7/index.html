@@ -1132,6 +1132,106 @@
     font-size:11px;letter-spacing:.08em;color:var(--seda)}
   .bn figcaption b{color:var(--ink);font-weight:500;letter-spacing:.14em;text-transform:uppercase}
 </style>
+
+<style>
+  /* ---- LinkedIn maketa: vlastni jmenny prostor li-*, zadna kolize s LP ---- */
+  /* Karta je zamerne ve svetlem LinkedIn UI. Na tmave strance tim cte jako
+     ukazka jineho povrchu, ne jako dalsi sekce webu. */
+  #lipost .rám{text-align:center}
+  /* centrovany odstavec potrebuje uzsi miru, jinak je prapor rozhozeny */
+  #lipost .pod{margin-left:auto;margin-right:auto;max-width:52ch}
+  .li-stred{margin-top:clamp(40px,6vw,64px);display:flex;flex-direction:column;align-items:center}
+  .li-stitek{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--zlata);margin:0 0 18px}
+  .li-karta{width:min(500px,100%);background:#fff;border:1px solid #d9dde2;border-radius:10px;
+    overflow:hidden;text-align:left;box-shadow:0 24px 60px rgba(0,0,0,.45);
+    font-family:var(--body);color:#191919}
+  .li-hl{display:flex;align-items:flex-start;gap:10px;padding:14px 16px 6px}
+  .li-ava{flex:0 0 auto;width:48px;height:48px;border-radius:50%;background:#2B4A6F;color:#fff;
+    display:grid;place-items:center;font-family:var(--disp);font-weight:700;font-size:17px;
+    letter-spacing:.04em}
+  .li-kdo{min-width:0;flex:1 1 auto;line-height:1.3}
+  .li-kdo b{display:block;font-size:14.5px;font-weight:600;color:#191919}
+  .li-kdo span{display:block;font-size:12.5px;color:#666}
+  .li-tri{flex:0 0 auto;color:#666;font-size:18px;letter-spacing:1px;line-height:1}
+  .li-text{padding:4px 16px 14px;font-size:14.5px;line-height:1.48;color:#191919;
+    white-space:pre-line}
+  .li-text a{color:#0a66c2;text-decoration:none}
+  .li-media{display:block;width:100%;height:auto;background:#07090F;border-top:1px solid #e6e9ec;
+    border-bottom:1px solid #e6e9ec}
+  .li-akce{display:flex;padding:6px 8px}
+  .li-akce span{flex:1 1 0;text-align:center;padding:9px 4px;font-size:13px;font-weight:600;
+    color:#5f6b7a;border-radius:4px}
+  @media (max-width:560px){
+    .li-akce span{font-size:11.5px;padding:9px 2px}
+    .li-ava{width:42px;height:42px;font-size:15px}
+    .li-stitek{letter-spacing:.12em;font-size:10px}
+  }
+</style>
+
+<!-- ===== LinkedIn maketa: video 4:5 tak, jak by vypadalo v kanalu ===== -->
+<section id="lipost" class="sek" style="padding-top:0">
+  <div class="rám">
+    <p class="kick">Video pro LinkedIn</p>
+    <h2>Stejný stroj, <span class="z">formát kanálu</span></h2>
+    <p class="pod">Poměr 4:5 zabere v mobilním kanálu největší plochu, jakou LinkedIn u videa
+    dovolí. Ořez na výšku by ale stroj rozřízl přesně v záběru, kde je největší, takže obraz
+    drží svůj poměr a popisky mají vlastní zónu pod ním. <b>Čitelné jsou konstrukcí, ne stínem
+    pod písmem.</b> První dvě věty postu nesou celý hák, protože dál kanál text zabalí.</p>
+
+    <div class="li-stred">
+      <p class="li-stitek">Koncept &middot; takto by post vypadal na profilu</p>
+
+      <article class="li-karta">
+        <div class="li-hl">
+          <div class="li-ava" aria-hidden="true">VS</div>
+          <div class="li-kdo">
+            <b>Věra Sasková</b>
+            <span>CEO &middot; Fly4Future</span>
+            <span>1 h &middot; &#127760;</span>
+          </div>
+          <div class="li-tri" aria-hidden="true">&middot;&middot;&middot;</div>
+        </div>
+
+        <div class="li-text">Do nádrže, do potrubí, do šachty se dnes leze s lešením a s odstávkou. RoboAid tam vlétne sám.
+
+Nemá GPS a nepotřebuje ji. Polohu si drží LiDARem podle toho, co sám vidí. Kamera a termovize měří zároveň, vlastní světlo má 14 000 lumenů a všechno si počítá na palubě, bez sítě a bez kabelu.
+
+Ve vzduchu vydrží 14 až 22 minut. To je celá prohlídka, při které nikdo nemusí dovnitř.
+
+Kde u vás dnes prohlídka znamená odstávku?
+
+<a href="#" onclick="return false">fly4future.com/custom-drones/roboaid</a></div>
+
+        <video class="li-media" id="livid" playsinline muted loop preload="metadata"
+          poster="/nahledy/roboaid-x4k7/li/post-poster.jpg"
+          aria-label="Promo video RoboAid ve formátu 4:5">
+          <source src="/nahledy/roboaid-x4k7/li/post.mp4" type="video/mp4">
+        </video>
+
+        <div class="li-akce" aria-hidden="true">
+          <span>To se mi líbí</span><span>Komentovat</span><span>Přeposlat</span><span>Odeslat</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  // Chova se jako kanal: hraje, jen kdyz je v zaberu. Jinak by na strance
+  // bezela tri videa najednou.
+  var v = document.getElementById('livid');
+  if (!v || !('IntersectionObserver' in window)) return;
+  new IntersectionObserver(function(zaznamy){
+    zaznamy.forEach(function(z){
+      if (z.isIntersecting){ var p = v.play(); if (p && p.catch) p.catch(function(){}); }
+      else { v.pause(); }
+    });
+  }, {threshold: 0.45}).observe(v);
+})();
+</script>
+
 <section id="formaty" class="sek" style="padding-top:0">
   <div class="rám">
     <p class="kick">Reklamní formáty</p>
