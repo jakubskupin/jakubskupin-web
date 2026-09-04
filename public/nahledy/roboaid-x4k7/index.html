@@ -641,17 +641,33 @@
     background:linear-gradient(180deg,rgba(7,9,15,.55) 0%,rgba(7,9,15,0) 26%,
       rgba(7,9,15,0) 58%,rgba(7,9,15,.74) 100%)}
   .fvrstva{position:absolute;inset:0;display:grid;pointer-events:none;z-index:2}
-  .fbeat{grid-area:1/1;align-self:end;justify-self:start;
+  .fbeat{position:absolute;left:0;bottom:0;
     padding:0 clamp(24px,6vw,88px) clamp(56px,9vh,110px);max-width:min(640px,86vw);
     opacity:0;transform:translateY(22px);transition:opacity .45s ease,transform .45s ease}
   .fbeat.je{opacity:1;transform:none}
-  .fbeat .stitek{font-family:var(--mono);font-size:11px;letter-spacing:.24em;
-    text-transform:uppercase;color:var(--zlata);margin:0 0 14px}
-  .fbeat h3{font-family:var(--serif);font-weight:400;
-    font-size:clamp(30px,4.6vw,62px);line-height:1.03;letter-spacing:-.01em;margin:0 0 14px;color:#fff}
-  .fbeat p{font-size:clamp(15px,1.25vw,19px);line-height:1.55;color:#C6D2E4;margin:0;max-width:44ch}
-  .fbeat p b{color:var(--hot);font-weight:600}
-  #fuvod{grid-area:1/1;align-self:center;justify-self:center;text-align:center;
+  .fnazev{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--zlata);margin:0 0 12px}
+  .ftxt{font-family:var(--serif);font-weight:400;font-size:clamp(22px,2.5vw,34px);
+    line-height:1.22;letter-spacing:-.005em;color:#fff;margin:0 0 14px;max-width:20ch}
+  .fspec{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+    color:var(--seda);border-top:1px solid rgba(233,185,74,.28);padding-top:9px}
+  /* Krouzek sedi na dilu ve VIDEU, ne na pevnem miste obrazovky. Prepocet dela JS
+     stejnym vzorcem jako prohlizec pro object-fit: cover, takze drzi i pri orezu.
+     Kdyz dil z kadru vypadne, krouzek i cara se schovaji: radeji nic nez sipka vedle. */
+  #fkruh{position:absolute;left:0;top:0;width:46px;height:46px;margin:-23px 0 0 -23px;
+    border:1.5px solid rgba(233,185,74,.95);border-radius:50%;opacity:0;
+    transition:opacity .3s ease;z-index:3;pointer-events:none}
+  /* tmavy prstenec tesne uvnitr: bez nej se zlata linka ztrati na svetlem kouri */
+  #fkruh::after{content:"";position:absolute;inset:-2.5px;border:1px solid rgba(7,9,15,.5);
+    border-radius:50%}
+  #fkruh::before{content:"";position:absolute;inset:-14px;border:1px solid rgba(233,185,74,.20);
+    border-radius:50%}
+  #fkruh i{position:absolute;left:50%;top:50%;width:6px;height:6px;margin:-3px 0 0 -3px;
+    background:var(--zlata);border-radius:50%;box-shadow:0 0 0 1.5px rgba(7,9,15,.45)}
+  #fspoj{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;
+    opacity:0;transition:opacity .3s ease}
+  #fspoj path{fill:none;stroke:rgba(233,185,74,.30);stroke-width:1}
+  #fuvod{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;
     padding:0 24px;max-width:820px;transition:opacity .5s ease,transform .5s ease}
   #fuvod .stitek{font-family:var(--mono);font-size:11px;letter-spacing:.24em;
     text-transform:uppercase;color:var(--zlata);margin:0 0 20px}
@@ -668,8 +684,9 @@
     #film-lep::after{background:linear-gradient(180deg,rgba(7,9,15,.45) 0%,
       rgba(7,9,15,0) 16%,rgba(7,9,15,0) 44%,rgba(7,9,15,.92) 60%)}
     .fbeat{padding:0 22px clamp(64px,12vh,110px);max-width:none}
-    .fbeat h3{font-size:clamp(28px,8.4vw,40px)}
-    .fbeat p{font-size:16px;max-width:none}
+    .ftxt{font-size:clamp(21px,5.8vw,28px);max-width:none}
+    #fkruh{width:36px;height:36px;margin:-18px 0 0 -18px}
+    #fkruh::before{inset:-10px}
     #fstopa{height:min(140px,18vh);right:9px}
   }
   @media (prefers-reduced-motion:reduce){ .fbeat{transition:none} }
@@ -684,27 +701,39 @@
         <p class="stitek">Průlet strojem</p>
         <h2>Tam, kde <span class="z">končí GPS</span></h2>
       </div>
-      <article class="fbeat" data-od="0.16" data-do="0.36">
-        <p class="stitek">Orientace</p>
-        <h3>Satelit tu nemá</h3>
-        <p>Polohu drží podle toho, co <b>sám vidí</b>. Ve tmě, v prachu i v kouři.</p>
+      <article class="fbeat" data-i="0">
+        <p class="fnazev">Segmentované LED</p>
+        <p class="ftxt">Čtyři ovladatelné segmenty tam, kde není žádné světlo.</p>
+        <span class="fspec">14 000 lm</span>
       </article>
-      <article class="fbeat" data-od="0.40" data-do="0.60">
-        <p class="stitek">Vidění</p>
-        <h3>Vidí a měří zároveň</h3>
-        <p>Kamera a termovize <b>v jednom průletu</b>. Vlastní světlo tam, kde žádné není.</p>
+      <article class="fbeat" data-i="1">
+        <p class="fnazev">Rám</p>
+        <p class="ftxt">Chrání vrtule a nese všechny komponenty.</p>
+        <span class="fspec">karbonový sendvič</span>
       </article>
-      <article class="fbeat" data-od="0.64" data-do="0.84">
-        <p class="stitek">Nezávislost</p>
-        <h3>Počítá si to na palubě</h3>
-        <p>Žádná síť, žádný kabel, <b>žádný člověk uvnitř</b> prostoru.</p>
+      <article class="fbeat" data-i="2">
+        <p class="fnazev">Li-Ion baterie</p>
+        <p class="ftxt">Poměr hmotnosti k energii, který prodlužuje let.</p>
+        <span class="fspec">15 000 mAh</span>
       </article>
-      <article class="fbeat" data-od="0.88" data-do="1.01">
-        <p class="stitek">Výsledek</p>
-        <h3>Odletí a vrátí se s nálezem</h3>
-        <p>Provoz mezitím <b>běží dál</b>.</p>
+      <article class="fbeat" data-i="3">
+        <p class="fnazev">SIYI ZT6</p>
+        <p class="ftxt">Inspekční hlava na tříosém gimbalu.</p>
+        <span class="fspec">4K RGB + 720p termo</span>
+      </article>
+      <article class="fbeat" data-i="4">
+        <p class="fnazev">Palubní počítač</p>
+        <p class="ftxt">Let, autonomie i vidění se počítají na palubě, bez sítě.</p>
+        <span class="fspec">ASUS NUC i7 nebo Jetson Orin NX</span>
+      </article>
+      <article class="fbeat" data-i="5">
+        <p class="fnazev">Livox MID360</p>
+        <p class="ftxt">Navigace bez GNSS, ve tmě, v prachu i v kouři.</p>
+        <span class="fspec">360° FOV · LIO</span>
       </article>
     </div>
+    <svg id="fspoj" aria-hidden="true"><path d="" /></svg>
+    <div id="fkruh"><i></i></div>
     <div id="fstopa"><i></i></div>
   </div>
 </section>
@@ -713,7 +742,39 @@
   var sek=document.getElementById('film-sek'), vid=document.getElementById('film');
   var uvod=document.getElementById('fuvod'), stopa=document.querySelector('#fstopa i');
   var beaty=[].slice.call(document.querySelectorAll('.fbeat'));
+  var lep=document.getElementById('film-lep');
+  var kruh=document.getElementById('fkruh'), spoj=document.getElementById('fspoj');
+  var cara=spoj?spoj.querySelector('path'):null;
+  var H=[{"od":0.14,"do":0.26,"p":0.1992,"x":0.3985,"y":0.6},{"od":0.27,"do":0.36,"p":0.2988,"x":0.5,"y":0.508},{"od":0.37,"do":0.45,"p":0.3784,"x":0.485,"y":0.617},{"od":0.5,"do":0.605,"p":0.5577,"x":0.484,"y":0.401},{"od":0.615,"do":0.695,"p":0.6473,"x":0.586,"y":0.464},{"od":0.705,"do":0.8,"p":0.7369,"x":0.5,"y":0.305}];
   if(!sek||!vid) return;
+  // normalizovana souradnice VIDEA -> pixel na obrazovce, vzorec pro object-fit: cover
+  function naObrazovku(nx,ny){
+    var cw=lep.clientWidth, ch=lep.clientHeight;
+    var vw=vid.videoWidth||1920, vh=vid.videoHeight||1080;
+    var m=Math.max(cw/vw,ch/vh), dw=vw*m, dh=vh*m;
+    return {x:(cw-dw)/2+nx*dw, y:(ch-dh)/2+ny*dh, cw:cw, ch:ch};
+  }
+  function znacka(p, akt){
+    if(!kruh||!cara) return;
+    if(akt<0){ kruh.style.opacity=0; spoj.style.opacity=0; return; }
+    // krouzek jen v uzkem okne kolem casu, kdy byla kotva zmerena; mimo nej by
+    // od dilu ujel, protoze kamera mezitim najizdi
+    var h=H[akt], d=Math.abs(p-h.p), OKNO=0.05;
+    if(d>OKNO){ kruh.style.opacity=0; spoj.style.opacity=0; return; }
+    var q=naObrazovku(h.x,h.y);
+    var M=46;   // polomer krouzku i s vnejsim prstencem, plus rezerva
+    if(!(q.x>M && q.x<q.cw-M && q.y>M && q.y<q.ch-M)){
+      kruh.style.opacity=0; spoj.style.opacity=0; return; }
+    var a=1-Math.pow(d/OKNO,2);
+    kruh.style.transform='translate('+q.x+'px,'+q.y+'px)';
+    kruh.style.opacity=a;
+    var b=beaty[akt].getBoundingClientRect(), l=lep.getBoundingClientRect();
+    var tx=b.left-l.left+16, ty=b.top-l.top-16;
+    var smer = q.x<tx ? 1 : -1;
+    var loh = q.x + smer*34;
+    cara.setAttribute('d','M'+(q.x+smer*27)+' '+q.y+' L'+loh+' '+q.y+' L'+(loh+smer*26)+' '+ty+' L'+tx+' '+ty);
+    spoj.style.opacity=a*0.85;
+  }
   // iOS prehraje scrubbing jen u videa, ktere uz jednou belo. Krotky play a hned
   // pause staci a nechce gesto, protoze je muted+playsinline.
   var odemknuto=false;
@@ -728,10 +789,13 @@
     if(d<=0)return 0; var p=-r.top/d; return p<0?0:(p>1?1:p); }
   function vrstvy(p){
     var c = p<0.06 ? 1 : (p>0.15 ? 0 : 1-(p-0.06)/0.09);
-    uvod.style.opacity=c; uvod.style.transform='translateY('+(-(1-c)*26)+'px)';
+    uvod.style.opacity=c; uvod.style.transform='translateY(calc(-50% - '+((1-c)*26)+'px))';
     stopa.style.height=(p*100)+'%';
-    for(var i=0;i<beaty.length;i++){ var b=beaty[i];
-      b.classList.toggle('je', p>=parseFloat(b.dataset.od) && p<=parseFloat(b.dataset.do)); } }
+    var akt=-1;
+    for(var i=0;i<beaty.length;i++){
+      var je = p>=H[i].od && p<=H[i].do;
+      beaty[i].classList.toggle('je', je); if(je) akt=i; }
+    znacka(p, akt); }
   function tik(){
     // dojezd misto skoku: scroll na trackpadu je trhany a video by poskakovalo
     ted += (cil-ted)*0.14; if(Math.abs(cil-ted)<0.0004) ted=cil;
