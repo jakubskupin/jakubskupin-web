@@ -144,6 +144,20 @@
     color:rgba(255,255,255,.7);font-variant-numeric:tabular-nums}
   @media (max-width:700px){ #ovladac{bottom:14px;width:min(320px,86vw)} #ovladac.ukaz{opacity:.85} }
 
+  /* na konci stopy, kde video drží poslední snímek, pozve scroll dál */
+  #dolu{position:absolute;left:50%;bottom:74px;transform:translateX(-50%);z-index:9;
+    display:flex;flex-direction:column;align-items:center;gap:9px;cursor:pointer;
+    background:none;border:0;padding:8px 14px;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;
+    color:rgba(255,255,255,.72);transition:color .2s ease}
+  #dolu svg{width:13px;height:19px;fill:none;stroke:rgba(255,255,255,.72);stroke-width:1.3;
+    stroke-linecap:round;stroke-linejoin:round;animation:dolusip 2.1s ease-in-out infinite}
+  #dolu:hover,#dolu:focus-visible{color:#fff}
+  #dolu:hover svg,#dolu:focus-visible svg{stroke:#fff}
+  @keyframes dolusip{0%,100%{transform:translateY(-2px)}50%{transform:translateY(3px)}}
+  @media (prefers-reduced-motion:reduce){ #dolu svg{animation:none} }
+  @media (max-width:700px){ #dolu{bottom:56px;font-size:9.5px} }
+
   /* claim drží jen úvod videa, pak zmizí, aby na obrazovce byl vždy jen jeden text */
   .herotext,.scrollhint{transition:opacity .5s ease}
   .herotext.pryc,.scrollhint.pryc{opacity:0;pointer-events:none}
@@ -309,7 +323,7 @@
 
 <header id="hero">
   <div id="hvbox">
-  <video id="hv" poster="/nahledy/roboaid-x4k7/v3/prulet-v3-poster.jpg" autoplay muted loop playsinline
+  <video id="hv" poster="/nahledy/roboaid-x4k7/v3/prulet-v3-poster.jpg" autoplay muted playsinline
          webkit-playsinline preload="auto" disablepictureinpicture>
     <source src="/nahledy/roboaid-x4k7/v3/prulet-v3-drzi.mp4" type="video/mp4">
   </video>
@@ -329,6 +343,10 @@
       <input id="ovRange" type="range" min="0" max="1000" value="0" step="1" aria-label="Čas videa"></div>
     <span id="ovCas">0:00</span>
   </div>
+  <button id="dolu" type="button" hidden>
+    <span>Scrollujte</span>
+    <svg viewBox="0 0 14 20" aria-hidden="true"><path d="M7 1 V17 M1.5 11.5 L7 18 L12.5 11.5"/></svg>
+  </button>
   <div id="textzona">
   <div id="popisky" aria-hidden="true">
     <div class="popis m-vlevo-nahore" data-p="light"><span class="k">01 &middot; světlo</span>
@@ -796,7 +814,7 @@
       {od: 8.30,  do: 11.00, fx: 'lidar',   misto: 'vpravo-nahore', kotva: [[8.30,50,42],[11.00,50,42]]},
       {od: 13.02, do: 15.98, fx: 'termo',   misto: 'vpravo-dole',   kotva: IZOLACE, horko: true},
       {od: 16.85, do: 22.35, fx: 'nalez',   misto: 'vlevo-nahore',  horko: true},
-      {od: 25.00, do: 28.95, fx: 'hala',    misto: 'nahore-stred'},
+      {od: 25.00, do: 99,    fx: 'hala',    misto: 'nahore-stred'},
     ];
     const NAZEV = {claim:'claim', light:'světlo', kontakt:'klec', lidar:'LiDAR',
                    termo:'termo', nalez:'nález', hala:'RoboAid'};
@@ -1075,6 +1093,9 @@
         if (term)  term.classList.toggle('on', chci === 'termo');
         if (box)   box.classList.toggle('vypravi', !!chci && chci !== 'claim');
       }
+      // pozvánka dál se ukazuje jen na podrženém posledním snímku
+      const dl = document.getElementById('dolu');
+      if (dl) dl.hidden = !(hv.duration && t >= hv.duration - 1.7);
       if (chci === 'lidar') lidarKresli(t, b);
       if (chci === 'termo') termoKresli(t);
 
@@ -1099,7 +1120,7 @@
       let rucne = false;
       const mmss = s => Math.floor(s/60) + ':' + String(Math.floor(s%60)).padStart(2,'0');
       function stav(){
-        ov.classList.toggle('pauza', hv.paused);
+        ov.classList.toggle('pauza', hv.paused || hv.ended);
         btn.setAttribute('aria-label', hv.paused ? 'Přehrát' : 'Pauza');
       }
       function posun(){
@@ -1111,7 +1132,7 @@
         cas.textContent = mmss(hv.currentTime) + ' / ' + mmss(hv.duration);
       }
       btn.addEventListener('click', e => { e.stopPropagation(); hv.paused ? hv.play() : hv.pause(); stav(); });
-      ['play','pause'].forEach(u => hv.addEventListener(u, stav));
+      ['play','pause','ended'].forEach(u => hv.addEventListener(u, stav));
       hv.addEventListener('timeupdate', posun);
       hv.addEventListener('loadedmetadata', posun);
       rng.addEventListener('pointerdown', () => rucne = true);
@@ -1148,6 +1169,17 @@
       hero.addEventListener('pointerleave', () => { if (!hv.paused) ov.classList.remove('ukaz'); });
       ov.addEventListener('focusin', ukaz);
       hv.addEventListener('pause', ukaz);
+      hv.addEventListener('ended', ukaz);
+      // závěr stopy: video drží poslední snímek, tak pozveme dál
+      const dolu = document.getElementById('dolu');
+      if (dolu){
+        dolu.addEventListener('click', e => {
+          e.stopPropagation();
+          const dalsi = document.getElementById('hero').nextElementSibling;
+          if (dalsi) dalsi.scrollIntoView({behavior:'smooth', block:'start'});
+        });
+
+      }
       vidno(false); stav(); posun();
     })();
 
@@ -1160,7 +1192,7 @@
     function zastav(){ if (raf) { cancelAnimationFrame(raf); raf = 0; } }
     hv.addEventListener('play', rozjed);
     hv.addEventListener('playing', rozjed);
-    ['pause','seeked','timeupdate','loadedmetadata','durationchange'].forEach(u =>
+    ['pause','ended','seeked','timeupdate','loadedmetadata','durationchange'].forEach(u =>
       hv.addEventListener(u, () => { tik(); if (hv.paused) zastav(); }));
     document.addEventListener('visibilitychange', () => { tik(); if (!document.hidden && !hv.paused) rozjed(); });
     window.addEventListener('resize', tik);
@@ -1182,13 +1214,13 @@
     // nabídnout dotek. Klepnutí kamkoli do hero taky stačí.
     if (tlac) tlac.addEventListener('click', pust);
     document.getElementById('hero').addEventListener('click', () => { if (hv.paused) pust(); });
-    hv.addEventListener('loadeddata', () => { if (hv.paused) pust(); });
+    hv.addEventListener('loadeddata', () => { if (hv.paused && !hv.ended) pust(); });
     pust();
 
     // dokud je hero mimo obraz, video ani vrstvu nehnat zbytečně
     if ('IntersectionObserver' in window){
       new IntersectionObserver(es => es.forEach(e => {
-        if (e.isIntersecting) { if (hv.paused) pust(); }
+        if (e.isIntersecting) { if (hv.paused && !hv.ended) pust(); }
         // pauzovat až když už někdy hrálo, jinak by observer zabil první pokus
         else if (hralo) { hv.pause(); zastav(); }
       }), {threshold: 0.05}).observe(document.getElementById('hero'));
