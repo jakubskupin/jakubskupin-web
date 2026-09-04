@@ -667,8 +667,37 @@
   #fspoj{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;
     opacity:0;transition:opacity .3s ease}
   #fspoj path{fill:none;stroke:rgba(233,185,74,.30);stroke-width:1}
+  /* Kdyz stroj odleti, zbyde na chvili prazdny kour. Misto prazdna tam jde
+     decentni typograficky pruh: zadna vymyslena loga, jen nazvy a roky. */
+  #fzaver{position:absolute;left:0;right:0;top:43%;transform:translateY(-50%);
+    margin-inline:auto;max-width:760px;padding:0 24px;text-align:center;
+    opacity:0;transition:opacity .6s ease;z-index:2;pointer-events:none}
+  #fzaver .stitek{font-family:var(--mono);font-size:11px;letter-spacing:.24em;
+    text-transform:uppercase;color:var(--zlata);margin:0 0 26px}
+  .fceny{list-style:none;margin:0 0 34px;padding:0;display:flex;justify-content:center;
+    flex-wrap:wrap;gap:0}
+  .fceny li{padding:0 clamp(18px,3vw,34px);border-left:1px solid rgba(255,255,255,.13)}
+  .fceny li:first-child{border-left:0}
+  .fceny b{display:block;font-family:var(--serif);font-weight:400;
+    font-size:clamp(19px,2.1vw,28px);color:#fff;letter-spacing:-.005em}
+  .fceny span{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.18em;
+    color:var(--seda);margin-top:8px}
+  .fndaa{display:inline-flex;align-items:center;gap:14px;padding:12px 20px;
+    border:1px solid rgba(255,255,255,.14);border-radius:2px}
+  .fndaa svg{width:34px;height:18px;display:block;flex:none}
+  .fndaa p{margin:0;text-align:left}
+  .fndaa b{display:block;font-family:var(--body);font-weight:600;font-size:13px;color:#fff;
+    letter-spacing:.01em}
+  .fndaa span{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+    color:var(--seda);margin-top:4px}
+  @media (max-width:760px){
+    .fceny{gap:20px 0}
+    .fceny li{padding:0 14px}
+    .fndaa{padding:10px 14px;gap:11px}
+    .fndaa span{font-size:9px}
+  }
   #fuvod{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;
-    padding:0 24px;max-width:820px;transition:opacity .5s ease,transform .5s ease}
+    padding:0 24px;max-width:820px;margin-inline:auto;transition:opacity .5s ease,transform .5s ease}
   #fuvod .stitek{font-family:var(--mono);font-size:11px;letter-spacing:.24em;
     text-transform:uppercase;color:var(--zlata);margin:0 0 20px}
   #fuvod h2{font-family:var(--serif);font-weight:400;
@@ -698,7 +727,7 @@
       <source src="/nahledy/roboaid-x4k7/scroll/film.mp4" type="video/mp4"></video>
     <div class="fvrstva">
       <div id="fuvod">
-        <p class="stitek">Průlet strojem</p>
+        <p class="stitek">RoboAid &middot; Autonomous Inspection Drone</p>
         <h2>Tam, kde <span class="z">končí GPS</span></h2>
       </div>
       <article class="fbeat" data-i="0">
@@ -732,6 +761,27 @@
         <span class="fspec">360° FOV · LIO</span>
       </article>
     </div>
+    <div id="fzaver">
+      <p class="stitek">Ocenění týmu Fly4Future</p>
+      <ul class="fceny">
+        <li><b>SPRIND Funke</b><span>2024</span></li>
+        <li><b>A2RL Abu Dhabi</b><span>2025</span></li>
+        <li><b>AI Awards</b><span>2024 &middot; 2025</span></li>
+      </ul>
+      <div class="fndaa">
+        <svg viewBox="0 0 38 20" aria-hidden="true">
+          <rect width="38" height="20" fill="#8E9AAE" opacity=".14"/>
+          <g fill="#C98A86" opacity=".85">
+            <rect y="0"  width="38" height="1.54"/><rect y="3.08" width="38" height="1.54"/>
+            <rect y="6.16" width="38" height="1.54"/><rect y="9.23" width="38" height="1.54"/>
+            <rect y="12.31" width="38" height="1.54"/><rect y="15.38" width="38" height="1.54"/>
+            <rect y="18.46" width="38" height="1.54"/>
+          </g>
+          <rect width="16" height="10.77" fill="#5C6E96" opacity=".9"/>
+        </svg>
+        <p><b>Schopné splnit NDAA</b><span>Section 889, bez komponent od zakázaných výrobců</span></p>
+      </div>
+    </div>
     <svg id="fspoj" aria-hidden="true"><path d="" /></svg>
     <div id="fkruh"><i></i></div>
     <div id="fstopa"><i></i></div>
@@ -744,6 +794,7 @@
   var beaty=[].slice.call(document.querySelectorAll('.fbeat'));
   var lep=document.getElementById('film-lep');
   var kruh=document.getElementById('fkruh'), spoj=document.getElementById('fspoj');
+  var zaver=document.getElementById('fzaver');
   var cara=spoj?spoj.querySelector('path'):null;
   var H=[{"od":0.14,"do":0.26,"p":0.1992,"x":0.3985,"y":0.6},{"od":0.27,"do":0.36,"p":0.2988,"x":0.5,"y":0.508},{"od":0.37,"do":0.45,"p":0.3784,"x":0.485,"y":0.617},{"od":0.5,"do":0.605,"p":0.5577,"x":0.484,"y":0.401},{"od":0.615,"do":0.695,"p":0.6473,"x":0.586,"y":0.464},{"od":0.705,"do":0.8,"p":0.7369,"x":0.5,"y":0.305}];
   if(!sek||!vid) return;
@@ -791,6 +842,11 @@
     var c = p<0.06 ? 1 : (p>0.15 ? 0 : 1-(p-0.06)/0.09);
     uvod.style.opacity=c; uvod.style.transform='translateY(calc(-50% - '+((1-c)*26)+'px))';
     stopa.style.height=(p*100)+'%';
+    if(zaver){
+      // stroj odleti kolem 88 % postupu, teprve pak ma smysl neco ukazat
+      var z = p<0.90 ? 0 : Math.min(1,(p-0.90)/0.05);
+      zaver.style.opacity=z;
+    }
     var akt=-1;
     for(var i=0;i<beaty.length;i++){
       var je = p>=H[i].od && p<=H[i].do;
