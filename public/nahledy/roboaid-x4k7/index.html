@@ -127,25 +127,60 @@
   .vypis .sl.demo li::before{background:transparent;border:1.5px solid var(--zlata)}
   .vypis li small{display:block;font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:4px;letter-spacing:.04em}
 
-  /* 06 kótovaný packshot */
-  .pack{position:relative;background:#fff;border-radius:16px;overflow:visible;margin-top:36px}
-  .pack img{width:100%;height:auto;border-radius:16px}
-  .hs{position:absolute;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;background:var(--zlata);border:3px solid #fff;
-    box-shadow:0 0 0 1px rgba(0,0,0,.25),0 6px 18px rgba(0,0,0,.35);cursor:pointer;z-index:2}
-  .hs::after{content:"";position:absolute;inset:-9px;border-radius:50%;border:1.5px solid rgba(233,185,74,.6);animation:tep 2.2s ease-out infinite}
-  @keyframes tep{0%{transform:scale(.6);opacity:1}100%{transform:scale(1.5);opacity:0}}
-  .hs .k{position:absolute;left:34px;top:50%;transform:translateY(-50%);width:max-content;max-width:260px;background:#07090F;color:var(--ink);
-    border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:13.5px;line-height:1.45;opacity:0;pointer-events:none;transition:opacity .2s;z-index:3}
-  .hs .k b{display:block;font-family:var(--disp);font-size:17px;color:#fff;margin-bottom:4px}
-  .hs .k small{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--muted);margin-top:6px}
-  .hs.vlevo .k{left:auto;right:34px}
-  .hs:hover .k,.hs.on .k{opacity:1}
-  .radky{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:14px}
-  .radky div{background:#0B0F19;padding:16px 18px}
-  .radky small{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
-  .radky b{font-family:var(--disp);font-size:17px;color:#fff;font-weight:600}
+  /* 05 technikálie: pohyblivý výkres + výpis */
+  #tech{background:#14181F}
+  .tech{display:grid;grid-template-columns:minmax(0,440px) 1fr;gap:clamp(32px,5vw,72px);
+    align-items:start;margin-top:44px}
+  .tech-obr{margin:0}
+  .tech-obr figcaption{margin-top:14px;font-family:var(--mono);font-size:10.5px;
+    letter-spacing:.05em;color:#5C6B84;line-height:1.6}
+  .vykres{width:100%;height:auto;display:block;overflow:visible}
+  .vykres .g{fill:none;transition:opacity .3s ease}
+  .vykres .g-chranice circle{stroke:#233149;fill:none;stroke-width:1.3}
+  .vykres .g-vrtule path{stroke:#1D2A3E;fill:none;stroke-width:1}
+  .vykres .g-ramena path{stroke:#2B3B54;fill:none;stroke-width:1.2}
+  .vykres .g-motory circle{stroke:#2B3B54;fill:none;stroke-width:1.2}
+  .vykres .g-ram rect{stroke:#3B5273;fill:none;stroke-width:1.8}
+  .vykres .g-kamera rect,.vykres .g-kamera circle{stroke:#2B3B54;fill:none;stroke-width:1.2}
+  .vykres .g-led rect{fill:var(--zlata);stroke:none}
+  .vykres .g-tahla path{stroke:var(--zlata);fill:none;stroke-width:2.2;stroke-linecap:round}
+  .vykres .g-kotvy circle{fill:var(--zlata);stroke:none}
+  .vykres .g-naboj path{stroke:var(--zlata);fill:none;stroke-width:1.8;stroke-linejoin:round}
+  .vykres .g-lidar circle{stroke:var(--accent);fill:none;stroke-width:1.4}
+  .vykres .pulsy{transition:opacity .3s ease}
+  .vykres .pulsy path{stroke:#FFF3D6;fill:none;stroke-width:3.2;stroke-linecap:round;
+    stroke-dasharray:.14 .86;stroke-dashoffset:1;animation:tahni 3.6s linear infinite}
+  .vykres .vrtule{animation:tocit 9s linear infinite;transform-box:view-box}
+  .vykres .dech{animation:dychat 4.4s ease-in-out infinite;transform-box:view-box;
+    transform-origin:180px 180px;opacity:.45}
+  @keyframes tahni{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+  @keyframes tocit{to{transform:rotate(360deg)}}
+  @keyframes dychat{0%,100%{transform:scale(1);opacity:.45}50%{transform:scale(1.18);opacity:.1}}
+  .tech[data-hl] .g,.tech[data-hl] .pulsy{opacity:.15}
+  .tech[data-hl] .g.sviti{opacity:1}
 
-  /* 07 proč jsme ho vyvíjeli */
+  .spec{margin:0;display:grid;gap:26px}
+  .spec .blok{display:grid;gap:2px;outline:none}
+  .spec dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--zlata);margin-bottom:8px;transition:color .2s}
+  .spec dd{margin:0;display:grid;grid-template-columns:150px 1fr;gap:16px;padding:9px 0;
+    border-top:1px solid #212B3A;align-items:baseline}
+  .spec dd span{font-family:var(--mono);font-size:11.5px;color:#6E7C93}
+  .spec dd b{font-family:var(--disp);font-size:16px;font-weight:600;color:#fff}
+  .spec .blok:hover dt,.spec .blok:focus-within dt{color:#F7DC94}
+
+  @media (max-width:860px){
+    .tech{grid-template-columns:1fr;gap:34px}
+    .tech-obr{max-width:380px;margin:0 auto}
+    .spec dd{grid-template-columns:1fr;gap:2px;padding:8px 0}
+    .spec dd b{font-size:15px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .vykres .pulsy path,.vykres .vrtule,.vykres .dech{animation:none}
+    .vykres .pulsy path{stroke-dasharray:none;stroke-dashoffset:0;opacity:.22}
+  }
+
+  /* 06 proč jsme ho vyvíjeli */
   #proc{background:#000}
   blockquote.velka{margin:0;font-family:var(--serif);font-size:clamp(24px,3.2vw,42px);line-height:1.2;color:#fff}
   blockquote.velka span{color:var(--zlata)}
@@ -161,7 +196,7 @@
   .puvod b{display:block;font-family:var(--disp);font-size:16px;color:#fff;font-weight:600}
   .puvod p{margin:6px 0 0;font-size:13px;color:var(--muted);line-height:1.5}
 
-  /* 08 poptávka */
+  /* 07 poptávka */
   #demo{background:radial-gradient(90% 80% at 80% 50%,#171A12 0%,#000 60%)}
   .chipy{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
   .chipy button{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);background:#0B0F19;
@@ -500,31 +535,79 @@
   </div>
 </section>
 
-<!-- ===== 06 · ČÍSLA TAM, KDE NA STROJI SEDÍ ===== -->
-<section id="cisla" class="sek">
+<!-- ===== 05 · TECHNIKÁLIE ===== -->
+<section id="tech" class="sek">
   <div class="rám">
-    <p class="kick">05 · Parametry</p>
-    <h2>Čísla tam, <span class="z">kde na stroji sedí</span></h2>
-    <p class="pod">Najeďte na bod. Jen údaje z oficiálních listů F4F, nic z datasheetů komponent.</p>
-    <div class="pack">
-      <img src="/nahledy/roboaid-x4k7/img/packshot.jpg" alt="RoboAid, bílý packshot">
-      <span class="hs" style="left:51%;top:27%"><span class="k"><b>3D LiDAR Livox MID360</b>Orientace bez satelitu, 360°, LiDAR-Inertial Odometry. GPS: nemá.<small>spec list F4F</small></span></span>
-      <span class="hs vlevo" style="left:37%;top:40%"><span class="k"><b>Gimbal SIYI ZT6</b>RGB 4K a termo 720p současně, 3osá stabilizace, nastavitelný za letu.<small>spec list F4F</small></span></span>
-      <span class="hs vlevo" style="left:19%;top:36%"><span class="k"><b>LED 14 000 lm</b>Čtyři ovladatelné segmenty.<small>leaflet F4F 7/2026</small></span></span>
-      <span class="hs" style="left:80%;top:52%"><span class="k"><b>Klec z uhlíkových profilů</b>3 200 až 3 800 g podle varianty, varianty 6 až 10 palců.<small>spec list F4F, Lupa.cz</small></span></span>
-      <span class="hs" style="left:50%;top:68%"><span class="k"><b>Baterie 6S 15 000 mAh</b>14 až 22 min letu podle varianty.<small>spec list F4F 7/2026</small></span></span>
+    <p class="kick">05 · Technikálie</p>
+    <h2>Osm táhel <span class="z">a co drží</span></h2>
+    <p class="pod">Kresba je obtažená z fotky stroje shora. Puls ukazuje, kudy jde kontakt
+      z rámu do náboje. Vpravo jen údaje z oficiálních listů F4F, nic z datasheetů komponent.</p>
+
+    <div class="tech">
+      <figure class="tech-obr">
+        <svg class="vykres" viewBox="0 0 360 360" role="img"
+        aria-label="RoboAid shora: rám, čtyři chrániče vrtulí, osm nosných táhel a náboj s LiDARem">
+      <g class="g g-chranice"><circle cx="105" cy="112.5" r="75"/><circle cx="255" cy="112.5" r="75"/><circle cx="105" cy="247.5" r="75"/><circle cx="255" cy="247.5" r="75"/></g>
+      <g class="g g-vrtule"><g class="vrtule" style="transform-origin:105px 112.5px;animation-duration:7.5s"><path d="M45.7 88.5 L164.3 136.5"/><path d="M129.0 53.2 L81.0 171.8"/></g><g class="vrtule" style="transform-origin:255px 112.5px;animation-duration:8.8s"><path d="M209.7 67.2 L300.3 157.8"/><path d="M300.3 67.2 L209.7 157.8"/></g><g class="vrtule" style="transform-origin:105px 247.5px;animation-duration:10.1s"><path d="M81.0 188.2 L129.0 306.8"/><path d="M164.3 223.5 L45.7 271.5"/></g><g class="vrtule" style="transform-origin:255px 247.5px;animation-duration:11.4s"><path d="M256.1 183.5 L253.9 311.5"/><path d="M319.0 248.6 L191.0 246.4"/></g></g>
+      <g class="g g-ramena"><path d="M180 180 L105 112.5 M180 180 L255 112.5 M180 180 L105 247.5 M180 180 L255 247.5"/></g>
+      <g class="g g-motory"><circle cx="105" cy="112.5" r="11"/><circle cx="255" cy="112.5" r="11"/><circle cx="105" cy="247.5" r="11"/><circle cx="255" cy="247.5" r="11"/></g>
+      <g class="g g-ram"><rect x="30" y="37.5" width="300" height="285" rx="69"/></g>
+      <g class="g g-kamera"><rect x="158" y="306.5" width="44" height="30" rx="5"/>
+        <circle cx="180" cy="324.5" r="9"/></g>
+      <g class="g g-led"><rect x="46" y="311" width="14" height="14" rx="3"/><rect x="279" y="311" width="14" height="14" rx="3"/></g>
+      <g class="g g-tahla"><path d="M330.0 255.6 L218.4 199.4 M251.9 322.5 L199.4 218.4 M108.1 322.5 L160.6 218.4 M30.0 255.6 L141.6 199.4 M30.0 104.4 L141.6 160.6 M108.1 37.5 L160.6 141.6 M251.9 37.5 L199.4 141.6 M330.0 104.4 L218.4 160.6"/></g>
+      <g class="g g-kotvy"><circle cx="330.0" cy="255.6" r="4.5"/><circle cx="251.9" cy="322.5" r="4.5"/><circle cx="108.1" cy="322.5" r="4.5"/><circle cx="30.0" cy="255.6" r="4.5"/><circle cx="30.0" cy="104.4" r="4.5"/><circle cx="108.1" cy="37.5" r="4.5"/><circle cx="251.9" cy="37.5" r="4.5"/><circle cx="330.0" cy="104.4" r="4.5"/></g>
+      <g class="g g-naboj"><path d="M218.4 199.4 L199.4 218.4 L160.6 218.4 L141.6 199.4 L141.6 160.6 L160.6 141.6 L199.4 141.6 L218.4 160.6 Z"/></g>
+      <g class="g g-lidar"><circle cx="180" cy="180" r="26"/><circle cx="180" cy="180" r="17"/>
+        <circle class="dech" cx="180" cy="180" r="34"/></g>
+      <g class="pulsy"><path class="puls" d="M330.0 255.6 L218.4 199.4" pathLength="1" style="animation-delay:0.00s"/><path class="puls" d="M251.9 322.5 L199.4 218.4" pathLength="1" style="animation-delay:0.42s"/><path class="puls" d="M108.1 322.5 L160.6 218.4" pathLength="1" style="animation-delay:0.84s"/><path class="puls" d="M30.0 255.6 L141.6 199.4" pathLength="1" style="animation-delay:1.26s"/><path class="puls" d="M30.0 104.4 L141.6 160.6" pathLength="1" style="animation-delay:1.68s"/><path class="puls" d="M108.1 37.5 L160.6 141.6" pathLength="1" style="animation-delay:2.10s"/><path class="puls" d="M251.9 37.5 L199.4 141.6" pathLength="1" style="animation-delay:2.52s"/><path class="puls" d="M330.0 104.4 L218.4 160.6" pathLength="1" style="animation-delay:2.94s"/></g>
+    </svg>
+        <figcaption>půdorys &middot; obtaženo z fotky, konstrukce zprůměrovaná do čtyřnásobné symetrie</figcaption>
+      </figure>
+
+      <dl class="spec">
+        <div class="blok" data-hl="ram kotvy">
+          <dt>Rozměry a hmotnost</dt>
+          <dd><span>šířka rámu</span><b>38 až 56 cm</b></dd>
+          <dd><span>hmotnost</span><b>3 200 až 3 800 g</b></dd>
+          <dd><span>varianty</span><b>6 až 10 palců</b></dd>
+        </div>
+        <div class="blok" data-hl="tahla kotvy naboj ram">
+          <dt>Nosná konstrukce</dt>
+          <dd><span>klec</span><b>uhlíkové profily</b></dd>
+          <dd><span>táhla</span><b>8, dvě na každé straně</b></dd>
+          <dd><span>vrtule</span><b>uvnitř obrysu klece</b></dd>
+        </div>
+        <div class="blok" data-hl="lidar naboj">
+          <dt>Orientace bez satelitu</dt>
+          <dd><span>senzor</span><b>3D LiDAR Livox MID360</b></dd>
+          <dd><span>algoritmus</span><b>LiDAR-Inertial Odometry</b></dd>
+          <dd><span>satelitní navigace</span><b>nemá</b></dd>
+        </div>
+        <div class="blok" data-hl="kamera led">
+          <dt>Vidění a světlo</dt>
+          <dd><span>gimbal</span><b>SIYI ZT6, 3 osy</b></dd>
+          <dd><span>obraz</span><b>RGB 4K + termo 720p současně</b></dd>
+          <dd><span>světlo</span><b>14 000 lm ve 4 segmentech</b></dd>
+        </div>
+        <div class="blok" data-hl="vrtule motory chranice">
+          <dt>Pohon a vytrvalost</dt>
+          <dd><span>doba letu</span><b>14 až 22 min</b></dd>
+          <dd><span>baterie</span><b>6S 15 000 mAh</b></dd>
+          <dd><span>rychlost</span><b>2 m/s autonomně, 8 m/s ručně</b></dd>
+        </div>
+        <div class="blok" data-hl="naboj lidar">
+          <dt>Výpočet na palubě</dt>
+          <dd><span>počítač</span><b>Jetson Orin NX 16 GB nebo ASUS NUC i7</b></dd>
+          <dd><span>letový počítač</span><b>Pixhawk 6C Mini, PX4</b></dd>
+          <dd><span>stack a rádio</span><b>ROS 2 &middot; 2,4 a 5 GHz</b></dd>
+        </div>
+      </dl>
     </div>
-    <div class="radky">
-      <div><small>Palubní počítač</small><b>Jetson Orin NX 16 GB</b></div>
-      <div><small>nebo</small><b>ASUS NUC i7</b></div>
-      <div><small>Letový počítač</small><b>Pixhawk 6C Mini, PX4</b></div>
-      <div><small>Rádio</small><b>2,4 a 5 GHz</b></div>
-      <div><small>Stack</small><b>ROS 2</b></div>
-      <div><small>Rychlost</small><b>2 m/s autonomně, 8 m/s ručně</b></div>
-      <div><small>Satelitní navigace</small><b>nemá</b></div>
-      <div><small>Prostředí</small><b>vnitřní</b></div>
-    </div>
-    <p class="cit">Bez řádku úložiště, bez fps a bez měřicího rozsahu termokamery: to jsou čísla výrobců komponent, ne F4F. Dva oficiální listy se liší v době letu (22 min vs. 14 až 22 min), držíme konzervativnější.</p>
+
+    <p class="cit">Bez řádku úložiště, bez fps a bez měřicího rozsahu termokamery: to jsou čísla
+      výrobců komponent, ne F4F. Dva oficiální listy se liší v době letu (22 min vs. 14 až 22 min),
+      držíme konzervativnější.</p>
   </div>
 </section>
 
@@ -558,7 +641,7 @@
 <section id="demo" class="sek">
   <div class="rám dva">
     <div>
-      <p class="kick">07 · Další krok</p>
+      <p class="kick">06 · Další krok</p>
       <h2><span data-per="vse provoz">Označte, <span class="z">kam se u vás nedá</span></span><span data-per="sluzba">Označte zakázku, <span class="z">kterou dnes odmítáte</span></span></h2>
       <p class="pod">Kde RoboAid prokazatelně létal, a kde by mohl u vás. Klik doplní zprávu.</p>
       <div class="chipy" id="chipy">
@@ -1064,12 +1147,22 @@
     prepocti();
   })();
 
-  // ---------- hotspoty na packshotu: klik na dotyku, hover na desktopu ----------
-  document.querySelectorAll('.hs').forEach(h => h.addEventListener('click', e => {
-    document.querySelectorAll('.hs.on').forEach(x => x !== h && x.classList.remove('on'));
-    h.classList.toggle('on'); e.stopPropagation();
-  }));
-  document.addEventListener('click', () => document.querySelectorAll('.hs.on').forEach(x => x.classList.remove('on')));
+  // ---------- výkres reaguje na najetí na blok parametrů ----------
+  (function(){
+    const tech = document.querySelector('.tech'); if (!tech) return;
+    const svg = tech.querySelector('.vykres');
+    function zvyrazni(hl){
+      svg.querySelectorAll('.g').forEach(g => g.classList.remove('sviti'));
+      if (!hl){ delete tech.dataset.hl; return; }
+      tech.dataset.hl = hl;
+      hl.split(' ').forEach(n => { const g = svg.querySelector('.g-'+n); if (g) g.classList.add('sviti'); });
+    }
+    tech.querySelectorAll('.blok').forEach(b => {
+      b.tabIndex = 0;
+      ['mouseenter','focusin'].forEach(e => b.addEventListener(e, () => zvyrazni(b.dataset.hl)));
+      ['mouseleave','focusout'].forEach(e => b.addEventListener(e, () => zvyrazni(null)));
+    });
+  })();
 
   // ---------- chipy a checklist doplňují zprávu ----------
   (function(){
