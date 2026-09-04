@@ -365,7 +365,7 @@
 
 
   /* ovladač hero videa: nenápadný a bez barvy; objeví se, když hneš myší */
-  #ovladac{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:9;pointer-events:auto;
+  #ovladac{position:absolute;left:50%;bottom:66px;transform:translateX(-50%);z-index:9;pointer-events:auto;
     display:flex;align-items:center;gap:11px;width:min(420px,72vw);
     opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s}
   #ovladac.ukaz{opacity:.62;visibility:visible}
@@ -385,10 +385,10 @@
   #ovRange{position:absolute;left:0;right:0;width:100%;height:18px;opacity:0;cursor:pointer;margin:0}
   #ovCas{flex:0 0 auto;font-family:var(--mono);font-size:10px;letter-spacing:.05em;
     color:rgba(255,255,255,.7);font-variant-numeric:tabular-nums}
-  @media (max-width:700px){ #ovladac{bottom:14px;width:min(320px,86vw)} #ovladac.ukaz{opacity:.85} }
+  @media (max-width:700px){ #ovladac{bottom:52px;width:min(320px,86vw)} #ovladac.ukaz{opacity:.85} }
 
   /* na konci stopy, kde video drží poslední snímek, pozve scroll dál */
-  #dolu{position:absolute;left:50%;bottom:74px;transform:translateX(-50%);z-index:9;
+  #dolu{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);z-index:9;
     display:flex;flex-direction:column;align-items:center;gap:9px;cursor:pointer;
     background:none;border:0;padding:8px 14px;
     font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;
@@ -399,7 +399,7 @@
   #dolu:hover svg,#dolu:focus-visible svg{stroke:#fff}
   @keyframes dolusip{0%,100%{transform:translateY(-2px)}50%{transform:translateY(3px)}}
   @media (prefers-reduced-motion:reduce){ #dolu svg{animation:none} }
-  @media (max-width:700px){ #dolu{bottom:56px;font-size:9.5px} }
+  @media (max-width:700px){ #dolu{bottom:12px;font-size:9.5px} }
 
   /* claim drží jen úvod videa, pak zmizí, aby na obrazovce byl vždy jen jeden text */
   .herotext,.scrollhint{transition:opacity .5s ease}
@@ -454,7 +454,7 @@
     .herotext p{font-size:14px}
   }
   /* ovladač hero videa: nenápadný a bez barvy; objeví se, když hneš myší */
-  #ovladac{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:9;pointer-events:auto;
+  #ovladac{position:absolute;left:50%;bottom:66px;transform:translateX(-50%);z-index:9;pointer-events:auto;
     display:flex;align-items:center;gap:11px;width:min(420px,72vw);
     opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s}
   #ovladac.ukaz{opacity:.62;visibility:visible}
@@ -474,10 +474,10 @@
   #ovRange{position:absolute;left:0;right:0;width:100%;height:18px;opacity:0;cursor:pointer;margin:0}
   #ovCas{flex:0 0 auto;font-family:var(--mono);font-size:10px;letter-spacing:.05em;
     color:rgba(255,255,255,.7);font-variant-numeric:tabular-nums}
-  @media (max-width:700px){ #ovladac{bottom:14px;width:min(320px,86vw)} #ovladac.ukaz{opacity:.85} }
+  @media (max-width:700px){ #ovladac{bottom:52px;width:min(320px,86vw)} #ovladac.ukaz{opacity:.85} }
 
   /* na konci stopy, kde video drží poslední snímek, pozve scroll dál */
-  #dolu{position:absolute;left:50%;bottom:74px;transform:translateX(-50%);z-index:9;
+  #dolu{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);z-index:9;
     display:flex;flex-direction:column;align-items:center;gap:9px;cursor:pointer;
     background:none;border:0;padding:8px 14px;
     font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;
@@ -488,7 +488,7 @@
   #dolu:hover svg,#dolu:focus-visible svg{stroke:#fff}
   @keyframes dolusip{0%,100%{transform:translateY(-2px)}50%{transform:translateY(3px)}}
   @media (prefers-reduced-motion:reduce){ #dolu svg{animation:none} }
-  @media (max-width:700px){ #dolu{bottom:56px;font-size:9.5px} }
+  @media (max-width:700px){ #dolu{bottom:12px;font-size:9.5px} }
 
 
 </style>
@@ -1308,7 +1308,7 @@
       }
       // pozvánka dál se ukazuje jen na podrženém posledním snímku
       const dl = document.getElementById('dolu');
-      if (dl) dl.hidden = !(hv.duration && t >= hv.duration - 1.7);
+      if (dl) dl.hidden = !(hv.ended || (hv.duration && t >= hv.duration - 0.25));
       if (chci === 'lidar') lidarKresli(t, b);
       if (chci === 'termo') termoKresli(t);
 
