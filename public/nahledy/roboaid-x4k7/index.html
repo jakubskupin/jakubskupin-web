@@ -43,16 +43,14 @@
   html[data-kdo="provoz"] [data-per~="provoz"]{display:revert}
   html[data-kdo="sluzba"] [data-per~="sluzba"]{display:revert}
 
-  /* lišta faktů přes spodek hero videa, nad foldem */
-  #fakta{position:absolute;left:0;right:0;bottom:0;z-index:6;padding:0;border-top:1px solid rgba(255,255,255,.08);
-    background:rgba(5,7,12,.58);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+  /* lišta faktů je první, co přijde pod foldem */
+  #fakta{padding:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#05070C}
   #fakta ul{list-style:none;margin:0 auto;padding:0 24px;display:flex;overflow-x:auto;scrollbar-width:none;justify-content:space-between;max-width:1180px}
-  #fakta li{flex:0 0 auto;padding:20px 18px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--muted);white-space:nowrap;border-left:1px solid var(--line)}
+  #fakta li{flex:0 0 auto;padding:24px 18px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--muted);white-space:nowrap;border-left:1px solid var(--line)}
   #fakta li:first-child{border-left:0;padding-left:0}
   #fakta b{display:block;font-family:var(--disp);font-size:20px;letter-spacing:0;color:#fff;margin-bottom:3px}
   #fakta b.z{color:var(--zlata)}
-  #hero .herotext{bottom:14%} #hero .scrollhint{display:none}
-  @media (max-width:700px){ #fakta{position:static;background:#05070C;border-bottom:1px solid var(--line)} }
+  #hero .herotext{bottom:17%} #hero .scrollhint{display:none}
 
   /* sticky dron: nese syntézu, ne beaty videa */
   #slib{padding:0;background:#000;height:480vh}
@@ -382,7 +380,7 @@
 
 
   /* ovladač hero videa: kdo chce, zastaví si to a posune */
-  #ovladac{position:absolute;left:24px;right:24px;bottom:96px;z-index:7;display:flex;
+  #ovladac{position:absolute;left:24px;right:24px;bottom:26px;z-index:9;pointer-events:auto;display:flex;
     align-items:center;gap:14px;max-width:1180px;margin:0 auto;opacity:.55;transition:opacity .25s}
   #hero:hover #ovladac,#ovladac:focus-within{opacity:1}
   #ovPlay{flex:0 0 auto;width:34px;height:34px;display:grid;place-items:center;cursor:pointer;
@@ -470,7 +468,6 @@
     <div class="hbox" data-box="trhlina"><span>trhlina</span></div>
   </div>
   </div>
-  <div id="textzona">
   <div id="ovladac">
     <button id="ovPlay" type="button" aria-label="Pauza">
       <svg viewBox="0 0 12 14" aria-hidden="true"><rect class="i-pause" x="1" y="1" width="3.4" height="12"/><rect class="i-pause" x="7.6" y="1" width="3.4" height="12"/><path class="i-play" d="M1.5 1 L11 7 L1.5 13 Z"/></svg>
@@ -479,6 +476,7 @@
       <input id="ovRange" type="range" min="0" max="1000" value="0" step="1" aria-label="Čas videa"></div>
     <span id="ovCas">0:00</span>
   </div>
+  <div id="textzona">
   <div id="popisky" aria-hidden="true">
     <div class="popis m-vlevo-nahore" data-p="light"><span class="k">01 &middot; světlo</span>
       <strong>14 000 lumenů<br class="mbr"> do úplné tmy</strong></div>
@@ -500,7 +498,7 @@
   </div>
   </div>
   <div class="scrollhint">scrollujte</div>
-<section id="fakta" aria-label="Klíčová fakta">
+</header><section id="fakta" aria-label="Klíčová fakta">
   <ul>
     <li><b class="z">Plně autonomní</b>letí bez pilota</li>
     <li><b>GPS: nemá</b>LiDAR-Inertial Odometry</li>
@@ -510,7 +508,6 @@
     <li><b class="z">Vše na palubě</b>bez přístupu k síti</li>
   </ul>
 </section>
-</header>
 <!-- ===== 0 · STICKY DRON: syntéza, ne beaty videa ===== -->
 <section id="slib" aria-label="Hlavní sdělení">
   <div class="stick">

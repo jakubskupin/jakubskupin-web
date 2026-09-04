@@ -122,7 +122,7 @@
 
 
   /* ovladač hero videa: kdo chce, zastaví si to a posune */
-  #ovladac{position:absolute;left:24px;right:24px;bottom:96px;z-index:7;display:flex;
+  #ovladac{position:absolute;left:24px;right:24px;bottom:26px;z-index:9;pointer-events:auto;display:flex;
     align-items:center;gap:14px;max-width:1180px;margin:0 auto;opacity:.55;transition:opacity .25s}
   #hero:hover #ovladac,#ovladac:focus-within{opacity:1}
   #ovPlay{flex:0 0 auto;width:34px;height:34px;display:grid;place-items:center;cursor:pointer;
@@ -319,7 +319,6 @@
     <div class="hbox" data-box="trhlina"><span>trhlina</span></div>
   </div>
   </div>
-  <div id="textzona">
   <div id="ovladac">
     <button id="ovPlay" type="button" aria-label="Pauza">
       <svg viewBox="0 0 12 14" aria-hidden="true"><rect class="i-pause" x="1" y="1" width="3.4" height="12"/><rect class="i-pause" x="7.6" y="1" width="3.4" height="12"/><path class="i-play" d="M1.5 1 L11 7 L1.5 13 Z"/></svg>
@@ -328,6 +327,7 @@
       <input id="ovRange" type="range" min="0" max="1000" value="0" step="1" aria-label="Čas videa"></div>
     <span id="ovCas">0:00</span>
   </div>
+  <div id="textzona">
   <div id="popisky" aria-hidden="true">
     <div class="popis m-vlevo-nahore" data-p="light"><span class="k">01 &middot; světlo</span>
       <strong>14 000 lumenů<br class="mbr"> do úplné tmy</strong></div>
