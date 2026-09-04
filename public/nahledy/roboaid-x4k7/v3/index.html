@@ -120,6 +120,28 @@
     letter-spacing:.12em;text-transform:uppercase;color:#07090F;background:var(--hot);
     padding:5px 14px;border-radius:5px;white-space:nowrap;font-weight:500}
 
+
+  /* ovladač hero videa: kdo chce, zastaví si to a posune */
+  #ovladac{position:absolute;left:24px;right:24px;bottom:96px;z-index:7;display:flex;
+    align-items:center;gap:14px;max-width:1180px;margin:0 auto;opacity:.55;transition:opacity .25s}
+  #hero:hover #ovladac,#ovladac:focus-within{opacity:1}
+  #ovPlay{flex:0 0 auto;width:34px;height:34px;display:grid;place-items:center;cursor:pointer;
+    background:rgba(7,9,15,.6);border:1px solid rgba(255,255,255,.22);border-radius:50%;padding:0}
+  #ovPlay svg{width:11px;height:13px;fill:#fff}
+  #ovPlay .i-play{display:none}
+  #ovladac.pauza #ovPlay .i-pause{display:none}
+  #ovladac.pauza #ovPlay .i-play{display:block}
+  #ovPlay:focus-visible{outline:2px solid var(--zlata);outline-offset:2px}
+  #ovOsa{position:relative;flex:1;height:22px;display:flex;align-items:center}
+  #ovOsa::before{content:"";position:absolute;left:0;right:0;height:2px;background:rgba(255,255,255,.22);border-radius:2px}
+  #ovPruh{position:absolute;left:0;height:2px;width:0;background:var(--zlata);border-radius:2px}
+  #ovBod{position:absolute;left:0;width:10px;height:10px;margin-left:-5px;border-radius:50%;
+    background:var(--zlata);box-shadow:0 0 0 3px rgba(7,9,15,.5)}
+  #ovRange{position:absolute;left:0;right:0;width:100%;height:22px;opacity:0;cursor:pointer;margin:0}
+  #ovCas{flex:0 0 auto;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:#fff;
+    font-variant-numeric:tabular-nums;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+  @media (max-width:700px){ #ovladac{bottom:auto;top:calc(56.25vw - 42px);left:16px;right:16px;opacity:1} }
+
   /* claim drží jen úvod videa, pak zmizí, aby na obrazovce byl vždy jen jeden text */
   .herotext,.scrollhint{transition:opacity .5s ease}
   .herotext.pryc,.scrollhint.pryc{opacity:0;pointer-events:none}
@@ -287,7 +309,7 @@
   <div id="hvbox">
   <video id="hv" poster="/nahledy/roboaid-x4k7/v3/prulet-v3-poster.jpg" autoplay muted loop playsinline
          webkit-playsinline preload="auto" disablepictureinpicture>
-    <source src="/nahledy/roboaid-x4k7/v3/prulet-v3.mp4" type="video/mp4">
+    <source src="/nahledy/roboaid-x4k7/v3/prulet-v3-drzi.mp4" type="video/mp4">
   </video>
   <button id="hvplay" type="button" hidden aria-label="Přehrát video">Přehrát</button>
   <div id="herofx" aria-hidden="true">
@@ -298,30 +320,32 @@
   </div>
   </div>
   <div id="textzona">
+  <div id="ovladac">
+    <button id="ovPlay" type="button" aria-label="Pauza">
+      <svg viewBox="0 0 12 14" aria-hidden="true"><rect class="i-pause" x="1" y="1" width="3.4" height="12"/><rect class="i-pause" x="7.6" y="1" width="3.4" height="12"/><path class="i-play" d="M1.5 1 L11 7 L1.5 13 Z"/></svg>
+    </button>
+    <div id="ovOsa"><div id="ovPruh"></div><div id="ovBod"></div>
+      <input id="ovRange" type="range" min="0" max="1000" value="0" step="1" aria-label="Čas videa"></div>
+    <span id="ovCas">0:00</span>
+  </div>
   <div id="popisky" aria-hidden="true">
     <div class="popis m-vlevo-nahore" data-p="light"><span class="k">01 &middot; světlo</span>
-      <strong>14 000 lumenů<br class="mbr"> do úplné tmy</strong>
-      <em>4 ovladatelné segmenty &middot; svítí si na to, co má zdokumentovat</em></div>
+      <strong>14 000 lumenů<br class="mbr"> do úplné tmy</strong></div>
     <div class="popis m-vlevo-dole" data-p="kontakt"><span class="k">02 &middot; klec</span>
-      <strong>Kontakt s konstrukcí<br class="mbr"> let neukončí</strong>
-      <em>karbonová klec drží vrtule mimo dosah stěn &middot; proto smí letět tam, kam se běžný dron nepustí</em></div>
+      <strong>Kontakt s konstrukcí<br class="mbr"> let neukončí</strong></div>
     <div class="popis m-vpravo-nahore" data-p="lidar"><span class="k">03 &middot; orientace</span>
-      <strong>Mapuje si tunel,<br class="mbr"> kterým letí</strong>
-      <em>LiDAR odometrie &middot; Livox MID360 &middot; GPS uvnitř není a dron ho nepotřebuje</em></div>
+      <strong>Mapuje si tunel,<br class="mbr"> kterým letí</strong></div>
     <div class="popis m-vpravo-dole hot" data-p="termo"><span class="k">04 &middot; termovize</span>
-      <strong>Vidí, kudy<br class="mbr"> uniká teplo</strong>
-      <em>pohled z palubní kamery &middot; termo je vizualizace jasu, ne měření teploty</em></div>
+      <strong>Vidí, kudy<br class="mbr"> uniká teplo</strong></div>
     <div class="popis m-stred-dole hot" data-p="nalez"><span class="k">05 &middot; nález</span>
-      <strong>Nález označí<br class="mbr"> už za letu</strong>
-      <em>onboard AI čte RGB i termo současně &middot; koroze, netěsnosti, betonové trhliny</em></div>
+      <strong>Nález označí<br class="mbr"> už za letu</strong></div>
     <div class="popis m-nahore-stred zaver" data-p="hala"><span class="k">Fly4Future &middot; RoboAid</span>
-      <strong>Plně autonomní<br class="mbr"> inspekční dron</strong>
-      <em>„true pilotless navigation" &middot; „zero operational downtime" &middot; bez GPS, bez pilota, bez odstávky</em></div>
+      <strong>Plně autonomní<br class="mbr"> inspekční dron</strong></div>
   </div>
   <div class="herotext">
     <span class="num">RoboAid &middot; autonomní inspekce &middot; v3</span>
-    <h1>Uvnitř. Za provozu. Bez signálu</h1>
-    <p>Dron proletí potrubím, halou i tunelem, sám se zorientuje bez GPS a nález označí už za letu.</p>
+    <h1>Letí sám tam,<br class="mbr"> kam nikdo nemusí</h1>
+    <p>Plně autonomní inspekce uvnitř budov a zařízení.<br class="mbr"> Bez pilota, bez satelitu, bez odstávky.</p>
   </div>
   </div>
   <div class="scrollhint">scrollujte</div>
@@ -1064,6 +1088,46 @@
       }
       if (b && Array.isArray(b.kotva)) kotva = lerp(b.kotva, t);
     }
+
+    // ---------- ovladač: play/pauza a posuvník ----------
+    (function(){
+      const ov = document.getElementById('ovladac'); if (!ov) return;
+      const btn = document.getElementById('ovPlay'), rng = document.getElementById('ovRange');
+      const pruh = document.getElementById('ovPruh'), bod = document.getElementById('ovBod'), cas = document.getElementById('ovCas');
+      let rucne = false;
+      const mmss = s => Math.floor(s/60) + ':' + String(Math.floor(s%60)).padStart(2,'0');
+      function stav(){
+        ov.classList.toggle('pauza', hv.paused);
+        btn.setAttribute('aria-label', hv.paused ? 'Přehrát' : 'Pauza');
+      }
+      function posun(){
+        if (rucne || !hv.duration) return;
+        const p = hv.currentTime / hv.duration;
+        pruh.style.width = (p*100).toFixed(2) + '%';
+        bod.style.left = (p*100).toFixed(2) + '%';
+        rng.value = Math.round(p*1000);
+        cas.textContent = mmss(hv.currentTime) + ' / ' + mmss(hv.duration);
+      }
+      btn.addEventListener('click', e => { e.stopPropagation(); hv.paused ? hv.play() : hv.pause(); stav(); });
+      ['play','pause'].forEach(u => hv.addEventListener(u, stav));
+      hv.addEventListener('timeupdate', posun);
+      hv.addEventListener('loadedmetadata', posun);
+      rng.addEventListener('pointerdown', () => rucne = true);
+      rng.addEventListener('input', () => {
+        if (!hv.duration) return;
+        const p = rng.value/1000;
+        hv.currentTime = p*hv.duration;
+        pruh.style.width = (p*100).toFixed(2) + '%';
+        bod.style.left = (p*100).toFixed(2) + '%';
+        cas.textContent = mmss(hv.currentTime) + ' / ' + mmss(hv.duration);
+        tik();
+      });
+      ['pointerup','pointercancel','change'].forEach(u => rng.addEventListener(u, () => { rucne = false; }));
+      // klik do hera nesmí přehazovat přehrávání, když míří na ovladač
+      ov.addEventListener('click', e => e.stopPropagation());
+      stav(); posun();
+    })();
+
     // rAF drží plynulost, když video hraje. Ale rAF NEBĚŽÍ ve skryté záložce
     // a nepřiběhne ani po přetočení pauznutého videa, takže vrstvu překresluji
     // i na událostech videa. Jinak by po návratu na záložku seděla na starém čase.

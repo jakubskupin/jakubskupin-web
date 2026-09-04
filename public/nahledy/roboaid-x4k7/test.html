@@ -138,7 +138,7 @@
   .osa-foto img,.osa-foto .ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
     filter:contrast(1.12) brightness(1.18);
     opacity:0;transition:opacity .5s ease;border:0;border-radius:0}
-  .osa-foto .ph{display:grid;place-items:center;min-height:0;filter:none;border-radius:0}
+  .osa-foto .ph{display:grid;place-items:center;min-height:0}
   .osa-foto [data-krok].on{opacity:1}
   .osa-znacka{position:absolute;left:16px;top:16px;z-index:2;font-family:var(--mono);font-size:10px;
     letter-spacing:.16em;text-transform:uppercase;padding:5px 10px;border-radius:999px;
@@ -533,12 +533,11 @@
     <div class="osa-mriz">
       <figure class="osa-foto">
         <span class="osa-znacka" id="osaZnacka">Satelit drží</span>
-        <div class="ph on" data-krok="0" class="on"><div><div class="t">Fotka &middot; venkovní areál</div><p>Dron nad průmyslovým areálem za denního světla, celek. Archiv F4F.</p></div></div>
-        <img data-krok="1" src="/nahledy/roboaid-x4k7/img/uc-vjezd.jpg" alt="Vjezd do haly">
-        <img data-krok="2" src="/nahledy/roboaid-x4k7/img/uc-hala.jpg" alt="Hala s regály">
-        <img data-krok="3" src="/nahledy/roboaid-x4k7/img/uc-tunel.jpg" alt="Tunel a šachta">
-        <img data-krok="4" src="/nahledy/roboaid-x4k7/img/uc-potrubi.jpg" alt="Potrubí a nádrž">
-        <img data-krok="5" src="/nahledy/roboaid-x4k7/img/uc-uvnitr.jpg" alt="Uvnitř zařízení">
+        <img data-krok="0" src="/nahledy/roboaid-x4k7/img/uc-vjezd.jpg" alt="Venkovní areál" class="on">
+        <img data-krok="1" src="/nahledy/roboaid-x4k7/img/uc-hala.jpg" alt="Vjezd do haly">
+        <img data-krok="2" src="/nahledy/roboaid-x4k7/img/uc-tunel.jpg" alt="Hala s regály">
+        <img data-krok="3" src="/nahledy/roboaid-x4k7/img/uc-potrubi.jpg" alt="Tunel a šachta">
+        <img data-krok="4" src="/nahledy/roboaid-x4k7/img/uc-uvnitr.jpg" alt="Potrubí a nádrž">
       </figure>
       <div>
         <div class="osa-text" data-krok="0">
@@ -566,11 +565,6 @@
           <h3>Potrubí a nádrž</h3>
           <p>Tma, prach, úzko. Svítí si sám 14 000 lumeny a nález označí už za letu.</p>
         </div>
-        <div class="osa-text" data-krok="5" hidden>
-          <span class="cislo">06</span>
-          <h3>Uvnitř zařízení</h3>
-          <p>Nejtěsnější místo trasy. Člověk by sem šel jen s odstávkou, lešením a dýchací technikou.</p>
-        </div>
       </div>
     </div>
 
@@ -581,7 +575,6 @@
         <button type="button" data-krok="2">Hala s regály</button>
         <button type="button" data-krok="3" class="zlom">Tunel a šachta</button>
         <button type="button" data-krok="4" class="zlom">Potrubí a nádrž</button>
-        <button type="button" data-krok="5" class="zlom">Uvnitř zařízení</button>
       </div>
       <div class="osa-signal">
         <span>Satelitní signál</span>
@@ -1463,12 +1456,11 @@
   (function(){
     const sek = document.getElementById('osa'); if (!sek) return;
     const SIG = [
-      {t:'drží',         p:0,  mrtvo:false, znacka:'Satelit drží'},
-      {t:'slábne',       p:22, mrtvo:false, znacka:'Satelit slábne'},
-      {t:'nespolehlivý', p:40, mrtvo:false, znacka:'Satelit nespolehlivý'},
-      {t:'nemá',         p:60, mrtvo:true,  znacka:'Satelit: nemá'},
-      {t:'nemá',         p:60, mrtvo:true,  znacka:'Bez satelitu, bez světla'},
-      {t:'nemá',         p:60, mrtvo:true,  znacka:'Sám, nebo nikdo'},
+      {t:'drží',            p:0,   mrtvo:false, znacka:'Satelit drží'},
+      {t:'slábne',          p:26,  mrtvo:false, znacka:'Satelit slábne'},
+      {t:'nespolehlivý',    p:44,  mrtvo:false, znacka:'Satelit nespolehlivý'},
+      {t:'nemá',            p:62,  mrtvo:true,  znacka:'Satelit: nemá'},
+      {t:'nemá',            p:62,  mrtvo:true,  znacka:'Bez satelitu, bez světla'},
     ];
     const stopy = [...sek.querySelectorAll('.osa-stopy button')];
     const fota  = [...sek.querySelectorAll('.osa-foto [data-krok]')];
@@ -1523,4 +1515,11 @@
   })();
 
 </script>
+
+<script>addEventListener('load',()=>{setTimeout(()=>{
+  const q=new URLSearchParams(location.search); const id=q.get('s'); const k=q.get('k');
+  const v=document.getElementById('hv'); if(v){v.pause();}
+  if(k!==null){const b=document.querySelectorAll('.osa-stopy button')[+k]; if(b)b.click();}
+  if(id){const e=document.getElementById(id); if(e){document.body.style.transform='translateY(-'+(e.offsetTop-10)+'px)';}}
+},900)});</script>
 </body></html>
