@@ -1308,7 +1308,7 @@
       }
       // pozvánka dál se ukazuje jen na podrženém posledním snímku
       const dl = document.getElementById('dolu');
-      if (dl) dl.hidden = !(hv.ended || (hv.duration && t >= hv.duration - 0.25));
+      if (dl) dl.hidden = !(hv.ended || (hv.duration && t >= hv.duration - 0.06));
       if (chci === 'lidar') lidarKresli(t, b);
       if (chci === 'termo') termoKresli(t);
 
@@ -1429,6 +1429,24 @@
     document.getElementById('hero').addEventListener('click', () => { if (hv.paused) pust(); });
     hv.addEventListener('loadeddata', () => { if (hv.paused && !hv.ended) pust(); });
     pust();
+
+    // Smyčka s pauzou na konci: video dojede, poslední snímek chvíli drží
+    // (tam se ukáže pozvánka dál) a pak se rozjede znovu od začátku.
+    // Když si divák video sám pauzne, restart se zruší.
+    let znovu = 0;
+    hv.addEventListener('ended', () => {
+      clearTimeout(znovu);
+      znovu = setTimeout(() => {
+        if (!hv.ended) return;
+        hv.currentTime = 0;
+        const s = hv.play();
+        // když prohlížeč znovuspuštění odmítne, vrátit se na závěrečný snímek,
+        // ať divák nezůstane na prázdném prvním políčku bez textu
+        if (s && s.catch) s.catch(() => { hv.currentTime = hv.duration - 0.03; });
+      }, 2800);
+    });
+    hv.addEventListener('play', () => clearTimeout(znovu));
+    document.getElementById('ovPlay').addEventListener('click', () => clearTimeout(znovu));
 
     // dokud je hero mimo obraz, video ani vrstvu nehnat zbytečně
     if ('IntersectionObserver' in window){
