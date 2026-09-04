@@ -543,7 +543,80 @@
   </div>
   </div>
   <div class="scrollhint">scrollujte</div>
-</header><section id="fakta" aria-label="Klíčová fakta">
+</header>
+<!-- ===== CITACE: vybarvuje se scrollem ===== -->
+<style>
+  /* Sticky ramecek drzi citaci na miste a scroll ji po slovech rozsvecuje.
+     Kazde slovo ma vlastni opacity, takze zlute useky zustanou zlute. */
+  #citat-sek{position:relative;height:280vh;background:var(--bg)}
+  #citat-lep{position:sticky;top:0;min-height:100svh;display:flex;align-items:center;
+    padding:clamp(64px,10vh,120px) clamp(24px,6vw,88px)}
+  #citat-ram{max-width:1180px;margin:0 auto;width:100%}
+  #citat-ram .stitek{font-family:var(--mono);font-size:11px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--zlata);margin:0 0 clamp(24px,4vh,44px)}
+  #citat{margin:0}
+  #citat-text{font-family:var(--serif);font-weight:400;
+    font-size:clamp(25px,3.5vw,52px);line-height:1.22;letter-spacing:-.005em;
+    margin:0 0 clamp(28px,5vh,52px);color:#fff;max-width:20ch;max-width:24ch}
+  #citat-text .cs{opacity:.14;transition:opacity .12s linear;display:inline-block}
+  #citat-text .cs.z{color:var(--zlata)}
+  #citat-podpis{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+    opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+  #citat-podpis.je{opacity:1;transform:none}
+  #citat-podpis b{font-family:var(--body);font-weight:600;font-size:clamp(15px,1.3vw,18px);color:var(--ink)}
+  #citat-podpis span{font-family:var(--mono);font-size:11px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--seda)}
+  @media (max-width:760px){
+    #citat-sek{height:250vh}
+    #citat-lep{padding:clamp(56px,8vh,90px) 22px}
+    #citat-text{font-size:clamp(23px,6.4vw,32px);max-width:none;line-height:1.26}
+  }
+  @media (prefers-reduced-motion:reduce){
+    #citat-text .cs{opacity:1!important;transition:none}
+    #citat-podpis{opacity:1;transform:none}
+  }
+</style>
+<section id="citat-sek" aria-label="Proč RoboAid vznikl">
+  <div id="citat-lep"><div id="citat-ram">
+    <p class="stitek">Proč vznikl</p>
+    <blockquote id="citat">
+      <p id="citat-text">&bdquo;<span class="cs">RoboAid</span> <span class="cs">jsme</span> <span class="cs">vyvíjeli</span> <span class="cs">právě</span> <span class="cs">do</span> <span class="cs">situací,</span> <span class="cs">kdy</span> <span class="cs">je</span> <span class="cs">potřeba</span> <span class="cs">dostat</span> <span class="cs">kvalitní</span> <span class="cs">senzoriku</span> <span class="cs">do</span> <span class="cs">vnitřních</span> <span class="cs">prostor,</span> <span class="cs z">kde</span> <span class="cs z">není</span> <span class="cs z">GPS,</span> <span class="cs">kde</span> <span class="cs">je</span> <span class="cs">omezený</span> <span class="cs">prostor</span> <span class="cs">k</span> <span class="cs">manévrování</span> <span class="cs">a</span> <span class="cs">kde</span> <span class="cs">by</span> <span class="cs">fyzická</span> <span class="cs">kontrola</span> <span class="cs">znamenala</span> <span class="cs z">zbytečné</span> <span class="cs z">riziko,</span> <span class="cs z">odstávku</span> <span class="cs z">nebo</span> <span class="cs z">vysoké</span> <span class="cs z">náklady.</span>&ldquo;</p>
+      <footer id="citat-podpis"><b>Věra Sasková</b><span>CEO Fly4Future</span></footer>
+    </blockquote>
+  </div></div>
+</section>
+<script>
+(function(){
+  var sek=document.getElementById('citat-sek'), txt=document.getElementById('citat-text');
+  var podpis=document.getElementById('citat-podpis');
+  if(!sek||!txt) return;
+  var slova=[].slice.call(txt.querySelectorAll('.cs'));
+  var n=slova.length, bezi=false, cil=0, ted=0;
+  var OD=0.06, DO=0.72;      // v jakem useku scrollu se text rozsviti
+  var PREKRYV=2.2;           // o kolik se rozsveceni sousednich slov prekryva
+  function postup(){ var r=sek.getBoundingClientRect(), d=sek.offsetHeight-window.innerHeight;
+    if(d<=0) return 0; var p=-r.top/d; return p<0?0:(p>1?1:p); }
+  function kresli(p){
+    var u=(p-OD)/(DO-OD); if(u<0)u=0; if(u>1)u=1;
+    var krok=1/n, sirka=krok*PREKRYV;
+    for(var i=0;i<n;i++){
+      var lp=(u-i*krok*(1-(sirka-krok)/1))/sirka;
+      if(lp<0)lp=0; if(lp>1)lp=1;
+      slova[i].style.opacity=(0.14+lp*0.86).toFixed(3);
+    }
+    podpis.classList.toggle('je', u>0.96);
+  }
+  function tik(){
+    ted+=(cil-ted)*0.16; if(Math.abs(cil-ted)<0.0004) ted=cil;
+    kresli(ted);
+    if(Math.abs(cil-ted)>0.0002){ requestAnimationFrame(tik); } else { bezi=false; } }
+  function nastart(){ cil=postup(); if(!bezi){bezi=true; requestAnimationFrame(tik);} }
+  window.addEventListener('scroll',nastart,{passive:true});
+  window.addEventListener('resize',nastart);
+  nastart();
+})();
+</script>
+<section id="fakta" aria-label="Klíčová fakta">
   <ul>
     <li><b class="z">Plně autonomní</b>letí bez pilota</li>
     <li><b>GPS: nemá</b>LiDAR-Inertial Odometry</li>
