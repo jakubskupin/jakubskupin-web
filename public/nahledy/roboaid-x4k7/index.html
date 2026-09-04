@@ -681,6 +681,46 @@
 </div></footer>
 <div id="pilulka" role="button" tabindex="0">Díváte se jako: <b>—</b> · změnit</div>
 
+<style>
+  .bn-mrizka{display:grid;gap:18px;margin-top:44px}
+  .bn-dvoj{display:grid;gap:18px;margin-top:18px;grid-template-columns:1fr}
+  @media(min-width:820px){.bn-dvoj{grid-template-columns:1.2fr .8fr}}
+  .bn{margin:0;display:flex;flex-direction:column;gap:10px}
+  .bn img{width:100%;height:auto;border:1px solid var(--line)}
+  .bn figcaption{display:flex;flex-wrap:wrap;gap:6px 16px;font-family:var(--mono);
+    font-size:11px;letter-spacing:.08em;color:var(--seda)}
+  .bn figcaption b{color:var(--ink);font-weight:500;letter-spacing:.14em;text-transform:uppercase}
+</style>
+<section id="formaty" class="sek" style="padding-top:0">
+  <div class="rám">
+    <p class="kick">Reklamní formáty</p>
+    <h2>Jedna paleta, <span class="z">tři kanály</span></h2>
+    <p class="pod">Barevnost je odvozená z měření, ne z oka: obloha přechází z břidlicové
+    <b>#3D4B54</b> přes neutrální <b>#7E8181</b> do zaprášené <b>#94817A</b> u horizontu,
+    skála je modročerná <b>#050F18</b>. Jediná sytá barva v obraze je jantar, a ten na stroji
+    reálně je, jsou to jeho vlastní LED moduly. Typografie si tedy nic nepřidává, jen si
+    půjčuje světlo stroje.</p>
+
+    <div class="bn-mrizka">
+      <figure class="bn">
+        <img src="/nahledy/roboaid-x4k7/img/ad-billboard.jpg" alt="Billboard RoboAid, WHERE GPS ENDS">
+        <figcaption><b>Billboard</b><span>5,1 &times; 2,4 m</span><span>2:1</span><span>text vlevo, stroj vpravo</span></figcaption>
+      </figure>
+    </div>
+
+    <div class="bn-dvoj">
+      <figure class="bn">
+        <img src="/nahledy/roboaid-x4k7/img/ad-ctverec.jpg" alt="Čtvercový formát RoboAid">
+        <figcaption><b>Feed</b><span>1:1</span><span>Instagram, LinkedIn</span></figcaption>
+      </figure>
+      <figure class="bn">
+        <img src="/nahledy/roboaid-x4k7/img/ad-svisly.jpg" alt="Svislý formát RoboAid">
+        <figcaption><b>Stories</b><span>9:16</span><span>Reels, Shorts</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
 <script>
   // ================= HERO: vrstvy jedou ČAS VIDEA, ne scroll =================
   // Kotvy jsou změřené přímo ve spojeném V3 videu (klip 1 = 0–13 s, POV klip 2
