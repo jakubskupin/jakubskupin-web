@@ -98,10 +98,10 @@
      a nahoře je oříznutá těsně nad vrcholkem klece (PNG s alfou, 1264×710):
      pozadí je průhledné, takže věty za dronem zakrývá jen stroj a kámen, ne černý obdélník. Výška je stropovaná na
      67 vh, aby nad dronem zbylo místo pro větu i na nízkém displeji. */
-  #slib .dron{position:absolute;left:50%;bottom:0;width:min(78vw,1120px,calc(67vh * 1.78));height:auto;
+  #slib .dron{position:absolute;left:50%;bottom:0;width:min(78vw,1120px,calc(67vh * 1.731));height:auto;
     transform:translateX(-50%);z-index:2;pointer-events:none;
     filter:drop-shadow(0 24px 50px rgba(0,0,0,.9))}
-  #slib .stick .ph{position:absolute;left:50%;bottom:0;width:min(78vw,1120px,calc(67vh * 1.78));aspect-ratio:1264/710;min-height:0;
+  #slib .stick .ph{position:absolute;left:50%;bottom:0;width:min(78vw,1120px,calc(67vh * 1.731));aspect-ratio:1264/730;min-height:0;
     transform:translateX(-50%);z-index:2}
   #slib .veta{position:absolute;left:50%;top:50%;width:min(92vw,1100px);transform:translate(-50%,-50%);
     text-align:center;z-index:1;opacity:0;will-change:transform,opacity;pointer-events:none}
@@ -217,7 +217,7 @@
     .dlaz{grid-template-columns:1fr 1fr}
     .otazky li{grid-template-columns:44px 1fr;}
     .otazky .stav{grid-column:2}
-    #slib .dron{width:min(96vw,calc(62vh * 1.78))}
+    #slib .dron{width:min(96vw,calc(62vh * 1.731))}
     .osoba{grid-template-columns:96px 1fr}
   }
 
@@ -416,7 +416,7 @@
     <div class="veta"><p>Náraz není konec mise</p><small>karbonová klec snese kontakt a stroj letí dál</small></div>
     <div class="veta"><p>Satelit uvnitř nechytíte</p><small>on ho nepotřebuje</small></div>
     <div class="veta"><p>Nález máte, než skončí směna</p><small>označí korozi i trhlinu už za letu</small></div>
-    <img class="dron" id="dronFront" src="/nahledy/roboaid-x4k7/img/front.webp" alt="RoboAid zepředu na kusu uhlí" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',innerHTML:'<div><div class=t>Obrázek · dron zepředu</div><p>RoboAid z bílého packshotu na tmavé skále, černé studio. Generuje se v Comfy (Nano Banana 2).</p></div>'}))">
+    <img class="dron" id="dronFront" src="/nahledy/roboaid-x4k7/img/front.jpg" alt="RoboAid zepředu na černé skále" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',innerHTML:'<div><div class=t>Obrázek · dron zepředu</div><p>RoboAid z bílého packshotu na tmavé skále, černé studio. Generuje se v Comfy (Nano Banana 2).</p></div>'}))">
     <div class="tecky"><i></i><i></i><i></i></div>
   </div>
 </section>
