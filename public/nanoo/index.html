@@ -60,6 +60,23 @@ section{margin-top:64px}
 .tag{display:inline-block;font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;border-radius:3px;background:#F1EFEA;color:var(--text-2);margin-bottom:6px}
 .tag.bad{background:#F6E5E1;color:#9A3A24}.tag.ok{background:#E3EEE6;color:#2C6B41}
 .col{display:flex;flex-direction:column}
+/* IG carousel mockup */
+.carousel-wrap{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:28px;align-items:start}
+@media(max-width:760px){.carousel-wrap{grid-template-columns:1fr}}
+.ig-car{max-width:420px}
+.car{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none}
+.car::-webkit-scrollbar{display:none}
+.slide{flex:0 0 100%;scroll-snap-align:center;margin:0;position:relative;background:#eee}
+.slide img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover}
+.slide figcaption{position:absolute;left:0;right:0;bottom:0;padding:44px 16px 16px;color:#fff;
+  background:linear-gradient(to top,rgba(20,18,16,.72),rgba(20,18,16,.34) 46%,rgba(20,18,16,0))}
+.slide figcaption span{display:block;font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;opacity:.82;margin-bottom:3px}
+.slide figcaption b{display:block;font-family:var(--h);font-weight:700;letter-spacing:-.02em;font-size:20px;line-height:1.15}
+.dots{display:flex;justify-content:center;gap:5px;padding:9px 0 2px}
+.dots i{width:5px;height:5px;border-radius:50%;background:#CFCCC5;transition:background .2s}
+.dots i.on{background:#3D9BE9}
+.carousel-side{display:flex;flex-direction:column;gap:14px;padding-top:4px}
+.carousel-side .note{margin-top:0}
 footer{margin-top:70px;padding-top:18px;border-top:1px solid var(--line);font-size:13px;color:var(--text-3)}
 </style>
 </head>
@@ -70,6 +87,38 @@ footer{margin-top:70px;padding-top:18px;border-top:1px solid var(--line);font-si
 <div class="eyebrow">NANOO Oral Duo+</div>
 <h1>Videa z fotek, které už máte</h1>
 <p class="lede">Krabička ve všech ukázkách vychází z vašich packshotů, jen je přesazená do světla a prostoru. Ukázky jsou tady v mockupech Instagramu a Facebooku včetně textů, ať si je umíte představit v kanálu, kde poběží. Nejdřív první pokus i s chybami, potom opravený směr.</p>
+
+<section id="carousel">
+  <div class="sec-head">
+    <div class="eyebrow">Třetí kolo · Instagram carousel</div>
+    <h2>Návod, který se dá prolistovat</h2>
+    <p class="lede">Osm snímků 4:5, cover, šest kroků a závěr. Všechny vznikly nad jednou master scénou, takže při swipování drží stejné světlo, stejná police a stejné materiály. Scéna, ruce i barvy kapslí sedí. <b>Potisk krabičky ne</b>, a je to poučná chyba, kterou tady nechávám vidět.</p>
+  </div>
+  <div class="carousel-wrap">
+    <div class="ig ig-car">
+      <div class="hd"><span class="av">N</span><span class="who"><b>nanoo.cz</b><small>Sponzorováno</small></span><span class="more">···</span></div>
+      <div class="car" id="car">
+        <figure class="slide"><img src="/nanoo/assets/car-01-cover.jpg" alt="Cover" loading="lazy"><figcaption><span>Večerní rutina</span><b>Dvě kapsle, jedna minuta</b></figcaption></figure>
+        <figure class="slide"><img src="/nanoo/assets/car-02-blistr.jpg" alt="Krok 1" loading="lazy"><figcaption><span>Krok 1</span><b>Vytlačte první kapsli</b></figcaption></figure>
+        <figure class="slide"><img src="/nanoo/assets/car-03-voda.jpg" alt="Krok 2" loading="lazy"><figcaption><span>Krok 2</span><b>Zapijte ji vodou</b></figcaption></figure>
+        <figure class="slide"><img src="/nanoo/assets/car-04-kartacek.jpg" alt="Krok 3" loading="lazy"><figcaption><span>Krok 3</span><b>Vyčistěte si zuby</b></figcaption></figure>
+        <figure class="slide"><img src="/nanoo/assets/car-05-druha.jpg" alt="Krok 4" loading="lazy"><figcaption><span>Krok 4</span><b>Vezměte druhou kapsli</b></figcaption></figure>
+        <figure class="slide"><img src="/nanoo/assets/car-06-rozpousti.jpg" alt="Krok 5" loading="lazy"><figcaption><span>Krok 5</span><b>Nechte ji pracovat</b></figcaption></figure>
+        <figure class="slide"><img src="/nanoo/assets/car-07-rano.jpg" alt="Krok 6" loading="lazy"><figcaption><span>Krok 6</span><b>Ráno začínáte odpočatí</b></figcaption></figure>
+        <figure class="slide"><img src="/nanoo/assets/car-08-outro.jpg" alt="Závěr" loading="lazy"><figcaption><span>60 kapslí na 30 dní</span><b>nanoo.cz</b></figcaption></figure>
+      </div>
+      <div class="dots" id="dots"></div>
+      <div class="act"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9-9.2C1.6 8.4 3.7 5 7.2 5c2 0 3.4 1.1 4.8 2.7C13.4 6.1 14.8 5 16.8 5c3.5 0 5.6 3.4 4.2 6.8C19 16.4 12 21 12 21z"/></svg><svg viewBox="0 0 24 24"><path d="M21 12c0 4-4 7-9 7-1.3 0-2.5-.2-3.6-.6L4 20l1.4-3.6C4 15.2 3 13.7 3 12c0-4 4-7 9-7s9 3 9 7z"/></svg><svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg><svg class="r" viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg></div>
+      <div class="likes">1 284 To se mi líbí</div>
+      <div class="cap"><b>nanoo.cz</b>Dvě kapsle, jeden večerní rituál. Jedna se polyká, druhá se rozpouští přímo v ústech. Prolistujte si, kam Oral Duo+ ve vaší koupelně patří. <span class="more2">… více</span></div>
+    </div>
+    <div class="carousel-side">
+      <div class="note"><span class="tag ok">jedna master scéna</span><br><b>Proč to drží pohromadě.</b> Nejdřív vznikne jediný snímek koupelny, který určí světlo, dřevo a ručník. Teprve pak z něj vychází všech osm slidů. Tohle vyšlo: police, ručník i světlo jsou napříč carouselem stejné.</div>
+      <div class="note"><span class="tag bad">přetištěný obal</span><br><b>Model vysázel na krabičku slova z pokynu.</b> Místo českých textů tam stojí „silver carton" a „single-color capsules". Popsal jsem mu produkt slovy a on ta slova vzal jako grafiku k vytištění. Oprava je jednoduchá: obal se nesmí popisovat, jen ukázat.</div>
+      <div class="note"><span class="tag ok">barvy sedí</span><br><b>Kapsle jsou poprvé správně:</b> bledě bílá a olivově zlatá, přesně jak jsou vytištěné na vaší krabičce. Dosavadní sety měly hnědou, ta pochází z vygenerovaného blistru na kartě produktu.<br><br><span class="tag bad">čeká na vás</span><br><b>Dvě věci potřebujeme od vás.</b> Fotku skutečného blistru a potvrzení, která kapsle se polyká a která se rozpouští. Do té doby jsou kroky psané jako „první" a „druhá".</div>
+    </div>
+  </div>
+</section>
 
 <section id="set1">
   <div class="sec-head">
@@ -97,8 +146,8 @@ footer{margin-top:70px;padding-top:18px;border-top:1px solid var(--line);font-si
   </div>
   <div class="grid">
 <div class="col"><div class="ig"><div class="hd"><span class="av">N</span><span class="who"><b>nanoo.cz</b><small>Sponzorováno</small></span><span class="more">···</span></div><img src="/nanoo/assets/set2-start-s1-studio-45.jpg" alt="Krabička v ateliéru" loading="lazy"><div class="act"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9-9.2C1.6 8.4 3.7 5 7.2 5c2 0 3.4 1.1 4.8 2.7C13.4 6.1 14.8 5 16.8 5c3.5 0 5.6 3.4 4.2 6.8C19 16.4 12 21 12 21z"/></svg><svg viewBox="0 0 24 24"><path d="M21 12c0 4-4 7-9 7-1.3 0-2.5-.2-3.6-.6L4 20l1.4-3.6C4 15.2 3 13.7 3 12c0-4 4-7 9-7s9 3 9 7z"/></svg><svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg><svg class="r" viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg></div><div class="likes">1 284 To se mi líbí</div><div class="cap"><b>nanoo.cz</b>Dvě kapsle, jeden večerní rituál. Vitamíny a minerály po jídle, orální probiotika po vyčištění zubů. <span class="more2">… více</span></div></div><div class="note"><span class="tag ok">základ videa</span><br><b>Čisté pozadí pro dynamickou kameru.</b> Startovní snímek videa 1.</div></div>
-<div class="col"><div class="fb"><div class="hd"><span class="av">N</span><span class="who"><b>NANOO</b><small>Sponzorováno · 🌐</small></span><span class="more">···</span></div><div class="txt">Dvě kapsle, dvě role. Polykací s vitaminy a minerály po jídle, rozpustná s probiotiky po vyčištění zubů.</div><img src="/nanoo/assets/set2-start-s2-slab-capsules-45.jpg" alt="Krabička s kapslemi na desce" loading="lazy"><div class="link"><div><small>nanoo.cz</small><b>Dvě kapsle, dvě role</b></div><span class="btn">Koupit</span></div></div><div class="note"><span class="tag ok">opraveno</span><br><b>Kapsle podle blistru a obalu:</b> hnědá a bílá, jednobarevné. Klidový stav po nasypání, konec videa 2.</div></div>
-<div class="col"><div class="ig"><div class="hd"><span class="av">N</span><span class="who"><b>nanoo.cz</b><small>Sponzorováno</small></span><span class="more">···</span></div><img src="/nanoo/assets/set2-start-s3-black-mirror-45.jpg" alt="Krabička a blistr na černém zrcadle" loading="lazy"><div class="act"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9-9.2C1.6 8.4 3.7 5 7.2 5c2 0 3.4 1.1 4.8 2.7C13.4 6.1 14.8 5 16.8 5c3.5 0 5.6 3.4 4.2 6.8C19 16.4 12 21 12 21z"/></svg><svg viewBox="0 0 24 24"><path d="M21 12c0 4-4 7-9 7-1.3 0-2.5-.2-3.6-.6L4 20l1.4-3.6C4 15.2 3 13.7 3 12c0-4 4-7 9-7s9 3 9 7z"/></svg><svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg><svg class="r" viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg></div><div class="likes">1 284 To se mi líbí</div><div class="cap"><b>nanoo.cz</b>30 dní. 60 kapslí. 4 miliardy živých kultur v každé rozpustné kapsli. Vyrobeno v České republice. <span class="more2">… více</span></div></div><div class="note"><span class="tag ok">opraveno</span><br><b>Blistr podle skutečného balení,</b> kapsle celohnědé. Tmavý svět pro tvrdší argument.</div></div>
+<div class="col"><div class="fb"><div class="hd"><span class="av">N</span><span class="who"><b>NANOO</b><small>Sponzorováno · 🌐</small></span><span class="more">···</span></div><div class="txt">Dvě kapsle, dvě role. Polykací s vitaminy a minerály po jídle, rozpustná s probiotiky po vyčištění zubů.</div><img src="/nanoo/assets/set2-start-s2-slab-capsules-45.jpg" alt="Krabička s kapslemi na desce" loading="lazy"><div class="link"><div><small>nanoo.cz</small><b>Dvě kapsle, dvě role</b></div><span class="btn">Koupit</span></div></div><div class="note"><span class="tag bad">barva kapslí</span><br><b>Kapsle jednobarevné,</b> ale barva vychází z blistru na kartě produktu. Ten je vygenerovaný, skutečné kapsle jsou bílá a olivově zlatá.</div></div>
+<div class="col"><div class="ig"><div class="hd"><span class="av">N</span><span class="who"><b>nanoo.cz</b><small>Sponzorováno</small></span><span class="more">···</span></div><img src="/nanoo/assets/set2-start-s3-black-mirror-45.jpg" alt="Krabička a blistr na černém zrcadle" loading="lazy"><div class="act"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9-9.2C1.6 8.4 3.7 5 7.2 5c2 0 3.4 1.1 4.8 2.7C13.4 6.1 14.8 5 16.8 5c3.5 0 5.6 3.4 4.2 6.8C19 16.4 12 21 12 21z"/></svg><svg viewBox="0 0 24 24"><path d="M21 12c0 4-4 7-9 7-1.3 0-2.5-.2-3.6-.6L4 20l1.4-3.6C4 15.2 3 13.7 3 12c0-4 4-7 9-7s9 3 9 7z"/></svg><svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg><svg class="r" viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg></div><div class="likes">1 284 To se mi líbí</div><div class="cap"><b>nanoo.cz</b>30 dní. 60 kapslí. 4 miliardy živých kultur v každé rozpustné kapsli. Vyrobeno v České republice. <span class="more2">… více</span></div></div><div class="note"><span class="tag bad">barva kapslí</span><br><b>Blistr vychází z karty produktu,</b> jenže ta fotka je vygenerovaná. Tmavý svět pro tvrdší argument drží, barva kapslí ne.</div></div>
 <div class="col"><div class="ig"><div class="hd"><span class="av">N</span><span class="who"><b>nanoo.cz</b><small>Sponzorováno</small></span><span class="more">···</span></div><img src="/nanoo/assets/set2-start-s2-slab-empty-45.jpg" alt="Krabička na bílé desce" loading="lazy"><div class="act"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9-9.2C1.6 8.4 3.7 5 7.2 5c2 0 3.4 1.1 4.8 2.7C13.4 6.1 14.8 5 16.8 5c3.5 0 5.6 3.4 4.2 6.8C19 16.4 12 21 12 21z"/></svg><svg viewBox="0 0 24 24"><path d="M21 12c0 4-4 7-9 7-1.3 0-2.5-.2-3.6-.6L4 20l1.4-3.6C4 15.2 3 13.7 3 12c0-4 4-7 9-7s9 3 9 7z"/></svg><svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg><svg class="r" viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg></div><div class="likes">1 284 To se mi líbí</div><div class="cap"><b>nanoo.cz</b>Péče o ústní mikrobiom, kterou zvládnete za minutu večer. <span class="more2">… více</span></div></div><div class="note"><span class="tag ok">základ videa</span><br><b>Prázdná deska</b> je začátek videa 2: sem se sypou kapsle.</div></div>
   </div>
 </section>
@@ -120,5 +169,18 @@ footer{margin-top:70px;padding-top:18px;border-top:1px solid var(--line);font-si
 
 <footer>Jakub Skupin · vizuály a videa jsou ukázka směru, ne finální adaptace. Produkt je reálný, prostředí vzniklo s pomocí AI.</footer>
 </div>
+<script>
+(function(){
+  var car=document.getElementById('car'), dots=document.getElementById('dots');
+  if(!car||!dots) return;
+  var s=car.querySelectorAll('.slide');
+  s.forEach(function(_,i){var d=document.createElement('i'); if(!i)d.className='on'; dots.appendChild(d);});
+  var b=dots.querySelectorAll('i');
+  car.addEventListener('scroll',function(){
+    var i=Math.round(car.scrollLeft/car.clientWidth);
+    b.forEach(function(d,j){d.classList.toggle('on', j===i);});
+  },{passive:true});
+})();
+</script>
 </body>
 </html>
