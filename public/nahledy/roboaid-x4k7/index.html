@@ -88,11 +88,14 @@
      průhlednost počítá JS z postupu scrollu, takže to jede plynule s prstem, ne skokem. */
   #slib{padding:0;background:#000;height:480vh}
   #slib .stick{position:sticky;top:0;height:100vh;overflow:hidden}
-  #slib .dron{position:absolute;left:50%;top:50%;width:min(52vw,720px);height:auto;
-    transform:translate(-50%,calc(-50% + 6vh));z-index:2;pointer-events:none;
-    filter:drop-shadow(0 40px 80px rgba(0,0,0,.85))}
-  #slib .stick .ph{position:absolute;left:50%;top:50%;width:min(52vw,720px);aspect-ratio:3/2;min-height:0;
-    transform:translate(-50%,calc(-50% + 6vh));z-index:2}
+  /* Kámen sedí spodní hranou přesně na spodní hraně okna (fotka končí hranou kamene,
+     změřeno: poslední řádek obrázku je kámen). Výška je stropovaná na 66 vh, aby nad
+     dronem zbylo místo pro větu i na nízkém displeji. */
+  #slib .dron{position:absolute;left:50%;bottom:0;width:min(64vw,900px,calc(66vh * 1.49));height:auto;
+    transform:translateX(-50%);z-index:2;pointer-events:none;
+    filter:drop-shadow(0 30px 60px rgba(0,0,0,.85))}
+  #slib .stick .ph{position:absolute;left:50%;bottom:0;width:min(64vw,900px,calc(66vh * 1.49));aspect-ratio:3/2;min-height:0;
+    transform:translateX(-50%);z-index:2}
   #slib .veta{position:absolute;left:50%;top:50%;width:min(92vw,1100px);transform:translate(-50%,-50%);
     text-align:center;z-index:1;opacity:0;will-change:transform,opacity;pointer-events:none}
   #slib .veta p{margin:0 auto;font-family:var(--serif);font-size:clamp(40px,7.2vw,118px);line-height:.96;
@@ -195,7 +198,7 @@
     .dlaz{grid-template-columns:1fr 1fr}
     .otazky li{grid-template-columns:44px 1fr;}
     .otazky .stav{grid-column:2}
-    #slib .stick img{width:92vw}
+    #slib .dron{width:min(96vw,calc(60vh * 1.49))}
     .osoba{grid-template-columns:96px 1fr}
   }
 
