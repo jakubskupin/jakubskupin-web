@@ -88,13 +88,13 @@
      průhlednost počítá JS z postupu scrollu, takže to jede plynule s prstem, ne skokem. */
   #slib{padding:0;background:#000;height:480vh}
   #slib .stick{position:sticky;top:0;height:100vh;overflow:hidden}
-  /* Kámen sedí spodní hranou přesně na spodní hraně okna (fotka končí hranou kamene,
-     změřeno: poslední řádek obrázku je kámen). Výška je stropovaná na 66 vh, aby nad
-     dronem zbylo místo pro větu i na nízkém displeji. */
-  #slib .dron{position:absolute;left:50%;bottom:0;width:min(64vw,900px,calc(66vh * 1.49));height:auto;
+  /* Kámen sedí spodní hranou přesně na spodní hraně okna (fotka končí hranou kamene)
+     a nahoře je oříznutá těsně nad vrcholkem klece (1264×730). Výška je stropovaná na
+     67 vh, aby nad dronem zbylo místo pro větu i na nízkém displeji. */
+  #slib .dron{position:absolute;left:50%;bottom:0;width:min(78vw,1120px,calc(67vh * 1.731));height:auto;
     transform:translateX(-50%);z-index:2;pointer-events:none;
     filter:drop-shadow(0 30px 60px rgba(0,0,0,.85))}
-  #slib .stick .ph{position:absolute;left:50%;bottom:0;width:min(64vw,900px,calc(66vh * 1.49));aspect-ratio:3/2;min-height:0;
+  #slib .stick .ph{position:absolute;left:50%;bottom:0;width:min(78vw,1120px,calc(67vh * 1.731));aspect-ratio:1264/730;min-height:0;
     transform:translateX(-50%);z-index:2}
   #slib .veta{position:absolute;left:50%;top:50%;width:min(92vw,1100px);transform:translate(-50%,-50%);
     text-align:center;z-index:1;opacity:0;will-change:transform,opacity;pointer-events:none}
@@ -198,7 +198,7 @@
     .dlaz{grid-template-columns:1fr 1fr}
     .otazky li{grid-template-columns:44px 1fr;}
     .otazky .stav{grid-column:2}
-    #slib .dron{width:min(96vw,calc(60vh * 1.49))}
+    #slib .dron{width:min(96vw,calc(62vh * 1.731))}
     .osoba{grid-template-columns:96px 1fr}
   }
 
@@ -1077,7 +1077,7 @@
         // dráha: zpoza dronu (střed) nahoru nad něj, pak dál a pryč
         // vyjede nad dron (34 vh), tam chvíli stojí, pak ještě kousek povyjede a zmizí
         // dřív, než ho ořízne horní hrana okna
-        const up = t < 0.55 ? easeOut(clamp(t/0.55,0,1)) * 34 : 34 + (t-0.55)/0.45 * 10;   // ve vh
+        const up = t < 0.55 ? easeOut(clamp(t/0.55,0,1)) * 31 : 31 + (t-0.55)/0.45 * 8;   // ve vh
         const op = smooth(0.08, 0.40, t) * (1 - smooth(0.70, 0.92, t));
         const sc = 0.9 + 0.1*easeOut(clamp(t/0.55,0,1));
         el.style.opacity = op.toFixed(3);
