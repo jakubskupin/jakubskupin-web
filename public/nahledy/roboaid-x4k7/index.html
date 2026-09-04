@@ -1,4 +1,4 @@
-<!doctype html><html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow, noarchive"><meta name="referrer" content="no-referrer"><title>RoboAid · landing page v2</title><style>:root{color-scheme:dark}body{margin:0;padding:0}img{max-width:100%}</style></head><body>
+<!doctype html><html lang="cs" data-kdo="provoz"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow, noarchive"><meta name="referrer" content="no-referrer"><title>RoboAid · landing page v2</title><style>:root{color-scheme:dark}body{margin:0;padding:0}img{max-width:100%}</style></head><body>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap">
 <style>
 
@@ -64,21 +64,6 @@
   #slib .tecky{position:absolute;right:28px;top:50%;transform:translateY(-50%);display:grid;gap:10px;z-index:3}
   #slib .tecky i{display:block;width:6px;height:6px;border-radius:50%;background:rgba(233,185,74,.25);transition:background .3s}
   #slib .tecky i.on{background:var(--zlata)}
-
-  /* 01 kdo jste: jeden řádek */
-  #kdo{padding:26px 24px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#05070C}
-  #kdo .rám{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-  #kdo .lab{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
-  .volba{display:flex;gap:8px;flex-wrap:wrap}
-  .volba button{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);
-    background:#0B0F19;border:1px solid var(--line);border-radius:999px;padding:11px 18px;cursor:pointer;transition:all .2s ease}
-  .volba button:hover{border-color:var(--zlata)} .volba button.on{background:var(--zlata);color:#07090F;border-color:var(--zlata)}
-  #kdo .jednotka{margin-left:auto;font-family:var(--serif);font-size:clamp(18px,1.7vw,24px);color:var(--zlata)}
-  #kdo .treti{font-size:12.5px;color:var(--muted)} #kdo .treti a{color:var(--zlata);text-decoration:none;border-bottom:1px solid rgba(233,185,74,.4)}
-  #pilulka{position:fixed;right:18px;top:18px;transform:translate(0,-90px);z-index:50;font-family:var(--mono);font-size:11px;
-    letter-spacing:.12em;text-transform:uppercase;background:rgba(7,9,15,.86);border:1px solid var(--line);color:var(--muted);
-    border-radius:999px;padding:9px 14px;backdrop-filter:blur(8px);transition:transform .35s ease;cursor:pointer;white-space:nowrap}
-  #pilulka.on{transform:translate(0,0)} #pilulka b{color:var(--zlata);font-weight:500}
 
   /* 02 kalkulačka */
   .kalk{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:36px;align-items:start}
@@ -379,26 +364,28 @@
     padding:5px 14px;border-radius:5px;white-space:nowrap;font-weight:500}
 
 
-  /* ovladač hero videa: kdo chce, zastaví si to a posune */
-  #ovladac{position:absolute;left:24px;right:24px;bottom:26px;z-index:9;pointer-events:auto;display:flex;
-    align-items:center;gap:14px;max-width:1180px;margin:0 auto;opacity:.55;transition:opacity .25s}
-  #hero:hover #ovladac,#ovladac:focus-within{opacity:1}
-  #ovPlay{flex:0 0 auto;width:34px;height:34px;display:grid;place-items:center;cursor:pointer;
-    background:rgba(7,9,15,.6);border:1px solid rgba(255,255,255,.22);border-radius:50%;padding:0}
-  #ovPlay svg{width:11px;height:13px;fill:#fff}
+  /* ovladač hero videa: nenápadný a bez barvy; objeví se, když hneš myší */
+  #ovladac{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:9;pointer-events:auto;
+    display:flex;align-items:center;gap:11px;width:min(420px,72vw);
+    opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s}
+  #ovladac.ukaz{opacity:.62;visibility:visible}
+  #ovladac.ukaz:hover,#ovladac:focus-within{opacity:1}
+  #ovPlay{flex:0 0 auto;width:26px;height:26px;display:grid;place-items:center;cursor:pointer;
+    background:none;border:0;border-radius:50%;padding:0}
+  #ovPlay svg{width:9px;height:11px;fill:rgba(255,255,255,.88)}
   #ovPlay .i-play{display:none}
   #ovladac.pauza #ovPlay .i-pause{display:none}
   #ovladac.pauza #ovPlay .i-play{display:block}
-  #ovPlay:focus-visible{outline:2px solid var(--zlata);outline-offset:2px}
-  #ovOsa{position:relative;flex:1;height:22px;display:flex;align-items:center}
-  #ovOsa::before{content:"";position:absolute;left:0;right:0;height:2px;background:rgba(255,255,255,.22);border-radius:2px}
-  #ovPruh{position:absolute;left:0;height:2px;width:0;background:var(--zlata);border-radius:2px}
-  #ovBod{position:absolute;left:0;width:10px;height:10px;margin-left:-5px;border-radius:50%;
-    background:var(--zlata);box-shadow:0 0 0 3px rgba(7,9,15,.5)}
-  #ovRange{position:absolute;left:0;right:0;width:100%;height:22px;opacity:0;cursor:pointer;margin:0}
-  #ovCas{flex:0 0 auto;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:#fff;
-    font-variant-numeric:tabular-nums;text-shadow:0 1px 3px rgba(0,0,0,.6)}
-  @media (max-width:700px){ #ovladac{bottom:auto;top:calc(56.25vw - 42px);left:16px;right:16px;opacity:1} }
+  #ovPlay:focus-visible{outline:1px solid rgba(255,255,255,.7);outline-offset:2px}
+  #ovOsa{position:relative;flex:1;height:18px;display:flex;align-items:center}
+  #ovOsa::before{content:"";position:absolute;left:0;right:0;height:1px;background:rgba(255,255,255,.26)}
+  #ovPruh{position:absolute;left:0;height:1px;width:0;background:rgba(255,255,255,.85)}
+  #ovBod{position:absolute;left:0;width:6px;height:6px;margin-left:-3px;border-radius:50%;
+    background:rgba(255,255,255,.9)}
+  #ovRange{position:absolute;left:0;right:0;width:100%;height:18px;opacity:0;cursor:pointer;margin:0}
+  #ovCas{flex:0 0 auto;font-family:var(--mono);font-size:10px;letter-spacing:.05em;
+    color:rgba(255,255,255,.7);font-variant-numeric:tabular-nums}
+  @media (max-width:700px){ #ovladac{bottom:14px;width:min(320px,86vw)} #ovladac.ukaz{opacity:.85} }
 
   /* claim drží jen úvod videa, pak zmizí, aby na obrazovce byl vždy jen jeden text */
   .herotext,.scrollhint{transition:opacity .5s ease}
@@ -452,6 +439,29 @@
     .herotext h1{font-size:clamp(26px,5vw,42px)}
     .herotext p{font-size:14px}
   }
+  /* ovladač hero videa: nenápadný a bez barvy; objeví se, když hneš myší */
+  #ovladac{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:9;pointer-events:auto;
+    display:flex;align-items:center;gap:11px;width:min(420px,72vw);
+    opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s}
+  #ovladac.ukaz{opacity:.62;visibility:visible}
+  #ovladac.ukaz:hover,#ovladac:focus-within{opacity:1}
+  #ovPlay{flex:0 0 auto;width:26px;height:26px;display:grid;place-items:center;cursor:pointer;
+    background:none;border:0;border-radius:50%;padding:0}
+  #ovPlay svg{width:9px;height:11px;fill:rgba(255,255,255,.88)}
+  #ovPlay .i-play{display:none}
+  #ovladac.pauza #ovPlay .i-pause{display:none}
+  #ovladac.pauza #ovPlay .i-play{display:block}
+  #ovPlay:focus-visible{outline:1px solid rgba(255,255,255,.7);outline-offset:2px}
+  #ovOsa{position:relative;flex:1;height:18px;display:flex;align-items:center}
+  #ovOsa::before{content:"";position:absolute;left:0;right:0;height:1px;background:rgba(255,255,255,.26)}
+  #ovPruh{position:absolute;left:0;height:1px;width:0;background:rgba(255,255,255,.85)}
+  #ovBod{position:absolute;left:0;width:6px;height:6px;margin-left:-3px;border-radius:50%;
+    background:rgba(255,255,255,.9)}
+  #ovRange{position:absolute;left:0;right:0;width:100%;height:18px;opacity:0;cursor:pointer;margin:0}
+  #ovCas{flex:0 0 auto;font-family:var(--mono);font-size:10px;letter-spacing:.05em;
+    color:rgba(255,255,255,.7);font-variant-numeric:tabular-nums}
+  @media (max-width:700px){ #ovladac{bottom:14px;width:min(320px,86vw)} #ovladac.ukaz{opacity:.85} }
+
 
 </style>
 <header id="hero">
@@ -607,19 +617,6 @@
         <div><small>vrstva 06</small><b>volná</b></div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ===== 01 · KDO JSTE (jeden řádek) ===== -->
-<section id="kdo" aria-label="Kdo jste">
-  <div class="rám">
-    <span class="lab">Díváte se jako</span>
-    <div class="volba" role="group" aria-label="Kdo jste">
-      <button type="button" data-kdo="provoz">Provozuji aktivum</button>
-      <button type="button" data-kdo="sluzba">Dělám inspekce jako službu</button>
-    </div>
-    <span class="treti">Stavíte na platformě? <a href="#demo">Napište nám rovnou</a></span>
-    <span class="jednotka"><span data-per="vse">Vyberte, v čem to počítáte</span><span data-per="provoz">Počítáte v hodinách odstávky</span><span data-per="sluzba">Počítáte v zakázkách na jeden stroj</span></span>
   </div>
 </section>
 
@@ -906,7 +903,6 @@
   <span>Ze stejné dílny: <a href="https://fly4future.com/" target="_blank" rel="noopener">RoboCore</a> (modulární platforma, 38 min, 4 kg) · <a href="https://fly4future.com/" target="_blank" rel="noopener">PORTOS</a> (jedno tělo, čtyři stroje)</span>
   <span>Prototyp landing page RoboAid · není veřejná stránka Fly4Future</span>
 </div></footer>
-<div id="pilulka" role="button" tabindex="0">Díváte se jako: <b>nikdo</b> · změnit</div>
 
 <style>
   .bn-mrizka{display:grid;gap:18px;margin-top:44px}
@@ -1330,7 +1326,28 @@
       ['pointerup','pointercancel','change'].forEach(u => rng.addEventListener(u, () => { rucne = false; }));
       // klik do hera nesmí přehazovat přehrávání, když míří na ovladač
       ov.addEventListener('click', e => e.stopPropagation());
-      stav(); posun();
+      // nenápadnost: ovladač je vidět jen chvíli po pohybu myší, a vždy když je pauza
+      // viditelnost řídí JS napřímo: stránka skládá CSS ze dvou souborů
+      // a spoléhat se tu na pořadí pravidel se ukázalo jako křehké
+      let casovac = 0;
+      function vidno(ano){
+        ov.classList.toggle('ukaz', ano);
+        ov.style.opacity = ano ? '.62' : '0';
+        ov.style.visibility = ano ? 'visible' : 'hidden';
+      }
+      function ukaz(){
+        vidno(true);
+        clearTimeout(casovac);
+        if (!hv.paused) casovac = setTimeout(() => vidno(false), 2200);
+      }
+      ov.addEventListener('pointerenter', () => { ov.style.opacity = '1'; });
+      ov.addEventListener('pointerleave', () => { if (ov.classList.contains('ukaz')) ov.style.opacity = '.62'; });
+      const hero = document.getElementById('hero');
+      ['pointermove','pointerdown'].forEach(u => hero.addEventListener(u, ukaz, {passive:true}));
+      hero.addEventListener('pointerleave', () => { if (!hv.paused) ov.classList.remove('ukaz'); });
+      ov.addEventListener('focusin', ukaz);
+      hv.addEventListener('pause', ukaz);
+      vidno(false); stav(); posun();
     })();
 
     // rAF drží plynulost, když video hraje. Ale rAF NEBĚŽÍ ve skryté záložce
@@ -1375,27 +1392,6 @@
         else if (hralo) { hv.pause(); zastav(); }
       }), {threshold: 0.05}).observe(document.getElementById('hero'));
     }
-  })();
-
-  // ---------- persona ----------
-  (function(){
-    const H = document.documentElement, tl = document.querySelectorAll('.volba button');
-    const pil = document.getElementById('pilulka'), pb = pil && pil.querySelector('b');
-    const NAZEV = {provoz:'provoz', sluzba:'inspekční služba'};
-    const PH = {provoz:'Kam se u vás nedá? Stačí věta.', sluzba:'Jakou zakázku dnes odmítáte? Stačí věta.'};
-    const zpr = document.getElementById('zprava');
-    function nastav(k){
-      if (k) H.dataset.kdo = k; else delete H.dataset.kdo;
-      tl.forEach(b => b.classList.toggle('on', b.dataset.kdo === k));
-      if (pil){ pil.classList.toggle('on', !!k); if (pb) pb.textContent = NAZEV[k] || 'nikdo'; }
-      if (zpr) zpr.placeholder = PH[k] || PH.provoz;
-      try { k ? localStorage.setItem('roboaid-kdo', k) : localStorage.removeItem('roboaid-kdo'); } catch(e){}
-      if (window.prepocti) window.prepocti();
-    }
-    tl.forEach(b => b.addEventListener('click', () => nastav(b.dataset.kdo)));
-    if (pil) pil.addEventListener('click', () => { nastav(null); document.getElementById('kdo').scrollIntoView({behavior:'smooth'}); });
-    let u = null; try { u = localStorage.getItem('roboaid-kdo'); } catch(e){}
-    if (u && NAZEV[u]) nastav(u);
   })();
 
   // ---------- sticky dron: věty vyjíždějí zpoza něj podle postupu scrollu ----------
