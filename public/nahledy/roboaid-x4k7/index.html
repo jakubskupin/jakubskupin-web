@@ -544,23 +544,34 @@
   </div>
   <div class="scrollhint">scrollujte</div>
 </header>
+<section id="fakta" aria-label="Klíčová fakta">
+  <ul>
+    <li><b class="z">Plně autonomní</b>letí bez pilota</li>
+    <li><b>GPS: nemá</b>LiDAR-Inertial Odometry</li>
+    <li><b>14 až 22 min</b>doba letu podle varianty</li>
+    <li><b>RGB 4K + termo</b>oba kanály současně</li>
+    <li><b>14 000 lm</b>4 ovladatelné segmenty</li>
+    <li><b class="z">Vše na palubě</b>bez přístupu k síti</li>
+  </ul>
+</section>
 <!-- ===== CITACE: vybarvuje se scrollem ===== -->
 <style>
   /* Sticky ramecek drzi citaci na miste a scroll ji po slovech rozsvecuje.
      Kazde slovo ma vlastni opacity, takze zlute useky zustanou zlute. */
   #citat-sek{position:relative;height:280vh;background:var(--bg)}
-  #citat-lep{position:sticky;top:0;min-height:100svh;display:flex;align-items:center;
+  #citat-lep{position:sticky;top:0;min-height:100svh;min-height:100dvh;display:flex;align-items:center;
     padding:clamp(64px,10vh,120px) clamp(24px,6vw,88px)}
-  #citat-ram{max-width:1180px;margin:0 auto;width:100%}
+  #citat-ram{max-width:1180px;margin:0 auto;width:100%;text-align:center}
   #citat-ram .stitek{font-family:var(--mono);font-size:11px;letter-spacing:.22em;
     text-transform:uppercase;color:var(--zlata);margin:0 0 clamp(24px,4vh,44px)}
   #citat{margin:0}
   #citat-text{font-family:var(--serif);font-weight:400;
-    font-size:clamp(25px,3.5vw,52px);line-height:1.22;letter-spacing:-.005em;
-    margin:0 0 clamp(28px,5vh,52px);color:#fff;max-width:20ch;max-width:24ch}
+    font-size:clamp(28px,4.3vw,66px);line-height:1.2;letter-spacing:-.008em;
+    margin:0 auto clamp(30px,5vh,56px);color:#fff;max-width:26ch;text-wrap:balance}
   #citat-text .cs{opacity:.14;transition:opacity .12s linear;display:inline-block}
   #citat-text .cs.z{color:var(--zlata)}
   #citat-podpis{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+    justify-content:center;border-top:0;padding:0;
     opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
   #citat-podpis.je{opacity:1;transform:none}
   #citat-podpis b{font-family:var(--body);font-weight:600;font-size:clamp(15px,1.3vw,18px);color:var(--ink)}
@@ -569,7 +580,7 @@
   @media (max-width:760px){
     #citat-sek{height:250vh}
     #citat-lep{padding:clamp(56px,8vh,90px) 22px}
-    #citat-text{font-size:clamp(23px,6.4vw,32px);max-width:none;line-height:1.26}
+    #citat-text{font-size:clamp(26px,7.4vw,38px);max-width:none;line-height:1.24}
   }
   @media (prefers-reduced-motion:reduce){
     #citat-text .cs{opacity:1!important;transition:none}
@@ -616,16 +627,7 @@
   nastart();
 })();
 </script>
-<section id="fakta" aria-label="Klíčová fakta">
-  <ul>
-    <li><b class="z">Plně autonomní</b>letí bez pilota</li>
-    <li><b>GPS: nemá</b>LiDAR-Inertial Odometry</li>
-    <li><b>14 až 22 min</b>doba letu podle varianty</li>
-    <li><b>RGB 4K + termo</b>oba kanály současně</li>
-    <li><b>14 000 lm</b>4 ovladatelné segmenty</li>
-    <li><b class="z">Vše na palubě</b>bez přístupu k síti</li>
-  </ul>
-</section>
+
 <!-- ===== 0 · STICKY DRON: syntéza, ne beaty videa ===== -->
 <section id="slib" aria-label="Hlavní sdělení">
   <div class="stick">
@@ -642,7 +644,7 @@
   /* Vlastni jmena, at se to nepotka s nicim na strance. Sekce je vysoka,
      uvnitr sticky ramecek na vysku okna, postup scrollu = cas videa. */
   #film-sek{position:relative;height:480vh}
-  #film-lep{position:sticky;top:0;height:100svh;overflow:hidden;background:#000}
+  #film-lep{position:sticky;top:0;height:100svh;height:100dvh;overflow:hidden;background:#000}
   #film{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
   #film-lep::after{content:"";position:absolute;inset:0;pointer-events:none;
     background:linear-gradient(180deg,rgba(7,9,15,.55) 0%,rgba(7,9,15,0) 26%,
@@ -668,13 +670,10 @@
   #fstopa{position:absolute;right:clamp(14px,2.4vw,30px);top:50%;transform:translateY(-50%);
     width:2px;height:min(230px,26vh);background:rgba(255,255,255,.12);z-index:3;border-radius:2px}
   #fstopa i{position:absolute;left:0;top:0;width:100%;height:0;background:var(--zlata);border-radius:2px}
-  /* Video je 16:9. V uzsim okne by cover orizl kadr tak, ze ze stroje zbyde
-     stred a pudorysny beat prestane davat smysl. Pozadi videa je stejne cerne
-     jako stranka, takze pruhy pri contain nejsou videt. */
-  @media (max-aspect-ratio:16/9){ #film{object-fit:contain} }
+  /* Video drzi hrany okna vzdy, tedy cover a zadne pruhy. Cenou je orez
+     bocnich hran klece v uzkem okne, to je Jakubovo rozhodnuti ze 4. 9. */
   @media (max-width:760px){
     #film-sek{height:420vh}
-    #film{object-position:50% 26%}
     #film-lep::after{background:linear-gradient(180deg,rgba(7,9,15,.45) 0%,
       rgba(7,9,15,0) 16%,rgba(7,9,15,0) 44%,rgba(7,9,15,.92) 60%)}
     .fbeat{padding:0 22px clamp(64px,12vh,110px);max-width:none}
@@ -691,8 +690,8 @@
       <source src="/nahledy/roboaid-x4k7/scroll/film.mp4" type="video/mp4"></video>
     <div class="fvrstva">
       <div id="fuvod">
-        <p class="stitek">Stroj zblízka</p>
-        <h2>Deset sekund v prostoru,<br class="mbr"> kde <span class="z">satelit nefunguje</span></h2>
+        <p class="stitek">Průlet strojem</p>
+        <h2>Tam, kde <span class="z">končí GPS</span></h2>
       </div>
       <article class="fbeat" data-od="0.16" data-do="0.36">
         <p class="stitek">Orientace</p>
