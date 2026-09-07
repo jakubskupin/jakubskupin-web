@@ -11,6 +11,7 @@
 <style>
 :root{--bg:#FAFAF8;--text:#1A1A18;--text-2:#6B6964;--text-3:#8A8883;--line:#E6E4DF;--card:#FFFFFF;--h:'Syne',sans-serif;--b:'Manrope',ui-sans-serif,system-ui,sans-serif}
 *{box-sizing:border-box}
+html{overflow-x:hidden}
 body{margin:0;background:var(--bg);color:var(--text);font-family:var(--b);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
 .wrap{max-width:1120px;margin:0 auto;padding:0 20px 80px}
 .top{display:flex;justify-content:space-between;align-items:center;padding:22px 0;font-size:13px;color:var(--text-2)}
@@ -66,7 +67,7 @@ section{margin-top:64px}
 .carousel-wrap{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:28px;align-items:start}
 @media(max-width:760px){.carousel-wrap{grid-template-columns:1fr}}
 .ig-car{max-width:420px}
-.car{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none}
+.car{display:flex;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none}
 .car::-webkit-scrollbar{display:none}
 .slide{flex:0 0 100%;scroll-snap-align:center;margin:0;position:relative;background:#eee}
 .slide img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover}
@@ -168,7 +169,7 @@ footer{margin-top:70px;padding-top:18px;border-top:1px solid var(--line);font-si
 
 <section id="carousel">
   <div class="sec-head">
-    <div class="eyebrow">Třetí kolo · Instagram carousel</div>
+    <div class="eyebrow">Instagram carousel</div>
     <h2>Návod, který se dá prolistovat</h2>
   </div>
   <div class="carousel-wrap">
@@ -189,18 +190,10 @@ footer{margin-top:70px;padding-top:18px;border-top:1px solid var(--line);font-si
       <div class="likes">1 284 To se mi líbí</div>
       <div class="cap"><b>nanoo.cz</b>Dvě kapsle, jeden večerní rituál. Jedna se polyká, druhá se rozpouští přímo v ústech. Prolistujte si, kam Oral Duo+ ve vaší koupelně patří. <span class="more2">… více</span></div>
     </div>
-    <div class="carousel-side">
-      <div class="note"><span class="tag ok">jedna master scéna</span></div>
-      <div class="note"><span class="tag bad">přetištěný obal</span></div>
-      <div class="note"><span class="tag ok">barvy sedí</span><span class="tag bad">čeká na vás</span></div>
-    </div>
   </div>
 </section>
 
 <section id="set1">
-  <div class="sec-head">
-    <h2>První pokus: záměr byl správný, detaily ne</h2>
-  </div>
   <div class="grid">
 <div class="col"><div class="ig"><div class="hd"><span class="av">N</span><span class="who"><b>nanoo.cz</b><small>Sponzorováno</small></span><span class="more">···</span></div><img src="/nanoo/assets/set1-01-vecerni-ritual.jpg" alt="Večerní rituál" loading="lazy"><div class="act"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9-9.2C1.6 8.4 3.7 5 7.2 5c2 0 3.4 1.1 4.8 2.7C13.4 6.1 14.8 5 16.8 5c3.5 0 5.6 3.4 4.2 6.8C19 16.4 12 21 12 21z"/></svg><svg viewBox="0 0 24 24"><path d="M21 12c0 4-4 7-9 7-1.3 0-2.5-.2-3.6-.6L4 20l1.4-3.6C4 15.2 3 13.7 3 12c0-4 4-7 9-7s9 3 9 7z"/></svg><svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg><svg class="r" viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg></div><div class="likes">1 284 To se mi líbí</div><div class="cap"><b>nanoo.cz</b>Poslední krok večerní péče. Polykací kapsle po jídle, rozpustná po vyčištění zubů. Dvě kapsle, jeden rituál. <span class="more2">… více</span></div></div><div class="note"><span class="tag bad">zelená kapsle</span></div></div>
 <div class="col"><div class="fb"><div class="hd"><span class="av">N</span><span class="who"><b>NANOO</b><small>Sponzorováno · 🌐</small></span><span class="more">···</span></div><div class="txt">Svěžest, která vydrží do večera. Rozpustná kapsle s mátovou příchutí působí přímo v ústech, ne v žaludku.</div><img src="/nanoo/assets/set1-02-ranni-mata.jpg" alt="Ranní máta" loading="lazy"><div class="link"><div><small>nanoo.cz</small><b>Objevte NANOO Oral Duo+</b></div><span class="btn">Koupit</span></div></div><div class="note"><span class="tag ok">v pořádku</span></div></div>
@@ -216,10 +209,6 @@ footer{margin-top:70px;padding-top:18px;border-top:1px solid var(--line);font-si
 </section>
 
 <section id="set2">
-  <div class="sec-head">
-    <h2>Opravený směr</h2>
-    <p class="lede" style="font-size:16px">Kapsle podle blistru a obalu: hnědá a bílá, každá jednobarevná. Nové scény jsou stavěné jako začátky videí.</p>
-  </div>
   <div class="grid">
 <div class="col"><div class="ig"><div class="hd"><span class="av">N</span><span class="who"><b>nanoo.cz</b><small>Sponzorováno</small></span><span class="more">···</span></div><img src="/nanoo/assets/set2-start-s1-studio-45.jpg" alt="Krabička v ateliéru" loading="lazy"><div class="act"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9-9.2C1.6 8.4 3.7 5 7.2 5c2 0 3.4 1.1 4.8 2.7C13.4 6.1 14.8 5 16.8 5c3.5 0 5.6 3.4 4.2 6.8C19 16.4 12 21 12 21z"/></svg><svg viewBox="0 0 24 24"><path d="M21 12c0 4-4 7-9 7-1.3 0-2.5-.2-3.6-.6L4 20l1.4-3.6C4 15.2 3 13.7 3 12c0-4 4-7 9-7s9 3 9 7z"/></svg><svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg><svg class="r" viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg></div><div class="likes">1 284 To se mi líbí</div><div class="cap"><b>nanoo.cz</b>Dvě kapsle, jeden večerní rituál. Vitamíny a minerály po jídle, orální probiotika po vyčištění zubů. <span class="more2">… více</span></div></div><div class="note"><span class="tag ok">základ videa</span></div></div>
 <div class="col"><div class="fb"><div class="hd"><span class="av">N</span><span class="who"><b>NANOO</b><small>Sponzorováno · 🌐</small></span><span class="more">···</span></div><div class="txt">Dvě kapsle, dvě role. Polykací s vitaminy a minerály po jídle, rozpustná s probiotiky po vyčištění zubů.</div><img src="/nanoo/assets/set2-start-s2-slab-capsules-45.jpg" alt="Krabička s kapslemi na desce" loading="lazy"><div class="link"><div><small>nanoo.cz</small><b>Dvě kapsle, dvě role</b></div><span class="btn">Koupit</span></div></div><div class="note"><span class="tag bad">barva kapslí</span></div></div>
@@ -229,10 +218,6 @@ footer{margin-top:70px;padding-top:18px;border-top:1px solid var(--line);font-si
 </section>
 
 <section id="videa">
-  <div class="sec-head">
-    <h2>Videa</h2>
-    <p class="lede" style="font-size:16px">Každý klip je surový materiál pro střih a titulky, bez zvuku. Dva scénáře: dynamická kamera kolem krabičky na čistém pozadí a sypání kapslí s uklidněním scény.</p>
-  </div>
   <div class="grid">
 <div class="col"><div class="reel"><div class="vidwrap"><video src="/nanoo/assets/set2-s1-kling.mp4" poster="/nanoo/assets/set2-start-s1-studio-916.jpg" muted loop playsinline preload="metadata"></video><button class="playbtn" type="button" aria-label="Přehrát"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg></button></div><div class="side"><span><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9-9.2C1.6 8.4 3.7 5 7.2 5c2 0 3.4 1.1 4.8 2.7C13.4 6.1 14.8 5 16.8 5c3.5 0 5.6 3.4 4.2 6.8C19 16.4 12 21 12 21z"/></svg>2 431</span><span><svg viewBox="0 0 24 24"><path d="M21 12c0 4-4 7-9 7-1.3 0-2.5-.2-3.6-.6L4 20l1.4-3.6C4 15.2 3 13.7 3 12c0-4 4-7 9-7s9 3 9 7z"/></svg>38</span><span><svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></span></div><div class="ov"><b><span class="av">N</span>nanoo.cz</b>Dvě kapsle, jeden večerní rituál.</div></div><div class="note"><span class="tag ok">dynamická kamera</span></div></div>
 <div class="col"><div class="reel"><div class="vidwrap"><video src="/nanoo/assets/set2-s1-minimax.mp4" poster="/nanoo/assets/set2-start-s1-studio-916.jpg" muted loop playsinline preload="metadata"></video><button class="playbtn" type="button" aria-label="Přehrát"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg></button></div><div class="side"><span><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9-9.2C1.6 8.4 3.7 5 7.2 5c2 0 3.4 1.1 4.8 2.7C13.4 6.1 14.8 5 16.8 5c3.5 0 5.6 3.4 4.2 6.8C19 16.4 12 21 12 21z"/></svg>2 431</span><span><svg viewBox="0 0 24 24"><path d="M21 12c0 4-4 7-9 7-1.3 0-2.5-.2-3.6-.6L4 20l1.4-3.6C4 15.2 3 13.7 3 12c0-4 4-7 9-7s9 3 9 7z"/></svg>38</span><span><svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></span></div><div class="ov"><b><span class="av">N</span>nanoo.cz</b>Dvě kapsle, jeden večerní rituál.</div></div><div class="note"><span class="tag ok">dynamická kamera</span></div></div>
