@@ -63,13 +63,15 @@ section:last-of-type{padding-bottom:96px}
 .note b{color:var(--text)}
 
 /* ---- LinkedIn mockup ---- */
-.li-scope{color-scheme:light;background:#f4f2ee;border-radius:12px;padding:20px 16px;
+.li-scope{color-scheme:light;background:#f4f2ee;border-radius:12px;padding:20px 16px;min-width:0;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   letter-spacing:0;display:flex;justify-content:center}
 .posts{display:grid;gap:30px}
+.posts>*{min-width:0}
+.par>*{min-width:0}
 @media(min-width:980px){.posts{grid-template-columns:1fr 1fr;gap:24px;align-items:start}}
 .plabel{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3);margin-bottom:12px}
-.li{width:100%;max-width:555px;background:#fff;border-radius:8px;box-shadow:0 0 0 1px rgba(0,0,0,.08);overflow:hidden}
+.li{width:100%;min-width:0;max-width:555px;background:#fff;border-radius:8px;box-shadow:0 0 0 1px rgba(0,0,0,.08);overflow:hidden}
 .li .hd{display:flex;padding:12px 16px 0;position:relative}
 .li .av{width:48px;height:48px;border-radius:50%;flex:0 0 48px;margin-right:8px;background:#2b2f36;color:#fff;
   display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:600;letter-spacing:.02em}
@@ -99,6 +101,7 @@ section:last-of-type{padding-bottom:96px}
   height:40px;border-radius:4px;cursor:pointer;color:rgba(0,0,0,.6);font-size:13px;line-height:20px;font-weight:600;
   font-family:inherit;white-space:nowrap;overflow:hidden}
 .li .bar button:hover{background:rgba(0,0,0,.08)}
+@media(max-width:520px){.li-scope{padding:12px 8px}.li .hd,.li .body,.li .counts{padding-left:12px;padding-right:12px}}
 .li .bar svg{width:20px;height:20px;fill:rgba(0,0,0,.6);flex:0 0 20px}
 @media(max-width:700px){.li .bar button span{display:none}}
 @media(min-width:980px) and (max-width:1180px){.li .bar button span{display:none}}
@@ -108,7 +111,7 @@ section:last-of-type{padding-bottom:96px}
 .mezihlava h3{font-family:var(--h);font-size:clamp(19px,2.4vw,23px);font-weight:700;letter-spacing:-.02em;margin:0 0 10px}
 .mezihlava p{color:var(--text-2);font-size:15.5px}
 .steps{display:grid;gap:20px;margin-top:8px}
-@media(min-width:860px){.steps{grid-template-columns:repeat(4,1fr);gap:18px}}
+@media(min-width:820px){.steps{grid-template-columns:repeat(3,1fr);gap:20px}}
 .step{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px}
 .step .k{font-family:var(--h);font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--text-3)}
 .step h3{font-family:var(--h);font-size:17px;font-weight:700;letter-spacing:-.02em;margin:9px 0 7px}
@@ -152,8 +155,6 @@ section:last-of-type{padding-bottom:96px}
   <div class="num rv">01 · Srovnání</div>
   <div class="sechead rv">
     <h2>Stejný příspěvek, stejný text, dvě různá videa</h2>
-    <p>Obě verze vznikly z týchž 39 fotek. Rozdíl není v materiálu, ale v tom, co se s ním udělá.</p>
-    <p class="pivot">Vlevo kamera, která se pohybuje kolem vozu. <b>Vpravo jen posunuté fotky.</b></p>
   </div>
   <div class="posts">
     <div class="rv">
@@ -211,28 +212,23 @@ section:last-of-type{padding-bottom:96px}
       <p>Z profilové fotky se změří rozvor, délka, výška a kola. Rozměry se nehádají, čtou se z pixelů.</p>
     </div>
     <div class="step rv">
-      <div class="vis"><video src="/auta/assets/blockout.mp4" muted loop playsinline preload="metadata" autoplay></video></div>
-      <div class="k">02</div><h3>Zjednodušený model</h3>
-      <p>Model nenese vzhled, nese jen jedno: dráhu kamery. Je to nosič pohybu, ne náhled.</p>
+      <div class="vis"><video src="/auta/assets/blockout-strih.mp4" muted loop playsinline preload="metadata" data-krok></video></div>
+      <div class="k">02</div><h3>Řídicí model</h3>
+      <p>Zjednodušený model nenese vzhled, nese dráhu kamery. Ta je odečtená ze skutečné automobilové reklamy, snímek po snímku.</p>
     </div>
     <div class="step rv">
-      <div class="vis"><video src="/auta/assets/blockout.mp4" muted loop playsinline preload="metadata"></video></div>
-      <div class="k">03</div><h3>Choreografie kamery</h3>
-      <p>Pohyb je odečtený ze skutečné automobilové reklamy, snímek po snímku. Nevymýšlí se.</p>
-    </div>
-    <div class="step rv">
-      <div class="vis"><video src="/auta/assets/spot.mp4" muted loop playsinline preload="metadata"></video></div>
-      <div class="k">04</div><h3>Převlečení do reality</h3>
+      <div class="vis"><video src="/auta/assets/spot-strih.mp4" muted loop playsinline preload="metadata" data-krok></video></div>
+      <div class="k">03</div><h3>Převlečení do reality</h3>
       <p>Pohyb jde z modelu, vzhled z fotek. Lak, kola, světla i maska přebírá z toho konkrétního vozu.</p>
     </div>
   </div>
+</div>
 </section>
 
 <section class="w">
   <div class="num rv">02 · Věrnost</div>
   <div class="sechead rv">
     <h2>V záběru je ten kus, který prodáváte</h2>
-    <p>Vlevo fotka z inzerátu, vpravo snímek z hotového videa. Dvoubarevné paprsky, tvar koncovek i podsvícená maska sedí, protože model je bere z fotek toho vozu.</p>
   </div>
   <div class="pary">
     <div class="rv">
@@ -259,7 +255,7 @@ section:last-of-type{padding-bottom:96px}
   </div>
 </section>
 
-<section class="w">
+<section class="w" hidden data-skryto="pripravene, az pribude druhy pripad">
   <div class="num rv">03 · Použití</div>
   <div class="sechead rv">
     <h2>Auto bylo první, ne poslední</h2>
@@ -296,9 +292,20 @@ document.querySelectorAll('.seemore').forEach(s=>s.addEventListener('click',()=>
 }));
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px'});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
-document.querySelectorAll('.step .vis video').forEach(v=>{
-  new IntersectionObserver(es=>es.forEach(e=>{e.isIntersecting?v.play().catch(()=>{}):v.pause()}),{threshold:.35}).observe(v);
-});
+// Kroky 02 a 03 jsou tentyz strih: vlevo blockout, vpravo hotovy obraz.
+// Musi bezet snimek na snimek, jinak se ta pointa ztrati.
+const kroky=[...document.querySelectorAll('video[data-krok]')];
+if(kroky.length){
+  kroky.forEach(v=>v.removeAttribute('loop'));
+  let jede=false;
+  const spust=()=>{jede=true;kroky.forEach(v=>{try{v.currentTime=0}catch(e){};v.play().catch(()=>{})})};
+  const stuj=()=>{jede=false;kroky.forEach(v=>v.pause())};
+  kroky[0].addEventListener('ended',()=>{ if(jede) spust(); });
+  kroky.slice(1).forEach(v=>v.addEventListener('ended',()=>v.pause()));
+  new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting && !jede) spust(); else if(!e.isIntersecting && jede) stuj();
+  }),{threshold:0}).observe(document.querySelector('.steps'));
+}
 // Obe srovnavaci videa se pousteji SPOLECNE a spolecne se i vraci na zacatek,
 // aby se rozdil mezi metodami dal cist ve stejnem okamziku.
 const sync=[...document.querySelectorAll('video[data-sync]')];
