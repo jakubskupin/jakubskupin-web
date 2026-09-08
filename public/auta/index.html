@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Auta v pohybu | Jakub Skupin</title>
-<meta name="description" content="Inzerát měl 39 fotek a žádné video. Z těch fotek vzniklo 21 sekund reklamy, bez kamery a bez zapůjčení vozu.">
+<meta name="description" content="Stejný inzerát, stejný text, dvě různá videa. Obě z týchž 39 fotek, bez kamery a bez zapůjčení vozu.">
 <meta name="robots" content="noindex">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="cs_CZ">
 <meta property="og:site_name" content="Jakub Skupin">
 <meta property="og:title" content="Auta v pohybu">
-<meta property="og:description" content="Inzerát měl 39 fotek a žádné video. Z těch fotek vzniklo 21 sekund reklamy, bez kamery a bez zapůjčení vozu.">
+<meta property="og:description" content="Stejný inzerát, stejný text, dvě různá videa. Obě z týchž 39 fotek, bez kamery a bez zapůjčení vozu.">
 <meta property="og:url" content="https://jakubskupin.cz/auta/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,7 +34,6 @@ h1{font-size:clamp(31px,5.2vw,52px);line-height:1.06}
 h2{font-size:clamp(24px,3.4vw,35px);line-height:1.12}
 p{margin:0}
 .eyebrow{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--text-3)}
-.lede{font-size:clamp(16.5px,2.1vw,19px);line-height:1.6;color:var(--text-2);max-width:54ch}
 b,strong{font-weight:600;color:var(--text)}
 .rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
 .rv.in{opacity:1;transform:none}
@@ -49,20 +48,15 @@ b,strong{font-weight:600;color:var(--text)}
 .hero{padding:30px 0 6px}
 .hero .eyebrow{margin-bottom:16px}
 .hero h1{margin-bottom:20px;max-width:17ch}
-.facts{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
-.fact{border:1px solid var(--border);border-radius:999px;padding:8px 16px;font-size:13.5px;color:var(--text-2)}
-.fact b{font-family:var(--h);font-size:15px;margin-right:6px}
 
 section{padding:60px 0}
+section:last-of-type{padding-bottom:96px}
 @media(min-width:768px){section{padding:92px 0}}
 .num{font-family:var(--h);font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--text-3);margin-bottom:12px}
 .sechead{max-width:62ch;margin-bottom:32px}
 .sechead p{margin-top:14px;color:var(--text-2)}
 .pivot{margin-top:12px;color:var(--text-2)}.pivot b{color:var(--text)}
 
-.filmbox{background:#000;border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,.6)}
-.filmbox video{width:100%;display:block}
-.cap{margin-top:12px;font-size:13px;color:var(--text-3)}
 
 .note{margin-top:30px;border:1px solid var(--border);border-left:2px solid #C8DA2E;border-radius:10px;
   padding:16px 18px;background:var(--bg-2);font-size:14.5px;color:var(--text-2);max-width:74ch}
@@ -139,8 +133,6 @@ section{padding:60px 0}
 .use .stav{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#C8DA2E;margin-bottom:8px}
 .use.next{border-style:dashed}.use.next .stav{color:var(--text-3)}
 
-.foot{border-top:1px solid var(--line);padding:38px 0 60px;color:var(--text-3);font-size:14px}
-.foot a{color:var(--text-2);text-decoration:none}.foot a:hover{color:var(--text)}
 </style>
 </head>
 <body>
@@ -154,28 +146,10 @@ section{padding:60px 0}
 <header class="w hero">
   <div class="eyebrow rv">Vizuály · auta · případ 01</div>
   <h1 class="rv">Reklama na jeden konkrétní&nbsp;kus.<br>Bez&nbsp;natáčení</h1>
-  <p class="lede rv">Inzerát měl 39 fotek a žádné video. Z těch fotek vzniklo 21 sekund reklamy, bez kamery a bez zapůjčení vozu.</p>
-  <div class="facts rv">
-    <div class="fact"><b>39</b> fotek na vstupu</div>
-    <div class="fact"><b>21</b> sekund na výstupu</div>
-    <div class="fact"><b>0</b> natočených záběrů</div>
-  </div>
 </header>
 
 <section class="w">
-  <div class="num rv">01 · Výsledek</div>
-  <div class="sechead rv">
-    <h2>Není to video auta, je to video toho auta</h2>
-    <p>Spot pro sociální sítě. Střih na doby, hudba na míru, koncová karta ve značce prodejce.</p>
-  </div>
-  <div class="filmbox rv">
-    <video src="/auta/assets/spot.mp4" poster="/auta/assets/spot-poster.jpg" controls playsinline preload="metadata"></video>
-  </div>
-  <p class="cap rv">BMW 750e xDrive z veřejné nabídky sellmycar.cz</p>
-</section>
-
-<section class="w">
-  <div class="num rv">02 · Srovnání</div>
+  <div class="num rv">01 · Srovnání</div>
   <div class="sechead rv">
     <h2>Stejný příspěvek, stejný text, dvě různá videa</h2>
     <p>Obě verze vznikly z týchž 39 fotek. Rozdíl není v materiálu, ale v tom, co se s ním udělá.</p>
@@ -255,7 +229,7 @@ section{padding:60px 0}
 </section>
 
 <section class="w">
-  <div class="num rv">03 · Věrnost</div>
+  <div class="num rv">02 · Věrnost</div>
   <div class="sechead rv">
     <h2>V záběru je ten kus, který prodáváte</h2>
     <p>Vlevo fotka z inzerátu, vpravo snímek z hotového videa. Dvoubarevné paprsky, tvar koncovek i podsvícená maska sedí, protože model je bere z fotek toho vozu.</p>
@@ -286,7 +260,7 @@ section{padding:60px 0}
 </section>
 
 <section class="w">
-  <div class="num rv">04 · Použití</div>
+  <div class="num rv">03 · Použití</div>
   <div class="sechead rv">
     <h2>Auto bylo první, ne poslední</h2>
     <p>Metoda není o autech. Je o tom, že inzerát má obvykle dost podkladu na spot a nikdo ho nepoužije.</p>
@@ -298,11 +272,6 @@ section{padding:60px 0}
     <div class="use rv next"><div class="stav">Volný slot</div><b>Produktové katalogy</b><p>Packshot na bílé je nejhorší možný vstup pro reklamu a zároveň to jediné, co e-shopy mají.</p></div>
   </div>
 </section>
-
-<footer class="w foot">
-  <p>Ukázka metody. Fotky pocházejí z veřejného inzerátu, vůz ani prodejce nejsou klientem.</p>
-  <p style="margin-top:10px"><a href="/">jakubskupin.cz</a></p>
-</footer>
 
 <script>
 const T=`Nové v nabídce 👀 BMW 750e xDrive, 92.500 km, první majitel.
