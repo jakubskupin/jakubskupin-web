@@ -1,6 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      // /fotky-v-pohybu bylo par hodin zive, at nikomu nespadne odkaz
+      { source: "/fotky-v-pohybu", destination: "/auta", permanent: true },
+    ];
+  },
   async rewrites() {
     return [
       { source: "/le-premier", destination: "/le-premier/index.html" },
@@ -8,7 +14,7 @@ const nextConfig: NextConfig = {
       { source: "/vizualy", destination: "/vizualy/index.html" },
       { source: "/prim", destination: "/prim/index.html" },
       { source: "/nanoo", destination: "/nanoo/index.html" },
-      { source: "/fotky-v-pohybu", destination: "/fotky-v-pohybu/index.html" },
+      { source: "/auta", destination: "/auta/index.html" },
     ];
   },
 };

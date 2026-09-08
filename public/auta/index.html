@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Fotky v pohybu | Jakub Skupin</title>
+<title>Auta v pohybu | Jakub Skupin</title>
 <meta name="description" content="Inzerát měl 39 fotek a žádné video. Z těch fotek vzniklo 21 sekund reklamy, bez kamery a bez zapůjčení vozu.">
 <meta name="robots" content="noindex">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="cs_CZ">
 <meta property="og:site_name" content="Jakub Skupin">
-<meta property="og:title" content="Fotky v pohybu">
+<meta property="og:title" content="Auta v pohybu">
 <meta property="og:description" content="Inzerát měl 39 fotek a žádné video. Z těch fotek vzniklo 21 sekund reklamy, bez kamery a bez zapůjčení vozu.">
-<meta property="og:url" content="https://jakubskupin.cz/fotky-v-pohybu/">
+<meta property="og:url" content="https://jakubskupin.cz/auta/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
@@ -77,7 +77,8 @@ section{padding:60px 0}
 .plabel{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3);margin-bottom:12px}
 .li{width:100%;max-width:555px;background:#fff;border-radius:8px;box-shadow:0 0 0 1px rgba(0,0,0,.08);overflow:hidden}
 .li .hd{display:flex;padding:12px 16px 0;position:relative}
-.li .av{width:48px;height:48px;border-radius:50%;object-fit:cover;flex:0 0 48px;margin-right:8px;background:#e9e5df}
+.li .av{width:48px;height:48px;border-radius:50%;flex:0 0 48px;margin-right:8px;background:#2b2f36;color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:600;letter-spacing:.02em}
 .li .id{flex:1;min-width:0;padding-right:32px}
 .li .nm{font-size:14px;line-height:20px;font-weight:600;color:rgba(0,0,0,.9)}
 .li .hl{font-size:12px;line-height:16px;color:rgba(0,0,0,.6);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -108,9 +109,10 @@ section{padding:60px 0}
 @media(max-width:700px){.li .bar button span{display:none}}
 @media(min-width:980px) and (max-width:1180px){.li .bar button span{display:none}}
 
-.mrizka{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:6px;margin-top:8px}
-.mrizka img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px}
 
+.mezihlava{margin:48px 0 20px;max-width:62ch}
+.mezihlava h3{font-family:var(--h);font-size:clamp(19px,2.4vw,23px);font-weight:700;letter-spacing:-.02em;margin:0 0 10px}
+.mezihlava p{color:var(--text-2);font-size:15.5px}
 .steps{display:grid;gap:20px;margin-top:8px}
 @media(min-width:860px){.steps{grid-template-columns:repeat(4,1fr);gap:18px}}
 .step{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px}
@@ -150,7 +152,7 @@ section{padding:60px 0}
 </div></div>
 
 <header class="w hero">
-  <div class="eyebrow rv">Fotky v pohybu · případ 01</div>
+  <div class="eyebrow rv">Vizuály · auta · případ 01</div>
   <h1 class="rv">Reklama na jeden konkrétní&nbsp;kus.<br>Bez&nbsp;natáčení</h1>
   <p class="lede rv">Inzerát měl 39 fotek a žádné video. Z těch fotek vzniklo 21 sekund reklamy, bez kamery a bez zapůjčení vozu.</p>
   <div class="facts rv">
@@ -167,118 +169,85 @@ section{padding:60px 0}
     <p>Spot pro sociální sítě. Střih na doby, hudba na míru, koncová karta ve značce prodejce.</p>
   </div>
   <div class="filmbox rv">
-    <video src="/fotky-v-pohybu/assets/spot.mp4" poster="/fotky-v-pohybu/assets/spot-poster.jpg" controls playsinline preload="metadata"></video>
+    <video src="/auta/assets/spot.mp4" poster="/auta/assets/spot-poster.jpg" controls playsinline preload="metadata"></video>
   </div>
   <p class="cap rv">BMW 750e xDrive z veřejné nabídky sellmycar.cz</p>
 </section>
 
 <section class="w">
-  <div class="num rv">02 · Distribuce</div>
+  <div class="num rv">02 · Srovnání</div>
   <div class="sechead rv">
-    <h2>Stejné video, dva různé úkoly</h2>
-    <p class="pivot">Jednou prodává auto. <b>Podruhé prodává metodu.</b></p>
+    <h2>Stejný příspěvek, stejný text, dvě různá videa</h2>
+    <p>Obě verze vznikly z týchž 39 fotek. Rozdíl není v materiálu, ale v tom, co se s ním udělá.</p>
+    <p class="pivot">Vlevo kamera, která se pohybuje kolem vozu. <b>Vpravo jen posunuté fotky.</b></p>
   </div>
   <div class="posts">
     <div class="rv">
-      <div class="plabel">A · příspěvek o voze</div>
+      <div class="plabel">Mockup · kamera kolem vozu</div>
       <div class="li-scope"><div class="li">
         <div class="hd">
-          <img class="av" src="/jakub-skupin.png" alt="">
+          <div class="av" aria-hidden="true">JS</div>
           <div class="id">
-            <div class="nm">Jakub Skupin</div>
-            <div class="hl">Obsah, brand a AI agenti pro B2B</div>
-            <div class="mt">3 h ·
-              <svg width="14" height="14" viewBox="0 0 16 16" fill="rgba(0,0,0,.6)"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zM3 8c0-.85.2-1.65.55-2.36l1.2 1.2v.66c0 .37.3.67.67.67h1.33v1.33c0 .37.3.67.67.67h.66v2c0 .18-.07.35-.2.47A5 5 0 013 8zm8.6 3.9a.67.67 0 00-.6-.57H10V9.33c0-.36-.3-.66-.67-.66H6.67V7.33H8c.37 0 .67-.3.67-.66V5.33H10c.74 0 1.33-.6 1.33-1.33v-.27A5 5 0 0111.6 11.9z"/></svg>
-            </div>
+            <div class="nm">Jan Srnka</div>
+            <div class="hl">sellmycar.cz ▫️ Prodej aut s důvěrou ▫️ +420 724 596 409</div>
+            <div class="mt">2 h · <svg width="14" height="14" viewBox="0 0 16 16" fill="rgba(0,0,0,.6)"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zM3 8c0-.85.2-1.65.55-2.36l1.2 1.2v.66c0 .37.3.67.67.67h1.33v1.33c0 .37.3.67.67.67h.66v2c0 .18-.07.35-.2.47A5 5 0 013 8zm8.6 3.9a.67.67 0 00-.6-.57H10V9.33c0-.36-.3-.66-.67-.66H6.67V7.33H8c.37 0 .67-.3.67-.66V5.33H10c.74 0 1.33-.6 1.33-1.33v-.27A5 5 0 0111.6 11.9z"/></svg></div>
           </div>
           <div class="more">···</div>
         </div>
-        <div class="body clamp" id="bodyA"></div>
-        <div class="body" style="margin-top:0"><span class="seemore" data-t="bodyA">…více</span></div>
+        <div class="body" id="bodyA"></div>
         <div class="media">
-          <video src="/fotky-v-pohybu/assets/spot.mp4" poster="/fotky-v-pohybu/assets/spot-poster.jpg" muted loop playsinline preload="metadata"></video>
+          <video src="/auta/assets/spot.mp4" poster="/auta/assets/spot-poster.jpg" muted loop playsinline preload="metadata" data-sync></video>
           <span class="dur">0:21</span>
         </div>
-        <div class="counts"><span class="rx"><i class="a"></i><i class="b"></i><i class="c"></i></span>64<span class="sp">7 komentářů</span></div>
-        <div class="bar">
-          <button><svg viewBox="0 0 24 24"><path d="M19.46 11l-3.91-3.91a7 7 0 01-1.69-2.74l-.49-1.47A2.76 2.76 0 0010.76 1a2.75 2.75 0 00-2.75 2.75v4.5c0 .28-.22.5-.5.5H5.6a2.75 2.75 0 00-2.75 2.75v6.75A2.75 2.75 0 005.6 21h11.9a2.75 2.75 0 002.7-2.24l1.06-5.75A2.75 2.75 0 0019.46 11z"/></svg><span>To se mi líbí</span></button>
-          <button><svg viewBox="0 0 24 24"><path d="M21 3H3a2 2 0 00-2 2v12a2 2 0 002 2h4v4l5.2-4H21a2 2 0 002-2V5a2 2 0 00-2-2zM7 11H5V9h2zm4 0H9V9h2zm4 0h-2V9h2zm4 0h-2V9h2z"/></svg><span>Komentář</span></button>
-          <button><svg viewBox="0 0 24 24"><path d="M23 12l-4.61 7H16l4-6H8a3 3 0 00-3 3v3H3v-3a5 5 0 015-5h12l-4-6h2.39z"/></svg><span>Přeposlat</span></button>
-          <button><svg viewBox="0 0 24 24"><path d="M21 3L0 10l7.66 4.26L16 8l-6.26 8.34L14 24z"/></svg><span>Poslat</span></button>
-        </div>
+        <div class="counts"><span class="rx"><i class="a"></i><i class="b"></i><i class="c"></i></span>214<span class="sp">23 komentářů</span></div>
+        <div class="bar"><button><svg viewBox="0 0 24 24"><path d="M19.46 11l-3.91-3.91a7 7 0 01-1.69-2.74l-.49-1.47A2.76 2.76 0 0010.76 1a2.75 2.75 0 00-2.75 2.75v4.5c0 .28-.22.5-.5.5H5.6a2.75 2.75 0 00-2.75 2.75v6.75A2.75 2.75 0 005.6 21h11.9a2.75 2.75 0 002.7-2.24l1.06-5.75A2.75 2.75 0 0019.46 11z"/></svg><span>Líbí se</span></button><button><svg viewBox="0 0 24 24"><path d="M21 3H3a2 2 0 00-2 2v12a2 2 0 002 2h4v4l5.2-4H21a2 2 0 002-2V5a2 2 0 00-2-2zM7 11H5V9h2zm4 0H9V9h2zm4 0h-2V9h2zm4 0h-2V9h2z"/></svg><span>Komentář</span></button><button><svg viewBox="0 0 24 24"><path d="M23 12l-4.61 7H16l4-6H8a3 3 0 00-3 3v3H3v-3a5 5 0 015-5h12l-4-6h2.39z"/></svg><span>Znovu zveřejnit</span></button><button><svg viewBox="0 0 24 24"><path d="M21 3L0 10l7.66 4.26L16 8l-6.26 8.34L14 24z"/></svg><span>Odeslat</span></button></div>
       </div></div>
     </div>
-
     <div class="rv">
-      <div class="plabel">B · tentýž spot, odhalená metoda</div>
+      <div class="plabel">Mockup · jen rozpohybované 2D fotky</div>
       <div class="li-scope"><div class="li">
         <div class="hd">
-          <img class="av" src="/jakub-skupin.png" alt="">
+          <div class="av" aria-hidden="true">JS</div>
           <div class="id">
-            <div class="nm">Jakub Skupin</div>
-            <div class="hl">Obsah, brand a AI agenti pro B2B</div>
-            <div class="mt">3 h ·
-              <svg width="14" height="14" viewBox="0 0 16 16" fill="rgba(0,0,0,.6)"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zM3 8c0-.85.2-1.65.55-2.36l1.2 1.2v.66c0 .37.3.67.67.67h1.33v1.33c0 .37.3.67.67.67h.66v2c0 .18-.07.35-.2.47A5 5 0 013 8zm8.6 3.9a.67.67 0 00-.6-.57H10V9.33c0-.36-.3-.66-.67-.66H6.67V7.33H8c.37 0 .67-.3.67-.66V5.33H10c.74 0 1.33-.6 1.33-1.33v-.27A5 5 0 0111.6 11.9z"/></svg>
-            </div>
+            <div class="nm">Jan Srnka</div>
+            <div class="hl">sellmycar.cz ▫️ Prodej aut s důvěrou ▫️ +420 724 596 409</div>
+            <div class="mt">2 h · <svg width="14" height="14" viewBox="0 0 16 16" fill="rgba(0,0,0,.6)"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zM3 8c0-.85.2-1.65.55-2.36l1.2 1.2v.66c0 .37.3.67.67.67h1.33v1.33c0 .37.3.67.67.67h.66v2c0 .18-.07.35-.2.47A5 5 0 013 8zm8.6 3.9a.67.67 0 00-.6-.57H10V9.33c0-.36-.3-.66-.67-.66H6.67V7.33H8c.37 0 .67-.3.67-.66V5.33H10c.74 0 1.33-.6 1.33-1.33v-.27A5 5 0 0111.6 11.9z"/></svg></div>
           </div>
           <div class="more">···</div>
         </div>
         <div class="body" id="bodyB"></div>
         <div class="media">
-          <video src="/fotky-v-pohybu/assets/spot.mp4" poster="/fotky-v-pohybu/assets/spot-poster.jpg" muted loop playsinline preload="metadata"></video>
-          <span class="dur">0:21</span>
+          <video src="/auta/assets/spot-fotky.mp4" poster="/auta/assets/spot-fotky-poster.jpg" muted loop playsinline preload="metadata" data-sync></video>
+          <span class="dur">0:15</span>
         </div>
-        <div class="counts"><span class="rx"><i class="a"></i><i class="b"></i><i class="c"></i></span>318<span class="sp">41 komentářů</span></div>
-        <div class="bar">
-          <button><svg viewBox="0 0 24 24"><path d="M19.46 11l-3.91-3.91a7 7 0 01-1.69-2.74l-.49-1.47A2.76 2.76 0 0010.76 1a2.75 2.75 0 00-2.75 2.75v4.5c0 .28-.22.5-.5.5H5.6a2.75 2.75 0 00-2.75 2.75v6.75A2.75 2.75 0 005.6 21h11.9a2.75 2.75 0 002.7-2.24l1.06-5.75A2.75 2.75 0 0019.46 11z"/></svg><span>To se mi líbí</span></button>
-          <button><svg viewBox="0 0 24 24"><path d="M21 3H3a2 2 0 00-2 2v12a2 2 0 002 2h4v4l5.2-4H21a2 2 0 002-2V5a2 2 0 00-2-2zM7 11H5V9h2zm4 0H9V9h2zm4 0h-2V9h2zm4 0h-2V9h2z"/></svg><span>Komentář</span></button>
-          <button><svg viewBox="0 0 24 24"><path d="M23 12l-4.61 7H16l4-6H8a3 3 0 00-3 3v3H3v-3a5 5 0 015-5h12l-4-6h2.39z"/></svg><span>Přeposlat</span></button>
-          <button><svg viewBox="0 0 24 24"><path d="M21 3L0 10l7.66 4.26L16 8l-6.26 8.34L14 24z"/></svg><span>Poslat</span></button>
-        </div>
+        <div class="counts"><span class="rx"><i class="a"></i><i class="b"></i><i class="c"></i></span>96<span class="sp">6 komentářů</span></div>
+        <div class="bar"><button><svg viewBox="0 0 24 24"><path d="M19.46 11l-3.91-3.91a7 7 0 01-1.69-2.74l-.49-1.47A2.76 2.76 0 0010.76 1a2.75 2.75 0 00-2.75 2.75v4.5c0 .28-.22.5-.5.5H5.6a2.75 2.75 0 00-2.75 2.75v6.75A2.75 2.75 0 005.6 21h11.9a2.75 2.75 0 002.7-2.24l1.06-5.75A2.75 2.75 0 0019.46 11z"/></svg><span>Líbí se</span></button><button><svg viewBox="0 0 24 24"><path d="M21 3H3a2 2 0 00-2 2v12a2 2 0 002 2h4v4l5.2-4H21a2 2 0 002-2V5a2 2 0 00-2-2zM7 11H5V9h2zm4 0H9V9h2zm4 0h-2V9h2zm4 0h-2V9h2z"/></svg><span>Komentář</span></button><button><svg viewBox="0 0 24 24"><path d="M23 12l-4.61 7H16l4-6H8a3 3 0 00-3 3v3H3v-3a5 5 0 015-5h12l-4-6h2.39z"/></svg><span>Znovu zveřejnit</span></button><button><svg viewBox="0 0 24 24"><path d="M21 3L0 10l7.66 4.26L16 8l-6.26 8.34L14 24z"/></svg><span>Odeslat</span></button></div>
       </div></div>
     </div>
   </div>
 
-  <div class="note rv">
-    <b>Poctivě k tomu, co vidíte.</b> Video vzniklo z mé iniciativy z veřejného inzerátu.
-    Prodejce si ho neobjednal a o téhle stránce neví. Oba příspěvky jsou mockup, nikde nevyšly.
-    Obraz je generovaný, ne záznam, a v detailech se od skutečného vozu liší.
-  </div>
-</section>
-
-<section class="w">
-  <div class="num rv">03 · Materiál</div>
-  <div class="sechead rv">
-    <h2>Tohle bylo všechno, co existovalo</h2>
-    <p>Devětatřicet fotek staženo z inzerátu v původní kvalitě. Bez retuše, bez ořezu, bez dosvícení.</p>
-  </div>
-  <div class="mrizka rv" id="mrizka"></div>
-</section>
-
-<section class="w">
-  <div class="num rv">04 · Postup</div>
-  <div class="sechead rv">
-    <h2>Čtyři kroky, žádný z nich není natáčení</h2>
-    <p>Kdyby fotky šly rovnou do generátoru, auto by se v každém záběru proměnilo. Mezi fotku a výstup patří ještě jedna vrstva.</p>
+  <div class="mezihlava rv">
+    <h3>Proč se to liší</h3>
+    <p>Vpravo se hýbe okno po ploché fotce, auto zůstává placka. Vlevo se hýbe kamera kolem vozu, protože mezi fotku a výstup se vloží ještě jedna vrstva.</p>
   </div>
   <div class="steps">
     <div class="step rv">
-      <div class="vis"><img src="/fotky-v-pohybu/assets/vstup-fotka.jpg" alt="Boční fotka vozu z inzerátu"></div>
+      <div class="vis"><img src="/auta/assets/vstup-fotka.jpg" alt="Boční fotka vozu z inzerátu"></div>
       <div class="k">01</div><h3>Odečtení geometrie</h3>
       <p>Z profilové fotky se změří rozvor, délka, výška a kola. Rozměry se nehádají, čtou se z pixelů.</p>
     </div>
     <div class="step rv">
-      <div class="vis"><video src="/fotky-v-pohybu/assets/blockout.mp4" muted loop playsinline preload="metadata" autoplay></video></div>
+      <div class="vis"><video src="/auta/assets/blockout.mp4" muted loop playsinline preload="metadata" autoplay></video></div>
       <div class="k">02</div><h3>Zjednodušený model</h3>
       <p>Model nenese vzhled, nese jen jedno: dráhu kamery. Je to nosič pohybu, ne náhled.</p>
     </div>
     <div class="step rv">
-      <div class="vis"><video src="/fotky-v-pohybu/assets/blockout.mp4" muted loop playsinline preload="metadata"></video></div>
+      <div class="vis"><video src="/auta/assets/blockout.mp4" muted loop playsinline preload="metadata"></video></div>
       <div class="k">03</div><h3>Choreografie kamery</h3>
       <p>Pohyb je odečtený ze skutečné automobilové reklamy, snímek po snímku. Nevymýšlí se.</p>
     </div>
     <div class="step rv">
-      <div class="vis"><video src="/fotky-v-pohybu/assets/spot.mp4" muted loop playsinline preload="metadata"></video></div>
+      <div class="vis"><video src="/auta/assets/spot.mp4" muted loop playsinline preload="metadata"></video></div>
       <div class="k">04</div><h3>Převlečení do reality</h3>
       <p>Pohyb jde z modelu, vzhled z fotek. Lak, kola, světla i maska přebírá z toho konkrétního vozu.</p>
     </div>
@@ -286,7 +255,7 @@ section{padding:60px 0}
 </section>
 
 <section class="w">
-  <div class="num rv">05 · Věrnost</div>
+  <div class="num rv">03 · Věrnost</div>
   <div class="sechead rv">
     <h2>V záběru je ten kus, který prodáváte</h2>
     <p>Vlevo fotka z inzerátu, vpravo snímek z hotového videa. Dvoubarevné paprsky, tvar koncovek i podsvícená maska sedí, protože model je bere z fotek toho vozu.</p>
@@ -294,22 +263,22 @@ section{padding:60px 0}
   <div class="pary">
     <div class="rv">
       <div class="par">
-        <figure><figcaption>Fotka</figcaption><img src="/fotky-v-pohybu/assets/par/kolo-foto.jpg" alt="Detail kola na fotce z inzerátu"></figure>
-        <figure><figcaption>Video</figcaption><img src="/fotky-v-pohybu/assets/par/kolo-video.jpg" alt="Detail kola ve videu"></figure>
+        <figure><figcaption>Fotka</figcaption><img src="/auta/assets/par/kolo-foto.jpg" alt="Detail kola na fotce z inzerátu"></figure>
+        <figure><figcaption>Video</figcaption><img src="/auta/assets/par/kolo-video.jpg" alt="Detail kola ve videu"></figure>
       </div>
       <p class="parlabel">21" kolo, dvoubarevné leštěné paprsky</p>
     </div>
     <div class="rv">
       <div class="par">
-        <figure><figcaption>Fotka</figcaption><img src="/fotky-v-pohybu/assets/par/predek-foto.jpg" alt="Přední maska na fotce z inzerátu"></figure>
-        <figure><figcaption>Video</figcaption><img src="/fotky-v-pohybu/assets/par/predek-video.jpg" alt="Přední maska ve videu"></figure>
+        <figure><figcaption>Fotka</figcaption><img src="/auta/assets/par/predek-foto.jpg" alt="Přední maska na fotce z inzerátu"></figure>
+        <figure><figcaption>Video</figcaption><img src="/auta/assets/par/predek-video.jpg" alt="Přední maska ve videu"></figure>
       </div>
       <p class="parlabel">Podsvícená maska a matrixové světlomety</p>
     </div>
     <div class="rv">
       <div class="par">
-        <figure><figcaption>Fotka</figcaption><img src="/fotky-v-pohybu/assets/par/zad-foto.jpg" alt="Záď na fotce z inzerátu"></figure>
-        <figure><figcaption>Video</figcaption><img src="/fotky-v-pohybu/assets/par/zad-video.jpg" alt="Záď ve videu"></figure>
+        <figure><figcaption>Fotka</figcaption><img src="/auta/assets/par/zad-foto.jpg" alt="Záď na fotce z inzerátu"></figure>
+        <figure><figcaption>Video</figcaption><img src="/auta/assets/par/zad-video.jpg" alt="Záď ve videu"></figure>
       </div>
       <p class="parlabel">Tenká vodorovná stopa zadních světel</p>
     </div>
@@ -317,7 +286,7 @@ section{padding:60px 0}
 </section>
 
 <section class="w">
-  <div class="num rv">06 · Použití</div>
+  <div class="num rv">04 · Použití</div>
   <div class="sechead rv">
     <h2>Auto bylo první, ne poslední</h2>
     <p>Metoda není o autech. Je o tom, že inzerát má obvykle dost podkladu na spot a nikdo ho nepoužije.</p>
@@ -336,32 +305,16 @@ section{padding:60px 0}
 </footer>
 
 <script>
-const TEXTY={bodyA:`Ojeté auto za dva miliony se prodává stejnou sadou fotek jako deset let stará Fabia. Zaparkované na štěrku před halou, třicet snímků z jednoho odpoledne, palec jede dál.
+const T=`Nové v nabídce 👀 BMW 750e xDrive, 92.500 km, první majitel.
 
-Tenhle se hýbe.
+Plug-in hybrid, 3.0, 360 kW, xDrive... a hlavně s odpočtem DPH 😉 to u aut nad 2M dělá obrovský rozdíl, protože bez odpočtu se prodej vždycky protáhne.
 
-BMW 750e xDrive, 92 500 km, první majitel, plug-in hybrid 3.0, 360 kW, záruka do února 2027.
+Tovární záruka do 2/2027, servisní kniha, krásný stav. Nad 2M mívám auta velmi zřídka, takže jsem zvědav jaká bude poptávka 😃
 
-Cena 2 150 000 Kč, s možností odpočtu DPH.
+2.150.000 Kč
 
-Detail vozu: https://sellmycar.cz/vuz/211028421-bmw-rada-7-750e-xdrive-3-0-360kw-dph-1maj`,bodyB:`Tohle auto jsem nikdy neviděl. Kamera u něj taky ne.
-
-Vstupem bylo 39 fotek z inzerátu ojetého vozu.
-
-JAK TO VZNIKLO
-1. Z profilové fotky jsem odečetl geometrii vozu a postavil zjednodušený model.
-2. Na něm jsem rozpohyboval kameru podle choreografie odečtené z reálného reklamního reelu.
-3. Pohyb pak šel z modelu, vzhled z fotek. Střih na doby, hudba, koncová karta.
-
-Výstup je 21 sekund reklamy z podkladů, které v tom inzerátu ležely tak jako tak.
-
-Je to generovaný obraz, ne záznam. Vzhled je dopočítaný z fotek toho konkrétního vozu, ne z jiného auta, a v detailech se od skutečného kusu liší.
-
-Nikdo si to neobjednal. Vzal jsem veřejný inzerát a udělal to sám.
-
-Celý postup krok za krokem: jakubskupin .cz/fotky-v-pohybu
-
-P. S. Další na řadě je byt na Airbnb.`};
+Kdyby to někoho zajímalo, ozvěte se 🙏🏻`;
+const TEXTY={bodyA:T,bodyB:T};
 function vloz(id){
   const el=document.getElementById(id);
   el.innerHTML=TEXTY[id]
@@ -372,18 +325,32 @@ vloz('bodyA'); vloz('bodyB');
 document.querySelectorAll('.seemore').forEach(s=>s.addEventListener('click',()=>{
   document.getElementById(s.dataset.t).classList.remove('clamp'); s.remove();
 }));
-const g=document.getElementById('mrizka');
-for(let i=1;i<=39;i++){
-  const im=document.createElement('img');
-  im.src='/fotky-v-pohybu/assets/mrizka/'+String(i).padStart(2,'0')+'.webp';
-  im.loading='lazy'; im.alt='Fotka '+i+' z inzerátu';
-  g.appendChild(im);
-}
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px'});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
-document.querySelectorAll('.li .media video, .step .vis video').forEach(v=>{
+document.querySelectorAll('.step .vis video').forEach(v=>{
   new IntersectionObserver(es=>es.forEach(e=>{e.isIntersecting?v.play().catch(()=>{}):v.pause()}),{threshold:.35}).observe(v);
 });
+// Obe srovnavaci videa se pousteji SPOLECNE a spolecne se i vraci na zacatek,
+// aby se rozdil mezi metodami dal cist ve stejnem okamziku.
+const sync=[...document.querySelectorAll('video[data-sync]')];
+if(sync.length===2){
+  // Obe srovnavaci videa bezi SPOLECNE a spolecne se vraci na zacatek, aby se
+  // rozdil mezi metodami dal cist ve stejnem okamziku. Delsi z nich udava takt.
+  sync.forEach(v=>v.removeAttribute('loop'));
+  let bezi=false;
+  const start=()=>{bezi=true;sync.forEach(v=>{try{v.currentTime=0}catch(e){};v.play().catch(()=>{})})};
+  const stop=()=>{bezi=false;sync.forEach(v=>v.pause())};
+  const takt=sync[0];                       // spot.mp4, 21,6 s
+  takt.addEventListener('ended',()=>{ if(bezi) start(); });
+  sync[1].addEventListener('ended',()=>sync[1].pause());
+  // threshold 0 bez rootMargin: blok je vyssi nez okno, takze jakykoli jiny prah
+  // by se nemusel nikdy naplnit a videa by se nespustila vubec
+  const io2=new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting && !bezi) start();
+    else if(!e.isIntersecting && bezi) stop();
+  }),{threshold:0});
+  io2.observe(document.querySelector('.posts'));
+}
 </script>
 </body>
 </html>
