@@ -50,6 +50,26 @@ b,strong{font-weight:600;color:var(--text)}
 .grain{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.05;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
 
+/* ---- celoplosna hlavicka s videem ---- */
+.hlavicka{position:relative;width:100%;min-height:clamp(420px,66svh,720px);display:flex;flex-direction:column;
+  background:#000;overflow:hidden}
+.hlavicka .film{position:absolute;inset:0;z-index:0}
+.hlavicka .film video{width:100%;height:100%;object-fit:cover;display:block}
+/* text nad videem se resi gradientem, ne stinem pisma */
+.hlavicka .film::after{content:"";position:absolute;inset:0;
+  /* citelnost nadpisu resi VYHRADNE gradient, zadny text-shadow. Spodni tretina
+     musi byt dost tmava i tehdy, kdyz pod textem lezi svetla cast karoserie. */
+  background:linear-gradient(180deg,rgba(10,10,11,.70) 0%,rgba(10,10,11,.14) 26%,
+    rgba(10,10,11,.42) 52%,rgba(10,10,11,.80) 74%,rgba(10,10,11,.96) 100%)}
+/* .w ma margin:0 auto; ve flex sloupci ho auto margin scvrkne na sirku obsahu,
+   takze lista i nadpis skoncily uprostred. Explicitni sirka to vrati. */
+.hlavicka>.w,.hlavicka>.hero{width:100%}
+.hlavicka .top{position:relative;z-index:2}
+.hlavicka .hero{position:relative;z-index:2;margin-top:auto;padding-block:0 clamp(28px,5vh,56px)}
+@media(max-width:720px){
+  .hlavicka{min-height:clamp(400px,72svh,640px)}
+}
+
 .top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:12px 0;font-size:13px;color:var(--text-2)}
 .top a{padding:10px 0}
 .top .brand{font-family:var(--h);font-weight:700;letter-spacing:-.02em;color:var(--text);text-decoration:none;font-size:15px}
@@ -153,24 +173,26 @@ body{padding-bottom:80px}
 .use.next{border-style:dashed}.use.next .stav{color:var(--text-3)}
 
 
-/* Badge Koncept je fixed presne nad nadpisem. Tohle pravidlo MUSI byt az tady,
-   v medii u badge bylo v souboru driv nez .hero h1{max-width:17ch} a prohralo. */
-@media(max-width:720px){.hero h1{max-width:calc(100% - 78px)}}
 </style>
 </head>
 <body>
 <div class="grain"></div>
 <div class="koncept-fix" aria-label="Tato ukázka je koncept"><span>Koncept</span></div>
 
-<div class="w"><div class="top">
-  <a class="brand" href="/">Jakub Skupin</a>
-  <a href="/vizualy/">Produktové vizuály</a>
-</div></div>
-
-<header class="w hero">
-  <div class="eyebrow rv">Vizuály · auta · případ 01</div>
-  <h1 class="rv">Reklama na jeden konkrétní&nbsp;kus.<br>Bez&nbsp;natáčení</h1>
-</header>
+<div class="hlavicka">
+  <div class="film">
+    <video src="/auta/assets/header-loop.mp4" poster="/auta/assets/header-poster.jpg"
+           autoplay muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1"></video>
+  </div>
+  <div class="w"><div class="top">
+    <a class="brand" href="/">Jakub Skupin</a>
+    <a href="/vizualy/">Produktové vizuály</a>
+  </div></div>
+  <header class="w hero">
+    <div class="eyebrow">Vizuály · auta · případ 01</div>
+    <h1>Reklama na jeden konkrétní&nbsp;kus.<br>Bez&nbsp;natáčení</h1>
+  </header>
+</div>
 
 <section class="w">
   <div class="num rv">01 · Srovnání</div>
@@ -333,6 +355,17 @@ if(kroky.length){
 }
 // Obe srovnavaci videa se pousteji SPOLECNE a spolecne se i vraci na zacatek,
 // aby se rozdil mezi metodami dal cist ve stejnem okamziku.
+// Hlavickove video: autoplay muze byt odlozeny (setreni baterie, skryta zalozka),
+// tak se o nej pripomeneme, az bude stranka zase videt nebo se uzivatel dotkne.
+const hlav=document.querySelector('.hlavicka video');
+if(hlav){
+  const kick=()=>hlav.paused&&hlav.play().catch(()=>{});
+  hlav.addEventListener('loadeddata',kick);
+  document.addEventListener('visibilitychange',()=>{document.visibilityState==='visible'&&kick()});
+  ['pointerdown','touchstart','scroll'].forEach(ev=>addEventListener(ev,kick,{once:true,passive:true}));
+  kick();
+}
+
 const sync=[...document.querySelectorAll('video[data-sync]')];
 if(sync.length===2){
   // Obe srovnavaci videa bezi SPOLECNE a spolecne se vraci na zacatek, aby se
