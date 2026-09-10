@@ -180,7 +180,7 @@ var STEPS=[
  {k:"Compare",      h:"See who AI names instead", c:"Competitors found automatically.", a:"comp", d:4.6},
  {k:"Sentiment",    h:"And how it talks about you", c:"Every mention scored, -100 to +100.", a:"sent", d:4.6},
  {k:"Merchandise",  h:"An agent proposes the fix", c:"Titles, descriptions, GTINs, attributes.", a:"prop", d:5.0},
- {k:"Publish",      h:"You approve. It ships", c:"Google Merchant, Amazon, generic XML.", a:"chan", d:4.6, w:56},
+ {k:"Publish",      h:"You approve. It ships", c:"Google Merchant, Amazon, generic XML.", a:"chan", d:4.6},
  {k:"Visibility",   h:"You see where you stand", c:"The share of AI answers where you appear.", a:"vis", d:4.8},
  {k:"And yes",      h:"An MCP server", c:"Claude, Cursor, any MCP client.", d:4.0, mcp:true}
 ];
@@ -197,8 +197,7 @@ var layout="full";
 function buildPage(){
   var h=navHtml()+
     '<div>'+stageHtml()+'</div>'+
-    '<div style="height:34px;background:#fff;border-bottom:1px solid var(--rk-border)"></div>'+
-    '<div style="padding:24px 40px 26px;border-bottom:1px solid var(--rk-border)">'+
+    '<div style="padding:22px 40px 24px;border-top:1px solid var(--rk-border);border-bottom:1px solid var(--rk-border)">'+
     '<div class="rk-lab plain" style="margin-bottom:14px">Trusted by 1200+ e-commerce and D2C brands</div>'+
     logosHtml()+'</div>';
   document.getElementById("page").innerHTML=h;
@@ -248,7 +247,8 @@ function buildStage(){
     var st=STEPS[i],w=st.tiles?88:st.mcp?56:46;
     h+='<div class="vcol" style="left:7%;top:11%;width:'+w+'%">'+
        '<div class="vt k" id="s'+i+'k">'+st.k+'</div>'+
-       '<div class="vt h h2s" id="s'+i+'h"'+(st.tiles?' style="max-width:76%"':'')+'>'+st.h+'</div>';
+       '<div class="vt h h2s" id="s'+i+'h"'+(st.tiles?' style="max-width:76%"':'')+'>'+
+         st.h.replace(/\. /g,".<br>")+'</div>';   /* dvouvětný nadpis se láme za tečkou */
     if(st.tiles){
       h+='<div class="kpis" id="s'+i+'c">';
       for(var q=0;q<ENG.length;q++){
@@ -264,7 +264,7 @@ function buildStage(){
       h+='<div class="vt s" id="s'+i+'c">'+st.c+'</div>';
     }
     h+='</div>';
-    if(st.a) h+='<div class="shot" id="s'+i+'i" style="right:4%;top:'+(st.w?26:15)+'%;width:'+(st.w||44)+'%">'+
+    if(st.a) h+='<div class="shot" id="s'+i+'i" data-a="'+st.a+'" style="right:4%">'+
        '<img src="'+ASSETS[st.a].uri+'" alt=""></div>';
     if(st.mcp){
       h+='<div class="mcp" id="s'+i+'i" style="right:7%;top:15%;width:31%">'+
@@ -297,7 +297,7 @@ function buildStage(){
 function sizeStage(){
   var st=document.getElementById("stage"); if(!st) return;
   var w=st.parentElement.clientWidth||st.clientWidth;
-  var ratio=layout==="band"?3.4:layout==="full"?1.6:layout==="bg"?1.9:1.75;
+  var ratio=layout==="band"?3.4:layout==="full"?1.75:layout==="bg"?1.9:1.75;
   var h=Math.round(w/ratio);
   st.style.height=h+"px";
   var cv=document.getElementById("cv"),dpr=Math.min(window.devicePixelRatio||1,2);
@@ -368,6 +368,26 @@ function sizeStage(){
     e.style.padding=Math.round(ms*.72)+"px "+Math.round(ms*.85)+"px";});
   each(".mcp .rw",function(e){e.style.fontSize=ms+"px";
     e.style.padding=Math.round(ms*.62)+"px "+Math.round(ms*.85)+"px";});
+  /* Obrazovky sedí na společné spodní lince a dopočítávají si šířku z vlastního
+     poměru stran. Dřív měly pevných 44 % šířky, takže široké výřezy vyšly jako
+     proužek a pod nimi zbývala třetina plochy prázdná. */
+  /* 40 % je strop, aby obrazovka nikdy nezasáhla do textového sloupce
+     (ten končí na 53 % a obrazovka pak začíná na 56 %) */
+  var SBOT=66, SMAXW=.40, SMAXH=.53;
+  each(".shot",function(e){
+    var a=ASSETS[e.getAttribute("data-a")]; if(!a) return;
+    var rr=a.w/a.h;
+    var hpx=Math.min(h*SMAXH,(w*SMAXW)/rr), wpx=hpx*rr;
+    e.style.width=(wpx/w*100).toFixed(2)+"%";
+    e.style.top=(SBOT-(hpx/h*100)).toFixed(2)+"%";
+  });
+  var mcp=document.querySelector(".mcp");
+  if(mcp){var mh=mcp.getBoundingClientRect().height;
+    mcp.style.top=(mh?Math.max(15,SBOT-(mh/h*100)):17)+"%";}
+  /* karta s dlaždicemi je na celou šířku a nedá se zvětšit, tak sedne níž,
+     ať pod ní nezůstane pruh prázdna */
+  each(".kpis",function(e){e.style.marginTop=Math.round(h*.11)+"px";});
+
   var rb=document.getElementById("replay"),rs=Math.max(30,Math.round(w*.036));
   if(rb){rb.style.width=rs+"px"; rb.style.height=rs+"px";
     rb.style.right=Math.round(w*.04)+"px"; rb.style.bottom=Math.round(h*.07)+"px";}
@@ -401,13 +421,13 @@ function waveAt(t){
   if(t<16.4){var f=ease(ramp(t,14.4,16.4));
     return {band:.72-f*.62,amp:.42-f*.40,thin:.46-f*.38,fade:1.5+f*1.9};}
   if(t<STEP_T0){var q2=ease(ramp(t,16.4,18.8));
-    return {band:.10+q2*.06,amp:.02+q2*.06,thin:.08+q2*.06,fade:3.4-q2*1.8};}
+    return {band:.10+q2*.16,amp:.02+q2*.08,thin:.08+q2*.08,fade:3.4-q2*1.8};}
   if(t<STEP_END){var g=growth(t);
-    return {band:.16+g*.26,amp:.08+g*.52,thin:.14+g*.68,fade:1.6-g*.6};}
+    return {band:.26+g*.16,amp:.10+g*.42,thin:.16+g*.64,fade:1.6-g*.6};}
   if(t<HEAL){var q3=ease(ramp(t,STEP_END,HEAL));
-    return {band:.42+q3*.16,amp:.60+q3*.18,thin:.82+q3*.18,fade:1};}
+    return {band:.42+q3*.12,amp:.52+q3*.20,thin:.80+q3*.20,fade:1};}
   var q4=ease(ramp(t,HEAL,HEAL+1.8));
-  return {band:.58-q4*.16,amp:.78-q4*.24,thin:1,fade:1};
+  return {band:.54-q4*.12,amp:.72-q4*.24,thin:1,fade:1};
 }
 
 
