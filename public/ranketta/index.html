@@ -87,6 +87,17 @@ section{padding-block:56px;border-top:1px solid var(--border)}
 /* Maketa je desktopová stránka. Na úzkém displeji ji nelámeme, zmenšíme ji celou,
    ať Marcel vidí skutečnou kompozici a ne rozbitou lištu. */
 .mwrap{overflow:hidden}
+/* Odkud jednotlivé věty na obraze pocházejí. Marcel chtěl vlastní messaging,
+   tohle mu ukazuje, že animace nic nevymyslela. */
+.zdroje{margin-top:30px;border-top:1px solid var(--border)}
+.zdroje h3{font-family:var(--h);font-size:15px;font-weight:700;margin:22px 0 4px;letter-spacing:-.01em}
+.zdroje .zpodnadpis{font-size:13px;color:var(--text-3);margin:0 0 16px}
+.zdroje ul{list-style:none;margin:0;padding:0;display:grid;gap:1px;background:var(--border);border:1px solid var(--border)}
+.zdroje li{background:var(--card);padding:11px 14px;display:grid;gap:3px}
+@media(min-width:760px){.zdroje li{grid-template-columns:minmax(0,42%) minmax(0,1fr);gap:18px;align-items:baseline}}
+.zdroje .veta{font-size:14px;line-height:1.4;color:var(--text)}
+.zdroje .kde{font-size:12.5px;line-height:1.45;color:var(--text-3)}
+.zdroje .kde b{color:var(--text-2);font-weight:600}
 .mscale{width:100%;transform-origin:top left}
 
 /* ── Sekce 05: maketa příspěvku na LinkedIn ───────────────────────────
@@ -173,11 +184,37 @@ footer a:hover{color:var(--text)}
   <div class="sechead rv">
     <div class="num">01</div>
     <h2>Hero animace do&nbsp;homepage</h2>
-    <div class="meta"><span>Bez hlasu</span><span>73&nbsp;s</span><span>Reálné obrazovky</span><span>Jejich vlna</span></div>
+    <div class="meta"><span>Bez hlasu</span><span>70&nbsp;s</span><span>Reálné obrazovky</span><span>Jejich vlna</span><span>Jejich messaging</span></div>
   </div>
   <div class="maketa rv">
     <div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span class="url">ranketta.com</span></div>
     <div class="mwrap" id="mwrap"><div class="mscale" id="mscale"><div id="rk-hero"></div></div></div>
+  </div>
+  <div class="zdroje rv">
+    <h3>Odkud je každá věta</h3>
+    <p class="zpodnadpis">Marcel psal, že chce jejich messaging. Animace tedy nic nevymýšlí, bere jejich vlastní formulace. Vlevo je text na obraze, vpravo zdroj.</p>
+    <ul>
+      <li><span class="veta">„Most never make the shortlist“</span><span class="kde">Jejich ustálený obrat. <b>Blog What Is AI Visibility</b> a popis na G2: „never make the recommendation shortlist“.</span></li>
+      <li><span class="veta">„An AI answer holds three to five products.“</span><span class="kde"><b>Blog What Is AI Visibility</b>, doslova: „An AI answer to a buying question typically holds three to five products.“</span></li>
+      <li><span class="veta">„Which get skipped?“</span><span class="kde"><b>ranketta.com/solutions/ecommerce</b>: „See exactly which products win AI recommendations in your category, and which get skipped.“</span></li>
+      <li><span class="veta">„How am I doing in AI search?“</span><span class="kde"><b>docs.ranketta.com, Shopping Overview.</b> Jejich vlastní dvojice otázek, kterou dělí produkt na měřicí a akční půlku.</span></li>
+      <li><span class="veta">„Not brand mentions. Every product“</span><span class="kde"><b>Homepage, sekce Core Capabilities</b>: „Most platforms count brand mentions. Ranketta tracks every product.“</span></li>
+      <li><span class="veta">„AI recommends brands it perceives as trustworthy.“</span><span class="kde"><b>docs.ranketta.com, Sentiment Score</b>, doslova.</span></li>
+      <li><span class="veta">„See which AI channels send shoppers“</span><span class="kde"><b>Homepage, karta AI traffic attribution</b>, doslova.</span></li>
+      <li><span class="veta">„Analytics alone won’t fix it“<br>„Knowing you have a gap doesn’t close it.“</span><span class="kde"><b>Homepage, nadpis a perex sekce Core Capabilities</b>, doslova včetně modrého zvýraznění druhé půlky.</span></li>
+      <li><span class="veta">„each with a confidence score“</span><span class="kde"><b>docs.ranketta.com, Proposals</b>: „Every proposal carries a confidence score.“</span></li>
+      <li><span class="veta">„You approve. It ships“</span><span class="kde"><b>docs.ranketta.com, Proposals</b>: „Nothing in your feed changes until a proposal is approved.“</span></li>
+      <li><span class="veta">„Become the product AI recommends“ a celý závěr</span><span class="kde"><b>Jejich dnešní hero</b>, doslovný přepis včetně pillu, obou tlačítek a hodnocení na G2.</span></li>
+    </ul>
+
+    <h3>A odkud je vizuál</h3>
+    <p class="zpodnadpis">Off brand byla Marcelova hlavní výtka k tomu předchozímu videu. Tady je, čím se to hlídá.</p>
+    <ul>
+      <li><span class="veta">Modrá vlna</span><span class="kde">Port jejich generátoru z <b>ranketta.com/style-guide</b>, sekce CTA wave pattern, se stejnými pevnými hodnotami: #2F55D4, amplitude 50 %, fade 45 %, grid 4px, dot 102 %.</span></li>
+      <li><span class="veta">Obrazovky produktu</span><span class="kde">Pět skutečných výřezů z <b>docs.ranketta.com</b> a k tomu dlaždice motorů vyříznuté z jejich dashboardu. Nic nakresleného, jen ořez o levý navigační panel.</span></li>
+      <li><span class="veta">Loga motorů a klientů</span><span class="kde">Jejich vlastní soubory z <b>ranketta.com/images</b>, ve stejném pořadí, v jakém je mají na webu.</span></li>
+      <li><span class="veta">Písmo a prvky</span><span class="kde">Naměřeno na živém webu při šířce 1440: H1 80 px Geist 500, perex 18 px, pill a tlačítka Geist Mono bez zaoblení, pozadí hero sekce #f5f5f5.</span></li>
+    </ul>
   </div>
 </section>
 

@@ -118,9 +118,12 @@ function drawIntro(ctx,CW,CH,t,phase,bandFrac,ampT,onlyFalling){
   var u=ease(ramp(t,.55,2.85)),z=Math.pow(900,1-u);
   /* z odděleného bodu do jejich 102 %, na které pak naváže drawWave */
   var ratio=.55+(1.02-.55)*ease(ramp(t,2.6,4.6));
-  /* střed kamery je geometrický střed plochy, aby při z=1 body padly
-     přesně na mřížku, kterou kreslí drawWave */
-  var M=r*ratio,cx=K.baseWidth/2,cy=d/2;
+  /* Střed kamery musí sedět na středu jedné kostičky, ne na geometrickém středu
+     plochy. Ten padne přesně do mezery mezi dvěma sloupci a při velkém zoomu je
+     pak vidět jen ta mezera, čili prázdné plátno. Zarovnání mřížky s drawWave to
+     nerozbíjí, při z=1 je poloha bodu na cx nezávislá. */
+  var M=r*ratio,ccx=Math.round(K.baseWidth/2/r),ccy=Math.round(d/2/r),
+      cx=ccx*r+r/2,cy=ccy*r+r/2;
   ctx.save(); ctx.scale(sc,sc);
   /* Jakmile se plocha začne skládat, vlnu pod čárou přebírá drawWave, tedy jejich
      generátor i s ditherovým okrajem. Tady pak zůstávají jen letící kostičky nad ní.
@@ -128,8 +131,8 @@ function drawIntro(ctx,CW,CH,t,phase,bandFrac,ampT,onlyFalling){
   if(!onlyFalling){ctx.fillStyle=BG;ctx.fillRect(0,0,K.baseWidth,d);}
   ctx.fillStyle=K.color;
   var span=z>2?Math.ceil(Math.max(K.baseWidth,d)/(r*z))+2:1e9;
-  var c0=Math.max(0,(cols>>1)-span),c1=Math.min(cols,(cols>>1)+span);
-  var q0=Math.max(0,(rows>>1)-span),q1=Math.min(rows,(rows>>1)+span);
+  var c0=Math.max(0,ccx-span),c1=Math.min(cols,ccx+span);
+  var q0=Math.max(0,ccy-span),q1=Math.min(rows,ccy+span);
   /* rozpad: každá kostička má vlastní zpoždění, zrychlení a boční snos,
      takže se plocha rozsype na milion dílků směrem dolů a odkryje vlnu */
   var RS=rmat(cols+2,rows+2,9),sT=ease(ramp(t,2.85,5.15));
@@ -175,15 +178,17 @@ var ENG=[{i:"tile_openai",n:"ChatGPT",v:5031,d:-407},
          {i:"tile_copilot",n:"Copilot",v:330,d:-160},
          {i:"tile_claude",n:"Claude",v:226,d:160}];
 var STEPS=[
- {k:"AI traffic",   h:"Up in one. Down in the next", d:5.4, tiles:true},
- {k:"Measured",     h:"And how the trend moves", c:"Sessions from AI models, according to Google Analytics and Cloudflare.", a:"chart", d:4.6},
- {k:"Product level",h:"Not brand mentions. Every product", c:"Most platforms stop at the brand name.", a:"prod", d:5.0},
+ /* MĚŘICÍ PŮLKA, otevírá ji jejich otázka „How am I doing in AI search?" */
+ {k:"Product level",h:"Not brand mentions. Every product", c:"A brand tracker says you appear. Your products still do not.", a:"prod", d:5.0},
  {k:"Compare",      h:"See who AI names instead", c:"Competitors found automatically.", a:"comp", d:4.6},
- {k:"Sentiment",    h:"And how it talks about you", c:"Every mention scored, -100 to +100.", a:"sent", d:4.6},
- {k:"Merchandise",  h:"An agent proposes the fix", c:"Titles, descriptions, GTINs, attributes.", a:"prop", d:5.0},
- {k:"Publish",      h:"You approve. It ships", c:"Google Merchant, Amazon, generic XML.", a:"chan", d:4.6},
- {k:"Visibility",   h:"You see where you stand", c:"The share of AI answers where you appear.", a:"vis", d:4.8},
- {k:"And yes",      h:"An MCP server", c:"Claude, Cursor, any MCP client.", d:4.0, mcp:true}
+ {k:"Sentiment",    h:"And how AI talks about you", c:"AI recommends brands it perceives as trustworthy.", a:"sent", d:4.6},
+ {k:"AI traffic",   h:"See which AI channels send shoppers", c:"Sessions from AI models, from Google Analytics and Cloudflare.", d:5.6, tiles:true},
+ {k:"MCP",          h:"An MCP server", c:"Claude, Cursor, any MCP client.", d:4.2, mcp:true},
+ /* PIVOT, doslovný nadpis a perex jejich sekce Core Capabilities */
+ {h:"Analytics alone <span style='color:var(--rk-blue)'>won\u2019t fix it</span>", c:"Knowing you have a gap doesn\u2019t close it.", d:3.6, pivot:true},
+ /* AKČNÍ PŮLKA, podle jejich srovnávacích stránek to, co konkurence neumí */
+ {k:"Merchandise",  h:"An AI agent proposes the fix", c:"Titles, descriptions, GTINs and attributes, each with a confidence score.", a:"prop", d:5.4},
+ {k:"Publish",      h:"You approve. It ships", c:"Google Merchant, Amazon, generic XML.", a:"chan", d:5.0}
 ];
 (function(){var t=STEP_T0;
   for(var i=0;i<STEPS.length;i++){STEPS[i].t=t;t+=STEPS[i].d;
@@ -191,7 +196,7 @@ var STEPS=[
   STEPS.end=t;})();
 var STEP_END=STEPS.end;            /* 61.2 */
 var HEAL=STEP_END+2.6;             /* vrchol vlny */
-var DUR=73;
+var DUR=70.0;
 
 /* ── maketa jejich stránky, jen layout "full" ─────────────── */
 var layout="full";
@@ -238,16 +243,17 @@ function buildStage(){
      '<div class="vt s" id="e_n1s">Products in this catalog.</div></div>'+
    '<div class="vcol" style="left:7%;top:15%;width:86%">'+
      '<div class="vt h" id="e_h2">The wave is your <span style="color:var(--rk-blue)">AI visibility</span></div>'+
-     '<div class="vt s" id="e_s2" style="max-width:62%">How often the answers name you at all.</div></div>'+
-   '<div class="vcol" style="left:7%;top:15%;width:86%"><div class="vt h" id="e_h3">Most never make the answer</div></div>'+
+     '<div class="vt s" id="e_s2" style="max-width:62%">How often you appear in AI answers at all.</div></div>'+
+   '<div class="vcol" style="left:7%;top:15%;width:86%"><div class="vt h" id="e_h3">Most never make the shortlist</div>'+
+     '<div class="vt s" id="e_s3" style="max-width:58%">An AI answer holds three to five products.</div></div>'+
    '<div class="vcol" style="left:7%;top:15%;width:86%"><div class="vt h" id="e_h4" style="color:var(--rk-blue)">Which get skipped?</div></div>'+
-   '<div class="vcol" style="left:7%;top:15%;width:86%"><div class="vt h" id="e_h5" style="color:var(--rk-blue)">What do you do about it?</div></div>'+
+   '<div class="vcol" style="left:7%;top:15%;width:86%"><div class="vt h" id="e_h5" style="color:var(--rk-blue)">How am I doing in AI search?</div></div>'+
    '<div class="gauge" id="e_g" style="right:4%;top:5.5%"><span>AI visibility</span>'+
      '<span class="gbar" id="e_gb"><i id="e_gf"></i></span></div>';
   for(var i=0;i<STEPS.length;i++){
-    var st=STEPS[i],w=st.tiles?88:st.mcp?56:46;
-    h+='<div class="vcol" style="left:7%;top:11%;width:'+w+'%">'+
-       '<div class="vt k" id="s'+i+'k">'+st.k+'</div>'+
+    var st=STEPS[i],w=st.tiles?88:st.pivot?74:st.mcp?56:46;
+    h+='<div class="vcol" style="left:7%;top:'+(st.pivot?18:11)+'%;width:'+w+'%">'+
+       (st.k?'<div class="vt k" id="s'+i+'k">'+st.k+'</div>':'')+
        '<div class="vt h h2s" id="s'+i+'h"'+(st.tiles?' style="max-width:76%"':'')+'>'+
          st.h.replace(/\. /g,".<br>")+'</div>';   /* dvouvětný nadpis se láme za tečkou */
     if(st.tiles){
@@ -389,7 +395,7 @@ function sizeStage(){
     mcp.style.top=(mh?(STOP+((bh-mh)/h*100)/2):STOP+4).toFixed(2)+"%";}
   /* karta s dlaždicemi je na celou šířku a nedá se zvětšit, tak sedne níž,
      ať pod ní nezůstane pruh prázdna */
-  each(".kpis",function(e){e.style.marginTop=Math.round(h*.11)+"px";});
+  each(".kpis",function(e){e.style.marginTop=Math.round(h*.06)+"px";});
 
   var rb=document.getElementById("replay"),rs=Math.max(30,Math.round(w*.036));
   if(rb){rb.style.width=rs+"px"; rb.style.height=rs+"px";
@@ -475,6 +481,7 @@ function render(t){
   set("e_h2",win(t,7.9,10.5,.42));
   set("e_s2",win(t,8.5,10.5,.42));
   set("e_h3",win(t,10.5,12.9,.4));
+  set("e_s3",win(t,10.9,12.9,.35));
   set("e_h4",win(t,12.9,14.6,.32));
   set("e_h5",win(t,16.6,19.5,.5));
 
@@ -521,9 +528,12 @@ function render(t){
 
 /* ── spuštění: startuje, až když je vidět ──────────────────── */
 buildPage();
-window.addEventListener("resize",sizeStage);
+/* zmena rozmeru plátno vymaze, takze se po ni musí hned překreslit,
+   jinak hero zůstane prázdný, dokud se animace nerozjede */
+function resize(){ sizeStage(); render(T); }
+window.addEventListener("resize",resize);
 /* stránka může kontejner zvětšit sama (zmenšená maketa na mobilu), pak si řekne */
-window.addEventListener("rk-hero:resize",sizeStage);
+window.addEventListener("rk-hero:resize",resize);
 render(0);
 
 var host=document.getElementById("rk-hero");
