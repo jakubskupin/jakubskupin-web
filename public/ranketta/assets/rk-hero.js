@@ -237,8 +237,8 @@ function buildStage(){
      '<div class="vt num" id="e_n1">0</div>'+
      '<div class="vt s" id="e_n1s">Products in this catalog.</div></div>'+
    '<div class="vcol" style="left:7%;top:15%;width:86%">'+
-     '<div class="vt h" id="e_h2">The wave is your visibility</div>'+
-     '<div class="vt s" id="e_s2" style="max-width:62%">How often AI answers name you at all.</div></div>'+
+     '<div class="vt h" id="e_h2">The wave is your <span style="color:var(--rk-blue)">AI visibility</span></div>'+
+     '<div class="vt s" id="e_s2" style="max-width:62%">How often the answers name you at all.</div></div>'+
    '<div class="vcol" style="left:7%;top:15%;width:86%"><div class="vt h" id="e_h3">Most never make the answer</div></div>'+
    '<div class="vcol" style="left:7%;top:15%;width:86%"><div class="vt h" id="e_h4" style="color:var(--rk-blue)">Which get skipped?</div></div>'+
    '<div class="vcol" style="left:7%;top:15%;width:86%"><div class="vt h" id="e_h5" style="color:var(--rk-blue)">What do you do about it?</div></div>'+
