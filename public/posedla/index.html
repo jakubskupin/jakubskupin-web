@@ -97,6 +97,8 @@ section{padding-block:56px;border-top:1px solid var(--border)}
 .karta li{position:relative;padding-left:18px;font-size:15px;line-height:1.5;color:var(--text-2)}
 .karta li::before{content:"";position:absolute;left:0;top:.62em;width:8px;height:8px;border-radius:50%;background:var(--ink)}
 .karta li b{color:var(--text);font-weight:600}
+.karta li a{color:var(--text);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--border);white-space:nowrap}
+.karta li a:hover{text-decoration-color:var(--text)}
 
 /* Dvojice fotka vedle videa, prevzato z /auta */
 .pary{display:grid;gap:26px;margin-top:8px}
@@ -107,13 +109,6 @@ section{padding-block:56px;border-top:1px solid var(--border)}
 .par figcaption{position:absolute;left:10px;top:10px;background:rgba(0,0,0,.72);color:#fff;font-size:11px;
   font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:999px;backdrop-filter:blur(4px)}
 .par img{width:100%;aspect-ratio:1/1;object-fit:cover}
-
-/* Postup ve trech krocich */
-.kroky{display:grid;gap:14px;margin-top:8px;counter-reset:krok}
-@media(min-width:760px){.kroky{grid-template-columns:1fr 1fr 1fr}}
-.krok{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px 22px 20px;display:grid;gap:8px;align-content:start}
-.krok::before{counter-increment:krok;content:"0" counter(krok);font-family:var(--h);font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--text-3)}
-.krok p{font-size:15px;color:var(--text-2);line-height:1.5}
 
 /* Equator jako dlazdice */
 .dlazdice{display:grid;gap:0;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:#111;color:#FAFAF8;text-decoration:none;
@@ -258,8 +253,8 @@ footer a:hover{color:var(--text)}
 <section class="w" id="smery">
   <div class="sechead rv">
     <div class="num">03</div>
-    <h2>Dva směry, jedno pravidlo</h2>
-    <p class="lede">Obsah máte bohatý: brand film, výrobu, unboxingy od ambasadorů, 75 epizod podcastu, Academy. Co e-shop, mailing a&nbsp;kampaně spotřebují každý měsíc, je tempo a&nbsp;objem. Takhle bych je vyráběl.</p>
+    <h2>Jen z&nbsp;fotek na bílém</h2>
+    <p class="lede">Váš obsah umím využít bez focení a&nbsp;natáčení, jen z&nbsp;fotek na bílém pozadí, které už máte. Reálnost ani kreativita tím nejsou omezené.</p>
   </div>
   <div class="smery">
     <div class="karta rv">
@@ -274,29 +269,18 @@ footer a:hover{color:var(--text)}
       <h3>Zkusit kreativnější věci s&nbsp;AI</h3>
       <ul>
         <li><b>Sedlo ve scénách, kam ho focení nedostane:</b> světlo, počasí, prostředí, sezóna. Bez natáčecího dne.</li>
-        <li><b>Desítky variant pro testování reklam</b> z&nbsp;fotek, které už máte, ve všech formátech naráz.</li>
+        <li><b>Desítky variant pro testování reklam</b> z&nbsp;fotek, které už máte, ve všech formátech naráz. <a href="https://www.linkedin.com/feed/update/urn:li:activity:7503725292440559616/" target="_blank" rel="noopener">Ideový příklad na LinkedInu&nbsp;↗</a></li>
         <li><b>Věci, které nejde vyfotit:</b> proč má každé sedlo jiný tvar, co znamená šířka 130 až 170&nbsp;mm, jak vzniká mřížka.</li>
-        <li><b>Launche a&nbsp;novinky</b> (třeba Trimesh) hotové v&nbsp;den, kdy je potřebujete, ne za měsíc.</li>
+        <li><b>Scrollytellingová stránka pro modely sedla:</b> produkt se při scrollování otáčí a&nbsp;vysvětluje sám sebe. <a href="/equator">Draft pro Equator&nbsp;↗</a></li>
+        <li><b>Launche a&nbsp;novinky</b> (třeba Trimesh) hotové v&nbsp;den, kdy je potřebujete.</li>
       </ul>
     </div>
   </div>
 </section>
 
-<section class="w" id="postup">
-  <div class="sechead rv">
-    <div class="num">04</div>
-    <h2>Jak to vzniklo</h2>
-  </div>
-  <div class="kroky">
-    <div class="krok rv"><h3>Fotka z&nbsp;e-shopu</h3><p>Ta, kterou už máte na e-shopu.</p></div>
-    <div class="krok rv"><h3>Dráha kamery</h3><p>Předem popsaná: objet, přiblížit k&nbsp;mřížce, sjet pod sedlo, vrátit se na výchozí záběr.</p></div>
-    <div class="krok rv"><h3>Generování a&nbsp;kontrola</h3><p>Sedlo se nesmí hnout ani změnit. Snímky srovnávám s&nbsp;fotkou, co nesedí, jde znovu.</p></div>
-  </div>
-</section>
-
 <section class="w" id="equator">
   <div class="sechead rv">
-    <div class="num">05</div>
+    <div class="num">04</div>
     <h2>Stejná metoda, taky cyklistika</h2>
   </div>
   <a class="dlazdice rv" href="/equator">
