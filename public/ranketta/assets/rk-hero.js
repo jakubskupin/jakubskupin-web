@@ -12,13 +12,11 @@ document.getElementById("rk-hero").innerHTML='<div class="page" id="page"></div>
 var BAYER=[[0,32,8,40,2,34,10,42],[48,16,56,24,50,18,58,26],[12,44,4,36,14,46,6,38],
 [60,28,52,20,62,30,54,22],[3,35,11,43,1,33,9,41],[51,19,59,27,49,17,57,25],
 [15,47,7,39,13,45,5,37],[63,31,55,23,61,29,53,21]];
-/* Mřížka a velikost bodu jsou naměřené na jejich SKUTEČNÉ hero vlně
-   (ranketta.com/images/hero/bg-hero.webp, 3200x1800): rozteč 16 px a bod 8 px,
-   tedy při baseWidth 1600 mřížka 8 a bod na 50 %. Style-guide má v ukázce
-   jemnější 4/102 %, ale na jejich homepage je tenhle hrubší rastr, a ten je
-   pro Marcela referencí. Díky tomu jsou body na ditherovém okraji oddělené
-   čtverečky, ne slepená hmota. */
-var K={color:"#2F55D4",fadePct:45,gridSize:8,dotSizePct:50,baseWidth:1600,
+/* Konstanty doslova z jejich generátoru na ranketta.com/style-guide, kde jsou
+   pod ovladači vypsané: #2F55D4 · amplitude 50 % · fade 45 % · grid 4px · dot 102 %.
+   Chvíli jsem měřil rozteč z bg-hero.webp a vyšlo 16/8 px, jenže ten export je
+   v jiném měřítku, než v jakém generátor pracuje. Autoritou je štelovátko. */
+var K={color:"#2F55D4",fadePct:45,gridSize:4,dotSizePct:102,baseWidth:1600,
   heightNeutral:.5,heightMinAtFullVary:.05,heightMaxAtFullVary:.95,
   topMarginPct:.2,bottomMarginPct:.2,widthVaryMax:.1};
 var PEAKS=4,VARY=60,SEED=12;
@@ -62,18 +60,14 @@ function makeWave(d,phase,amp,fadeMul){
 }
 
 function drawWave(ctx,CW,CH,phase,thin,amp,paintBg,fadeMul){
-  /* Jeden jediný způsob kreslení pro řídkou i plnou vlnu, ať mezi nimi není šev.
+  /* Jeden způsob kreslení pro řídkou i plnou vlnu, ať mezi nimi není šev.
      Všechny body jdou do jedné cesty a kreslí se jedním fill(): překryvy se slijí,
-     takže plná vlna vyjde jako souvislá plocha, přesně jako jejich bg-hero.webp. */
+     takže plná vlna vyjde jako souvislá plocha, přesně jako u nich. */
   var sc=CW/K.baseWidth,W=makeWave(CH/sc,phase,amp,fadeMul);
   var r=W.r,v=W.cols,k=W.rows;
-  /* Bod na ditherovém okraji má u nich vždy 50 % buňky (naměřeno na bg-hero.webp:
-     rozteč 16 px, bod 8 px). Hmota pod čárou je u nich plná. Aby mezi řídkou
-     a plnou vlnou nebyl skok, roste velikost bodu v hmotě s hustotou: při řídké
-     vlně je to jejich rastr oddělených čtverečků, při plné se body slijí do plochy. */
-  var M=K.dotSizePct/100*r,j=(r-M)/2;
-  var dens=Math.max(0,Math.min(1,(thin-.80)/.20));
-  var Mm=(K.dotSizePct+62*dens)/100*r,jm=(r-Mm)/2;
+  /* Jediná velikost bodu, jako u nich. Oddělené čtverečky na okraji nedělá
+     zmenšování bodu, ale dither: většina bodů je tam vypnutá, takže zbylé stojí samy. */
+  var M=K.dotSizePct/100*r,j=(r-M)/2,Mm=M,jm=j;
   ctx.save(); ctx.scale(sc,sc);
   if(paintBg!==false){ctx.fillStyle=BG;ctx.fillRect(0,0,W.base,W.d);}
   var R=thin<.999?rmat(v+2,k+2,5):null,N=[];
@@ -119,8 +113,8 @@ function drawIntro(ctx,CW,CH,t,phase,bandFrac,ampT){
   var W=makeWave(dB,phase,ampT,1);
   var cols=Math.floor(K.baseWidth/r),rows=Math.ceil(d/r)+1;
   var u=ease(ramp(t,.55,2.85)),z=Math.pow(900,1-u);
-  /* 50 % je jejich rastr, 112 % je slitá hmota, na kterou pak naváže drawWave */
-  var ratio=.50+(1.12-.50)*ease(ramp(t,2.6,4.6));
+  /* z odděleného bodu do jejich 102 %, na které pak naváže drawWave */
+  var ratio=.55+(1.02-.55)*ease(ramp(t,2.6,4.6));
   /* střed kamery je geometrický střed plochy, aby při z=1 body padly
      přesně na mřížku, kterou kreslí drawWave */
   var M=r*ratio,cx=K.baseWidth/2,cy=d/2;
