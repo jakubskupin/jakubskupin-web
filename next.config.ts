@@ -15,6 +15,7 @@ const nextConfig: NextConfig = {
       { source: "/prim", destination: "/prim/index.html" },
       { source: "/nanoo", destination: "/nanoo/index.html" },
       { source: "/auta", destination: "/auta/index.html" },
+      { source: "/ranketta", destination: "/ranketta/index.html" },
     ];
   },
 };
