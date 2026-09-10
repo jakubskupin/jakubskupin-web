@@ -1,5 +1,8 @@
 /* Ranketta hero animace pro jakubskupin.cz/ranketta.
-   Generováno z prototypu build-hero.py, needituj ručně. */
+   GENEROVANY SOUBOR, NEEDITUJ HO RUCNE. Rucni zmena se ztrati pri dalsim buildu.
+   Zdroje:  ~/Projects/sandbox/ranketta/hero/proto/src/
+   Sestaveni:  cd do te slozky a spustit  python3 build-hero.py
+   Popis a casova osa animace:  ~/Projects/sandbox/ranketta/hero/proto/README.md */
 (function(){
 "use strict";
 if(!document.getElementById("rk-hero")) return;
