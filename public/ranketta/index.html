@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Pro Rankettu · Jakub Skupin</title>
-<meta name="description" content="Tři třicetivteřinové ukázky videa pro Rankettu, každá jinou dramaturgií.">
+<meta name="description" content="Hero animace do homepage Ranketty a tři třicetivteřinové ukázky videa.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="cs_CZ">
 <meta property="og:site_name" content="Jakub Skupin">
 <meta property="og:title" content="Pro Rankettu · Jakub Skupin">
-<meta property="og:description" content="Tři třicetivteřinové ukázky videa pro Rankettu, každá jinou dramaturgií.">
+<meta property="og:description" content="Hero animace do homepage Ranketty a tři třicetivteřinové ukázky videa.">
 <meta property="og:url" content="https://jakubskupin.cz/ranketta/">
 <meta property="og:image" content="https://jakubskupin.cz/ranketta/assets/og-ranketta.jpg">
 <meta property="og:image:width" content="1200">
@@ -21,7 +21,7 @@
 <meta name="twitter:image" content="https://jakubskupin.cz/ranketta/assets/og-ranketta.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Syne:wght@700;800&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#FAFAF8; --text:#1A1A18; --text-2:#6B6964; --text-3:#6F6D68;
@@ -78,6 +78,18 @@ section{padding-block:56px;border-top:1px solid var(--border)}
 .stahnout:hover{color:var(--text);border-bottom-color:var(--border)}
 .stahnout svg{width:14px;height:14px;flex:0 0 14px;fill:currentColor}
 
+/* maketa homepage Ranketty s hero animaci */
+.maketa{border:1px solid var(--border);border-radius:12px;overflow:hidden;background:#fff;
+  box-shadow:0 24px 60px rgba(26,26,24,.08)}
+.chrome{display:flex;align-items:center;gap:7px;padding:11px 14px;background:#F2F1ED;border-bottom:1px solid var(--border)}
+.chrome i{width:9px;height:9px;border-radius:50%;background:#D9D7D1;display:block}
+.chrome .url{margin-left:10px;font-size:11px;color:var(--text-3);letter-spacing:.02em}
+.pod{margin-top:14px;font-size:13px;color:var(--text-3);max-width:60ch}
+/* Maketa je desktopová stránka. Na úzkém displeji ji nelámeme, zmenšíme ji celou,
+   ať Marcel vidí skutečnou kompozici a ne rozbitou lištu. */
+.mwrap{overflow:hidden}
+.mscale{width:100%;transform-origin:top left}
+
 footer{border-top:1px solid var(--border);padding-block:36px 56px;font-size:13px;color:var(--text-3)}
 footer .row{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;justify-content:space-between}
 footer a{text-decoration:none;color:var(--text-2)}
@@ -93,14 +105,27 @@ footer a:hover{color:var(--text)}
 </div></div>
 
 <header class="w hero">
-  <div class="eyebrow">Ranketta · tři ukázky · 30&nbsp;s</div>
-  <h1>Video pro Rankettu, třikrát&nbsp;jinak</h1>
-  <p class="lede">Tři třicetivteřinové ukázky, každá jinou dramaturgií.</p>
+  <div class="eyebrow">Ranketta · hero animace · tři ukázky</div>
+  <h1>Video pro Rankettu</h1>
+  <p class="lede">Animace do hero sekce a tři třicetivteřinové ukázky, každá jinou dramaturgií.</p>
 </header>
+
+<section class="w" id="hero-animace">
+  <div class="sechead rv">
+    <div class="num">01</div>
+    <h2>Hero animace do&nbsp;homepage</h2>
+    <div class="meta"><span>Bez hlasu</span><span>73&nbsp;s</span><span>Reálné obrazovky</span><span>Jejich vlna</span></div>
+  </div>
+  <div class="maketa rv">
+    <div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span class="url">ranketta.com</span></div>
+    <div class="mwrap" id="mwrap"><div class="mscale" id="mscale"><div id="rk-hero"></div></div></div>
+  </div>
+  <p class="pod rv">Maketa jejich homepage, aby bylo vidět, jak animace sedí pod lištou. Modrá plocha je jejich vlastní halftone generátor ze style-guide, obrazovky jsou skutečné z&nbsp;jejich dokumentace a&nbsp;závěr přistane na&nbsp;dnešním hero sdělení.</p>
+</section>
 
 <section class="w" id="od-problemu">
   <div class="sechead rv">
-    <div class="num">01</div>
+    <div class="num">02</div>
     <h2>Od problému k&nbsp;řešení</h2>
     <div class="meta"><span>S hlasem</span><span>31&nbsp;s</span><span>Problém, řešení, důkaz</span></div>
   </div>
@@ -112,7 +137,7 @@ footer a:hover{color:var(--text)}
 
 <section class="w" id="slovesa">
   <div class="sechead rv">
-    <div class="num">02</div>
+    <div class="num">03</div>
     <h2>Bez hlasu, jen slovesa</h2>
     <div class="meta"><span>Bez hlasu</span><span>30&nbsp;s</span><span>Track. Fix. Merchandise. Connect.</span></div>
   </div>
@@ -124,7 +149,7 @@ footer a:hover{color:var(--text)}
 
 <section class="w" id="proc-ted">
   <div class="sechead rv">
-    <div class="num">03</div>
+    <div class="num">04</div>
     <h2>Proč právě teď</h2>
     <div class="meta"><span>S hlasem</span><span>31&nbsp;s</span><span>Trh, produkt, číslo</span></div>
   </div>
@@ -141,12 +166,28 @@ footer a:hover{color:var(--text)}
   </div>
 </footer>
 
+<script src="/ranketta/assets/rk-hero.js" defer></script>
 <script>
 const rv=document.querySelectorAll('.rv');
 if(!('IntersectionObserver' in window)){rv.forEach(e=>e.classList.add('in'))}else{
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px'});
   rv.forEach(el=>io.observe(el));
 }
+// Maketa se na uzkem displeji cela zmensi, misto aby se lista lamala
+const MW=980;
+function fitMaketa(){
+  const wrap=document.getElementById('mwrap'),sc=document.getElementById('mscale');
+  if(!wrap||!sc) return;
+  const avail=wrap.parentElement.clientWidth, wide=avail>=MW, k=wide?1:avail/MW;
+  sc.style.width=wide?'100%':MW+'px';
+  sc.style.transform=wide?'none':'scale('+k+')';
+  window.dispatchEvent(new CustomEvent('rk-hero:resize'));
+  wrap.style.height=wide?'auto':Math.round(sc.scrollHeight*k)+'px';
+}
+window.addEventListener('resize',fitMaketa);
+window.addEventListener('load',fitMaketa);
+setTimeout(fitMaketa,300); setTimeout(fitMaketa,1200);
+
 // Kdyz se pusti jedno video, ostatni se zastavi (dve VO pres sebe by byla kase)
 const vids=[...document.querySelectorAll('video')];
 vids.forEach(v=>v.addEventListener('play',()=>vids.forEach(o=>{if(o!==v&&!o.paused)o.pause()})));
