@@ -110,7 +110,7 @@ function drawWave(ctx,CW,CH,phase,thin,amp,paintBg,fadeMul){
 }
 
 /* ── nájezd: modrá až k liště, jeden puntík, pole, vlna ─── */
-function drawIntro(ctx,CW,CH,t,phase,bandFrac,ampT){
+function drawIntro(ctx,CW,CH,t,phase,bandFrac,ampT,onlyFalling){
   var sc=CW/K.baseWidth,d=CH/sc,r=K.gridSize;
   var dB=d*bandFrac,off=d-dB;
   var W=makeWave(dB,phase,ampT,1);
@@ -122,7 +122,10 @@ function drawIntro(ctx,CW,CH,t,phase,bandFrac,ampT){
      přesně na mřížku, kterou kreslí drawWave */
   var M=r*ratio,cx=K.baseWidth/2,cy=d/2;
   ctx.save(); ctx.scale(sc,sc);
-  ctx.fillStyle=BG; ctx.fillRect(0,0,K.baseWidth,d);
+  /* Jakmile se plocha začne skládat, vlnu pod čárou přebírá drawWave, tedy jejich
+     generátor i s ditherovým okrajem. Tady pak zůstávají jen letící kostičky nad ní.
+     Bez toho by nájezd končil natvrdo useknutou plochou, která jejich vlnu nepřipomíná. */
+  if(!onlyFalling){ctx.fillStyle=BG;ctx.fillRect(0,0,K.baseWidth,d);}
   ctx.fillStyle=K.color;
   var span=z>2?Math.ceil(Math.max(K.baseWidth,d)/(r*z))+2:1e9;
   var c0=Math.max(0,(cols>>1)-span),c1=Math.min(cols,(cols>>1)+span);
@@ -134,6 +137,7 @@ function drawIntro(ctx,CW,CH,t,phase,bandFrac,ampT){
     var topR=Math.round((off+W.wy(c*r+r/2))/r); if(topR<0) topR=0;
     for(var q=q0;q<=q1;q++){
       var gx=c*r+r/2,gy=q*r+r/2,al=1;
+      if(onlyFalling&&q>=topR) continue;   /* co je pod čárou, kreslí vlna */
       if(sT>0&&q<topR){
         var rv=RS[c<0?0:c][q<0?0:q],dl=rv*.46;
         var pr=ease(Math.max(0,Math.min(1,(sT-dl)/(1-dl))));
@@ -440,7 +444,15 @@ function render(t){
   ctx.clearRect(0,0,w,h); ctx.fillStyle=BG; ctx.fillRect(0,0,w,h);
 
   if(t<5.4){
-    drawIntro(ctx,w,h,t,phase,.72,.78);
+    /* od chvíle, kdy se pole začne skládat, je vlna pod čárou už jejich generátor */
+    var rev=ease(ramp(t,2.85,4.30)), BND=.72, AMPT=.78;
+    if(rev>0){
+      var wh0=Math.round(h*BND);
+      ctx.save(); ctx.globalAlpha=rev; ctx.translate(0,h-wh0);
+      drawWave(ctx,w,wh0,phase,1,AMPT,false,1);
+      ctx.restore();
+    }
+    drawIntro(ctx,w,h,t,phase,BND,AMPT,rev>0);
   } else {
     var W=waveAt(t),wh=Math.max(18,Math.round(h*W.band));
     ctx.save(); ctx.translate(0,h-wh);
