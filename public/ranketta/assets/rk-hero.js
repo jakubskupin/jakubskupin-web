@@ -368,19 +368,21 @@ function sizeStage(){
   /* Obrazovky sedí na společné spodní lince a dopočítávají si šířku z vlastního
      poměru stran. Dřív měly pevných 44 % šířky, takže široké výřezy vyšly jako
      proužek a pod nimi zbývala třetina plochy prázdná. */
-  /* 40 % je strop, aby obrazovka nikdy nezasáhla do textového sloupce
-     (ten končí na 53 % a obrazovka pak začíná na 56 %) */
-  var SBOT=66, SMAXW=.40, SMAXH=.53;
+  /* Obrazovka se svisle centruje v pásu 15 až 66 % a šířku si dopočítá z vlastního
+     poměru stran. Lepení na spodní hranu se neosvědčilo: široký a nízký výřez
+     (kanály mají poměr 5:1) se pak propadl skoro k vlně a nahoře nad ním zůstala
+     díra. Strop šířky 40 % drží obrazovku mimo textový sloupec, ten končí na 53 %. */
+  var STOP=15, SBOT=66, SMAXW=.40, SMAXH=.51;
   each(".shot",function(e){
     var a=ASSETS[e.getAttribute("data-a")]; if(!a) return;
-    var rr=a.w/a.h;
-    var hpx=Math.min(h*SMAXH,(w*SMAXW)/rr), wpx=hpx*rr;
+    var rr=a.w/a.h, bandH=(SBOT-STOP)/100*h;
+    var hpx=Math.min(bandH,h*SMAXH,(w*SMAXW)/rr), wpx=hpx*rr;
     e.style.width=(wpx/w*100).toFixed(2)+"%";
-    e.style.top=(SBOT-(hpx/h*100)).toFixed(2)+"%";
+    e.style.top=(STOP+((bandH-hpx)/h*100)/2).toFixed(2)+"%";
   });
   var mcp=document.querySelector(".mcp");
-  if(mcp){var mh=mcp.getBoundingClientRect().height;
-    mcp.style.top=(mh?Math.max(15,SBOT-(mh/h*100)):17)+"%";}
+  if(mcp){var mh=mcp.getBoundingClientRect().height,bh=(SBOT-STOP)/100*h;
+    mcp.style.top=(mh?(STOP+((bh-mh)/h*100)/2):STOP+4).toFixed(2)+"%";}
   /* karta s dlaždicemi je na celou šířku a nedá se zvětšit, tak sedne níž,
      ať pod ní nezůstane pruh prázdna */
   each(".kpis",function(e){e.style.marginTop=Math.round(h*.11)+"px";});
@@ -467,7 +469,9 @@ function render(t){
   /* produkt */
   for(var i=0;i<STEPS.length;i++){
     var s=STEPS[i],a=s.t,b=s.t+s.d;
-    set("s"+i+"k",win(t,a-.2,b,.3));
+    /* pilulka má plné pozadí, takže se nesmí překrývat s tou z dalšího kroku:
+       vypne se přesně tam, kde se ta další zapíná */
+    set("s"+i+"k",win(t,a-.05,b-.05,.22));
     set("s"+i+"h",win(t,a-.05,b,.32));
     set("s"+i+"c",win(t,a+.25,b,.32));
     set("s"+i+"i",win(t,a+.1,b,.38),13);
