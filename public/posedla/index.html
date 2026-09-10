@@ -77,10 +77,6 @@ section{padding-block:56px;border-top:1px solid var(--border)}
 .film.sq{max-width:min(100%,82vh)}
 .film.sq video{aspect-ratio:1/1}
 
-.stahnout{display:inline-flex;align-items:center;gap:7px;margin-top:14px;padding:9px 0;font-size:13px;
-  color:var(--text-3);text-decoration:none;border-bottom:1px solid transparent;transition:color .2s ease,border-color .2s ease}
-.stahnout:hover{color:var(--text);border-bottom-color:var(--border)}
-.stahnout svg{width:14px;height:14px;flex:0 0 14px;fill:currentColor}
 
 .pozn{max-width:62ch;margin-top:34px;margin-bottom:14px;font-size:15px;color:var(--text-2)}
 
@@ -132,7 +128,8 @@ section{padding-block:56px;border-top:1px solid var(--border)}
   box-shadow:0 24px 60px rgba(26,26,24,.08);
   font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#262626}
 .ig-hd{display:flex;align-items:center;gap:10px;padding:12px 14px}
-.ig-av{width:34px;height:34px;border-radius:50%;background:#1A1A18;flex:0 0 auto}
+.ig-av{width:34px;height:34px;border-radius:50%;background:#0F3B33;flex:0 0 auto;overflow:hidden}
+.ig-av img{width:100%;height:100%;display:block;object-fit:cover}
 .ig-nm{font-size:14px;font-weight:600}
 .ig-follow{font-size:14px;font-weight:600;color:#0095F6}
 .ig-follow::before{content:"•";color:#8E8E8E;margin-right:8px;font-weight:400}
@@ -174,7 +171,6 @@ footer a:hover{color:var(--text)}
   <div class="film sq rv">
     <video src="/posedla/assets/joyseat-01-otocka.mp4" poster="/posedla/assets/poster-01.jpg" autoplay muted loop playsinline preload="auto"></video>
   </div>
-  <a class="stahnout rv" href="/posedla/assets/joyseat-01-otocka.mp4" download="posedla-joyseat-otocka.mp4"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5a.75.75 0 01.75.75v6.19l2.22-2.22a.75.75 0 111.06 1.06l-3.5 3.5a.75.75 0 01-1.06 0l-3.5-3.5a.75.75 0 111.06-1.06l2.22 2.22V2.25A.75.75 0 018 1.5zM2.75 12a.75.75 0 01.75.75v.75h9v-.75a.75.75 0 011.5 0v1.5a.75.75 0 01-.75.75h-10.5a.75.75 0 01-.75-.75v-1.5a.75.75 0 01.75-.75z"/></svg>Stáhnout video (3,9&nbsp;MB)</a>
   <p class="pozn rv">Vlevo výřez z&nbsp;fotky na e-shopu, vpravo výřez z&nbsp;videa.</p>
   <div class="pary">
     <div class="rv">
@@ -212,7 +208,6 @@ footer a:hover{color:var(--text)}
   <div class="film rv">
     <video src="/posedla/assets/joyseat-02.mp4" poster="/posedla/assets/poster-02.jpg" controls playsinline preload="metadata"></video>
   </div>
-  <a class="stahnout rv" href="/posedla/assets/joyseat-02.mp4" download="posedla-joyseat-02.mp4"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5a.75.75 0 01.75.75v6.19l2.22-2.22a.75.75 0 111.06 1.06l-3.5 3.5a.75.75 0 01-1.06 0l-3.5-3.5a.75.75 0 111.06-1.06l2.22 2.22V2.25A.75.75 0 018 1.5zM2.75 12a.75.75 0 01.75.75v.75h9v-.75a.75.75 0 011.5 0v1.5a.75.75 0 01-.75.75h-10.5a.75.75 0 01-.75-.75v-1.5a.75.75 0 01.75-.75z"/></svg>Stáhnout video (X&nbsp;MB)</a>
 </section>
 -->
 
@@ -224,7 +219,7 @@ footer a:hover{color:var(--text)}
   <div class="ig-wrap rv">
     <div class="ig-post">
       <div class="ig-hd">
-        <span class="ig-av" aria-hidden="true"></span>
+        <span class="ig-av"><img src="/posedla/assets/posedla-avatar.png" alt="Logo Posedla"></span>
         <span class="ig-nm">posedla.cc</span>
         <span class="ig-follow">Sledovat</span>
         <span class="ig-dots" aria-hidden="true">•••</span>
@@ -241,7 +236,6 @@ footer a:hover{color:var(--text)}
       <p class="ig-cap"><b>posedla.cc</b> The best saddle is the one you forget about while riding. <span>… více</span></p>
     </div>
   </div>
-  <a class="stahnout rv" href="/posedla/assets/joyseat-ig-4x5.mp4" download="posedla-joyseat-ig-4x5.mp4"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5a.75.75 0 01.75.75v6.19l2.22-2.22a.75.75 0 111.06 1.06l-3.5 3.5a.75.75 0 01-1.06 0l-3.5-3.5a.75.75 0 111.06-1.06l2.22 2.22V2.25A.75.75 0 018 1.5zM2.75 12a.75.75 0 01.75.75v.75h9v-.75a.75.75 0 011.5 0v1.5a.75.75 0 01-.75.75h-10.5a.75.75 0 01-.75-.75v-1.5a.75.75 0 01.75-.75z"/></svg>Stáhnout video 4:5 (5,2&nbsp;MB)</a>
 </section>
 
 <section class="w" id="smery">
