@@ -61,7 +61,7 @@ p{margin:0}
 
 .hero{padding-block:40px 40px;display:flex;flex-direction:column;gap:18px}
 @media(min-width:768px){.hero{padding-block:64px 56px}}
-.hero h1{max-width:16ch}
+.hero h1{max-width:20ch}
 
 section{padding-block:56px;border-top:1px solid var(--border)}
 @media(min-width:768px){section{padding-block:80px}}
@@ -79,6 +79,14 @@ section{padding-block:56px;border-top:1px solid var(--border)}
 
 
 .pozn{max-width:62ch;margin-top:34px;margin-bottom:14px;font-size:15px;color:var(--text-2)}
+
+/* Dva sloupce pod nadpisem 3D videa */
+.dvasl{display:grid;gap:22px;margin:0 0 30px}
+@media(min-width:760px){.dvasl{grid-template-columns:1fr 1fr;gap:32px}}
+.dvasl h3{font-size:15px;margin-bottom:10px}
+.dvasl ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.dvasl li{position:relative;padding-left:18px;font-size:15px;line-height:1.5;color:var(--text-2);max-width:48ch}
+.dvasl li::before{content:"";position:absolute;left:0;top:.62em;width:8px;height:8px;border-radius:50%;background:var(--ink)}
 
 /* Dva smery prace */
 .smery{display:grid;gap:18px;margin-top:8px}
@@ -99,7 +107,6 @@ section{padding-block:56px;border-top:1px solid var(--border)}
 .par figcaption{position:absolute;left:10px;top:10px;background:rgba(0,0,0,.72);color:#fff;font-size:11px;
   font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:999px;backdrop-filter:blur(4px)}
 .par img{width:100%;aspect-ratio:1/1;object-fit:cover}
-.parlabel{font-size:13.5px;color:var(--text-3);margin-top:8px}
 
 /* Postup ve trech krocich */
 .kroky{display:grid;gap:14px;margin-top:8px;counter-reset:krok}
@@ -157,14 +164,29 @@ footer a:hover{color:var(--text)}
 
 <header class="w hero">
   <div class="eyebrow">Posedla</div>
-  <h1>Joyseat ve&nbsp;videu.<br>Bez&nbsp;natáčení</h1>
+  <h1>Produktové vizuály bez focení a&nbsp;natáčení</h1>
   <p class="lede">Krátká videa vyrobená z&nbsp;fotek, které už na posedla.cz máte.</p>
 </header>
 
 <section class="w" id="otocka">
   <div class="sechead rv">
     <div class="num">01</div>
-    <h2>Otočka kolem Joyseatu</h2>
+    <h2>3D video</h2>
+  </div>
+  <div class="dvasl rv">
+    <div>
+      <h3>Výhody</h3>
+      <ul>
+        <li>Tohle je ukázka na rychlém a&nbsp;levném modelu.</li>
+        <li>Umím 100&nbsp;% tvar bez artefaktů na základě více fotek a&nbsp;3D modelu.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>O&nbsp;chybách vím</h3>
+      <ul>
+        <li>Spodní část sedla je dogenerovaná, proto není přesná. Když mám detailní set fotek, dodržím reálnost.</li>
+      </ul>
+    </div>
   </div>
   <div class="film sq rv">
     <video src="/posedla/assets/joyseat-01-otocka.mp4" poster="/posedla/assets/poster-01.jpg" autoplay muted loop playsinline preload="auto"></video>
@@ -176,21 +198,18 @@ footer a:hover{color:var(--text)}
         <figure><figcaption>Fotka</figcaption><img src="/posedla/assets/par/A-foto.jpg" alt="Reliéf nápisu posedla na fotce z e-shopu"></figure>
         <figure><figcaption>Video</figcaption><img src="/posedla/assets/par/A-video.jpg" alt="Reliéf nápisu posedla ve videu"></figure>
       </div>
-      <p class="parlabel">Reliéf nápisu posedla na nose sedla</p>
     </div>
     <div class="rv">
       <div class="par">
         <figure><figcaption>Fotka</figcaption><img src="/posedla/assets/par/B-foto.jpg" alt="Mřížka sedla na fotce z e-shopu"></figure>
         <figure><figcaption>Video</figcaption><img src="/posedla/assets/par/B-video.jpg" alt="Mřížka sedla ve videu zblízka"></figure>
       </div>
-      <p class="parlabel">Tvar buněk mřížky, ve videu zblízka</p>
     </div>
     <div class="rv">
       <div class="par">
         <figure><figcaption>Fotka</figcaption><img src="/posedla/assets/par/C-foto.jpg" alt="Celé sedlo na fotce z e-shopu"></figure>
         <figure><figcaption>Video</figcaption><img src="/posedla/assets/par/C-video.jpg" alt="Poslední snímek otočky"></figure>
       </div>
-      <p class="parlabel">Konec otočky sedí na výchozí fotku</p>
     </div>
   </div>
 </section>
@@ -212,7 +231,7 @@ footer a:hover{color:var(--text)}
 <section class="w" id="instagram">
   <div class="sechead rv">
     <div class="num">02</div>
-    <h2>Stejná otočka jako příspěvek</h2>
+    <h2>Obsah využitelný kdykoli</h2>
   </div>
   <div class="ig-wrap rv">
     <div class="ig-post">
