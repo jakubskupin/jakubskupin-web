@@ -210,7 +210,16 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
 .post .cap b{font-weight:600;margin-right:5px;color:var(--text)}
 .post .cap .more{color:var(--text-3)}
 
-/* 03 bannery: stejna vyska, sirka podle pomeru -> jedna scena ve trech formatech */
+/* 03 detail produktu: dve male smycky, format karty na eshopu */
+.vids{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;max-width:620px}
+.vid{margin:0;min-width:0}
+.vid video{display:block;width:100%;height:auto;aspect-ratio:1080/1342;object-fit:cover;
+  background:#0b0b0b;border-radius:5px;border:1px solid var(--border)}
+.vid figcaption{margin-top:11px;font-size:11.5px;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--text-3)}
+@media(max-width:560px){.vids{gap:14px}.vid video{border-radius:4px}}
+
+/* 04 bannery: stejna vyska, sirka podle pomeru -> jedna scena ve trech formatech */
 .fmtwide{max-width:1420px;margin:0 auto;padding:0 20px}
 .bboard{margin:0 0 44px}
 .bboard img{width:100%;height:auto;border-radius:6px;border:1px solid var(--border)}
@@ -408,7 +417,32 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
   </div>
 </section>
 
-<!-- 03 BANNERY -->
+<!-- 03 DETAIL PRODUKTU -->
+<section id="detail">
+  <div class="w">
+    <div class="sechead">
+      <div class="num rv"><span>Detail produktu</span></div>
+      <h2 class="rv">Popisek to neukáže</h2>
+      <p class="lede rv">Krátké smyčky do karty produktu na <span class="nb">e-shopu</span>. Text zvládne rozměr a&nbsp;gramáž. <b>Tvar ráfku ukáže až pohyb.</b> Celek patří na úvod karty, makro do sekce s&nbsp;parametry.</p>
+    </div>
+    <div class="vids rv">
+      <figure class="vid">
+        <video src="/equator/assets/detail/eq-celek-oblet.mp4" poster="/equator/assets/detail/eq-celek-oblet.jpg"
+               width="720" height="894" autoplay muted loop playsinline preload="metadata"
+               aria-label="Oblet celého kola Equator Wavy 50C v kouři"></video>
+        <figcaption>Celé kolo &middot; úvod karty produktu</figcaption>
+      </figure>
+      <figure class="vid">
+        <video src="/equator/assets/detail/eq-rafek-oblet.mp4" poster="/equator/assets/detail/eq-rafek-oblet.jpg"
+               width="480" height="608" autoplay muted loop playsinline preload="metadata"
+               aria-label="Detail vlnitého profilu ráfku s logem Equator"></video>
+        <figcaption>Makro ráfku &middot; sekce s&nbsp;parametry</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- 04 BANNERY -->
 <section id="bannery">
   <div class="w">
     <div class="sechead">
@@ -787,6 +821,7 @@ section{padding:56px 0;border-top:1px solid var(--line);position:relative}
     {h:'',          p:'Začátek stránky'},
     {h:'#reels',    p:'Z fotek video'},
     {h:'#carousel', p:'Z packshotů do kouře'},
+    {h:'#detail',   p:'Popisek to neukáže'},
     {h:'#bannery',  p:'Tři poměry, jedno kolo'},
     {h:'#citace',   p:'Citace klienta'},
     {h:'#kontakt',  p:'Závěr a kontakt'}
