@@ -111,9 +111,19 @@ section{padding-block:56px;border-top:1px solid var(--border)}
 .li-act{flex:0 0 auto;display:flex;align-items:flex-start;gap:12px;padding-top:2px}
 .li-fw{font-size:14px;font-weight:600;color:#0A66C2;white-space:nowrap}
 .li-dots{color:#666;font-size:17px;line-height:1;letter-spacing:.06em}
-.li-bd{padding:12px 16px 12px}
-.li-bd p{margin:0;font-size:14px;line-height:1.45}
-.li-bd p+p{margin-top:12px}
+/* LinkedIn ukazuje ve feedu jen tri radky a zbytek schova za "…see more".
+   Tlacitko sedi vpravo dole na bilem podkladu, takze prekryje vlastni vypustku
+   klampu, presne jako to dela on. */
+.li-bd{position:relative;padding:12px 16px 12px}
+.li-txt{margin:0;font-size:14px;line-height:1.45}
+/* Tri radky orizneme vyskou, ne pres -webkit-line-clamp. Klamp si totiz kresli
+   vlastni vypustku, a kdyz treti radek pripadne na prazdny radek mezi odstavci,
+   visi ta vypustka sama vlevo. Vypustku nese tlacitko. 3 x 1.45 = 4.35em */
+.li-txt.li-clamp{max-height:4.35em;overflow:hidden}
+.li-more{position:absolute;right:16px;bottom:12px;padding:0 0 0 20px;border:0;background:#fff;
+  font-family:inherit;font-size:14px;line-height:1.45;color:#666;cursor:pointer}
+.li-more:hover{color:#0A66C2;text-decoration:underline}
+.li-more:focus-visible{outline:2px solid #0A66C2;outline-offset:2px}
 .li-vid{position:relative;width:100%;aspect-ratio:4/5;background:#F4F2EE}
 .li-vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;max-width:none}
 
@@ -191,10 +201,8 @@ footer a:hover{color:var(--text)}
       </div>
 
       <div class="li-bd">
-        <p>Most of your catalogue never makes it into the AI answer.</p>
-        <p>Not because those are worse products. Because the data describing them is thin, and answer engines read data, not marketing copy.</p>
-        <p>Ranketta measures where your products show up across every engine, finds what keeps them out, rewrites the weak fields and pushes them back to the feed.</p>
-        <p>The whole loop in 73 seconds. No voiceover, the wave is visibility.</p>
+        <p class="li-txt li-clamp" id="li-txt">Most of your catalogue never makes it into the AI answer.<br><br>Not because those are worse products. Because the data describing them is thin, and answer engines read data, not marketing copy.<br><br>Ranketta measures where your products show up across every engine, finds what keeps them out, rewrites the weak fields and pushes them back to the feed.<br><br>The whole loop in 73 seconds. No voiceover, the wave is visibility.</p>
+        <button class="li-more" id="li-more" type="button">&hellip;see more</button>
       </div>
 
       <div class="li-vid">
@@ -286,6 +294,10 @@ function fitMaketa(){
 window.addEventListener('resize',fitMaketa);
 window.addEventListener('load',fitMaketa);
 setTimeout(fitMaketa,300); setTimeout(fitMaketa,1200);
+
+// Maketa prispevku se rozbali stejne jako na LinkedInu: tri radky, pak cely post
+const liMore=document.getElementById('li-more'),liTxt=document.getElementById('li-txt');
+if(liMore&&liTxt) liMore.addEventListener('click',()=>{liTxt.classList.remove('li-clamp');liMore.remove()});
 
 // Kdyz se pusti jedno video, ostatni se zastavi (dve VO pres sebe by byla kase)
 const vids=[...document.querySelectorAll('video')];
