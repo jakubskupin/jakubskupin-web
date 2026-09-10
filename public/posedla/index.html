@@ -126,6 +126,26 @@ section{padding-block:56px;border-top:1px solid var(--border)}
 .dlazdice .txt .odkaz{font-size:13px;font-weight:600;color:#FAFAF8;margin-top:4px}
 .dlazdice:hover img{opacity:.92}
 
+/* Maketa příspěvku na Instagramu: cizí plocha, proto šedé Instagramu natvrdo */
+.ig-wrap{max-width:470px}
+.ig-post{border:1px solid #DBDBDB;border-radius:10px;overflow:hidden;background:#fff;
+  box-shadow:0 24px 60px rgba(26,26,24,.08);
+  font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#262626}
+.ig-hd{display:flex;align-items:center;gap:10px;padding:12px 14px}
+.ig-av{width:34px;height:34px;border-radius:50%;background:#1A1A18;flex:0 0 auto}
+.ig-nm{font-size:14px;font-weight:600}
+.ig-follow{font-size:14px;font-weight:600;color:#0095F6}
+.ig-follow::before{content:"•";color:#8E8E8E;margin-right:8px;font-weight:400}
+.ig-dots{margin-left:auto;color:#262626;letter-spacing:.06em;font-size:15px}
+.ig-media{background:#EDEDEA}
+.ig-media video{width:100%;aspect-ratio:4/5;display:block}
+.ig-act{display:flex;align-items:center;gap:16px;padding:10px 14px 6px}
+.ig-act svg{width:24px;height:24px;fill:none;stroke:#262626;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.ig-act .r{margin-left:auto}
+.ig-cap{padding:0 14px 14px;font-size:14px;line-height:1.4}
+.ig-cap b{font-weight:600}
+.ig-cap span{color:#8E8E8E}
+
 footer{border-top:1px solid var(--border);padding-block:36px 56px;font-size:13px;color:var(--text-3)}
 footer .row{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;justify-content:space-between}
 footer a{text-decoration:none;color:var(--text-2)}
@@ -182,7 +202,7 @@ footer a:hover{color:var(--text)}
 </section>
 
 <!-- DRUHÉ VIDEO: až bude hotové, nahrát do /posedla/assets/joyseat-02.mp4 + poster-02.jpg,
-     odkomentovat blok, doplnit název, meta a velikost, a přečíslovat sekce níž (02 → 03 …).
+     odkomentovat blok, doplnit název, meta a velikost, a přečíslovat sekce níž (03 → 04 …).
 <section class="w" id="druhe">
   <div class="sechead rv">
     <div class="num">02</div>
@@ -196,9 +216,37 @@ footer a:hover{color:var(--text)}
 </section>
 -->
 
-<section class="w" id="smery">
+<section class="w" id="instagram">
   <div class="sechead rv">
     <div class="num">02</div>
+    <h2>Stejná otočka jako příspěvek</h2>
+  </div>
+  <div class="ig-wrap rv">
+    <div class="ig-post">
+      <div class="ig-hd">
+        <span class="ig-av" aria-hidden="true"></span>
+        <span class="ig-nm">posedla.cc</span>
+        <span class="ig-follow">Sledovat</span>
+        <span class="ig-dots" aria-hidden="true">•••</span>
+      </div>
+      <div class="ig-media">
+        <video src="/posedla/assets/joyseat-ig-4x5.mp4" poster="/posedla/assets/poster-ig.jpg" autoplay muted loop playsinline preload="auto"></video>
+      </div>
+      <div class="ig-act" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.5-9.3C1.2 8.4 3.3 5 6.8 5c2 0 3.5 1.1 4.2 2.4C11.7 6.1 13.2 5 15.2 5c3.5 0 5.6 3.4 4.3 6.7C19.5 16.4 12 21 12 21z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M20.5 12c0 4.4-3.8 8-8.5 8-1.1 0-2.2-.2-3.2-.6L4 21l1.5-4.2A7.7 7.7 0 013.5 12c0-4.4 3.8-8 8.5-8s8.5 3.6 8.5 8z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M21 3L2.5 10.2l7 2.7 2.7 7z"/><path d="M9.5 12.9L21 3"/></svg>
+        <svg class="r" viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg>
+      </div>
+      <p class="ig-cap"><b>posedla.cc</b> The best saddle is the one you forget about while riding. <span>… více</span></p>
+    </div>
+  </div>
+  <a class="stahnout rv" href="/posedla/assets/joyseat-ig-4x5.mp4" download="posedla-joyseat-ig-4x5.mp4"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5a.75.75 0 01.75.75v6.19l2.22-2.22a.75.75 0 111.06 1.06l-3.5 3.5a.75.75 0 01-1.06 0l-3.5-3.5a.75.75 0 111.06-1.06l2.22 2.22V2.25A.75.75 0 018 1.5zM2.75 12a.75.75 0 01.75.75v.75h9v-.75a.75.75 0 011.5 0v1.5a.75.75 0 01-.75.75h-10.5a.75.75 0 01-.75-.75v-1.5a.75.75 0 01.75-.75z"/></svg>Stáhnout video 4:5 (5,2&nbsp;MB)</a>
+</section>
+
+<section class="w" id="smery">
+  <div class="sechead rv">
+    <div class="num">03</div>
     <h2>Dva směry, jedno pravidlo</h2>
     <p class="lede">Obsah máte bohatý: brand film, výrobu, unboxingy od ambasadorů, 75 epizod podcastu, Academy. Co e-shop, mailing a&nbsp;kampaně spotřebují každý měsíc, je tempo a&nbsp;objem. Takhle bych je vyráběl.</p>
   </div>
@@ -229,7 +277,7 @@ footer a:hover{color:var(--text)}
 
 <section class="w" id="postup">
   <div class="sechead rv">
-    <div class="num">03</div>
+    <div class="num">04</div>
     <h2>Jak to vzniklo</h2>
   </div>
   <div class="kroky">
@@ -241,7 +289,7 @@ footer a:hover{color:var(--text)}
 
 <section class="w" id="equator">
   <div class="sechead rv">
-    <div class="num">04</div>
+    <div class="num">05</div>
     <h2>Stejná metoda, taky cyklistika</h2>
   </div>
   <a class="dlazdice rv" href="/equator">
@@ -267,9 +315,6 @@ if(!('IntersectionObserver' in window)){rv.forEach(e=>e.classList.add('in'))}els
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px'});
   rv.forEach(el=>io.observe(el));
 }
-// Kdyz se pusti jedno video, ostatni se zastavi
-const vids=[...document.querySelectorAll('video')];
-vids.forEach(v=>v.addEventListener('play',()=>vids.forEach(o=>{if(o!==v&&!o.paused)o.pause()})));
 </script>
 </body>
 </html>
