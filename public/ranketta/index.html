@@ -90,6 +90,56 @@ section{padding-block:56px;border-top:1px solid var(--border)}
 .mwrap{overflow:hidden}
 .mscale{width:100%;transform-origin:top left}
 
+/* ── Sekce 05: maketa příspěvku na LinkedIn ───────────────────────────
+   Všechno je prefixované .li-, protože stránka má vlastní .card, .meta
+   a podobná jména. Karta napodobuje cizí plochu, takže uvnitř jsou šedé
+   LinkedInu natvrdo a nedědí paletu stránky. */
+.li-wrap{max-width:540px}
+.li-lab{display:flex;align-items:center;gap:9px;margin-bottom:13px;font-size:11px;font-weight:600;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--text-3)}
+.li-lab i{display:block;width:22px;height:1px;background:var(--border)}
+.li-post{border:1px solid #E0DFDC;border-radius:10px;overflow:hidden;background:#fff;
+  box-shadow:0 24px 60px rgba(26,26,24,.08);
+  font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#191919}
+.li-hd{display:flex;align-items:flex-start;gap:9px;padding:13px 16px 0}
+.li-av{flex:0 0 auto;width:48px;height:48px;border-radius:50%;background:#2F55D4;color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600;letter-spacing:.03em}
+.li-who{flex:1;min-width:0;line-height:1.28}
+.li-who p{margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.li-nm{font-size:14px;font-weight:600}
+.li-rl,.li-tm{font-size:12px;color:#666}
+.li-tm{display:flex;align-items:center;gap:4px;margin-top:1px!important}
+.li-act{flex:0 0 auto;display:flex;align-items:flex-start;gap:12px;padding-top:2px}
+.li-fw{font-size:14px;font-weight:600;color:#0A66C2;white-space:nowrap}
+.li-dots{color:#666;font-size:17px;line-height:1;letter-spacing:.06em}
+.li-bd{padding:12px 16px 12px}
+.li-bd p{margin:0;font-size:14px;line-height:1.45}
+.li-bd p+p{margin-top:12px}
+.li-vid{position:relative;width:100%;aspect-ratio:4/5;background:#F4F2EE}
+.li-vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;max-width:none}
+
+/* řádek s reakcemi */
+.li-soc{display:flex;align-items:center;gap:6px;padding:9px 16px 7px;font-size:12.5px;color:#666}
+.li-rx{display:flex;align-items:center}
+.li-rx i{display:block;width:17px;height:17px;border-radius:50%;border:1.5px solid #fff;
+  margin-left:-4px;background:#fff}
+.li-rx i:first-child{margin-left:0}
+.li-rx svg{display:block;width:100%;height:100%}
+.li-num{margin-left:3px}
+.li-soc .li-r{margin-left:auto}
+.li-soc a{color:inherit;text-decoration:none}
+
+/* lišta akcí */
+.li-bar{display:flex;border-top:1px solid #E9E5DF;padding:4px 6px}
+.li-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;
+  padding:11px 4px;border-radius:4px;font-size:13.5px;font-weight:600;color:#5F5F5F}
+.li-btn svg{width:19px;height:19px;flex:0 0 19px;fill:none;stroke:currentColor;stroke-width:1.7;
+  stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:520px){
+  .li-btn{font-size:12px;gap:5px}
+  .li-btn svg{width:17px;height:17px;flex:0 0 17px}
+}
+
 footer{border-top:1px solid var(--border);padding-block:36px 56px;font-size:13px;color:var(--text-3)}
 footer .row{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;justify-content:space-between}
 footer a{text-decoration:none;color:var(--text-2)}
@@ -158,6 +208,56 @@ footer a:hover{color:var(--text)}
   </div>
   <a class="stahnout rv" href="/ranketta/assets/ranketta-03-proc-ted.mp4" download="ranketta-03-proc-ted.mp4"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5a.75.75 0 01.75.75v6.19l2.22-2.22a.75.75 0 111.06 1.06l-3.5 3.5a.75.75 0 01-1.06 0l-3.5-3.5a.75.75 0 111.06-1.06l2.22 2.22V2.25A.75.75 0 018 1.5zM2.75 12a.75.75 0 01.75.75v.75h9v-.75a.75.75 0 011.5 0v1.5a.75.75 0 01-.75.75h-10.5a.75.75 0 01-.75-.75v-1.5a.75.75 0 01.75-.75z"/></svg>Stáhnout video (5,9&nbsp;MB)</a>
 </section>
+<section class="w" id="linkedin">
+  <div class="sechead rv">
+    <div class="num">05</div>
+    <h2>Stejná animace jako příspěvek</h2>
+  </div>
+
+  <div class="li-wrap rv">
+    <div class="li-lab"><i></i>Maketa příspěvku</div>
+    <div class="li-post">
+      <div class="li-hd">
+        <span class="li-av" aria-hidden="true">VO</span>
+        <div class="li-who">
+          <p class="li-nm">Vojtěch Oravec</p>
+          <p class="li-rl">Founder &amp; CEO at Ranketta</p>
+          <p class="li-tm">2h <span aria-hidden="true">·</span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18"/></svg></p>
+        </div>
+        <span class="li-act"><span class="li-fw">+ Follow</span><span class="li-dots" aria-hidden="true">•••</span></span>
+      </div>
+
+      <div class="li-bd">
+        <p>Most of your catalogue never makes it into the AI answer.</p>
+        <p>Not because those are worse products. Because the data describing them is thin, and answer engines read data, not marketing copy.</p>
+        <p>Ranketta measures where your products show up across every engine, finds what keeps them out, rewrites the weak fields and pushes them back to the feed.</p>
+        <p>The whole loop in 73 seconds. No voiceover, the wave is visibility.</p>
+      </div>
+
+      <div class="li-vid">
+        <video src="/ranketta/assets/ranketta-05-linkedin.mp4" poster="/ranketta/assets/poster-05.jpg" autoplay muted loop playsinline preload="metadata"></video>
+      </div>
+
+      <div class="li-soc">
+        <span class="li-rx" aria-hidden="true">
+          <i><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#378FE9"/><path d="M7 10.5h2.1V17H7zM10.2 17h5.3c.7 0 1.3-.4 1.5-1l1.2-3.4c.3-.8-.3-1.6-1.1-1.6h-3.3l.5-2.2c.1-.7-.4-1.3-1.1-1.3-.4 0-.8.2-1 .6l-2 3.2z" fill="#fff"/></svg></i>
+          <i><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#DF704D"/><path d="M12 17.2s-4.6-2.9-4.6-5.7c0-1.4 1.1-2.5 2.4-2.5.9 0 1.7.5 2.2 1.3.5-.8 1.3-1.3 2.2-1.3 1.3 0 2.4 1.1 2.4 2.5 0 2.8-4.6 5.7-4.6 5.7z" fill="#fff"/></svg></i>
+          <i><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#F5BB5C"/><path d="M12 5.6a4 4 0 00-2.3 7.3c.3.2.5.6.5 1v.6h3.6v-.6c0-.4.2-.8.5-1A4 4 0 0012 5.6zM10.2 16.1h3.6v.9a.9.9 0 01-.9.9h-1.8a.9.9 0 01-.9-.9z" fill="#fff"/></svg></i>
+        </span>
+        <span class="li-num">187</span>
+        <span class="li-r">14 comments &middot; 6 reposts</span>
+      </div>
+
+      <div class="li-bar" aria-hidden="true">
+        <span class="li-btn"><svg viewBox="0 0 24 24"><path d="M7 10v10H4a1 1 0 01-1-1v-8a1 1 0 011-1zM7 10l4.2-6.3a1.4 1.4 0 012.5 1l-.8 3.6h4.9a2 2 0 011.9 2.6l-2 6.6a2.4 2.4 0 01-2.3 1.5H7z"/></svg>Like</span>
+        <span class="li-btn"><svg viewBox="0 0 24 24"><path d="M20.5 12.4c0 4-3.8 7.2-8.5 7.2a10 10 0 01-2.7-.4l-5 1.4 1.5-4.1a6.7 6.7 0 01-1.8-4.5c0-4 3.8-7.2 8.5-7.2s8 3.2 8 7.6z"/></svg>Comment</span>
+        <span class="li-btn"><svg viewBox="0 0 24 24"><path d="M4 9V7.5A2.5 2.5 0 016.5 5H17M17 5l-3-3M17 5l-3 3M20 15v1.5a2.5 2.5 0 01-2.5 2.5H7M7 19l3 3M7 19l3-3"/></svg>Repost</span>
+        <span class="li-btn"><svg viewBox="0 0 24 24"><path d="M21 3L2.5 10.2l7 2.7 2.7 7z"/><path d="M9.5 12.9L21 3"/></svg>Send</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <footer class="w">
   <div class="row">
