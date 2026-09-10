@@ -21,7 +21,7 @@
 <meta name="twitter:image" content="https://jakubskupin.cz/posedla/assets/og-posedla.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Syne:wght@700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#FAFAF8; --text:#1A1A18; --text-2:#6B6964; --text-3:#6F6D68;
@@ -37,8 +37,6 @@ img,video{max-width:100%;height:auto;display:block}
 @media(min-width:768px){.w{padding-inline:32px}}
 h1,h2,h3{font-family:var(--h);font-weight:700;letter-spacing:-.03em;margin:0;text-wrap:balance}
 h1{font-size:clamp(32px,5.4vw,54px);line-height:1.06}
-h1 b{font-weight:800}
-h1 .kicker{color:var(--text-3);font-weight:700}
 h2{font-size:clamp(24px,3.4vw,34px);line-height:1.12}
 h3{font-size:17px;letter-spacing:-.01em}
 p{margin:0}
@@ -63,7 +61,7 @@ p{margin:0}
 
 .hero{padding-block:40px 40px;display:flex;flex-direction:column;gap:18px}
 @media(min-width:768px){.hero{padding-block:64px 56px}}
-.hero h1{max-width:18ch}
+.hero h1{max-width:16ch}
 
 section{padding-block:56px;border-top:1px solid var(--border)}
 @media(min-width:768px){section{padding-block:80px}}
@@ -76,7 +74,7 @@ section{padding-block:56px;border-top:1px solid var(--border)}
 .film{border:1px solid var(--border);border-radius:12px;overflow:hidden;background:#fff;
   box-shadow:0 24px 60px rgba(26,26,24,.08)}
 .film video{width:100%;aspect-ratio:16/9;background:#fff}
-.film.sq{max-width:680px}
+.film.sq{max-width:min(100%,82vh)}
 .film.sq video{aspect-ratio:1/1}
 
 .stahnout{display:inline-flex;align-items:center;gap:7px;margin-top:14px;padding:9px 0;font-size:13px;
@@ -84,8 +82,7 @@ section{padding-block:56px;border-top:1px solid var(--border)}
 .stahnout:hover{color:var(--text);border-bottom-color:var(--border)}
 .stahnout svg{width:14px;height:14px;flex:0 0 14px;fill:currentColor}
 
-.pozn{max-width:62ch;margin-top:22px;display:grid;gap:10px;font-size:15px;color:var(--text-2)}
-.pozn b{color:var(--text);font-weight:600}
+.pozn{max-width:62ch;margin-top:34px;margin-bottom:14px;font-size:15px;color:var(--text-2)}
 
 /* Dva smery prace */
 .smery{display:grid;gap:18px;margin-top:8px}
@@ -129,11 +126,6 @@ section{padding-block:56px;border-top:1px solid var(--border)}
 .dlazdice .txt .odkaz{font-size:13px;font-weight:600;color:#FAFAF8;margin-top:4px}
 .dlazdice:hover img{opacity:.92}
 
-/* Poctivy box */
-.poctive{border:1px solid var(--border);border-radius:12px;padding:22px 24px;background:var(--card);max-width:72ch;display:grid;gap:8px}
-.poctive .eyebrow{margin-bottom:2px}
-.poctive p{font-size:15px;color:var(--text-2);line-height:1.55}
-
 footer{border-top:1px solid var(--border);padding-block:36px 56px;font-size:13px;color:var(--text-3)}
 footer .row{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;justify-content:space-between}
 footer a{text-decoration:none;color:var(--text-2)}
@@ -149,29 +141,48 @@ footer a:hover{color:var(--text)}
 </div></div>
 
 <header class="w hero">
-  <div class="eyebrow">Posedla · Joyseat · ukázka k&nbsp;inzerátu Chief of Content &amp; Community</div>
-  <h1><span class="kicker">Fotka z&nbsp;vašeho e-shopu.</span><br><b>Teď se točí</b></h1>
-  <p class="lede">Krátká videa vyrobená z&nbsp;fotek, které už na posedla.cz máte. Sedlo zůstává v&nbsp;každém snímku to vaše, včetně reliéfu nápisu. Generuje se pohyb kamery a&nbsp;svět kolem, ne produkt.</p>
+  <div class="eyebrow">Posedla</div>
+  <h1>Joyseat ve&nbsp;videu.<br>Bez&nbsp;natáčení</h1>
+  <p class="lede">Krátká videa vyrobená z&nbsp;fotek, které už na posedla.cz máte.</p>
 </header>
 
 <section class="w" id="otocka">
   <div class="sechead rv">
     <div class="num">01</div>
     <h2>Otočka kolem Joyseatu</h2>
-    <div class="meta"><span>10&nbsp;s</span><span>1:1</span><span>Z&nbsp;produktové fotky</span><span>Bez 3D modelu</span><span>Bez natáčení</span></div>
   </div>
   <div class="film sq rv">
-    <video src="/posedla/assets/joyseat-01-otocka.mp4" poster="/posedla/assets/poster-01.jpg" controls playsinline preload="metadata"></video>
+    <video src="/posedla/assets/joyseat-01-otocka.mp4" poster="/posedla/assets/poster-01.jpg" autoplay muted loop playsinline preload="auto"></video>
   </div>
   <a class="stahnout rv" href="/posedla/assets/joyseat-01-otocka.mp4" download="posedla-joyseat-otocka.mp4"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5a.75.75 0 01.75.75v6.19l2.22-2.22a.75.75 0 111.06 1.06l-3.5 3.5a.75.75 0 01-1.06 0l-3.5-3.5a.75.75 0 111.06-1.06l2.22 2.22V2.25A.75.75 0 018 1.5zM2.75 12a.75.75 0 01.75.75v.75h9v-.75a.75.75 0 011.5 0v1.5a.75.75 0 01-.75.75h-10.5a.75.75 0 01-.75-.75v-1.5a.75.75 0 01.75-.75z"/></svg>Stáhnout video (3,9&nbsp;MB)</a>
-  <div class="pozn rv">
-    <p>Kamera objede sedlo, přiblíží se k&nbsp;mřížce, podívá se zespodu a&nbsp;vrátí se přesně na výchozí záběr. Vstupem byla produktová fotka z&nbsp;e-shopu, ta s&nbsp;nápisem posedla na nose. Odstranil jsem z&nbsp;ní jen štítek Nové polstrování Trimesh.</p>
-    <p><b>Co je odvozené:</b> spodní strana sedla a&nbsp;ližiny zespodu na fotce nejsou, model je dopočítal podle toho, co vidí. U&nbsp;ostrého výstupu bych je srovnal s&nbsp;reálným kusem, nebo přidal fotku zespodu.</p>
+  <p class="pozn rv">Vlevo výřez z&nbsp;fotky na e-shopu, vpravo výřez z&nbsp;videa.</p>
+  <div class="pary">
+    <div class="rv">
+      <div class="par">
+        <figure><figcaption>Fotka</figcaption><img src="/posedla/assets/par/A-foto.jpg" alt="Reliéf nápisu posedla na fotce z e-shopu"></figure>
+        <figure><figcaption>Video</figcaption><img src="/posedla/assets/par/A-video.jpg" alt="Reliéf nápisu posedla ve videu"></figure>
+      </div>
+      <p class="parlabel">Reliéf nápisu posedla na nose sedla</p>
+    </div>
+    <div class="rv">
+      <div class="par">
+        <figure><figcaption>Fotka</figcaption><img src="/posedla/assets/par/B-foto.jpg" alt="Mřížka sedla na fotce z e-shopu"></figure>
+        <figure><figcaption>Video</figcaption><img src="/posedla/assets/par/B-video.jpg" alt="Mřížka sedla ve videu zblízka"></figure>
+      </div>
+      <p class="parlabel">Tvar buněk mřížky, ve videu zblízka</p>
+    </div>
+    <div class="rv">
+      <div class="par">
+        <figure><figcaption>Fotka</figcaption><img src="/posedla/assets/par/C-foto.jpg" alt="Celé sedlo na fotce z e-shopu"></figure>
+        <figure><figcaption>Video</figcaption><img src="/posedla/assets/par/C-video.jpg" alt="Poslední snímek otočky"></figure>
+      </div>
+      <p class="parlabel">Konec otočky sedí na výchozí fotku</p>
+    </div>
   </div>
 </section>
 
 <!-- DRUHÉ VIDEO: až bude hotové, nahrát do /posedla/assets/joyseat-02.mp4 + poster-02.jpg,
-     odkomentovat blok, doplnit název, meta a velikost, a přečíslovat sekce níž (03 → 04 …).
+     odkomentovat blok, doplnit název, meta a velikost, a přečíslovat sekce níž (02 → 03 …).
 <section class="w" id="druhe">
   <div class="sechead rv">
     <div class="num">02</div>
@@ -216,44 +227,13 @@ footer a:hover{color:var(--text)}
   </div>
 </section>
 
-<section class="w" id="vernost">
-  <div class="sechead rv">
-    <div class="num">03</div>
-    <h2>V&nbsp;záběru je vaše sedlo, ne podobné</h2>
-    <p class="lede">Vlevo výřez z&nbsp;fotky na e-shopu, vpravo výřez z&nbsp;videa.</p>
-  </div>
-  <div class="pary">
-    <div class="rv">
-      <div class="par">
-        <figure><figcaption>Fotka</figcaption><img src="/posedla/assets/par/A-foto.jpg" alt="Reliéf nápisu posedla na fotce z e-shopu"></figure>
-        <figure><figcaption>Video</figcaption><img src="/posedla/assets/par/A-video.jpg" alt="Reliéf nápisu posedla ve videu"></figure>
-      </div>
-      <p class="parlabel">Reliéf nápisu posedla na nose sedla</p>
-    </div>
-    <div class="rv">
-      <div class="par">
-        <figure><figcaption>Fotka</figcaption><img src="/posedla/assets/par/B-foto.jpg" alt="Mřížka sedla na fotce z e-shopu"></figure>
-        <figure><figcaption>Video</figcaption><img src="/posedla/assets/par/B-video.jpg" alt="Mřížka sedla ve videu zblízka"></figure>
-      </div>
-      <p class="parlabel">Tvar buněk mřížky, ve videu zblízka</p>
-    </div>
-    <div class="rv">
-      <div class="par">
-        <figure><figcaption>Fotka</figcaption><img src="/posedla/assets/par/C-foto.jpg" alt="Celé sedlo na fotce z e-shopu"></figure>
-        <figure><figcaption>Video</figcaption><img src="/posedla/assets/par/C-video.jpg" alt="Poslední snímek otočky"></figure>
-      </div>
-      <p class="parlabel">Konec otočky sedí na výchozí fotku</p>
-    </div>
-  </div>
-</section>
-
 <section class="w" id="postup">
   <div class="sechead rv">
-    <div class="num">04</div>
+    <div class="num">03</div>
     <h2>Jak to vzniklo</h2>
   </div>
   <div class="kroky">
-    <div class="krok rv"><h3>Fotka z&nbsp;e-shopu</h3><p>Ta, kterou už máte. Odstranil jsem z&nbsp;ní štítek s&nbsp;novinkou, jinak beze změny.</p></div>
+    <div class="krok rv"><h3>Fotka z&nbsp;e-shopu</h3><p>Ta, kterou už máte na e-shopu.</p></div>
     <div class="krok rv"><h3>Dráha kamery</h3><p>Předem popsaná: objet, přiblížit k&nbsp;mřížce, sjet pod sedlo, vrátit se na výchozí záběr.</p></div>
     <div class="krok rv"><h3>Generování a&nbsp;kontrola</h3><p>Sedlo se nesmí hnout ani změnit. Snímky srovnávám s&nbsp;fotkou, co nesedí, jde znovu.</p></div>
   </div>
@@ -261,7 +241,7 @@ footer a:hover{color:var(--text)}
 
 <section class="w" id="equator">
   <div class="sechead rv">
-    <div class="num">05</div>
+    <div class="num">04</div>
     <h2>Stejná metoda, taky cyklistika</h2>
   </div>
   <a class="dlazdice rv" href="/equator">
@@ -275,17 +255,8 @@ footer a:hover{color:var(--text)}
   </a>
 </section>
 
-<section class="w" id="poctive">
-  <div class="poctive rv">
-    <div class="eyebrow">Poctivě</div>
-    <p>Posedla si tuhle ukázku neobjednala. Vznikla 10.&nbsp;9.&nbsp;2026 z&nbsp;veřejných fotek na posedla.cz jako příloha k&nbsp;přihlášce na pozici Chief of Content &amp; Community. Joyseat a&nbsp;Posedla jsou ochranné známky svých majitelů. Stránka není v&nbsp;indexu vyhledávačů a&nbsp;z&nbsp;webu na ni nevede odkaz.</p>
-    <p>Videa vznikla generativně z&nbsp;vašich fotek. Přiznávám to rád, protože pravidlo je jasné: produkt se negeneruje, generuje se svět kolem něj.</p>
-  </div>
-</section>
-
 <footer class="w">
   <div class="row">
-    <span>Jakub Skupin · září 2026</span>
     <span><a href="https://jakubskupin.cz">jakubskupin.cz</a> &nbsp;·&nbsp; <a href="https://www.linkedin.com/in/jakubskupin" target="_blank" rel="noopener">LinkedIn ↗</a></span>
   </div>
 </footer>
