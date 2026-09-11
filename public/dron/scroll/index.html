@@ -1,0 +1,241 @@
+<!doctype html><html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow, noarchive"><meta name="referrer" content="no-referrer"><title>RoboAid · scroll</title><style>:root{color-scheme:dark}body{margin:0;padding:0;background:#07090F}</style></head><body>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap">
+<style>
+  :root{--bg:#07090F;--ink:#EAF0FA;--muted:#8FA0BC;--line:#1B2740;--accent:#4DA3FF;
+    --hot:#FFB454;--zlata:#E9B94A;--seda:#9AA3AD;
+    --disp:'Chakra Petch',system-ui,sans-serif;--body:'IBM Plex Sans',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;--serif:'Instrument Serif',Georgia,serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased}
+  img,video{max-width:100%;display:block}
+  a{color:inherit}
+
+  /* ---------- scroll-telling ---------- */
+  /* Sekce je vysoka, uvnitr je sticky ramecek na vysku okna. Postup scrollu
+     v teto sekci se preklada na cas videa, takze cas rizne divak. */
+  #film-sek{position:relative;height:560vh}
+  #film-lep{position:sticky;top:0;height:100svh;overflow:hidden;background:#000}
+  #film{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  /* prechod dolu, aby text drzel citelnost i kdyz je pod nim kour */
+  #film-lep::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(180deg,rgba(7,9,15,.55) 0%,rgba(7,9,15,0) 26%,
+      rgba(7,9,15,0) 58%,rgba(7,9,15,.72) 100%)}
+
+  .vrstva{position:absolute;inset:0;display:grid;pointer-events:none;z-index:2}
+  .beat{grid-area:1/1;align-self:end;justify-self:start;
+    padding:0 clamp(24px,6vw,88px) clamp(56px,9vh,110px);max-width:min(640px,86vw);
+    opacity:0;transform:translateY(22px);transition:opacity .45s ease,transform .45s ease}
+  .beat.je{opacity:1;transform:none}
+  .beat .cislo{font-family:var(--mono);font-size:11px;letter-spacing:.24em;
+    text-transform:uppercase;color:var(--zlata);margin:0 0 14px}
+  .beat h2{font-family:var(--serif);font-weight:400;
+    font-size:clamp(30px,4.6vw,62px);line-height:1.03;letter-spacing:-.01em;margin:0 0 14px;color:#fff}
+  .beat p{font-size:clamp(15px,1.25vw,19px);line-height:1.55;color:#C6D2E4;margin:0;max-width:44ch}
+  .beat p b{color:var(--hot);font-weight:600}
+
+  /* uvodni claim lezi na cerne, aby prvni obrazovka nebyla prazdna */
+  #claim{grid-area:1/1;align-self:center;justify-self:center;text-align:center;
+    padding:0 24px;transition:opacity .5s ease,transform .5s ease}
+  #claim .kick{font-family:var(--mono);font-size:11px;letter-spacing:.24em;
+    text-transform:uppercase;color:var(--zlata);margin:0 0 20px}
+  #claim h1{font-family:var(--serif);font-weight:400;
+    font-size:clamp(40px,7vw,96px);line-height:1;letter-spacing:-.015em;margin:0;color:#fff}
+  #claim h1 .z{color:var(--zlata)}
+
+  #pobidka{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);
+    font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--seda);z-index:3;transition:opacity .4s ease}
+  #pobidka span{display:block;text-align:center;margin-top:8px;animation:sip 1.8s ease-in-out infinite}
+  @keyframes sip{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(5px);opacity:1}}
+
+  /* ukazatel postupu */
+  #stopa{position:absolute;right:clamp(14px,2.4vw,30px);top:50%;transform:translateY(-50%);
+    width:2px;height:min(230px,26vh);background:rgba(255,255,255,.12);z-index:3;border-radius:2px}
+  #stopa i{position:absolute;left:0;top:0;width:100%;height:0;background:var(--zlata);border-radius:2px}
+
+  /* ---------- co je pod videem ---------- */
+  .sek{position:relative;padding:clamp(72px,10vw,132px) 24px}
+  .ram{max-width:1180px;margin:0 auto}
+  .kick{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--zlata);margin:0 0 18px}
+  h2.nad{font-family:var(--serif);font-weight:400;font-size:clamp(32px,5vw,64px);
+    line-height:1.03;letter-spacing:-.01em;margin:0 0 20px;color:#fff}
+  h2.nad .z{color:var(--zlata)}
+  .pod{font-size:clamp(16px,1.3vw,19px);line-height:1.6;color:var(--muted);max-width:60ch;margin:0}
+  .pod b{color:var(--ink);font-weight:600}
+
+  .fakta{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+    gap:1px;background:var(--line);border:1px solid var(--line);margin-top:clamp(40px,6vw,64px)}
+  .fakta div{background:var(--bg);padding:26px 22px}
+  .fakta dt{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--seda);margin:0 0 10px}
+  .fakta dd{margin:0;font-family:var(--disp);font-size:clamp(21px,2.4vw,30px);
+    font-weight:600;color:#fff;line-height:1.1}
+  .fakta dd small{display:block;font-family:var(--body);font-size:13px;font-weight:400;
+    color:var(--muted);margin-top:8px;letter-spacing:0}
+
+  .patka{border-top:1px solid var(--line);padding:44px 24px 72px;text-align:center}
+  .patka p{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--seda);margin:0 0 14px}
+  .patka a{color:var(--zlata);text-decoration:none;border-bottom:1px solid rgba(233,185,74,.4);
+    padding-bottom:2px;font-size:15px}
+
+  /* Video je 16:9. Jakmile je okno uzsi nez 16:9, cover by orizl kadr tak,
+     ze ze stroje zbyde stred a pudorysny beat prestane davat smysl. Proto
+     contain: pozadi videa je stejne cerne jako stranka, takze pruhy nejsou
+     videt, a cely stroj je videt vzdy. */
+  @media (max-aspect-ratio:16/9){
+    #film{object-fit:contain}
+  }
+  @media (max-width:760px){
+    #film-sek{height:460vh}
+    /* pas s videem nahoru, spodni tretina patri textu, jak to ma i V2 */
+    #film{object-position:50% 26%}
+    #film-lep::after{background:linear-gradient(180deg,rgba(7,9,15,.45) 0%,
+      rgba(7,9,15,0) 16%,rgba(7,9,15,0) 44%,rgba(7,9,15,.92) 60%)}
+    .beat{padding:0 22px clamp(64px,12vh,110px);max-width:none}
+    .beat h2{font-size:clamp(28px,8.4vw,40px)}
+    .beat p{font-size:16px;max-width:none}
+    #claim h1{font-size:clamp(38px,11vw,54px)}
+    #stopa{height:min(140px,18vh);right:9px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .beat{transition:none} #pobidka span{animation:none}
+  }
+</style>
+
+<section id="film-sek">
+  <div id="film-lep">
+    <video id="film" playsinline muted preload="auto" poster="/nahledy/roboaid-x4k7/scroll/poster.jpg"><source src="/nahledy/roboaid-x4k7/scroll/film.mp4" type="video/mp4"></video>
+
+    <div class="vrstva">
+      <div id="claim">
+        <p class="kick">Fly4Future &middot; RoboAid</p>
+        <h1>Tam, kde <span class="z">končí GPS</span></h1>
+      </div>
+
+      <article class="beat" data-od="0.16" data-do="0.36">
+        <p class="cislo">01 &middot; Orientace</p>
+        <h2>Satelit tu nemá</h2>
+        <p>Polohu drží podle toho, co sám vidí. LiDAR měří <b>360 stupňů</b> kolem sebe, ve tmě, v prachu i v kouři.</p>
+      </article>
+
+      <article class="beat" data-od="0.40" data-do="0.60">
+        <p class="cislo">02 &middot; Vidění</p>
+        <h2>Vidí a měří zároveň</h2>
+        <p>Kamera a termovize v jednom průletu. Vlastní světlo <b>14 000 lumenů</b> tam, kde žádné není.</p>
+      </article>
+
+      <article class="beat" data-od="0.64" data-do="0.84">
+        <p class="cislo">03 &middot; Nezávislost</p>
+        <h2>Počítá si to na palubě</h2>
+        <p>Žádná síť, žádný kabel, <b>žádný člověk uvnitř</b> prostoru.</p>
+      </article>
+
+      <article class="beat" data-od="0.88" data-do="1.01">
+        <p class="cislo">04 &middot; Výsledek</p>
+        <h2>14 až 22 minut</h2>
+        <p>Tolik má stroj ve vzduchu. Prohlídka, která dnes stojí <b>lešení a odstávku</b>.</p>
+      </article>
+    </div>
+
+    <div id="stopa"><i></i></div>
+    <div id="pobidka">Scrollujte<span>&darr;</span></div>
+  </div>
+</section>
+
+<section class="sek">
+  <div class="ram">
+    <p class="kick">Co z toho plyne</p>
+    <h2 class="nad">Kupujete přístup do prostoru,<br><span class="z">ne dron</span></h2>
+    <p class="pod">Stroj vlétne tam, kam se dnes nedá bez lešení, bez odstávky a bez člověka v prostoru.
+      Vrátí se s obrazem a s mapou. <b>Všechno si to počítá sám na palubě.</b></p>
+
+    <dl class="fakta">
+      <div><dt>Navigace</dt><dd>Bez GPS<small>LiDAR odometrie, 360°</small></dd></div>
+      <div><dt>Ve vzduchu</dt><dd>14 až 22 min<small>podle konfigurace</small></dd></div>
+      <div><dt>Senzory</dt><dd>RGB + termo<small>současně, v jednom průletu</small></dd></div>
+      <div><dt>Světlo</dt><dd>14 000 lm<small>vlastní, na palubě</small></dd></div>
+      <div><dt>Prostředí</dt><dd>Vnitřní<small>tma, prach, kouř</small></dd></div>
+      <div><dt>Spojení</dt><dd>Nepotřebuje síť<small>vše se počítá na palubě</small></dd></div>
+    </dl>
+  </div>
+</section>
+
+<div class="patka">
+  <p>Ukázka &middot; nezávislý koncept, není oficiální materiál Fly4Future</p>
+  <a href="/nahledy/roboaid-x4k7">Zpět na celou stránku</a>
+</div>
+
+<script>
+(function(){
+  var sek = document.getElementById('film-sek');
+  var vid = document.getElementById('film');
+  var claim = document.getElementById('claim');
+  var pobidka = document.getElementById('pobidka');
+  var stopa = document.querySelector('#stopa i');
+  var beaty = [].slice.call(document.querySelectorAll('.beat'));
+
+  // iOS prehraje scrubbing jen u videa, ktere uz jednou "belo". Krotky pokus
+  // o play a hned pause staci a nevyzaduje gesto, protoze je muted+playsinline.
+  var odemknuto = false;
+  function odemkni(){
+    if (odemknuto) return; odemknuto = true;
+    var p = vid.play();
+    if (p && p.then) p.then(function(){ vid.pause(); }).catch(function(){});
+    else { try { vid.pause(); } catch(e){} }
+  }
+  vid.addEventListener('loadedmetadata', odemkni, {once:true});
+  ['touchstart','pointerdown','wheel','keydown'].forEach(function(t){
+    window.addEventListener(t, odemkni, {once:true, passive:true});
+  });
+
+  var cil = 0, ted = 0, bezi = false;
+
+  function postup(){
+    var r = sek.getBoundingClientRect();
+    var drah = sek.offsetHeight - window.innerHeight;
+    if (drah <= 0) return 0;
+    var p = -r.top / drah;
+    return p < 0 ? 0 : (p > 1 ? 1 : p);
+  }
+
+  function vrstvy(p){
+    // claim mizi hned, jak se stroj zacne vynorovat z cerne
+    var c = p < 0.06 ? 1 : (p > 0.15 ? 0 : 1 - (p - 0.06) / 0.09);
+    claim.style.opacity = c;
+    claim.style.transform = 'translateY(' + (-(1 - c) * 26) + 'px)';
+    pobidka.style.opacity = c;
+    stopa.style.height = (p * 100) + '%';
+    for (var i = 0; i < beaty.length; i++){
+      var b = beaty[i];
+      var od = parseFloat(b.dataset.od), doo = parseFloat(b.dataset.do);
+      b.classList.toggle('je', p >= od && p <= doo);
+    }
+  }
+
+  function tik(){
+    // dojezd k cili misto skoku: scroll na trackpadu je trhany a video by
+    // svedomite skakalo po snimcich, takhle to plyne
+    ted += (cil - ted) * 0.14;
+    if (Math.abs(cil - ted) < 0.0004) ted = cil;
+    if (vid.readyState >= 1 && isFinite(vid.duration) && vid.duration > 0){
+      var t = ted * (vid.duration - 0.06);
+      if (Math.abs(vid.currentTime - t) > 0.012) vid.currentTime = t;
+    }
+    vrstvy(ted);
+    if (Math.abs(cil - ted) > 0.0002){ requestAnimationFrame(tik); } else { bezi = false; }
+  }
+
+  function nastart(){
+    cil = postup();
+    if (!bezi){ bezi = true; requestAnimationFrame(tik); }
+  }
+
+  window.addEventListener('scroll', nastart, {passive:true});
+  window.addEventListener('resize', nastart);
+  vid.addEventListener('loadeddata', function(){ ted = -1; nastart(); });
+  nastart();
+})();
+</script>
+
+</body></html>
