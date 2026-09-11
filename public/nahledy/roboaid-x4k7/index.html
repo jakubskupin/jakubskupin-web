@@ -177,13 +177,6 @@
     border-bottom:1px solid rgba(233,185,74,.4);padding-bottom:2px}
   #ocen a.pdf:hover{border-bottom-color:var(--zlata)}
 
-  /* ---- velká citace ---- */
-  #rec{background:#000;text-align:center}
-  #rec blockquote{margin:0 auto;max-width:19ch;font-family:var(--serif);font-weight:400;
-    font-size:clamp(34px,5.6vw,76px);line-height:1.06;letter-spacing:-.015em;color:#fff}
-  #rec blockquote span{color:var(--zlata)}
-  #rec .kdo{margin-top:34px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--muted);line-height:1.9}
-  #rec .kdo a{color:var(--zlata);text-decoration:none;border-bottom:1px solid rgba(233,185,74,.35)}
 
   /* ---- CTA ---- */
   #cta{background:#000;text-align:center;padding-top:0}
@@ -303,6 +296,10 @@
   #hero{position:relative;z-index:10;height:100vh;min-height:520px;overflow:hidden;
         background:#05070C}
   #hvbox{position:absolute;inset:0}
+  #neofic{position:absolute;z-index:6;top:14px;left:18px;margin:0;padding:5px 10px;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink);background:rgba(5,7,12,.62);border:1px solid rgba(234,240,250,.18);border-radius:4px}
+  @media (max-width:560px){#neofic{top:10px;left:10px;font-size:9.5px;letter-spacing:.1em;padding:4px 8px}}
   #hv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
   #hero::after{content:"";position:absolute;inset:0;pointer-events:none;
     background:linear-gradient(180deg,rgba(5,7,12,.74) 0%,transparent 24%,transparent 42%,rgba(5,7,12,.72) 68%,rgba(5,7,12,.93) 100%)}
@@ -501,6 +498,7 @@
 
 </style>
 <header id="hero">
+  <p id="neofic">Neoficiální koncept &middot; není materiál Fly4Future</p>
   <div id="hvbox">
   <video id="hv" poster="/nahledy/roboaid-x4k7/v3/prulet-v3-poster.jpg" autoplay muted playsinline
          webkit-playsinline preload="auto" disablepictureinpicture>
@@ -583,6 +581,8 @@
   #citat-podpis b{font-family:var(--body);font-weight:600;font-size:clamp(15px,1.3vw,18px);color:var(--ink)}
   #citat-podpis span{font-family:var(--mono);font-size:11px;letter-spacing:.16em;
     text-transform:uppercase;color:var(--seda)}
+  #citat-podpis a{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--zlata);
+    text-decoration:none;border-bottom:1px solid rgba(233,185,74,.4)}
   @media (max-width:760px){
     #citat-sek{height:250vh}
     #citat-lep{padding:clamp(56px,8vh,90px) 22px}
@@ -598,7 +598,7 @@
     <p class="stitek">Proč vznikl</p>
     <blockquote id="citat">
       <p id="citat-text">&bdquo;<span class="cs">RoboAid</span> <span class="cs">jsme</span> <span class="cs">vyvíjeli</span> <span class="cs">právě</span> <span class="cs">do</span> <span class="cs">situací,</span> <span class="cs">kdy</span> <span class="cs">je</span> <span class="cs">potřeba</span> <span class="cs">dostat</span> <span class="cs">kvalitní</span> <span class="cs">senzoriku</span> <span class="cs">do</span> <span class="cs">vnitřních</span> <span class="cs">prostor,</span> <span class="cs z">kde</span> <span class="cs z">není</span> <span class="cs z">GPS,</span> <span class="cs">kde</span> <span class="cs">je</span> <span class="cs">omezený</span> <span class="cs">prostor</span> <span class="cs">k</span> <span class="cs">manévrování</span> <span class="cs">a</span> <span class="cs">kde</span> <span class="cs">by</span> <span class="cs">fyzická</span> <span class="cs">kontrola</span> <span class="cs">znamenala</span> <span class="cs z">zbytečné</span> <span class="cs z">riziko,</span> <span class="cs z">odstávku</span> <span class="cs z">nebo</span> <span class="cs z">vysoké</span> <span class="cs z">náklady.</span>&ldquo;</p>
-      <footer id="citat-podpis"><b>Věra Sasková</b><span>CEO Fly4Future</span></footer>
+      <footer id="citat-podpis"><b>Věra Sasková</b><span>CEO Fly4Future</span><a href="https://www.lupa.cz/aktuality/cesi-ukazali-autonomni-inspekcni-dron-pro-prumysl-leta-uvnitr-nepotrebuje-gps-a-hleda-zavady/" target="_blank" rel="noopener">Lupa.cz, 15. 7. 2026</a></footer>
     </blockquote>
   </div></div>
 </section>
@@ -1150,17 +1150,13 @@
 
 <!-- ===== 07 · PROČ JSME HO VYVÍJELI ===== -->
 <section id="proc" class="sek">
-  <div class="rám dva">
-    <div>
-      <p class="kick">08 · Věra Sasková, CEO Fly4Future</p>
-      <blockquote class="velka">„RoboAid jsme vyvíjeli právě do situací, kdy je potřeba dostat kvalitní senzoriku do vnitřních prostor, <span>kde není GPS, kde je omezený prostor k manévrování</span> a kde by fyzická kontrola znamenala zbytečné riziko, odstávku nebo vysoké náklady."</blockquote>
-      <p class="kdo-rekl"><a href="https://www.lupa.cz/aktuality/cesi-ukazali-autonomni-inspekcni-dron-pro-prumysl-leta-uvnitr-nepotrebuje-gps-a-hleda-zavady/" target="_blank" rel="noopener">Lupa.cz, 15. 7. 2026</a></p>
-    </div>
-    <div class="scenar">
+  <div class="rám">
+    <p class="kick">08 · Věra Sasková, CEO Fly4Future</p>
+    <div class="scenar" style="max-width:720px">
       <h3>Scénář nahrávky · 30 s · natočíme při demu</h3>
       <ol>
         <li><b>Záběr:</b> Věra Sasková, polocelek, jedno měkké světlo zleva, za ní RoboAid na stole, jinak tma. Telefon na stativu stačí.</li>
-        <li><b>Text:</b> věta výše, přesně jak ji řekla Lupě. Nic víc.</li>
+        <li><b>Text:</b> citace z úvodu stránky, přesně jak ji řekla Lupě. Nic víc.</li>
         <li><b>Titulky:</b> CZ jako první stopa, EN a DE jako titulky. Dabing až s jejím písemným souhlasem a jen z její nahrávky.</li>
         <li><b>Na stránce:</b> na klik, s posterem, nikdy autoplay; vedle vždy přepis.</li>
       </ol>
@@ -1222,15 +1218,6 @@
       <li><span>2024 · 2025</span>AI Awards</li>
     </ul>
     <a class="pdf" href="#demo">Podrobná dokumentace v PDF &nbsp;&darr;</a>
-  </div>
-</section>
-
-<!-- ===== CITACE ===== -->
-<section id="rec" class="sek">
-  <div class="rám">
-    <blockquote>Vyvíjeli jsme ho tam, <span>kde není GPS</span> a kde by kontrola znamenala riziko a odstávku</blockquote>
-    <p class="kdo">Věra Sasková, CEO Fly4Future<br>
-      <a href="https://www.lupa.cz/aktuality/cesi-ukazali-autonomni-inspekcni-dron-pro-prumysl-leta-uvnitr-nepotrebuje-gps-a-hleda-zavady/" target="_blank" rel="noopener">Lupa.cz, 15. 7. 2026</a></p>
   </div>
 </section>
 
