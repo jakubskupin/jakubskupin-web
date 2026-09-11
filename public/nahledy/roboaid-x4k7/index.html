@@ -501,7 +501,7 @@
   <div id="hvbox">
   <video id="hv" poster="/nahledy/roboaid-x4k7/v3/prulet-v3-poster.jpg" autoplay muted playsinline
          webkit-playsinline preload="auto" disablepictureinpicture>
-    <source src="/nahledy/roboaid-x4k7/v3/prulet-v3-drzi.mp4" type="video/mp4">
+    <source src="/nahledy/roboaid-x4k7/v3/prulet-v3-ostre.mp4" type="video/mp4">
   </video>
   <button id="hvplay" type="button" hidden aria-label="Přehrát video">Přehrát</button>
   <div id="herofx" aria-hidden="true">
@@ -1626,7 +1626,7 @@ Kde u vás dnes prohlídka znamená odstávku?
         // horký vzduch se nad únikem kolébá, a čím výš, tím víc
         const nad = dyRaw < 0 ? -dyRaw/ry : 0;
         const kol = 0.45*Math.sin(y*0.075 + t*1.9) * Math.min(1, nad*0.35);
-        const sloup = dyRaw < 0 && dyRaw > -ry*6.5;
+        const sloup = dyRaw < 0 && dyRaw > -ry*11;
         for (let x = 0; x < MW; x++, i += 4){
           let L = (px[i]*0.2126 + px[i+1]*0.7152 + px[i+2]*0.0722) / 255;
           L = Math.min(1, Math.max(0, (L - 0.04) / 0.62));
@@ -1644,7 +1644,11 @@ Kde u vás dnes prohlídka znamená odstávku?
           // slabý sloup horkého vzduchu nad únikem: stoupá, vlní se a slábne
           if (sloup && Math.abs(x - stx) < rx*3.5){
             const ex = (x - stx)/(rx*1.25) + kol*1.4;
-            const sila = Math.exp(-ex*ex) * Math.exp(dyRaw/(ry*3.2));
+            // Náběh od nuly: sloup dřív začínal v plné síle hned nad řádkem úniku
+            // a pod ním byla nula, takže přes jádro vedla ostrá vodorovná hrana,
+            // která vypadala jako odraz. Horní mez je tak vysoko, že tam už je nula.
+            const u = Math.min(1, -dyRaw/(ry*1.4)), nabeh = u*u*(3 - 2*u);
+            const sila = Math.exp(-ex*ex) * Math.exp(dyRaw/(ry*3.2)) * nabeh;
             T += 0.13 * sila * (0.55 + 0.45*Math.sin(y*0.23 + t*3.4 + x*0.05));
           }
           if (T > 1) T = 1; else if (T < 0) T = 0;
