@@ -355,6 +355,9 @@
   #hlid,#hterm{position:absolute;inset:0;width:100%;height:100%;display:block;
     opacity:0;transition:opacity .4s ease}
   #hlid.on,#hterm.on{opacity:1}
+  /* náraz do sloupu: jeden tenký prstenec v místě dotyku, velikost a průhlednost řídí JS */
+  #hnaraz{position:absolute;left:0;top:0;box-sizing:border-box;border:1.5px solid #fff;
+    border-radius:50%;opacity:0;pointer-events:none}
 
   /* detekční rámeček nad hero videem, stejný jazyk jako ve scrollovací části */
   .hbox{position:absolute;border:1.5px solid var(--hot);border-radius:3px;
@@ -507,6 +510,7 @@
   <div id="herofx" aria-hidden="true">
     <canvas id="hlid"></canvas>
     <canvas id="hterm"></canvas>
+    <div id="hnaraz"></div>
     <div class="hbox" data-box="koroze"><span>koroze</span></div>
     <div class="hbox" data-box="trhlina"><span>trhlina</span></div>
   </div>
@@ -1418,7 +1422,7 @@ Kde u vás dnes prohlídka znamená odstávku?
     //  0,0–2,2 s   dron stojí na podlaze, zvedne se, je ve vzduchu
     //  ~2,3 s      střih, pohled zezadu do tunelu
     //  3,6–4,9 s   světla naskočí naplno, celý záběr se rozzáří
-    //  5,6–6,9 s   proplouvá kolem sloupu, levý roh klece se ho v 6,0 s dotkne
+    //  5,6–6,9 s   proplouvá kolem sloupu, v 6,28 s stopa cukne (náraz klece)
     //  8,3–11,0 s  rovný let tunelem, drží kurz
     // 13,0–16,0 s  POV z palubní kamery na potrubí s odhalenou izolací
     // 16,4–20,1 s  pět zkorodovaných spojů projede záběrem zleva doprava
@@ -1731,6 +1735,54 @@ Kde u vás dnes prohlídka znamená odstávku?
       return v;
     }
 
+    // ---------- náraz do sloupu ----------
+    // Špička klece jede přes sloup a v 6,28 s stopa cukne: dron poskočí o 2 px
+    // a pak ho to odsune doprava dolů. Náraz to podtrhne postprodukčně, mírnoučkým
+    // zatřesením obrazu a jedním tenkým prstencem v místě dotyku. Počítá se
+    // z času videa, ne jako jednorázová animace, takže sedí i po přetočení.
+    // Třese se video i vrstvy nad ním stejně, popisky stojí. Zvětšení o 1 %
+    // schová okraje, které by zatřesení jinak odkrylo.
+    const NARAZ = 6.28, NARAZ_DELKA = 0.6, NARAZ_BOD = [40.0, 48.9];
+    const hvbox = document.getElementById('hvbox');
+    const kruh  = document.getElementById('hnaraz');
+    const klidne = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+    let trese = false;
+    function naraz(t, c){
+      const dt = t - NARAZ;
+      if (dt < 0 || dt > NARAZ_DELKA){
+        if (trese){
+          trese = false;
+          hv.style.transform = box.style.transform = '';
+          hvbox.style.overflow = '';
+          if (kruh) kruh.style.opacity = '0';
+        }
+        return;
+      }
+      trese = true;
+      if (!klidne){
+        // třes dozní spolu se zvětšením, takže rezerva na okrajích nikdy nedojde;
+        // na hodně širokém a nízkém okně se úměrně ubere pootočení
+        const u = Math.min(1, Math.max(0, (dt - 0.2)/0.36)), zpet = u*u*(3 - 2*u);
+        const obal = Math.exp(-dt/0.11)*(1 - zpet);
+        const sx = 0.0022*c.cw*obal*Math.sin(2*Math.PI*13*dt);
+        const sy = -Math.min(0.0012*c.cw, 0.0026*c.ch)*obal*Math.sin(2*Math.PI*17*dt + 0.5);
+        const rot = 0.09*Math.min(1, 1.9*c.ch/c.cw)*obal*Math.sin(2*Math.PI*11*dt + 0.6);
+        const s = 1 + 0.01*(1 - zpet);
+        hv.style.transform = box.style.transform = 'translate(' + sx.toFixed(2) + 'px,' + sy.toFixed(2) +
+          'px) rotate(' + rot.toFixed(3) + 'deg) scale(' + s.toFixed(4) + ')';
+        hvbox.style.overflow = 'hidden';
+      }
+      if (kruh){
+        const u = Math.min(1, dt/0.5);
+        const R = Math.max(14, Math.min(46, c.w*0.03));
+        const r = R*(0.2 + 0.8*(1 - Math.pow(1 - u, 3)));
+        const x = c.x + NARAZ_BOD[0]/100*c.w, y = c.y + NARAZ_BOD[1]/100*c.h;
+        kruh.style.width = kruh.style.height = (2*r).toFixed(1) + 'px';
+        kruh.style.transform = 'translate(' + (x - r).toFixed(1) + 'px,' + (y - r).toFixed(1) + 'px)';
+        kruh.style.opacity = (0.8*Math.pow(1 - u, 1.6)).toFixed(3);
+      }
+    }
+
     let ktera = null;
     function tik(){
       const t = hv.currentTime || 0;
@@ -1755,6 +1807,7 @@ Kde u vás dnes prohlídka znamená odstávku?
       if (chci === 'termo') termoKresli(t);
 
       const c = cover();
+      naraz(t, c);
       let kotva = null;
       if (chci === 'nalez'){
         const k1 = kresliBox(boxy.koroze,  bod4(KOROZE, t),    c);
