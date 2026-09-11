@@ -315,7 +315,7 @@
   <div id="hvbox">
   <video id="hv" poster="/dron/v4/prulet-v4-poster.jpg" autoplay muted playsinline
          webkit-playsinline preload="auto" disablepictureinpicture>
-    <source src="/dron/v4/prulet-v4.mp4" type="video/mp4">
+    <source src="/dron/v4/prulet-v4.mp4?v=6" type="video/mp4">
   </video>
   <!-- bumerang: po začátku podrženého snímku se obraz jemně houpe skutečným posledním pohybem kamery -->
   <video id="hvloop" muted playsinline webkit-playsinline preload="auto" disablepictureinpicture aria-hidden="true" tabindex="-1">
@@ -1764,7 +1764,7 @@
     // Hlavní video se pak rozjede znovu od začátku, až vlna doběhne. Při pauze diváka stojí
     // i smyčka, při přetočení před 28,4 s zmizí. prefers-reduced-motion: bez smyčky.
     const loopV = document.getElementById('hvloop');
-    const DRZI = 28.40;
+    const DRZI = 29.65;   // konec zpomaleného dojezdu (26,4 až 29,63 s, rychlost 1 → 0,2), pak podržený snímek
     const bezPohybu = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
     let loopZap = false;
     if (loopV){ loopV.muted = true; loopV.defaultMuted = true; loopV.setAttribute('muted', ''); }
