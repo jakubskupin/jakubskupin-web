@@ -89,7 +89,9 @@
   #hero{position:relative;z-index:10;height:100vh;min-height:520px;overflow:hidden;
         background:#05070C}
   #hvbox{position:absolute;inset:0}
-  #hv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  #hv,#hvloop{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  #hvloop{opacity:0;transition:opacity .25s ease;pointer-events:none}
+  #hvloop.on{opacity:1}
   #hero::after{content:"";position:absolute;inset:0;pointer-events:none;
     background:linear-gradient(180deg,rgba(5,7,12,.74) 0%,transparent 24%,transparent 42%,rgba(5,7,12,.72) 68%,rgba(5,7,12,.93) 100%)}
 
@@ -242,7 +244,7 @@
           justify-content:flex-start;gap:18px;padding:62px 0 26px}
     #hero::after{background:linear-gradient(180deg,rgba(5,7,12,.55) 0%,transparent 14%,transparent 100%)}
     #hvbox{position:relative;inset:auto;width:100%;aspect-ratio:16/9}
-    #hv{position:absolute;inset:0}
+    #hv,#hvloop{position:absolute;inset:0}
     .herotext{position:static;transform:none;padding:0 20px}
     .herotext h1{font-size:clamp(27px,7.4vw,40px);max-width:14ch}
     .herotext p{font-size:14.5px}
@@ -298,6 +300,10 @@
   <video id="hv" poster="/dron/v4/prulet-v4-poster.jpg" autoplay muted playsinline
          webkit-playsinline preload="auto" disablepictureinpicture>
     <source src="/dron/v4/prulet-v4.mp4" type="video/mp4">
+  </video>
+  <!-- bumerang: po začátku podrženého snímku se obraz jemně houpe skutečným posledním pohybem kamery -->
+  <video id="hvloop" muted playsinline webkit-playsinline preload="auto" disablepictureinpicture aria-hidden="true" tabindex="-1">
+    <source src="/dron/v4/bumerang.mp4" type="video/mp4">
   </video>
   <button id="hvplay" type="button" hidden aria-label="Přehrát video">Přehrát</button>
   <div id="herofx" aria-hidden="true">
@@ -826,7 +832,7 @@
     <div class="zlom-obsah">
       <p class="kick">GPS · N/A</p>
       <p class="zlom-nadpis">Tady končí signál, ne let</p>
-      <div class="zlom-bary" id="zlomBary" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div><br>
+      <div class="zlom-bary" id="zlomBary" aria-hidden="true"><i class="off"></i><i class="off"></i><i class="off"></i><i class="off"></i><i class="off"></i></div><br>
       <p class="zlom-hud" aria-live="polite"><span id="zlomHud"></span><span class="zh-kurzor" aria-hidden="true"></span></p>
       <p class="zlom-veta">Za tímto místem satelitní signál není a stroj se bez něj obejde: let řídí palubní počítač, který se k síti nepřipojuje.</p>
     </div>
@@ -855,11 +861,14 @@
     radky.forEach(function(r){ io.observe(r); });
   }
 
-  // zlom: scroll přepíná stavy HUD, satelity mizí, pak se stroj přepne na sebe
+  // zlom: po výpadku monitoru je signál pryč od první chvíle, čárky zůstávají
+  // zhasnuté a scroll přepíná stavy HUD od ztráty signálu po autonomní let.
+  // Stavy Venku a Za vjezdem vypadly: po přehození use casů (Jakub, 11. 9.)
+  // stojí zlom až za Skladem a Halou, tedy uvnitř.
   var sek = document.getElementById('zlom'), stick = document.getElementById('zlomStick');
-  var hud = document.getElementById('zlomHud'), bary = [].slice.call(document.querySelectorAll('#zlomBary i'));
+  var hud = document.getElementById('zlomHud');
   if (!sek || !hud) return;
-  var STAVY = /*HUD*/["Venku · GPS dostupná", "Za vjezdem · GPS slabá", "Uvnitř · GPS žádná", "Stroj · GPS N/A", "Poloha · LIO position mode", "Síť · žádná · výpočet na palubě", "Pilot · žádný · let autonomní"];
+  var STAVY = /*HUD*/["Uvnitř · GPS žádná", "Stroj · GPS N/A", "Poloha · LIO position mode", "Síť · žádná · výpočet na palubě", "Pilot · žádný · let autonomní"];
   var AUTO_OD = 0.62;                       // od jakého postupu je stroj sám
   var klid = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var n = STAVY.length, akt = -1, titul = document.title, titulZmenen = false, scr = 0;
@@ -879,8 +888,6 @@
     if (klid) P = 1;
     var i = Math.min(n - 1, Math.floor(P * n));
     if (i !== akt){ akt = i; ukaz(i); }
-    var sviti = P >= AUTO_OD ? 0 : Math.max(0, Math.round((1 - P / AUTO_OD) * 5));
-    bary.forEach(function(b, k){ b.classList.toggle('off', k >= sviti); });
     var auto = P >= AUTO_OD;
     stick.classList.toggle('auto', auto);
     // easter egg: záložka prohlížeče na chvíli ztratí signál taky
@@ -983,10 +990,10 @@
 })();
 </script>
 
-<!-- ===== 02 · MARKETING: LinkedIn post a formáty, jen nadpis a věta ===== -->
+<!-- ===== MARKETING: LinkedIn post a formáty, jen nadpis a věta ===== -->
 <section id="marketing" class="sek">
   <div class="rám">
-    <p class="kick">02 · Post a formáty</p>
+    <p class="kick">Post a formáty</p>
     <h2>Jedna věta, čtyři plochy</h2>
     <p class="pod">Sdělení stránky zkrácené na jeden claim a jeden záběr, stejné v postu i na billboardu.</p>
     <div class="mkt-mriz">
@@ -1674,27 +1681,72 @@
     // Smyčka s pauzou na konci: video dojede, poslední snímek chvíli drží
     // (tam se ukáže pozvánka dál) a pak se rozjede znovu od začátku.
     // Když si divák video sám pauzne, restart se zruší.
+    // Bumerang: od začátku podrženého snímku (28,4 s) hraje nad heroem jedna vlna smyčky
+    // ze skutečného posledního pohybu kamery (5,03 s, začíná i končí na podrženém snímku).
+    // Hlavní video se pak rozjede znovu od začátku, až vlna doběhne. Při pauze diváka stojí
+    // i smyčka, při přetočení před 28,4 s zmizí. prefers-reduced-motion: bez smyčky.
+    const loopV = document.getElementById('hvloop');
+    const DRZI = 28.40;
+    const bezPohybu = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+    let loopZap = false;
+    if (loopV){ loopV.muted = true; loopV.defaultMuted = true; loopV.setAttribute('muted', ''); }
+    function loopVypni(){
+      if (!loopV || !loopZap) return;
+      loopZap = false; loopV.classList.remove('on'); loopV.pause();
+      try { loopV.currentTime = 0; } catch (e) {}
+    }
+    function loopHraj(){
+      if (!loopV) return;
+      const s = loopV.play();
+      if (s && s.catch) s.catch(() => {});
+    }
+    function loopStav(){
+      if (!loopV || bezPohybu) return;
+      const t = hv.currentTime || 0;
+      if (t < DRZI - 0.02){ loopVypni(); return; }
+      if (!loopZap){
+        loopZap = true;
+        try { loopV.currentTime = 0; } catch (e) {}
+        const ukazLoop = () => { if (loopZap) loopV.classList.add('on'); };
+        if (loopV.requestVideoFrameCallback) loopV.requestVideoFrameCallback(ukazLoop);
+        else loopV.addEventListener('playing', ukazLoop, {once: true});
+      }
+      // divák pauzl (a video ještě nedojelo): stojí i smyčka
+      if (hv.paused && !hv.ended) loopV.pause(); else if (loopV.paused && !loopV.ended) loopHraj();
+    }
+    ['timeupdate','seeked','play','pause','ended'].forEach(u => hv.addEventListener(u, loopStav));
+
+    // Smyčka s pauzou na konci: video dojede, poslední snímek drží (tam se ukáže
+    // pozvánka dál) a houpe se bumerangem; po jeho doběhnutí se hero rozjede znovu.
+    // Když si divák video sám pauzne, restart se zruší.
     let znovu = 0;
+    function odZacatku(){
+      if (!hv.ended) return;
+      loopVypni();
+      hv.currentTime = 0;
+      const s = hv.play();
+      // když prohlížeč znovuspuštění odmítne, vrátit se na závěrečný snímek,
+      // ať divák nezůstane na prázdném prvním políčku bez textu
+      if (s && s.catch) s.catch(() => { hv.currentTime = hv.duration - 0.03; });
+    }
     hv.addEventListener('ended', () => {
       clearTimeout(znovu);
-      znovu = setTimeout(() => {
-        if (!hv.ended) return;
-        hv.currentTime = 0;
-        const s = hv.play();
-        // když prohlížeč znovuspuštění odmítne, vrátit se na závěrečný snímek,
-        // ať divák nezůstane na prázdném prvním políčku bez textu
-        if (s && s.catch) s.catch(() => { hv.currentTime = hv.duration - 0.03; });
-      }, 2800);
+      if (loopV && loopZap && !loopV.ended && !loopV.paused){
+        // pojistka, kdyby 'ended' smyčky nepřišel (např. skrytá záložka)
+        const zbyva = Math.max(0, (loopV.duration || 5.03) - loopV.currentTime);
+        znovu = setTimeout(odZacatku, zbyva*1000 + 400);
+      } else znovu = setTimeout(odZacatku, 2800);
     });
+    if (loopV) loopV.addEventListener('ended', () => { if (hv.ended){ clearTimeout(znovu); odZacatku(); } });
     hv.addEventListener('play', () => clearTimeout(znovu));
     document.getElementById('ovPlay').addEventListener('click', () => clearTimeout(znovu));
 
     // dokud je hero mimo obraz, video ani vrstvu nehnat zbytečně
     if ('IntersectionObserver' in window){
       new IntersectionObserver(es => es.forEach(e => {
-        if (e.isIntersecting) { if (hv.paused && !hv.ended) pust(); }
+        if (e.isIntersecting) { if (hv.paused && !hv.ended) pust(); else if (hv.ended && loopZap && loopV && !loopV.ended) loopHraj(); }
         // pauzovat až když už někdy hrálo, jinak by observer zabil první pokus
-        else if (hralo) { hv.pause(); zastav(); }
+        else if (hralo) { hv.pause(); zastav(); if (loopV) loopV.pause(); }
       }), {threshold: 0.05}).observe(document.getElementById('hero'));
     }
   })();
