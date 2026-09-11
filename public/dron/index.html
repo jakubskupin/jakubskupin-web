@@ -1006,6 +1006,69 @@
 })();
 </script>
 
+<!-- ===== CTA: nedostupné místo, vede na kontakt Fly4Future ===== -->
+<style>
+  #misto{text-align:center;border-top:1px solid var(--line);
+    background:radial-gradient(60% 70% at 50% 100%,rgba(233,185,74,.07),transparent 70%),var(--bg)}
+  #misto h2{max-width:16ch;margin:0 auto 20px}
+  #misto .pod{margin:0 auto 34px;max-width:46ch}
+  #misto .pod b{display:block;color:#fff;font-weight:600;margin-top:4px}
+
+  /* rozcestník na sourozence RoboAidu: karty na černé, fotky s průhledným pozadím */
+  #rodina{background:#000;border-top:1px solid var(--line)}
+  #rodina .hlava{text-align:center;margin:0 auto clamp(36px,5vw,64px);max-width:720px}
+  #rodina .hlava .pod{margin:0 auto}
+  .karty{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,2vw,24px)}
+  .karta{background:#0A0C11;border:1px solid var(--line);border-radius:16px;padding:clamp(24px,3vw,40px) clamp(20px,3vw,36px) 30px;
+    display:flex;flex-direction:column;align-items:center;text-align:center;transition:border-color .25s ease,transform .25s ease}
+  .karta:hover{border-color:#2C3A57;transform:translateY(-2px)}
+  .karta .foto{width:100%;height:clamp(150px,17vw,230px);display:flex;align-items:center;justify-content:center;margin-bottom:22px}
+  .karta .foto img{max-width:100%;max-height:100%;object-fit:contain}
+  .karta h3{font-family:var(--disp);font-weight:600;font-size:clamp(26px,2.6vw,34px);letter-spacing:.01em;color:#fff;margin:0 0 8px}
+  .karta .veta{font-size:15px;line-height:1.5;color:var(--muted);margin:0 0 20px;max-width:34ch}
+  .karta .fakta{list-style:none;padding:0;margin:0 0 24px;display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+  .karta .fakta li{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--ink);
+    border:1px solid var(--line);border-radius:999px;padding:6px 12px}
+  .karta .odkaz{margin-top:auto;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--hot);text-decoration:none}
+  .karta .odkaz:hover{text-decoration:underline;text-underline-offset:4px}
+  @media (max-width:760px){ .karty{grid-template-columns:1fr} }
+</style>
+
+<section id="misto" class="sek" aria-label="Ukažte nám své nedostupné místo">
+  <div class="rám">
+    <h2>Ukažte nám své nedostupné místo</h2>
+    <p class="pod">Šachta, nádrž, kabelový kanál, kotelna. <b>Řekneme, jestli tam RoboAid doletí.</b></p>
+    <a class="btn" href="https://fly4future.com/contact/" target="_blank" rel="noopener">Ukázat místo <span aria-hidden="true">&#8599;</span></a>
+  </div>
+</section>
+
+<section id="rodina" class="sek" aria-label="Další stroje Fly4Future">
+  <div class="rám">
+    <div class="hlava">
+      <p class="kick">Ze stejné dílny</p>
+      <h2>Který stroj je pro vás</h2>
+      <p class="pod">RoboAid je hotový inspekční stroj, který létá sám. Když potřebujete vlastní senzory nebo jiný terén, má Fly4Future další platformy.</p>
+    </div>
+    <div class="karty">
+      <article class="karta">
+        <div class="foto"><img src="/dron/img/robocore.webp" alt="RoboCore v letu: bílé tělo, čtyři ramena s vrtulemi, přistávací nohy" width="1000" height="467" loading="lazy"></div>
+        <h3>RoboCore</h3>
+        <p class="veta">Modulární platforma, na kterou si dáte vlastní senzory a náklad</p>
+        <ul class="fakta"><li>nosnost do 4 kg</li><li>38 min letu</li><li>autonomie v ROS 2</li></ul>
+        <a class="odkaz" href="https://fly4future.com/custom-drones/robocore/" target="_blank" rel="noopener">Více o RoboCore <span aria-hidden="true">&rsaquo;</span></a>
+      </article>
+      <article class="karta">
+        <div class="foto"><img src="/dron/img/portos.webp" alt="PORTOS v letu: karbonová trubka s elektronikou, čtyři ramena, přistávací ližiny" width="710" height="416" loading="lazy"></div>
+        <h3>PORTOS</h3>
+        <p class="veta">Jedno tělo, čtyři stroje: dron, rover, katamarán i letoun VTOL</p>
+        <ul class="fakta"><li>nosnost do 10 kg</li><li>až 60 min letu</li><li>až 100 km/h</li></ul>
+        <a class="odkaz" href="https://fly4future.com/custom-drones/portos/" target="_blank" rel="noopener">Více o PORTOS <span aria-hidden="true">&rsaquo;</span></a>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- ===== MARKETING: LinkedIn post a formáty, jen nadpis a věta ===== -->
 <section id="marketing" class="sek">
   <div class="rám">
@@ -1082,7 +1145,6 @@
 </script>
 
 <footer><div class="rám">
-  <span>Ze stejné dílny: <a href="https://fly4future.com/" target="_blank" rel="noopener">RoboCore</a> (modulární platforma, 38 min, 4 kg) · <a href="https://fly4future.com/" target="_blank" rel="noopener">PORTOS</a> (jedno tělo, čtyři stroje)</span>
   <span>Prototyp landing page RoboAid · není veřejná stránka Fly4Future</span>
 </div></footer>
 
