@@ -15,7 +15,7 @@
 <meta name="twitter:title" content="Produktové video a vizuály pro dron">
 <meta name="twitter:image" content="https://jakubskupin.cz/dron/img/og-dron-e.png">
 <style>:root{color-scheme:dark}body{margin:0;padding:0}img{max-width:100%}</style></head><body>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500&family=Syne:wght@700&display=swap">
 <style>
 
   :root{--bg:#07090F;--ink:#EAF0FA;--muted:#8FA0BC;--line:#1B2740;--accent:#4DA3FF;--hot:#FFB454;
@@ -63,7 +63,9 @@
   #hero .herotext{bottom:17%} #hero .scrollhint{display:none}
 
   /* sticky dron: nese syntézu, ne beaty videa */
-  #slib{padding:0;background:#000;height:480vh}
+  /* 480vh by na tři věty. Poslední věta se usadí v 0,62 svého úseku a tam stránka končí:
+     2,62 úseku × 126,7vh scrollu na úsek + 100vh okna = 432vh */
+  #slib{padding:0;background:#000;height:432vh}
   #slib .stick{position:sticky;top:0;height:100vh;overflow:hidden}
   #slib .dron{position:absolute;left:50%;bottom:0;width:min(78vw,1120px,calc(67vh * 1.731));height:auto;
     transform:translateX(-50%);z-index:2;pointer-events:none;filter:drop-shadow(0 24px 50px rgba(0,0,0,.9))}
@@ -74,6 +76,18 @@
   #slib .tecky{position:absolute;right:28px;top:50%;transform:translateY(-50%);display:grid;gap:10px;z-index:3}
   #slib .tecky i{display:block;width:6px;height:6px;border-radius:50%;background:rgba(233,185,74,.25);transition:background .3s}
   #slib .tecky i.on{background:var(--zlata)}
+  /* šipka zpět na hero: jen na úplném konci, v černém rohu vedle dronu */
+  #nahoru{position:absolute;right:24px;bottom:24px;z-index:4;width:42px;height:42px;border-radius:50%;padding:0;
+    display:grid;place-items:center;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.22);cursor:pointer;
+    opacity:0;visibility:hidden;transform:translateY(8px);
+    transition:opacity .4s ease,transform .4s ease,visibility .4s,border-color .25s ease}
+  #nahoru.je{opacity:1;visibility:visible;transform:none}
+  #nahoru svg{width:12px;height:17px;fill:none;stroke:rgba(255,255,255,.78);stroke-width:1.3;
+    stroke-linecap:round;stroke-linejoin:round;transition:stroke .25s ease}
+  #nahoru:hover,#nahoru:focus-visible{border-color:var(--zlata);outline:none}
+  #nahoru:hover svg,#nahoru:focus-visible svg{stroke:var(--zlata)}
+  @media (max-width:700px){ #nahoru{right:14px;bottom:14px} }
+  @media (prefers-reduced-motion:reduce){ #nahoru{transition:none} }
 
   /* Placka Koncept jako na /auta/: světlý kruh na tmavé stránce. Ukáže se až
      pod foldem, ať nezavazí hero videu, a nad scrollovacím filmem se zase schová */
@@ -86,6 +100,26 @@
   @media (max-width:720px){
     .koncept-fix{width:64px;height:64px;font-size:9px;top:70px;right:14px}
   }
+  /* horní lišta jako na /equator: při načtení schovaná, ať hero video zůstane čisté.
+     Scroll dolů ji nechá schovanou, scroll nahoru ji vysune (JS na konci stránky). */
+  #lista{position:fixed;top:0;left:0;right:0;z-index:80;background:#000;transform:translateY(-100%);
+    transition:transform .35s ease;font-family:'Manrope',ui-sans-serif,system-ui,sans-serif;line-height:1.6}
+  #lista.je,#lista:focus-within{transform:none}
+  #lista .w{max-width:1120px;margin:0 auto;padding:0 20px}
+  @media (min-width:768px){ #lista .w{padding:0 32px} }
+  #lista .top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 0;font-size:13px;color:#9C9C98}
+  #lista .brand{font-family:'Syne',sans-serif;font-weight:700;letter-spacing:-.02em;color:#F3F3F1;text-decoration:none;font-size:15px;white-space:nowrap}
+  #lista .links{display:flex;align-items:center;gap:20px}
+  #lista .links a{color:#9C9C98;text-decoration:none;white-space:nowrap;transition:color .25s ease}
+  #lista .links a:hover{color:#F3F3F1}
+  #lista .links .navbtn{border:1px solid #26262A;border-radius:999px;padding:8px 20px;font-weight:500;transition:border-color .25s ease,color .25s ease}
+  #lista .links .navbtn:hover{border-color:#6E6E6B;color:#F3F3F1}
+  @media (max-width:479px){ #lista .top{font-size:12px} #lista .links{gap:14px} #lista .links a:not(.navbtn){display:none} #lista .links .navbtn{padding:7px 14px} }
+  /* placka Koncept uhne pod vysunutou lištu */
+  .koncept-fix{transition:opacity .3s ease,transform .35s ease}
+  html.lista-je .koncept-fix{transform:translateY(var(--listaH,84px))}
+  @media (prefers-reduced-motion:reduce){ #lista,.koncept-fix{transition:none} }
+
   footer{padding:36px 24px 60px;border-top:1px solid var(--line)}
   footer .rám{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--muted)}
   footer a{color:var(--zlata);text-decoration:none}
@@ -262,7 +296,8 @@
     #hvbox{position:relative;inset:auto;width:100%;aspect-ratio:16/9}
     #hv,#hvloop{position:absolute;inset:0}
     .herotext{position:static;transform:none;padding:0 20px}
-    .herotext h1{font-size:clamp(27px,7.4vw,40px);max-width:14ch}
+    /* nadpis má zlom ručně za první větou; 14ch by „Nemusí tam technik.“ rozlomilo do tří řádků */
+    .herotext h1{font-size:clamp(27px,7.4vw,40px);max-width:none}
     .herotext p{font-size:14.5px}
     .scrollhint{position:static;transform:none;margin-top:6px;text-align:center;animation:none}
   }
@@ -310,6 +345,17 @@
 
 
 </style>
+<nav id="lista" aria-label="Jakub Skupin">
+  <div class="w">
+    <div class="top">
+      <a class="brand" href="https://jakubskupin.cz">Jakub Skupin</a>
+      <div class="links">
+        <a href="/vizualy/">Produktové vizuály</a>
+        <a class="navbtn" href="https://www.linkedin.com/in/jakubskupin/" target="_blank" rel="noopener">Spolupráce &#8599;&#xFE0E;</a>
+      </div>
+    </div>
+  </div>
+</nav>
 <div class="koncept-fix" id="koncept" aria-label="Tato ukázka je koncept"><span>Koncept</span></div>
 <header id="hero">
   <div id="hvbox">
@@ -338,8 +384,8 @@
       <input id="ovRange" type="range" min="0" max="1000" value="0" step="1" aria-label="Čas videa"></div>
     <span id="ovCas">0:00</span>
   </div>
-  <button id="dolu" type="button" hidden>
-    <span>Scrollujte</span>
+  <button id="dolu" type="button" hidden aria-label="Sestup povolen: pokračovat dolů">
+    <span>Sestup povolen</span>
     <svg viewBox="0 0 14 20" aria-hidden="true"><path d="M7 1 V17 M1.5 11.5 L7 18 L12.5 11.5"/></svg>
   </button>
   <div id="textzona">
@@ -359,11 +405,11 @@
   </div>
   <div class="herotext">
     <span class="num">RoboAid &middot; autonomní inspekce</span>
-    <h1>Letí sám tam,<br class="mbr"> kam už nikdo nemusí</h1>
-    <p>Plně autonomní inspekce uvnitř budov a zařízení.<br class="mbr"> Bez pilota, bez satelitu, bez odstávky.</p>
+    <h1>Nemusí tam technik.<br> Ani pilot</h1>
+    <p>Inspekce tunelů, šachet a hal bez odstávky.</p>
   </div>
   </div>
-  <div class="scrollhint">scrollujte</div>
+  <div class="scrollhint">sestup povolen</div>
 </header>
 <section id="fakta" aria-label="Klíčová fakta">
   <ul>
@@ -389,6 +435,8 @@
     margin:0 auto clamp(30px,5vh,56px);color:#fff;max-width:26ch;text-wrap:balance}
   #citat-text .cs{opacity:.14;transition:opacity .12s linear;display:inline-block}
   #citat-text .cs.z{color:var(--zlata)}
+  /* uvozovky svítí spolu s prvním a posledním slovem, ne samy od začátku */
+  #citat-text .uv{color:#fff}
   #citat-podpis{display:flex;flex-direction:column;align-items:center;gap:7px;
     justify-content:center;border-top:0;padding:0;text-align:center;
     opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
@@ -412,7 +460,7 @@
   <div id="citat-lep"><div id="citat-ram">
     <p class="stitek">Proč vznikl</p>
     <blockquote id="citat">
-      <p id="citat-text">&bdquo;<span class="cs z">RoboAid</span> <span class="cs">jsme</span> <span class="cs">vyvíjeli</span> <span class="cs">právě</span> <span class="cs">do</span> <span class="cs">situací,</span> <span class="cs">kdy</span> <span class="cs">je</span> <span class="cs">potřeba</span> <span class="cs">dostat</span> <span class="cs">kvalitní</span> <span class="cs">senzoriku</span> <span class="cs">do</span> <span class="cs">vnitřních</span> <span class="cs">prostor,</span> <span class="cs z">kde</span> <span class="cs z">není</span> <span class="cs z">GPS,</span> <span class="cs">kde</span> <span class="cs">je</span> <span class="cs">omezený</span> <span class="cs">prostor</span> <span class="cs">k</span> <span class="cs">manévrování</span> <span class="cs">a</span> <span class="cs">kde</span> <span class="cs">by</span> <span class="cs">fyzická</span> <span class="cs">kontrola</span> <span class="cs">znamenala</span> <span class="cs z">zbytečné</span> <span class="cs z">riziko,</span> <span class="cs z">odstávku</span> <span class="cs z">nebo</span> <span class="cs z">vysoké</span> <span class="cs z">náklady.</span>&ldquo;</p>
+      <p id="citat-text"><span class="cs z"><span class="uv">&bdquo;</span>RoboAid</span> <span class="cs">jsme</span> <span class="cs">vyvíjeli</span> <span class="cs">právě</span> <span class="cs">do</span> <span class="cs">situací,</span> <span class="cs">kdy</span> <span class="cs">je</span> <span class="cs">potřeba</span> <span class="cs">dostat</span> <span class="cs">kvalitní</span> <span class="cs">senzoriku</span> <span class="cs">do</span> <span class="cs">vnitřních</span> <span class="cs">prostor,</span> <span class="cs z">kde</span> <span class="cs z">není</span> <span class="cs z">GPS,</span> <span class="cs">kde</span> <span class="cs">je</span> <span class="cs">omezený</span> <span class="cs">prostor</span> <span class="cs">k</span> <span class="cs">manévrování</span> <span class="cs">a</span> <span class="cs">kde</span> <span class="cs">by</span> <span class="cs">fyzická</span> <span class="cs">kontrola</span> <span class="cs">znamenala</span> <span class="cs z">zbytečné</span> <span class="cs z">riziko,</span> <span class="cs z">odstávku</span> <span class="cs z">nebo</span> <span class="cs z">vysoké</span> <span class="cs z">náklady.<span class="uv">&ldquo;</span></span></p>
       <footer id="citat-podpis"><b>Věra Sasková</b><span>CEO Fly4Future</span><a href="https://www.lupa.cz/aktuality/cesi-ukazali-autonomni-inspekcni-dron-pro-prumysl-leta-uvnitr-nepotrebuje-gps-a-hleda-zavady/" target="_blank" rel="noopener">Lupa.cz, 15. 7. 2026</a></footer>
     </blockquote>
   </div></div>
@@ -1021,6 +1069,12 @@
   .karta{background:#0A0C11;border:1px solid var(--line);border-radius:16px;padding:clamp(24px,3vw,40px) clamp(20px,3vw,36px) 30px;
     display:flex;flex-direction:column;align-items:center;text-align:center;transition:border-color .25s ease,transform .25s ease}
   .karta:hover{border-color:#2C3A57;transform:translateY(-2px)}
+  /* celá karta i s fotkou je proklik: odkaz „Více o…“ se roztáhne přes celý rámeček */
+  .karta{position:relative;cursor:pointer}
+  .karta .odkaz::after{content:"";position:absolute;inset:0;border-radius:16px}
+  .karta:hover .odkaz{text-decoration:underline;text-underline-offset:4px}
+  .karta .odkaz:focus-visible{outline:none}
+  .karta:has(.odkaz:focus-visible){border-color:#2C3A57;box-shadow:0 0 0 2px rgba(255,180,84,.55)}
   .karta .foto{width:100%;height:clamp(150px,17vw,230px);display:flex;align-items:center;justify-content:center;margin-bottom:22px}
   .karta .foto img{max-width:100%;max-height:100%;object-fit:contain}
   .karta h3{font-family:var(--disp);font-weight:600;font-size:clamp(26px,2.6vw,34px);letter-spacing:.01em;color:#fff;margin:0 0 8px}
@@ -1034,19 +1088,19 @@
   @media (max-width:760px){ .karty{grid-template-columns:1fr} }
 </style>
 
-<section id="misto" class="sek" aria-label="Ukažte nám své nedostupné místo">
+<section id="misto" class="sek" aria-label="Kam u vás nikdo nechce lézt">
   <div class="rám">
-    <h2>Ukažte nám své nedostupné místo</h2>
-    <p class="pod"><b>RoboAid tam doletí.</b></p>
-    <a class="btn" href="https://fly4future.com/contact/" target="_blank" rel="noopener">Ukázat místo <span aria-hidden="true">&#8599;</span></a>
+    <h2>Kam u vás nikdo nechce lézt?</h2>
+    <p class="pod">Popište nám to místo. <b>Řekneme, jestli tam RoboAid doletí.</b></p>
+    <a class="btn" href="https://fly4future.com/contact/" target="_blank" rel="noopener">Popsat místo <span aria-hidden="true">&#8599;</span></a>
   </div>
 </section>
 
-<section id="rodina" class="sek" aria-label="Další stroje Fly4Future">
+<section id="rodina" class="sek" aria-label="Další drony Fly4Future">
   <div class="rám">
     <div class="hlava">
       <p class="kick">Ze stejné dílny</p>
-      <h2>Další stroje</h2>
+      <h2>Pro jiné mise</h2>
     </div>
     <div class="karty">
       <article class="karta">
@@ -1154,6 +1208,9 @@
     <div class="veta"><div><p>RoboAid</p><small>Where GPS ends</small></div></div>
     <img class="dron" id="dronFront" src="/dron/img/front.jpg" alt="RoboAid zepředu na černé skále">
     <div class="tecky"><i></i><i></i><i></i></div>
+    <button id="nahoru" type="button" aria-label="Zpět nahoru na začátek stránky" title="Zpět nahoru">
+      <svg viewBox="0 0 14 20" aria-hidden="true"><path d="M7 19 V3 M1.5 8.5 L7 2 L12.5 8.5"/></svg>
+    </button>
   </div>
 </section>
 
@@ -1831,6 +1888,10 @@
   (function(){
     const sec = document.getElementById('slib'); if (!sec) return;
     const vety = [...sec.querySelectorAll('.veta')], tecky = [...sec.querySelectorAll('.tecky i')], n = vety.length;
+    // Poslední věta (RoboAid) už nezhasíná ani neujíždí nahoru: usadí se nad dronem
+    // a scroll stránky končí krátce po tom (KONEC). Výška #slib v CSS počítá se stejným číslem.
+    const KONEC = 0.62, USEKY = (n - 1) + KONEC;
+    const nahoru = document.getElementById('nahoru');
     const clamp = (x,a,b) => Math.min(b, Math.max(a, x));
     const smooth = (a,b,x) => { const t = clamp((x-a)/(b-a),0,1); return t*t*(3-2*t); };
     const easeOut = t => 1 - Math.pow(1-t, 3);
@@ -1839,20 +1900,27 @@
       const P = clamp(-r.top / Math.max(1, r.height - vh), 0, 1);
       let akt = -1;
       vety.forEach((el, i) => {
-        const t = P*n - i;
+        const t = P*USEKY - i, posledni = i === n - 1;
         if (t <= -0.05 || t >= 1.05){ el.style.opacity = 0; el.style.transform = 'translate(-50%,-50%)'; return; }
-        const up = t < 0.55 ? easeOut(clamp(t/0.55,0,1)) * 31 : 31 + (t-0.55)/0.45 * 8;
-        const op = smooth(0.08, 0.40, t) * (1 - smooth(0.70, 0.92, t));
+        const up = t < 0.55 ? easeOut(clamp(t/0.55,0,1)) * 31 : (posledni ? 31 : 31 + (t-0.55)/0.45 * 8);
+        const op = smooth(0.08, 0.40, t) * (posledni ? 1 : 1 - smooth(0.70, 0.92, t));
         const sc = 0.9 + 0.1*easeOut(clamp(t/0.55,0,1));
         el.style.opacity = op.toFixed(3);
         el.style.transform = 'translate(-50%,calc(-50% - ' + up.toFixed(2) + 'vh)) scale(' + sc.toFixed(3) + ')';
         if (op > 0.2) akt = i;
       });
       tecky.forEach((d, i) => d.classList.toggle('on', i === akt));
+      if (nahoru) nahoru.classList.toggle('je', P*USEKY - (n - 1) >= 0.5);
     }
     let raf = 0; const plan = () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; tick(); }); };
     addEventListener('scroll', plan, {passive:true}); addEventListener('resize', plan); tick();
     window.slibTick = tick;
+    if (nahoru) nahoru.addEventListener('click', e => {
+      const klid = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({top: 0, behavior: klid ? 'auto' : 'smooth'});
+      // z klávesnice (detail 0) přesunout fokus nahoru, ať Tab nepokračuje od konce stránky
+      if (e.detail === 0){ const a = document.querySelector('#lista a'); if (a) a.focus({preventScroll: true}); }
+    });
   })();
 
   // ---------- placka Koncept: jen pod foldem a mimo scrollovací film ----------
@@ -1867,6 +1935,32 @@
     addEventListener('scroll', plan, {passive:true}); addEventListener('resize', plan); tick();
   })();
 
+  // ---------- horní lišta jako na /equator ----------
+  // Při načtení schovaná (hero video zůstane čisté). Scroll dolů ji nechá schovanou,
+  // scroll nahoru ji vysune. Drobná cuknutí do 4 px směr nepřepínají.
+  (function(){
+    const lista = document.getElementById('lista'); if (!lista) return;
+    const root = document.documentElement, placka = document.getElementById('koncept');
+    let posledniY = Math.max(0, scrollY), je = false;
+    function nastav(ano){
+      if (ano === je) return; je = ano;
+      lista.classList.toggle('je', ano); root.classList.toggle('lista-je', ano);
+    }
+    // placka Koncept uhne jen o tolik, aby pod lištou zůstalo 14 px
+    function vyska(){
+      const top = placka ? parseFloat(getComputedStyle(placka).top) || 0 : 0;
+      root.style.setProperty('--listaH', Math.max(0, lista.offsetHeight + 14 - top) + 'px');
+    }
+    addEventListener('scroll', () => {
+      const y = Math.max(0, scrollY);
+      if (y < posledniY - 4) nastav(true);
+      else if (y > posledniY + 4) nastav(false);
+      else return;
+      posledniY = y;
+    }, {passive:true});
+    addEventListener('resize', vyska); vyska();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(vyska);
+  })();
 
 </script>
 </body></html>
