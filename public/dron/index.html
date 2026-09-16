@@ -1200,6 +1200,101 @@
 })();
 </script>
 
+<!-- ===== Avatar: krátké video nad CTA. Po doscrollování samo hraje bez zvuku, vpravo dole zvuk a pauza ===== -->
+<style>
+  #rozhovor{border-top:1px solid var(--line);padding-bottom:0}
+  #rozhovor ~ #misto{border-top:0}
+  .rz-ram{position:relative;max-width:960px;margin:0 auto;border-radius:16px;overflow:hidden;
+    border:1px solid var(--line);background:#000;aspect-ratio:16/9}
+  .rz-ram video{display:block;width:100%;height:100%;object-fit:cover;cursor:pointer}
+  .rz-ovl{position:absolute;right:clamp(10px,1.6vw,18px);bottom:clamp(10px,1.6vw,18px);display:flex;gap:8px}
+  .rz-ovl button{width:clamp(36px,3.4vw,44px);height:clamp(36px,3.4vw,44px);display:grid;place-items:center;padding:0;cursor:pointer;
+    border-radius:50%;border:1px solid rgba(255,255,255,.22);background:rgba(7,9,15,.58);color:#fff;
+    -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:background .2s ease,border-color .2s ease}
+  .rz-ovl button:hover{background:rgba(7,9,15,.8);border-color:rgba(255,255,255,.45)}
+  .rz-ovl button:focus-visible{outline:2px solid var(--hot);outline-offset:2px}
+  .rz-ovl svg{width:46%;height:46%;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .rz-ovl .plny{fill:currentColor;stroke:none}
+  #rozhovor .i-zvuk,#rozhovor .i-play{display:none}
+  #rozhovor.zvuk .i-zvuk,#rozhovor.pauza .i-play{display:block}
+  #rozhovor.zvuk .i-ticho,#rozhovor.pauza .i-pauza{display:none}
+  @media (max-width:760px){ .rz-ram{border-radius:12px} }
+</style>
+
+<section id="rozhovor" class="sek pauza" aria-label="RoboAid ve zkratce">
+  <div class="rám">
+    <div class="rz-ram">
+      <video id="rzVideo" poster="/dron/avatar/avatar-dron-poster.jpg" muted playsinline preload="metadata">
+        <source src="/dron/avatar/avatar-dron.mp4" type="video/mp4">
+      </video>
+      <div class="rz-ovl">
+        <button id="rzZvuk" type="button" aria-label="Zapnout zvuk">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path class="plny" d="M4 9.5h3.2L12 5.5v13l-4.8-4H4z"/>
+            <path class="i-ticho" d="M16 9.5l5 5M21 9.5l-5 5"/>
+            <path class="i-zvuk" d="M15.5 9a4.2 4.2 0 0 1 0 6M18.3 6.3a8 8 0 0 1 0 11.4"/>
+          </svg>
+        </button>
+        <button id="rzPlay" type="button" aria-label="Přehrát video">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path class="plny i-pauza" d="M7 5h3.4v14H7zM13.6 5H17v14h-3.4z"/>
+            <path class="plny i-play" d="M8 5l11 7-11 7z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var sek = document.getElementById('rozhovor'), v = document.getElementById('rzVideo'),
+      bZvuk = document.getElementById('rzZvuk'), bPlay = document.getElementById('rzPlay');
+  if (!sek || !v) return;
+  var klid = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var uzivatelPauza = false, poprveZvuk = true, videt = false;
+
+  function stav(){
+    sek.classList.toggle('pauza', v.paused);
+    sek.classList.toggle('zvuk', !v.muted);
+    bPlay.setAttribute('aria-label', v.paused ? 'Přehrát video' : 'Pozastavit video');
+    bZvuk.setAttribute('aria-label', v.muted ? 'Zapnout zvuk' : 'Vypnout zvuk');
+  }
+  function hraj(){ var p = v.play(); if (p && p.catch) p.catch(stav); }
+
+  ['play','pause','ended','volumechange'].forEach(function(e){ v.addEventListener(e, stav); });
+
+  function prepniPlay(){
+    if (v.paused){ uzivatelPauza = false; hraj(); }
+    else { uzivatelPauza = true; v.pause(); }
+  }
+  bPlay.addEventListener('click', prepniPlay);
+  v.addEventListener('click', prepniPlay);
+
+  bZvuk.addEventListener('click', function(){
+    v.muted = !v.muted;
+    // kdo zapne zvuk poprvé, slyší repliku od začátku, ne od půlky věty
+    if (!v.muted && poprveZvuk){ poprveZvuk = false; v.currentTime = 0; }
+    if (!v.muted && v.paused){ uzivatelPauza = false; hraj(); }
+  });
+
+  // samo se pustí, když je video z větší části v okně; mimo okno se zastaví a po návratu pokračuje
+  if ('IntersectionObserver' in window){
+    new IntersectionObserver(function(z){
+      var r = z[0].intersectionRatio;
+      if (r >= 0.6 && !videt){
+        videt = true;
+        if (!klid && !uzivatelPauza && !v.ended) hraj();
+      } else if (r === 0 && videt){
+        videt = false;
+        if (!v.paused) v.pause();
+      }
+    }, {threshold:[0, 0.6]}).observe(v);
+  }
+  stav();
+})();
+</script>
+
 <!-- ===== CTA: nedostupné místo, vede na kontakt Fly4Future ===== -->
 <style>
   #misto{text-align:center;border-top:1px solid var(--line);
