@@ -78,12 +78,14 @@
     transform:translateX(-50%);z-index:2;pointer-events:none;filter:drop-shadow(0 24px 50px rgba(0,0,0,.9))}
   #slib .veta{position:absolute;left:50%;top:50%;width:min(92vw,1100px);transform:translate(-50%,-50%);
     text-align:center;z-index:1;opacity:0;will-change:transform,opacity;pointer-events:none}
-  #slib .veta p{margin:0 auto;font-family:var(--serif);font-size:clamp(40px,7.2vw,118px);line-height:.96;color:var(--zlata);letter-spacing:-.02em;max-width:12ch}
+  /* závěr tučně písmem titulku z hera, na desktopu stejně jako na mobilu (Jakub 16. 9. 2026) */
+  #slib .veta p{margin:0 auto;font-family:var(--disp);font-weight:700;font-size:clamp(40px,5.2vw,92px);line-height:1.02;color:var(--zlata);letter-spacing:-.012em;max-width:17ch;text-wrap:balance}
+  #slib .veta:nth-child(3) p{font-size:clamp(56px,8.4vw,144px)}
   #slib .veta small{display:block;margin-top:18px;font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--seda)}
   #slib .tecky{position:absolute;right:28px;top:50%;transform:translateY(-50%);display:grid;gap:10px;z-index:3}
   #slib .tecky i{display:block;width:6px;height:6px;border-radius:50%;background:rgba(233,185,74,.25);transition:background .3s}
   #slib .tecky i.on{background:var(--zlata)}
-  /* mobil: tenký serif je na telefonu malý, závěr jde tučně písmem titulku z hera.
+  /* mobil: větší písmo podle šířky displeje.
      Věta sedí níž (--slib-vyse, JS čte v vh), uprostřed volné plochy nad dronem. */
   @media (max-width:760px){
     #slib{--slib-vyse:17}
@@ -362,31 +364,68 @@
   @media (prefers-reduced-motion:reduce){ #dolu svg{animation:none} }
   @media (max-width:700px){ #dolu{bottom:12px;font-size:9.5px} }
 
-  /* ---------- telefon na šířku: hero video přes celé okno ----------
-     Výzva k otočení je jen na dotykovém telefonu na výšku, v prázdném pruhu nad videem.
-     Třídu html.nasirku přidá JS jen na dotykovém telefonu otočeném na šířku, desktop ji nikdy
-     nedostane. Rám videa i vrstvy drží 16 : 9 uprostřed okna: nic se neořízne a popisky
-     sedí na stejných místech obrazu jako na desktopu. */
-  .natoc,#nasirkuZavri{display:none}
+  /* ---------- telefon na výšku: úvod „Na bok“ (Jakub, 16. 9. 2026) ----------
+     Na výšku se video nepřehrává. Hero je první snímek videa otočený o 90° a výzva k otočení,
+     nic dalšího. Po otočení telefonu se obraz narovná a z téhož snímku se rozjede video přes
+     celé okno (html.nasirku). Klepnutí kamkoli pustí video natočené o 90° (html.otoceny),
+     takže to jde i se zamčenou rotací. Desktop ani úzké okno s myší tohle nikdy nedostanou. */
+  .nabok,#nasirkuZavri,#celeokno,#prubeh,#pauzaZnak{display:none}
   @media (max-width:700px) and (orientation:portrait) and (hover:none) and (pointer:coarse){
-    .natoc{position:absolute;left:0;right:0;top:0;height:62px;margin:0;z-index:5;display:flex;align-items:center;
-      justify-content:center;gap:11px;pointer-events:none;font-family:var(--mono);font-size:10px;letter-spacing:.2em;
-      text-transform:uppercase;color:rgba(255,255,255,.72);animation:natocIn .6s ease 1s both}
-    .natoc svg{width:11px;height:17px;fill:none;stroke:rgba(255,255,255,.72);stroke-width:1.2;stroke-linecap:round;
-      animation:natocTo 3.2s ease-in-out 1.6s infinite}
-    html.natoceno .natoc{display:none}
+    html:not(.nasirku) #hero{height:100vh;height:100svh;min-height:0;display:block;padding:0;gap:0}
+    html:not(.nasirku) #hvbox,html:not(.nasirku) #textzona{display:none}
+    html:not(.nasirku) .nabok{display:block}
+    .nabok{position:absolute;inset:0;z-index:6;width:100%;height:100%;margin:0;padding:0;border:0;border-radius:0;
+      background:#05070C;color:#fff;font:inherit;text-align:center;cursor:pointer;overflow:hidden;-webkit-tap-highlight-color:transparent}
+    .nabok img{position:absolute;left:50%;top:50%;width:100vh;width:100svh;height:100vw;max-width:none;object-fit:cover;
+      transform:translate(-50%,-50%) rotate(90deg)}
+    /* text stojí přes střed stroje: střed ztmavit víc, okraje nechat číst jako fotku (bez stínu na písmu) */
+    .nabok::after{content:"";position:absolute;inset:0;
+      background:radial-gradient(92% 44% at 50% 50%,rgba(5,7,12,.8) 0%,rgba(5,7,12,.56) 58%,rgba(5,7,12,.4) 100%)}
+    .nabok-text{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 28px}
+    .nabok-ikona{width:22px;height:34px;margin-bottom:26px;fill:none;stroke:#fff;stroke-width:1.5;stroke-linecap:round;
+      animation:nabokKyv 3s ease-in-out .8s infinite}
+    .nabok-h{display:block;font-family:var(--disp);font-weight:700;font-size:clamp(50px,18.5vw,80px);line-height:.92;letter-spacing:-.01em;color:#fff}
+    .nabok-p{display:block;margin-top:20px;max-width:24ch;font-size:15.5px;line-height:1.45;color:rgba(234,240,250,.82);text-wrap:balance}
+    .nabok:focus-visible{outline:2px solid var(--accent);outline-offset:-8px}
   }
-  @keyframes natocIn{from{opacity:0}to{opacity:1}}
-  @keyframes natocTo{0%,30%{transform:rotate(0)}45%,80%{transform:rotate(-90deg)}95%,100%{transform:rotate(0)}}
-  @media (prefers-reduced-motion:reduce){ .natoc,.natoc svg{animation:none} }
+  /* ikona se nakloní tam, kam se má telefon otočit (doleva), a vrátí se */
+  @keyframes nabokKyv{0%,20%{transform:rotate(0)}38%,58%{transform:rotate(-22deg)}78%,100%{transform:rotate(0)}}
+  @media (prefers-reduced-motion:reduce){ .nabok-ikona{animation:none} }
 
+  /* ---------- telefon na šířku: hero video přes celé okno ----------
+     Třídu html.nasirku přidá JS jen na dotykovém telefonu, desktop ji nikdy nedostane.
+     Video vyplní celé okno (cover), vrstvy počítají polohu z cover geometrie jako na desktopu.
+     Místo ovladače jen křížek, tenká čára průběhu u spodní hrany a klepnutí = pauza. */
   html.nasirku,html.nasirku body{overflow:hidden;overscroll-behavior:none}
   html.nasirku #hero{position:fixed;inset:0;z-index:200;height:auto;min-height:0;display:block;padding:0;gap:0;
     container-type:size;touch-action:none}
   html.nasirku #hero::after{background:linear-gradient(180deg,rgba(5,7,12,.74) 0%,transparent 24%,transparent 42%,rgba(5,7,12,.72) 68%,rgba(5,7,12,.93) 100%)}
-  html.nasirku #hvbox,html.nasirku #textzona{position:absolute;inset:auto;left:50%;top:50%;transform:translate(-50%,-50%);
-    width:100%;height:100%;width:min(100cqw,calc(100cqh * 16 / 9));height:min(100cqh,calc(100cqw * 9 / 16));aspect-ratio:auto}
+  html.nasirku #hvbox,html.nasirku #textzona{position:absolute;inset:0;width:auto;height:auto;transform:none;aspect-ratio:auto}
   html.nasirku #textzona{display:block}
+  html.nasirku .scrollhint{display:none}
+  /* zamčená rotace: klepnutí na výšku otočí celé hero o 90°, drží ho na šířku v ruce */
+  @media (orientation:portrait){
+    html.nasirku.otoceny #hero{inset:auto;left:50%;top:50%;width:100vh;width:100svh;height:100vw;
+      transform:translate(-50%,-50%) rotate(90deg)}
+  }
+  html.nasirku #prubeh{display:block;position:absolute;left:0;right:0;bottom:0;height:3px;z-index:11;
+    background:rgba(255,255,255,.18);pointer-events:none}
+  #prubeh i{display:block;height:100%;background:rgba(255,255,255,.85);transform-origin:0 50%;transform:scaleX(0)}
+  html.nasirku.pauznuto #pauzaZnak{display:grid;place-items:center;position:absolute;left:50%;top:50%;z-index:11;
+    width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;pointer-events:none;
+    background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.25)}
+  #pauzaZnak svg{width:17px;height:20px;margin-left:4px;fill:rgba(255,255,255,.9)}
+  /* po doběhnutí na šířku: stránka je zpět, tlačítko v rohu pustí video znovu přes celé okno */
+  @media (orientation:landscape) and (max-height:500px) and (hover:none) and (pointer:coarse){
+    html:not(.nasirku) #hero{min-height:0}
+    /* popisky ve stránce stejně velké jako přes celé okno, desktopová velikost by přejela dron */
+    .popis strong{font-size:clamp(15px,2.5vw,22px)}
+    .popis.zaver strong{font-size:clamp(18px,3vw,28px)}
+    .popis .k{font-size:9px;margin-bottom:6px}
+    html:not(.nasirku) #celeokno{display:grid;place-items:center;position:absolute;z-index:12;right:16px;bottom:16px;
+      width:44px;height:44px;padding:0;border-radius:50%;cursor:pointer;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.22)}
+  }
+  #celeokno svg{width:16px;height:16px;fill:none;stroke:rgba(255,255,255,.85);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
   html.nasirku #popisky{position:absolute;inset:0;display:block;padding:0}
   html.nasirku .popis{position:absolute;max-width:min(430px,40%);text-align:left;transform:none}
   html.nasirku .popis.m-vpravo-dole{left:auto;top:auto;right:12%;bottom:20%;text-align:right}
@@ -410,6 +449,11 @@
     width:38px;height:38px;padding:0;border-radius:50%;cursor:pointer;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.22)}
   #nasirkuZavri svg{width:12px;height:12px;fill:none;stroke:rgba(255,255,255,.8);stroke-width:1.4;stroke-linecap:round}
 
+  /* telefon: lišta s CTA ani ovladač videa se neukazují nikdy, na výšku ani na šířku (Jakub 16. 9.: zavazí) */
+  @media (hover:none) and (pointer:coarse) and (max-width:700px),(hover:none) and (pointer:coarse) and (max-height:500px){
+    #lista,#ovladac{display:none}
+  }
+
 </style>
 <nav id="lista" aria-label="Jakub Skupin">
   <div class="w">
@@ -424,8 +468,18 @@
 </nav>
 <div class="koncept-fix" id="koncept" aria-label="Tato ukázka je koncept"><span>Koncept</span></div>
 <header id="hero">
-  <p class="natoc" aria-hidden="true"><svg viewBox="0 0 12 18"><rect x="1" y="1" width="10" height="16" rx="2"/><path d="M5 14.3h2"/></svg><span>Otočte telefon na šířku</span></p>
+  <button class="nabok" id="nabok" type="button" aria-label="Přehrát průlet dronu přes celou obrazovku">
+    <img src="/dron/v4/prulet-v4-poster.jpg" alt="" decoding="async">
+    <span class="nabok-text">
+      <svg class="nabok-ikona" viewBox="0 0 22 34" aria-hidden="true"><rect x="1" y="1" width="20" height="32" rx="4"/><path d="M8.5 28.5h5"/></svg>
+      <span class="nabok-h">Otočte<br> telefon</span>
+      <span class="nabok-p">Obraz se narovná a&nbsp;pustí průlet dronu.</span>
+    </span>
+  </button>
   <button id="nasirkuZavri" type="button" aria-label="Zavřít video přes celou obrazovku"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2 L12 12 M12 2 L2 12"/></svg></button>
+  <button id="celeokno" type="button" aria-label="Pustit video znovu přes celou obrazovku"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M16 21h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg></button>
+  <div id="prubeh" aria-hidden="true"><i></i></div>
+  <span id="pauzaZnak" aria-hidden="true"><svg viewBox="0 0 17 20"><path d="M1 1 L16 10 L1 19 Z"/></svg></span>
   <div id="hvbox">
   <video id="hv" poster="/dron/v4/prulet-v4-poster.jpg" autoplay muted playsinline
          webkit-playsinline preload="auto" disablepictureinpicture>
@@ -1890,6 +1944,9 @@
       // pozvánka dál se ukazuje jen na podrženém posledním snímku
       const dl = document.getElementById('dolu');
       if (dl) dl.hidden = !(hv.ended || (hv.duration && t >= hv.duration - 0.06));
+      // tenká čára průběhu: vidět je jen na telefonu přes celé okno
+      const pr = document.querySelector('#prubeh i');
+      if (pr && hv.duration) pr.style.transform = 'scaleX(' + Math.min(1, t / hv.duration).toFixed(4) + ')';
       if (chci === 'lidar') lidarKresli(t, b);
       if (chci === 'termo') termoKresli(t);
 
@@ -2000,7 +2057,11 @@
     hv.muted = true; hv.defaultMuted = true; hv.setAttribute('muted', '');
     const tlac = document.getElementById('hvplay');
     let hralo = false;
+    // telefon na výšku ukazuje jen úvod „Na bok“, video čeká na otočení nebo klepnutí
+    const naVysku = matchMedia('(max-width:700px) and (orientation:portrait) and (hover:none) and (pointer:coarse)');
+    const cekaNaOtoceni = () => naVysku.matches && !document.documentElement.classList.contains('nasirku');
     function pust(){
+      if (cekaNaOtoceni()){ if (!hv.paused) hv.pause(); return; }
       const s = hv.play();
       if (s && s.then) s.then(() => { hralo = true; if (tlac) tlac.hidden = true; rozjed(); })
                         .catch(() => { if (tlac) tlac.hidden = false; });
@@ -2009,9 +2070,16 @@
     // Safari v úsporném režimu autoplay odmítne bez ohledu na kódování, proto
     // nabídnout dotek. Klepnutí kamkoli do hero taky stačí.
     if (tlac) tlac.addEventListener('click', pust);
-    document.getElementById('hero').addEventListener('click', () => { if (hv.paused) pust(); });
+    // Na telefonu přes celé okno (bez ovladače) klepnutí do obrazu přepíná pauzu.
+    document.getElementById('hero').addEventListener('click', () => {
+      const plne = document.documentElement.classList.contains('nasirku');
+      if (plne && hv.ended) return;
+      if (hv.paused) pust(); else if (plne) hv.pause();
+    });
     hv.addEventListener('loadeddata', () => { if (hv.paused && !hv.ended) pust(); });
     pust();
+    // atribut autoplay spustí video i bez pust(): na telefonu na výšku ho hned zastavit
+    hv.addEventListener('play', () => { if (cekaNaOtoceni()) hv.pause(); });
 
     // Smyčka s pauzou na konci: video dojede, poslední snímek chvíli drží
     // (tam se ukáže pozvánka dál) a pak se rozjede znovu od začátku.
@@ -2085,39 +2153,58 @@
     (function(){
       const root = document.documentElement, hero = document.getElementById('hero'), hvbox = document.getElementById('hvbox');
       const nasirku = matchMedia('(orientation: landscape) and (max-height: 500px) and (hover: none) and (pointer: coarse)');
-      const zavri = document.getElementById('nasirkuZavri');
+      const zavri = document.getElementById('nasirkuZavri'), nabok = document.getElementById('nabok'), celeokno = document.getElementById('celeokno');
       let zap = false, odehrano = false, videt = true, konec = 0;
-      // na výšku si pamatuje, jestli je hero video vidět; po otočení už by měření lhalo
+      // na výšku si pamatuje, jestli je hero vidět; po otočení už by měření lhalo.
+      // Na telefonu na výšku je video schované pod úvodem, měří se tedy celé hero.
       function zmer(){
         if (zap || nasirku.matches) return;
-        const r = hvbox.getBoundingClientRect();
+        const r = (hvbox.offsetHeight ? hvbox : hero).getBoundingClientRect();
         videt = r.height > 0 && r.bottom > r.height*0.5 && r.top < innerHeight*0.6;
       }
-      function zapni(){
-        zap = true; root.classList.add('nasirku', 'natoceno');
+      // otocit: klepnutí na výšku (i se zamčenou rotací), hero se natočí o 90°
+      function zapni(otocit){
+        zap = true; root.classList.add('nasirku'); root.classList.toggle('otoceny', !!otocit);
         if (scrollY) scrollTo(0, 0);
         clearTimeout(znovu); clearTimeout(konec); loopVypni();
         try { hv.currentTime = 0; } catch (e) {}
         pust(); tik();
       }
+      // telefon na výšku bez videa přes celé okno: video i bumerang stojí pod úvodem
+      function uspi(){
+        if (!cekaNaOtoceni()) return;
+        clearTimeout(znovu); loopVypni();
+        if (!hv.paused) hv.pause();
+      }
       function vypni(){
         if (!zap) return;
         zap = false; clearTimeout(konec);
-        root.classList.remove('nasirku');
-        tik();
+        root.classList.remove('nasirku', 'otoceny', 'pauznuto');
+        uspi(); tik();
       }
       function zmena(){
         // úplně nahoře je hero vidět vždy, i když poslední měření scrollu ještě nedoběhlo
-        if (nasirku.matches){ if (!zap && !odehrano && (videt || scrollY < 80)) zapni(); }
-        else { odehrano = false; vypni(); zmer(); }
+        if (nasirku.matches){ if (!zap && !odehrano && (videt || scrollY < 80)) zapni(false); }
+        else { odehrano = false; vypni(); uspi(); zmer(); }
       }
       if (nasirku.addEventListener) nasirku.addEventListener('change', zmena); else if (nasirku.addListener) nasirku.addListener(zmena);
+      // z výšky do jiné polohy bez celého okna (hero mimo obraz, video už doběhlo): video hraje jako dřív
+      const zVysky = () => {
+        if (naVysku.matches || zap) return;
+        const r = hero.getBoundingClientRect();
+        if (r.bottom > 0 && r.top < innerHeight && hv.paused && !hv.ended) pust();
+      };
+      if (naVysku.addEventListener) naVysku.addEventListener('change', zVysky); else if (naVysku.addListener) naVysku.addListener(zVysky);
       addEventListener('scroll', zmer, {passive:true});
       hv.addEventListener('ended', () => { if (zap){ odehrano = true; konec = setTimeout(vypni, 900); } });
-      if (zavri) zavri.addEventListener('click', e => { e.stopPropagation(); odehrano = true; vypni(); });
-      hero.addEventListener('touchmove', e => { if (zap && !e.target.closest('#ovladac')) e.preventDefault(); }, {passive:false});
+      ['play','pause','ended'].forEach(u => hv.addEventListener(u, () => root.classList.toggle('pauznuto', zap && hv.paused && !hv.ended)));
+      // křížek na šířku nechá video zavřené až do otočení zpět; na výšku další otočení pustí video znovu
+      if (zavri) zavri.addEventListener('click', e => { e.stopPropagation(); odehrano = nasirku.matches; vypni(); });
+      if (nabok) nabok.addEventListener('click', e => { e.stopPropagation(); odehrano = false; zapni(!nasirku.matches); });
+      if (celeokno) celeokno.addEventListener('click', e => { e.stopPropagation(); odehrano = false; zapni(false); });
+      hero.addEventListener('touchmove', e => { if (zap) e.preventDefault(); }, {passive:false});
       zmer();
-      if (nasirku.matches && scrollY < 40) zapni();   // stránka otevřená rovnou na šířku
+      if (nasirku.matches && scrollY < 40) zapni(false);   // stránka otevřená rovnou na šířku
     })();
 
     // dokud je hero mimo obraz, video ani vrstvu nehnat zbytečně
