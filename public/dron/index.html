@@ -76,8 +76,8 @@
   #slib .tecky{position:absolute;right:28px;top:50%;transform:translateY(-50%);display:grid;gap:10px;z-index:3}
   #slib .tecky i{display:block;width:6px;height:6px;border-radius:50%;background:rgba(233,185,74,.25);transition:background .3s}
   #slib .tecky i.on{background:var(--zlata)}
-  /* šipka zpět na hero: jen na úplném konci, v černém rohu vedle dronu */
-  #nahoru{position:absolute;right:24px;bottom:24px;z-index:4;width:42px;height:42px;border-radius:50%;padding:0;
+  /* šipka zpět na hero: v rohu okna, jakmile je vidět fotka dronu na kameni (na konci sedí v jeho černém rohu) */
+  #nahoru{position:fixed;right:24px;bottom:24px;z-index:70;width:42px;height:42px;border-radius:50%;padding:0;
     display:grid;place-items:center;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.22);cursor:pointer;
     opacity:0;visibility:hidden;transform:translateY(8px);
     transition:opacity .4s ease,transform .4s ease,visibility .4s,border-color .25s ease}
@@ -102,18 +102,19 @@
   }
   /* horní lišta jako na /equator: při načtení schovaná, ať hero video zůstane čisté.
      Scroll dolů ji nechá schovanou, scroll nahoru ji vysune (JS na konci stránky). */
-  #lista{position:fixed;top:0;left:0;right:0;z-index:80;background:#000;transform:translateY(-100%);
+  #lista{position:fixed;top:0;left:0;right:0;z-index:80;background:linear-gradient(180deg,rgba(5,7,12,.45),rgba(5,7,12,0));transform:translateY(-100%);
     transition:transform .35s ease;font-family:'Manrope',ui-sans-serif,system-ui,sans-serif;line-height:1.6}
   #lista.je,#lista:focus-within{transform:none}
   #lista .w{max-width:1120px;margin:0 auto;padding:0 20px}
   @media (min-width:768px){ #lista .w{padding:0 32px} }
-  #lista .top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 0;font-size:13px;color:#9C9C98}
-  #lista .brand{font-family:'Syne',sans-serif;font-weight:700;letter-spacing:-.02em;color:#F3F3F1;text-decoration:none;font-size:15px;white-space:nowrap}
+  /* lišta je průhledná, proto světlejší text a viditelnější obrys než na /equator */
+  #lista .top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 0;font-size:13px;color:rgba(255,255,255,.8)}
+  #lista .brand{font-family:'Syne',sans-serif;font-weight:700;letter-spacing:-.02em;color:#fff;text-decoration:none;font-size:15px;white-space:nowrap}
   #lista .links{display:flex;align-items:center;gap:20px}
-  #lista .links a{color:#9C9C98;text-decoration:none;white-space:nowrap;transition:color .25s ease}
-  #lista .links a:hover{color:#F3F3F1}
-  #lista .links .navbtn{border:1px solid #26262A;border-radius:999px;padding:8px 20px;font-weight:500;transition:border-color .25s ease,color .25s ease}
-  #lista .links .navbtn:hover{border-color:#6E6E6B;color:#F3F3F1}
+  #lista .links a{color:rgba(255,255,255,.8);text-decoration:none;white-space:nowrap;transition:color .25s ease}
+  #lista .links a:hover{color:#fff}
+  #lista .links .navbtn{border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:8px 20px;font-weight:500;transition:border-color .25s ease,color .25s ease}
+  #lista .links .navbtn:hover{border-color:rgba(255,255,255,.7);color:#fff}
   @media (max-width:479px){ #lista .top{font-size:12px} #lista .links{gap:14px} #lista .links a:not(.navbtn){display:none} #lista .links .navbtn{padding:7px 14px} }
   /* placka Koncept uhne pod vysunutou lištu */
   .koncept-fix{transition:opacity .3s ease,transform .35s ease}
@@ -1088,10 +1089,10 @@
   @media (max-width:760px){ .karty{grid-template-columns:1fr} }
 </style>
 
-<section id="misto" class="sek" aria-label="Kam u vás nikdo nechce lézt">
+<section id="misto" class="sek" aria-label="Které místo u vás kontrolujete nejhůř">
   <div class="rám">
-    <h2>Kam u vás nikdo nechce lézt?</h2>
-    <p class="pod">Popište nám to místo. <b>Řekneme, jestli tam RoboAid doletí.</b></p>
+    <h2>Které místo u vás kontrolujete nejhůř?</h2>
+    <p class="pod"><b>Řekneme, jestli tam RoboAid doletí.</b></p>
     <a class="btn" href="https://fly4future.com/contact/" target="_blank" rel="noopener">Popsat místo <span aria-hidden="true">&#8599;</span></a>
   </div>
 </section>
@@ -1099,7 +1100,7 @@
 <section id="rodina" class="sek" aria-label="Další drony Fly4Future">
   <div class="rám">
     <div class="hlava">
-      <p class="kick">Ze stejné dílny</p>
+      <p class="kick">Zbytek letky</p>
       <h2>Pro jiné mise</h2>
     </div>
     <div class="karty">
@@ -1208,10 +1209,10 @@
     <div class="veta"><div><p>RoboAid</p><small>Where GPS ends</small></div></div>
     <img class="dron" id="dronFront" src="/dron/img/front.jpg" alt="RoboAid zepředu na černé skále">
     <div class="tecky"><i></i><i></i><i></i></div>
-    <button id="nahoru" type="button" aria-label="Zpět nahoru na začátek stránky" title="Zpět nahoru">
-      <svg viewBox="0 0 14 20" aria-hidden="true"><path d="M7 19 V3 M1.5 8.5 L7 2 L12.5 8.5"/></svg>
-    </button>
   </div>
+  <button id="nahoru" type="button" aria-label="Zpět nahoru na začátek stránky" title="Zpět nahoru">
+    <svg viewBox="0 0 14 20" aria-hidden="true"><path d="M7 19 V3 M1.5 8.5 L7 2 L12.5 8.5"/></svg>
+  </button>
 </section>
 
 <script>
@@ -1891,7 +1892,7 @@
     // Poslední věta (RoboAid) už nezhasíná ani neujíždí nahoru: usadí se nad dronem
     // a scroll stránky končí krátce po tom (KONEC). Výška #slib v CSS počítá se stejným číslem.
     const KONEC = 0.62, USEKY = (n - 1) + KONEC;
-    const nahoru = document.getElementById('nahoru');
+    const nahoru = document.getElementById('nahoru'), dronFoto = document.getElementById('dronFront');
     const clamp = (x,a,b) => Math.min(b, Math.max(a, x));
     const smooth = (a,b,x) => { const t = clamp((x-a)/(b-a),0,1); return t*t*(3-2*t); };
     const easeOut = t => 1 - Math.pow(1-t, 3);
@@ -1910,7 +1911,8 @@
         if (op > 0.2) akt = i;
       });
       tecky.forEach((d, i) => d.classList.toggle('on', i === akt));
-      if (nahoru) nahoru.classList.toggle('je', P*USEKY - (n - 1) >= 0.5);
+      // šipka naskočí, jakmile je vidět 40 % fotky dronu na kameni (horní část stroje)
+      if (nahoru && dronFoto){ const d = dronFoto.getBoundingClientRect(); nahoru.classList.toggle('je', d.height > 0 && d.top < vh - d.height*0.4); }
     }
     let raf = 0; const plan = () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; tick(); }); };
     addEventListener('scroll', plan, {passive:true}); addEventListener('resize', plan); tick();
