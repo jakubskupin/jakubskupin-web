@@ -445,7 +445,8 @@
   html.nasirku .herotext p{font-size:13px}
   html.nasirku #herofx::before{display:block}
   html.nasirku #dolu{display:none}
-  html.nasirku #nasirkuZavri{display:grid;place-items:center;position:absolute;z-index:12;top:12px;right:12px;
+  html.nasirku #nasirkuZavri{display:grid;place-items:center;position:absolute;z-index:12;
+    top:max(12px,env(safe-area-inset-top));right:max(12px,env(safe-area-inset-right));
     width:38px;height:38px;padding:0;border-radius:50%;cursor:pointer;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.22)}
   #nasirkuZavri svg{width:12px;height:12px;fill:none;stroke:rgba(255,255,255,.8);stroke-width:1.4;stroke-linecap:round}
 
@@ -473,7 +474,7 @@
     <span class="nabok-text">
       <svg class="nabok-ikona" viewBox="0 0 22 34" aria-hidden="true"><rect x="1" y="1" width="20" height="32" rx="4"/><path d="M8.5 28.5h5"/></svg>
       <span class="nabok-h">Otočte<br> telefon</span>
-      <span class="nabok-p">Obraz se narovná a&nbsp;pustí průlet dronu.</span>
+      <span class="nabok-p">Spustí se průlet dronu.</span>
     </span>
   </button>
   <button id="nasirkuZavri" type="button" aria-label="Zavřít video přes celou obrazovku"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2 L12 12 M12 2 L2 12"/></svg></button>
@@ -2155,16 +2156,26 @@
       const nasirku = matchMedia('(orientation: landscape) and (max-height: 500px) and (hover: none) and (pointer: coarse)');
       const zavri = document.getElementById('nasirkuZavri'), nabok = document.getElementById('nabok'), celeokno = document.getElementById('celeokno');
       let zap = false, odehrano = false, videt = true, konec = 0;
-      // na výšku si pamatuje, jestli je hero vidět; po otočení už by měření lhalo.
-      // Na telefonu na výšku je video schované pod úvodem, měří se tedy celé hero.
+      // na výšku si pamatuje, jestli je hero vidět. Měří jen telefon na výšku: při otočení iOS mění
+      // šířku a výšku okna ve dvou krocích a měření v mezistavu (i s posunutým scrollem) by lhalo.
       function zmer(){
-        if (zap || nasirku.matches) return;
-        const r = (hvbox.offsetHeight ? hvbox : hero).getBoundingClientRect();
+        if (zap || !naVysku.matches) return;
+        const r = hero.getBoundingClientRect();
         videt = r.height > 0 && r.bottom > r.height*0.5 && r.top < innerHeight*0.6;
+      }
+      // skutečná celá obrazovka bez lišt prohlížeče, kde ji prohlížeč dovolí (Android, iPad);
+      // Safari na iPhonu ji stránce nedá, tam zůstane hero roztažené přes celé okno
+      const meta = document.querySelector('meta[name="viewport"]'), metaPuv = meta ? meta.getAttribute('content') : '';
+      function celaObrazovka(){
+        const f = root.requestFullscreen || root.webkitRequestFullscreen;
+        if (!f || document.fullscreenElement || document.webkitFullscreenElement) return;
+        try { const p = f.call(root, {navigationUI: 'hide'}); if (p && p.catch) p.catch(() => {}); } catch (e) {}
       }
       // otocit: klepnutí na výšku (i se zamčenou rotací), hero se natočí o 90°
       function zapni(otocit){
         zap = true; root.classList.add('nasirku'); root.classList.toggle('otoceny', !!otocit);
+        // po dobu videa až do krajů displeje, i pod výřez kamery
+        if (meta) meta.setAttribute('content', metaPuv + ',viewport-fit=cover');
         if (scrollY) scrollTo(0, 0);
         clearTimeout(znovu); clearTimeout(konec); loopVypni();
         try { hv.currentTime = 0; } catch (e) {}
@@ -2180,28 +2191,44 @@
         if (!zap) return;
         zap = false; clearTimeout(konec);
         root.classList.remove('nasirku', 'otoceny', 'pauznuto');
+        if (meta) meta.setAttribute('content', metaPuv);
+        if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(() => {});
+        else if (document.webkitFullscreenElement && document.webkitExitFullscreen) document.webkitExitFullscreen();
         uspi(); tik();
       }
+      const telefon = () => matchMedia('(hover: none) and (pointer: coarse)').matches && Math.min(screen.width, screen.height) <= 500;
+      const heroNaObrazovce = () => { const r = hero.getBoundingClientRect(); return r.bottom > innerHeight*0.5 && r.top < innerHeight*0.5; };
       function zmena(){
         // úplně nahoře je hero vidět vždy, i když poslední měření scrollu ještě nedoběhlo
         if (nasirku.matches){ if (!zap && !odehrano && (videt || scrollY < 80)) zapni(false); }
         else { odehrano = false; vypni(); uspi(); zmer(); }
       }
       if (nasirku.addEventListener) nasirku.addEventListener('change', zmena); else if (nasirku.addListener) nasirku.addListener(zmena);
-      // z výšky do jiné polohy bez celého okna (hero mimo obraz, video už doběhlo): video hraje jako dřív
-      const zVysky = () => {
-        if (naVysku.matches || zap) return;
-        const r = hero.getBoundingClientRect();
-        if (r.bottom > 0 && r.top < innerHeight && hv.paused && !hv.ended) pust();
-      };
-      if (naVysku.addEventListener) naVysku.addEventListener('change', zVysky); else if (naVysku.addListener) naVysku.addListener(zVysky);
+      // Otočení telefonu: rozhodne hned událost otočení (jen v ní prohlížeč dovolí celou obrazovku
+      // bez klepnutí) a pojistkou ještě ustálená poloha, kdyby změna dotazu přišla v mezistavu.
+      let ustal = 0;
+      function otoceni(){
+        const o = screen.orientation && screen.orientation.type;
+        const naSirku = o ? o.indexOf('landscape') === 0 : Math.abs(window.orientation || 0) === 90;
+        if (naSirku && telefon() && !zap && !odehrano && (videt || scrollY < 80)){ zapni(false); celaObrazovka(); }
+        clearTimeout(ustal);
+        ustal = setTimeout(() => {
+          if (zap) return;
+          if (nasirku.matches){ if (!odehrano && (videt || heroNaObrazovce())) zapni(false); }
+          // jiná poloha bez videa přes celé okno: hero hraje jako na desktopu
+          else if (telefon() && !naVysku.matches && hv.paused && !hv.ended && heroNaObrazovce()) pust();
+        }, 450);
+      }
+      if (naVysku.addEventListener) naVysku.addEventListener('change', otoceni); else if (naVysku.addListener) naVysku.addListener(otoceni);
+      if (screen.orientation && screen.orientation.addEventListener) screen.orientation.addEventListener('change', otoceni);
+      else addEventListener('orientationchange', otoceni);
       addEventListener('scroll', zmer, {passive:true});
       hv.addEventListener('ended', () => { if (zap){ odehrano = true; konec = setTimeout(vypni, 900); } });
       ['play','pause','ended'].forEach(u => hv.addEventListener(u, () => root.classList.toggle('pauznuto', zap && hv.paused && !hv.ended)));
       // křížek na šířku nechá video zavřené až do otočení zpět; na výšku další otočení pustí video znovu
       if (zavri) zavri.addEventListener('click', e => { e.stopPropagation(); odehrano = nasirku.matches; vypni(); });
-      if (nabok) nabok.addEventListener('click', e => { e.stopPropagation(); odehrano = false; zapni(!nasirku.matches); });
-      if (celeokno) celeokno.addEventListener('click', e => { e.stopPropagation(); odehrano = false; zapni(false); });
+      if (nabok) nabok.addEventListener('click', e => { e.stopPropagation(); odehrano = false; zapni(!nasirku.matches); celaObrazovka(); });
+      if (celeokno) celeokno.addEventListener('click', e => { e.stopPropagation(); odehrano = false; zapni(false); celaObrazovka(); });
       hero.addEventListener('touchmove', e => { if (zap) e.preventDefault(); }, {passive:false});
       zmer();
       if (nasirku.matches && scrollY < 40) zapni(false);   // stránka otevřená rovnou na šířku
