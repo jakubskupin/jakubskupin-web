@@ -1202,12 +1202,17 @@
 
 <!-- ===== Rozhovor: minuta Walter × Irena (Seedance 2.5) nad CTA. Po doscrollování samo hraje bez zvuku s českými titulky, vpravo dole zvuk a pauza ===== -->
 <style>
-  #rozhovor{border-top:1px solid var(--line);padding-bottom:0}
-  #rozhovor ~ #misto{border-top:0}
+  #rozhovor{border-top:1px solid var(--line);padding-bottom:clamp(32px,4vw,48px);z-index:0;--rz-presah:clamp(72px,10vw,140px)}
+  /* CTA pod rozhovorem bez vlastní černé plochy (body má stejnou barvu), aby do jejího horního okraje dobíhala silnice z tunelu */
+  #rozhovor ~ #misto{border-top:0;background:radial-gradient(60% 70% at 50% 100%,rgba(233,185,74,.07),transparent 70%)}
+  /* tunel za videem: fotka přes celou šířku, ztlumená, úběžník sedí na středu videa, parallax přes transform (iOS neumí background-attachment:fixed) */
+  .rz-pozadi{position:absolute;left:0;right:0;top:0;bottom:calc(-1 * var(--rz-presah));z-index:-1;overflow:hidden;pointer-events:none;
+    -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 min(16vw,240px),#000 calc(100% - var(--rz-presah)),transparent 100%);
+            mask-image:linear-gradient(180deg,transparent 0,#000 min(16vw,240px),#000 calc(100% - var(--rz-presah)),transparent 100%)}
+  .rz-pozadi img{position:absolute;left:50%;top:55%;width:100%;max-width:none;height:auto;opacity:.36;transform:translate3d(-50%,-53.8%,0)}
   .rz-hlava{max-width:960px;margin:0 auto clamp(24px,3vw,36px)}
   .rz-hlava h2{max-width:18ch}
   .rz-hlava .pod{max-width:62ch}
-  .rz-pozn{margin:14px auto 0;max-width:960px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
   #rozhovor video::cue{background:rgba(7,9,15,.72);color:#fff;font-family:inherit;font-size:clamp(14px,1.7vw,22px);font-weight:500}
   .rz-ram{position:relative;max-width:960px;margin:0 auto;border-radius:16px;overflow:hidden;
     border:1px solid var(--line);background:#000;aspect-ratio:16/9}
@@ -1223,14 +1228,15 @@
   #rozhovor .i-zvuk,#rozhovor .i-play{display:none}
   #rozhovor.zvuk .i-zvuk,#rozhovor.pauza .i-play{display:block}
   #rozhovor.zvuk .i-ticho,#rozhovor.pauza .i-pauza{display:none}
-  @media (max-width:760px){ .rz-ram{border-radius:12px} }
+  @media (max-width:760px){ .rz-ram{border-radius:12px} .rz-pozadi img{opacity:.44} }
 </style>
 
 <section id="rozhovor" class="sek pauza" aria-label="Rozhovor o inspekci šachty s RoboAidem">
+  <div class="rz-pozadi" aria-hidden="true"><img id="rzTunel" src="/dron/rozhovor/tunel-pozadi.webp" width="832" height="1248" alt="" loading="lazy" decoding="async"></div>
   <div class="rám">
     <div class="rz-hlava">
       <h2>Kdo dnes leze do šachty a kdo ji brzy proletí</h2>
-      <p class="pod">Walter Hofer se stará o silniční tunely v Rakousku: jedenáct kilometrů a větrací šachty hluboké až devadesát metrů. Irena Kovářová vede firmu, která postavila RoboAid. Minuta o tom, jak dnes vypadá kontrola jedné šachty a co se změní, když ji místo lezců proletí dron bez GPS.</p>
+      <p class="pod">Walter Hofer se stará o silniční tunely v Rakousku.</p>
     </div>
     <div class="rz-ram">
       <video id="rzVideo" poster="/dron/rozhovor/f4f-podcast-v2-poster.jpg" muted playsinline preload="metadata">
@@ -1253,7 +1259,6 @@
         </button>
       </div>
     </div>
-    <p class="rz-pozn">Postavy jsou fiktivní, rozhovor vznikl s pomocí AI. Parametry RoboAidu odpovídají skutečnosti</p>
   </div>
 </section>
 
@@ -1303,6 +1308,38 @@
     }, {threshold:[0, 0.6]}).observe(v);
   }
   stav();
+})();
+
+// tunel za videem: úběžník fotky drží střed videa, při scrollu jede fotka pomaleji než stránka
+(function(){
+  var sek = document.getElementById('rozhovor'), obal = sek && sek.querySelector('.rz-pozadi'),
+      img = document.getElementById('rzTunel'), ram = sek && sek.querySelector('.rz-ram');
+  if (!obal || !img || !ram) return;
+  var UBEZNIK = 53.8, SILA = 0.2;   // úběžník v % výšky fotky; o kolik fotka zaostává za stránkou
+  var klid = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var vStred = 0, raf = 0, blizko = true;
+
+  function zmer(){   // střed videa od horní hrany vrstvy, mění se jen s rozvržením
+    var o = obal.getBoundingClientRect(), r = ram.getBoundingClientRect();
+    vStred = r.top + r.height / 2 - o.top;
+    img.style.top = vStred + 'px';
+  }
+  function kresli(){
+    raf = 0;
+    if (klid) return;
+    var d = obal.getBoundingClientRect().top + vStred - innerHeight / 2;   // o kolik je střed videa pod středem okna
+    img.style.transform = 'translate3d(-50%,-' + UBEZNIK + '%,0) translateY(' + (-SILA * d).toFixed(1) + 'px)';
+  }
+  function plan(){ if (blizko && !raf) raf = requestAnimationFrame(kresli); }
+  function premer(){ zmer(); plan(); }
+
+  if ('IntersectionObserver' in window){
+    new IntersectionObserver(function(z){ blizko = z[0].isIntersecting; plan(); }, {rootMargin:'50% 0px'}).observe(obal);
+  }
+  if (!klid) addEventListener('scroll', plan, {passive:true});
+  addEventListener('resize', premer);
+  if ('ResizeObserver' in window) new ResizeObserver(premer).observe(sek);
+  premer();
 })();
 </script>
 
