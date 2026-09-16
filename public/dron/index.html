@@ -61,6 +61,13 @@
   #fakta b{display:block;font-family:var(--disp);font-size:20px;letter-spacing:0;color:#fff;margin-bottom:3px}
   #fakta b.z{color:var(--zlata)}
   #hero .herotext{bottom:17%} #hero .scrollhint{display:none}
+  /* mobil: fakta jako drobná mřížka 2 × 2, nic se neposouvá do strany a nekřičí */
+  @media (max-width:760px){
+    #fakta ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;padding:0;overflow:visible;background:var(--line)}
+    #fakta li,#fakta li:first-child{padding:11px 20px 12px;border-left:0;white-space:normal;background:#05070C;
+      font-size:10px;letter-spacing:.06em;line-height:1.4}
+    #fakta b{font-size:14px;margin-bottom:1px}
+  }
 
   /* sticky dron: nese syntézu, ne beaty videa */
   /* 480vh by na tři věty. Poslední věta se usadí v 0,62 svého úseku a tam stránka končí:
@@ -76,6 +83,17 @@
   #slib .tecky{position:absolute;right:28px;top:50%;transform:translateY(-50%);display:grid;gap:10px;z-index:3}
   #slib .tecky i{display:block;width:6px;height:6px;border-radius:50%;background:rgba(233,185,74,.25);transition:background .3s}
   #slib .tecky i.on{background:var(--zlata)}
+  /* mobil: tenký serif je na telefonu malý, závěr jde tučně písmem titulku z hera.
+     Věta sedí níž (--slib-vyse, JS čte v vh), uprostřed volné plochy nad dronem. */
+  @media (max-width:760px){
+    #slib{--slib-vyse:17}
+    #slib .veta{width:calc(100vw - 40px)}
+    #slib .veta p{font-family:var(--disp);font-weight:700;font-size:clamp(40px,12.8vw,62px);line-height:1.04;
+      letter-spacing:-.012em;max-width:none;text-wrap:balance}
+    #slib .veta:nth-child(3) p{font-size:clamp(56px,19vw,88px)}
+    #slib .veta small{margin-top:16px;font-size:11px;letter-spacing:.16em}
+    #slib .tecky{right:10px}
+  }
   /* šipka zpět na hero: v rohu okna, jakmile je vidět fotka dronu na kameni (na konci sedí v jeho černém rohu) */
   #nahoru{position:fixed;right:24px;bottom:24px;z-index:70;width:42px;height:42px;border-radius:50%;padding:0;
     display:grid;place-items:center;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.22);cursor:pointer;
@@ -344,6 +362,53 @@
   @media (prefers-reduced-motion:reduce){ #dolu svg{animation:none} }
   @media (max-width:700px){ #dolu{bottom:12px;font-size:9.5px} }
 
+  /* ---------- telefon na šířku: hero video přes celé okno ----------
+     Výzva k otočení je jen na dotykovém telefonu na výšku, v prázdném pruhu nad videem.
+     Třídu html.nasirku přidá JS jen na dotykovém telefonu otočeném na šířku, desktop ji nikdy
+     nedostane. Rám videa i vrstvy drží 16 : 9 uprostřed okna: nic se neořízne a popisky
+     sedí na stejných místech obrazu jako na desktopu. */
+  .natoc,#nasirkuZavri{display:none}
+  @media (max-width:700px) and (orientation:portrait) and (hover:none) and (pointer:coarse){
+    .natoc{position:absolute;left:0;right:0;top:0;height:62px;margin:0;z-index:5;display:flex;align-items:center;
+      justify-content:center;gap:11px;pointer-events:none;font-family:var(--mono);font-size:10px;letter-spacing:.2em;
+      text-transform:uppercase;color:rgba(255,255,255,.72);animation:natocIn .6s ease 1s both}
+    .natoc svg{width:11px;height:17px;fill:none;stroke:rgba(255,255,255,.72);stroke-width:1.2;stroke-linecap:round;
+      animation:natocTo 3.2s ease-in-out 1.6s infinite}
+    html.natoceno .natoc{display:none}
+  }
+  @keyframes natocIn{from{opacity:0}to{opacity:1}}
+  @keyframes natocTo{0%,30%{transform:rotate(0)}45%,80%{transform:rotate(-90deg)}95%,100%{transform:rotate(0)}}
+  @media (prefers-reduced-motion:reduce){ .natoc,.natoc svg{animation:none} }
+
+  html.nasirku,html.nasirku body{overflow:hidden;overscroll-behavior:none}
+  html.nasirku #hero{position:fixed;inset:0;z-index:200;height:auto;min-height:0;display:block;padding:0;gap:0;
+    container-type:size;touch-action:none}
+  html.nasirku #hero::after{background:linear-gradient(180deg,rgba(5,7,12,.74) 0%,transparent 24%,transparent 42%,rgba(5,7,12,.72) 68%,rgba(5,7,12,.93) 100%)}
+  html.nasirku #hvbox,html.nasirku #textzona{position:absolute;inset:auto;left:50%;top:50%;transform:translate(-50%,-50%);
+    width:100%;height:100%;width:min(100cqw,calc(100cqh * 16 / 9));height:min(100cqh,calc(100cqw * 9 / 16));aspect-ratio:auto}
+  html.nasirku #textzona{display:block}
+  html.nasirku #popisky{position:absolute;inset:0;display:block;padding:0}
+  html.nasirku .popis{position:absolute;max-width:min(430px,40%);text-align:left;transform:none}
+  html.nasirku .popis.m-vpravo-dole{left:auto;top:auto;right:12%;bottom:20%;text-align:right}
+  html.nasirku .popis.m-vlevo-dole{right:auto;top:auto;left:12%;bottom:20%}
+  html.nasirku .popis.m-vpravo-nahore{left:auto;bottom:auto;right:12%;top:18%;text-align:right}
+  html.nasirku .popis.m-vlevo-nahore{right:auto;bottom:auto;left:12%;top:18%}
+  html.nasirku .popis.m-stred-dole{right:auto;bottom:auto;left:46%;top:56%}
+  html.nasirku .popis.m-u-tepla{right:auto;bottom:auto;left:59.5%;top:49%;max-width:min(400px,30%)}
+  html.nasirku .popis.m-nahore-stred{right:auto;bottom:auto;left:50%;top:8%;transform:translateX(-50%);text-align:center;max-width:70%}
+  html.nasirku .popis strong{font-size:clamp(15px,2.5vw,22px)}
+  html.nasirku .popis.zaver strong{font-size:clamp(18px,3vw,28px)}
+  html.nasirku .popis .k{font-size:9px;margin-bottom:6px}
+  html.nasirku #hero .herotext{position:absolute;left:0;right:0;top:auto;bottom:16%;padding:0 24px;text-align:center}
+  html.nasirku #ovladac{bottom:18px}
+  html.nasirku .herotext .num{font-size:9.5px;margin-bottom:6px}
+  html.nasirku .herotext h1{font-size:clamp(22px,4.2vw,34px);max-width:none;margin-bottom:6px}
+  html.nasirku .herotext p{font-size:13px}
+  html.nasirku #herofx::before{display:block}
+  html.nasirku #dolu{display:none}
+  html.nasirku #nasirkuZavri{display:grid;place-items:center;position:absolute;z-index:12;top:12px;right:12px;
+    width:38px;height:38px;padding:0;border-radius:50%;cursor:pointer;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.22)}
+  #nasirkuZavri svg{width:12px;height:12px;fill:none;stroke:rgba(255,255,255,.8);stroke-width:1.4;stroke-linecap:round}
 
 </style>
 <nav id="lista" aria-label="Jakub Skupin">
@@ -359,6 +424,8 @@
 </nav>
 <div class="koncept-fix" id="koncept" aria-label="Tato ukázka je koncept"><span>Koncept</span></div>
 <header id="hero">
+  <p class="natoc" aria-hidden="true"><svg viewBox="0 0 12 18"><rect x="1" y="1" width="10" height="16" rx="2"/><path d="M5 14.3h2"/></svg><span>Otočte telefon na šířku</span></p>
+  <button id="nasirkuZavri" type="button" aria-label="Zavřít video přes celou obrazovku"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2 L12 12 M12 2 L2 12"/></svg></button>
   <div id="hvbox">
   <video id="hv" poster="/dron/v4/prulet-v4-poster.jpg" autoplay muted playsinline
          webkit-playsinline preload="auto" disablepictureinpicture>
@@ -854,6 +921,25 @@
   .li-akce{display:flex;padding:6px 8px}
   .li-akce span{flex:1 1 0;text-align:center;padding:9px 4px;font-size:13px;font-weight:600;
     color:#5f6b7a;border-radius:4px}
+  /* mobil: text jako v LinkedIn feedu, jen první dvě věty a „…více“, zbytek po klepnutí;
+     pod videem reakce a počty. Desktop ukazuje celý text jako dřív a řádek reakcí nemá. */
+  .li-vice,.li-eng{display:none}
+  @media (max-width:760px){
+    .li-text:not(.otevreno){cursor:pointer}
+    .li-text:not(.otevreno) .li-zbytek{display:none}
+    .li-text:not(.otevreno) .li-vice{display:inline}
+    .li-vice{margin:0 0 0 .3em;padding:0;border:0;background:none;font:inherit;color:#666;cursor:pointer}
+    .li-vice:hover,.li-vice:focus-visible{color:#0a66c2;text-decoration:underline;outline:none}
+    .li-text{padding-bottom:12px}
+    .li-media{border-bottom:0}
+    .li-eng{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 16px;padding:9px 0 8px;
+      border-bottom:1px solid #e6e9ec;font-size:12px;line-height:1.3;color:#666}
+    .li-reakce{display:inline-flex;align-items:center}
+    .li-r{width:17px;height:17px;border-radius:50%;display:grid;place-items:center;margin-right:-3px;box-shadow:0 0 0 1.5px #fff}
+    .li-r svg{width:11px;height:11px;fill:#fff}
+    .li-r-like{background:#378FE9;z-index:3} .li-r-love{background:#DF704D;z-index:2} .li-r-idea{background:#E7A33E;z-index:1}
+    .li-reakce > span{margin-left:9px}
+  }
   @media (max-width:560px){
     .li-akce span{font-size:11.5px;padding:9px 2px}
     .li-ava{width:42px;height:42px;font-size:15px}
@@ -1087,6 +1173,25 @@
     color:var(--hot);text-decoration:none}
   .karta .odkaz:hover{text-decoration:underline;text-underline-offset:4px}
   @media (max-width:760px){ .karty{grid-template-columns:1fr} }
+  /* mobil: méně textu (parametry zůstávají na desktopu) a obě karty v balíčku jako na Tinderu.
+     Přední karta sama odlétá a střídá se se zadní, dokud divák na jednu neklikne; jde i švihnout prstem.
+     Třídu .balicek přidá JS jen na mobilu a bez prefers-reduced-motion, jinak karty zůstanou pod sebou. */
+  @media (max-width:760px){
+    #rodina{overflow:hidden}
+    .karta .fakta{display:none}
+    .karta .veta{margin-bottom:18px}
+  }
+  .karty.balicek{grid-template-columns:minmax(0,1fr);justify-items:center;padding:0 14px 16px 0;touch-action:pan-y}
+  .karty.balicek .karta{grid-area:1/1;width:100%;max-width:360px;-webkit-user-select:none;user-select:none;
+    -webkit-tap-highlight-color:transparent;will-change:transform;
+    transition:transform .6s cubic-bezier(.22,.8,.26,1),opacity .6s ease,filter .6s ease,border-color .25s ease}
+  .karty.balicek .karta.predni{z-index:2;transform:none}
+  .karty.balicek .karta.zadni{z-index:1;transform:translate(14px,16px) rotate(5deg) scale(.96);filter:brightness(.8);border-color:#2C3A57;pointer-events:none}
+  .karty.balicek .karta.odlet-l{z-index:3;transform:translateX(-125%) rotate(-14deg);opacity:0}
+  .karty.balicek .karta.odlet-p{z-index:3;transform:translateX(125%) rotate(14deg);opacity:0}
+  .karty.balicek .karta.tah{transition:none}
+  .karty.balicek .karta img{-webkit-user-drag:none;pointer-events:none}
+  .karty.balicek .karta a{-webkit-touch-callout:none;-webkit-user-drag:none}
 </style>
 
 <section id="misto" class="sek" aria-label="Které místo u vás kontrolujete nejhůř">
@@ -1121,6 +1226,91 @@
     </div>
   </div>
 </section>
+<script>
+// ---------- rozcestník na mobilu: balíček dvou karet, které se střídají jako na Tinderu ----------
+// Přední karta každé 3 s odletí doleva a zadní se zvedne. Švihnutí prstem (přes 70 px)
+// udělá totéž na tu stranu, kratší tah karta vrátí. Střídání běží, jen když je balíček
+// z poloviny vidět, a skončí, jakmile divák na kartu klikne (odkaz se otevře v nové záložce).
+(function(){
+  const box = document.querySelector('#rodina .karty'); if (!box) return;
+  const karty = [...box.querySelectorAll('.karta')]; if (karty.length < 2) return;
+  const mq = matchMedia('(max-width:760px)'), klid = matchMedia('(prefers-reduced-motion: reduce)');
+  const KROK = 3000, ODLET = 600, SVIH = 70;
+  let zap = false, predni = 0, casovac = 0, vidno = false, konec = false, bezi = false, tah = null, potlac = false;
+
+  function rozdej(){ karty.forEach((k, i) => { k.classList.toggle('predni', i === predni); k.classList.toggle('zadni', i !== predni); }); }
+  function dalsi(smer){
+    if (bezi) return; bezi = true;
+    const stara = karty[predni];
+    stara.classList.remove('tah', 'predni'); stara.style.transform = '';
+    stara.classList.add(smer > 0 ? 'odlet-p' : 'odlet-l');
+    predni = (predni + 1) % karty.length;
+    karty[predni].classList.remove('zadni'); karty[predni].classList.add('predni');
+    setTimeout(() => { stara.classList.remove('odlet-l', 'odlet-p'); stara.classList.add('zadni'); bezi = false; }, ODLET);
+  }
+  function planuj(){
+    clearTimeout(casovac);
+    if (zap && vidno && !konec && !tah && !document.hidden) casovac = setTimeout(() => { dalsi(-1); planuj(); }, KROK);
+  }
+  function nastav(){
+    const chci = mq.matches && !klid.matches;
+    if (chci === zap) return;
+    zap = chci; box.classList.toggle('balicek', zap);
+    if (zap){ rozdej(); planuj(); return; }
+    clearTimeout(casovac); tah = null; bezi = false;
+    karty.forEach(k => { k.classList.remove('predni', 'zadni', 'odlet-l', 'odlet-p', 'tah'); k.style.transform = ''; });
+  }
+
+  box.addEventListener('pointerdown', e => {
+    if (!zap || bezi || e.button > 0) return;
+    const k = e.target.closest('.karta'); if (k !== karty[predni]) return;
+    tah = {k, x: e.clientX, y: e.clientY, dx: 0, id: e.pointerId, jede: false};
+    clearTimeout(casovac);
+  });
+  box.addEventListener('pointermove', e => {
+    if (!tah || e.pointerId !== tah.id) return;
+    const dx = e.clientX - tah.x, dy = e.clientY - tah.y;
+    if (!tah.jede){
+      if (Math.abs(dy) > 10 && Math.abs(dy) > Math.abs(dx)){ tah = null; planuj(); return; }   // svislý pohyb patří stránce
+      if (Math.abs(dx) < 8) return;
+      tah.jede = true; tah.k.classList.add('tah');
+      try { tah.k.setPointerCapture(e.pointerId); } catch (_) {}
+    }
+    tah.dx = dx;
+    tah.k.style.transform = 'translateX(' + dx.toFixed(1) + 'px) rotate(' + (dx/18).toFixed(2) + 'deg)';
+  });
+  function pust(e){
+    if (!tah || e.pointerId !== tah.id) return;
+    const t = tah; tah = null;
+    if (t.jede){
+      potlac = true; setTimeout(() => { potlac = false; }, 350);   // tah nesmí skončit otevřením odkazu
+      t.k.classList.remove('tah');
+      if (e.type === 'pointerup' && Math.abs(t.dx) > SVIH) dalsi(Math.sign(t.dx)); else t.k.style.transform = '';
+    }
+    planuj();
+  }
+  box.addEventListener('pointerup', pust); box.addEventListener('pointercancel', pust);
+  box.addEventListener('dragstart', e => { if (zap) e.preventDefault(); });
+  box.addEventListener('click', e => {
+    if (!zap) return;
+    if (potlac){ e.preventDefault(); e.stopPropagation(); return; }
+    if (e.target.closest('.odkaz')){ konec = true; clearTimeout(casovac); }
+  }, true);
+  // z klávesnice: karta s fokusem jde dopředu a střídání se zastaví
+  box.addEventListener('focusin', e => {
+    if (!zap) return;
+    const k = e.target.closest('.karta'); konec = true; clearTimeout(casovac);
+    if (k && k !== karty[predni]){ bezi = false; predni = karty.indexOf(k); rozdej(); }
+  });
+
+  if ('IntersectionObserver' in window){
+    new IntersectionObserver(es => es.forEach(z => { vidno = z.isIntersecting; planuj(); }), {threshold: 0.5}).observe(box);
+  } else vidno = true;
+  document.addEventListener('visibilitychange', planuj);
+  [mq, klid].forEach(m => m.addEventListener ? m.addEventListener('change', nastav) : m.addListener(nastav));
+  nastav();
+})();
+</script>
 
 <!-- ===== MARKETING: LinkedIn post a formáty, jen nadpis a věta ===== -->
 <section id="marketing" class="sek">
@@ -1142,7 +1332,7 @@
                   <div class="li-tri" aria-hidden="true">&middot;&middot;&middot;</div>
                 </div>
 
-                <div class="li-text">Do štoly, do šachty, pod strop haly se dnes leze s lešením a s odstávkou. RoboAid tam vlétne sám.
+                <div class="li-text">Do štoly, do šachty, pod strop haly se dnes leze s lešením a s odstávkou. RoboAid tam vlétne sám.<button type="button" class="li-vice" aria-expanded="false">&hellip;více</button><span class="li-zbytek">
 
         Nemá GPS a nepotřebuje ji. Polohu si drží LiDARem podle toho, co sám vidí. Kamera a termovize měří zároveň, vlastní světlo má 14 000 lumenů a všechno si počítá na palubě, bez sítě a bez kabelu.
 
@@ -1150,13 +1340,18 @@
 
         Kde u vás dnes prohlídka znamená odstávku?
 
-        <a href="#" onclick="return false">fly4future.com/custom-drones/roboaid</a></div>
+        <a href="#" onclick="return false">fly4future.com/custom-drones/roboaid</a></span></div>
 
                 <video class="li-media" id="livid" playsinline muted loop preload="metadata"
                   poster="/dron/li/post-poster.jpg"
                   aria-label="Promo video RoboAid ve formátu 4:5">
                   <source src="/dron/li/post.mp4" type="video/mp4">
                 </video>
+
+                <div class="li-eng" aria-hidden="true">
+                  <span class="li-reakce"><i class="li-r li-r-like"><svg viewBox="0 0 16 16"><path d="M4.2 7.2H2.6v6.2h1.6zM5.4 13.4h5.3c.6 0 1.1-.4 1.3-1l1.1-3.9c.2-.8-.4-1.6-1.2-1.6H9.4l.4-2.3c.1-.7-.4-1.3-1.1-1.3-.4 0-.7.2-.9.5L5.4 7.2z"/></svg></i><i class="li-r li-r-love"><svg viewBox="0 0 16 16"><path d="M8 13.3 3.4 9A2.9 2.9 0 0 1 7.5 4.9l.5.5.5-.5A2.9 2.9 0 1 1 12.6 9z"/></svg></i><i class="li-r li-r-idea"><svg viewBox="0 0 16 16"><path d="M8 2.4a3.9 3.9 0 0 0-2.3 7c.4.3.6.7.6 1.2v.6h3.4v-.6c0-.5.2-.9.6-1.2A3.9 3.9 0 0 0 8 2.4zM6.3 12.2h3.4v1.4H6.3z"/></svg></i><span>186</span></span>
+                  <span class="li-pocty">27 komentářů &middot; 12 přeposlání</span>
+                </div>
 
                 <div class="li-akce" aria-hidden="true">
                   <span>To se mi líbí</span><span>Komentovat</span><span>Přeposlat</span><span>Odeslat</span>
@@ -1186,6 +1381,12 @@
 (function(){
   // Chova se jako kanal: hraje, jen kdyz je v zaberu. Jinak by na strance
   // bezela tri videa najednou.
+  // „…více“: klepnutí kamkoli do zkráceného textu ukáže celý post (zkracuje se jen na mobilu)
+  var txt = document.querySelector('.li-text'), vice = document.querySelector('.li-vice');
+  if (txt && vice) txt.addEventListener('click', function(){
+    if (txt.classList.contains('otevreno')) return;
+    txt.classList.add('otevreno'); vice.setAttribute('aria-expanded', 'true');
+  });
   var v = document.getElementById('livid');
   if (!v || !('IntersectionObserver' in window)) return;
   new IntersectionObserver(function(zaznamy){
@@ -1875,6 +2076,50 @@
     hv.addEventListener('play', () => clearTimeout(znovu));
     document.getElementById('ovPlay').addEventListener('click', () => clearTimeout(znovu));
 
+    // ---------- telefon na šířku: video přes celé okno, po doběhnutí zpět do stránky ----------
+    // Skutečný fullscreen iPhone webu bez klepnutí nedovolí a ukázal by jen holé video bez vrstev
+    // (LiDAR, termo, rámečky, popisky), proto se hero jen roztáhne přes okno. Spustí to otočení
+    // telefonu, když je hero video na obrazovce: video jede od začátku a stránka se nescrolluje.
+    // Po doběhnutí videa se stránka pustí a v téže poloze se to už znovu nespustí.
+    // Otočení zpět na výšku nebo křížek to zruší hned.
+    (function(){
+      const root = document.documentElement, hero = document.getElementById('hero'), hvbox = document.getElementById('hvbox');
+      const nasirku = matchMedia('(orientation: landscape) and (max-height: 500px) and (hover: none) and (pointer: coarse)');
+      const zavri = document.getElementById('nasirkuZavri');
+      let zap = false, odehrano = false, videt = true, konec = 0;
+      // na výšku si pamatuje, jestli je hero video vidět; po otočení už by měření lhalo
+      function zmer(){
+        if (zap || nasirku.matches) return;
+        const r = hvbox.getBoundingClientRect();
+        videt = r.height > 0 && r.bottom > r.height*0.5 && r.top < innerHeight*0.6;
+      }
+      function zapni(){
+        zap = true; root.classList.add('nasirku', 'natoceno');
+        if (scrollY) scrollTo(0, 0);
+        clearTimeout(znovu); clearTimeout(konec); loopVypni();
+        try { hv.currentTime = 0; } catch (e) {}
+        pust(); tik();
+      }
+      function vypni(){
+        if (!zap) return;
+        zap = false; clearTimeout(konec);
+        root.classList.remove('nasirku');
+        tik();
+      }
+      function zmena(){
+        // úplně nahoře je hero vidět vždy, i když poslední měření scrollu ještě nedoběhlo
+        if (nasirku.matches){ if (!zap && !odehrano && (videt || scrollY < 80)) zapni(); }
+        else { odehrano = false; vypni(); zmer(); }
+      }
+      if (nasirku.addEventListener) nasirku.addEventListener('change', zmena); else if (nasirku.addListener) nasirku.addListener(zmena);
+      addEventListener('scroll', zmer, {passive:true});
+      hv.addEventListener('ended', () => { if (zap){ odehrano = true; konec = setTimeout(vypni, 900); } });
+      if (zavri) zavri.addEventListener('click', e => { e.stopPropagation(); odehrano = true; vypni(); });
+      hero.addEventListener('touchmove', e => { if (zap && !e.target.closest('#ovladac')) e.preventDefault(); }, {passive:false});
+      zmer();
+      if (nasirku.matches && scrollY < 40) zapni();   // stránka otevřená rovnou na šířku
+    })();
+
     // dokud je hero mimo obraz, video ani vrstvu nehnat zbytečně
     if ('IntersectionObserver' in window){
       new IntersectionObserver(es => es.forEach(e => {
@@ -1893,6 +2138,10 @@
     // a scroll stránky končí krátce po tom (KONEC). Výška #slib v CSS počítá se stejným číslem.
     const KONEC = 0.62, USEKY = (n - 1) + KONEC;
     const nahoru = document.getElementById('nahoru'), dronFoto = document.getElementById('dronFront');
+    // o kolik vh nad středem se věta usadí; desktop 31, mobil si hodnotu nastaví v CSS (--slib-vyse)
+    let VYSE = 31;
+    const vyse = () => { const v = parseFloat(getComputedStyle(sec).getPropertyValue('--slib-vyse')); VYSE = isFinite(v) ? v : 31; };
+    vyse(); addEventListener('resize', vyse);
     const clamp = (x,a,b) => Math.min(b, Math.max(a, x));
     const smooth = (a,b,x) => { const t = clamp((x-a)/(b-a),0,1); return t*t*(3-2*t); };
     const easeOut = t => 1 - Math.pow(1-t, 3);
@@ -1903,7 +2152,7 @@
       vety.forEach((el, i) => {
         const t = P*USEKY - i, posledni = i === n - 1;
         if (t <= -0.05 || t >= 1.05){ el.style.opacity = 0; el.style.transform = 'translate(-50%,-50%)'; return; }
-        const up = t < 0.55 ? easeOut(clamp(t/0.55,0,1)) * 31 : (posledni ? 31 : 31 + (t-0.55)/0.45 * 8);
+        const up = t < 0.55 ? easeOut(clamp(t/0.55,0,1)) * VYSE : (posledni ? VYSE : VYSE + (t-0.55)/0.45 * 8);
         const op = smooth(0.08, 0.40, t) * (posledni ? 1 : 1 - smooth(0.70, 0.92, t));
         const sc = 0.9 + 0.1*easeOut(clamp(t/0.55,0,1));
         el.style.opacity = op.toFixed(3);
