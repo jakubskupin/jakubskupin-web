@@ -426,6 +426,11 @@
       width:44px;height:44px;padding:0;border-radius:50%;cursor:pointer;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.22)}
   }
   #celeokno svg{width:16px;height:16px;fill:none;stroke:rgba(255,255,255,.85);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  /* během videa přes celé okno je tlačítko v rohu pořád: klepnutí schová i lišty Safari
+     (Fullscreen API chce klepnutí, otočení nestačí), vrstvy v obraze zůstanou */
+  html.nasirku.fs-ok:not(.celaobrazovka) #celeokno{display:grid;place-items:center;position:absolute;z-index:12;
+    right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));
+    width:44px;height:44px;padding:0;border-radius:50%;cursor:pointer;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.22)}
   html.nasirku #popisky{position:absolute;inset:0;display:block;padding:0}
   html.nasirku .popis{position:absolute;max-width:min(430px,40%);text-align:left;transform:none}
   html.nasirku .popis.m-vpravo-dole{left:auto;top:auto;right:12%;bottom:20%;text-align:right}
@@ -478,7 +483,7 @@
     </span>
   </button>
   <button id="nasirkuZavri" type="button" aria-label="Zavřít video přes celou obrazovku"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2 L12 12 M12 2 L2 12"/></svg></button>
-  <button id="celeokno" type="button" aria-label="Pustit video znovu přes celou obrazovku"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M16 21h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg></button>
+  <button id="celeokno" type="button" aria-label="Video přes celou obrazovku"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M16 21h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg></button>
   <div id="prubeh" aria-hidden="true"><i></i></div>
   <span id="pauzaZnak" aria-hidden="true"><svg viewBox="0 0 17 20"><path d="M1 1 L16 10 L1 19 Z"/></svg></span>
   <div id="hvbox">
@@ -2228,7 +2233,15 @@
       // křížek na šířku nechá video zavřené až do otočení zpět; na výšku další otočení pustí video znovu
       if (zavri) zavri.addEventListener('click', e => { e.stopPropagation(); odehrano = nasirku.matches; vypni(); });
       if (nabok) nabok.addEventListener('click', e => { e.stopPropagation(); odehrano = false; zapni(!nasirku.matches); celaObrazovka(); });
-      if (celeokno) celeokno.addEventListener('click', e => { e.stopPropagation(); odehrano = false; zapni(false); celaObrazovka(); });
+      // tlačítko v rohu: během videa jen schová lišty prohlížeče, po doběhnutí pustí video znovu
+      if (celeokno) celeokno.addEventListener('click', e => {
+        e.stopPropagation();
+        if (!zap){ odehrano = false; zapni(false); }
+        celaObrazovka();
+      });
+      if (document.fullscreenEnabled || document.webkitFullscreenEnabled) root.classList.add('fs-ok');
+      ['fullscreenchange', 'webkitfullscreenchange'].forEach(u => document.addEventListener(u, () =>
+        root.classList.toggle('celaobrazovka', !!(document.fullscreenElement || document.webkitFullscreenElement))));
       hero.addEventListener('touchmove', e => { if (zap) e.preventDefault(); }, {passive:false});
       zmer();
       if (nasirku.matches && scrollY < 40) zapni(false);   // stránka otevřená rovnou na šířku
