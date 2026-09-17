@@ -2756,10 +2756,11 @@
         if (!root.classList.contains('nativ')) celaObrazovka();
         else if (behemVidea) nativni();
       });
-      // iPhone Fullscreen API pro prvky nemá (MDN: jen iPad), klepnutí lištu Safari neschová. Video ale
-      // umí nativní přehrávač iOS (webkitEnterFullscreen), bez vrstev v obraze.
+      // iPhone Fullscreen API pro prvky nemá (MDN: jen iPad), klepnutí lištu Safari neschová. Nativní
+      // přehrávač iOS (webkitEnterFullscreen) sice celou obrazovku umí, ale ukáže holé video: popisky,
+      // LiDAR i termovrstva zmizí a s nimi příběh (Jakub 17. 9. 2026). Do doby, než bude verze videa
+      // s vrstvami zapečenými v obraze, tlačítko na iPhonu během videa není.
       if (document.fullscreenEnabled || document.webkitFullscreenEnabled) root.classList.add('fs-ok');
-      else if (typeof hv.webkitEnterFullscreen === 'function') root.classList.add('nativ');
       ['fullscreenchange', 'webkitfullscreenchange'].forEach(u => document.addEventListener(u, () =>
         root.classList.toggle('celaobrazovka', !!(document.fullscreenElement || document.webkitFullscreenElement))));
       hero.addEventListener('touchmove', e => { if (zap) e.preventDefault(); }, {passive:false});
