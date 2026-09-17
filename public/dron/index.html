@@ -1315,7 +1315,7 @@
 })();
 </script>
 
-<!-- ===== Rozhovor: minuta Walter × Irena (Seedance 2.5) nad CTA. Po doscrollování samo hraje bez zvuku s českými titulky, vpravo dole zvuk a pauza ===== -->
+<!-- ===== Rozhovor: minuta Walter × Irena (Seedance 2.5) jako maketa videa na YouTube. Náhled s červeným tlačítkem, po kliknutí hraje se zvukem a českými titulky, ovládání ve stylu YouTube, pod videem název, kanál, akce a popis ===== -->
 <style>
   #rozhovor{border-top:1px solid var(--line);padding-bottom:clamp(32px,4vw,48px);z-index:0;--rz-presah:clamp(72px,10vw,140px)}
   /* CTA pod rozhovorem bez vlastní černé plochy (body má stejnou barvu), aby do jejího horního okraje dobíhala silnice z tunelu */
@@ -1328,50 +1328,180 @@
   .rz-hlava{max-width:960px;margin:0 auto clamp(24px,3vw,36px)}
   .rz-hlava h2{max-width:18ch}
   .rz-hlava .pod{max-width:62ch}
-  #rozhovor video::cue{background:rgba(7,9,15,.72);color:#fff;font-family:inherit;font-size:clamp(14px,1.7vw,22px);font-weight:500}
-  .rz-ram{position:relative;max-width:960px;margin:0 auto;border-radius:16px;overflow:hidden;
-    border:1px solid var(--line);background:#000;aspect-ratio:16/9}
+
+  /* maketa YouTube: tmavý motiv a písmo YouTube (Roboto, jinak Arial); z barev stránky jen fokus */
+  .yt{--yt-text:#f1f1f1;--yt-sub:#aaa;--yt-pill:rgba(39,39,39,.86);--yt-pill-h:rgba(63,63,63,.95);--yt-red:#f03;--yt-link:#3ea6ff;
+    max-width:960px;margin:0 auto;font-family:Roboto,Arial,sans-serif;color:var(--yt-text);-webkit-font-smoothing:antialiased}
+  .yt button{font-family:inherit}
+  .yt :focus-visible{outline:2px solid var(--hot);outline-offset:2px}
+  .rz-ram{position:relative;border-radius:12px;overflow:hidden;background:#000;aspect-ratio:16/9;box-shadow:0 40px 90px -40px rgba(77,163,255,.35)}
   .rz-ram video{display:block;width:100%;height:100%;object-fit:cover;cursor:pointer}
-  .rz-ovl{position:absolute;right:clamp(10px,1.6vw,18px);bottom:clamp(10px,1.6vw,18px);display:flex;gap:8px}
-  .rz-ovl button{width:clamp(36px,3.4vw,44px);height:clamp(36px,3.4vw,44px);display:grid;place-items:center;padding:0;cursor:pointer;
-    border-radius:50%;border:1px solid rgba(255,255,255,.22);background:rgba(7,9,15,.58);color:#fff;
-    -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:background .2s ease,border-color .2s ease}
-  .rz-ovl button:hover{background:rgba(7,9,15,.8);border-color:rgba(255,255,255,.45)}
-  .rz-ovl button:focus-visible{outline:2px solid var(--hot);outline-offset:2px}
-  .rz-ovl svg{width:46%;height:46%;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-  .rz-ovl .plny{fill:currentColor;stroke:none}
-  #rozhovor .i-zvuk,#rozhovor .i-play{display:none}
-  #rozhovor.zvuk .i-zvuk,#rozhovor.pauza .i-play{display:block}
-  #rozhovor.zvuk .i-ticho,#rozhovor.pauza .i-pauza{display:none}
-  @media (max-width:760px){ .rz-ram{border-radius:12px} .rz-pozadi img{opacity:.44} }
+  .rz-ram:fullscreen{border-radius:0;box-shadow:none}
+  .rz-ram:fullscreen video{object-fit:contain}
+  /* titulky kreslí přehrávač, ne prohlížeč: nad lištou, když je ovládání vidět, jinak u spodní hrany */
+  .yt-titulek{position:absolute;left:0;right:0;bottom:max(10px,4%);display:flex;justify-content:center;padding:0 6%;pointer-events:none;transition:bottom .2s ease}
+  .yt.spusteno:not(.skryt) .yt-titulek{bottom:70px}
+  .yt:not(.titulky) .yt-titulek,.yt:not(.spusteno) .yt-titulek{display:none}
+  .yt-titulek span{padding:1px 8px;background:rgba(8,8,8,.75);color:#fff;font-size:clamp(13px,1.7vw,22px);line-height:1.4;text-align:center;white-space:pre-line;
+    -webkit-box-decoration-break:clone;box-decoration-break:clone}
+  .yt-titulek span:empty{display:none}
+
+  /* náhled před spuštěním a po doběhnutí */
+  .yt-start{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;background:#000;cursor:pointer;display:grid;place-items:center}
+  .yt-start img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .yt-start svg{position:relative;width:clamp(56px,7vw,68px);height:auto;filter:drop-shadow(0 6px 18px rgba(0,0,0,.4));transition:transform .2s ease}
+  .yt-start:hover svg{transform:scale(1.08)}
+  .yt-start:focus-visible{outline-offset:-4px}
+  .yt.spusteno .yt-start{display:none}
+
+  /* ovládání při přehrávání, samo se schová, když se myš nehýbe */
+  .yt-ovl{position:absolute;left:0;right:0;bottom:0;padding:28px 12px 0;display:none;
+    background:linear-gradient(to top,rgba(0,0,0,.72),rgba(0,0,0,.28) 62%,transparent);transition:opacity .25s ease}
+  .yt.spusteno .yt-ovl{display:block}
+  .yt.skryt .yt-ovl{opacity:0;pointer-events:none}
+  .yt.skryt .rz-ram video{cursor:none}
+  .yt-osa{position:relative;height:16px;display:flex;align-items:center;cursor:pointer;touch-action:none}
+  .yt-drah{position:relative;flex:1;height:3px;background:rgba(255,255,255,.2);transition:height .1s ease}
+  .yt-osa:hover .yt-drah,.yt-osa.tah .yt-drah{height:5px}
+  .yt-nacteno,.yt-prehrano{position:absolute;left:0;top:0;bottom:0;width:0}
+  .yt-nacteno{background:rgba(255,255,255,.4)}
+  .yt-prehrano{background:var(--yt-red)}
+  .yt-kap{position:absolute;top:0;bottom:0;width:2px;margin-left:-1px;background:rgba(0,0,0,.6)}
+  .yt-bod{position:absolute;top:50%;left:0;width:13px;height:13px;margin:-6.5px 0 0 -6.5px;border-radius:50%;background:var(--yt-red);transform:scale(0);transition:transform .1s ease}
+  .yt-osa:hover .yt-bod,.yt-osa.tah .yt-bod,.yt-osa:focus-visible .yt-bod{transform:scale(1)}
+  .yt-osa:focus-visible{outline:0}
+  .yt-lista{display:flex;align-items:center;height:48px;color:#fff}
+  .yt-lista button{flex:0 0 auto;width:48px;height:48px;padding:0;border:0;background:none;color:inherit;cursor:pointer;display:grid;place-items:center;opacity:.9;transition:opacity .15s ease}
+  .yt-lista button:hover{opacity:1}
+  .yt-lista button:focus-visible{outline-offset:-6px}
+  .yt-lista svg{width:28px;height:28px;fill:currentColor}
+  .yt-cas{margin-left:6px;font-size:13px;white-space:nowrap;font-variant-numeric:tabular-nums;color:#eee}
+  .yt-kapitola{margin-left:8px;font-size:13px;color:#eee;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+  .yt-kapitola::before{content:"•";margin-right:8px}
+  .yt-mezera{flex:1}
+  .yt-cc{position:relative}
+  .yt-cc::after{content:"";position:absolute;left:12px;right:12px;bottom:9px;height:3px;border-radius:2px;background:var(--yt-red);transform:scaleX(0);transition:transform .15s ease}
+  .yt.titulky .yt-cc::after{transform:scaleX(1)}
+  .yt .i-play,.yt.pauza .i-pauza,.yt .i-ticho,.yt.ticho .i-zvuk,.yt .i-fs-ven,.yt.fs .i-fs-in{display:none}
+  .yt.pauza .i-play,.yt.ticho .i-ticho,.yt.fs .i-fs-ven{display:block}
+
+  /* pod videem: název, kanál, akce, popis */
+  .yt-nazev{margin:14px 0 10px;font-family:Roboto,Arial,sans-serif;font-size:20px;line-height:28px;font-weight:700;letter-spacing:0;color:var(--yt-text)}
+  .yt-radek{display:flex;align-items:center;gap:12px 16px;flex-wrap:wrap}
+  .yt-kanal{display:flex;align-items:center;gap:12px;min-width:0}
+  .yt-avatar{flex:0 0 auto;width:40px;height:40px;border-radius:50%;background:#00234d;display:grid;place-items:center}
+  .yt-avatar svg{width:26px;height:13px;fill:#fff}
+  .yt-kanal b{display:block;font-size:16px;line-height:22px;font-weight:500}
+  .yt-kanal small{display:block;font-size:12px;line-height:18px;color:var(--yt-sub)}
+  .yt-odber{margin-left:12px;height:36px;padding:0 16px;border:0;border-radius:18px;background:#f1f1f1;color:#0f0f0f;font-size:14px;font-weight:500;white-space:nowrap;cursor:pointer;transition:background .2s ease,color .2s ease}
+  .yt-odber:hover{background:#d9d9d9}
+  .yt-odber[aria-pressed="true"]{background:var(--yt-pill);color:var(--yt-text)}
+  .yt-akce{display:flex;gap:8px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+  .yt-akce::-webkit-scrollbar{display:none}
+  .yt-pill{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 16px 0 12px;border:0;border-radius:18px;background:var(--yt-pill);color:var(--yt-text);
+    font-size:14px;font-weight:500;white-space:nowrap;cursor:pointer;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);transition:background .2s ease}
+  button.yt-pill:hover,.yt-libi button:hover{background:var(--yt-pill-h)}
+  .yt-pill svg{width:24px;height:24px;fill:currentColor}
+  .yt-libi{padding:0;gap:0;overflow:hidden;cursor:auto}
+  .yt-libi button{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 14px 0 12px;border:0;background:none;color:inherit;font-size:14px;font-weight:500;cursor:pointer;transition:background .2s ease}
+  .yt-libi i{flex:0 0 auto;width:1px;height:24px;background:rgba(255,255,255,.2)}
+  .yt-libi .dolu svg{transform:rotate(180deg)}
+  .yt .i-plny,.yt [aria-pressed="true"] .i-obrys{display:none}
+  .yt [aria-pressed="true"] .i-plny{display:block}
+  .yt-sdilet svg{transform:scaleX(-1)}
+  .yt-popis{margin-top:12px;padding:12px;border-radius:12px;background:var(--yt-pill);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+    font-size:14px;line-height:20px;cursor:pointer;transition:background .2s ease}
+  .yt-popis:not(.otevreno):hover{background:var(--yt-pill-h)}
+  .yt-popis.otevreno{cursor:auto}
+  .yt-meta{font-weight:500}
+  .yt-meta span{margin-left:6px;color:var(--yt-link)}
+  .yt-text{margin-top:4px;max-height:40px;overflow:hidden}
+  .yt-popis.otevreno .yt-text{max-height:none}
+  .yt-text p{margin:0 0 12px}
+  .yt-text [data-t]{padding:0;border:0;background:none;color:var(--yt-link);font-size:14px;cursor:pointer}
+  .yt-ai{padding-top:12px;border-top:1px solid rgba(255,255,255,.1)}
+  .yt-ai b{display:block;margin-bottom:6px;font-size:16px;line-height:22px;font-weight:700}
+  .yt-ai span{display:block;font-weight:500}
+  .yt-ai small{display:block;font-size:12px;line-height:18px;color:var(--yt-sub)}
+  .yt-vice{margin-top:4px;padding:0;border:0;background:none;color:var(--yt-text);font-size:14px;font-weight:500;cursor:pointer}
+  .yt-toast{position:fixed;left:24px;bottom:24px;z-index:60;padding:14px 16px;border-radius:8px;background:#f1f1f1;color:#0f0f0f;font:14px/20px Roboto,Arial,sans-serif;
+    opacity:0;transform:translateY(12px);transition:opacity .25s ease,transform .25s ease;pointer-events:none}
+  .yt-toast.vidno{opacity:1;transform:none}
+  @media (max-width:760px){
+    .rz-pozadi img{opacity:.44}
+    .yt-nazev{margin:12px 0 10px;font-size:18px;line-height:25px}
+    .yt-kanal{flex:1 1 100%}
+    .yt-odber{margin-left:auto}
+    .yt-akce{flex:1 1 100%;margin-left:0}
+    .yt-ovl{padding:18px 4px 0}
+    .yt-lista{height:44px}
+    .yt-lista button{width:40px;height:44px}
+    .yt-lista svg{width:24px;height:24px}
+    .yt-kapitola{display:none}
+    .yt.spusteno:not(.skryt) .yt-titulek{bottom:64px}
+  }
+  @media (prefers-reduced-motion:reduce){ .yt *{transition:none!important} }
 </style>
 
-<section id="rozhovor" class="sek pauza" aria-label="Rozhovor o inspekci šachty s RoboAidem">
+<section id="rozhovor" class="sek" aria-label="Rozhovor o inspekci šachty s RoboAidem">
   <div class="rz-pozadi" aria-hidden="true"><img id="rzTunel" src="/dron/rozhovor/tunel-pozadi.webp" width="832" height="1248" alt="" loading="lazy" decoding="async"></div>
   <div class="rám">
     <div class="rz-hlava">
       <h2>Kdo dnes leze do šachty a kdo ji brzy proletí</h2>
       <p class="pod">Walter Hofer se stará o silniční tunely v Rakousku.</p>
     </div>
-    <div class="rz-ram">
-      <video id="rzVideo" poster="/dron/rozhovor/f4f-podcast-v2-poster.jpg" muted playsinline preload="metadata">
-        <source src="/dron/rozhovor/f4f-podcast-v2-1280x720.mp4" type="video/mp4">
-        <track kind="subtitles" src="/dron/rozhovor/f4f-podcast-v2-cs.vtt" srclang="cs" label="Česky" default>
-      </video>
-      <div class="rz-ovl">
-        <button id="rzZvuk" type="button" aria-label="Zapnout zvuk">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path class="plny" d="M4 9.5h3.2L12 5.5v13l-4.8-4H4z"/>
-            <path class="i-ticho" d="M16 9.5l5 5M21 9.5l-5 5"/>
-            <path class="i-zvuk" d="M15.5 9a4.2 4.2 0 0 1 0 6M18.3 6.3a8 8 0 0 1 0 11.4"/>
-          </svg>
+    <div class="yt pauza titulky" id="rzYt">
+      <div class="rz-ram">
+        <video id="rzVideo" poster="/dron/rozhovor/nahled-tunel.webp" playsinline preload="metadata">
+          <source src="/dron/rozhovor/f4f-podcast-v2-1280x720.mp4" type="video/mp4">
+          <track kind="subtitles" src="/dron/rozhovor/f4f-podcast-v2-cs.vtt" srclang="cs" label="Česky" default>
+        </video>
+        <div class="yt-titulek" aria-hidden="true"><span></span></div>
+        <button class="yt-start" type="button" aria-label="Přehrát video Who flies a 90 m tunnel shaft? Nobody">
+          <img src="/dron/rozhovor/nahled-tunel.webp" width="1280" height="720" alt="" loading="lazy" decoding="async">
+          <svg viewBox="0 0 68 48" aria-hidden="true"><path fill="#f03" d="M66.5 7.7c-.8-2.9-2.5-5.4-5.4-5.9C55.8.9 34 .9 34 .9s-21.8 0-27.1.9c-2.9.5-4.6 3-5.4 5.9C.6 13 .6 24 .6 24s0 11 .9 16.3c.8 2.9 2.5 5.4 5.4 5.9 5.3.9 27.1.9 27.1.9s21.8 0 27.1-.9c2.9-.5 4.6-3 5.4-5.9.9-5.3.9-16.3.9-16.3s0-11-.9-16.3z"/><path fill="#fff" d="M45 24 27 14v20z"/></svg>
         </button>
-        <button id="rzPlay" type="button" aria-label="Přehrát video">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path class="plny i-pauza" d="M7 5h3.4v14H7zM13.6 5H17v14h-3.4z"/>
-            <path class="plny i-play" d="M8 5l11 7-11 7z"/>
-          </svg>
-        </button>
+        <div class="yt-ovl">
+          <div class="yt-osa" role="slider" tabindex="0" aria-label="Posun ve videu" aria-valuemin="0" aria-valuemax="60" aria-valuenow="0" aria-valuetext="0:00 z 1:00">
+            <div class="yt-drah"><div class="yt-nacteno"></div><div class="yt-prehrano"></div><div class="yt-kap"></div></div>
+            <div class="yt-bod"></div>
+          </div>
+          <div class="yt-lista">
+            <button class="yt-play" type="button" aria-label="Přehrát"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-pauza" d="M6 5h4v14H6zM14 5h4v14h-4z"/><path class="i-play" d="M8 5v14l11-7z"/></svg></button>
+            <button class="yt-zvuk" type="button" aria-label="Vypnout zvuk"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-zvuk" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05A4.47 4.47 0 0 0 16.5 12zM14 3.23v2.06a7 7 0 0 1 0 13.42v2.06A9 9 0 0 0 14 3.23z"/><path class="i-ticho" d="M16.5 12A4.5 4.5 0 0 0 14 7.97v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.8 8.8 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a9 9 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg></button>
+            <span class="yt-cas"><span class="yt-ted">0:00</span> / <span class="yt-delka">1:00</span></span>
+            <span class="yt-kapitola">Shafts without signal</span>
+            <span class="yt-mezera"></span>
+            <button class="yt-cc" type="button" aria-label="Titulky" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 4H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm-8 7H9.5v-.5h-2v3h2V13H11v1a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v1zm7 0h-1.5v-.5h-2v3h2V13H18v1a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v1z"/></svg></button>
+            <button class="yt-fs" type="button" aria-label="Celá obrazovka"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-fs-in" d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/><path class="i-fs-ven" d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/></svg></button>
+          </div>
+        </div>
+      </div>
+      <h3 class="yt-nazev">Who flies a 90 m tunnel shaft? Nobody</h3>
+      <div class="yt-radek">
+        <div class="yt-kanal">
+          <span class="yt-avatar" aria-hidden="true"><svg viewBox="0 128 512 256"><path d="M434.27 230.49H358.05V179.46H472.67L511.12 128.44H307.09L307.02 332.54H358.05V281.51H395.77ZM115.19 281.51l38.4 51.02h76.9v51.02h51.02v-255.12h-51.02l-115.3 153.07Zm63.84 0l51.46-68.29v68.29h-51.46ZM128.12 230.49H51.91V179.46H166.53L204.98 128.44H.94L.88 332.54H51.91V281.51H89.63Z" fill-rule="evenodd"/></svg></span>
+          <span><b>Fly4Future</b><small>Autonomní drony bez GPS</small></span>
+          <button class="yt-odber" type="button" aria-pressed="false">Odebírat</button>
+        </div>
+        <div class="yt-akce">
+          <span class="yt-pill yt-libi">
+            <button type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-obrys" d="M9 21h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.58 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2zM9 9l4.34-4.34L12 10h9v2l-3 7H9V9zM1 9h4v12H1z"/><path class="i-plny" d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>Líbí se mi</button>
+            <i></i>
+            <button class="dolu" type="button" aria-pressed="false" aria-label="Nelíbí se mi"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-obrys" d="M9 21h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.58 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2zM9 9l4.34-4.34L12 10h9v2l-3 7H9V9zM1 9h4v12H1z"/><path class="i-plny" d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg></button>
+          </span>
+          <button class="yt-pill yt-sdilet" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 9V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11z"/></svg>Sdílet</button>
+          <button class="yt-pill yt-ulozit" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 10H3v2h11v-2zm0-4H3v2h11V6zm4 8v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM3 16h7v-2H3v2z"/></svg><span>Uložit</span></button>
+        </div>
+      </div>
+      <div class="yt-popis" id="rzPopis">
+        <div class="yt-meta">Koncept videa · 1:00<span>#RoboAid</span><span>#TunnelInspection</span><span>#NoGPS</span></div>
+        <div class="yt-text">
+          <p>Walter runs maintenance for road tunnels. Ventilation shafts up to 90 metres, no signal, no light, and one inspection means closing the tunnel for a night. Irena explains how RoboAid flies the shaft on its own, with 3D LiDAR instead of GPS and all computing on board.</p>
+          <p><button type="button" data-t="0">0:00</button> Shafts without signal<br><button type="button" data-t="30.1">0:30</button> No GPS, no pilot</p>
+          <div class="yt-ai"><b>Jak obsah vznikl</b><span>Upravený nebo syntetický obsah</span><small>Postavy jsou fiktivní, rozhovor vznikl s pomocí AI. Parametry RoboAidu odpovídají skutečnosti.</small></div>
+        </div>
+        <button class="yt-vice" type="button" aria-expanded="false">…více</button>
       </div>
     </div>
   </div>
@@ -1379,50 +1509,176 @@
 
 <script>
 (function(){
-  var sek = document.getElementById('rozhovor'), v = document.getElementById('rzVideo'),
-      bZvuk = document.getElementById('rzZvuk'), bPlay = document.getElementById('rzPlay');
-  if (!sek || !v) return;
-  var klid = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var uzivatelPauza = false, poprveZvuk = true, videt = false;
+  var yt = document.getElementById('rzYt'), v = document.getElementById('rzVideo');
+  if (!yt || !v) return;
+  var $ = function(s){ return yt.querySelector(s); };
+  var ram = $('.rz-ram'), start = $('.yt-start'), osa = $('.yt-osa'), prehrano = $('.yt-prehrano'), nacteno = $('.yt-nacteno'),
+      bod = $('.yt-bod'), kap = $('.yt-kap'), ted = $('.yt-ted'), delkaEl = $('.yt-delka'), kapitola = $('.yt-kapitola'),
+      bPlay = $('.yt-play'), bZvuk = $('.yt-zvuk'), bCc = $('.yt-cc'), bFs = $('.yt-fs');
+  var KAPITOLY = [[0, 'Shafts without signal'], [30.1, 'No GPS, no pilot']];
+  var klid = matchMedia('(prefers-reduced-motion: reduce)').matches, stopa = v.textTracks && v.textTracks[0];
+  var uzivatelPauza = false, pauzaMimo = false, skrytT = 0, raf = 0, ignorujKlik = false;
 
-  function stav(){
-    sek.classList.toggle('pauza', v.paused);
-    sek.classList.toggle('zvuk', !v.muted);
-    bPlay.setAttribute('aria-label', v.paused ? 'Přehrát video' : 'Pozastavit video');
-    bZvuk.setAttribute('aria-label', v.muted ? 'Zapnout zvuk' : 'Vypnout zvuk');
+  function fmt(s){ s = Math.max(0, Math.floor(s || 0)); return Math.floor(s / 60) + ':' + ('0' + s % 60).slice(-2); }
+  function delka(){ return isFinite(v.duration) && v.duration > 0 ? v.duration : 60; }
+  function kresliCas(){
+    var d = delka(), t = v.currentTime, p = Math.min(100, t / d * 100), k = KAPITOLY[0][1];
+    prehrano.style.width = p + '%'; bod.style.left = p + '%';
+    if (v.buffered.length) nacteno.style.width = Math.min(100, v.buffered.end(v.buffered.length - 1) / d * 100) + '%';
+    for (var i = 0; i < KAPITOLY.length; i++) if (t >= KAPITOLY[i][0]) k = KAPITOLY[i][1];
+    ted.textContent = fmt(t); delkaEl.textContent = fmt(d); kapitola.textContent = k;
+    osa.setAttribute('aria-valuenow', Math.round(t)); osa.setAttribute('aria-valuemax', Math.round(d));
+    osa.setAttribute('aria-valuetext', fmt(t) + ' z ' + fmt(d));
   }
-  function hraj(){ var p = v.play(); if (p && p.catch) p.catch(stav); }
-
-  ['play','pause','ended','volumechange'].forEach(function(e){ v.addEventListener(e, stav); });
-
-  function prepniPlay(){
-    if (v.paused){ uzivatelPauza = false; hraj(); }
+  function smycka(){ kresliCas(); raf = v.paused ? 0 : requestAnimationFrame(smycka); }
+  function planSkryt(){
+    clearTimeout(skrytT);
+    if (!v.paused && !osa.classList.contains('tah')) skrytT = setTimeout(schovej, 2600);
+  }
+  function schovej(){ yt.classList.add('skryt'); }
+  function ukaz(){ yt.classList.remove('skryt'); planSkryt(); }
+  function stav(){
+    yt.classList.toggle('pauza', v.paused);
+    yt.classList.toggle('ticho', v.muted);
+    bPlay.setAttribute('aria-label', v.paused ? 'Přehrát' : 'Pozastavit');
+    bZvuk.setAttribute('aria-label', v.muted ? 'Zapnout zvuk' : 'Vypnout zvuk');
+    if (v.paused) ukaz(); else { planSkryt(); if (!raf) raf = requestAnimationFrame(smycka); }
+  }
+  function hraj(){
+    yt.classList.add('spusteno');
+    var p = v.play();
+    if (p && p.catch) p.catch(function(){ v.muted = true; var q = v.play(); if (q && q.catch) q.catch(stav); });
+  }
+  function prepni(){
+    if (v.paused || v.ended){ uzivatelPauza = false; hraj(); }
     else { uzivatelPauza = true; v.pause(); }
   }
-  bPlay.addEventListener('click', prepniPlay);
-  v.addEventListener('click', prepniPlay);
 
-  bZvuk.addEventListener('click', function(){
-    v.muted = !v.muted;
-    // kdo zapne zvuk poprvé, slyší repliku od začátku, ne od půlky věty
-    if (!v.muted && poprveZvuk){ poprveZvuk = false; v.currentTime = 0; }
-    if (!v.muted && v.paused){ uzivatelPauza = false; hraj(); }
+  ['play', 'pause', 'volumechange'].forEach(function(e){ v.addEventListener(e, stav); });
+  ['timeupdate', 'progress', 'loadedmetadata', 'seeked'].forEach(function(e){ v.addEventListener(e, kresliCas); });
+  v.addEventListener('loadedmetadata', function(){ kap.style.left = (KAPITOLY[1][0] / delka() * 100) + '%'; });
+  kap.style.left = (KAPITOLY[1][0] / 60 * 100) + '%';
+  v.addEventListener('ended', function(){ yt.classList.remove('spusteno'); ukaz(); });
+
+  start.addEventListener('click', function(e){
+    if (v.ended) v.currentTime = 0;
+    uzivatelPauza = false; hraj();
+    if (e.detail === 0) bPlay.focus({preventScroll: true});   // spuštěno z klávesnice, fokus zůstane v přehrávači
+  });
+  // na dotyk první klepnutí jen ukáže schované ovládání, jako na YouTube
+  v.addEventListener('pointerdown', function(e){ if (e.pointerType !== 'mouse' && yt.classList.contains('skryt')){ ignorujKlik = true; ukaz(); } });
+  v.addEventListener('click', function(){ if (ignorujKlik){ ignorujKlik = false; return; } prepni(); });
+  bPlay.addEventListener('click', prepni);
+  bZvuk.addEventListener('click', function(){ v.muted = !v.muted; });
+
+  // titulky jako na YouTube: stopa je skrytá, přehrávač kreslí text aktivních titulků sám
+  var titulek = $('.yt-titulek span');
+  if (stopa){
+    stopa.mode = 'hidden';
+    stopa.addEventListener('cuechange', function(){
+      var c = stopa.activeCues, t = [];
+      for (var i = 0; c && i < c.length; i++) t.push(c[i].text.replace(/<[^>]+>/g, ''));
+      titulek.textContent = t.join('\n');
+    });
+    // iPhone umí celou obrazovku jen v nativním přehrávači, tam titulky ukáže systém
+    v.addEventListener('webkitbeginfullscreen', function(){ if (yt.classList.contains('titulky')) stopa.mode = 'showing'; });
+    v.addEventListener('webkitendfullscreen', function(){ stopa.mode = 'hidden'; });
+  }
+  bCc.addEventListener('click', function(){
+    var zap = !yt.classList.contains('titulky');
+    yt.classList.toggle('titulky', zap); bCc.setAttribute('aria-pressed', zap);
   });
 
-  // samo se pustí, když je video z větší části v okně; mimo okno se zastaví a po návratu pokračuje
+  bFs.addEventListener('click', function(){
+    var d = document;
+    if (d.fullscreenElement || d.webkitFullscreenElement){ (d.exitFullscreen || d.webkitExitFullscreen).call(d); return; }
+    if (ram.requestFullscreen) ram.requestFullscreen();
+    else if (ram.webkitRequestFullscreen) ram.webkitRequestFullscreen();
+    else if (v.webkitEnterFullscreen) v.webkitEnterFullscreen();   // iPhone: jen nativní přehrávač
+  });
+  ['fullscreenchange', 'webkitfullscreenchange'].forEach(function(e){
+    document.addEventListener(e, function(){ yt.classList.toggle('fs', ram === (document.fullscreenElement || document.webkitFullscreenElement)); });
+  });
+
+  function casZ(e){ var r = osa.getBoundingClientRect(); return Math.min(Math.max(0, e.clientX - r.left), r.width) / r.width * delka(); }
+  osa.addEventListener('pointerdown', function(e){
+    e.preventDefault();
+    osa.setPointerCapture(e.pointerId); osa.classList.add('tah'); clearTimeout(skrytT);
+    v.currentTime = casZ(e); kresliCas();
+    function pohyb(ev){ v.currentTime = casZ(ev); kresliCas(); }
+    function pust(){ osa.classList.remove('tah'); planSkryt(); osa.removeEventListener('pointermove', pohyb); osa.removeEventListener('pointerup', pust); osa.removeEventListener('pointercancel', pust); }
+    osa.addEventListener('pointermove', pohyb); osa.addEventListener('pointerup', pust); osa.addEventListener('pointercancel', pust);
+  });
+  osa.addEventListener('keydown', function(e){
+    var t = v.currentTime;
+    if (e.key === 'ArrowRight') v.currentTime = Math.min(delka() - 0.1, t + 5);
+    else if (e.key === 'ArrowLeft') v.currentTime = Math.max(0, t - 5);
+    else if (e.key === 'Home') v.currentTime = 0;
+    else if (e.key === 'End') v.currentTime = delka() - 0.1;
+    else return;
+    e.preventDefault(); e.stopPropagation(); kresliCas();
+  });
+  // klávesy jako na YouTube, když je fokus v přehrávači
+  ram.addEventListener('keydown', function(e){
+    if (e.target.closest('button') && (e.key === ' ' || e.key === 'Enter')) return;
+    var k = e.key.toLowerCase();
+    if (k === 'k' || k === ' ') prepni(); else if (k === 'm') v.muted = !v.muted; else if (k === 'f') bFs.click(); else if (k === 'c') bCc.click(); else return;
+    e.preventDefault();
+  });
+  ram.addEventListener('pointermove', function(e){ if (e.pointerType === 'mouse') ukaz(); });
+  ram.addEventListener('pointerleave', function(e){ if (e.pointerType === 'mouse' && !v.paused) schovej(); });
+  ram.addEventListener('focusin', ukaz);
+
+  // mimo okno se video zastaví, po návratu pokračuje, pokud ho nezastavil divák
   if ('IntersectionObserver' in window){
     new IntersectionObserver(function(z){
       var r = z[0].intersectionRatio;
-      if (r >= 0.6 && !videt){
-        videt = true;
-        if (!klid && !uzivatelPauza && !v.ended) hraj();
-      } else if (r === 0 && videt){
-        videt = false;
-        if (!v.paused) v.pause();
-      }
-    }, {threshold:[0, 0.6]}).observe(v);
+      if (r === 0 && !v.paused){ pauzaMimo = true; v.pause(); }
+      else if (r >= 0.6 && pauzaMimo){ pauzaMimo = false; if (!uzivatelPauza) hraj(); }
+    }, {threshold: [0, 0.6]}).observe(ram);
   }
-  stav();
+
+  // pod videem: odběr, líbí se, uložit, sdílet, popis s kapitolami
+  var odber = $('.yt-odber');
+  odber.addEventListener('click', function(){
+    var zap = odber.getAttribute('aria-pressed') !== 'true';
+    odber.setAttribute('aria-pressed', zap); odber.textContent = zap ? 'Odebíráte' : 'Odebírat';
+  });
+  yt.querySelectorAll('.yt-libi button, .yt-ulozit').forEach(function(b){
+    b.addEventListener('click', function(){
+      var zap = b.getAttribute('aria-pressed') !== 'true';
+      if (zap && b.parentNode.classList.contains('yt-libi')) b.parentNode.querySelectorAll('button').forEach(function(x){ x.setAttribute('aria-pressed', 'false'); });
+      b.setAttribute('aria-pressed', zap);
+      if (b.classList.contains('yt-ulozit')) b.querySelector('span').textContent = zap ? 'Uloženo' : 'Uložit';
+    });
+  });
+  var toast;
+  function oznam(text){
+    if (!toast){ toast = document.createElement('div'); toast.className = 'yt-toast'; toast.setAttribute('role', 'status'); document.body.appendChild(toast); }
+    toast.textContent = text; toast.classList.add('vidno');
+    clearTimeout(toast.t); toast.t = setTimeout(function(){ toast.classList.remove('vidno'); }, 2400);
+  }
+  $('.yt-sdilet').addEventListener('click', function(){
+    var url = location.origin + location.pathname + '#rozhovor';
+    if (navigator.share && matchMedia('(pointer: coarse)').matches){ navigator.share({title: document.title, url: url}).catch(function(){}); return; }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(function(){ oznam('Odkaz zkopírován do schránky'); }, function(){ oznam(url); });
+    else oznam(url);
+  });
+  var popis = document.getElementById('rzPopis'), vice = popis.querySelector('.yt-vice');
+  function rozbal(zap){ popis.classList.toggle('otevreno', zap); vice.textContent = zap ? 'Méně' : '…více'; vice.setAttribute('aria-expanded', zap); }
+  popis.addEventListener('click', function(e){
+    if (e.target.closest('[data-t]')) return;
+    if (e.target === vice){ rozbal(!popis.classList.contains('otevreno')); return; }
+    if (!popis.classList.contains('otevreno')) rozbal(true);
+  });
+  popis.querySelectorAll('[data-t]').forEach(function(b){
+    b.addEventListener('click', function(){
+      v.currentTime = parseFloat(b.getAttribute('data-t')); uzivatelPauza = false; hraj(); kresliCas();
+      ram.scrollIntoView({behavior: klid ? 'auto' : 'smooth', block: 'center'});
+    });
+  });
+
+  stav(); kresliCas();
 })();
 
 // tunel za videem: úběžník fotky drží střed videa, při scrollu jede fotka pomaleji než stránka
