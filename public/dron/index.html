@@ -727,9 +727,8 @@
 </style>
 <section id="film-sek" aria-label="Průlet strojem">
   <div id="film-lep">
-    <video id="film" playsinline muted preload="auto"
-      poster="/dron/scroll/poster.jpg">
-      <source src="/dron/scroll/film.mp4" type="video/mp4"></video>
+    <video id="film" playsinline muted preload="none"
+      poster="/dron/scroll/poster.jpg"></video>
     <div class="fvrstva">
       <div id="fuvod">
         <p class="stitek">RoboAid &middot; Autonomous Inspection Drone</p>
@@ -803,16 +802,31 @@
   var cara=spoj?spoj.querySelector('path'):null;
   var H=[{"od":0.14,"do":0.26,"p":0.1992,"x":0.3985,"y":0.6},{"od":0.27,"do":0.36,"p":0.2988,"x":0.5,"y":0.508},{"od":0.37,"do":0.45,"p":0.3784,"x":0.485,"y":0.617},{"od":0.5,"do":0.605,"p":0.5577,"x":0.484,"y":0.401},{"od":0.615,"do":0.695,"p":0.6473,"x":0.586,"y":0.464},{"od":0.705,"do":0.8,"p":0.7369,"x":0.5,"y":0.305}];
   if(!sek||!vid) return;
-  // normalizovana souradnice VIDEA -> pixel na obrazovce, vzorec pro object-fit: cover
+  // Dve varianty videa. Na vysku (okno uzsi nez 3:4) ukaze cover z 16:9 stejne jen stred,
+  // proto telefon stahuje jen stredni vyrez 810x1080: stejne pixely jako z plneho videa,
+  // bez okraju, ktere nikdo neuvidi. HEVC tam, kde ho prohlizec umi (iPhone), jinak H.264.
+  // Klicovy snimek po 6 snimcich a bez B snimku, posun o snimek dekoder zvladne rychle.
+  // x0 a w = vyrez v souradnicich plneho videa, podle nich sedi krouzky na dilech.
+  var VAR={
+    m:{zdroje:[['/dron/scroll/film-m-hevc.mp4','video/mp4; codecs="hvc1.1.6.L93.B0"'],
+               ['/dron/scroll/film-m.mp4','']], x0:555/1920, w:810/1920},
+    d:{zdroje:[['/dron/scroll/film.mp4','']], x0:0, w:1}
+  };
+  var FPS=24, orez=VAR.d, cekaOrez=VAR.d, priChybe=null, pripraveno=false, ukazany=-1;
+  var nacita=null, zacato=false, bloby={}, kolo=0;
+  var odemknuto=false, zkousi=false;
+  var cil=0, ted=0, bezi=false;
+  // normalizovana souradnice PLNEHO videa -> pixel na obrazovce, vzorec pro object-fit: cover
   function naObrazovku(nx,ny){
     var cw=lep.clientWidth, ch=lep.clientHeight;
-    var vw=vid.videoWidth||1920, vh=vid.videoHeight||1080;
+    var vw=vid.videoWidth||Math.round(1920*orez.w), vh=vid.videoHeight||1080;
     var m=Math.max(cw/vw,ch/vh), dw=vw*m, dh=vh*m;
-    return {x:(cw-dw)/2+nx*dw, y:(ch-dh)/2+ny*dh, cw:cw, ch:ch};
+    return {x:(cw-dw)/2+(nx-orez.x0)/orez.w*dw, y:(ch-dh)/2+ny*dh, cw:cw, ch:ch};
   }
   function znacka(p, akt){
     if(!kruh||!cara) return;
-    if(akt<0){ kruh.style.opacity=0; spoj.style.opacity=0; return; }
+    // dokud neni video nactene, je videt plakat a krouzek by ukazoval do prazdna
+    if(akt<0||!pripraveno){ kruh.style.opacity=0; spoj.style.opacity=0; return; }
     // krouzek jen v uzkem okne kolem casu, kdy byla kotva zmerena; mimo nej by
     // od dilu ujel, protoze kamera mezitim najizdi
     var h=H[akt], d=Math.abs(p-h.p), OKNO=0.05;
@@ -831,16 +845,69 @@
     cara.setAttribute('d','M'+(q.x+smer*27)+' '+q.y+' L'+loh+' '+q.y+' L'+(loh+smer*26)+' '+ty+' L'+tx+' '+ty);
     spoj.style.opacity=a*0.85;
   }
-  // iOS prehraje scrubbing jen u videa, ktere uz jednou belo. Krotky play a hned
-  // pause staci a nechce gesto, protoze je muted+playsinline.
-  var odemknuto=false;
-  function odemkni(){ if(odemknuto)return; odemknuto=true;
-    var pr=vid.play(); if(pr&&pr.then)pr.then(function(){vid.pause();}).catch(function(){});
-    else{try{vid.pause();}catch(e){}} }
-  vid.addEventListener('loadedmetadata',odemkni,{once:true});
-  ['touchstart','pointerdown','wheel','keydown'].forEach(function(t){
-    window.addEventListener(t,odemkni,{once:true,passive:true}); });
-  var cil=0, ted=0, bezi=false;
+  function chciVariantu(nyni){
+    var a=innerWidth/Math.max(1,innerHeight);
+    // rezerva kolem hranice, at lista prohlizece nebo iPad na vysku neprepina tam a zpet
+    if(nyni==='m') return a>0.85?'d':'m';
+    if(nyni==='d') return a<0.7?'m':'d';
+    return a<=0.75?'m':'d';
+  }
+  // Cele video se stahne do pameti (blob) a posouva se az v nem. Pri posouvani primo ze site
+  // prohlizec rusil a znovu zacinal stahovani kusu a obraz stal (zmereno 17. 9. 2026 na
+  // emulovanem telefonu: z 57 posunu dobehlo 7, obraz stal az 2,5 s).
+  function nacti(v){
+    if(nacita===v) return; nacita=v;
+    var zdroje=VAR[v].zdroje.filter(function(z){ return !z[1] || vid.canPlayType(z[1])==='probably'; }), i=0;
+    function dalsi(){
+      if(nacita!==v) return;
+      var z=zdroje[i++];
+      if(!z){ nastav(VAR.d.zdroje[0][0], VAR.d, null); return; }   // posledni zachrana: plne video ze site
+      if(bloby[z[0]]){ nastav(bloby[z[0]], VAR[v], dalsi); return; }
+      if(!window.fetch||!window.URL||!URL.createObjectURL){ nastav(z[0], VAR[v], dalsi); return; }
+      fetch(z[0]).then(function(r){ if(!r.ok) throw r.status; return r.blob(); })
+        .then(function(bl){ bloby[z[0]]=URL.createObjectURL(bl); if(nacita===v) nastav(bloby[z[0]], VAR[v], dalsi); })
+        .catch(function(){ if(nacita===v) nastav(z[0], VAR[v], dalsi); });
+    }
+    dalsi();
+  }
+  function nastav(src, o, chyba){
+    kolo++; pripraveno=false; ukazany=-1; odemknuto=false; zkousi=false;
+    cekaOrez=o; priChybe=chyba;
+    vid.preload='auto'; vid.src=src;
+    odemkni();
+  }
+  // prohlizec video neprehraje (napr. HEVC bez dekoderu): dalsi zdroj v poradi
+  vid.addEventListener('error',function(){ var f=priChybe; priChybe=null; if(f) f(); });
+  vid.addEventListener('loadedmetadata',function(){ orez=cekaOrez; odemkni(); });
+  vid.addEventListener('loadeddata',function(){ pripraveno=true; ukazany=-1; hledej(); nastart(); });
+  function zacni(){ if(zacato) return; zacato=true; nacti(chciVariantu(null)); }
+  // iOS ukaze snimek po posunu az u videa, ktere uz jednou bezelo. Kratke play a hned pause.
+  // Bez gesta projde jen ztlumene video na obrazovce; kdyz ho iOS odmitne (usporny rezim,
+  // video mimo obraz), zkusi se to znovu pri dalsim dotyku nebo scrollu k sekci.
+  function odemkni(){
+    if(odemknuto||zkousi||!vid.getAttribute('src')) return;
+    zkousi=true; var k=kolo, pr;
+    try{ pr=vid.play(); }catch(e){ zkousi=false; return; }
+    if(pr&&pr.then) pr.then(function(){ if(k!==kolo) return;
+        odemknuto=true; zkousi=false; vid.pause(); ukazany=-1; hledej(); },
+      function(){ if(k===kolo) zkousi=false; });
+    else { odemknuto=true; zkousi=false; try{vid.pause();}catch(e){} }
+  }
+  ['touchend','pointerdown','click','wheel','keydown'].forEach(function(t){
+    window.addEventListener(t,odemkni,{passive:true}); });
+  // Posouva se po celych snimcich a dalsi posun ceka, az dobehne predchozi. Nove prirazeni
+  // currentTime rozpracovany posun zahodi, takze pri plynulem scrollu by obraz stal.
+  // Cas je stejny jako driv (ted * (delka - 0.06)), jen zarovnany na stred snimku,
+  // proto kotvy krouzku sedi beze zmeny.
+  function hledej(){
+    if(!pripraveno||vid.seeking) return;
+    var d=vid.duration; if(!isFinite(d)||d<=0) return;
+    var n=Math.round(d*FPS), f=Math.floor(Math.max(0,ted)*(d-0.06)*FPS+1e-4);
+    if(f>n-1) f=n-1;
+    if(f===ukazany) return;
+    ukazany=f; vid.currentTime=(f+0.5)/FPS;
+  }
+  vid.addEventListener('seeked',hledej);
   function postup(){ var r=sek.getBoundingClientRect(), d=sek.offsetHeight-window.innerHeight;
     if(d<=0)return 0; var p=-r.top/d; return p<0?0:(p>1?1:p); }
   function vrstvy(p){
@@ -860,15 +927,29 @@
   function tik(){
     // dojezd misto skoku: scroll na trackpadu je trhany a video by poskakovalo
     ted += (cil-ted)*0.14; if(Math.abs(cil-ted)<0.0004) ted=cil;
-    if(vid.readyState>=1 && isFinite(vid.duration) && vid.duration>0){
-      var t=ted*(vid.duration-0.06);
-      if(Math.abs(vid.currentTime-t)>0.012) vid.currentTime=t; }
+    hledej();
     vrstvy(ted);
     if(Math.abs(cil-ted)>0.0002){ requestAnimationFrame(tik); } else { bezi=false; } }
-  function nastart(){ cil=postup(); if(!bezi){bezi=true; requestAnimationFrame(tik);} }
+  // U sekce: zacit stahovat (kdyby to jeste nezacalo), po otoceni okna prepnout variantu
+  // a zkusit odemknout video pro iOS, jakmile je na obrazovce.
+  function hlidej(){
+    var r=sek.getBoundingClientRect(), vh=window.innerHeight;
+    if(r.top<2*vh && r.bottom>-vh){
+      zacni();
+      var v=chciVariantu(nacita); if(v!==nacita) nacti(v);
+      if(r.top<vh && r.bottom>0) odemkni();
+    }
+  }
+  function nastart(){ cil=postup(); hlidej(); if(!bezi){bezi=true; requestAnimationFrame(tik);} }
   window.addEventListener('scroll',nastart,{passive:true});
   window.addEventListener('resize',nastart);
-  vid.addEventListener('loadeddata',function(){ ted=-1; nastart(); });
+  // Stahovat hned, jak je stranka rozparsovana (ne az po load, to na telefonu prislo
+  // o nekolik sekund pozdeji), at je video pripravene, nez k nemu ctenar dojede.
+  // S usporou dat az u sekce (hlidej).
+  if(!(navigator.connection&&navigator.connection.saveData)){
+    if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',zacni);
+    else zacni();
+  }
   nastart();
 })();
 </script>
