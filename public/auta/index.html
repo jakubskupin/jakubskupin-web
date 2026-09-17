@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Auta v pohybu | Jakub Skupin</title>
-<meta name="description" content="Stejný inzerát, stejný text, dvě různá videa. Obě z týchž 39 fotek, bez kamery a bez zapůjčení vozu.">
+<title>Z fotek do videa | Jakub Skupin</title>
+<meta name="description" content="Packshot na bílém i fotky z e-shopu unesou video. Ukázané na autě z inzerátu: dvě verze videa ze stejných fotek, bez kamery a bez zapůjčení vozu.">
 <meta name="robots" content="noindex">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="cs_CZ">
 <meta property="og:site_name" content="Jakub Skupin">
-<meta property="og:title" content="Auta v pohybu">
-<meta property="og:description" content="Stejný inzerát, stejný text, dvě různá videa. Obě z týchž 39 fotek, bez kamery a bez zapůjčení vozu.">
+<meta property="og:title" content="Fotky už máte. Video z nich vznikne">
+<meta property="og:description" content="Packshot na bílém i fotky z e-shopu unesou video. Ukázané na autě z inzerátu: dvě verze videa ze stejných fotek.">
 <meta property="og:url" content="https://jakubskupin.cz/auta/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -77,7 +77,8 @@ b,strong{font-weight:600;color:var(--text)}
 
 .hero{padding-block:30px 6px}   /* NE shorthand: prebil by vodorovny padding z .w */
 .hero .eyebrow{margin-bottom:16px}
-.hero h1{margin-bottom:20px;max-width:17ch}
+.hero h1{margin-bottom:18px;max-width:20ch}
+.hero .lead{max-width:48ch;font-size:16.5px;color:rgba(243,243,241,.82)}
 
 section{padding-block:60px}    /* shorthand by zabil padding z .w, trida vyhrava nad typem */
 section:last-of-type:not([hidden]){padding-bottom:96px}
@@ -172,6 +173,16 @@ body{padding-bottom:80px}
 .use .stav{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#C8DA2E;margin-bottom:8px}
 .use.next{border-style:dashed}.use.next .stav{color:var(--text-3)}
 
+/* zaver: stejny prvek jako na /equator a na homepage, na cerne strance */
+.closing{text-align:center}
+.closing h2{font-size:clamp(30px,4vw,44px);letter-spacing:-.03em;max-width:20ch;margin:0 auto 18px}
+.closing p{color:var(--text-2);margin-bottom:30px}
+.closing .btn{display:inline-block;font-family:var(--h);font-size:14px;font-weight:700;letter-spacing:-.01em;text-decoration:none;
+  padding:14px 32px;border-radius:999px;background:var(--text);color:var(--bg);transition:opacity .25s ease,transform .25s ease}
+.closing .btn:hover{opacity:.85;transform:translateY(-1px)}
+.closing .viz{color:var(--text-3);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:2px}
+.closing .viz:hover{color:var(--text-2);border-bottom-color:var(--text-3)}
+
 
 </style>
 </head>
@@ -181,7 +192,7 @@ body{padding-bottom:80px}
 
 <div class="hlavicka">
   <div class="film">
-    <video src="/auta/assets/header-loop.mp4" poster="/auta/assets/header-poster.jpg"
+    <video src="/auta/assets/header-loop-v2.mp4" poster="/auta/assets/header-poster-v2.jpg"
            autoplay muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1"></video>
   </div>
   <div class="w"><div class="top">
@@ -189,15 +200,17 @@ body{padding-bottom:80px}
     <a href="/vizualy/">Produktové vizuály</a>
   </div></div>
   <header class="w hero">
-    <div class="eyebrow">Vizuály · auta · případ 01</div>
-    <h1>Reklama na jeden konkrétní&nbsp;kus.<br>Bez&nbsp;natáčení</h1>
+    <div class="eyebrow">Vizuály · z fotek do videa</div>
+    <h1>Fotky už máte.<br>Video z nich vznikne</h1>
+    <p class="lead">Packshot na bílém i fotky z e-shopu. Tady je metoda ukázaná na autě z inzerátu, funguje ale na čemkoli, co jde vyfotit.</p>
   </header>
 </div>
 
 <section class="w">
-  <div class="num rv">01 · Srovnání</div>
+  <div class="num rv">01 · Dvě verze</div>
   <div class="sechead rv">
-    <h2>Stejný příspěvek, stejný text, dvě různá videa</h2>
+    <h2>Ze stejných fotek jdou dvě různá videa</h2>
+    <p>Jedno oblétá vůz kamerou, druhé rozpohybuje ploché fotky. Vstup je u obou stejný: obyčejné fotky z inzerátu, žádné natáčení.</p>
   </div>
   <div class="posts">
     <div class="rv">
@@ -224,7 +237,7 @@ body{padding-bottom:80px}
       <a class="stahnout" href="/auta/assets/spot.mp4" download="BMW-750e-kamera-kolem-vozu.mp4"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5a.75.75 0 01.75.75v6.19l2.22-2.22a.75.75 0 111.06 1.06l-3.5 3.5a.75.75 0 01-1.06 0l-3.5-3.5a.75.75 0 111.06-1.06l2.22 2.22V2.25A.75.75 0 018 1.5zM2.75 12a.75.75 0 01.75.75v.75h9v-.75a.75.75 0 011.5 0v1.5a.75.75 0 01-.75.75h-10.5a.75.75 0 01-.75-.75v-1.5a.75.75 0 01.75-.75z"/></svg>Stáhnout video <span class="vel">5,8 MB</span></a>
     </div>
     <div class="rv">
-      <div class="plabel">Mockup · jen rozpohybované 2D fotky</div>
+      <div class="plabel">Mockup · rozpohybované fotky</div>
       <div class="li-scope"><div class="li">
         <div class="hd">
           <div class="av" aria-hidden="true">JS</div>
@@ -250,7 +263,7 @@ body{padding-bottom:80px}
 
   <div class="mezihlava rv">
     <h3>Proč se to liší</h3>
-    <p>U rozpohybovaných fotek se hýbe okno po ploché fotce, auto zůstává placka. U druhé verze se hýbe kamera kolem vozu, protože mezi fotku a výstup se vloží ještě jedna vrstva.</p>
+    <p>Rozpohybovaná fotka je rychlá a levná. Oblet kamery kolem vozu potřebuje krok navíc: mezi fotku a hotový záběr se vloží vrstva, která nese pohyb.</p>
   </div>
   <div class="steps">
     <div class="step rv">
@@ -276,6 +289,7 @@ body{padding-bottom:80px}
   <div class="num rv">02 · Věrnost</div>
   <div class="sechead rv">
     <h2>V záběru je ten kus, který prodáváte</h2>
+    <p>Nic se nedomýšlí. Detaily se čtou z fotek, které dodáte.</p>
   </div>
   <div class="pary">
     <div class="rv">
@@ -302,17 +316,26 @@ body{padding-bottom:80px}
   </div>
 </section>
 
-<section class="w" hidden data-skryto="pripravene, az pribude druhy pripad">
-  <div class="num rv">03 · Použití</div>
+<section class="w">
+  <div class="num rv">03 · Vstupy</div>
   <div class="sechead rv">
-    <h2>Auto bylo první, ne poslední</h2>
-    <p>Metoda není o autech. Je o tom, že inzerát má obvykle dost podkladu na spot a nikdo ho nepoužije.</p>
+    <h2>Auto je jen příklad</h2>
+    <p class="pivot">Metoda nestojí na autech. <b>Stojí na fotkách, které už máte.</b></p>
   </div>
   <div class="uses">
-    <div class="use rv"><div class="stav">Hotovo</div><b>Ojetá auta</b><p>Bazar má u každého vozu třicet až padesát fotek. Z toho jde postavit spot na sociální sítě bez focení.</p></div>
-    <div class="use rv next"><div class="stav">Připravuje se</div><b>Byty na Airbnb</b><p>Fotky interiéru už hostitel má, chybí jim průchod prostorem. Druhý případ na téhle stránce.</p></div>
-    <div class="use rv next"><div class="stav">Volný slot</div><b>Nemovitosti</b><p>Stejná úloha jako Airbnb, jen delší rozhodovací cyklus a vyšší cena za konverzi.</p></div>
-    <div class="use rv next"><div class="stav">Volný slot</div><b>Produktové katalogy</b><p>Packshot na bílé je nejhorší možný vstup pro reklamu a zároveň to jediné, co e-shopy mají.</p></div>
+    <div class="use rv"><b>Packshot na bílém</b><p>To jediné, co má většina e-shopů. Jako reklama je to mrtvý obrázek, jako zdroj tvaru a materiálu ale stačí.</p></div>
+    <div class="use rv"><b>Fotky z e-shopu</b><p>Produkt nafocený v prostředí, z několika stran. Čím víc pohledů dodáte, tím míň se domýšlí.</p></div>
+    <div class="use rv"><b>Fotky z inzerátu</b><p>Případ z téhle stránky. Třicet až padesát snímků jednoho konkrétního kusu, bez studia a bez zapůjčení.</p></div>
+    <div class="use rv"><b>Zbytky z focení</b><p>Z jednoho focení vyjde pár set snímků a použije se deset. Ten zbytek je pořád použitelný materiál.</p></div>
+  </div>
+</section>
+
+<section class="closing" id="kontakt">
+  <div class="w">
+    <h2 class="rv">Vyberte produkt,<br>na kterém vám záleží</h2>
+    <p class="rv"><strong>Ať vynikne.</strong></p>
+    <a class="btn rv" href="https://www.linkedin.com/in/jakubskupin/" target="_blank" rel="noopener">Poslat odkaz &#8599;&#xFE0E;</a>
+    <p class="rv" style="margin-top:36px;font-size:13px"><a class="viz" href="/vizualy/#ukazky">Ukázka je součástí služby produktové vizuály &#8594;</a></p>
   </div>
 </section>
 
