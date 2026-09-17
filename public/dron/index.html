@@ -426,11 +426,37 @@
       width:44px;height:44px;padding:0;border-radius:50%;cursor:pointer;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.22)}
   }
   #celeokno svg{width:16px;height:16px;fill:none;stroke:rgba(255,255,255,.85);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-  /* během videa přes celé okno je tlačítko v rohu pořád: klepnutí schová i lišty Safari
-     (Fullscreen API chce klepnutí, otočení nestačí), vrstvy v obraze zůstanou */
-  html.nasirku.fs-ok:not(.celaobrazovka) #celeokno{display:grid;place-items:center;position:absolute;z-index:12;
+  /* během videa přes celé okno je tlačítko v rohu od prvního snímku, velké a s popiskem (Jakub 17. 9. 2026):
+     klepnutí schová lišty prohlížeče (Fullscreen API chce klepnutí, otočení nestačí), vrstvy v obraze zůstanou.
+     Jen kde Fullscreen API je (Android); iPhone ho nemá, tam je výzva k přejetí nahoru (#tahnout) */
+  html.nasirku.fs-ok:not(.celaobrazovka) #celeokno{display:flex;align-items:center;gap:10px;position:absolute;z-index:12;
     right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));
-    width:44px;height:44px;padding:0;border-radius:50%;cursor:pointer;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.22)}
+    height:48px;padding:0 20px 0 16px;border-radius:99px;cursor:pointer;
+    background:rgba(7,9,15,.72);border:1px solid var(--accent);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink)}
+  html.nasirku.fs-ok:not(.celaobrazovka) #celeokno svg{width:20px;height:20px;stroke:#fff}
+  #celeokno span{display:none}
+  html.nasirku.fs-ok:not(.celaobrazovka) #celeokno span{display:inline}
+  /* iPhone: celou obrazovku stránce nedá (Fullscreen API má jen iPad), lištu Safari ale schová posun
+     stránky prstem. Během videa se proto stránka pod heroem smí posunout o kousek (tělo oříznuté
+     na výšku okna + 240 px) a výzva zmizí, jakmile se pohne. Neplatí pro hero natočené klepnutím
+     na výšku (.otoceny), tam by tah nahoru stránku neposunul. */
+  html.nasirku.tahni:not(.otoceny){overflow:auto}
+  html.nasirku.tahni:not(.otoceny) body{overflow:clip;height:calc(100vh + 240px)}
+  html.nasirku.tahni:not(.otoceny) #hero{touch-action:pan-y}
+  #tahnout{display:none}
+  /* šířka a výška změřené proti claimu v prvních 2,35 s: s bezpečnými okraji iPhonu na šířku
+     (vpravo až 62 px, dole 21 px) nesmí najet na konec nadpisu ani podtitulu, ani na iPhonu SE */
+  html.nasirku.tahni:not(.otoceny):not(.tazeno) #tahnout{display:flex;align-items:center;gap:12px;position:absolute;z-index:12;
+    right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));
+    padding:8px 16px 8px 14px;border-radius:12px;background:rgba(7,9,15,.72);border:1px solid rgba(255,255,255,.22);
+    backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:#fff;text-align:left}
+  #tahnout svg{flex:0 0 auto;width:14px;height:20px;fill:none;stroke:var(--accent);stroke-width:1.5;
+    stroke-linecap:round;stroke-linejoin:round;animation:tahnoutSip 2.1s ease-in-out infinite}
+  #tahnout .t-k{display:block;font-family:var(--mono);font-size:9px;line-height:1.2;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:3px}
+  #tahnout .t-h{display:block;font-weight:600;font-size:14px;line-height:1.2}
+  @keyframes tahnoutSip{0%,100%{transform:translateY(3px)}50%{transform:translateY(-3px)}}
+  @media (prefers-reduced-motion:reduce){ #tahnout svg{animation:none} }
   html.nasirku #popisky{position:absolute;inset:0;display:block;padding:0}
   html.nasirku .popis{position:absolute;max-width:min(430px,40%);text-align:left;transform:none}
   html.nasirku .popis.m-vpravo-dole{left:auto;top:auto;right:12%;bottom:20%;text-align:right}
@@ -455,9 +481,10 @@
     width:38px;height:38px;padding:0;border-radius:50%;cursor:pointer;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.22)}
   #nasirkuZavri svg{width:12px;height:12px;fill:none;stroke:rgba(255,255,255,.8);stroke-width:1.4;stroke-linecap:round}
 
-  /* telefon: lišta s CTA ani ovladač videa se neukazují nikdy, na výšku ani na šířku (Jakub 16. 9.: zavazí) */
+  /* telefon: lišta s CTA ani ovladač videa se neukazují nikdy, na výšku ani na šířku (Jakub 16. 9.: zavazí);
+     samostatné Přehrát taky ne (Jakub 17. 9.): stojící video ukáže znak pauzy a pustí ho klepnutí do obrazu */
   @media (hover:none) and (pointer:coarse) and (max-width:700px),(hover:none) and (pointer:coarse) and (max-height:500px){
-    #lista,#ovladac{display:none}
+    #lista,#ovladac,#hvplay{display:none}
   }
 
 </style>
@@ -483,7 +510,8 @@
     </span>
   </button>
   <button id="nasirkuZavri" type="button" aria-label="Zavřít video přes celou obrazovku"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2 L12 12 M12 2 L2 12"/></svg></button>
-  <button id="celeokno" type="button" aria-label="Video přes celou obrazovku"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M16 21h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg></button>
+  <button id="celeokno" type="button" aria-label="Video přes celou obrazovku"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M16 21h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg><span>Celá obrazovka</span></button>
+  <div id="tahnout"><svg viewBox="0 0 14 20" aria-hidden="true"><path d="M7 19 V3 M1.5 8.5 L7 2 L12.5 8.5"/></svg><span><span class="t-k">Celá obrazovka</span><span class="t-h">Přejeďte nahoru</span></span></div>
   <div id="prubeh" aria-hidden="true"><i></i></div>
   <span id="pauzaZnak" aria-hidden="true"><svg viewBox="0 0 17 20"><path d="M1 1 L16 10 L1 19 Z"/></svg></span>
   <div id="hvbox">
@@ -882,10 +910,16 @@
   vid.addEventListener('loadeddata',function(){ pripraveno=true; ukazany=-1; hledej(); nastart(); });
   function zacni(){ if(zacato) return; zacato=true; nacti(chciVariantu(null)); }
   // iOS ukaze snimek po posunu az u videa, ktere uz jednou bezelo. Kratke play a hned pause.
-  // Bez gesta projde jen ztlumene video na obrazovce; kdyz ho iOS odmitne (usporny rezim,
-  // video mimo obraz), zkusi se to znovu pri dalsim dotyku nebo scrollu k sekci.
+  // Bez gesta projde jen ztlumene video na obrazovce; kdyz ho iOS odmitne (usporny rezim),
+  // zkusi se to znovu pri dalsim dotyku nebo scrollu v sekci.
+  // Pojistka (17. 9. 2026): play() jen se sekci na obrazovce a nikdy behem hera pres cele okno.
+  // Po stazeni nebo pri klepnuti kamkoli jinde by na iPhonu mohlo prerusit hero video.
+  function naObrazovce(){
+    if(document.documentElement.classList.contains('nasirku')) return false;
+    var r=sek.getBoundingClientRect(); return r.top<window.innerHeight && r.bottom>0;
+  }
   function odemkni(){
-    if(odemknuto||zkousi||!vid.getAttribute('src')) return;
+    if(odemknuto||zkousi||!vid.getAttribute('src')||!naObrazovce()) return;
     zkousi=true; var k=kolo, pr;
     try{ pr=vid.play(); }catch(e){ zkousi=false; return; }
     if(pr&&pr.then) pr.then(function(){ if(k!==kolo) return;
@@ -2290,11 +2324,25 @@
     // telefon na výšku ukazuje jen úvod „Na bok“, video čeká na otočení nebo klepnutí
     const naVysku = matchMedia('(max-width:700px) and (orientation:portrait) and (hover:none) and (pointer:coarse)');
     const cekaNaOtoceni = () => naVysku.matches && !document.documentElement.classList.contains('nasirku');
+    // Telefon přes celé okno nemá samostatné Přehrát (Jakub 17. 9. 2026). Přerušený pokus (AbortError,
+    // např. pauza během otáčení) se jednou zopakuje. Když video stojí dál (úsporný režim iOS pustí video
+    // jen po klepnutí), ukáže se znak pauzy a klepnutí do obrazu video pustí.
+    let opakovano = false, rucniPauza = false;
     function pust(){
       if (cekaNaOtoceni()){ if (!hv.paused) hv.pause(); return; }
       const s = hv.play();
-      if (s && s.then) s.then(() => { hralo = true; if (tlac) tlac.hidden = true; rozjed(); })
-                        .catch(() => { if (tlac) tlac.hidden = false; });
+      if (s && s.then) s.then(() => { hralo = true; opakovano = false; if (tlac) tlac.hidden = true; rozjed(); })
+                        .catch(e => {
+                          if (tlac) tlac.hidden = false;
+                          const root = document.documentElement;
+                          if (!root.classList.contains('nasirku') || !hv.paused || hv.ended) return;
+                          if (e && e.name === 'AbortError' && !opakovano){
+                            opakovano = true;
+                            setTimeout(() => { if (root.classList.contains('nasirku') && hv.paused && !hv.ended && !rucniPauza) pust(); }, 300);
+                            return;
+                          }
+                          root.classList.add('pauznuto');
+                        });
       else { hralo = true; rozjed(); }
     }
     // Safari v úsporném režimu autoplay odmítne bez ohledu na kódování, proto
@@ -2304,7 +2352,7 @@
     document.getElementById('hero').addEventListener('click', () => {
       const plne = document.documentElement.classList.contains('nasirku');
       if (plne && hv.ended) return;
-      if (hv.paused) pust(); else if (plne) hv.pause();
+      if (hv.paused){ rucniPauza = false; pust(); } else if (plne){ rucniPauza = true; hv.pause(); }
     });
     hv.addEventListener('loadeddata', () => { if (hv.paused && !hv.ended) pust(); });
     pust();
@@ -2406,6 +2454,7 @@
         // po dobu videa až do krajů displeje, i pod výřez kamery
         if (meta) meta.setAttribute('content', metaPuv + ',viewport-fit=cover');
         if (scrollY) scrollTo(0, 0);
+        root.classList.remove('tazeno'); rucniPauza = false;
         clearTimeout(znovu); clearTimeout(konec); loopVypni();
         try { hv.currentTime = 0; } catch (e) {}
         pust(); tik();
@@ -2419,7 +2468,9 @@
       function vypni(){
         if (!zap) return;
         zap = false; clearTimeout(konec);
-        root.classList.remove('nasirku', 'otoceny', 'pauznuto');
+        root.classList.remove('nasirku', 'otoceny', 'pauznuto', 'tazeno');
+        // iPhone: stránka se pod videem mohla posunout přejetím nahoru, zpět je hero zase nahoře
+        if (scrollY && root.classList.contains('tahni')){ root.style.scrollBehavior = 'auto'; scrollTo(0, 0); root.style.scrollBehavior = ''; }
         if (meta) meta.setAttribute('content', metaPuv);
         if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(() => {});
         else if (document.webkitFullscreenElement && document.webkitExitFullscreen) document.webkitExitFullscreen();
@@ -2463,10 +2514,17 @@
         if (!zap){ odehrano = false; zapni(false); }
         celaObrazovka();
       });
+      // iPhone Fullscreen API nemá vůbec (MDN: jen iPad), klepnutí lištu Safari neschová. Tam místo
+      // tlačítka výzva k přejetí prstem nahoru: posun stránky lištu schová a vrstvy v obraze zůstanou.
       if (document.fullscreenEnabled || document.webkitFullscreenEnabled) root.classList.add('fs-ok');
+      else if (!root.requestFullscreen && !root.webkitRequestFullscreen) root.classList.add('tahni');
       ['fullscreenchange', 'webkitfullscreenchange'].forEach(u => document.addEventListener(u, () =>
         root.classList.toggle('celaobrazovka', !!(document.fullscreenElement || document.webkitFullscreenElement))));
-      hero.addEventListener('touchmove', e => { if (zap) e.preventDefault(); }, {passive:false});
+      const tahSeSmi = () => root.classList.contains('tahni') && !root.classList.contains('otoceny');
+      hero.addEventListener('touchmove', e => { if (zap && !tahSeSmi()) e.preventDefault(); }, {passive:false});
+      addEventListener('scroll', () => { if (zap) root.classList.toggle('tazeno', scrollY > 4); }, {passive:true});
+      const tahnout = document.getElementById('tahnout');
+      if (tahnout) tahnout.addEventListener('click', e => e.stopPropagation());
       zmer();
       if (nasirku.matches && scrollY < 40) zapni(false);   // stránka otevřená rovnou na šířku
     })();
