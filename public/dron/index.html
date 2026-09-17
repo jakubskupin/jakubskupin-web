@@ -426,37 +426,21 @@
       width:44px;height:44px;padding:0;border-radius:50%;cursor:pointer;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.22)}
   }
   #celeokno svg{width:16px;height:16px;fill:none;stroke:rgba(255,255,255,.85);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-  /* během videa přes celé okno je tlačítko v rohu od prvního snímku, velké a s popiskem (Jakub 17. 9. 2026):
-     klepnutí schová lišty prohlížeče (Fullscreen API chce klepnutí, otočení nestačí), vrstvy v obraze zůstanou.
-     Jen kde Fullscreen API je (Android); iPhone ho nemá, tam je výzva k přejetí nahoru (#tahnout) */
-  html.nasirku.fs-ok:not(.celaobrazovka) #celeokno{display:flex;align-items:center;gap:10px;position:absolute;z-index:12;
+  /* během videa přes celé okno je tlačítko v rohu od prvního snímku, velké a s popiskem (Jakub 17. 9. 2026).
+     Android (Fullscreen API): klepnutí schová lišty prohlížeče, vrstvy v obraze zůstanou.
+     iPhone (API nemá, jen iPad): klepnutí otevře nativní přehrávač iOS (webkitEnterFullscreen), po jeho
+     zavření video jede dál v heru přes celé okno. Ne u hera natočeného klepnutím na výšku (.otoceny).
+     Bez rozmazaného pozadí: backdrop-filter nad hrajícím videem se překresluje s každým snímkem.
+     Přejetí nahoru (a3d5585) zrušeno: posun stránky pod heroem schovával lištu Safari,
+     okno měnilo výšku uprostřed videa a obraz i claim poskočily. */
+  html.nasirku.fs-ok:not(.celaobrazovka) #celeokno,html.nasirku.nativ:not(.otoceny) #celeokno{display:flex;align-items:center;gap:10px;position:absolute;z-index:12;
     right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));
     height:48px;padding:0 20px 0 16px;border-radius:99px;cursor:pointer;
-    background:rgba(7,9,15,.72);border:1px solid var(--accent);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    background:rgba(7,9,15,.85);border:1px solid var(--accent);
     font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink)}
-  html.nasirku.fs-ok:not(.celaobrazovka) #celeokno svg{width:20px;height:20px;stroke:#fff}
+  html.nasirku.fs-ok:not(.celaobrazovka) #celeokno svg,html.nasirku.nativ:not(.otoceny) #celeokno svg{width:20px;height:20px;stroke:#fff}
   #celeokno span{display:none}
-  html.nasirku.fs-ok:not(.celaobrazovka) #celeokno span{display:inline}
-  /* iPhone: celou obrazovku stránce nedá (Fullscreen API má jen iPad), lištu Safari ale schová posun
-     stránky prstem. Během videa se proto stránka pod heroem smí posunout o kousek (tělo oříznuté
-     na výšku okna + 240 px) a výzva zmizí, jakmile se pohne. Neplatí pro hero natočené klepnutím
-     na výšku (.otoceny), tam by tah nahoru stránku neposunul. */
-  html.nasirku.tahni:not(.otoceny){overflow:auto}
-  html.nasirku.tahni:not(.otoceny) body{overflow:clip;height:calc(100vh + 240px)}
-  html.nasirku.tahni:not(.otoceny) #hero{touch-action:pan-y}
-  #tahnout{display:none}
-  /* šířka a výška změřené proti claimu v prvních 2,35 s: s bezpečnými okraji iPhonu na šířku
-     (vpravo až 62 px, dole 21 px) nesmí najet na konec nadpisu ani podtitulu, ani na iPhonu SE */
-  html.nasirku.tahni:not(.otoceny):not(.tazeno) #tahnout{display:flex;align-items:center;gap:12px;position:absolute;z-index:12;
-    right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));
-    padding:8px 16px 8px 14px;border-radius:12px;background:rgba(7,9,15,.72);border:1px solid rgba(255,255,255,.22);
-    backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:#fff;text-align:left}
-  #tahnout svg{flex:0 0 auto;width:14px;height:20px;fill:none;stroke:var(--accent);stroke-width:1.5;
-    stroke-linecap:round;stroke-linejoin:round;animation:tahnoutSip 2.1s ease-in-out infinite}
-  #tahnout .t-k{display:block;font-family:var(--mono);font-size:9px;line-height:1.2;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:3px}
-  #tahnout .t-h{display:block;font-weight:600;font-size:14px;line-height:1.2}
-  @keyframes tahnoutSip{0%,100%{transform:translateY(3px)}50%{transform:translateY(-3px)}}
-  @media (prefers-reduced-motion:reduce){ #tahnout svg{animation:none} }
+  html.nasirku.fs-ok:not(.celaobrazovka) #celeokno span,html.nasirku.nativ:not(.otoceny) #celeokno span{display:inline}
   html.nasirku #popisky{position:absolute;inset:0;display:block;padding:0}
   html.nasirku .popis{position:absolute;max-width:min(430px,40%);text-align:left;transform:none}
   html.nasirku .popis.m-vpravo-dole{left:auto;top:auto;right:12%;bottom:20%;text-align:right}
@@ -511,7 +495,6 @@
   </button>
   <button id="nasirkuZavri" type="button" aria-label="Zavřít video přes celou obrazovku"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2 L12 12 M12 2 L2 12"/></svg></button>
   <button id="celeokno" type="button" aria-label="Video přes celou obrazovku"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M16 21h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg><span>Celá obrazovka</span></button>
-  <div id="tahnout"><svg viewBox="0 0 14 20" aria-hidden="true"><path d="M7 19 V3 M1.5 8.5 L7 2 L12.5 8.5"/></svg><span><span class="t-k">Celá obrazovka</span><span class="t-h">Přejeďte nahoru</span></span></div>
   <div id="prubeh" aria-hidden="true"><i></i></div>
   <span id="pauzaZnak" aria-hidden="true"><svg viewBox="0 0 17 20"><path d="M1 1 L16 10 L1 19 Z"/></svg></span>
   <div id="hvbox">
@@ -842,8 +825,10 @@
   };
   var FPS=24, orez=VAR.d, cekaOrez=VAR.d, priChybe=null, pripraveno=false, ukazany=-1;
   var nacita=null, zacato=false, bloby={}, kolo=0;
-  var odemknuto=false, zkousi=false;
+  var odemknuto=false, zkousi=false, odmitnuto=false, nabito=false, docasne=false;
   var cil=0, ted=0, bezi=false;
+  var dotyk=matchMedia('(hover:none) and (pointer:coarse)').matches;
+  var telefon=dotyk && Math.min(screen.width,screen.height)<=500;
   // normalizovana souradnice PLNEHO videa -> pixel na obrazovce, vzorec pro object-fit: cover
   function naObrazovku(nx,ny){
     var cw=lep.clientWidth, ch=lep.clientHeight;
@@ -854,7 +839,7 @@
   function znacka(p, akt){
     if(!kruh||!cara) return;
     // dokud neni video nactene, je videt plakat a krouzek by ukazoval do prazdna
-    if(akt<0||!pripraveno){ kruh.style.opacity=0; spoj.style.opacity=0; return; }
+    if(akt<0||!pripraveno||docasne){ kruh.style.opacity=0; spoj.style.opacity=0; return; }
     // krouzek jen v uzkem okne kolem casu, kdy byla kotva zmerena; mimo nej by
     // od dilu ujel, protoze kamera mezitim najizdi
     var h=H[akt], d=Math.abs(p-h.p), OKNO=0.05;
@@ -885,6 +870,9 @@
   // emulovanem telefonu: z 57 posunu dobehlo 7, obraz stal az 2,5 s).
   function nacti(v){
     if(nacita===v) return; nacita=v;
+    // telefon otoceny na sirku uprostred sekce: nez se stahne plne video, ukaze stavajici vyrez
+    // 810x1080 cely (contain), ne priblizeny pres sirku okna; krouzek do te doby schovany
+    if(telefon && v==='d' && orez!==VAR.d && pripraveno && !bloby[VAR.d.zdroje[0][0]]){ docasne=true; vid.style.objectFit='contain'; }
     var zdroje=VAR[v].zdroje.filter(function(z){ return !z[1] || vid.canPlayType(z[1])==='probably'; }), i=0;
     function dalsi(){
       if(nacita!==v) return;
@@ -902,33 +890,59 @@
     kolo++; pripraveno=false; ukazany=-1; odemknuto=false; zkousi=false;
     cekaOrez=o; priChybe=chyba;
     vid.preload='auto'; vid.src=src;
+    // Safari na iPhonu bez play() data videa nenacte (preload orizne na metadata), explicitni load() ano
+    if(dotyk){ try{ vid.load(); }catch(e){} }
     odemkni();
   }
   // prohlizec video neprehraje (napr. HEVC bez dekoderu): dalsi zdroj v poradi
   vid.addEventListener('error',function(){ var f=priChybe; priChybe=null; if(f) f(); });
-  vid.addEventListener('loadedmetadata',function(){ orez=cekaOrez; odemkni(); });
+  vid.addEventListener('loadedmetadata',function(){ orez=cekaOrez;
+    if(docasne){ docasne=false; vid.style.objectFit=''; } odemkni(); });
   vid.addEventListener('loadeddata',function(){ pripraveno=true; ukazany=-1; hledej(); nastart(); });
-  function zacni(){ if(zacato) return; zacato=true; nacti(chciVariantu(null)); }
+  // Telefon na sirku = hero pres cele okno. Plne video by se stahovalo soubezne s herem a po otoceni
+  // zpet na vysku jeste vyrez (6,9 + 3,9 MB). Pocka na polohu na vysku, nebo az na sekci (uSekce).
+  function zacni(uSekce){
+    if(zacato) return;
+    var v=chciVariantu(null);
+    if(v==='d' && telefon && !uSekce) return;
+    zacato=true; nacti(v);
+  }
   // iOS ukaze snimek po posunu az u videa, ktere uz jednou bezelo. Kratke play a hned pause.
-  // Bez gesta projde jen ztlumene video na obrazovce; kdyz ho iOS odmitne (usporny rezim),
-  // zkusi se to znovu pri dalsim dotyku nebo scrollu v sekci.
+  // Bez gesta projde jen ztlumene video na obrazovce. Kdyz ho iOS odmitne (usporny rezim), dalsi
+  // pokusy bez gesta se nedelaji (driv play() na kazdy scroll) a odemkne ho klepnuti.
   // Pojistka (17. 9. 2026): play() jen se sekci na obrazovce a nikdy behem hera pres cele okno.
-  // Po stazeni nebo pri klepnuti kamkoli jinde by na iPhonu mohlo prerusit hero video.
   function naObrazovce(){
     if(document.documentElement.classList.contains('nasirku')) return false;
     var r=sek.getBoundingClientRect(); return r.top<window.innerHeight && r.bottom>0;
   }
-  function odemkni(){
-    if(odemknuto||zkousi||!vid.getAttribute('src')||!naObrazovce()) return;
+  // Skutecne klepnuti kdekoli mimo hero pres cele okno odemkne hned jako v 9a3c8f6 (v usporne rezimu
+  // by jinak prulet cekal na klepnuti primo v sekci). Ztlumene play() pruletu ztlumene hero nezastavi
+  // (soubeh ztlumenych videi iOS dovoli), pojistka se sekci na obrazovce proto plati jen bez gesta.
+  function odemkni(e){
+    var gesto=!!(e&&(e.type==='touchend'||e.type==='click'||e.type==='keydown'));
+    if(gesto) odmitnuto=false;
+    if(odemknuto||zkousi||odmitnuto||!vid.getAttribute('src')) return;
+    if(gesto ? document.documentElement.classList.contains('nasirku') : !naObrazovce()) return;
     zkousi=true; var k=kolo, pr;
-    try{ pr=vid.play(); }catch(e){ zkousi=false; return; }
+    try{ pr=vid.play(); }catch(x){ zkousi=false; return; }
     if(pr&&pr.then) pr.then(function(){ if(k!==kolo) return;
         odemknuto=true; zkousi=false; vid.pause(); ukazany=-1; hledej(); },
-      function(){ if(k===kolo) zkousi=false; });
-    else { odemknuto=true; zkousi=false; try{vid.pause();}catch(e){} }
+      function(er){ if(k!==kolo) return; zkousi=false; if(er&&er.name==='NotAllowedError') odmitnuto=true; });
+    else { odemknuto=true; zkousi=false; try{vid.pause();}catch(x){} }
   }
   ['touchend','pointerdown','click','wheel','keydown'].forEach(function(t){
     window.addEventListener(t,odemkni,{passive:true}); });
+  // Klepnuti do hera pres cele okno: prulet se neprehraje, jen load() v klepnuti. WebKit tim prvku
+  // zrusi omezeni (usporny rezim, prehravani jen po gestu; prepareForLoad), takze play() v sekci pak
+  // projde i bez klepnuti. Jednou, jen na dotykovem zarizeni, capture kvuli tlacitkum, ktera klepnuti
+  // dal nepousti. Mimo hero odemyka klepnuti primo play() v odemkni(), load() by ho prerusil.
+  function nabij(){
+    if(nabito||odemknuto||zkousi||!document.documentElement.classList.contains('nasirku')) return;
+    nabito=true; odmitnuto=false;
+    if(vid.getAttribute('src')){ kolo++; pripraveno=false; ukazany=-1; zkousi=false; }
+    try{ vid.load(); }catch(x){}
+  }
+  if(dotyk) window.addEventListener('click',nabij,{capture:true,passive:true});
   // Posouva se po celych snimcich a dalsi posun ceka, az dobehne predchozi. Nove prirazeni
   // currentTime rozpracovany posun zahodi, takze pri plynulem scrollu by obraz stal.
   // Cas je stejny jako driv (ted * (delka - 0.06)), jen zarovnany na stred snimku,
@@ -969,7 +983,7 @@
   function hlidej(){
     var r=sek.getBoundingClientRect(), vh=window.innerHeight;
     if(r.top<2*vh && r.bottom>-vh){
-      zacni();
+      zacni(true);
       var v=chciVariantu(nacita); if(v!==nacita) nacti(v);
       if(r.top<vh && r.bottom>0) odemkni();
     }
@@ -981,8 +995,10 @@
   // o nekolik sekund pozdeji), at je video pripravene, nez k nemu ctenar dojede.
   // S usporou dat az u sekce (hlidej).
   if(!(navigator.connection&&navigator.connection.saveData)){
-    if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',zacni);
-    else zacni();
+    if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){ zacni(false); });
+    else zacni(false);
+    // telefon otevreny na sirku zacne stahovat po otoceni na vysku
+    window.addEventListener('resize',function(){ if(!zacato) zacni(false); });
   }
   nastart();
 })();
@@ -2019,13 +2035,25 @@
       for (let i = 0; i < 1150; i++) a.push({x: r(), y: r(), v: 0.3 + 0.7*r(), f: 0.6 + 0.9*r()});
       return a;
     })();
+    // Telefon: snímek videa se nejdřív zmenší na plátně bez willReadFrequently (kreslí GPU) a do plátna
+    // pro čtení pixelů jde až malý obraz. Přímé drawImage(video) do plátna pro čtení převádí celý snímek
+    // 1920×1080 na procesoru (headless Chrome 19 ms, přes mezikrok 5,5 ms na snímek, obraz se liší
+    // nejvýš o 1 z 255). Na telefonu to sekalo LiDAR i termo. Desktop kreslí jako dřív.
+    const TELEFON = matchMedia('(hover: none) and (pointer: coarse)').matches && Math.min(screen.width, screen.height) <= 500;
+    function snimekDo(ctx){
+      const w = ctx.canvas.width, h = ctx.canvas.height;
+      if (!TELEFON){ ctx.drawImage(hv, 0, 0, w, h); return; }
+      if (!ctx.gpu){ const g = document.createElement('canvas'); g.width = w; g.height = h; ctx.gpu = g.getContext('2d'); }
+      ctx.gpu.drawImage(hv, 0, 0, w, h);
+      ctx.drawImage(ctx.gpu.canvas, 0, 0);
+    }
     const lmini = document.createElement('canvas');
     lmini.width = 96; lmini.height = 54;
     const lmctx = lmini.getContext('2d', {willReadFrequently:true});
     let lpx = null;
     function odberObrazu(){
       if (!hv.videoWidth) { lpx = null; return; }
-      lmctx.drawImage(hv, 0, 0, lmini.width, lmini.height);
+      snimekDo(lmctx);
       try { lpx = lmctx.getImageData(0, 0, lmini.width, lmini.height).data; }
       catch(e){ lpx = null; }
     }
@@ -2104,7 +2132,7 @@
     function termoKresli(t){
       if (!term || !hv.videoWidth) return;
       const {c: tc, cw, ch} = platno(term);
-      mctx.drawImage(hv, 0, 0, mini.width, mini.height);
+      snimekDo(mctx);
       let d;
       try { d = mctx.getImageData(0, 0, mini.width, mini.height); }
       catch(e){ return; }                                  // jiná doména by plátno zašpinila
@@ -2344,6 +2372,7 @@
     }
 
     let ktera = null;
+    const dolu = document.getElementById('dolu'), prubeh = document.querySelector('#prubeh i');
     function tik(){
       const t = hv.currentTime || 0;
       const r = rychlost(t);
@@ -2361,13 +2390,15 @@
         if (box)   box.classList.toggle('vypravi', !!chci && chci !== 'claim');
       }
       // pozvánka dál se ukazuje jen na podrženém posledním snímku
-      const dl = document.getElementById('dolu');
-      if (dl) dl.hidden = !(hv.ended || (hv.duration && t >= hv.duration - 0.06));
+      const dl = dolu, skryt = !(hv.ended || (hv.duration && t >= hv.duration - 0.06));
+      if (dl && dl.hidden !== skryt) dl.hidden = skryt;
       // tenká čára průběhu: vidět je jen na telefonu přes celé okno
-      const pr = document.querySelector('#prubeh i');
+      const pr = prubeh;
       if (pr && hv.duration) pr.style.transform = 'scaleX(' + Math.min(1, t / hv.duration).toFixed(4) + ')';
-      if (chci === 'lidar') lidarKresli(t, b);
-      if (chci === 'termo') termoKresli(t);
+      // nativní přehrávač iOS vrstvy nezobrazí, kreslit je pod ním by jen zatěžovalo telefon
+      const nativni = !!hv.webkitDisplayingFullscreen;
+      if (chci === 'lidar' && !nativni) lidarKresli(t, b);
+      if (chci === 'termo' && !nativni) termoKresli(t);
 
       const c = cover();
       naraz(t, c);
@@ -2459,13 +2490,25 @@
     // a nepřiběhne ani po přetočení pauznutého videa, takže vrstvu překresluji
     // i na událostech videa. Jinak by po návratu na záložku seděla na starém čase.
     let raf = 0;
-    function smycka(){ tik(); raf = requestAnimationFrame(smycka); }
+    // Telefon: vrstvy se přepočítají jen s novým snímkem videa (video má 30 snímků za sekundu), ne s každým
+    // snímkem obrazovky; dvojí výpočet téhož snímku nic nepřidá a na telefonu sekal. Pojistka po 120 ms,
+    // kdyby prohlížeč snímky nehlásil. Desktop beze změny.
+    const poSnimcich = TELEFON && !!hv.requestVideoFrameCallback;
+    let novySnimek = true, posledniTik = 0;
+    if (poSnimcich) hv.requestVideoFrameCallback(function snimek(){ novySnimek = true; hv.requestVideoFrameCallback(snimek); });
+    function smycka(){
+      const ted = performance.now();
+      // třes při nárazu běží podle hodin, ne podle snímků videa: v jeho okně přepočítávat každý snímek obrazovky
+      const t = hv.currentTime || 0, vNarazu = t > NARAZ - 0.3 && t < NARAZ + NARAZ_DELKA + 0.1;
+      if (!poSnimcich || novySnimek || vNarazu || ted - posledniTik > 120){ novySnimek = false; posledniTik = ted; tik(); }
+      raf = requestAnimationFrame(smycka);
+    }
     function rozjed(){ if (!raf) smycka(); }
     function zastav(){ if (raf) { cancelAnimationFrame(raf); raf = 0; } }
     hv.addEventListener('play', rozjed);
     hv.addEventListener('playing', rozjed);
     ['pause','ended','seeked','timeupdate','loadedmetadata','durationchange'].forEach(u =>
-      hv.addEventListener(u, () => { tik(); if (hv.paused) zastav(); }));
+      hv.addEventListener(u, () => { if (!(poSnimcich && u === 'timeupdate' && raf)) tik(); if (hv.paused) zastav(); }));
     document.addEventListener('visibilitychange', () => { tik(); if (!document.hidden && !hv.paused) rozjed(); });
     window.addEventListener('resize', tik);
     tik();
@@ -2608,11 +2651,19 @@
         zap = true; root.classList.add('nasirku'); root.classList.toggle('otoceny', !!otocit);
         // po dobu videa až do krajů displeje, i pod výřez kamery
         if (meta) meta.setAttribute('content', metaPuv + ',viewport-fit=cover');
-        if (scrollY) scrollTo(0, 0);
-        root.classList.remove('tazeno'); rucniPauza = false;
+        nahoru();
+        rucniPauza = false;
         clearTimeout(znovu); clearTimeout(konec); loopVypni();
         try { hv.currentTime = 0; } catch (e) {}
-        pust(); tik();
+        pust(); tik(); zahrej();
+      }
+      // Plátna LiDARu a termo se alokovala a obraz se poprvé četl až v prvním snímku beatu uprostřed
+      // videa (špička stovky ms). Na telefonu se to udělá při otočení, kdy se stránka stejně přestavuje.
+      function zahrej(){
+        try {
+          if (lid) platno(lid); if (term) platno(term);
+          if (hv.videoWidth){ odberObrazu(); snimekDo(mctx); mctx.getImageData(0, 0, 1, 1); }
+        } catch (e) {}
       }
       // telefon na výšku bez videa přes celé okno: video i bumerang stojí pod úvodem
       function uspi(){
@@ -2620,13 +2671,31 @@
         clearTimeout(znovu); loopVypni();
         if (!hv.paused) hv.pause();
       }
-      function vypni(){
+      // hero přes celé okno začíná i končí se stránkou nahoře; html má scroll-behavior:smooth,
+      // plynulý posun by se s otáčením a změnou overflow na iOS nemusel dokončit
+      function nahoru(){
+        if (!scrollY) return;
+        // inline scroll-behavior:auto bez přepočtu stylu Chrome ignoroval a posouval plynule (změřeno)
+        root.style.scrollBehavior = 'auto'; getComputedStyle(root).scrollBehavior;
+        try { scrollTo({top: 0, left: 0, behavior: 'instant'}); } catch (e) { scrollTo(0, 0); }
+        root.style.scrollBehavior = '';
+      }
+      let dotekPoOtoceni = false, poOtoceniT = 0;
+      addEventListener('touchstart', () => { dotekPoOtoceni = true; }, {passive:true, capture:true});
+      function vypni(poOtoceni){
         if (!zap) return;
         zap = false; clearTimeout(konec);
-        root.classList.remove('nasirku', 'otoceny', 'pauznuto', 'tazeno');
-        // iPhone: stránka se pod videem mohla posunout přejetím nahoru, zpět je hero zase nahoře
-        if (scrollY && root.classList.contains('tahni')){ root.style.scrollBehavior = 'auto'; scrollTo(0, 0); root.style.scrollBehavior = ''; }
+        root.classList.remove('nasirku', 'otoceny', 'pauznuto');
+        if (hv.webkitDisplayingFullscreen && hv.webkitExitFullscreen){ try { hv.webkitExitFullscreen(); } catch (e) {} }
+        // nejdřív vrátit viewport (bez viewport-fit=cover iOS viewport přepočítá), až pak stránku nahoru
         if (meta) meta.setAttribute('content', metaPuv);
+        nahoru();
+        // iOS po otočení zpět na výšku obnovuje polohu stránky podle obsahu, který byl uprostřed okna,
+        // a mohl by úvod odjet. Po ustálení otočení ji srovnat ještě jednou, pokud se čtenář nedotkl.
+        if (poOtoceni){
+          dotekPoOtoceni = false; clearTimeout(poOtoceniT);
+          poOtoceniT = setTimeout(() => { if (!zap && !dotekPoOtoceni) nahoru(); }, 550);
+        }
         if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(() => {});
         else if (document.webkitFullscreenElement && document.webkitExitFullscreen) document.webkitExitFullscreen();
         uspi(); tik();
@@ -2636,7 +2705,9 @@
       function zmena(){
         // úplně nahoře je hero vidět vždy, i když poslední měření scrollu ještě nedoběhlo
         if (nasirku.matches){ if (!zap && !odehrano && (videt || scrollY < 80)) zapni(false); }
-        else { odehrano = false; vypni(); uspi(); zmer(); }
+        // v nativním přehrávači iOS se otáčí přehrávač, stránka se srovná až po jeho zavření
+        else if (hv.webkitDisplayingFullscreen) return;
+        else { odehrano = false; vypni(true); uspi(); zmer(); }
       }
       if (nasirku.addEventListener) nasirku.addEventListener('change', zmena); else if (nasirku.addListener) nasirku.addListener(zmena);
       // Otočení telefonu: rozhodne hned událost otočení (jen v ní prohlížeč dovolí celou obrazovku
@@ -2663,23 +2734,35 @@
       // křížek na šířku nechá video zavřené až do otočení zpět; na výšku další otočení pustí video znovu
       if (zavri) zavri.addEventListener('click', e => { e.stopPropagation(); odehrano = nasirku.matches; vypni(); });
       if (nabok) nabok.addEventListener('click', e => { e.stopPropagation(); odehrano = false; zapni(!nasirku.matches); celaObrazovka(); });
-      // tlačítko v rohu: během videa jen schová lišty prohlížeče, po doběhnutí pustí video znovu
+      // iPhone: nativní přehrávač iOS. play() ve stejném klepnutí zruší omezení úsporného režimu,
+      // video pokračuje ze stejného času a po zavření přehrávače jede dál v heru přes celé okno.
+      function nativni(){
+        rucniPauza = false;
+        if (hv.paused && !hv.ended) pust();
+        try { hv.webkitEnterFullscreen(); } catch (e) {}
+      }
+      hv.addEventListener('webkitendfullscreen', () => {
+        if (!zap) return;
+        if (!nasirku.matches){ zmena(); return; }   // v přehrávači otočený na výšku
+        const dal = () => { if (zap && hv.paused && !hv.ended && !hv.webkitDisplayingFullscreen){ rucniPauza = false; pust(); } };
+        dal(); setTimeout(dal, 400);
+      });
+      // tlačítko v rohu: během videa schová lišty prohlížeče (Android) nebo otevře nativní přehrávač (iPhone),
+      // po doběhnutí pustí video znovu (na iPhonu hero s vrstvami, nativní přehrávač jen během videa)
       if (celeokno) celeokno.addEventListener('click', e => {
         e.stopPropagation();
+        const behemVidea = zap;
         if (!zap){ odehrano = false; zapni(false); }
-        celaObrazovka();
+        if (!root.classList.contains('nativ')) celaObrazovka();
+        else if (behemVidea) nativni();
       });
-      // iPhone Fullscreen API nemá vůbec (MDN: jen iPad), klepnutí lištu Safari neschová. Tam místo
-      // tlačítka výzva k přejetí prstem nahoru: posun stránky lištu schová a vrstvy v obraze zůstanou.
+      // iPhone Fullscreen API pro prvky nemá (MDN: jen iPad), klepnutí lištu Safari neschová. Video ale
+      // umí nativní přehrávač iOS (webkitEnterFullscreen), bez vrstev v obraze.
       if (document.fullscreenEnabled || document.webkitFullscreenEnabled) root.classList.add('fs-ok');
-      else if (!root.requestFullscreen && !root.webkitRequestFullscreen) root.classList.add('tahni');
+      else if (typeof hv.webkitEnterFullscreen === 'function') root.classList.add('nativ');
       ['fullscreenchange', 'webkitfullscreenchange'].forEach(u => document.addEventListener(u, () =>
         root.classList.toggle('celaobrazovka', !!(document.fullscreenElement || document.webkitFullscreenElement))));
-      const tahSeSmi = () => root.classList.contains('tahni') && !root.classList.contains('otoceny');
-      hero.addEventListener('touchmove', e => { if (zap && !tahSeSmi()) e.preventDefault(); }, {passive:false});
-      addEventListener('scroll', () => { if (zap) root.classList.toggle('tazeno', scrollY > 4); }, {passive:true});
-      const tahnout = document.getElementById('tahnout');
-      if (tahnout) tahnout.addEventListener('click', e => e.stopPropagation());
+      hero.addEventListener('touchmove', e => { if (zap) e.preventDefault(); }, {passive:false});
       zmer();
       if (nasirku.matches && scrollY < 40) zapni(false);   // stránka otevřená rovnou na šířku
     })();
