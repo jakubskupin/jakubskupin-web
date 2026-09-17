@@ -59,8 +59,11 @@ b,strong{font-weight:600;color:var(--text)}
 .hlavicka .film::after{content:"";position:absolute;inset:0;
   /* citelnost nadpisu resi VYHRADNE gradient, zadny text-shadow. Spodni tretina
      musi byt dost tmava i tehdy, kdyz pod textem lezi svetla cast karoserie. */
+  /* Spodek MUSI dojit na plnou kryci barvu drive nez na 100 %. Pri .96 na konci
+     prosvitala svetla cast vozovky a mezi videem a strankou byl videt pruh. */
   background:linear-gradient(180deg,rgba(10,10,11,.70) 0%,rgba(10,10,11,.14) 26%,
-    rgba(10,10,11,.42) 52%,rgba(10,10,11,.80) 74%,rgba(10,10,11,.96) 100%)}
+    rgba(10,10,11,.44) 52%,rgba(10,10,11,.80) 72%,rgba(10,10,11,.94) 86%,
+    #0A0A0B 96%)}
 /* .w ma margin:0 auto; ve flex sloupci ho auto margin scvrkne na sirku obsahu,
    takze lista i nadpis skoncily uprostred. Explicitni sirka to vrati. */
 .hlavicka>.w,.hlavicka>.hero{width:100%}
@@ -263,7 +266,6 @@ body{padding-bottom:80px}
 
   <div class="mezihlava rv">
     <h3>Proč se to liší</h3>
-    <p>Rozpohybovaná fotka je rychlá a levná. Oblet kamery kolem vozu potřebuje krok navíc: mezi fotku a hotový záběr se vloží vrstva, která nese pohyb.</p>
   </div>
   <div class="steps">
     <div class="step rv">
@@ -297,21 +299,18 @@ body{padding-bottom:80px}
         <figure><figcaption>Fotka</figcaption><img src="/auta/assets/par/kolo-foto.jpg" alt="Detail kola na fotce z inzerátu"></figure>
         <figure><figcaption>Video</figcaption><img src="/auta/assets/par/kolo-video.jpg" alt="Detail kola ve videu"></figure>
       </div>
-      <p class="parlabel">21" kolo, dvoubarevné leštěné paprsky</p>
     </div>
     <div class="rv">
       <div class="par">
         <figure><figcaption>Fotka</figcaption><img src="/auta/assets/par/predek-foto.jpg" alt="Přední maska na fotce z inzerátu"></figure>
         <figure><figcaption>Video</figcaption><img src="/auta/assets/par/predek-video.jpg" alt="Přední maska ve videu"></figure>
       </div>
-      <p class="parlabel">Podsvícená maska a matrixové světlomety</p>
     </div>
     <div class="rv">
       <div class="par">
         <figure><figcaption>Fotka</figcaption><img src="/auta/assets/par/zad-foto.jpg" alt="Záď na fotce z inzerátu"></figure>
         <figure><figcaption>Video</figcaption><img src="/auta/assets/par/zad-video.jpg" alt="Záď ve videu"></figure>
       </div>
-      <p class="parlabel">Tenká vodorovná stopa zadních světel</p>
     </div>
   </div>
 </section>
@@ -321,12 +320,6 @@ body{padding-bottom:80px}
   <div class="sechead rv">
     <h2>Auto je jen příklad</h2>
     <p class="pivot">Metoda nestojí na autech. <b>Stojí na fotkách, které už máte.</b></p>
-  </div>
-  <div class="uses">
-    <div class="use rv"><b>Packshot na bílém</b><p>To jediné, co má většina e-shopů. Jako reklama je to mrtvý obrázek, jako zdroj tvaru a materiálu ale stačí.</p></div>
-    <div class="use rv"><b>Fotky z e-shopu</b><p>Produkt nafocený v prostředí, z několika stran. Čím víc pohledů dodáte, tím míň se domýšlí.</p></div>
-    <div class="use rv"><b>Fotky z inzerátu</b><p>Případ z téhle stránky. Třicet až padesát snímků jednoho konkrétního kusu, bez studia a bez zapůjčení.</p></div>
-    <div class="use rv"><b>Zbytky z focení</b><p>Z jednoho focení vyjde pár set snímků a použije se deset. Ten zbytek je pořád použitelný materiál.</p></div>
   </div>
 </section>
 
