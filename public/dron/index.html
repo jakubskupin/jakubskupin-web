@@ -160,7 +160,9 @@
   #hero{position:relative;z-index:10;height:100vh;min-height:520px;overflow:hidden;
         background:#05070C}
   #hvbox{position:absolute;inset:0}
-  #hv,#hvloop{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  #hv,#hvloop,#hvfs{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  /* #hvfs: zapečená stopa pro nativní přehrávač iPhonu, ve stránce leží pod #hv a není ji vidět */
+  #hvfs{pointer-events:none}
   #hvloop{opacity:0;transition:opacity .25s ease;pointer-events:none}
   #hvloop.on{opacity:1}
   #hero::after{content:"";position:absolute;inset:0;pointer-events:none;
@@ -315,7 +317,7 @@
           justify-content:flex-start;gap:18px;padding:62px 0 26px}
     #hero::after{background:linear-gradient(180deg,rgba(5,7,12,.55) 0%,transparent 14%,transparent 100%)}
     #hvbox{position:relative;inset:auto;width:100%;aspect-ratio:16/9}
-    #hv,#hvloop{position:absolute;inset:0}
+    #hv,#hvloop,#hvfs{position:absolute;inset:0}
     .herotext{position:static;transform:none;padding:0 20px}
     /* nadpis má zlom ručně za první větou; 14ch by „Nemusí tam technik.“ rozlomilo do tří řádků */
     .herotext h1{font-size:clamp(27px,7.4vw,40px);max-width:none}
@@ -506,6 +508,9 @@
   <video id="hvloop" muted playsinline webkit-playsinline preload="auto" disablepictureinpicture aria-hidden="true" tabindex="-1">
     <source src="/dron/v4/bumerang.mp4" type="video/mp4">
   </video>
+  <!-- #hvfs: druhá stopa téhož průletu, popisky a efekty zapečené v obraze. Vyrábí ji skript dole,
+       a to jen na iPhonu, jen s heroem na šířku a jen na telefonu, jehož obrazovka má poměr stopy:
+       nativní přehrávač iOS vrstvy stránky nezobrazí a stopu s jiným poměrem by orámoval černou. -->
   <button id="hvplay" type="button" hidden aria-label="Přehrát video">Přehrát</button>
   <div id="herofx" aria-hidden="true">
     <canvas id="hlid"></canvas>
@@ -1914,6 +1919,13 @@
   (function(){
     const hv = document.getElementById('hv');
     if (!hv) return;
+    // hraje zapečená stopa v nativním přehrávači iPhonu? (přepíná ji modul dole)
+    let vPrehravaci = false;
+    // hero stojí ve stránce, protože se obraz předává nativnímu přehrávači (přepíná ho modul dole)
+    let fsPredano = false;
+    // fáze předání: 0 klid, 1 žádost odeslaná (odvolat ji nejde), 2 přehrávač otevřený.
+    // Ve vnějším rozsahu, aby na ni viděl i odZacatku(): po nepovedeném předání se hero nesmí rozjet znovu.
+    let fsFaze = 0;
     const box  = document.getElementById('herofx');
     const lid  = document.getElementById('hlid');
     const term = document.getElementById('hterm');
@@ -2395,10 +2407,10 @@
       // tenká čára průběhu: vidět je jen na telefonu přes celé okno
       const pr = prubeh;
       if (pr && hv.duration) pr.style.transform = 'scaleX(' + Math.min(1, t / hv.duration).toFixed(4) + ')';
-      // nativní přehrávač iOS vrstvy nezobrazí, kreslit je pod ním by jen zatěžovalo telefon
-      const nativni = !!hv.webkitDisplayingFullscreen;
-      if (chci === 'lidar' && !nativni) lidarKresli(t, b);
-      if (chci === 'termo' && !nativni) termoKresli(t);
+      // v nativním přehrávači běží zapečená stopa, kreslit vrstvy pod ním by jen zatěžovalo telefon
+      const vPlnem = vPrehravaci || !!hv.webkitDisplayingFullscreen;
+      if (chci === 'lidar' && !vPlnem) lidarKresli(t, b);
+      if (chci === 'termo' && !vPlnem) termoKresli(t);
 
       const c = cover();
       naraz(t, c);
@@ -2527,6 +2539,10 @@
     // jen po klepnutí), ukáže se znak pauzy a klepnutí do obrazu video pustí.
     let opakovano = false, rucniPauza = false;
     function pust(){
+      // Pod otevřeným nativním přehrávačem a během předání do něj hero stát MÁ: divák se dívá
+      // jinam a druhý dekódovaný obraz by jen bral výkon. Zpátky ho pustí až pojistka předání
+      // nebo zavřený přehrávač, tedy až fsPredano a vPrehravaci spadnou.
+      if (fsPredano || vPrehravaci) return;
       if (cekaNaOtoceni()){ if (!hv.paused) hv.pause(); return; }
       const s = hv.play();
       if (s && s.then) s.then(() => { hralo = true; opakovano = false; if (tlac) tlac.hidden = true; rozjed(); })
@@ -2536,7 +2552,9 @@
                           if (!root.classList.contains('nasirku') || !hv.paused || hv.ended) return;
                           if (e && e.name === 'AbortError' && !opakovano){
                             opakovano = true;
-                            setTimeout(() => { if (root.classList.contains('nasirku') && hv.paused && !hv.ended && !rucniPauza) pust(); }, 300);
+                            // opakování nesmí hero rozjet pod přehrávačem ani uprostřed předání
+                            setTimeout(() => { if (root.classList.contains('nasirku') && hv.paused && !hv.ended
+                                && !rucniPauza && !fsPredano && !vPrehravaci) pust(); }, 300);
                             return;
                           }
                           root.classList.add('pauznuto');
@@ -2566,7 +2584,18 @@
     // i smyčka, při přetočení před 28,4 s zmizí. prefers-reduced-motion: bez smyčky.
     const loopV = document.getElementById('hvloop');
     const DRZI = 29.65;   // konec zpomaleného dojezdu (26,4 až 29,63 s, rychlost 1 → 0,2), pak podržený snímek
-    const bezPohybu = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+    // Klidový režim se dá přepnout za běhu (iOS: Zpřístupnění, Zmenšit pohyb), bez nového načtení
+    // stránky. Čte se proto živě z dotazu, ne z jednorázového měření při startu.
+    const dotazPohyb = window.matchMedia ? matchMedia('(prefers-reduced-motion: reduce)') : null;
+    let bezPohybu = !!(dotazPohyb && dotazPohyb.matches);
+    function pohybZmena(){
+      bezPohybu = !!(dotazPohyb && dotazPohyb.matches);
+      if (bezPohybu) loopVypni(); else loopStav();
+    }
+    if (dotazPohyb){
+      if (dotazPohyb.addEventListener) dotazPohyb.addEventListener('change', pohybZmena);
+      else if (dotazPohyb.addListener) dotazPohyb.addListener(pohybZmena);
+    }
     let loopZap = false;
     if (loopV){ loopV.muted = true; loopV.defaultMuted = true; loopV.setAttribute('muted', ''); }
     function loopVypni(){
@@ -2601,6 +2630,9 @@
     let znovu = 0;
     function odZacatku(){
       if (!hv.ended) return;
+      // v nativním přehrávači (i během celé žádosti o něj, tedy do odzbrojení) se hero znovu nerozjíždí,
+      // zkusí to po zavření; jinak by po nepovedeném předání průlet naskočil znovu místo návratu ke článku
+      if (fsPredano || vPrehravaci || fsFaze !== 0){ clearTimeout(znovu); znovu = setTimeout(odZacatku, 600); return; }
       loopVypni();
       hv.currentTime = 0;
       const s = hv.play();
@@ -2631,6 +2663,41 @@
       const nasirku = matchMedia('(orientation: landscape) and (max-height: 500px) and (hover: none) and (pointer: coarse)');
       const zavri = document.getElementById('nasirkuZavri'), nabok = document.getElementById('nabok'), celeokno = document.getElementById('celeokno');
       let zap = false, odehrano = false, videt = true, konec = 0;
+      // odložené akce stránky: konec hera a úklid celého okna nesmí skočit do běžícího předání
+      let konecCeka = false, vypniCeka = 0;
+      // ---------- zapečená stopa v nativním přehrávači iPhonu: stavy předání ----------
+      // Požadavek na nativní přehrávač NEJDE ODVOLAT. webkitEnterFullscreen() otevře okno i tehdy,
+      // když stránka mezitím couvne: WebKit si hned označí změnu režimu a webkitbeginfullscreen
+      // pošle až v naplánovaném úkolu, po odpovědi z procesu rozhraní. Proto se volá NEJVÝŠ JEDNOU
+      // na jedno předání a jednou vyslaný požadavek se nikdy nezahazuje.
+      // fsFaze 0  KLID      stopa stojí, hero hraje ve stránce, tlačítko je volné
+      // fsFaze 1  ŽÁDOST    webkitEnterFullscreen() zavolán právě jednou. Stopa je srovnaná na čas hera
+      //                     a běží, hero stojí (fsPredano). Další klepnutí nedělá vůbec nic.
+      //           POJISTKA  přehrávač se do 1,1 s neohlásil: vrátí se jen OBRAZ, tedy hero do stránky,
+      //                     a preload klesne na metadata. Fáze ani stopa se nesahají.
+      //           ODZBROJENÍ přehrávač se neozval ani do 6 s: iOS žádost nejspíš tiše odmítl (zavřený
+      //                     web view, skrytá stránka, jiné video v přechodu) a událost už nepřijde.
+      //                     Fáze padá na KLID, stopa stojí, tlačítko je zase živé. Kdyby se přehrávač
+      //                     přesto ozval, obslouží ho posluchač otevření, ten platí v každé fázi.
+      // fsFaze 2  PLNO      webkitbeginfullscreen, i pozdní, i po odzbrojení a v libovolném stavu
+      //                     stránky: stopa se srovná na to, co má divák právě vidět, hero stojí
+      //                     a stopa hraje. Přehrávač se nikdy nezavírá jen proto, že přišel pozdě.
+      //           ZAVŘENO   webkitendfullscreen: hero převezme čas stopy (po dohrání naváže na DRZI),
+      //                     fáze padá na 0 a tlačítko je zase volné.
+      // Otočení, křížek i konec videa žádost NERUŠÍ. Konec hera se navíc celý odloží, dokud se předání
+      // nevyřídí, ať se stránka nesloží pod právě otevřeným přehrávačem.
+      // Co zůstává a vyřešit to nejde:
+      //  - pozdě otevřený přehrávač se může ukázat nad stránkou otočenou na výšku nebo nad dohraným
+      //    videem. Odvolat to nelze, tak se aspoň nikdy neukáže zmrzlý obraz: stopa se srovná
+      //    (dohrané hero i dohraná stopa = průlet od začátku) a po zavření se stránka srovná do klidu.
+      //  - po dobu žádosti, nejdéle do odzbrojení, běží dva dekódované obrazy vedle sebe, hero ve
+      //    stránce a zapečená stopa. To je cena za to, že pozdní přehrávač nezamrzne.
+      let fsv = null, fsDohralo = false, fsPojistka = 0;
+      let fsOk = false, fsVrat = 0, fsTempoIv = 0;   // stopa načtená, pojistka návratu hera, tempo
+      let fsTempoNase = 1, fsTempoRucni = false;     // rychlost nastavená stránkou vs. divákem
+      let fsLhuta = 0, fsZavirac = 0, fsZnovu = 0;   // odzbrojení žádosti, zavírání dohrané stopy, odložený pokus
+      let fsZavrenoKdy = -1e9;                       // kdy naposled přišel webkitendfullscreen
+      const FS_POJISTKA = 1100, FS_LHUTA = 6000, FS_ZAVIRANI = 650;
       // na výšku si pamatuje, jestli je hero vidět. Měří jen telefon na výšku: při otočení iOS mění
       // šířku a výšku okna ve dvou krocích a měření v mezistavu (i s posunutým scrollem) by lhalo.
       function zmer(){
@@ -2656,6 +2723,7 @@
         clearTimeout(znovu); clearTimeout(konec); loopVypni();
         try { hv.currentTime = 0; } catch (e) {}
         pust(); tik(); zahrej();
+        if (nasirku.matches) fsPriprav();   // metadata zapečené stopy až na šířku, na výšku ne
       }
       // Plátna LiDARu a termo se alokovala a obraz se poprvé četl až v prvním snímku beatu uprostřed
       // videa (špička stovky ms). Na telefonu se to udělá při otočení, kdy se stránka stejně přestavuje.
@@ -2684,9 +2752,17 @@
       addEventListener('touchstart', () => { dotekPoOtoceni = true; }, {passive:true, capture:true});
       function vypni(poOtoceni){
         if (!zap) return;
-        zap = false; clearTimeout(konec);
+        // Pod otevřeným přehrávačem se stránka neskládá a přehrávač se nezavírá: úklid počká,
+        // až se předání vyřídí (fsVyrizeno).
+        if (fsFaze === 2){ vypniCeka = poOtoceni ? 2 : 1; return; }
+        // V ŽÁDOSTI si o odchod řekl divák sám (křížek, otočení zpět). Odvolat ji nejde, ale vyřídit
+        // se dá hned: odzbrojíme ji, ať stopa nehraje na pozadí a tlačítko zůstane živé.
+        if (fsFaze === 1) fsKlid();
+        zap = false; clearTimeout(konec); konecCeka = false; vypniCeka = 0;
         root.classList.remove('nasirku', 'otoceny', 'pauznuto');
         if (hv.webkitDisplayingFullscreen && hv.webkitExitFullscreen){ try { hv.webkitExitFullscreen(); } catch (e) {} }
+        if (fsv && fsv.webkitDisplayingFullscreen && fsv.webkitExitFullscreen){ try { fsv.webkitExitFullscreen(); } catch (e) {} }
+        fsZrus();
         // nejdřív vrátit viewport (bez viewport-fit=cover iOS viewport přepočítá), až pak stránku nahoru
         if (meta) meta.setAttribute('content', metaPuv);
         nahoru();
@@ -2704,9 +2780,9 @@
       const heroNaObrazovce = () => { const r = hero.getBoundingClientRect(); return r.bottom > innerHeight*0.5 && r.top < innerHeight*0.5; };
       function zmena(){
         // úplně nahoře je hero vidět vždy, i když poslední měření scrollu ještě nedoběhlo
-        if (nasirku.matches){ if (!zap && !odehrano && (videt || scrollY < 80)) zapni(false); }
+        if (nasirku.matches){ fsPriprav(); if (!zap && !odehrano && (videt || scrollY < 80)) zapni(false); }
         // v nativním přehrávači iOS se otáčí přehrávač, stránka se srovná až po jeho zavření
-        else if (hv.webkitDisplayingFullscreen) return;
+        else if (hv.webkitDisplayingFullscreen || (fsv && fsv.webkitDisplayingFullscreen)) return;
         else { odehrano = false; vypni(true); uspi(); zmer(); }
       }
       if (nasirku.addEventListener) nasirku.addEventListener('change', zmena); else if (nasirku.addListener) nasirku.addListener(zmena);
@@ -2714,11 +2790,13 @@
       // bez klepnutí) a pojistkou ještě ustálená poloha, kdyby změna dotazu přišla v mezistavu.
       let ustal = 0;
       function otoceni(){
+        if (fsv) nativStav();   // poměr obrazovky se mohl změnit bez nového načtení stránky
         const o = screen.orientation && screen.orientation.type;
         const naSirku = o ? o.indexOf('landscape') === 0 : Math.abs(window.orientation || 0) === 90;
         if (naSirku && telefon() && !zap && !odehrano && (videt || scrollY < 80)){ zapni(false); celaObrazovka(); }
         clearTimeout(ustal);
         ustal = setTimeout(() => {
+          if (fsv) nativStav();   // iOS mění šířku a výšku ve dvou krocích, až tady je poměr ustálený
           if (zap) return;
           if (nasirku.matches){ if (!odehrano && (videt || heroNaObrazovce())) zapni(false); }
           // jiná poloha bez videa přes celé okno: hero hraje jako na desktopu
@@ -2728,25 +2806,180 @@
       if (naVysku.addEventListener) naVysku.addEventListener('change', otoceni); else if (naVysku.addListener) naVysku.addListener(otoceni);
       if (screen.orientation && screen.orientation.addEventListener) screen.orientation.addEventListener('change', otoceni);
       else addEventListener('orientationchange', otoceni);
+      // klidový režim se dá přepnout za běhu: tlačítko se podle toho nabídne, nebo zmizí
+      if (dotazPohyb){
+        const pohybTlacitko = () => { if (!bezPohybu && nasirku.matches) fsPriprav(); nativStav(); };
+        if (dotazPohyb.addEventListener) dotazPohyb.addEventListener('change', pohybTlacitko);
+        else if (dotazPohyb.addListener) dotazPohyb.addListener(pohybTlacitko);
+      }
       addEventListener('scroll', zmer, {passive:true});
-      hv.addEventListener('ended', () => { if (zap){ odehrano = true; konec = setTimeout(vypni, 900); } });
-      ['play','pause','ended'].forEach(u => hv.addEventListener(u, () => root.classList.toggle('pauznuto', zap && hv.paused && !hv.ended)));
+      hv.addEventListener('ended', () => { if (zap){ odehrano = true; konecArmuj(); } });
+      // Hero dojelo a stránka se za 900 ms složí. Jen ne do běžícího předání: divák si právě řekl
+      // o celou obrazovku a nesmí mu pod rukama zmizet ani stránka, ani otevřený přehrávač.
+      function konecArmuj(){ clearTimeout(konec); konec = setTimeout(konecTik, 900); }
+      function konecTik(){
+        if (!zap) return;
+        if (fsFaze !== 0){ konecCeka = true; return; }   // odloženo, dokud se předání nevyřídí
+        vypni();
+      }
+      function konecDodelej(){
+        if (!konecCeka) return;
+        konecCeka = false;
+        // hero mezitím dostalo nový čas (návrat z přehrávače), časovač si armuje samo až doběhne
+        if (zap && hv.ended) konecArmuj();
+      }
+      ['play','pause','ended'].forEach(u => hv.addEventListener(u, () => root.classList.toggle('pauznuto', zap && hv.paused && !hv.ended && !fsPredano)));
       // křížek na šířku nechá video zavřené až do otočení zpět; na výšku další otočení pustí video znovu
       if (zavri) zavri.addEventListener('click', e => { e.stopPropagation(); odehrano = nasirku.matches; vypni(); });
       if (nabok) nabok.addEventListener('click', e => { e.stopPropagation(); odehrano = false; zapni(!nasirku.matches); celaObrazovka(); });
-      // iPhone: nativní přehrávač iOS. play() ve stejném klepnutí zruší omezení úsporného režimu,
-      // video pokračuje ze stejného času a po zavření přehrávače jede dál v heru přes celé okno.
-      function nativni(){
-        rucniPauza = false;
-        if (hv.paused && !hv.ended) pust();
-        try { hv.webkitEnterFullscreen(); } catch (e) {}
+      // iPhone: nativní přehrávač iOS pouští ZAPEČENOU stopu. play() ve stejném klepnutí zruší
+      // omezení úsporného režimu, přehrávač začne od stejného času a po zavření jede hero dál.
+      const fsKonecStopy = () => Math.max(0, ((fsv && fsv.duration) || hv.duration || 0) - 0.05);
+      // Čas, na který se stopa srovná: co má divák právě vidět. Dohrané hero i podržený závěr
+      // (od DRZI je to jeden nehybný snímek) znamenají průlet od začátku, ne zmrzlý obraz.
+      function fsCasProDivaka(){
+        const t = hv.currentTime || 0;
+        return (hv.ended || t >= DRZI) ? 0 : Math.min(t, fsKonecStopy());
       }
-      hv.addEventListener('webkitendfullscreen', () => {
-        if (!zap) return;
+      function nativni(){
+        if (!fsv || !root.classList.contains('nativ')) return;
+        // Klepnutí do živé žádosti nedělá NIC: odvolat ji nejde, zopakovat taky ne a WebKit by druhé
+        // volání uprostřed změny režimu odmítl. Po odzbrojení je fáze zase KLID a tlačítko funguje.
+        if (fsFaze !== 0 || fsv.webkitDisplayingFullscreen) return;
+        const t = fsCasProDivaka();
+        // klepnutí na Celá obrazovka je výslovná žádost o pohyb, starou ruční pauzu diváka tím ruší
+        rucniPauza = false;
+        fsDohralo = false; fsTempoRucni = false;
+        clearTimeout(fsPojistka); clearTimeout(fsZnovu);
+        root.classList.remove('pauznuto');
+        fsPredano = true;
+        // hero ve stránce má stát, ale play() v tomtéž klepnutí mu zruší omezení úsporného režimu.
+        // Bez toho by se po zavření přehrávače v úsporném režimu už nerozjelo. Zastavíme ho hned potom.
+        const stat = () => { if (fsPredano && !hv.paused) hv.pause(); };
+        if (hv.paused && !hv.ended){ const p = hv.play(); if (p && p.then) p.then(stat, () => {}); else stat(); }
+        else stat();
+        fsv.preload = 'auto';               // celý soubor až teď, klepnutí je gesto
+        try { fsv.currentTime = t; } catch (e) {}
+        fsTempoNastav(rychlost(t));
+        const s = fsv.play(); if (s && s.catch) s.catch(() => {});
+        fsOtevri();
+      }
+      // Jedna žádost na jedno předání, rovnou v klepnutí. Na metadata se nečeká: tlačítko naskakuje
+      // až s nimi, a volání mimo gesto by iOS stejně odmítl. Volání samo může padnout do zavírací
+      // animace předchozího přehrávače, proto ho posílá fsPozadej(), která si na ni počká.
+      function fsOtevri(){
+        if (!fsv || fsFaze !== 0) return;
+        fsFaze = 1;
+        // Tichá pojistka: přehrávač se do 1,1 s neohlásil. Vrátí jen OBRAZ, tedy hero do stránky,
+        // a sníží preload. Fáze ani stopa se nesahají, na to je brzy.
+        clearTimeout(fsVrat); clearTimeout(fsLhuta); clearTimeout(fsZnovu);
+        fsVrat = setTimeout(() => { if (fsFaze === 1) fsHeroZpet(); }, FS_POJISTKA);
+        // Odzbrojení: po lhůtě se žádosti přestaneme držet. Jinak by tiché odmítnutí ze strany iOS
+        // (nepřijde begin ani end) nechalo tlačítko trvale mrtvé a stopu hrát na pozadí.
+        fsLhuta = setTimeout(() => { if (fsFaze === 1){ fsKlid(); fsVyrizeno(); } }, FS_LHUTA);
+        fsPozadej(false);
+      }
+      // Samotné odeslání požadavku. Dokud běží zavírací animace předchozího přehrávače, WebKit volání
+      // odmítá (InvalidStateError). Klepnutí proto nezahazujeme: počkáme, až animace doběhne, a pošleme
+      // ho potom. Žádost je po celou tu dobu vedená jako živá, takže stopa hraje a tlačítko je zamčené.
+      function fsPozadej(znovu){
+        if (!fsv || fsFaze !== 1) return;
+        const zbyva = FS_ZAVIRANI - (performance.now() - fsZavrenoKdy);
+        if (zbyva > 0 && zbyva <= FS_ZAVIRANI){
+          clearTimeout(fsZnovu);
+          fsZnovu = setTimeout(() => fsPozadej(znovu), zbyva + 40);
+          return;
+        }
+        try { fsv.webkitEnterFullscreen(); return; }
+        catch (e) {}
+        // Výjimku spolkneme. Napoprvé pokus ještě jednou zopakujeme, podruhé se žádosti vzdáme
+        // a uklidíme do KLIDU, ať zůstane tlačítko živé pro další klepnutí.
+        if (!znovu){ clearTimeout(fsZnovu); fsZnovu = setTimeout(() => fsPozadej(true), 700); return; }
+        fsKlid(); fsVyrizeno();
+      }
+      // rychlost zapečené stopy: časovač 30 Hz, ne timeupdate (ten chodí asi 4× za vteřinu
+      // a náběh i doběh zpomalení POV záběru by byly po schodech). timeupdate je jen záchranný tik
+      // pro případ, že iOS časovač za otevřeným přehrávačem přiškrtí.
+      function fsTempoNastav(r){
+        if (!fsv) return;
+        fsTempoNase = r;   // co nastavila stránka, ať se to nepoplete s tempem od diváka
+        if (Math.abs(fsv.playbackRate - r) > 0.004) fsv.playbackRate = r;
+      }
+      function fsTempoTik(){
+        // rychlost, kterou si v přehrávači nastavil divák, stránka nepřepisuje
+        if (!fsv || fsv.paused || fsv.ended || fsTempoRucni) return;
+        fsTempoNastav(rychlost(fsv.currentTime || 0));
+      }
+      function fsTempoStart(){ if (!fsTempoIv) fsTempoIv = setInterval(fsTempoTik, 33); }
+      function fsTempoStop(){ if (fsTempoIv){ clearInterval(fsTempoIv); fsTempoIv = 0; } }
+      // Hero se vrací do stránky: pojistka, otočení, křížek, konec videa. Stopa ani žádost se přitom
+      // NESAHAJÍ, odvolat je nejde. Divák tak nikdy nezůstane u stojícího obrazu.
+      function fsHeroZpet(){
+        clearTimeout(fsVrat);
+        if (fsFaze === 2) return;            // přehrávač hraje, hero pod ním stát má
+        fsPredano = false; vPrehravaci = false;
+        if (fsv) fsv.preload = 'metadata';   // víc se dopředu stahovat nemá
+        // pauzu, kterou si divák nastavil sám, stránka nepřebíjí: hero zůstane stát a svítí znak pauzy
+        root.classList.toggle('pauznuto', !!(rucniPauza && zap && hv.paused && !hv.ended));
+        if (hv.paused && !hv.ended && !rucniPauza && (zap || heroNaObrazovce())) pust();
+      }
+      // Žádost je vyřízená: přehrávač se zavřel, nebo ji iOS odmítl rovnou. Teprve teď smí stopa
+      // zastavit a tlačítko je zase volné pro nové předání.
+      function fsKlid(){
+        clearTimeout(fsVrat); clearTimeout(fsLhuta); clearTimeout(fsZavirac);
+        fsFaze = 0; fsDohralo = false; fsTempoStop();
+        if (fsv){ if (!fsv.paused) fsv.pause(); fsv.preload = 'metadata'; }
+        fsHeroZpet();
+      }
+      // Předání je vyřízené (zavřený přehrávač, odmítnutí, odzbrojení): teď smí proběhnout to,
+      // co na něj čekalo. Úklid celého okna má přednost, konec hera se jinak armuje sám.
+      function fsVyrizeno(){
+        if (fsFaze !== 0) return;
+        const u = vypniCeka; vypniCeka = 0;
+        if (u){ konecCeka = false; vypni(u === 2); return; }
+        konecDodelej();
+      }
+      // Dohraná stopa zavírá přehrávač. Během otevírací animace je webkitExitFullscreen() tiché nic
+      // (WebKit si drží changingVideoFullscreenMode), tak se volání po jejím doběhnutí zopakuje.
+      function fsZavriStopu(pokus){
+        clearTimeout(fsZavirac);
+        if (!fsv || !fsv.webkitDisplayingFullscreen) return;
+        try { fsv.webkitExitFullscreen(); } catch (e) {}
+        if (pokus >= 3) return;
+        fsZavirac = setTimeout(() => { if (fsv && fsv.webkitDisplayingFullscreen) fsZavriStopu(pokus + 1); }, 520);
+      }
+      // úklid stránky ve vypni(): fázi už srovnal vypni() sám, tady padají jen příznaky stránky
+      function fsZrus(){
+        clearTimeout(fsPojistka);
+        if (fsFaze !== 0){ fsHeroZpet(); return; }
+        fsKlid();
+      }
+      // Zavřený přehrávač: hero převezme čas zapečené stopy a jede dál i s vrstvami.
+      // Když stopa dohrála, naváže hero na DRZI (29,65 s), ať podržený závěr, bumerang i pozvánka dál
+      // dojedou ve stránce. Bumerang v zapečené stopě není, kdo ji dokouká v přehrávači, by o něj přišel.
+      function fsZavreno(){ try { fsZavrenoTelo(); } finally { fsVyrizeno(); } }
+      function fsZavrenoTelo(){
+        const bylPlny = fsFaze === 2, dohralo = fsDohralo, t = fsv ? (fsv.currentTime || 0) : 0;
+        clearTimeout(fsZavirac);
+        fsZavrenoKdy = performance.now();   // zavírací animace ještě chvíli běží, viz fsPozadej
+        // čas se předává ještě před rozjezdem, ať hero nenavazuje na starou polohu
+        if (bylPlny && zap && nasirku.matches){
+          const konecHera = Math.max(0, (hv.duration || t) - 0.05);
+          try { hv.currentTime = dohralo ? Math.min(DRZI, konecHera) : Math.min(t, konecHera); } catch (e) {}
+        }
+        fsKlid();   // žádost je vyřízená, stopa stojí a hero se vrací do stránky
+        tik();
+        if (!bylPlny) return;   // iOS poslal konec, aniž přehrávač ukázal: stránka je zpátky v klidu
+        if (!zap) return;       // stránka se mezitím vrátila z celého okna, hero hraje v ní
         if (!nasirku.matches){ zmena(); return; }   // v přehrávači otočený na výšku
-        const dal = () => { if (zap && hv.paused && !hv.ended && !hv.webkitDisplayingFullscreen){ rucniPauza = false; pust(); } };
-        dal(); setTimeout(dal, 400);
-      });
+        // pauza, kterou si divák nastavil sám ještě ve stránce, platí dál: hero zůstane stát se znakem pauzy
+        const dal = () => { if (zap && hv.paused && !hv.ended && !fsPredano && !rucniPauza) pust(); };
+        setTimeout(dal, 400);
+        // kdyby prohlížeč doběh nepustil, vrátit stránku i tak; hrající hero se nechá dojet samo
+        // (z DRZI do konce je 1,6 s a po něm ještě 0,9 s na bumerang, než stránka odejde)
+        // pojistka neznamená „pusť video“, ale „film skončil, opusť režim přes celé okno“, proto i při ruční pauze
+        if (dohralo) fsPojistka = setTimeout(() => { if (zap && hv.paused && !hv.ended){ odehrano = true; vypni(); } }, 3400);
+      }
       // tlačítko v rohu: během videa schová lišty prohlížeče (Android) nebo otevře nativní přehrávač (iPhone),
       // po doběhnutí pustí video znovu (na iPhonu hero s vrstvami, nativní přehrávač jen během videa)
       if (celeokno) celeokno.addEventListener('click', e => {
@@ -2756,10 +2989,93 @@
         if (!root.classList.contains('nativ')) celaObrazovka();
         else if (behemVidea) nativni();
       });
-      // iPhone Fullscreen API pro prvky nemá (MDN: jen iPad), klepnutí lištu Safari neschová. Nativní
-      // přehrávač iOS (webkitEnterFullscreen) sice celou obrazovku umí, ale ukáže holé video: popisky,
-      // LiDAR i termovrstva zmizí a s nimi příběh (Jakub 17. 9. 2026). Do doby, než bude verze videa
-      // s vrstvami zapečenými v obraze, tlačítko na iPhonu během videa není.
+      // iPhone Fullscreen API pro prvky nemá (MDN: jen iPad), klepnutí lištu Safari neschová. Celou
+      // obrazovku umí jen nativní přehrávač iOS (webkitEnterFullscreen) a ten ukáže holé video: popisky,
+      // LiDAR i termovrstva by zmizely a s nimi příběh (Jakub 17. 9. 2026). Proto se v něm pouští druhá
+      // stopa téhož průletu, která má vrstvy zapečené v obraze (render 17. 9., 2532×1170, 30 fps, osa 1:1
+      // se zdrojem, takže si obě stopy předávají čas beze zbytku). Zpomalení POV záběru zapečené není,
+      // dělá ho tatáž funkce rychlost() přes playbackRate, a protože jsou vrstvy v pixelech, zpomalí s nimi.
+      // Co v přehrávači zůstává vědomě jinak než ve stránce (obraz ani příběh to nemění):
+      //  - claim je v zapečené stopě na velkých iPhonech asi o desetinu větší, po zavření drobně poskočí
+      //  - v prvních vteřinách přes něj jde spodní ovládání přehrávače, než ho iOS schová
+      //  - závěr stopy drží poslední snímek, bumerang v ní není; kdo ji dokouká, dostane ho ve stránce,
+      //    protože se hero po zavření vrací na DRZI
+      //  - tlačítko naskočí, až jsou metadata stopy doma, ne s prvním snímkem hera
+      const VRSTVY = '/dron/v4/prulet-v4-vrstvy-hevc.mp4';
+      // HEVC Main, tag hvc1, level 5.0 = general_level_idc 150 (přesně to, čím je stopa zakódovaná).
+      // H.264 pojistka není: kdo HEVC neumí, dostane stránku bez tlačítka jako dřív.
+      const HEVC = 'video/mp4; codecs="hvc1.1.6.L150.B0"';
+      const maNativ = !(document.fullscreenEnabled || document.webkitFullscreenEnabled)
+                      && typeof HTMLVideoElement.prototype.webkitEnterFullscreen === 'function'
+                      && !!document.createElement('video').canPlayType(HEVC);
+      // Nativní přehrávač vepíše stopu do celé obrazovky telefonu, a co se nevejde, orámuje černou.
+      // Měří se proto poměr obrazovky, ne okna: innerHeight se mění s lištou Safari i uprostřed videa
+      // a tlačítko by podle něj mizelo a naskakovalo. Telefony 19,5:9 (390×844, 393×852, 402×874,
+      // 430×932) sedí na poměr stopy do půl procenta, iPhone SE a starší 16:9 (375×667) ne: tam by
+      // byl obraz v přehrávači menší než hero ve stránce, tlačítko se nenabídne a stránka zůstane,
+      // jak se chová dnes.
+      const POMER = 2532/1170, TOLERANCE = 0.04;
+      function pomerSedi(){
+        const dlouha = Math.max(screen.width, screen.height), kratka = Math.max(1, Math.min(screen.width, screen.height));
+        return Math.abs(dlouha/kratka - POMER) <= POMER*TOLERANCE;
+      }
+      // Tlačítko se ukáže teprve s načtenou stopou, ať nikde nestojí tlačítko, které nic neudělá.
+      // prefers-reduced-motion: stránka schválně potlačuje třes i bumerang, jenže zapečená stopa
+      // třes veze v obraze a vypnout jí ho nejde. V klidovém režimu se proto tlačítko nenabízí vůbec.
+      // Přepočet při otočení: iOS rozměry obrazovky neprohazuje, takže poměr vyjde stejně; hlídá se tu hlavně
+      // klidový režim, který se dá přepnout za běhu, a tablety, kde se obrazovka měnit může.
+      function nativStav(){ root.classList.toggle('nativ', fsOk && !bezPohybu && pomerSedi()); }
+      function fsPriprav(){
+        if (!maNativ || !hvbox || bezPohybu) return;
+        if (fsv){ nativStav(); return; }
+        if (!pomerSedi()) return;
+        const v = document.createElement('video');
+        v.id = 'hvfs'; v.muted = true; v.defaultMuted = true; v.tabIndex = -1;
+        for (const a of ['muted', 'playsinline', 'webkit-playsinline', 'disablepictureinpicture']) v.setAttribute(a, '');
+        v.setAttribute('aria-hidden', 'true');
+        v.preload = 'metadata';   // dopředu jen metadata, celý soubor až s klepnutím na tlačítko
+        v.src = VRSTVY;
+        v.addEventListener('loadedmetadata', () => { fsOk = true; nativStav(); });
+        v.addEventListener('error', () => { fsOk = false; nativStav(); });
+        ['play', 'playing'].forEach(u => v.addEventListener(u, fsTempoStart));
+        ['pause', 'ended'].forEach(u => v.addEventListener(u, fsTempoStop));
+        v.addEventListener('seeked', fsTempoTik);   // po skoku v čase sedí rychlost hned, ne až s dalším tikem
+        v.addEventListener('timeupdate', fsTempoTik);   // záchranný tik, kdyby iOS časovač přiškrtil
+        // tempo, které nenastavila stránka, si nastavil divák v ovládání přehrávače: nechat mu ho
+        v.addEventListener('ratechange', () => { if (Math.abs((v.playbackRate || 1) - fsTempoNase) > 0.01) fsTempoRucni = true; });
+        v.addEventListener('webkitbeginfullscreen', () => {
+          clearTimeout(fsVrat); clearTimeout(fsPojistka); clearTimeout(fsLhuta);
+          clearTimeout(fsZavirac); clearTimeout(fsZnovu);   // konec hera se neruší, jen se odloží (konecTik)
+          fsFaze = 2; vPrehravaci = true; fsPredano = true; fsDohralo = false; fsTempoRucni = false;
+          root.classList.remove('pauznuto');
+          v.preload = 'auto';   // po odzbrojení klesl na metadata, teď se dohrává celá stopa
+          // Posluchač platí v KAŽDÉ fázi a v jakémkoli stavu stránky: po pojistce, po odzbrojení,
+          // po otočení na výšku, po křížku i po konci videa. Přehrávač se nikdy nezavírá jen proto,
+          // že přišel pozdě. Stopa se srovná na to, co má divák právě vidět: běžící hero pokračuje
+          // na svém čase, dohrané hero, podržený závěr i dohraná stopa dostanou průlet od začátku.
+          const t = (v.ended || v.currentTime >= fsKonecStopy()) ? 0 : fsCasProDivaka();
+          if (v.ended || Math.abs((v.currentTime || 0) - t) > 0.15){ try { v.currentTime = t; } catch (e) {} }
+          if (!hv.paused) hv.pause();
+          fsTempoNastav(rychlost(t));
+          // v přehrávači stopa stát nesmí: iOS ji při otevření mohl pauznout, a mohla i dojet
+          if (v.paused){ const p = v.play(); if (p && p.catch) p.catch(() => {}); }
+          fsTempoStart();
+        });
+        v.addEventListener('ended', () => {
+          if (v.webkitDisplayingFullscreen && v.webkitExitFullscreen){
+            fsDohralo = true;
+            // Volání může padnout do otevírací animace, kde je tichým ničím. Proto se opakuje,
+            // dokud se přehrávač opravdu nezavře, ať divák nezůstane u zmrzlého posledního snímku.
+            fsZavriStopu(0);
+            return;
+          }
+          // Stopa dojela dřív, než ji iOS stihl otevřít. Žádost se zahodit nedá, tak se nechává být:
+          // pozdní webkitbeginfullscreen ji přetočí na průlet od začátku a rozjede znovu.
+        });
+        v.addEventListener('webkitendfullscreen', fsZavreno);
+        hvbox.insertBefore(v, hvbox.firstChild);   // pod #hv, aby ji ve stránce nebylo vidět
+        fsv = v;
+      }
       if (document.fullscreenEnabled || document.webkitFullscreenEnabled) root.classList.add('fs-ok');
       ['fullscreenchange', 'webkitfullscreenchange'].forEach(u => document.addEventListener(u, () =>
         root.classList.toggle('celaobrazovka', !!(document.fullscreenElement || document.webkitFullscreenElement))));
