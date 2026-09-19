@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Piano placement preview · Jakub Skupin</title>
+<meta name="description" content="A Steinway grand placed into a client's room photo: 3D camera match, photoreal finish, short camera move.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Jakub Skupin">
+<meta property="og:title" content="Piano placement preview · Jakub Skupin">
+<meta property="og:description" content="A Steinway grand placed into a room photo: 3D camera match, photoreal finish, short camera move.">
+<meta property="og:url" content="https://jakubskupin.cz/lindeblad/">
+<meta property="og:image" content="https://jakubskupin.cz/lindeblad/assets/poster.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAFAF8; --text:#1A1A18; --text-2:#6B6964; --border:#E8E6E1;
+  --h:'Syne',sans-serif; --b:'Manrope',ui-sans-serif,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;overflow-x:clip;background:var(--bg);color:var(--text);font-family:var(--b);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+video{max-width:100%;height:auto;display:block}
+.w{max-width:1120px;margin:0 auto;padding-inline:20px}
+@media(min-width:768px){.w{padding-inline:32px}}
+header{padding:56px 0 28px}
+.label{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-2);margin:0 0 14px}
+h1{font-family:var(--h);font-weight:700;letter-spacing:-.03em;margin:0;font-size:clamp(32px,5.4vw,54px);line-height:1.06;text-wrap:balance}
+.lead{max-width:640px;margin:18px 0 0;color:var(--text-2);font-size:17px}
+.frame{border:1px solid var(--border);border-radius:14px;overflow:hidden;background:#111;aspect-ratio:1916/1080;box-shadow:0 18px 50px rgba(26,26,24,.12)}
+.frame video{width:100%;height:100%;object-fit:cover}
+.note{display:grid;gap:10px;margin:26px 0 0;padding:0;list-style:none;color:var(--text-2);font-size:15px;max-width:720px}
+.note b{color:var(--text);font-weight:600}
+footer{padding:44px 0 64px;color:var(--text-2);font-size:14px}
+.in{opacity:0;transform:translateY(14px);animation:in .7s cubic-bezier(.2,.7,.2,1) forwards}
+.in.d1{animation-delay:.08s}.in.d2{animation-delay:.18s}.in.d3{animation-delay:.3s}
+@keyframes in{to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.in{opacity:1;transform:none;animation:none}}
+</style>
+</head>
+<body>
+<header class="w">
+  <p class="label in">Placement preview</p>
+  <h1 class="in d1">Your grand piano, in your room</h1>
+  <p class="lead in d2">A short camera move built from the final placement still. It starts on your own photo and walks toward the piano.</p>
+</header>
+<main class="w">
+  <div class="frame in d2">
+    <video src="/lindeblad/assets/piano-placement-walkin.mp4" poster="/lindeblad/assets/poster.jpg" controls autoplay muted loop playsinline preload="metadata"></video>
+  </div>
+  <ul class="note in d3">
+    <li><b>Position, scale and perspective</b> come from a 3D camera match to your paper template on the floor.</li>
+    <li><b>The room</b> in the still is your original photo. The camera move is a motion test on top of that still.</li>
+  </ul>
+</main>
+<footer class="w in d3">Jakub Skupin · <a href="https://jakubskupin.cz">jakubskupin.cz</a></footer>
+</body>
+</html>

@@ -17,6 +17,7 @@ const nextConfig: NextConfig = {
       { source: "/auta", destination: "/auta/index.html" },
       { source: "/ranketta", destination: "/ranketta/index.html" },
       { source: "/posedla", destination: "/posedla/index.html" },
+      { source: "/lindeblad", destination: "/lindeblad/index.html" },
     ];
   },
 };
