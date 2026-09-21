@@ -1080,16 +1080,22 @@
 
   /* ---- marketing: nadpis, věta, ukázky ---- */
   #marketing{background:#05070C;border-top:1px solid var(--line)}
-  .mkt-mriz{margin-top:clamp(36px,5vw,60px);display:grid;grid-template-columns:minmax(300px,440px) 1fr;
-    gap:clamp(20px,3vw,44px);align-items:start}
-  .mkt-prava{display:grid;gap:18px}
-  .mkt-dvoj{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;align-items:start}
+  /* dva posty vedle sebe, pod nimi řada formátů; 2fr 1fr .5625fr = billboard 2:1, feed 1:1
+     a stories 9:16 vyjdou stejně vysoké */
+  .mkt-posty{margin-top:clamp(36px,5vw,60px);display:grid;grid-template-columns:repeat(2,minmax(0,440px));
+    gap:clamp(20px,3.4vw,48px);align-items:start}
+  .mkt-formaty{margin-top:clamp(32px,4.4vw,56px);display:grid;grid-template-columns:2fr 1fr .5625fr;
+    gap:18px;align-items:start}
   .mkt-stitek{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#55617A;margin:0 0 10px}
   .bn{margin:0;display:flex;flex-direction:column;gap:10px}
   .bn img{width:100%;height:auto;border:1px solid var(--line)}
   .bn figcaption{display:flex;flex-wrap:wrap;gap:6px 16px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--seda)}
   .bn figcaption b{color:var(--ink);font-weight:500;letter-spacing:.14em;text-transform:uppercase}
-  @media (max-width:860px){.mkt-mriz{grid-template-columns:1fr}.mkt-dvoj{grid-template-columns:1fr 1fr}}
+  @media (max-width:860px){
+    .mkt-posty{grid-template-columns:minmax(0,500px);gap:34px}
+    .mkt-formaty{grid-template-columns:1fr 1fr}
+    .mkt-formaty .bn:first-child{grid-column:1 / -1}
+  }
 </style>
 <style>
   /* ---- LinkedIn maketa: vlastni jmenny prostor li-*, zadna kolize s LP ---- */
@@ -1117,15 +1123,25 @@
   .li-akce{display:flex;padding:6px 8px}
   .li-akce span{flex:1 1 0;text-align:center;padding:9px 4px;font-size:13px;font-weight:600;
     color:#5f6b7a;border-radius:4px}
-  /* mobil: text jako v LinkedIn feedu, jen první dvě věty a „…více“, zbytek po klepnutí;
-     pod videem reakce a počty. Desktop ukazuje celý text jako dřív a řádek reakcí nemá. */
+  .li-ava img{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover}
+  /* text jako v LinkedIn feedu, jen první dvě věty a „…více“, zbytek po klepnutí. Platí i na
+     desktopu: dva posty vedle sebe tak mají video ve stejné výšce. Reakce a počty jen na mobilu. */
   .li-vice,.li-eng{display:none}
+  .li-text:not(.otevreno){cursor:pointer}
+  .li-text:not(.otevreno) .li-zbytek{display:none}
+  .li-text:not(.otevreno) .li-vice{display:inline}
+  .li-vice{margin:0 0 0 .3em;padding:0;border:0;background:none;font:inherit;color:#666;cursor:pointer}
+  .li-vice:hover,.li-vice:focus-visible{color:#0a66c2;text-decoration:underline;outline:none}
+  /* zvuk u rozhovoru: video hraje ztlumené jako ve feedu, tlačítko ho pustí nahlas */
+  .li-mwrap{position:relative}
+  .li-zvuk{position:absolute;right:12px;bottom:12px;width:34px;height:34px;padding:0;border:0;border-radius:50%;
+    background:rgba(0,0,0,.62);display:grid;place-items:center;cursor:pointer}
+  .li-zvuk svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .li-zvuk .li-zv-on{display:none}
+  .li-zvuk[aria-pressed="true"] .li-zv-on{display:block}
+  .li-zvuk[aria-pressed="true"] .li-zv-off{display:none}
+  .li-zvuk:focus-visible{outline:2px solid #fff;outline-offset:2px}
   @media (max-width:760px){
-    .li-text:not(.otevreno){cursor:pointer}
-    .li-text:not(.otevreno) .li-zbytek{display:none}
-    .li-text:not(.otevreno) .li-vice{display:inline}
-    .li-vice{margin:0 0 0 .3em;padding:0;border:0;background:none;font:inherit;color:#666;cursor:pointer}
-    .li-vice:hover,.li-vice:focus-visible{color:#0a66c2;text-decoration:underline;outline:none}
     .li-text{padding-bottom:12px}
     .li-media{border-bottom:0}
     .li-eng{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 16px;padding:9px 0 8px;
@@ -1806,27 +1822,27 @@
 })();
 </script>
 
-<!-- ===== MARKETING: LinkedIn post a formáty, jen nadpis a věta ===== -->
+<!-- ===== MARKETING: dva LinkedIn posty (Irena Kovářová, fiktivní) a formáty ===== -->
 <section id="marketing" class="sek">
   <div class="rám">
-    <p class="kick">Post a formáty</p>
+    <p class="kick">Posty a formáty</p>
     <h2>Jedna věta, čtyři plochy</h2>
-    <p class="pod">Sdělení stránky zkrácené na jeden claim a jeden záběr, stejné v postu i na billboardu.</p>
-    <div class="mkt-mriz">
+    <p class="pod">Sdělení stránky zkrácené na jeden claim a jeden záběr, stejné v postu i na billboardu. Druhý post nese minutu z rozhovoru.</p>
+    <div class="mkt-posty">
       <div>
         <p class="mkt-stitek">LinkedIn &middot; video 4:5</p>
         <article class="li-karta">
-                <div class="li-hl">
-                  <div class="li-ava" aria-hidden="true">VS</div>
-                  <div class="li-kdo">
-                    <b>Věra Sasková</b>
-                    <span>CEO &middot; Fly4Future</span>
-                    <span>1 h &middot; &#127760;</span>
-                  </div>
-                  <div class="li-tri" aria-hidden="true">&middot;&middot;&middot;</div>
-                </div>
+          <div class="li-hl">
+            <div class="li-ava"><img src="/dron/li/irena.jpg" width="48" height="48" alt="" loading="lazy" decoding="async"></div>
+            <div class="li-kdo">
+              <b>Irena Kovářová</b>
+              <span>CEO &middot; Fly4Future</span>
+              <span>1 h &middot; &#127760;</span>
+            </div>
+            <div class="li-tri" aria-hidden="true">&middot;&middot;&middot;</div>
+          </div>
 
-                <div class="li-text">Do štoly, do šachty, pod strop haly se dnes leze s lešením a s odstávkou. RoboAid tam vlétne sám.<button type="button" class="li-vice" aria-expanded="false">&hellip;více</button><span class="li-zbytek">
+          <div class="li-text">Do štoly, do šachty, pod strop haly se dnes leze s lešením a s odstávkou. RoboAid tam vlétne sám.<button type="button" class="li-vice" aria-expanded="false">&hellip;více</button><span class="li-zbytek">
 
         Nemá GPS a nepotřebuje ji. Polohu si drží LiDARem podle toho, co sám vidí. Kamera a termovize měří zároveň, vlastní světlo má 14 000 lumenů a všechno si počítá na palubě, bez sítě a bez kabelu.
 
@@ -1836,38 +1852,81 @@
 
         <a href="#" onclick="return false">fly4future.com/custom-drones/roboaid</a></span></div>
 
-                <video class="li-media" id="livid" playsinline muted loop preload="metadata"
-                  poster="/dron/li/post-poster.jpg"
-                  aria-label="Promo video RoboAid ve formátu 4:5">
-                  <source src="/dron/li/post.mp4" type="video/mp4">
-                </video>
+          <video class="li-media" id="livid" playsinline muted loop preload="metadata"
+            poster="/dron/li/post-poster.jpg"
+            aria-label="Promo video RoboAid ve formátu 4:5">
+            <source src="/dron/li/post.mp4" type="video/mp4">
+          </video>
 
-                <div class="li-eng" aria-hidden="true">
-                  <span class="li-reakce"><i class="li-r li-r-like"><svg viewBox="0 0 16 16"><path d="M4.2 7.2H2.6v6.2h1.6zM5.4 13.4h5.3c.6 0 1.1-.4 1.3-1l1.1-3.9c.2-.8-.4-1.6-1.2-1.6H9.4l.4-2.3c.1-.7-.4-1.3-1.1-1.3-.4 0-.7.2-.9.5L5.4 7.2z"/></svg></i><i class="li-r li-r-love"><svg viewBox="0 0 16 16"><path d="M8 13.3 3.4 9A2.9 2.9 0 0 1 7.5 4.9l.5.5.5-.5A2.9 2.9 0 1 1 12.6 9z"/></svg></i><i class="li-r li-r-idea"><svg viewBox="0 0 16 16"><path d="M8 2.4a3.9 3.9 0 0 0-2.3 7c.4.3.6.7.6 1.2v.6h3.4v-.6c0-.5.2-.9.6-1.2A3.9 3.9 0 0 0 8 2.4zM6.3 12.2h3.4v1.4H6.3z"/></svg></i><span>186</span></span>
-                  <span class="li-pocty">27 komentářů &middot; 12 přeposlání</span>
-                </div>
+          <div class="li-eng" aria-hidden="true">
+            <span class="li-reakce"><i class="li-r li-r-like"><svg viewBox="0 0 16 16"><path d="M4.2 7.2H2.6v6.2h1.6zM5.4 13.4h5.3c.6 0 1.1-.4 1.3-1l1.1-3.9c.2-.8-.4-1.6-1.2-1.6H9.4l.4-2.3c.1-.7-.4-1.3-1.1-1.3-.4 0-.7.2-.9.5L5.4 7.2z"/></svg></i><i class="li-r li-r-love"><svg viewBox="0 0 16 16"><path d="M8 13.3 3.4 9A2.9 2.9 0 0 1 7.5 4.9l.5.5.5-.5A2.9 2.9 0 1 1 12.6 9z"/></svg></i><i class="li-r li-r-idea"><svg viewBox="0 0 16 16"><path d="M8 2.4a3.9 3.9 0 0 0-2.3 7c.4.3.6.7.6 1.2v.6h3.4v-.6c0-.5.2-.9.6-1.2A3.9 3.9 0 0 0 8 2.4zM6.3 12.2h3.4v1.4H6.3z"/></svg></i><span>186</span></span>
+            <span class="li-pocty">27 komentářů &middot; 12 přeposlání</span>
+          </div>
 
-                <div class="li-akce" aria-hidden="true">
-                  <span>To se mi líbí</span><span>Komentovat</span><span>Přeposlat</span><span>Odeslat</span>
-                </div>
-              </article>
+          <div class="li-akce" aria-hidden="true">
+            <span>To se mi líbí</span><span>Komentovat</span><span>Přeposlat</span><span>Odeslat</span>
+          </div>
+        </article>
       </div>
-      <div class="mkt-prava">
-        <figure class="bn">
-          <img src="/dron/img/ad-billboard.jpg" alt="Billboard RoboAid, WHERE GPS ENDS" loading="lazy">
-          <figcaption><b>Billboard</b><span>2:1</span></figcaption>
-        </figure>
-        <div class="mkt-dvoj">
-          <figure class="bn">
-            <img src="/dron/img/ad-ctverec.jpg" alt="Čtvercový formát RoboAid" loading="lazy">
-            <figcaption><b>Feed</b><span>1:1</span></figcaption>
-          </figure>
-          <figure class="bn">
-            <img src="/dron/img/ad-svisly.jpg" alt="Svislý formát RoboAid" loading="lazy">
-            <figcaption><b>Stories</b><span>9:16</span></figcaption>
-          </figure>
-        </div>
+      <div>
+        <p class="mkt-stitek">LinkedIn &middot; rozhovor 4:5</p>
+        <article class="li-karta">
+          <div class="li-hl">
+            <div class="li-ava"><img src="/dron/li/irena.jpg" width="48" height="48" alt="" loading="lazy" decoding="async"></div>
+            <div class="li-kdo">
+              <b>Irena Kovářová</b>
+              <span>CEO &middot; Fly4Future</span>
+              <span>4 d &middot; &#127760;</span>
+            </div>
+            <div class="li-tri" aria-hidden="true">&middot;&middot;&middot;</div>
+          </div>
+
+          <div class="li-text">Walter Hofer zavírá kvůli jedné šachtě na noc celý tunel. Zeptal se mě, kdo mu ten dron bude řídit.<button type="button" class="li-vice" aria-expanded="false">&hellip;více</button><span class="li-zbytek">
+
+        Odpověděla jsem, že nikdo. RoboAid šachtou proletí sám, bez pilota a bez signálu. GPS nikdy neměl, takže ji nemá jak ztratit. Prostor kolem sebe si měří 3D LiDARem, ve tmě i v prachu, a všechno si počítá na palubě.
+
+        Walterovi elektrikáři zmáčknou start. Korozi a trhliny označí palubní AI ještě za letu.
+
+        Celý rozhovor z podcastu má minutu.
+
+        <a href="#" onclick="return false">fly4future.com/custom-drones/roboaid</a></span></div>
+
+          <div class="li-mwrap">
+            <video class="li-media" id="livid2" playsinline muted loop preload="metadata"
+              poster="/dron/li/podcast-poster.jpg"
+              aria-label="Rozhovor Waltera Hofera s Irenou Kovářovou o RoboAidu, formát 4:5 s českými titulky">
+              <source src="/dron/li/podcast.mp4" type="video/mp4">
+            </video>
+            <button type="button" class="li-zvuk" aria-pressed="false" aria-label="Zapnout zvuk">
+              <svg class="li-zv-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.2L12 5.5v13l-4.8-4H4z"/><path d="m16 9.5 5 5m0-5-5 5"/></svg>
+              <svg class="li-zv-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.2L12 5.5v13l-4.8-4H4z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6M18 6.5a7.8 7.8 0 0 1 0 11"/></svg>
+            </button>
+          </div>
+
+          <div class="li-eng" aria-hidden="true">
+            <span class="li-reakce"><i class="li-r li-r-like"><svg viewBox="0 0 16 16"><path d="M4.2 7.2H2.6v6.2h1.6zM5.4 13.4h5.3c.6 0 1.1-.4 1.3-1l1.1-3.9c.2-.8-.4-1.6-1.2-1.6H9.4l.4-2.3c.1-.7-.4-1.3-1.1-1.3-.4 0-.7.2-.9.5L5.4 7.2z"/></svg></i><i class="li-r li-r-love"><svg viewBox="0 0 16 16"><path d="M8 13.3 3.4 9A2.9 2.9 0 0 1 7.5 4.9l.5.5.5-.5A2.9 2.9 0 1 1 12.6 9z"/></svg></i><i class="li-r li-r-idea"><svg viewBox="0 0 16 16"><path d="M8 2.4a3.9 3.9 0 0 0-2.3 7c.4.3.6.7.6 1.2v.6h3.4v-.6c0-.5.2-.9.6-1.2A3.9 3.9 0 0 0 8 2.4zM6.3 12.2h3.4v1.4H6.3z"/></svg></i><span>94</span></span>
+            <span class="li-pocty">11 komentářů &middot; 6 přeposlání</span>
+          </div>
+
+          <div class="li-akce" aria-hidden="true">
+            <span>To se mi líbí</span><span>Komentovat</span><span>Přeposlat</span><span>Odeslat</span>
+          </div>
+        </article>
       </div>
+    </div>
+    <div class="mkt-formaty">
+      <figure class="bn">
+        <img src="/dron/img/ad-billboard.jpg" alt="Billboard RoboAid, WHERE GPS ENDS" loading="lazy">
+        <figcaption><b>Billboard</b><span>2:1</span></figcaption>
+      </figure>
+      <figure class="bn">
+        <img src="/dron/img/ad-ctverec.jpg" alt="Čtvercový formát RoboAid" loading="lazy">
+        <figcaption><b>Feed</b><span>1:1</span></figcaption>
+      </figure>
+      <figure class="bn">
+        <img src="/dron/img/ad-svisly.jpg" alt="Svislý formát RoboAid" loading="lazy">
+        <figcaption><b>Stories</b><span>9:16</span></figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -1876,19 +1935,37 @@
   // Chova se jako kanal: hraje, jen kdyz je v zaberu. Jinak by na strance
   // bezela tri videa najednou.
   // „…více“: klepnutí kamkoli do zkráceného textu ukáže celý post (zkracuje se jen na mobilu)
-  var txt = document.querySelector('.li-text'), vice = document.querySelector('.li-vice');
-  if (txt && vice) txt.addEventListener('click', function(){
-    if (txt.classList.contains('otevreno')) return;
-    txt.classList.add('otevreno'); vice.setAttribute('aria-expanded', 'true');
-  });
-  var v = document.getElementById('livid');
-  if (!v || !('IntersectionObserver' in window)) return;
-  new IntersectionObserver(function(zaznamy){
-    zaznamy.forEach(function(z){
-      if (z.isIntersecting){ var p = v.play(); if (p && p.catch) p.catch(function(){}); }
-      else { v.pause(); }
+  document.querySelectorAll('.li-text').forEach(function(txt){
+    var vice = txt.querySelector('.li-vice');
+    if (vice) txt.addEventListener('click', function(){
+      if (txt.classList.contains('otevreno')) return;
+      txt.classList.add('otevreno'); vice.setAttribute('aria-expanded', 'true');
     });
-  }, {threshold: 0.45}).observe(v);
+  });
+  var videa = document.querySelectorAll('.li-media');
+  // zvuk: tlačítko u rozhovoru přepíná ztlumení, mimo záběr se video zase ztlumí
+  document.querySelectorAll('.li-zvuk').forEach(function(tl){
+    var v = tl.parentNode.querySelector('video');
+    tl.addEventListener('click', function(){
+      v.muted = !v.muted;
+      tl.setAttribute('aria-pressed', String(!v.muted));
+      tl.setAttribute('aria-label', v.muted ? 'Zapnout zvuk' : 'Vypnout zvuk');
+      if (!v.muted){ var p = v.play(); if (p && p.catch) p.catch(function(){}); }
+    });
+  });
+  if (!videa.length || !('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function(zaznamy){
+    zaznamy.forEach(function(z){
+      var v = z.target;
+      if (z.isIntersecting){ var p = v.play(); if (p && p.catch) p.catch(function(){}); }
+      else {
+        v.pause();
+        var tl = v.parentNode.querySelector('.li-zvuk');
+        if (tl && !v.muted){ v.muted = true; tl.setAttribute('aria-pressed', 'false'); tl.setAttribute('aria-label', 'Zapnout zvuk'); }
+      }
+    });
+  }, {threshold: 0.45});
+  videa.forEach(function(v){ io.observe(v); });
 })();
 </script>
 
