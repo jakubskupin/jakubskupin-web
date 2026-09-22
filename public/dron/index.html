@@ -1134,6 +1134,12 @@
   .li-vice:hover,.li-vice:focus-visible{color:#0a66c2;text-decoration:underline;outline:none}
   /* zvuk u rozhovoru: video hraje ztlumené jako ve feedu, tlačítko ho pustí nahlas */
   .li-mwrap{position:relative}
+  .li-mwrap video{cursor:pointer}
+  /* klik na video = play/pauza; ikona jen po ruční pauze, ne když video stojí mimo záběr */
+  .li-play{position:absolute;left:50%;top:50%;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;
+    background:rgba(0,0,0,.55);display:none;place-items:center;pointer-events:none}
+  .li-play svg{width:26px;height:26px;fill:#fff;margin-left:3px}
+  .li-mwrap.li-pauza .li-play{display:grid}
   .li-zvuk{position:absolute;right:12px;bottom:12px;width:34px;height:34px;padding:0;border:0;border-radius:50%;
     background:rgba(0,0,0,.62);display:grid;place-items:center;cursor:pointer}
   .li-zvuk svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
@@ -1826,8 +1832,8 @@
 <section id="marketing" class="sek">
   <div class="rám">
     <p class="kick">Posty a formáty</p>
-    <h2>Jedna věta, čtyři plochy</h2>
-    <p class="pod">Sdělení stránky zkrácené na jeden claim a jeden záběr, stejné v postu i na billboardu. Druhý post nese minutu z rozhovoru.</p>
+    <h2>Jedna stránka, pět ploch</h2>
+    <p class="pod">Claim a záběr ze stránky jsou v postu i na billboardu stejné. Druhý post nese minutu z rozhovoru.</p>
     <div class="mkt-posty">
       <div>
         <p class="mkt-stitek">LinkedIn &middot; video 4:5</p>
@@ -1852,11 +1858,14 @@
 
         <a href="#" onclick="return false">fly4future.com/custom-drones/roboaid</a></span></div>
 
-          <video class="li-media" id="livid" playsinline muted loop preload="metadata"
-            poster="/dron/li/post-poster.jpg"
-            aria-label="Promo video RoboAid ve formátu 4:5">
-            <source src="/dron/li/post.mp4" type="video/mp4">
-          </video>
+          <div class="li-mwrap">
+            <video class="li-media" id="livid" playsinline muted loop preload="metadata"
+              poster="/dron/li/post-poster.jpg"
+              aria-label="Promo video RoboAid ve formátu 4:5">
+              <source src="/dron/li/post.mp4" type="video/mp4">
+            </video>
+            <span class="li-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg></span>
+          </div>
 
           <div class="li-eng" aria-hidden="true">
             <span class="li-reakce"><i class="li-r li-r-like"><svg viewBox="0 0 16 16"><path d="M4.2 7.2H2.6v6.2h1.6zM5.4 13.4h5.3c.6 0 1.1-.4 1.3-1l1.1-3.9c.2-.8-.4-1.6-1.2-1.6H9.4l.4-2.3c.1-.7-.4-1.3-1.1-1.3-.4 0-.7.2-.9.5L5.4 7.2z"/></svg></i><i class="li-r li-r-love"><svg viewBox="0 0 16 16"><path d="M8 13.3 3.4 9A2.9 2.9 0 0 1 7.5 4.9l.5.5.5-.5A2.9 2.9 0 1 1 12.6 9z"/></svg></i><i class="li-r li-r-idea"><svg viewBox="0 0 16 16"><path d="M8 2.4a3.9 3.9 0 0 0-2.3 7c.4.3.6.7.6 1.2v.6h3.4v-.6c0-.5.2-.9.6-1.2A3.9 3.9 0 0 0 8 2.4zM6.3 12.2h3.4v1.4H6.3z"/></svg></i><span>186</span></span>
@@ -1896,6 +1905,7 @@
               aria-label="Rozhovor Waltera Hofera s Irenou Kovářovou o RoboAidu, formát 4:5 s českými titulky">
               <source src="/dron/li/podcast.mp4" type="video/mp4">
             </video>
+            <span class="li-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg></span>
             <button type="button" class="li-zvuk" aria-pressed="false" aria-label="Zapnout zvuk">
               <svg class="li-zv-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.2L12 5.5v13l-4.8-4H4z"/><path d="m16 9.5 5 5m0-5-5 5"/></svg>
               <svg class="li-zv-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.2L12 5.5v13l-4.8-4H4z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6M18 6.5a7.8 7.8 0 0 1 0 11"/></svg>
@@ -1941,7 +1951,28 @@
       txt.classList.add('otevreno'); vice.setAttribute('aria-expanded', 'true');
     });
   });
+  // klik mimo rozbalený text ho zase složí; výjimka je video a zvuk téže karty,
+  // aby pauza nezkrátila text a neposunula video pod prstem
+  document.addEventListener('click', function(e){
+    document.querySelectorAll('.li-text.otevreno').forEach(function(txt){
+      if (txt.contains(e.target)) return;
+      var karta = txt.closest('.li-karta');
+      if (karta && karta.contains(e.target) && e.target.closest('.li-mwrap')) return;
+      txt.classList.remove('otevreno');
+      var vice = txt.querySelector('.li-vice'); if (vice) vice.setAttribute('aria-expanded', 'false');
+    });
+  });
   var videa = document.querySelectorAll('.li-media');
+  // klik na video = play/pauza jako na LinkedInu; ruční pauza drží i po návratu do záběru
+  document.querySelectorAll('.li-mwrap').forEach(function(w){
+    var v = w.querySelector('video');
+    v.addEventListener('click', function(){
+      if (v.paused){ v.dataset.rucne = ''; var p = v.play(); if (p && p.catch) p.catch(function(){}); }
+      else { v.dataset.rucne = '1'; v.pause(); }
+    });
+    v.addEventListener('play', function(){ w.classList.remove('li-pauza'); });
+    v.addEventListener('pause', function(){ if (v.dataset.rucne) w.classList.add('li-pauza'); });
+  });
   // zvuk: tlačítko u rozhovoru přepíná ztlumení, mimo záběr se video zase ztlumí
   document.querySelectorAll('.li-zvuk').forEach(function(tl){
     var v = tl.parentNode.querySelector('video');
@@ -1956,7 +1987,7 @@
   var io = new IntersectionObserver(function(zaznamy){
     zaznamy.forEach(function(z){
       var v = z.target;
-      if (z.isIntersecting){ var p = v.play(); if (p && p.catch) p.catch(function(){}); }
+      if (z.isIntersecting){ if (!v.dataset.rucne){ var p = v.play(); if (p && p.catch) p.catch(function(){}); } }
       else {
         v.pause();
         var tl = v.parentNode.querySelector('.li-zvuk');
