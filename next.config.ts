@@ -22,6 +22,7 @@ const nextConfig: NextConfig = {
       { source: "/ranketta", destination: "/ranketta/index.html" },
       { source: "/posedla", destination: "/posedla/index.html" },
       { source: "/lindeblad", destination: "/lindeblad/index.html" },
+      { source: "/web-ad", destination: "/web-ad/index.html" },
     ];
   },
 };
