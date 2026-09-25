@@ -1,0 +1,453 @@
+<!doctype html><html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow, noarchive"><meta name="referrer" content="no-referrer">
+<title>ŘEŽ: podklady ke kampani | Jakub Skupin</title>
+<meta name="description" content="Video, fotky, carousel a bannery ke knize ŘEŽ Jana Řezáče.">
+<meta property="og:type" content="website"><meta property="og:locale" content="cs_CZ"><meta property="og:site_name" content="Jakub Skupin">
+<meta property="og:title" content="ŘEŽ: podklady ke kampani">
+<meta property="og:image" content="https://jakubskupin.cz/bez-rohu/img/og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap">
+<style>
+:root{--bg:#07080b;--ink:#f2f2f5;--muted:#b2bbc3;--gold:#b5a05f;--gold2:#d4c07e;--night:#162131;--line:rgba(242,242,245,.1);
+  --f:'Open Sans',system-ui,sans-serif;--w:1200px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;
+  background:radial-gradient(1200px 700px at 78% -10%,rgba(22,33,49,.95),transparent 70%),radial-gradient(900px 600px at -10% 40%,rgba(181,160,95,.07),transparent 70%)}
+body:after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:50;opacity:.07;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+main,header,footer,nav{position:relative;z-index:2}
+a{color:inherit}
+.ram{width:min(var(--w),100% - 32px);margin:0 auto}
+
+/* ---- navigace ---- */
+nav{position:sticky;top:0;z-index:40;transition:background .3s ease,backdrop-filter .3s ease,border-color .3s ease;border-bottom:1px solid transparent}
+nav.pod{background:rgba(7,8,11,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:var(--line)}
+nav .ram{display:flex;align-items:center;justify-content:space-between;gap:18px;height:64px}
+nav .znak{width:22px;opacity:.9}
+nav ul{display:flex;gap:26px;list-style:none;margin:0;padding:0;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+nav ul a{text-decoration:none;color:var(--muted);transition:color .2s}
+nav ul a:hover,nav ul a.on{color:var(--ink)}
+@media (max-width:760px){nav ul{display:none}}
+
+/* ---- hero ---- */
+header{min-height:min(88vh,860px);display:grid;align-items:end;padding:120px 0 90px}
+header .ram{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:40px;align-items:end}
+.titulek{width:100%;max-width:640px;display:block;filter:drop-shadow(0 30px 80px rgba(181,160,95,.18))}
+header h1{margin:0;font-weight:300;font-size:clamp(34px,4.4vw,64px);line-height:1.05;letter-spacing:-.015em;padding-left:26px;border-left:2px solid var(--gold);justify-self:start}
+@media (max-width:760px){header{min-height:auto;padding:96px 0 64px}header .ram{grid-template-columns:1fr;gap:32px}}
+
+/* ---- sekce ---- */
+section{padding:clamp(72px,11vw,150px) 0 0}
+.hl{display:flex;align-items:baseline;gap:22px;margin:0 0 clamp(32px,5vw,56px)}
+.hl .c{font-size:11px;font-weight:600;letter-spacing:.24em;color:var(--gold)}
+h2{margin:0;font-weight:300;font-size:clamp(40px,6.2vw,92px);line-height:1;letter-spacing:-.02em}
+.odhal{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.odhal.je{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.odhal{opacity:1;transform:none;transition:none}}
+
+/* tlačítko ke stažení */
+.stah{display:inline-flex;align-items:center;gap:12px;margin-top:22px;padding:14px 22px 14px 18px;border:1px solid rgba(181,160,95,.55);border-radius:999px;
+  text-decoration:none;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);
+  transition:background .25s,border-color .25s,transform .25s,box-shadow .25s}
+.stah svg{width:18px;height:18px;stroke:var(--gold);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:stroke .25s}
+.stah small{font-weight:400;letter-spacing:.06em;text-transform:none;color:var(--muted);font-size:12px}
+.stah:hover{background:var(--gold);border-color:var(--gold);color:#0b0f16;transform:translateY(-2px);box-shadow:0 14px 36px rgba(181,160,95,.28)}
+.stah:hover svg{stroke:#0b0f16}.stah:hover small{color:#26303d}
+
+/* ---- LinkedIn maketa (jmenný prostor li-*, převzato z /dron) ---- */
+.li-stred{display:flex;flex-direction:column;align-items:center}
+.li-karta{width:min(540px,100%);background:#fff;border:1px solid #d9dde2;border-radius:10px;overflow:hidden;text-align:left;
+  box-shadow:0 30px 80px rgba(22,33,49,.65),0 0 0 1px rgba(181,160,95,.08);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,var(--f);color:#191919}
+.li-hl{display:flex;align-items:flex-start;gap:10px;padding:14px 16px 6px}
+.li-ava{flex:0 0 auto;width:48px;height:48px;border-radius:50%;overflow:hidden;background:#162131}
+.li-ava img{display:block;width:100%;height:100%;object-fit:cover}
+.li-kdo{min-width:0;flex:1 1 auto;line-height:1.3}
+.li-kdo b{display:block;font-size:14.5px;font-weight:600;color:#191919}
+.li-kdo span{display:block;font-size:12.5px;color:#666}
+.li-tri{flex:0 0 auto;color:#666;font-size:18px;letter-spacing:1px;line-height:1}
+.li-text{padding:4px 16px 14px;font-size:14.5px;line-height:1.48;color:#191919;white-space:pre-line}
+.li-text a{color:#0a66c2;text-decoration:none;font-weight:600}
+.li-text:not(.otevreno){cursor:pointer}
+.li-text:not(.otevreno) .li-zbytek{display:none}
+.li-vice{display:none;margin:0 0 0 .3em;padding:0;border:0;background:none;font:inherit;color:#666;cursor:pointer}
+.li-text:not(.otevreno) .li-vice{display:inline}
+.li-vice:hover,.li-vice:focus-visible{color:#0a66c2;text-decoration:underline;outline:none}
+.li-mwrap{position:relative;background:#000}
+.li-media{display:block;width:100%;height:auto;aspect-ratio:1/1;background:#000;cursor:pointer}
+.li-play{position:absolute;left:50%;top:50%;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;background:rgba(0,0,0,.55);display:none;place-items:center;pointer-events:none}
+.li-play svg{width:26px;height:26px;fill:#fff;margin-left:3px}
+.li-mwrap.li-pauza .li-play{display:grid}
+.li-zvuk{position:absolute;right:12px;bottom:12px;width:34px;height:34px;padding:0;border:0;border-radius:50%;background:rgba(0,0,0,.62);display:grid;place-items:center;cursor:pointer}
+.li-zvuk svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.li-zvuk .li-zv-on{display:none}
+.li-zvuk[aria-pressed="true"] .li-zv-on{display:block}.li-zvuk[aria-pressed="true"] .li-zv-off{display:none}
+.li-eng{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 16px;padding:9px 0 8px;border-bottom:1px solid #e6e9ec;font-size:12px;line-height:1.3;color:#666}
+.li-reakce{display:inline-flex;align-items:center}
+.li-r{width:17px;height:17px;border-radius:50%;display:grid;place-items:center;margin-right:-3px;box-shadow:0 0 0 1.5px #fff}
+.li-r svg{width:11px;height:11px;fill:#fff}
+.li-r-like{background:#378FE9;z-index:3}.li-r-love{background:#DF704D;z-index:2}.li-r-idea{background:#E7A33E;z-index:1}
+.li-reakce > span{margin-left:9px}
+.li-akce{display:flex;padding:6px 8px}
+.li-akce button{flex:1 1 0;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px 4px;font:600 13px/1 inherit;font-family:inherit;color:#5f6b7a;background:none;border:0;border-radius:4px;cursor:pointer;transition:background .15s,color .15s}
+.li-akce button:hover{background:#f3f2ef;color:#191919}
+.li-akce svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round}
+.li-akce button.dano{color:#0a66c2}.li-akce button.dano svg{fill:#0a66c2;stroke:#0a66c2}
+@media (max-width:560px){.li-akce button{flex-direction:column;font-size:11px;gap:4px;padding:8px 2px}.li-akce svg{width:18px;height:18px}}
+.stah{flex-wrap:wrap;row-gap:4px}
+
+/* ---- photoshoot ---- */
+.foto{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px}
+.foto figure{margin:0;position:relative;overflow:hidden;border-radius:4px;background:#0b0d12;cursor:zoom-in;aspect-ratio:16/9;grid-column:span 4}
+.foto figure:nth-child(1),.foto figure:nth-child(2){grid-column:span 6}
+.foto img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 1.1s cubic-bezier(.2,.7,.2,1),filter .4s}
+.foto figure:hover img{transform:scale(1.045)}
+.foto .cis{position:absolute;left:14px;top:12px;font-size:12px;font-weight:600;letter-spacing:.18em;color:var(--ink);text-shadow:none;background:rgba(7,8,11,.55);padding:5px 9px;border-radius:999px;backdrop-filter:blur(6px)}
+.foto .dl{position:absolute;right:12px;bottom:12px;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:rgba(7,8,11,.6);border:1px solid rgba(181,160,95,.5);
+  opacity:0;transform:translateY(6px);transition:opacity .25s,transform .25s,background .2s}
+.foto .dl svg{width:17px;height:17px;stroke:var(--gold);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.foto figure:hover .dl,.foto .dl:focus-visible{opacity:1;transform:none}
+.foto .dl:hover{background:var(--gold)}.foto .dl:hover svg{stroke:#0b0f16}
+@media (hover:none){.foto .dl{opacity:1;transform:none}}
+@media (max-width:760px){.foto{grid-template-columns:1fr 1fr;gap:10px}.foto figure,.foto figure:nth-child(1),.foto figure:nth-child(2){grid-column:span 1}.foto figure:nth-child(1){grid-column:1 / -1}}
+
+/* lightbox */
+#lb{position:fixed;inset:0;z-index:60;background:rgba(4,5,7,.94);display:none;align-items:center;justify-content:center;padding:24px}
+#lb.on{display:flex}
+#lb img{max-width:100%;max-height:calc(100vh - 120px);display:block;border-radius:3px;box-shadow:0 30px 90px rgba(0,0,0,.6)}
+#lb .lb-lista{position:absolute;left:0;right:0;bottom:18px;display:flex;justify-content:center;align-items:center;gap:14px}
+#lb button,#lb a.lbd{width:46px;height:46px;border-radius:50%;border:1px solid rgba(242,242,245,.25);background:rgba(7,8,11,.6);color:var(--ink);display:grid;place-items:center;cursor:pointer;text-decoration:none;transition:border-color .2s,background .2s}
+#lb button:hover,#lb a.lbd:hover{border-color:var(--gold);background:rgba(181,160,95,.18)}
+#lb svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#lb .lbx{position:absolute;right:18px;top:18px}
+#lb .lbc{font-size:12px;font-weight:600;letter-spacing:.2em;color:var(--muted);min-width:64px;text-align:center}
+
+/* ---- Instagram carousel ---- */
+.ig-obal{display:grid;grid-template-columns:minmax(0,470px) minmax(0,1fr);gap:clamp(28px,6vw,90px);align-items:center}
+.ig-obal .nahledy{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;align-self:end}
+.ig-obal .nahledy button{padding:0;border:1px solid transparent;border-radius:3px;overflow:hidden;background:none;cursor:pointer;opacity:.5;transition:opacity .25s,border-color .25s,transform .25s}
+.ig-obal .nahledy button:hover{opacity:.85;transform:translateY(-2px)}
+.ig-obal .nahledy button.on{opacity:1;border-color:var(--gold)}
+.ig-obal .nahledy img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover}
+@media (max-width:860px){.ig-obal{grid-template-columns:1fr}.ig-obal .nahledy{display:none}}
+.ig{background:#fff;color:#111;border-radius:10px;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,var(--f);font-size:13.5px;box-shadow:0 30px 80px rgba(22,33,49,.65)}
+.ig .hd{display:flex;align-items:center;gap:10px;padding:10px 12px}
+.ig .av{width:34px;height:34px;border-radius:50%;overflow:hidden;flex:none;padding:2px;background:linear-gradient(45deg,#f9ce34,#ee2a7b,#6228d7)}
+.ig .av img{width:100%;height:100%;border-radius:50%;border:2px solid #fff;object-fit:cover;display:block}
+.ig .who{flex:1;line-height:1.2}.ig .who b{font-weight:600;font-size:13.5px}.ig .who small{display:block;color:#737373;font-size:11.5px}
+.ig .more{color:#262626;font-size:18px;letter-spacing:1px}
+.car-wrap{position:relative}
+.car{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;background:#000}
+.car::-webkit-scrollbar{display:none}
+.car figure{flex:0 0 100%;margin:0;scroll-snap-align:center}
+.car img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover}
+.car-n{position:absolute;right:12px;top:12px;background:rgba(18,18,18,.72);color:#fff;font-size:12px;font-weight:600;padding:4px 9px;border-radius:999px;pointer-events:none}
+.car-sip{position:absolute;top:50%;width:30px;height:30px;margin-top:-15px;border-radius:50%;border:0;background:rgba(255,255,255,.88);display:grid;place-items:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.25);transition:opacity .2s,transform .2s}
+.car-sip:hover{transform:scale(1.08)}
+.car-sip svg{width:14px;height:14px;stroke:#111;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.car-sip.l{left:10px}.car-sip.p{right:10px}.car-sip[hidden]{display:none}
+.ig .ctrl{display:flex;align-items:center;padding:10px 12px 4px;gap:14px}
+.ig .ctrl svg{width:24px;height:24px;stroke:#111;fill:none;stroke-width:1.8;stroke-linejoin:round;stroke-linecap:round;cursor:pointer;transition:transform .15s}
+.ig .ctrl svg:active{transform:scale(.88)}
+.ig .ctrl .lajk.dano{fill:#ff3040;stroke:#ff3040}
+.ig .dots{flex:1;display:flex;justify-content:center;gap:4px;margin-right:62px}
+.ig .dots i{width:6px;height:6px;border-radius:50%;background:#dbdbdb;transition:background .2s}.ig .dots i.on{background:#0095f6}
+.ig .likes{padding:2px 12px;font-weight:600}
+.ig .cap{padding:4px 12px 14px;line-height:1.45}.ig .cap b{font-weight:600;margin-right:5px}
+.ig .cap .v{color:#737373;cursor:pointer}.ig .cap .z{display:none}.ig .cap.otevreno .z{display:inline}.ig .cap.otevreno .v{display:none}
+
+/* ---- bannerovka ---- */
+.kv{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,340px);gap:clamp(24px,4vw,56px);align-items:start}
+.kv-scena{position:relative;display:flex;justify-content:center;align-items:center;min-height:min(78vh,760px);border-radius:6px;overflow:hidden;
+  background:radial-gradient(60% 60% at 50% 40%,rgba(22,33,49,.9),rgba(7,8,11,.2))}
+.kv-ram{--r:.8;--h:min(72vh,700px);position:relative;width:min(100%,calc(var(--h) * var(--r)));aspect-ratio:var(--r);transition:width .6s cubic-bezier(.2,.7,.2,1)}
+.kv-ram img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:3px;opacity:0;transform:scale(1.035);
+  transition:opacity .8s ease,transform 1.6s cubic-bezier(.2,.7,.2,1);box-shadow:0 30px 90px rgba(0,0,0,.55)}
+.kv-ram img.on{opacity:1;transform:none}
+.kv-ctrl{display:flex;flex-direction:column;gap:22px}
+.fmt{display:flex;gap:8px;padding:5px;border:1px solid var(--line);border-radius:999px;width:max-content}
+.fmt button{font:600 12px/1 var(--f);letter-spacing:.14em;color:var(--muted);background:none;border:0;padding:11px 16px;border-radius:999px;cursor:pointer;transition:background .25s,color .25s}
+.fmt button:hover{color:var(--ink)}
+.fmt button.on{background:var(--gold);color:#0b0f16}
+.fmt button:disabled{opacity:.3;cursor:not-allowed}
+.svety{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.svety button{width:100%;display:grid;grid-template-columns:54px 1fr;gap:14px;align-items:center;text-align:left;padding:8px;border:1px solid transparent;border-radius:6px;background:none;color:var(--muted);cursor:pointer;
+  font:400 15px/1.2 var(--f);position:relative;overflow:hidden;transition:background .25s,color .25s,border-color .25s}
+.svety button:hover{background:rgba(242,242,245,.04);color:var(--ink)}
+.svety button.on{color:var(--ink);border-color:var(--line);background:rgba(242,242,245,.03)}
+.svety img{width:54px;height:54px;object-fit:cover;border-radius:3px;display:block}
+.svety .pr{position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--gold)}
+.svety button.on .pr{animation:pr var(--t,5s) linear forwards}
+.kv.stop .svety button.on .pr{animation-play-state:paused}
+@keyframes pr{to{width:100%}}
+@media (max-width:900px){.kv{grid-template-columns:1fr}.kv-scena{min-height:auto;padding:18px 0}.kv-ram{--h:min(64vh,560px)}
+  .svety{flex-direction:row;overflow-x:auto;scrollbar-width:none}.svety li{flex:0 0 auto}.svety button{grid-template-columns:54px;padding:6px}.svety button span{display:none}}
+
+/* ---- Jan ---- */
+.jan{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,3vw,40px);align-items:start}
+.jan figure{margin:0;position:relative;border-radius:4px;overflow:hidden;background:#0b0d12;aspect-ratio:3/4;cursor:zoom-in}
+.jan figure:nth-child(2){margin-top:clamp(40px,8vw,120px)}
+.jan img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 1.1s cubic-bezier(.2,.7,.2,1)}
+.jan figure:hover img{transform:scale(1.03)}
+.jan .cis{position:absolute;left:14px;top:12px;font-size:12px;font-weight:600;letter-spacing:.18em;background:rgba(7,8,11,.55);padding:5px 9px;border-radius:999px}
+.jan .ceka{position:absolute;inset:0;display:grid;place-items:center;color:var(--muted);font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  background:repeating-linear-gradient(135deg,rgba(181,160,95,.06) 0 14px,transparent 14px 28px)}
+
+footer{padding:clamp(90px,12vw,160px) 0 60px}
+footer .ram{display:flex;justify-content:space-between;align-items:center;gap:20px;border-top:1px solid var(--line);padding-top:26px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+footer img{width:18px;opacity:.7}
+</style></head><body>
+
+<nav id="nav"><div class="ram">
+  <img class="znak" src="/bez-rohu/img/monogram.svg" alt="House of Řezáč">
+  <ul><li><a href="#video">Video</a></li><li><a href="#foto">Photoshoot</a></li><li><a href="#carousel">Carousel</a></li><li><a href="#bannery">Bannery</a></li><li><a href="#jan">Jan s knihou</a></li></ul>
+</div></nav>
+
+<header><div class="ram">
+  <img class="titulek odhal" src="/bez-rohu/img/rez-titulek.png" alt="ŘEŽ" width="1200" height="214">
+  <h1 class="odhal">Podklady<br>pro Jana Řezáče</h1>
+</div></header>
+
+<main>
+<section id="video"><div class="ram">
+  <div class="hl odhal"><span class="c">01</span><h2>Video na LinkedIn</h2></div>
+  <div class="li-stred odhal">
+    <article class="li-karta">
+      <div class="li-hl">
+        <div class="li-ava"><img src="/bez-rohu/img/jan-avatar.jpg" width="48" height="48" alt=""></div>
+        <div class="li-kdo"><b>Jan Řezáč</b><span>House of Řezáč</span><span>1 h &middot; &#127760;&#xFE0E;</span></div>
+        <div class="li-tri" aria-hidden="true">&middot;&middot;&middot;</div>
+      </div>
+      <div class="li-text">Moje nová kniha přišla o roh.
+Schválně.<button type="button" class="li-vice" aria-expanded="false">&hellip;více</button><span class="li-zbytek">
+
+ŘEŽ je o rozhodování v době rychlých změn. Jak přestat utrácet energii na projektech, které neměly nikdy začít, a kam ji dát místo toho.
+
+Uvnitř je 9 strategických nástrojů, se kterými v House of Řezáč pracujeme už 10 let. Od letových hladin cílů přes Wardleyho mapy a 7 Powers až po designové sondy.
+
+Kniha vychází na podzim. Když si ji objednáte v předprodeji, přijde vám podepsaná.
+
+Který projekt byste dnes odřízli?
+
+<a href="https://houseofrezac.com/publikujeme/kniha-rez" target="_blank" rel="noopener">houseofrezac.com/publikujeme/kniha-rez</a></span></div>
+      <div class="li-mwrap">
+        <video class="li-media" id="livid" playsinline muted loop preload="metadata" poster="/bez-rohu/video/rez-promo-poster.jpg" aria-label="Promo video knihy ŘEŽ 1:1">
+          <source src="/bez-rohu/video/rez-promo-web.mp4" type="video/mp4">
+        </video>
+        <span class="li-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg></span>
+        <button type="button" class="li-zvuk" aria-pressed="false" aria-label="Zapnout zvuk">
+          <svg class="li-zv-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.2L12 5.5v13l-4.8-4H4z"/><path d="m16 9.5 5 5m0-5-5 5"/></svg>
+          <svg class="li-zv-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.2L12 5.5v13l-4.8-4H4z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6M18 6.5a7.8 7.8 0 0 1 0 11"/></svg>
+        </button>
+      </div>
+      <div class="li-eng" aria-hidden="true">
+        <span class="li-reakce"><i class="li-r li-r-like"><svg viewBox="0 0 16 16"><path d="M4.2 7.2H2.6v6.2h1.6zM5.4 13.4h5.3c.6 0 1.1-.4 1.3-1l1.1-3.9c.2-.8-.4-1.6-1.2-1.6H9.4l.4-2.3c.1-.7-.4-1.3-1.1-1.3-.4 0-.7.2-.9.5L5.4 7.2z"/></svg></i><i class="li-r li-r-love"><svg viewBox="0 0 16 16"><path d="M8 13.3 3.4 9A2.9 2.9 0 0 1 7.5 4.9l.5.5.5-.5A2.9 2.9 0 1 1 12.6 9z"/></svg></i><i class="li-r li-r-idea"><svg viewBox="0 0 16 16"><path d="M8 2.4a3.9 3.9 0 0 0-2.3 7c.4.3.6.7.6 1.2v.6h3.4v-.6c0-.5.2-.9.6-1.2A3.9 3.9 0 0 0 8 2.4zM6.3 12.2h3.4v1.4H6.3z"/></svg></i><span id="li-pocet">248</span></span>
+        <span class="li-pocty">36 komentářů &middot; 14 přeposlání</span>
+      </div>
+      <div class="li-akce">
+        <button type="button" id="li-lajk"><svg viewBox="0 0 24 24"><path d="M7 10.5H4v9h3zM9 19.5h7.4c.9 0 1.6-.6 1.8-1.4l1.5-5.6c.3-1.1-.6-2.2-1.7-2.2h-4.2l.6-3.4c.2-1-.6-1.9-1.6-1.9-.6 0-1.1.3-1.3.8L9 10.5z"/></svg>To se mi líbí</button>
+        <button type="button"><svg viewBox="0 0 24 24"><path d="M4 5.5h16v10H9l-5 4z"/></svg>Komentovat</button>
+        <button type="button"><svg viewBox="0 0 24 24"><path d="M17 3.5 21 7.5l-4 4M21 7.5H9a5 5 0 0 0-5 5M7 20.5 3 16.5l4-4M3 16.5h12a5 5 0 0 0 5-5"/></svg>Přeposlat</button>
+        <button type="button"><svg viewBox="0 0 24 24"><path d="m21 3.5-18 7 7 2.5 2.5 7z"/><path d="m10 13 4-4"/></svg>Odeslat</button>
+      </div>
+    </article>
+    <a class="stah" href="/bez-rohu/video/rez-promo-1x1.mp4" download="rez-promo-1x1.mp4">
+      <svg viewBox="0 0 24 24"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19.5h14"/></svg>Stáhnout video<small>MP4 &middot; 1080 &times; 1080 &middot; 25 MB</small></a>
+  </div>
+</div></section>
+
+<section id="foto"><div class="ram">
+  <div class="hl odhal"><span class="c">02</span><h2>Photoshoot</h2></div>
+  <div class="foto odhal" id="fotoMrizka"></div>
+  <a class="stah odhal" href="/bez-rohu/zip/rez-photoshoot.zip" download><svg viewBox="0 0 24 24"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19.5h14"/></svg>Stáhnout všechny fotky<small>ZIP &middot; 2048 &times; 1152</small></a>
+</div></section>
+
+<section id="carousel"><div class="ram">
+  <div class="hl odhal"><span class="c">03</span><h2>Instagram carousel</h2></div>
+  <div class="ig-obal odhal">
+    <div class="ig">
+      <div class="hd"><span class="av"><img src="/bez-rohu/img/hor-avatar.png" alt=""></span><span class="who"><b>houseofrezac</b><small>Brno</small></span><span class="more">&middot;&middot;&middot;</span></div>
+      <div class="car-wrap">
+        <div class="car" id="car"></div>
+        <span class="car-n" id="carN">1/7</span>
+        <button type="button" class="car-sip l" id="carL" aria-label="Předchozí" hidden><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button type="button" class="car-sip p" id="carP" aria-label="Další"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+      <div class="ctrl">
+        <svg class="lajk" id="igLajk" viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.6-9.3-9.4C1.4 7.7 3.6 4.5 7 4.5c2 0 3.5 1.1 5 2.8 1.5-1.7 3-2.8 5-2.8 3.4 0 5.6 3.2 4.3 6.6-1.8 4.8-9.3 9.4-9.3 9.4z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M20.5 11.5c0 4.4-3.8 8-8.5 8-1.3 0-2.6-.3-3.7-.8L3.5 20l1.3-4.2c-.8-1.3-1.3-2.7-1.3-4.3 0-4.4 3.8-8 8.5-8s8.5 3.6 8.5 8z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M21.5 3 10 14.5M21.5 3 15 21l-5-6.5L3 10z"/></svg>
+        <div class="dots" id="carDots"></div>
+      </div>
+      <div class="likes"><span id="igPocet">1 312</span> To se mi líbí</div>
+      <div class="cap" id="igCap"><b>houseofrezac</b>Tahle kniha přišla o roh. Schválně. <span class="v">&hellip; více</span><span class="z">ŘEŽ je o tom, co odříznout. Nová kniha Jana Řezáče vychází na podzim, v předprodeji přijde podepsaná. Odkaz v profilu.</span></div>
+    </div>
+    <div>
+      <div class="nahledy" id="carThumbs"></div>
+      <a class="stah" href="/bez-rohu/zip/rez-carousel.zip" download><svg viewBox="0 0 24 24"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19.5h14"/></svg>Stáhnout carousel<small>ZIP &middot; 7 &times; 1080 &times; 1350</small></a>
+    </div>
+  </div>
+</div></section>
+
+<section id="bannery"><div class="ram">
+  <div class="hl odhal"><span class="c">04</span><h2>Bannery</h2></div>
+  <div class="kv odhal" id="kv">
+    <div class="kv-scena"><div class="kv-ram" id="kvRam"></div></div>
+    <div class="kv-ctrl">
+      <div class="fmt" id="kvFmt"><button type="button" data-f="1x1">1:1</button><button type="button" data-f="4x5" class="on">4:5</button><button type="button" data-f="9x16">9:16</button></div>
+      <ul class="svety" id="kvSvety"></ul>
+      <a class="stah" id="kvStah" href="#" download style="margin-top:0"><svg viewBox="0 0 24 24"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19.5h14"/></svg>Stáhnout banner<small id="kvStahPopis"></small></a>
+      <a class="stah" href="/bez-rohu/zip/rez-bannery.zip" download style="margin-top:0"><svg viewBox="0 0 24 24"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19.5h14"/></svg>Všechny bannery<small>ZIP</small></a>
+    </div>
+  </div>
+</div></section>
+
+<section id="jan"><div class="ram">
+  <div class="hl odhal"><span class="c">05</span><h2>Jan s knihou</h2></div>
+  <div class="jan odhal" id="janMrizka"></div>
+</div></section>
+</main>
+
+<footer><div class="ram"><span>ŘEŽ &middot; House of Řezáč</span><img src="/bez-rohu/img/monogram.svg" alt=""></div></footer>
+
+<div id="lb" role="dialog" aria-modal="true" aria-label="Fotka">
+  <button type="button" class="lbx" id="lbX" aria-label="Zavřít"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  <img id="lbImg" alt="">
+  <div class="lb-lista">
+    <button type="button" id="lbL" aria-label="Předchozí"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <span class="lbc" id="lbC"></span>
+    <button type="button" id="lbP" aria-label="Další"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+    <a class="lbd" id="lbD" href="#" download aria-label="Stáhnout"><svg viewBox="0 0 24 24"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19.5h14"/></svg></a>
+  </div>
+</div>
+
+<script>
+(function(){
+  var S = '/bez-rohu/';
+  var DL = '<svg viewBox="0 0 24 24"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19.5h14"/></svg>';
+  // ---------- data ----------
+  var FOTO = ['2a-predni-hrbet-stred','3a-predni-hrbet-shora','1b-hrbet-nizko','2b-hrbet-stred','3b-hrbet-shora','1c-zada-hrbet-nizko','2c-zada-hrbet-stred','3c-zada-hrbet-shora'];
+  var SLIDY = 7;
+  var SVETY = [{"id": "tunel", "nazev": "Bronzový tunel", "f": {"1x1": 1, "4x5": 1, "9x16": 1}}, {"id": "monolit", "nazev": "Monolit", "f": {"1x1": 1, "4x5": 1, "9x16": 1}}, {"id": "vybuch", "nazev": "Zlatý výbuch", "f": {"1x1": 1, "4x5": 1, "9x16": 1}}, {"id": "boure", "nazev": "Bouře papírů", "f": {"1x1": 1, "4x5": 1, "9x16": 1}}, {"id": "vanitas", "nazev": "Zátiší", "f": {"1x1": 1, "4x5": 1, "9x16": 1}}];
+  var JAN = ["rez-jan-a-na-koleni", "rez-jan-b-u-hrudi"];
+
+  // ---------- navigace: rozmazané pozadí po odscrollování + aktivní sekce ----------
+  var nav = document.getElementById('nav');
+  addEventListener('scroll', function(){ nav.classList.toggle('pod', scrollY > 40); }, {passive:true});
+  var odkazy = {}; nav.querySelectorAll('ul a').forEach(function(a){ odkazy[a.getAttribute('href').slice(1)] = a; });
+  if ('IntersectionObserver' in window){
+    var ioN = new IntersectionObserver(function(z){ z.forEach(function(e){ if (e.isIntersecting && odkazy[e.target.id]){
+      Object.values(odkazy).forEach(function(a){ a.classList.remove('on'); }); odkazy[e.target.id].classList.add('on'); } }); }, {rootMargin:'-45% 0px -50% 0px'});
+    document.querySelectorAll('section[id]').forEach(function(s){ ioN.observe(s); });
+    var ioO = new IntersectionObserver(function(z){ z.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('je'); ioO.unobserve(e.target); } }); }, {threshold:.12});
+    document.querySelectorAll('.odhal').forEach(function(el){ ioO.observe(el); });
+  } else document.querySelectorAll('.odhal').forEach(function(el){ el.classList.add('je'); });
+
+  // ---------- lightbox ----------
+  var lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg'), lbC = document.getElementById('lbC'), lbD = document.getElementById('lbD');
+  var sada = [], ix = 0;
+  function lbUkaz(){ var p = sada[ix]; lbImg.src = p.src; lbD.href = p.src; lbD.setAttribute('download', p.src.split('/').pop()); lbC.textContent = p.cis; }
+  function lbOtevri(s, i){ sada = s; ix = i; lbUkaz(); lb.classList.add('on'); document.body.style.overflow = 'hidden'; }
+  function lbZavri(){ lb.classList.remove('on'); document.body.style.overflow = ''; }
+  document.getElementById('lbX').onclick = lbZavri;
+  document.getElementById('lbL').onclick = function(){ ix = (ix - 1 + sada.length) % sada.length; lbUkaz(); };
+  document.getElementById('lbP').onclick = function(){ ix = (ix + 1) % sada.length; lbUkaz(); };
+  lb.addEventListener('click', function(e){ if (e.target === lb) lbZavri(); });
+  addEventListener('keydown', function(e){ if (!lb.classList.contains('on')) return;
+    if (e.key === 'Escape') lbZavri(); if (e.key === 'ArrowLeft') document.getElementById('lbL').click(); if (e.key === 'ArrowRight') document.getElementById('lbP').click(); });
+
+  // ---------- photoshoot ----------
+  var fm = document.getElementById('fotoMrizka'), fotoSada = [];
+  FOTO.forEach(function(n, i){
+    var cis = String(i + 1).padStart(2, '0'), src = S + 'foto/' + n + '.jpg';
+    fotoSada.push({src: src, cis: cis + ' / ' + String(FOTO.length).padStart(2, '0')});
+    var f = document.createElement('figure');
+    f.innerHTML = '<img src="' + S + 'foto/' + n + '-nahled.jpg" alt="ŘEŽ, photoshoot ' + cis + '" loading="lazy" decoding="async"><span class="cis">' + cis + '</span>' +
+      '<a class="dl" href="' + src + '" download="rez-photoshoot-' + cis + '.jpg" aria-label="Stáhnout fotku ' + cis + '">' + DL + '</a>';
+    f.addEventListener('click', function(e){ if (!e.target.closest('.dl')) lbOtevri(fotoSada, i); });
+    fm.appendChild(f);
+  });
+
+  // ---------- LinkedIn: text, video, reakce ----------
+  document.querySelectorAll('.li-text').forEach(function(t){ var v = t.querySelector('.li-vice');
+    t.addEventListener('click', function(e){ if (t.classList.contains('otevreno') || e.target.closest('a')) return; t.classList.add('otevreno'); v.setAttribute('aria-expanded', 'true'); }); });
+  document.addEventListener('click', function(e){ document.querySelectorAll('.li-text.otevreno').forEach(function(t){
+    if (t.contains(e.target) || e.target.closest('.li-karta')) return; t.classList.remove('otevreno'); t.querySelector('.li-vice').setAttribute('aria-expanded', 'false'); }); });
+  var lajk = document.getElementById('li-lajk'), pocet = document.getElementById('li-pocet');
+  lajk.addEventListener('click', function(){ var on = lajk.classList.toggle('dano'); pocet.textContent = 248 + (on ? 1 : 0); });
+  var w = document.querySelector('.li-mwrap'), v = w.querySelector('video'), tl = w.querySelector('.li-zvuk');
+  v.addEventListener('click', function(){ if (v.paused){ v.dataset.rucne = ''; var p = v.play(); if (p && p.catch) p.catch(function(){}); } else { v.dataset.rucne = '1'; v.pause(); } });
+  v.addEventListener('play', function(){ w.classList.remove('li-pauza'); });
+  v.addEventListener('pause', function(){ if (v.dataset.rucne) w.classList.add('li-pauza'); });
+  tl.addEventListener('click', function(){ v.muted = !v.muted; tl.setAttribute('aria-pressed', String(!v.muted)); tl.setAttribute('aria-label', v.muted ? 'Zapnout zvuk' : 'Vypnout zvuk');
+    if (!v.muted){ var p = v.play(); if (p && p.catch) p.catch(function(){}); } });
+  if ('IntersectionObserver' in window) new IntersectionObserver(function(z){ z.forEach(function(e){
+    if (e.isIntersecting){ if (!v.dataset.rucne){ var p = v.play(); if (p && p.catch) p.catch(function(){}); } }
+    else { v.pause(); if (!v.muted){ v.muted = true; tl.setAttribute('aria-pressed', 'false'); tl.setAttribute('aria-label', 'Zapnout zvuk'); } } }); }, {threshold:.45}).observe(v);
+
+  // ---------- Instagram carousel ----------
+  var car = document.getElementById('car'), dots = document.getElementById('carDots'), th = document.getElementById('carThumbs');
+  for (var i = 1; i <= SLIDY; i++){
+    var n = String(i).padStart(2, '0');
+    car.insertAdjacentHTML('beforeend', '<figure><img src="' + S + 'carousel/rez-carousel-' + n + '.jpg" alt="Slide ' + i + '" loading="' + (i < 3 ? 'eager' : 'lazy') + '" decoding="async"></figure>');
+    dots.insertAdjacentHTML('beforeend', '<i></i>');
+    th.insertAdjacentHTML('beforeend', '<button type="button" aria-label="Slide ' + i + '"><img src="' + S + 'carousel/rez-carousel-' + n + '.jpg" alt="" loading="lazy"></button>');
+  }
+  var body = dots.querySelectorAll('i'), tb = th.querySelectorAll('button'), carN = document.getElementById('carN'), cL = document.getElementById('carL'), cP = document.getElementById('carP');
+  function carKde(){ return Math.round(car.scrollLeft / car.clientWidth); }
+  function carJdi(k){ car.scrollTo({left: k * car.clientWidth, behavior: 'smooth'}); }
+  function carObnov(){ var k = carKde(); body.forEach(function(d, j){ d.classList.toggle('on', j === k); }); tb.forEach(function(b, j){ b.classList.toggle('on', j === k); });
+    carN.textContent = (k + 1) + '/' + SLIDY; cL.hidden = k === 0; cP.hidden = k === SLIDY - 1; }
+  car.addEventListener('scroll', function(){ requestAnimationFrame(carObnov); }, {passive:true});
+  cL.onclick = function(){ carJdi(carKde() - 1); }; cP.onclick = function(){ carJdi(carKde() + 1); };
+  tb.forEach(function(b, j){ b.onclick = function(){ carJdi(j); }; });
+  carObnov();
+  var igL = document.getElementById('igLajk'), igP = document.getElementById('igPocet');
+  function igLajk(){ var on = igL.classList.toggle('dano'); igP.textContent = on ? '1 313' : '1 312'; }
+  igL.addEventListener('click', igLajk);
+  car.addEventListener('dblclick', function(){ if (!igL.classList.contains('dano')) igLajk(); });
+  var cap = document.getElementById('igCap'); cap.querySelector('.v').onclick = function(){ cap.classList.add('otevreno'); };
+
+  // ---------- bannerovka: střídání key visualů, přepínač formátu ----------
+  var kv = document.getElementById('kv'), ram = document.getElementById('kvRam'), sv = document.getElementById('kvSvety'), fmtB = document.querySelectorAll('#kvFmt button');
+  var stah = document.getElementById('kvStah'), stahP = document.getElementById('kvStahPopis');
+  var POMER = {'1x1': '1', '4x5': '.8', '9x16': '.5625'}, ROZ = {'1x1': '1080 × 1080', '4x5': '1080 × 1350', '9x16': '1080 × 1920'};
+  var fmt = '4x5', akt = 0, casovac = null, T = 5200, img = {};
+  if (!SVETY.length){ kv.style.display = 'none'; }
+  SVETY.forEach(function(s, i){
+    Object.keys(s.f).forEach(function(f){ var im = new Image(); im.alt = s.nazev + ' ' + f; im.decoding = 'async'; im.loading = i < 2 ? 'eager' : 'lazy';
+      im.src = S + 'bannery/rez-kv-' + s.id + '-' + f + '.jpg'; img[s.id + f] = im; ram.appendChild(im); });
+    var li = document.createElement('li'); var t = s.f['1x1'] ? '1x1' : Object.keys(s.f)[0];
+    li.innerHTML = '<button type="button" style="--t:' + T + 'ms"><img src="' + S + 'bannery/rez-kv-' + s.id + '-' + t + '.jpg" alt="" loading="lazy"><span>' + s.nazev + '</span><i class="pr"></i></button>';
+    li.firstChild.onclick = function(){ ukaz(i, true); }; sv.appendChild(li);
+  });
+  function maFmt(i, f){ return !!SVETY[i].f[f]; }
+  function ukaz(i, rucne){
+    akt = i; var s = SVETY[i]; if (!maFmt(i, fmt)) fmt = ['4x5', '1x1', '9x16'].filter(function(f){ return maFmt(i, f); })[0];
+    fmtB.forEach(function(b){ b.classList.toggle('on', b.dataset.f === fmt); b.disabled = !maFmt(i, b.dataset.f); });
+    ram.style.setProperty('--r', POMER[fmt]);
+    Object.keys(img).forEach(function(k){ img[k].classList.toggle('on', k === s.id + fmt); });
+    sv.querySelectorAll('button').forEach(function(b, j){ b.classList.remove('on'); if (j === i){ void b.offsetWidth; b.classList.add('on'); } });
+    stah.href = S + 'bannery/rez-kv-' + s.id + '-' + fmt + '.jpg'; stah.setAttribute('download', 'rez-kv-' + s.id + '-' + fmt + '.jpg'); stahP.textContent = ROZ[fmt];
+    clearTimeout(casovac); if (!kv.classList.contains('stop')) casovac = setTimeout(function(){ ukaz((akt + 1) % SVETY.length); }, T);
+  }
+  fmtB.forEach(function(b){ b.onclick = function(){ if (b.disabled) return; fmt = b.dataset.f; ukaz(akt, true); }; });
+  kv.addEventListener('mouseenter', function(){ kv.classList.add('stop'); clearTimeout(casovac); });
+  kv.addEventListener('mouseleave', function(){ kv.classList.remove('stop'); ukaz(akt); });
+  ram.addEventListener('click', function(){ var s = SVETY[akt]; lbOtevri([{src: S + 'bannery/rez-kv-' + s.id + '-' + fmt + '.jpg', cis: s.nazev + ' · ' + fmt.replace('x', ':')}], 0); });
+  ram.style.cursor = 'zoom-in';
+  if (SVETY.length) ukaz(0);
+
+  // ---------- Jan s knihou ----------
+  var jm = document.getElementById('janMrizka'), janSada = [];
+  (JAN.length ? JAN : [null, null]).forEach(function(j, i){
+    var f = document.createElement('figure'), cis = String.fromCharCode(65 + i);
+    if (j){ janSada.push({src: S + 'jan/' + j + '.jpg', cis: cis});
+      f.innerHTML = '<img src="' + S + 'jan/' + j + '.jpg" alt="Jan Řezáč s knihou, experiment ' + cis + '" loading="lazy"><span class="cis">' + cis + '</span>';
+      f.onclick = function(){ lbOtevri(janSada, janSada.findIndex(function(x){ return x.cis === cis; })); };
+    } else f.innerHTML = '<span class="cis">' + cis + '</span><span class="ceka">Generuje se</span>';
+    jm.appendChild(f);
+  });
+})();
+</script>
+</body></html>

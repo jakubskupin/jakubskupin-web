@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
   },
   async rewrites() {
     return [
+      { source: "/bez-rohu", destination: "/bez-rohu/index.html" },
       { source: "/le-premier", destination: "/le-premier/index.html" },
       { source: "/equator", destination: "/equator/index.html" },
       { source: "/vizualy", destination: "/vizualy/index.html" },
