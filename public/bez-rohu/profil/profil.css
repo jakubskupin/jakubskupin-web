@@ -2,11 +2,11 @@
 .pf{--pk:#fff;--pr:#d9dde2;--pt:#191919;--ps:#666;--psk:#e9e7e3;--pb:#f2f2f2;--pmod:#0a66c2}
 .pf[data-rezim="tmavy"]{--pk:#1b1f23;--pr:#38434f;--pt:rgba(255,255,255,.92);--ps:rgba(255,255,255,.6);--psk:#2f3942;--pb:#293138;--pmod:#71b7fb}
 .pf-horni{display:grid;grid-template-columns:minmax(0,1fr) minmax(250px,320px);gap:clamp(24px,4vw,64px);align-items:start}
-.pf-scena{border-radius:6px;padding:clamp(18px,4vw,56px);background:radial-gradient(60% 70% at 40% 30%,rgba(22,33,49,.9),rgba(7,8,11,.15))}
+.pf-scena{border-radius:6px;padding:clamp(18px,4vw,56px);background:radial-gradient(60% 70% at 40% 30%,var(--pf-zare,color-mix(in srgb,var(--ink) 7%,transparent)),transparent 72%)}
 
 /* velká karta profilu */
 .pf-karta{background:var(--pk);border:1px solid var(--pr);border-radius:10px;overflow:hidden;color:var(--pt);
-  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,var(--f);box-shadow:0 30px 80px rgba(22,33,49,.65),0 0 0 1px rgba(181,160,95,.08);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,var(--f);box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 0 1px color-mix(in srgb,var(--gold) 10%,transparent);
   transition:background .35s,border-color .35s,color .35s}
 .pf-banner{position:relative;aspect-ratio:4/1;background:#000}
 .pf-banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s ease}
@@ -47,8 +47,8 @@
 .pf-mini.je{opacity:1;transform:none}
 .pf-mkarta{background:var(--pk);border:1px solid var(--pr);border-radius:8px;overflow:hidden;
   transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s,border-color .3s,background .35s}
-.pf-mini:hover .pf-mkarta,.pf-mini:focus-visible .pf-mkarta{transform:translateY(-4px);box-shadow:0 18px 44px rgba(181,160,95,.22)}
-.pf-mini.on .pf-mkarta{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold),0 18px 44px rgba(181,160,95,.25)}
+.pf-mini:hover .pf-mkarta,.pf-mini:focus-visible .pf-mkarta{transform:translateY(-4px);box-shadow:0 18px 44px color-mix(in srgb,var(--gold) 22%,transparent)}
+.pf-mini.on .pf-mkarta{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold),0 18px 44px color-mix(in srgb,var(--gold) 25%,transparent)}
 /* malá karta = „Lidé, které možná znáte“: pruh banneru, velká profilovka uprostřed, jméno, tlačítko */
 .pf-mini .pf-mb{display:block;width:100%;aspect-ratio:4/1;object-fit:cover}
 .pf-mtelo{padding:0 8% 14px;display:flex;flex-direction:column;align-items:center;text-align:center}
@@ -59,7 +59,7 @@
 .pf-pop{display:flex;align-items:baseline;gap:9px;margin-top:10px;font-size:13px;color:var(--muted);line-height:1.25}
 .pf-pop b{font-size:10.5px;font-weight:600;letter-spacing:.2em;color:var(--gold)}
 .pf-mini.on .pf-pop{color:var(--ink)}
-.pf-mini .dl{position:absolute;right:8px;top:8px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:rgba(7,8,11,.62);border:1px solid rgba(181,160,95,.5);
+.pf-mini .dl{position:absolute;right:8px;top:8px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:rgba(0,0,0,.62);border:1px solid color-mix(in srgb,var(--gold) 50%,transparent);
   opacity:0;transform:translateY(-4px);transition:opacity .25s,transform .25s,background .2s}
 .pf-mini .dl svg{width:15px;height:15px;stroke:var(--gold);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .pf-mini:hover .dl,.pf-mini .dl:focus-visible{opacity:1;transform:none}
