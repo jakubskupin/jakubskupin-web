@@ -196,11 +196,13 @@ h2{margin:0;font-weight:300;font-size:clamp(40px,6.2vw,92px);line-height:1;lette
 footer{padding:clamp(90px,12vw,160px) 0 60px}
 footer .ram{display:flex;justify-content:space-between;align-items:center;gap:20px;border-top:1px solid var(--line);padding-top:26px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 footer img{width:18px;opacity:.7}
-</style></head><body>
+</style>
+<link rel="stylesheet" href="/bez-rohu/profil/profil.css">
+</head><body>
 
 <nav id="nav"><div class="ram">
   <img class="znak" src="/bez-rohu/img/monogram.svg" alt="House of Řezáč">
-  <ul><li><a href="#video">Video</a></li><li><a href="#foto">Photoshoot</a></li><li><a href="#carousel">Carousel</a></li><li><a href="#bannery">Bannery</a></li><li><a href="#jan">Jan s knihou</a></li></ul>
+  <ul><li><a href="#video">Video</a></li><li><a href="#foto">Photoshoot</a></li><li><a href="#carousel">Carousel</a></li><li><a href="#bannery">Bannery</a></li><li><a href="#jan">Jan s knihou</a></li><li><a href="#profil">Profil</a></li></ul>
 </div></nav>
 
 <header><div class="ram">
@@ -305,6 +307,12 @@ Který projekt byste dnes odřízli?
 <section id="jan"><div class="ram">
   <div class="hl odhal"><span class="c">05</span><h2>Jan s knihou</h2></div>
   <div class="jan odhal" id="janMrizka"></div>
+</div></section>
+
+<!-- sekce LinkedIn profil: obsah staví /profil/profil.js, obrázky a styl v /profil/ (thumbnaily/web_profil.py) -->
+<section id="profil"><div class="ram">
+  <div class="hl odhal"><span class="c">06</span><h2>LinkedIn profil</h2></div>
+  <div class="pf odhal" id="pf"></div>
 </div></section>
 </main>
 
@@ -450,4 +458,5 @@ Který projekt byste dnes odřízli?
   });
 })();
 </script>
+<script src="/bez-rohu/profil/profil.js" defer></script>
 </body></html>
