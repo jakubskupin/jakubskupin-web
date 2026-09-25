@@ -1,0 +1,37 @@
+/* Sekce 07 Bannery do feedu (jmenný prostor fd-*), obrázky vedle v /feed/, staví thumbnaily/web_feed.py */
+.fd-lista{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;margin:0 0 22px}
+.fd-sady{display:flex;flex-wrap:wrap;gap:8px}
+.fd-sady button{font-family:var(--f);font-size:13px;font-weight:600;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:999px;padding:9px 16px;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.fd-sady button small{font-size:12px;font-weight:500;opacity:.6;margin-left:6px}
+.fd-sady button:hover{color:var(--ink);border-color:var(--muted-3)}
+.fd-sady button.on{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.fd-lista .stah{margin-top:0}
+.fd-mrizka{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:26px 14px}
+.fd-mrizka figure{margin:0;cursor:zoom-in}
+.fd-obr{position:relative;overflow:hidden;border-radius:4px;background:var(--card);aspect-ratio:1/1}
+.fd-mrizka figcaption{display:flex;gap:10px;align-items:baseline;margin-top:10px;font-size:13px;font-weight:500;color:var(--muted);line-height:1.35}
+.fd-mrizka figcaption b{font-size:12px;font-weight:600;letter-spacing:.18em;color:var(--ink)}
+.fd-mrizka figure[hidden]{display:none}
+.fd-mrizka img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 1.1s cubic-bezier(.2,.7,.2,1)}
+.fd-mrizka figure:hover img{transform:scale(1.035)}
+.fd-dl{position:absolute;right:12px;bottom:12px;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:rgba(10,10,11,.62);border:1px solid rgba(243,243,241,.28);
+  opacity:0;transform:translateY(6px);transition:opacity .25s,transform .25s,background .2s}
+.fd-dl svg{width:17px;height:17px;stroke:var(--gold);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.fd-mrizka figure:hover .fd-dl,.fd-dl:focus-visible{opacity:1;transform:none}
+.fd-dl:hover{background:var(--gold)}.fd-dl:hover svg{stroke:#0b0f16}
+@media (hover:none){.fd-dl{opacity:1;transform:none}}
+@media (max-width:980px){.fd-mrizka{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:620px){.fd-mrizka{grid-template-columns:1fr 1fr;gap:18px 10px}.fd-mrizka figcaption{font-size:12px;gap:8px}.fd-lista{flex-direction:column;align-items:flex-start}}
+
+/* vlastní lightbox sekce (hlavní #lb patří fotkám) */
+#fdlb{position:fixed;inset:0;z-index:60;background:rgba(10,10,11,.95);display:none;align-items:center;justify-content:center;padding:24px 24px 96px}
+#fdlb.on{display:flex}
+#fdlb img{max-width:100%;max-height:calc(100vh - 150px);display:block;border-radius:3px;box-shadow:0 30px 90px rgba(0,0,0,.6)}
+#fdlb .fd-lb-lista{position:absolute;left:0;right:0;bottom:18px;display:flex;justify-content:center;align-items:center;gap:14px}
+#fdlb button,#fdlb a{width:46px;height:46px;border-radius:50%;border:1px solid rgba(242,242,245,.25);background:rgba(10,10,11,.62);color:var(--ink);display:grid;place-items:center;cursor:pointer;text-decoration:none;transition:border-color .2s,background .2s}
+#fdlb button:hover,#fdlb a:hover{border-color:var(--gold);background:rgba(243,243,241,.1)}
+#fdlb svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#fdlb .fd-lbx{position:absolute;right:18px;top:18px}
+#fdlb .fd-lbc{font-size:13px;font-weight:600;color:var(--muted);min-width:220px;text-align:center}
+#fdlb .fd-lbc b{color:var(--ink);font-weight:600;letter-spacing:.14em;margin-right:8px}
+@media (max-width:620px){#fdlb .fd-lbc{min-width:0;max-width:44vw;font-size:12px}}

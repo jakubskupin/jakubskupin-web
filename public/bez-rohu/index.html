@@ -208,11 +208,12 @@ footer .brand{font-family:var(--h);font-weight:700;font-size:15px;letter-spacing
 
 </style>
 <link rel="stylesheet" href="/bez-rohu/profil/profil.css">
+<link rel="stylesheet" href="/bez-rohu/feed/feed.css">
 </head><body>
 
 <nav id="nav"><div class="ram">
   <a class="brand" href="/">Jakub Skupin</a>
-  <ul><li><a href="#video">Video</a></li><li><a href="#foto">Photoshoot</a></li><li><a href="#carousel">Carousel</a></li><li><a href="#bannery">Bannery</a></li><li><a href="#jan">Jan s knihou</a></li><li><a href="#profil">Profil</a></li></ul>
+  <ul><li><a href="#video">Video</a></li><li><a href="#foto">Photoshoot</a></li><li><a href="#carousel">Carousel</a></li><li><a href="#bannery">Bannery</a></li><li><a href="#jan">Jan s knihou</a></li><li><a href="#profil">Profil</a></li><li><a href="#feed">Do feedu</a></li></ul>
 </div></nav>
 
 <header><div class="ram">
@@ -328,6 +329,11 @@ Který projekt byste dnes odřízli?
 <section id="profil"><div class="ram">
   <div class="hl odhal"><span class="c">06</span><h2>LinkedIn profil</h2></div>
   <div class="pf odhal" id="pf"></div>
+</div></section>
+<!-- sekce Bannery do feedu: obsah staví /feed/feed.js, obrázky a styl v /feed/ (thumbnaily/web_feed.py) -->
+<section id="feed"><div class="ram">
+  <div class="hl odhal"><span class="c">07</span><h2>Bannery do feedu</h2></div>
+  <div class="fd" id="fd"></div>
 </div></section>
 </main>
 
@@ -479,4 +485,5 @@ Který projekt byste dnes odřízli?
 })();
 </script>
 <script src="/bez-rohu/profil/profil.js" defer></script>
+<script src="/bez-rohu/feed/feed.js" defer></script>
 </body></html>
