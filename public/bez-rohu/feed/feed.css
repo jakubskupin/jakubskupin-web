@@ -35,3 +35,4 @@
 #fdlb .fd-lbc{font-size:13px;font-weight:600;color:var(--muted);min-width:220px;text-align:center}
 #fdlb .fd-lbc b{color:var(--ink);font-weight:600;letter-spacing:.14em;margin-right:8px}
 @media (max-width:620px){#fdlb .fd-lbc{min-width:0;max-width:44vw;font-size:12px}}
+.fd-mrizka figure.fd-novy{grid-column-start:1}
