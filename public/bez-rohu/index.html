@@ -31,19 +31,19 @@ nav ul a:hover,nav ul a.on{color:var(--ink)}
 @media (max-width:760px){nav ul{display:none}}
 
 /* ---- hero ---- */
-header{padding:clamp(8px,2vw,24px) 0 0}
-header .ram{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,4vw,64px);align-items:center;min-height:min(84vh,820px)}
-.hero-txt{position:relative;z-index:2;padding-bottom:clamp(0px,4vw,48px)}
+/* fotka gilotiny přes celé hero, navigace leží na ní */
+header{margin-top:-65px;overflow:hidden;isolation:isolate}
+header .ram{position:relative;z-index:2;min-height:max(560px,min(62.5vw,100svh));padding-top:calc(65px + clamp(32px,3.75vw,72px))}
+.hero-bg img{position:absolute;inset:0;z-index:0;display:block;width:100%;height:100%;object-fit:cover;object-position:50% 50%}
+header:after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(to bottom,rgba(10,10,11,.7) 0,rgba(10,10,11,0) 16%),linear-gradient(to bottom,rgba(10,10,11,0) 72%,var(--bg) 100%),
+    linear-gradient(to right,rgba(10,10,11,.9) 0,rgba(10,10,11,.6) 28%,rgba(10,10,11,0) 55%)}
+.hero-txt{position:relative;z-index:2}
 .eyebrow{font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-3);margin:0 0 18px}
 h1,h2{font-family:var(--h);font-weight:700;letter-spacing:-.03em;margin:0;text-wrap:balance}
 header h1{font-size:clamp(34px,4.8vw,68px);line-height:1.04}
-.hero-film{position:relative;width:100%;aspect-ratio:1/1;justify-self:end;max-width:760px}
-.hero-film video{display:block;width:100%;height:100%;object-fit:cover;background:var(--bg);
-  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 12%,#000 90%,transparent 100%),linear-gradient(to bottom,transparent 0,#000 8%,#000 88%,transparent 100%);
-  mask-image:linear-gradient(to right,transparent 0,#000 12%,#000 90%,transparent 100%),linear-gradient(to bottom,transparent 0,#000 8%,#000 88%,transparent 100%);
-  -webkit-mask-composite:source-in;mask-composite:intersect}
-@media (max-width:860px){header .ram{grid-template-columns:1fr;min-height:auto;gap:8px}.hero-film{order:-1;max-width:none;margin:0 -16px;width:calc(100% + 32px)}.hero-txt{padding:0 0 8px}
-  .hero-film video{-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 8%,#000 86%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 8%,#000 86%,transparent 100%)}}
+@media (max-width:760px){header .ram{min-height:86svh;padding-top:calc(65px + 24px)}.hero-bg img{top:auto;bottom:0;height:86%;object-position:62% 50%;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 20%);mask-image:linear-gradient(to bottom,transparent 0,#000 20%)}
+  header:after{background:linear-gradient(to bottom,rgba(10,10,11,.8) 0,rgba(10,10,11,.35) 30%,rgba(10,10,11,0) 45%),linear-gradient(to bottom,rgba(10,10,11,0) 70%,var(--bg) 100%)}}
 
 /* ---- sekce ---- */
 section{padding:clamp(64px,9vw,120px) 0 0}
@@ -218,13 +218,12 @@ footer .brand{font-family:var(--h);font-weight:700;font-size:15px;letter-spacing
   <ul><li><a href="#video">Video</a></li><li><a href="#foto">Photoshoot</a></li><li><a href="#carousel">Carousel</a></li><li><a href="#bannery">Bannery</a></li><li><a href="#jan">Jan s knihou</a></li><li><a href="#profil">Profil</a></li><li><a href="#feed">Do feedu</a></li><li><a href="#pokusy">Pokusy</a></li></ul>
 </div></nav>
 
-<header><div class="ram">
+<header>
+<picture class="hero-bg"><source media="(max-width:760px)" srcset="/bez-rohu/img/hero-gilotina-m.jpg"><img src="/bez-rohu/img/hero-gilotina.jpg" width="1440" height="900" fetchpriority="high" alt="Ocelová čepel gilotiny se zlatou hranou nad knihou ŘEŽ na mramorovém podstavci"></picture>
+<div class="ram">
   <div class="hero-txt odhal">
     <p class="eyebrow">Kniha ŘEŽ &middot; House of Řezáč</p>
     <h1>Podklady pro<br>Jana&nbsp;Řezáče</h1>
-  </div>
-  <div class="hero-film">
-    <video id="heroFilm" src="/bez-rohu/video/jan-hero-loop.mp4" poster="/bez-rohu/video/jan-hero-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="Jan Řezáč položí knihu ŘEŽ na mramorový podstavec a odejde"></video>
   </div>
 </div></header>
 
