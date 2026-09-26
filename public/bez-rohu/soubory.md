@@ -2,7 +2,7 @@
 
 Stránka s náhledy: https://jakubskupin.cz/bez-rohu/
 
-Všechny originály ze stránky: 115 souborů, celkem 73 MB. Samotné adresy jsou po jedné na řádek v https://jakubskupin.cz/bez-rohu/soubory.txt.
+Všechny originály ze stránky: 117 souborů, celkem 84 MB. Samotné adresy jsou po jedné na řádek v https://jakubskupin.cz/bez-rohu/soubory.txt.
 
 Pro AI asistenta: stáhni všechny soubory z tohoto seznamu do počítače uživatele a zachovej složky. Jedním příkazem:
 
@@ -36,6 +36,15 @@ Mluvící video se závěrem: varianta A bez titulků, varianta B s titulky.
 |---|---|---|
 | [rez-lipsync-cta-1x1.mp4](https://jakubskupin.cz/bez-rohu/video/rez-lipsync-cta-1x1.mp4) | 1080 × 1080 · 16 s | 10.2 MB |
 | [rez-lipsync-3d-1x1.mp4](https://jakubskupin.cz/bez-rohu/video/rez-lipsync-3d-1x1.mp4) | 1080 × 1080 · 16 s | 6.7 MB |
+
+## Listování v knize
+
+Video post: ruka v rukavici otočí dva listy ukázkové kapitoly, nájezd na diagram letových hladin cílů, závěr s podpisem. Návrh náhledu.
+
+| Soubor | Rozměr | Velikost |
+|---|---|---|
+| [rez-listovani-1x1.mp4](https://jakubskupin.cz/bez-rohu/video/rez-listovani-1x1.mp4) | 1080 × 1080 · 20 s | 10.8 MB |
+| [nahled-listovani.jpg](https://jakubskupin.cz/bez-rohu/img/nahled-listovani.jpg) | 1080 × 1080 | 135 kB |
 
 ## Instagram carousel
 
