@@ -43,7 +43,7 @@ Video post: ruka v rukavici otočí dva listy ukázkové kapitoly, nájezd na di
 
 | Soubor | Rozměr | Velikost |
 |---|---|---|
-| [rez-listovani-1x1.mp4](https://jakubskupin.cz/bez-rohu/video/rez-listovani-1x1.mp4) | 1080 × 1080 · 20 s | 12.5 MB |
+| [rez-listovani-1x1.mp4](https://jakubskupin.cz/bez-rohu/video/rez-listovani-1x1.mp4) | 1080 × 1080 · 20 s | 12.4 MB |
 | [nahled-listovani.jpg](https://jakubskupin.cz/bez-rohu/img/nahled-listovani.jpg) | 1080 × 1080 | 135 kB |
 
 ## Instagram carousel
