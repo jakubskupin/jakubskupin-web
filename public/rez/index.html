@@ -650,6 +650,7 @@ Devět strategických nástrojů pro dobu rychlých změn. V předprodeji za 595
   var pv = document.getElementById('hlavniVid');
   if (pv && 'IntersectionObserver' in window){
     var pvDorazil = false, pvZamek = false, pvCekaZvuk = false;
+    var pvMobil = matchMedia('(max-width:760px), (pointer:coarse)').matches;  // na telefonu scroll nezastavujeme, video se jen pustí (Jakub 28. 9. 2026)
     function pvBrzda(e){ if (!pvZamek) return; if (e.type === 'keydown' && [' ', 'ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'End', 'Home'].indexOf(e.key) < 0) return; e.preventDefault(); }
     ['wheel', 'touchmove', 'keydown'].forEach(function(t){ addEventListener(t, pvBrzda, {passive:false}); });
     function pvPust(){ pv.muted = false; var p = pv.play();
@@ -659,9 +660,10 @@ Devět strategických nástrojů pro dobu rychlých změn. V předprodeji za 595
     pv.addEventListener('volumechange', function(){ if (!pv.muted) pvCekaZvuk = false; });
     new IntersectionObserver(function(z){ z.forEach(function(e){
       if (e.isIntersecting && e.intersectionRatio >= .6 && !pvDorazil){
-        pvDorazil = true; pvZamek = true;
-        var r = pv.getBoundingClientRect(); scrollTo({top: scrollY + r.top - (innerHeight - r.height) / 2, behavior: 'smooth'});
-        pvPust(); setTimeout(function(){ pvZamek = false; }, 2600);
+        pvDorazil = true;
+        if (!pvMobil){ pvZamek = true; var r = pv.getBoundingClientRect(); scrollTo({top: scrollY + r.top - (innerHeight - r.height) / 2, behavior: 'smooth'});
+          setTimeout(function(){ pvZamek = false; }, 2600); }
+        pvPust();
       } else if (!e.isIntersecting && !pv.paused) pv.pause();
     }); }, {threshold:[0, .6]}).observe(pv);
   }
