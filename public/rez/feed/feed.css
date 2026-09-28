@@ -80,3 +80,13 @@
 .fb-akce span{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:9px 4px;font-size:14.5px;font-weight:600;color:#65676B}
 .fb-akce svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round}
 @media (max-width:420px){.fb-akce span{font-size:13px}.fb-odkaz b{font-size:15px}.fb-cta{font-size:14px;padding:8px 10px}}
+
+/* telefon: filtry sad v jednom řádku na posun, makety LinkedIn a Facebook vedle sebe na posun prstem (šipky hned pod nimi) */
+@media (max-width:620px){
+  .fd-sady{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;width:calc(100% + 32px);margin:0 -16px;padding:0 16px;
+    -webkit-mask-image:linear-gradient(to right,#000 88%,transparent);mask-image:linear-gradient(to right,#000 88%,transparent)}
+  .fd-sady::-webkit-scrollbar{display:none}.fd-sady button{flex:none}}
+@media (max-width:760px){
+  .mk-par{display:flex;justify-content:flex-start;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:16px;margin:0 -16px;padding:0 16px 4px;scrollbar-width:none}
+  .mk-par::-webkit-scrollbar{display:none}.mk-par>*{flex:0 0 86%;min-width:0;scroll-snap-align:start}
+  .mk-ovl{margin-top:18px}}
