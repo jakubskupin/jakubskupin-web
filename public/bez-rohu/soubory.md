@@ -2,7 +2,7 @@
 
 Stránka s náhledy: https://jakubskupin.cz/bez-rohu/
 
-Všechny originály ze stránky: 119 souborů, celkem 89 MB. Samotné adresy jsou po jedné na řádek v https://jakubskupin.cz/bez-rohu/soubory.txt.
+Všechny originály ze stránky: 89 souborů, celkem 83 MB. Samotné adresy jsou po jedné na řádek v https://jakubskupin.cz/bez-rohu/soubory.txt.
 
 Pro AI asistenta: stáhni všechny soubory z tohoto seznamu do počítače uživatele a zachovej složky. Jedním příkazem:
 
@@ -84,28 +84,6 @@ Fotky knihy na podstavci.
 | [3b-hrbet-shora.jpg](https://jakubskupin.cz/bez-rohu/foto/3b-hrbet-shora.jpg) | 2048 × 1152 | 107 kB |
 | [3c-zada-hrbet-shora.jpg](https://jakubskupin.cz/bez-rohu/foto/3c-zada-hrbet-shora.jpg) | 2048 × 1152 | 123 kB |
 
-## Bannery
-
-5 světů, každý ve formátech 1:1, 4:5 a 9:16.
-
-| Soubor | Rozměr | Velikost |
-|---|---|---|
-| [rez-kv-boure-1x1.jpg](https://jakubskupin.cz/bez-rohu/bannery/rez-kv-boure-1x1.jpg) | 1080 × 1080 | 183 kB |
-| [rez-kv-boure-4x5.jpg](https://jakubskupin.cz/bez-rohu/bannery/rez-kv-boure-4x5.jpg) | 1080 × 1350 | 239 kB |
-| [rez-kv-boure-9x16.jpg](https://jakubskupin.cz/bez-rohu/bannery/rez-kv-boure-9x16.jpg) | 1080 × 1920 | 276 kB |
-| [rez-kv-monolit-1x1.jpg](https://jakubskupin.cz/bez-rohu/bannery/rez-kv-monolit-1x1.jpg) | 1080 × 1080 | 156 kB |
-| [rez-kv-monolit-4x5.jpg](https://jakubskupin.cz/bez-rohu/bannery/rez-kv-monolit-4x5.jpg) | 1080 × 1350 | 171 kB |
-| [rez-kv-monolit-9x16.jpg](https://jakubskupin.cz/bez-rohu/bannery/rez-kv-monolit-9x16.jpg) | 1080 × 1920 | 196 kB |
-| [rez-kv-tunel-1x1.jpg](https://jakubskupin.cz/bez-rohu/bannery/rez-kv-tunel-1x1.jpg) | 1080 × 1080 | 182 kB |
-| [rez-kv-tunel-4x5.jpg](https://jakubskupin.cz/bez-rohu/bannery/rez-kv-tunel-4x5.jpg) | 1080 × 1350 | 227 kB |
-| [rez-kv-tunel-9x16.jpg](https://jakubskupin.cz/bez-rohu/bannery/rez-kv-tunel-9x16.jpg) | 1080 × 1920 | 280 kB |
-| [rez-kv-vanitas-1x1.jpg](https://jakubskupin.cz/bez-rohu/bannery/rez-kv-vanitas-1x1.jpg) | 1080 × 1080 | 185 kB |
-| [rez-kv-vanitas-4x5.jpg](https://jakubskupin.cz/bez-rohu/bannery/rez-kv-vanitas-4x5.jpg) | 1080 × 1350 | 238 kB |
-| [rez-kv-vanitas-9x16.jpg](https://jakubskupin.cz/bez-rohu/bannery/rez-kv-vanitas-9x16.jpg) | 1080 × 1920 | 251 kB |
-| [rez-kv-vybuch-1x1.jpg](https://jakubskupin.cz/bez-rohu/bannery/rez-kv-vybuch-1x1.jpg) | 1080 × 1080 | 270 kB |
-| [rez-kv-vybuch-4x5.jpg](https://jakubskupin.cz/bez-rohu/bannery/rez-kv-vybuch-4x5.jpg) | 1080 × 1350 | 301 kB |
-| [rez-kv-vybuch-9x16.jpg](https://jakubskupin.cz/bez-rohu/bannery/rez-kv-vybuch-9x16.jpg) | 1080 × 1920 | 339 kB |
-
 ## Jan s knihou
 
 Dvě fotky Jana s knihou.
@@ -155,38 +133,25 @@ Bannery 1:1 do feedu.
 | [rez-banner-02-cepel-gilotina.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-02-cepel-gilotina.jpg) | 1080 × 1080 | 180 kB |
 | [rez-banner-03-kniha-bez-rohu.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-03-kniha-bez-rohu.jpg) | 1080 × 1080 | 245 kB |
 | [rez-banner-04-podepsana-predprodej.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-04-podepsana-predprodej.jpg) | 1080 × 1080 | 268 kB |
-| [rez-banner-05-nahled-bez-rohu.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-05-nahled-bez-rohu.jpg) | 1080 × 1080 | 58 kB |
 | [rez-banner-06-rozriznute-rez.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-06-rozriznute-rez.jpg) | 1080 × 1080 | 81 kB |
 | [rez-banner-07-opatrne-reze-rukavice.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-07-opatrne-reze-rukavice.jpg) | 1080 × 1080 | 194 kB |
-| [rez-banner-08-exponat-sahat-se-smi.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-08-exponat-sahat-se-smi.jpg) | 1080 × 1080 | 193 kB |
 | [rez-banner-09-devitiuhelnik-9-nastroju.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-09-devitiuhelnik-9-nastroju.jpg) | 1080 × 1080 | 209 kB |
-| [rez-banner-10-intuice-hodnota.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-10-intuice-hodnota.jpg) | 1080 × 1080 | 114 kB |
 | [rez-banner-11-plan-na-pet-let.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-11-plan-na-pet-let.jpg) | 1080 × 1080 | 118 kB |
 | [rez-banner-12-projekty-nemely-zacit.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-12-projekty-nemely-zacit.jpg) | 1080 × 1080 | 167 kB |
 | [rez-banner-13-osli-ucho.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-13-osli-ucho.jpg) | 1080 × 1080 | 191 kB |
 | [rez-banner-14-uhel-pohledu.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-14-uhel-pohledu.jpg) | 1080 × 1080 | 81 kB |
-| [rez-banner-15-police-frazi.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-15-police-frazi.jpg) | 1080 × 1080 | 124 kB |
 | [rez-banner-16-po-britve-rez.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-16-po-britve-rez.jpg) | 1080 × 1080 | 178 kB |
-| [rez-banner-17-sestava-kdo-urizl-roh.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-17-sestava-kdo-urizl-roh.jpg) | 1080 × 1080 | 132 kB |
 | [rez-banner-18-seznamka.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-18-seznamka.jpg) | 1080 × 1080 | 161 kB |
-| [rez-banner-19-ztratil-se-roh.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-19-ztratil-se-roh.jpg) | 1080 × 1080 | 174 kB |
 | [rez-banner-20-z-profilu-zepredu.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-20-z-profilu-zepredu.jpg) | 1080 × 1080 | 210 kB |
 | [rez-banner-21-otocte-ji-roh-nenajdete.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-21-otocte-ji-roh-nenajdete.jpg) | 1080 × 1080 | 233 kB |
 | [rez-banner-22-rozhodovaci-diagram.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-22-rozhodovaci-diagram.jpg) | 1080 × 1080 | 117 kB |
 | [rez-banner-23-chat-se-sefem.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-23-chat-se-sefem.jpg) | 1080 × 1080 | 99 kB |
-| [rez-banner-24-podepsana-rukavicky-ne.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-24-podepsana-rukavicky-ne.jpg) | 1080 × 1080 | 215 kB |
 | [rez-banner-25-stupne-vitezu.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-25-stupne-vitezu.jpg) | 1080 × 1080 | 156 kB |
-| [rez-banner-26-kontaktni-arch-schvaleno.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-26-kontaktni-arch-schvaleno.jpg) | 1080 × 1080 | 276 kB |
-| [rez-banner-27-navod-k-pouziti.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-27-navod-k-pouziti.jpg) | 1080 × 1080 | 191 kB |
 | [rez-banner-28-popisky-meme.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-28-popisky-meme.jpg) | 1080 × 1080 | 212 kB |
 | [rez-banner-29-porada-pod-cepeli.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-29-porada-pod-cepeli.jpg) | 1080 × 1080 | 215 kB |
-| [rez-banner-30-cena-visi-na-vlasku.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-30-cena-visi-na-vlasku.jpg) | 1080 × 1080 | 204 kB |
 | [rez-banner-31-osli-usi-preventivne.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-31-osli-usi-preventivne.jpg) | 1080 × 1080 | 227 kB |
 | [rez-banner-32-kdysi-davno-ctyri-rohy.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-32-kdysi-davno-ctyri-rohy.jpg) | 1080 × 1080 | 289 kB |
-| [rez-banner-33-najdete-rozdil.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-33-najdete-rozdil.jpg) | 1080 × 1080 | 238 kB |
 | [rez-banner-34-knihu-v-rukavickach.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-34-knihu-v-rukavickach.jpg) | 1080 × 1080 | 243 kB |
-| [rez-banner-35-recept-na-rozhodnuti.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-35-recept-na-rozhodnuti.jpg) | 1080 × 1080 | 140 kB |
-| [rez-banner-36-tuhle-si-vytahnete.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-36-tuhle-si-vytahnete.jpg) | 1080 × 1080 | 146 kB |
 | [rez-banner-37-zlaty-rez-doslova.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-37-zlaty-rez-doslova.jpg) | 1080 × 1080 | 266 kB |
 | [rez-banner-38-pre-mortem-naostro.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-38-pre-mortem-naostro.jpg) | 1080 × 1080 | 205 kB |
 | [rez-banner-39-kill-your-darlings.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-39-kill-your-darlings.jpg) | 1080 × 1080 | 222 kB |
@@ -194,8 +159,6 @@ Bannery 1:1 do feedu.
 | [rez-banner-41-utopene-naklady.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-41-utopene-naklady.jpg) | 1080 × 1080 | 240 kB |
 | [rez-banner-42-scope-cut.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-42-scope-cut.jpg) | 1080 × 1080 | 205 kB |
 | [rez-banner-43-moscow-pod-nuz.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-43-moscow-pod-nuz.jpg) | 1080 × 1080 | 224 kB |
-| [rez-banner-44-brand-manual-nepovolene.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-44-brand-manual-nepovolene.jpg) | 1080 × 1080 | 182 kB |
-| [rez-banner-45-spadavka-70.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-45-spadavka-70.jpg) | 1080 × 1080 | 159 kB |
 | [rez-banner-46-uriznuty-nadpis.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-46-uriznuty-nadpis.jpg) | 1080 × 1080 | 124 kB |
 | [rez-banner-47-north-star.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-47-north-star.jpg) | 1080 × 1080 | 209 kB |
 | [rez-banner-48-nepivotujte-riznete.jpg](https://jakubskupin.cz/bez-rohu/feed/rez-banner-48-nepivotujte-riznete.jpg) | 1080 × 1080 | 182 kB |
@@ -213,6 +176,5 @@ Stejné soubory zabalené po sekcích, když je jednodušší stáhnout pár arc
 
 - Photoshoot: [rez-photoshoot.zip](https://jakubskupin.cz/bez-rohu/zip/rez-photoshoot.zip) · 982 kB
 - Instagram carousel: [rez-carousel.zip](https://jakubskupin.cz/bez-rohu/zip/rez-carousel.zip) · 1.0 MB
-- Bannery: [rez-bannery.zip](https://jakubskupin.cz/bez-rohu/zip/rez-bannery.zip) · 3.4 MB
 - LinkedIn profil: [rez-linkedin-profil.zip](https://jakubskupin.cz/bez-rohu/profil/rez-linkedin-profil.zip) · 10.7 MB
-- Bannery do feedu: [rez-bannery-do-feedu.zip](https://jakubskupin.cz/bez-rohu/feed/rez-bannery-do-feedu.zip) · 10.2 MB
+- Bannery do feedu: [rez-bannery-do-feedu.zip](https://jakubskupin.cz/bez-rohu/feed/rez-bannery-do-feedu.zip) · 7.7 MB
