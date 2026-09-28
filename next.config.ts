@@ -5,11 +5,14 @@ const nextConfig: NextConfig = {
     return [
       // /fotky-v-pohybu bylo par hodin zive, at nikomu nespadne odkaz
       { source: "/fotky-v-pohybu", destination: "/auta", permanent: true },
+      // podklady ke knize ŘEŽ: od 28. 9. 2026 na /rez, starý odkaz poslaný Janovi musí dál fungovat
+      { source: "/bez-rohu", destination: "/rez", permanent: true },
+      { source: "/bez-rohu/:path*", destination: "/rez/:path*", permanent: true },
     ];
   },
   async rewrites() {
     return [
-      { source: "/bez-rohu", destination: "/bez-rohu/index.html" },
+      { source: "/rez", destination: "/rez/index.html" },
       { source: "/le-premier", destination: "/le-premier/index.html" },
       { source: "/equator", destination: "/equator/index.html" },
       { source: "/vizualy", destination: "/vizualy/index.html" },

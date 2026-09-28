@@ -1,10 +1,10 @@
 <!doctype html><html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow, noarchive"><meta name="referrer" content="no-referrer">
 <title>ŘEŽ: podklady ke kampani | Jakub Skupin</title>
-<link rel="alternate" type="text/markdown" href="/bez-rohu/soubory.md" title="Seznam všech souborů ke stažení">
+<link rel="alternate" type="text/markdown" href="/rez/soubory.md" title="Seznam všech souborů ke stažení">
 <meta name="description" content="Video, fotky, carousel a bannery ke knize ŘEŽ Jana Řezáče.">
 <meta property="og:type" content="website"><meta property="og:locale" content="cs_CZ"><meta property="og:site_name" content="Jakub Skupin">
 <meta property="og:title" content="ŘEŽ: podklady ke kampani">
-<meta property="og:image" content="https://jakubskupin.cz/bez-rohu/img/og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image" content="https://jakubskupin.cz/rez/img/og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Manrope:wght@400;500;600;700&display=swap">
 <style>
@@ -24,7 +24,7 @@ a{color:inherit}
 /* ---- navigace ---- */
 nav{position:sticky;top:0;z-index:40;transition:background .3s ease,backdrop-filter .3s ease,border-color .3s ease;border-bottom:1px solid transparent}
 nav.pod{background:rgba(10,10,11,.8);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:var(--line)}
-nav .ram{display:flex;align-items:center;justify-content:space-between;gap:18px;height:64px}
+nav .ram{display:flex;align-items:center;justify-content:center;gap:18px;height:64px}
 nav .brand{font-family:var(--h);font-weight:700;font-size:15px;letter-spacing:-.02em;color:var(--ink);text-decoration:none}
 nav ul{display:flex;gap:24px;list-style:none;margin:0;padding:0;font-size:13px;font-weight:500}
 nav ul a{text-decoration:none;color:var(--muted);transition:color .2s}
@@ -34,17 +34,17 @@ nav ul a:hover,nav ul a.on{color:var(--ink)}
 /* ---- hero ---- */
 /* fotka gilotiny přes celé hero, navigace leží na ní */
 header{margin-top:-65px;overflow:hidden;isolation:isolate}
-header .ram{position:relative;z-index:2;min-height:max(560px,min(62.5vw,100svh));padding-top:calc(65px + clamp(32px,3.75vw,72px))}
+header .ram{position:relative;z-index:2;min-height:max(560px,min(62.5vw,100svh));padding-top:65px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
 .hero-bg img{position:absolute;inset:0;z-index:0;display:block;width:100%;height:100%;object-fit:cover;object-position:50% 50%}
 header:after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:linear-gradient(to bottom,rgba(10,10,11,.7) 0,rgba(10,10,11,0) 16%),linear-gradient(to bottom,rgba(10,10,11,0) 72%,var(--bg) 100%),
-    linear-gradient(to right,rgba(10,10,11,.9) 0,rgba(10,10,11,.6) 28%,rgba(10,10,11,0) 55%)}
+  background:linear-gradient(to bottom,rgba(10,10,11,.7) 0,rgba(10,10,11,.42) 16%,rgba(10,10,11,.42) 68%,var(--bg) 100%)}
 .hero-txt{position:relative;z-index:2}
 .eyebrow{font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-3);margin:0 0 18px}
 h1,h2{font-family:var(--h);font-weight:700;letter-spacing:-.03em;margin:0;text-wrap:balance}
-header h1{font-size:clamp(34px,4.8vw,68px);line-height:1.04}
-@media (max-width:760px){header .ram{min-height:86svh;padding-top:calc(65px + 24px)}.hero-bg img{top:auto;bottom:0;height:86%;object-position:62% 50%;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 20%);mask-image:linear-gradient(to bottom,transparent 0,#000 20%)}
-  header:after{background:linear-gradient(to bottom,rgba(10,10,11,.8) 0,rgba(10,10,11,.35) 30%,rgba(10,10,11,0) 45%),linear-gradient(to bottom,rgba(10,10,11,0) 70%,var(--bg) 100%)}}
+header h1{font-size:clamp(40px,6vw,92px);line-height:1}
+header .eyebrow{margin-bottom:22px}
+@media (max-width:760px){header .ram{min-height:86svh;padding-top:65px}.hero-bg img{top:auto;bottom:0;height:86%;object-position:62% 50%;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 20%);mask-image:linear-gradient(to bottom,transparent 0,#000 20%)}
+  header:after{background:linear-gradient(to bottom,rgba(10,10,11,.8) 0,rgba(10,10,11,.55) 30%,rgba(10,10,11,.5) 60%,var(--bg) 100%)}}
 
 /* hlavní video hned pod foldem, velké */
 .prem{padding-top:clamp(40px,6vw,88px)}
@@ -64,17 +64,26 @@ header h1{font-size:clamp(34px,4.8vw,68px);line-height:1.04}
 .ig-obal .nahledy{display:none!important}
 /* pás s listováním za řádkem Listování v knize: smyčka 16:9 přes celou šířku, nadpis a podnadpis přesahují spodní hranu */
 .uv-film{position:relative;width:100%;aspect-ratio:16/9;max-height:100svh;overflow:hidden}
-.uv-film video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%;display:block;background:#05060A}
+.uv-film video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%;display:block;background:#05060A;transform:scale(1.143);transform-origin:33.6% 50%}
 .uv-film:after{content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(to bottom,var(--bg) 0,rgba(10,10,11,0) 11%,rgba(10,10,11,0) 60%,rgba(10,10,11,.72) 82%,var(--bg) 100%)}
+  background:linear-gradient(to bottom,rgba(10,10,11,0) 60%,rgba(10,10,11,.72) 82%,var(--bg) 100%)}
 .uv-txt{position:relative;z-index:2;margin-top:calc(-1 * clamp(72px,9.5vw,170px))}
 .uv-txt h2{max-width:9em;font-size:clamp(40px,6.2vw,100px);line-height:.98}
 .uv-pod{max-width:36ch;margin:clamp(14px,1.6vw,24px) 0 0;font-size:clamp(17px,1.45vw,21px);line-height:1.5;color:rgba(243,243,241,.74)}
 @media (max-width:760px){
   .uv-film{aspect-ratio:auto;height:90vw}
-  .uv-film video{left:-30vw;width:160vw}
-  .uv-film:after{background:linear-gradient(to bottom,var(--bg) 0,rgba(10,10,11,0) 12%,rgba(10,10,11,0) 52%,rgba(10,10,11,.85) 80%,var(--bg) 100%)}
+  .uv-film video{left:-30vw;width:160vw;transform:none}
+  .uv-film:after{background:linear-gradient(to bottom,rgba(10,10,11,0) 52%,rgba(10,10,11,.85) 80%,var(--bg) 100%)}
   .uv-txt{margin-top:-12vw}.uv-txt h2{font-size:clamp(34px,10vw,46px)}}
+
+/* poznámka o AI pod videi: šedá pilulka AI GENERATED (oficiální ikona EK, krytí 60 %) + dvě možnosti */
+.ai-box{max-width:640px}
+.ai-stitek{display:block;height:30px;width:auto;margin:0 0 20px;opacity:.6}
+.ai-veta{margin:0;font-size:clamp(17px,1.4vw,19px);line-height:1.55;color:var(--ink)}
+.ai-moznosti{margin:16px 0 0;padding:0 0 0 1.3em;display:grid;gap:12px;font-size:16px;line-height:1.6;color:var(--muted)}
+.ai-moznosti b{color:var(--ink);font-weight:600}
+.ai-moznosti a{color:var(--ink);text-underline-offset:3px}
+.ai-konec{margin-top:16px;font-size:16px;color:var(--muted)}
 
 /* ---- sekce ---- */
 section{padding:clamp(64px,9vw,120px) 0 0}
@@ -222,21 +231,20 @@ footer .soubory{color:var(--muted);text-underline-offset:3px;transition:color .2
 footer .brand{font-family:var(--h);font-weight:700;font-size:15px;letter-spacing:-.02em;color:var(--ink);text-decoration:none}
 
 </style>
-<link rel="stylesheet" href="/bez-rohu/profil/profil.css">
-<link rel="stylesheet" href="/bez-rohu/feed/feed.css">
+<link rel="stylesheet" href="/rez/profil/profil.css">
+<link rel="stylesheet" href="/rez/feed/feed.css">
 </head><body>
 
 <nav id="nav"><div class="ram">
   <a class="brand" href="/">Jakub Skupin</a>
-  <ul><li><a href="#hlavni">Video</a></li><li><a href="#video">LinkedIn</a></li><li><a href="#carousel">Carousel</a></li><li><a href="#foto">Photoshoot</a></li><li><a href="#jan">Jan s knihou</a></li><li><a href="#profil">Profil</a></li><li><a href="#feed">Bannery</a></li></ul>
 </div></nav>
 
 <header>
-<picture class="hero-bg"><source media="(max-width:760px)" srcset="/bez-rohu/img/hero-gilotina-m.jpg"><img src="/bez-rohu/img/hero-gilotina.jpg" width="1440" height="900" fetchpriority="high" alt="Ocelová čepel gilotiny se zlatou hranou nad knihou ŘEŽ na mramorovém podstavci"></picture>
+<picture class="hero-bg"><source media="(max-width:760px)" srcset="/rez/img/hero-gilotina-m.jpg"><img src="/rez/img/hero-gilotina.jpg" width="1440" height="900" fetchpriority="high" alt="Ocelová čepel gilotiny se zlatou hranou nad knihou ŘEŽ na mramorovém podstavci"></picture>
 <div class="ram">
   <div class="hero-txt odhal">
-    <p class="eyebrow">Kniha ŘEŽ &middot; House of Řezáč</p>
-    <h1>Podklady pro<br>Jana&nbsp;Řezáče</h1>
+    <p class="eyebrow">Kniha ŘEŽ</p>
+    <h1>Podklady pro <span style="white-space:nowrap">pre-launch</span></h1>
   </div>
 </div></header>
 
@@ -244,7 +252,7 @@ footer .brand{font-family:var(--h);font-weight:700;font-size:15px;letter-spacing
 <section id="hlavni" class="prem"><div class="ram">
   <div class="hl odhal"><span class="c">27 s &middot; se zvukem</span><h2>Hlavní video</h2></div>
   <div class="prem-film odhal">
-    <video id="hlavniVid" controls playsinline controlslist="nodownload" preload="metadata" poster="/bez-rohu/video/rez-promo-poster-1080.jpg" aria-label="Hlavní video ke knize ŘEŽ"><source src="/bez-rohu/video/rez-promo-1080-web.mp4" type="video/mp4"></video>
+    <video id="hlavniVid" controls playsinline controlslist="nodownload" preload="metadata" poster="/rez/video/rez-promo-poster-1080.jpg" aria-label="Hlavní video ke knize ŘEŽ"><source src="/rez/video/rez-promo-1080-web.mp4" type="video/mp4"></video>
   </div>
 </div></section>
 
@@ -255,7 +263,7 @@ footer .brand{font-family:var(--h);font-weight:700;font-size:15px;letter-spacing
   <div class="li-stred">
     <article class="li-karta">
       <div class="li-hl">
-        <div class="li-ava"><img src="/bez-rohu/img/jan-avatar.jpg" width="48" height="48" alt=""></div>
+        <div class="li-ava"><img src="/rez/img/jan-avatar.jpg" width="48" height="48" alt=""></div>
         <div class="li-kdo"><b>Jan Řezáč</b><span>House of Řezáč</span><span>1 h &middot; &#127760;&#xFE0E;</span></div>
         <div class="li-tri" aria-hidden="true">&middot;&middot;&middot;</div>
       </div>
@@ -272,8 +280,8 @@ Který projekt byste dnes odřízli?
 
 <a href="https://houseofrezac.com/publikujeme/kniha-rez" target="_blank" rel="noopener">houseofrezac.com/publikujeme/kniha-rez</a></span></div>
       <div class="li-mwrap">
-        <video class="li-media" id="livid" playsinline muted loop preload="metadata" poster="/bez-rohu/video/rez-promo-poster.jpg" aria-label="Promo video knihy ŘEŽ 1:1">
-          <source src="/bez-rohu/video/rez-promo-web.mp4" type="video/mp4">
+        <video class="li-media" id="livid" playsinline muted loop preload="metadata" poster="/rez/video/rez-promo-poster.jpg" aria-label="Promo video knihy ŘEŽ 1:1">
+          <source src="/rez/video/rez-promo-web.mp4" type="video/mp4">
         </video>
         <span class="li-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg></span>
         <button type="button" class="li-zvuk" aria-pressed="false" aria-label="Zapnout zvuk">
@@ -294,7 +302,7 @@ Který projekt byste dnes odřízli?
     </article>
   </div>
   <div class="li-stred li-nahled">
-    <figure><img src="/bez-rohu/feed/rez-banner-02-cepel-gilotina.jpg" width="1080" height="1080" loading="lazy" alt="Návrh náhledu: čepel gilotiny nad knihou ŘEŽ, text Co uříznete?"><figcaption>Návrh náhledu (thumbnail) k videu</figcaption></figure>
+    <figure><img src="/rez/feed/rez-banner-02-cepel-gilotina.jpg" width="1080" height="1080" loading="lazy" alt="Návrh náhledu: čepel gilotiny nad knihou ŘEŽ, text Co uříznete?"><figcaption>Návrh náhledu (thumbnail) k videu</figcaption></figure>
   </div>
   </div></div>
   <div class="li-radek odhal"><h3 class="li-rh">Autor a kniha</h3>
@@ -302,7 +310,7 @@ Který projekt byste dnes odřízli?
   <div class="li-stred">
     <article class="li-karta">
       <div class="li-hl">
-        <div class="li-ava"><img src="/bez-rohu/img/jan-avatar.jpg" width="48" height="48" alt=""></div>
+        <div class="li-ava"><img src="/rez/img/jan-avatar.jpg" width="48" height="48" alt=""></div>
         <div class="li-kdo"><b>Jan Řezáč</b><span>House of Řezáč</span><span>3 h &middot; &#127760;&#xFE0E;</span></div>
         <div class="li-tri" aria-hidden="true">&middot;&middot;&middot;</div>
       </div>
@@ -316,8 +324,8 @@ V předprodeji stojí kniha 595 Kč, potom 795 Kč. S videokurzem 2 894 Kč.
 Předobjednávejte tady:
 <a href="https://houseofrezac.com/publikujeme/kniha-rez" target="_blank" rel="noopener">houseofrezac.com/publikujeme/kniha-rez</a></span></div>
       <div class="li-mwrap">
-        <video class="li-media" playsinline muted loop preload="metadata" poster="/bez-rohu/video/rez-post2-poster.jpg" aria-label="Jan Řezáč položí knihu ŘEŽ na podstavec, výzva k předobjednávce">
-          <source src="/bez-rohu/video/rez-post2-web.mp4" type="video/mp4">
+        <video class="li-media" playsinline muted loop preload="metadata" poster="/rez/video/rez-post2-poster.jpg" aria-label="Jan Řezáč položí knihu ŘEŽ na podstavec, výzva k předobjednávce">
+          <source src="/rez/video/rez-post2-web.mp4" type="video/mp4">
         </video>
         <span class="li-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg></span>
         <button type="button" class="li-zvuk" aria-pressed="false" aria-label="Zapnout zvuk">
@@ -338,7 +346,7 @@ Předobjednávejte tady:
     </article>
   </div>
   <div class="li-stred li-nahled">
-    <figure><img src="/bez-rohu/img/nahled-autor-a-kniha.jpg" width="1080" height="1080" loading="lazy" alt="Návrh náhledu: ruce pokládají knihu ŘEŽ na podstavec, text Z rukou autora rovnou k vám"><figcaption>Návrh náhledu (thumbnail) k videu</figcaption></figure>
+    <figure><img src="/rez/img/nahled-autor-a-kniha.jpg" width="1080" height="1080" loading="lazy" alt="Návrh náhledu: ruce pokládají knihu ŘEŽ na podstavec, text Z rukou autora rovnou k vám"><figcaption>Návrh náhledu (thumbnail) k videu</figcaption></figure>
   </div>
   </div></div>
   <div class="li-radek odhal"><h3 class="li-rh">Jan mluví do kamery<small>Bez titulků a s titulky</small></h3>
@@ -347,7 +355,7 @@ Předobjednávejte tady:
     <p class="li-stitek">Bez titulků</p>
     <article class="li-karta">
       <div class="li-hl">
-        <div class="li-ava"><img src="/bez-rohu/img/jan-avatar.jpg" width="48" height="48" alt=""></div>
+        <div class="li-ava"><img src="/rez/img/jan-avatar.jpg" width="48" height="48" alt=""></div>
         <div class="li-kdo"><b>Jan Řezáč</b><span>House of Řezáč</span><span>5 h &middot; &#127760;&#xFE0E;</span></div>
         <div class="li-tri" aria-hidden="true">&middot;&middot;&middot;</div>
       </div>
@@ -358,8 +366,8 @@ Kniha je v předprodeji a přijde vám podepsaná.
 
 <a href="https://houseofrezac.com/publikujeme/kniha-rez" target="_blank" rel="noopener">houseofrezac.com/publikujeme/kniha-rez</a></span></div>
       <div class="li-mwrap">
-        <video class="li-media" playsinline muted loop preload="metadata" poster="/bez-rohu/video/rez-lipsync-cta-poster.jpg" aria-label="Mluvící video se závěrem a výzvou">
-          <source src="/bez-rohu/video/rez-lipsync-cta-web.mp4" type="video/mp4">
+        <video class="li-media" playsinline muted loop preload="metadata" poster="/rez/video/rez-lipsync-cta-poster.jpg" aria-label="Mluvící video se závěrem a výzvou">
+          <source src="/rez/video/rez-lipsync-cta-web.mp4" type="video/mp4">
         </video>
         <span class="li-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg></span>
         <button type="button" class="li-zvuk" aria-pressed="false" aria-label="Zapnout zvuk">
@@ -383,7 +391,7 @@ Kniha je v předprodeji a přijde vám podepsaná.
     <p class="li-stitek">S titulky</p>
     <article class="li-karta">
       <div class="li-hl">
-        <div class="li-ava"><img src="/bez-rohu/img/jan-avatar.jpg" width="48" height="48" alt=""></div>
+        <div class="li-ava"><img src="/rez/img/jan-avatar.jpg" width="48" height="48" alt=""></div>
         <div class="li-kdo"><b>Jan Řezáč</b><span>House of Řezáč</span><span>6 h &middot; &#127760;&#xFE0E;</span></div>
         <div class="li-tri" aria-hidden="true">&middot;&middot;&middot;</div>
       </div>
@@ -394,8 +402,8 @@ Kniha je v předprodeji a přijde vám podepsaná.
 
 <a href="https://houseofrezac.com/publikujeme/kniha-rez" target="_blank" rel="noopener">houseofrezac.com/publikujeme/kniha-rez</a></span></div>
       <div class="li-mwrap">
-        <video class="li-media" playsinline muted loop preload="metadata" poster="/bez-rohu/video/rez-lipsync-3d-poster.jpg" aria-label="Mluvící video s 3D titulky, závěrem a výzvou">
-          <source src="/bez-rohu/video/rez-lipsync-3d-web.mp4" type="video/mp4">
+        <video class="li-media" playsinline muted loop preload="metadata" poster="/rez/video/rez-lipsync-3d-poster.jpg" aria-label="Mluvící video s 3D titulky, závěrem a výzvou">
+          <source src="/rez/video/rez-lipsync-3d-web.mp4" type="video/mp4">
         </video>
         <span class="li-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg></span>
         <button type="button" class="li-zvuk" aria-pressed="false" aria-label="Zapnout zvuk">
@@ -421,7 +429,7 @@ Kniha je v předprodeji a přijde vám podepsaná.
   <div class="li-stred">
     <article class="li-karta">
       <div class="li-hl">
-        <div class="li-ava"><img src="/bez-rohu/img/jan-avatar.jpg" width="48" height="48" alt=""></div>
+        <div class="li-ava"><img src="/rez/img/jan-avatar.jpg" width="48" height="48" alt=""></div>
         <div class="li-kdo"><b>Jan Řezáč</b><span>House of Řezáč</span><span>8 h &middot; &#127760;&#xFE0E;</span></div>
         <div class="li-tri" aria-hidden="true">&middot;&middot;&middot;</div>
       </div>
@@ -438,8 +446,8 @@ Nové CRM, nový web, nová kampaň. To jsou výstupy. Práce skončí &bdquo;ú
 Dalších osm nástrojů najdete v knize. V předprodeji za 595 Kč a přijde vám podepsaná:
 <a href="https://houseofrezac.com/publikujeme/kniha-rez" target="_blank" rel="noopener">houseofrezac.com/publikujeme/kniha-rez</a></span></div>
       <div class="li-mwrap">
-        <video class="li-media" playsinline muted loop preload="metadata" poster="/bez-rohu/video/rez-listovani-poster.jpg" aria-label="Ruka v bílé rukavici listuje knihou ŘEŽ, diagram letových hladin cílů">
-          <source src="/bez-rohu/video/rez-listovani-web.mp4" type="video/mp4">
+        <video class="li-media" playsinline muted loop preload="metadata" poster="/rez/video/rez-listovani-poster.jpg" aria-label="Ruka v bílé rukavici listuje knihou ŘEŽ, diagram letových hladin cílů">
+          <source src="/rez/video/rez-listovani-web.mp4" type="video/mp4">
         </video>
         <span class="li-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg></span>
         <button type="button" class="li-zvuk" aria-pressed="false" aria-label="Zapnout zvuk">
@@ -460,16 +468,16 @@ Dalších osm nástrojů najdete v knize. V předprodeji za 595 Kč a přijde v�
     </article>
   </div>
   <div class="li-stred li-nahled">
-    <figure><img src="/bez-rohu/img/nahled-listovani.jpg" width="1080" height="1080" loading="lazy" alt="Návrh náhledu: ruka v rukavici otáčí stránku Nastavte cíle, text Devět nástrojů. Tady je jeden"><figcaption>Návrh náhledu (thumbnail) k videu</figcaption></figure>
+    <figure><img src="/rez/img/nahled-listovani.jpg" width="1080" height="1080" loading="lazy" alt="Návrh náhledu: ruka v rukavici otáčí stránku Nastavte cíle, text Devět nástrojů. Tady je jeden"><figcaption>Návrh náhledu (thumbnail) k videu</figcaption></figure>
   </div>
   </div></div>
 </div></section>
 
 <section id="uvnitr" class="uv-sekce" aria-label="Ukázka z knihy"><div class="uv">
   <div class="uv-film" aria-hidden="true">
-    <video id="uvVid" muted loop playsinline disablepictureinpicture preload="none" poster="/bez-rohu/video/rez-listovani-smycka-poster.jpg">
-      <source media="(max-width:760px)" src="/bez-rohu/video/rez-listovani-smycka-720.mp4" type="video/mp4">
-      <source src="/bez-rohu/video/rez-listovani-smycka-1080.mp4" type="video/mp4">
+    <video id="uvVid" muted loop playsinline disablepictureinpicture preload="none" poster="/rez/video/rez-listovani-smycka-poster.jpg">
+      <source media="(max-width:760px)" src="/rez/video/rez-listovani-smycka-720.mp4" type="video/mp4">
+      <source src="/rez/video/rez-listovani-smycka-1080.mp4" type="video/mp4">
     </video>
   </div>
   <div class="ram uv-txt odhal">
@@ -478,11 +486,38 @@ Dalších osm nástrojů najdete v knize. V předprodeji za 595 Kč a přijde v�
   </div>
 </div></section>
 
+<section id="ai" class="ai-sekce"><div class="ram">
+  <div class="ai-box odhal">
+    <img class="ai-stitek" src="/rez/img/ai-generated.png" width="502" height="96" alt="AI GENERATED">
+    <p class="ai-veta">Videa a většina vizuálů na téhle stránce vznikly s pomocí AI. Máme dvě možnosti:</p>
+    <ol class="ai-moznosti">
+      <li><b>Označit.</b> Do videí, která si vybereš, doplním tenhle štítek, šedě, aby nekřičel. Nebo ho vložíte sami: <a href="/rez/img/ai-generated-velky.png" download>stáhnout štítek</a> (oficiální ikona Evropské komise).</li>
+      <li><b>Neoznačit.</b> Někdo se v komentářích určitě ozve, rozjede se diskuse a dosah vyroste. Jenže je to pozornost za chybu a House of Řezáč tyhle chyby nedělá. Proto bych volil jedničku.</li>
+    </ol>
+    <p class="ai-veta ai-konec">Rozhodnutí nechám na tobě.</p>
+  </div>
+</div></section>
+
+<section id="foto"><div class="ram">
+  <div class="hl odhal"><span class="c">02</span><h2>Photoshoot</h2></div>
+  <div class="foto odhal" id="fotoMrizka"></div>
+</div></section>
+
+<section id="jan"><div class="ram">
+  <div class="hl odhal"><span class="c">03</span><h2>Jan s knihou</h2></div>
+  <div class="jan odhal" id="janMrizka"></div>
+</div></section>
+
+<!-- sekce LinkedIn profil: obsah staví /profil/profil.js, obrázky a styl v /profil/ (thumbnaily/web_profil.py) -->
+<section id="profil"><div class="ram">
+  <div class="hl odhal"><span class="c">04</span><h2>LinkedIn profil</h2></div>
+  <div class="pf odhal" id="pf"></div>
+</div></section>
 <section id="carousel"><div class="ram">
-  <div class="hl odhal"><span class="c">02</span><h2>Instagram carousel</h2></div>
+  <div class="hl odhal"><span class="c">05</span><h2>Instagram carousel</h2></div>
   <div class="ig-obal odhal">
     <div class="ig">
-      <div class="hd"><span class="av"><img src="/bez-rohu/img/hor-avatar.png" alt=""></span><span class="who"><b>houseofrezac</b><small>Brno</small></span><span class="more">&middot;&middot;&middot;</span></div>
+      <div class="hd"><span class="av"><img src="/rez/img/hor-avatar.png" alt=""></span><span class="who"><b>houseofrezac</b><small>Brno</small></span><span class="more">&middot;&middot;&middot;</span></div>
       <div class="car-wrap">
         <div class="car" id="car"></div>
         <span class="car-n" id="carN">1/7</span>
@@ -504,21 +539,6 @@ Dalších osm nástrojů najdete v knize. V předprodeji za 595 Kč a přijde v�
   </div>
 </div></section>
 
-<section id="foto"><div class="ram">
-  <div class="hl odhal"><span class="c">03</span><h2>Photoshoot</h2></div>
-  <div class="foto odhal" id="fotoMrizka"></div>
-</div></section>
-
-<section id="jan"><div class="ram">
-  <div class="hl odhal"><span class="c">04</span><h2>Jan s knihou</h2></div>
-  <div class="jan odhal" id="janMrizka"></div>
-</div></section>
-
-<!-- sekce LinkedIn profil: obsah staví /profil/profil.js, obrázky a styl v /profil/ (thumbnaily/web_profil.py) -->
-<section id="profil"><div class="ram">
-  <div class="hl odhal"><span class="c">05</span><h2>LinkedIn profil</h2></div>
-  <div class="pf odhal" id="pf"></div>
-</div></section>
 <!-- sekce Bannery do feedu: obsah staví /feed/feed.js, obrázky a styl v /feed/ (thumbnaily/web_feed.py) -->
 <section id="feed"><div class="ram">
   <div class="hl odhal"><span class="c">06</span><h2>Bannery do feedu</h2></div>
@@ -527,7 +547,7 @@ Dalších osm nástrojů najdete v knize. V předprodeji za 595 Kč a přijde v�
       <div><p class="mk-stitek">LinkedIn &middot; příspěvek Jana</p>
       <article class="li-karta">
         <div class="li-hl">
-          <div class="li-ava"><img src="/bez-rohu/img/jan-avatar.jpg" width="48" height="48" alt=""></div>
+          <div class="li-ava"><img src="/rez/img/jan-avatar.jpg" width="48" height="48" alt=""></div>
           <div class="li-kdo"><b>Jan Řezáč</b><span>House of Řezáč</span><span>2 h &middot; &#127760;&#xFE0E;</span></div>
           <div class="li-tri" aria-hidden="true">&middot;&middot;&middot;</div>
         </div>
@@ -551,7 +571,7 @@ Devět strategických nástrojů pro dobu rychlých změn. V předprodeji za 595
       <div><p class="mk-stitek">Facebook &middot; reklama</p>
       <article class="fb-karta">
         <div class="fb-hl">
-          <div class="fb-ava"><img src="/bez-rohu/img/hor-avatar.png" width="40" height="40" alt=""></div>
+          <div class="fb-ava"><img src="/rez/img/hor-avatar.png" width="40" height="40" alt=""></div>
           <div class="fb-kdo"><b>House of Řezáč</b><span>Sponzorováno &middot; <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zm4.9 6H10.9a10 10 0 0 0-1-4.2 5.1 5.1 0 0 1 3 4.2zM8 2.9c.5.6 1.3 2.1 1.5 4.6h-3C6.7 5 7.5 3.5 8 2.9zM6.1 3.3a10 10 0 0 0-1 4.2H3.1a5.1 5.1 0 0 1 3-4.2zM3.1 8.5h2a10 10 0 0 0 1 4.2 5.1 5.1 0 0 1-3-4.2zM8 13.1c-.5-.6-1.3-2.1-1.5-4.6h3c-.2 2.5-1 4-1.5 4.6zm1.9-.4a10 10 0 0 0 1-4.2h2a5.1 5.1 0 0 1-3 4.2z"/></svg></span></div>
           <div class="fb-tri" aria-hidden="true">&middot;&middot;&middot;</div>
         </div>
@@ -576,7 +596,7 @@ Devět strategických nástrojů pro dobu rychlých změn. V předprodeji za 595
 </div></section>
 </main>
 
-<footer><div class="ram"><a class="brand" href="/">Jakub Skupin</a><a class="soubory" href="/bez-rohu/soubory.md">Seznam všech souborů ke stažení (pro AI asistenta)</a><span>Kniha ŘEŽ &middot; podklady pro Jana Řezáče</span></div></footer>
+<footer><div class="ram"><a class="brand" href="/">Jakub Skupin</a><a class="soubory" href="/rez/soubory.md">Seznam všech souborů ke stažení (pro AI agenta)</a><span>Kniha ŘEŽ &middot; podklady pro Jana Řezáče</span></div></footer>
 
 <div id="lb" role="dialog" aria-modal="true" aria-label="Fotka">
   <button type="button" class="lbx" id="lbX" aria-label="Zavřít"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
@@ -591,7 +611,7 @@ Devět strategických nástrojů pro dobu rychlých změn. V předprodeji za 595
 
 <script>
 (function(){
-  var S = '/bez-rohu/';
+  var S = '/rez/';
   var DL = '<svg viewBox="0 0 24 24"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19.5h14"/></svg>';
   // ---------- data ----------
   var FOTO = ['2a-predni-hrbet-stred','3a-predni-hrbet-shora','1b-hrbet-nizko','2b-hrbet-stred','3b-hrbet-shora','1c-zada-hrbet-nizko','2c-zada-hrbet-stred','3c-zada-hrbet-shora'];
@@ -721,6 +741,6 @@ Devět strategických nástrojů pro dobu rychlých změn. V předprodeji za 595
   });
 })();
 </script>
-<script src="/bez-rohu/profil/profil.js" defer></script>
-<script src="/bez-rohu/feed/feed.js" defer></script>
+<script src="/rez/profil/profil.js" defer></script>
+<script src="/rez/feed/feed.js" defer></script>
 </body></html>

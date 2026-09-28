@@ -1,17 +1,19 @@
-/* Sekce LinkedIn profil: kombo banner + profilovka v maketě profilu, 20 profilovek v malých kartách. Obrázky vedle v /profil/. */
+/* Sekce LinkedIn profil: kombo banner + profilovka v maketě profilu, profilovky v malých kartách (VEN vyřazené, čísla zůstávají). Obrázky vedle v /profil/. */
 (function(){
   var root = document.getElementById('pf'); if (!root) return;
-  var B = (document.currentScript && document.currentScript.src || '').replace(/profil\.js.*$/, '') || '/bez-rohu/profil/';
+  var B = (document.currentScript && document.currentScript.src || '').replace(/profil\.js.*$/, '') || '/rez/profil/';
   var DL = '<svg viewBox="0 0 24 24"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19.5h14"/></svg>';
   var P = [['chybejici-roh','Chybějící roh'],['odpadly-roh','Odpadlý roh'],['zlata-stopa','Zlatá stopa'],['rozriznuty-portret','Rozříznutý portrét'],
     ['zlaty-prstenec','Zlatý prstenec'],['prstenec-s-napisem','Prstenec s nápisem'],['portret-v-obalce','Portrét v obálce'],['rez-za-hlavou','ŘEŽ za hlavou'],
     ['hacek','Háček'],['zlata-orizka','Zlatá ořízka'],['mramor','Mramor'],['pod-cepeli','Pod čepelí'],['duoton','Duotón'],['negativ','Negativ'],
     ['devitiuhelnik','Devítiúhelník'],['autor-s-knihou','Autor s knihou'],['napul-kniha','Napůl kniha'],['podpis','Podpis'],['makro','Makro'],['paprsek','Paprsek']];
   var BN = [['b3','blizi-se-rez','Blíží se ŘEŽ'],['b1','rez-se-blizi','Řez se blíží'],['b2','cepel-je-nahore','Čepel je nahoře']];
-  function cis(i){ return String(i + 1).padStart(2, '0'); }
+  var VEN = ['odpadly-roh','prstenec-s-napisem','portret-v-obalce','zlata-orizka','mramor','duoton','negativ'];  // Jakub 28. 9. 2026: z webu pryč
+  P = P.map(function(p, i){ return [p[0], p[1], String(i + 1).padStart(2, '0')]; }).filter(function(p){ return VEN.indexOf(p[0]) < 0; });
+  function cis(i){ return P[i][2]; }
   function nahled(i){ return B + 'p' + cis(i) + '-nahled.jpg'; }
   function png(i){ return B + 'rez-profilovka-' + cis(i) + '-' + P[i][0] + '.png'; }
-  var akt = 12, ban = 0;
+  var akt = Math.max(0, P.map(function(p){ return p[0]; }).indexOf('rez-za-hlavou')), ban = 0;  // výchozí v maketě: 08 ŘEŽ za hlavou
 
   root.innerHTML =
     '<div class="pf-horni">' +
