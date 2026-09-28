@@ -64,6 +64,26 @@ header h1{font-size:clamp(34px,4.8vw,68px);line-height:1.04}
 .li-nahled img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:10px;border:1px solid var(--line)}
 .li-nahled figcaption{margin-top:12px;font-size:13px;color:var(--muted)}
 .ig-obal .nahledy{display:none!important}
+/* pás s listováním: smyčka přes celou šířku, kniha vpravo bez ztmavení, sdělení vlevo na mramoru */
+/* --uvf písmo nadpisu, --uvL levá hrana videa: kniha (v záběru od 19,7 % šířky, tj. 16,2vw) začíná až za sloupcem textu 8,2em */
+.uv-sekce{padding-top:clamp(40px,6vw,88px)}
+.uv{--uvf:clamp(30px,3.6vw,56px);--uvL:calc(max(16px,(100vw - 1200px) / 2) + var(--uvf) * 9 - 16.2vw);--uvB:calc(var(--uvL) + 16.2vw);
+  position:relative;isolation:isolate;overflow:hidden;height:clamp(480px,46.125vw,100svh);display:flex;align-items:flex-end}
+.uv-film{position:absolute;inset:0;z-index:0}
+.uv-film video{position:absolute;top:0;left:var(--uvL);width:82vw;height:100%;object-fit:cover;object-position:50% 50%;display:block;background:#05060A}
+.uv-film:after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to bottom,var(--bg) 0,rgba(10,10,11,0) 14%,rgba(10,10,11,0) 84%,var(--bg) 100%),
+    linear-gradient(to right,var(--bg) 0,var(--bg) var(--uvL),rgba(10,10,11,.92) calc(var(--uvB) - 5vw),rgba(10,10,11,.66) calc(var(--uvB) - 1vw),rgba(10,10,11,0) calc(var(--uvB) + 2.5vw))}
+.uv-txt{position:relative;z-index:2;padding-bottom:clamp(56px,7vw,110px)}
+.uv-txt .eyebrow{margin-bottom:22px}
+.uv-txt h2{max-width:8.2em;font-size:var(--uvf);line-height:1.03;color:rgba(243,243,241,.62)}
+.uv-txt h2 b{display:block;margin-top:.14em;font-weight:800;color:var(--ink)}
+@media (max-width:760px){
+  .uv{height:auto;display:block}
+  .uv-film{position:relative;inset:auto;height:90vw}
+  .uv-film video{left:-30vw;width:160vw}
+  .uv-film:after{background:linear-gradient(to bottom,var(--bg) 0,rgba(10,10,11,0) 12%,rgba(10,10,11,0) 52%,rgba(10,10,11,.85) 80%,var(--bg) 100%)}
+  .uv-txt{margin-top:-12vw;padding-bottom:8px}.uv-txt h2{max-width:none;font-size:clamp(32px,9.4vw,44px)}}
 
 /* ---- sekce ---- */
 section{padding:clamp(64px,9vw,120px) 0 0}
@@ -254,6 +274,19 @@ footer .brand{font-family:var(--h);font-weight:700;font-size:15px;letter-spacing
   <div class="hl odhal"><span class="c">27 s &middot; se zvukem</span><h2>Hlavní video</h2></div>
   <div class="prem-film odhal">
     <video id="hlavniVid" controls playsinline controlslist="nodownload" preload="metadata" poster="/bez-rohu/video/rez-promo-poster-1080.jpg" aria-label="Hlavní video ke knize ŘEŽ"><source src="/bez-rohu/video/rez-promo-1080-web.mp4" type="video/mp4"></video>
+  </div>
+</div></section>
+
+<section id="uvnitr" class="uv-sekce" aria-label="Ukázka z knihy"><div class="uv">
+  <div class="uv-film" aria-hidden="true">
+    <video id="uvVid" muted loop playsinline disablepictureinpicture preload="none" poster="/bez-rohu/video/rez-listovani-smycka-poster.jpg">
+      <source media="(max-width:760px)" src="/bez-rohu/video/rez-listovani-smycka-720.mp4" type="video/mp4">
+      <source src="/bez-rohu/video/rez-listovani-smycka-1080.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="ram uv-txt odhal">
+    <p class="eyebrow">Ukázka z knihy &middot; s.&nbsp;34&ndash;39</p>
+    <h2>Nemusíte číst od začátku. <b>Začněte tím, co pálí</b></h2>
   </div>
 </div></section>
 
@@ -575,6 +608,11 @@ Dalších osm nástrojů najdete v knize. V předprodeji za 595 Kč a přijde v�
   var hf = document.getElementById('heroFilm');
   if (hf && 'IntersectionObserver' in window) new IntersectionObserver(function(z){ z.forEach(function(e){
     if (e.isIntersecting){ var p = hf.play(); if (p && p.catch) p.catch(function(){}); } else hf.pause(); }); }, {threshold:.15}).observe(hf);
+
+  // ---------- pás s listováním: smyčka hraje jen v záběru, při omezeném pohybu zůstane stát poster ----------
+  var uv = document.getElementById('uvVid');
+  if (uv && 'IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) new IntersectionObserver(function(z){ z.forEach(function(e){
+    if (e.isIntersecting){ uv.preload = 'auto'; var p = uv.play(); if (p && p.catch) p.catch(function(){}); } else uv.pause(); }); }, {rootMargin:'200px 0px'}).observe(uv);
 
   // ---------- hlavní video: při příjezdu se na chvíli zastaví scroll a video se samo pustí ----------
   // prohlížeč pustí zvuk bez kliknutí jen někdy; když ho zablokuje, hraje bez zvuku a zvuk naskočí při prvním kliknutí nebo klávese mimo video

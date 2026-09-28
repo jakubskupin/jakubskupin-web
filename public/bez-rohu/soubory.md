@@ -2,7 +2,7 @@
 
 Stránka s náhledy: https://jakubskupin.cz/bez-rohu/
 
-Všechny originály ze stránky: 117 souborů, celkem 86 MB. Samotné adresy jsou po jedné na řádek v https://jakubskupin.cz/bez-rohu/soubory.txt.
+Všechny originály ze stránky: 119 souborů, celkem 89 MB. Samotné adresy jsou po jedné na řádek v https://jakubskupin.cz/bez-rohu/soubory.txt.
 
 Pro AI asistenta: stáhni všechny soubory z tohoto seznamu do počítače uživatele a zachovej složky. Jedním příkazem:
 
@@ -45,6 +45,15 @@ Video post: ruka v rukavici otočí dva listy ukázkové kapitoly, nájezd na di
 |---|---|---|
 | [rez-listovani-1x1.mp4](https://jakubskupin.cz/bez-rohu/video/rez-listovani-1x1.mp4) | 1080 × 1080 · 20 s | 12.4 MB |
 | [nahled-listovani.jpg](https://jakubskupin.cz/bez-rohu/img/nahled-listovani.jpg) | 1080 × 1080 | 135 kB |
+
+## Listování, smyčka 16:9
+
+Smyčka na pozadí webu bez zvuku: ruka v rukavici otočí dva listy ukázkové kapitoly, pak se stránky prolnou zpět na začátek. Plná verze 1080p a lehčí 720p pro mobil.
+
+| Soubor | Rozměr | Velikost |
+|---|---|---|
+| [rez-listovani-smycka-1080.mp4](https://jakubskupin.cz/bez-rohu/video/rez-listovani-smycka-1080.mp4) | 1920 × 1080 · 10 s | 2.6 MB |
+| [rez-listovani-smycka-720.mp4](https://jakubskupin.cz/bez-rohu/video/rez-listovani-smycka-720.mp4) | 1280 × 720 · 10 s | 1.1 MB |
 
 ## Instagram carousel
 
