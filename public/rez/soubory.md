@@ -2,7 +2,7 @@
 
 Stránka s náhledy: https://jakubskupin.cz/rez/
 
-Všechny originály ze stránky: 87 souborů, celkem 80 MB. Samotné adresy jsou po jedné na řádek v https://jakubskupin.cz/rez/soubory.txt.
+Všechny originály ze stránky: 88 souborů, celkem 80 MB. Samotné adresy jsou po jedné na řádek v https://jakubskupin.cz/rez/soubory.txt.
 
 Pro AI agenta: stáhni všechny soubory z tohoto seznamu do počítače uživatele a zachovej složky. Jedním příkazem:
 
@@ -17,7 +17,7 @@ Promo video ke knize, originál pro LinkedIn, a návrh náhledu (thumbnailu).
 | Soubor | Rozměr | Velikost |
 |---|---|---|
 | [rez-hlavni-video-predprodej-11-10.mp4](https://jakubskupin.cz/rez/aktualizace/rez-hlavni-video-predprodej-11-10.mp4) | 1080 × 1080 · 27 s | 23.4 MB |
-| [rez-banner-02-cepel-gilotina.jpg](https://jakubskupin.cz/rez/feed/rez-banner-02-cepel-gilotina.jpg) | 1080 × 1080 | 180 kB |
+| [rez-nahled-hlavni-video-fedra.jpg](https://jakubskupin.cz/rez/aktualizace/rez-nahled-hlavni-video-fedra.jpg) | 1080 × 1080 | 190 kB |
 
 ## Autor a kniha
 
@@ -26,7 +26,7 @@ Druhé video pro LinkedIn (Jan položí knihu, závěr s výzvou k předobjedná
 | Soubor | Rozměr | Velikost |
 |---|---|---|
 | [rez-autor-a-kniha-predprodej-11-10.mp4](https://jakubskupin.cz/rez/aktualizace/rez-autor-a-kniha-predprodej-11-10.mp4) | 1080 × 1080 · 16 s | 5.8 MB |
-| [nahled-autor-a-kniha.jpg](https://jakubskupin.cz/rez/img/nahled-autor-a-kniha.jpg) | 1080 × 1080 | 126 kB |
+| [rez-nahled-autor-a-kniha-fedra.jpg](https://jakubskupin.cz/rez/aktualizace/rez-nahled-autor-a-kniha-fedra.jpg) | 1080 × 1080 | 218 kB |
 
 ## Jan mluví do kamery
 
@@ -44,7 +44,7 @@ Video post: ruka v rukavici otočí dva listy ukázkové kapitoly, nájezd na di
 | Soubor | Rozměr | Velikost |
 |---|---|---|
 | [rez-listovani-predprodej-11-10.mp4](https://jakubskupin.cz/rez/aktualizace/rez-listovani-predprodej-11-10.mp4) | 1080 × 1080 · 20 s | 12.4 MB |
-| [nahled-listovani.jpg](https://jakubskupin.cz/rez/img/nahled-listovani.jpg) | 1080 × 1080 | 135 kB |
+| [rez-nahled-listovani-fedra.jpg](https://jakubskupin.cz/rez/aktualizace/rez-nahled-listovani-fedra.jpg) | 1080 × 1080 | 188 kB |
 
 ## Listování, smyčka 16:9
 
@@ -186,7 +186,7 @@ Bannery 1:1 do feedu, původní verze.
 
 Stejné soubory zabalené po sekcích, když je jednodušší stáhnout pár archivů.
 
-- Jen aktualizace 29. 9.: [rez-aktualizace-29-9.zip](https://jakubskupin.cz/rez/aktualizace/rez-aktualizace-29-9.zip) · 42.3 MB
+- Jen aktualizace 29. 9.: [rez-aktualizace-29-9.zip](https://jakubskupin.cz/rez/aktualizace/rez-aktualizace-29-9.zip) · 42.9 MB
 - Photoshoot: [rez-photoshoot.zip](https://jakubskupin.cz/rez/zip/rez-photoshoot.zip) · 982 kB
 - Instagram carousel: [rez-carousel.zip](https://jakubskupin.cz/rez/zip/rez-carousel.zip) · 1.0 MB
 - LinkedIn profil: [rez-linkedin-profil.zip](https://jakubskupin.cz/rez/profil/rez-linkedin-profil.zip) · 7.0 MB
