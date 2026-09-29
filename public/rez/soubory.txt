@@ -1,11 +1,11 @@
 https://jakubskupin.cz/rez/aktualizace/rez-hlavni-video-predprodej-11-10.mp4
-https://jakubskupin.cz/rez/feed/rez-banner-02-cepel-gilotina.jpg
+https://jakubskupin.cz/rez/aktualizace/rez-nahled-hlavni-video-fedra.jpg
 https://jakubskupin.cz/rez/aktualizace/rez-autor-a-kniha-predprodej-11-10.mp4
-https://jakubskupin.cz/rez/img/nahled-autor-a-kniha.jpg
+https://jakubskupin.cz/rez/aktualizace/rez-nahled-autor-a-kniha-fedra.jpg
 https://jakubskupin.cz/rez/video/rez-lipsync-cta-1x1.mp4
 https://jakubskupin.cz/rez/video/rez-lipsync-3d-1x1.mp4
 https://jakubskupin.cz/rez/aktualizace/rez-listovani-predprodej-11-10.mp4
-https://jakubskupin.cz/rez/img/nahled-listovani.jpg
+https://jakubskupin.cz/rez/aktualizace/rez-nahled-listovani-fedra.jpg
 https://jakubskupin.cz/rez/video/rez-listovani-smycka-1080.mp4
 https://jakubskupin.cz/rez/video/rez-listovani-smycka-720.mp4
 https://jakubskupin.cz/rez/img/ai-generated-velky.png
@@ -47,6 +47,7 @@ https://jakubskupin.cz/rez/aktualizace/rez-banner-22-rozhodovaci-diagram-fedra.j
 https://jakubskupin.cz/rez/aktualizace/rez-banner-34-knihu-v-rukavickach-fedra.jpg
 https://jakubskupin.cz/rez/aktualizace/rez-banner-38-pre-mortem-naostro-fedra.jpg
 https://jakubskupin.cz/rez/feed/rez-banner-01-pred-sekem-gilotina.jpg
+https://jakubskupin.cz/rez/feed/rez-banner-02-cepel-gilotina.jpg
 https://jakubskupin.cz/rez/feed/rez-banner-03-kniha-bez-rohu.jpg
 https://jakubskupin.cz/rez/feed/rez-banner-04-podepsana-predprodej.jpg
 https://jakubskupin.cz/rez/feed/rez-banner-06-rozriznute-rez.jpg
