@@ -1,6 +1,7 @@
 <!doctype html><html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow, noarchive"><meta name="referrer" content="no-referrer">
 <title>ŘEŽ: podklady ke kampani | Jakub Skupin</title>
 <link rel="alternate" type="text/markdown" href="/rez/soubory.md" title="Seznam všech souborů ke stažení">
+<link rel="alternate" type="text/markdown" href="/rez/aktualizace.md" title="Jen aktualizované soubory (29. 9.)">
 <meta name="description" content="Video, fotky, carousel a bannery ke knize ŘEŽ Jana Řezáče.">
 <meta property="og:type" content="website"><meta property="og:locale" content="cs_CZ"><meta property="og:site_name" content="Jakub Skupin">
 <meta property="og:title" content="ŘEŽ: podklady ke kampani">
@@ -233,6 +234,37 @@ footer .ram{display:flex;justify-content:space-between;align-items:center;gap:20
 footer .soubory{color:var(--muted);text-underline-offset:3px;transition:color .2s}footer .soubory:hover{color:var(--ink)}
 footer .brand{font-family:var(--h);font-weight:700;font-size:15px;letter-spacing:-.02em;color:var(--ink);text-decoration:none}
 
+/* aktualizace 29. 9. 2026: štítek u nových verzí, blok nových bannerů, spodní lišta se stažením jen aktualizací */
+.akt-stitek{display:inline-flex;align-items:center;gap:7px;padding:6px 12px 6px 10px;border-radius:999px;background:#dc5b6f;color:#fff;font-family:var(--f);font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;line-height:1;white-space:nowrap;vertical-align:middle}
+.akt-stitek:before{content:"";width:6px;height:6px;border-radius:50%;background:#fff}
+.li-rh .akt-stitek{margin-left:12px;position:relative;top:-3px}
+.li-rh small.akt-pozn{color:#e58a99}
+.hl .akt-stitek{order:-1}
+.akt-bannery{margin:0 0 clamp(28px,4vw,40px)}
+.akt-bannery .akt-hlava{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:0 0 18px;font-size:13px;color:var(--muted)}
+.akt-mrizka{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.akt-mrizka figure{margin:0;position:relative}
+.akt-mrizka img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:10px;border:1px solid var(--line)}
+.akt-mrizka figcaption{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px;font-size:13px;color:var(--muted)}
+.akt-mrizka figcaption a{color:var(--ink);text-underline-offset:3px;white-space:nowrap}
+.akt-mrizka figcaption .akt-stitek{padding:4px 8px 4px 7px;font-size:10px;gap:5px;margin-right:6px}.akt-mrizka figcaption .akt-stitek:before{width:5px;height:5px}
+.akt-mrizka figcaption>span{display:flex;align-items:center;flex-wrap:wrap;gap:4px 0}
+.akt-predel{display:flex;align-items:center;gap:16px;margin:clamp(36px,5vw,56px) 0 clamp(28px,4vw,40px);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-3)}
+.akt-predel:before,.akt-predel:after{content:"";flex:1;height:1px;background:var(--line)}
+@media (max-width:760px){.akt-mrizka{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.akt-predel{font-size:10.5px;letter-spacing:.1em;gap:10px;text-align:center}}
+body{padding-bottom:84px}
+.akt-lista{position:fixed;left:0;right:0;bottom:0;z-index:45;background:rgba(14,14,16,.9);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid #dc5b6f66}
+.akt-lista .akt-in{max-width:var(--w);margin:0 auto;padding:14px clamp(16px,4vw,32px);display:flex;align-items:center;gap:18px}
+.akt-lista .akt-co{flex:1;min-width:0;font-size:14px;color:var(--ink);line-height:1.35}
+.akt-lista .akt-co small{display:block;color:var(--muted);font-size:12.5px}
+.akt-lista .akt-zip{display:inline-flex;align-items:center;gap:10px;padding:12px 20px;border-radius:999px;background:var(--ink);color:var(--bg);font-weight:700;font-size:14px;text-decoration:none;white-space:nowrap;transition:opacity .2s}
+.akt-lista .akt-zip:hover{opacity:.88}
+.akt-lista .akt-zip small{font-weight:500;color:#55554f;font-size:12px}
+.akt-lista .akt-zip svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.akt-lista .akt-ai{font-size:13px;color:var(--muted);text-underline-offset:3px;white-space:nowrap}
+.akt-lista .akt-ai:hover{color:var(--ink)}
+@media (max-width:760px){body{padding-bottom:82px}.akt-lista .akt-in{gap:12px;padding:10px 16px calc(10px + env(safe-area-inset-bottom))}.akt-lista>.akt-in>.akt-stitek,.akt-lista .akt-co{display:none}.akt-lista .akt-zip{flex:1;justify-content:center;padding:12px 14px;font-size:13.5px}.akt-lista .akt-ai .dl-cele{display:none}}
+@media (min-width:761px){.akt-lista .akt-ai .dl-kratke{display:none}}
 </style>
 <link rel="stylesheet" href="/rez/profil/profil.css">
 <link rel="stylesheet" href="/rez/feed/feed.css">
@@ -253,15 +285,15 @@ footer .brand{font-family:var(--h);font-weight:700;font-size:15px;letter-spacing
 
 <main>
 <section id="hlavni" class="prem"><div class="ram">
-  <div class="hl odhal"><span class="c">27 s &middot; se zvukem</span><h2>Hlavní video</h2></div>
+  <div class="hl odhal"><span class="c">27 s &middot; se zvukem</span><h2>Hlavní video</h2><span class="akt-stitek">Aktualizováno 29.&nbsp;9.</span></div>
   <div class="prem-film odhal">
-    <video id="hlavniVid" controls playsinline controlslist="nodownload" preload="metadata" poster="/rez/video/rez-promo-poster-1080.jpg" aria-label="Hlavní video ke knize ŘEŽ"><source src="/rez/video/rez-promo-1080-web.mp4" type="video/mp4"></video>
+    <video id="hlavniVid" controls playsinline controlslist="nodownload" preload="metadata" poster="/rez/video/rez-hlavni-v22-poster-1080.jpg" aria-label="Hlavní video ke knize ŘEŽ"><source src="/rez/video/rez-hlavni-v22-1080-web.mp4" type="video/mp4"></video>
   </div>
 </div></section>
 
 <section id="video"><div class="ram">
   <div class="hl odhal"><span class="c">01</span><h2>Takhle na LinkedInu</h2></div>
-  <div class="li-radek odhal"><h3 class="li-rh">Hlavní video</h3>
+  <div class="li-radek odhal"><h3 class="li-rh">Hlavní video<span class="akt-stitek">Aktualizováno 29.&nbsp;9.</span><small class="akt-pozn">Nová verze: písmo Fedra, předprodej do 11.&nbsp;října, štítek AI</small></h3>
   <div class="li-dvojice">
   <div class="li-stred">
     <article class="li-karta">
@@ -283,8 +315,8 @@ Který projekt byste dnes odřízli?
 
 <a href="https://houseofrezac.com/publikujeme/kniha-rez" target="_blank" rel="noopener">houseofrezac.com/publikujeme/kniha-rez</a></span></div>
       <div class="li-mwrap">
-        <video class="li-media" id="livid" playsinline muted loop preload="metadata" poster="/rez/video/rez-promo-poster.jpg" aria-label="Promo video knihy ŘEŽ 1:1">
-          <source src="/rez/video/rez-promo-web.mp4" type="video/mp4">
+        <video class="li-media" id="livid" playsinline muted loop preload="metadata" poster="/rez/video/rez-hlavni-v22-poster.jpg" aria-label="Promo video knihy ŘEŽ 1:1">
+          <source src="/rez/video/rez-hlavni-v22-web.mp4" type="video/mp4">
         </video>
         <span class="li-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg></span>
         <button type="button" class="li-zvuk" aria-pressed="false" aria-label="Zapnout zvuk">
@@ -308,7 +340,7 @@ Který projekt byste dnes odřízli?
     <figure><img src="/rez/feed/rez-banner-02-cepel-gilotina.jpg" width="1080" height="1080" loading="lazy" alt="Návrh náhledu: čepel gilotiny nad knihou ŘEŽ, text Co uříznete?"><figcaption>Návrh náhledu (thumbnail) k videu</figcaption></figure>
   </div>
   </div></div>
-  <div class="li-radek odhal"><h3 class="li-rh">Autor a kniha</h3>
+  <div class="li-radek odhal"><h3 class="li-rh">Autor a kniha<span class="akt-stitek">Aktualizováno 29.&nbsp;9.</span><small class="akt-pozn">Nová verze: písmo Fedra, předprodej do 11.&nbsp;října, štítek AI</small></h3>
   <div class="li-dvojice">
   <div class="li-stred">
     <article class="li-karta">
@@ -317,7 +349,7 @@ Který projekt byste dnes odřízli?
         <div class="li-kdo"><b>Jan Řezáč</b><span>House of Řezáč</span><span>3 h &middot; &#127760;&#xFE0E;</span></div>
         <div class="li-tri" aria-hidden="true">&middot;&middot;&middot;</div>
       </div>
-      <div class="li-text">Předprodej knihy ŘEŽ běží do poloviny října.
+      <div class="li-text">Předprodej knihy ŘEŽ běží do 11.&nbsp;října.
 Každý výtisk vám pošlu podepsaný.<button type="button" class="li-vice" aria-expanded="false">&hellip;více</button><span class="li-zbytek">
 
 Uvnitř je 9 strategických nástrojů pro rozhodování v době rychlých změn. Od letových hladin cílů přes Wardleyho mapy až po designové sondy.
@@ -327,8 +359,8 @@ V předprodeji stojí kniha 595 Kč, potom 795 Kč. S videokurzem 2 894 Kč.
 Předobjednávejte tady:
 <a href="https://houseofrezac.com/publikujeme/kniha-rez" target="_blank" rel="noopener">houseofrezac.com/publikujeme/kniha-rez</a></span></div>
       <div class="li-mwrap">
-        <video class="li-media" playsinline muted loop preload="metadata" poster="/rez/video/rez-post2-poster.jpg" aria-label="Jan Řezáč položí knihu ŘEŽ na podstavec, výzva k předobjednávce">
-          <source src="/rez/video/rez-post2-web.mp4" type="video/mp4">
+        <video class="li-media" playsinline muted loop preload="metadata" poster="/rez/video/rez-autor-v2-poster.jpg" aria-label="Jan Řezáč položí knihu ŘEŽ na podstavec, výzva k předobjednávce">
+          <source src="/rez/video/rez-autor-v2-web.mp4" type="video/mp4">
         </video>
         <span class="li-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg></span>
         <button type="button" class="li-zvuk" aria-pressed="false" aria-label="Zapnout zvuk">
@@ -427,7 +459,7 @@ Kniha je v předprodeji a přijde vám podepsaná.
     </article>
   </div>
   </div></div>
-  <div class="li-radek odhal"><h3 class="li-rh">Listování v knize</h3>
+  <div class="li-radek odhal"><h3 class="li-rh">Listování v knize<span class="akt-stitek">Aktualizováno 29.&nbsp;9.</span><small class="akt-pozn">Nová verze: písmo Fedra, předprodej do 11.&nbsp;října, štítek AI</small></h3>
   <div class="li-dvojice">
   <div class="li-stred">
     <article class="li-karta">
@@ -449,8 +481,8 @@ Nové CRM, nový web, nová kampaň. To jsou výstupy. Práce skončí &bdquo;ú
 Dalších osm nástrojů najdete v knize. V předprodeji za 595 Kč a přijde vám podepsaná:
 <a href="https://houseofrezac.com/publikujeme/kniha-rez" target="_blank" rel="noopener">houseofrezac.com/publikujeme/kniha-rez</a></span></div>
       <div class="li-mwrap">
-        <video class="li-media" playsinline muted loop preload="metadata" poster="/rez/video/rez-listovani-poster.jpg" aria-label="Ruka v bílé rukavici listuje knihou ŘEŽ, diagram letových hladin cílů">
-          <source src="/rez/video/rez-listovani-web.mp4" type="video/mp4">
+        <video class="li-media" playsinline muted loop preload="metadata" poster="/rez/video/rez-listovani-v5-poster.jpg" aria-label="Ruka v bílé rukavici listuje knihou ŘEŽ, diagram letových hladin cílů">
+          <source src="/rez/video/rez-listovani-v5-web.mp4" type="video/mp4">
         </video>
         <span class="li-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg></span>
         <button type="button" class="li-zvuk" aria-pressed="false" aria-label="Zapnout zvuk">
@@ -545,6 +577,11 @@ Dalších osm nástrojů najdete v knize. V předprodeji za 595 Kč a přijde v�
 <!-- sekce Bannery do feedu: obsah staví /feed/feed.js, obrázky a styl v /feed/ (thumbnaily/web_feed.py) -->
 <section id="feed"><div class="ram">
   <div class="hl odhal"><span class="c">06</span><h2>Bannery do feedu</h2></div>
+  <div class="akt-bannery odhal" id="aktBannery">
+    <div class="akt-hlava"><span class="akt-stitek">Aktualizováno 29.&nbsp;9.</span><span>Bannery, které Jan vybral, v nové verzi písmem Fedra</span></div>
+    <div class="akt-mrizka"><figure><img src="/rez/aktualizace/rez-banner-34-knihu-v-rukavickach-fedra-nahled.jpg" width="540" height="540" loading="lazy" alt="Banner 34 Knihu v rukavičkách, nová verze písmem Fedra"><figcaption><span><span class="akt-stitek">Nová verze</span> 34 &middot; Knihu v rukavičkách</span><a href="/rez/aktualizace/rez-banner-34-knihu-v-rukavickach-fedra.jpg" download>Stáhnout</a></figcaption></figure><figure><img src="/rez/aktualizace/rez-banner-38-pre-mortem-naostro-fedra-nahled.jpg" width="540" height="540" loading="lazy" alt="Banner 38 Pre-mortem naostro, nová verze písmem Fedra"><figcaption><span><span class="akt-stitek">Nová verze</span> 38 &middot; Pre-mortem naostro</span><a href="/rez/aktualizace/rez-banner-38-pre-mortem-naostro-fedra.jpg" download>Stáhnout</a></figcaption></figure><figure><img src="/rez/aktualizace/rez-banner-22-rozhodovaci-diagram-fedra-nahled.jpg" width="540" height="540" loading="lazy" alt="Banner 22 Chystáte nový projekt?, nová verze písmem Fedra"><figcaption><span><span class="akt-stitek">Nová verze</span> 22 &middot; Chystáte nový projekt?</span><a href="/rez/aktualizace/rez-banner-22-rozhodovaci-diagram-fedra.jpg" download>Stáhnout</a></figcaption></figure><figure><img src="/rez/aktualizace/rez-banner-14-uhel-pohledu-fedra-nahled.jpg" width="540" height="540" loading="lazy" alt="Banner 14 Změňte úhel pohledu, nová verze písmem Fedra"><figcaption><span><span class="akt-stitek">Nová verze</span> 14 &middot; Změňte úhel pohledu</span><a href="/rez/aktualizace/rez-banner-14-uhel-pohledu-fedra.jpg" download>Stáhnout</a></figcaption></figure></div>
+  </div>
+  <div class="akt-predel">Níž jsou původní verze, bez aktualizace</div>
   <div class="mk odhal" id="mk">
     <div class="mk-par">
       <div><p class="mk-stitek">LinkedIn &middot; příspěvek Jana</p>
@@ -750,4 +787,5 @@ Devět strategických nástrojů pro dobu rychlých změn. V předprodeji za 595
 </script>
 <script src="/rez/profil/profil.js" defer></script>
 <script src="/rez/feed/feed.js" defer></script>
+<div class="akt-lista" role="region" aria-label="Aktualizace 29. 9."><div class="akt-in"><span class="akt-stitek">Aktualizováno 29.&nbsp;9.</span><div class="akt-co">3 videa a 4 bannery v nové verzi<small>Písmo Fedra, předprodej do 11.&nbsp;října, štítek AI ve videích</small></div><a class="akt-zip" href="/rez/aktualizace/rez-aktualizace-29-9.zip" download><svg viewBox="0 0 24 24"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19.5h14"/></svg>Stáhnout jen aktualizace 29.&nbsp;9. <small>ZIP &middot; 42&nbsp;MB</small></a><a class="akt-ai" href="/rez/aktualizace.md"><span class="dl-cele">Seznam pro AI agenta</span><span class="dl-kratke">Pro AI</span></a></div></div>
 </body></html>
