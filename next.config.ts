@@ -23,6 +23,7 @@ const nextConfig: NextConfig = {
       { source: "/posedla", destination: "/posedla/index.html" },
       { source: "/lindeblad", destination: "/lindeblad/index.html" },
       { source: "/web-ad", destination: "/web-ad/index.html" },
+      { source: "/trade-funding", destination: "/trade-funding/index.html" },
     ];
   },
 };
