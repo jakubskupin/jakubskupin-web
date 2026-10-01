@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fotky bez focení | Jakub Skupin</title>
+<meta name="description" content="Profesionální portréty z fotek, které už máte. Pro LinkedIn, web i média, pro jednotlivce i týmy. Bez fotografa, bez ateliéru a bez svolávání.">
+<meta name="robots" content="noindex">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:site_name" content="Jakub Skupin">
+<meta property="og:title" content="Fotky bez focení">
+<meta property="og:description" content="Pošlete 3 až 5 fotek z mobilu. Dostanete portréty na LinkedIn, web i do médií. A pořád na nich budete vy.">
+<meta property="og:url" content="https://jakubskupin.cz/fotky/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0A0A0B; --bg-2:#121214; --card:#161618;
+  --text:#F3F3F1; --text-2:#9C9C98; --text-3:#8A8A86;
+  --border:#26262A; --line:#1D1D20;
+  --h:'Syne',sans-serif; --b:'Manrope',ui-sans-serif,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--bg);overflow-x:clip}
+body{margin:0;overflow-x:clip;background:var(--bg);color:var(--text);font-family:var(--b);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;padding-bottom:80px}
+a{color:inherit}
+img{max-width:100%;height:auto;display:block}
+.w{max-width:1120px;margin:0 auto;padding-inline:20px;position:relative;z-index:1}
+@media(min-width:768px){.w{padding-inline:32px}}
+h1,h2,h3{font-family:var(--h);font-weight:700;letter-spacing:-.03em;margin:0;text-wrap:balance}
+h1{font-size:clamp(34px,5.6vw,60px);line-height:1.04}
+h2{font-size:clamp(24px,3.4vw,35px);line-height:1.12}
+p{margin:0}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--text-3)}
+b,strong{font-weight:600;color:var(--text)}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+.grain{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+/* štítek pracovní verze: zástupné fotky, než budou výstupy */
+.zastupce-fix{position:fixed;top:84px;right:20px;z-index:60;width:88px;height:88px;border-radius:50%;
+  background:var(--text);color:var(--bg);display:flex;align-items:center;justify-content:center;text-align:center;
+  font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;line-height:1.25;
+  box-shadow:0 4px 18px rgba(0,0,0,.5);pointer-events:none}
+.zastupce-fix span{transform:rotate(-12deg);display:block}
+@media(max-width:720px){.zastupce-fix{width:66px;height:66px;font-size:8px;top:66px;right:12px}}
+
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:12px 0;font-size:13px;color:var(--text-2)}
+.top a{padding:10px 0;text-decoration:none;color:var(--text-2)}.top a:hover{color:var(--text)}
+.top .brand{font-family:var(--h);font-weight:700;letter-spacing:-.02em;color:var(--text);font-size:15px}
+.top nav{display:flex;gap:22px}
+
+/* ---- hero: text vlevo, posuvník před/po vpravo (asymetrie) ---- */
+.hero{display:grid;gap:36px;padding-block:28px 40px;align-items:center}
+@media(min-width:900px){.hero{grid-template-columns:1.1fr .9fr;gap:56px;padding-block:56px 72px}}
+.hero .eyebrow{margin-bottom:18px}
+.hero h1{margin-bottom:20px;max-width:15ch}
+.hero .lead{max-width:46ch;font-size:17px;color:rgba(243,243,241,.82)}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:center;margin-top:28px}
+.btn{display:inline-block;font-family:var(--h);font-size:14px;font-weight:700;letter-spacing:-.01em;text-decoration:none;
+  padding:14px 30px;border-radius:999px;background:var(--text);color:var(--bg);transition:opacity .25s ease,transform .25s ease,box-shadow .25s ease}
+.btn:hover{opacity:.9;transform:translateY(-1px);box-shadow:0 10px 30px rgba(243,243,241,.12)}
+.lnk{color:var(--text-2);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:2px;font-size:14px}
+.lnk:hover{color:var(--text);border-bottom-color:var(--text-3)}
+
+/* posuvník před/po (sdílený hero i pokožka) */
+.ba{position:relative;border-radius:18px;overflow:hidden;background:#000;border:1px solid var(--border);
+  aspect-ratio:4/5;user-select:none;touch-action:pan-y;box-shadow:0 30px 80px rgba(0,0,0,.55)}
+.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%}
+.ba .po{clip-path:inset(0 0 0 var(--x,50%))}
+.ba .hrana{position:absolute;top:0;bottom:0;left:var(--x,50%);width:2px;background:var(--text);transform:translateX(-1px);pointer-events:none}
+.ba .hrana::after{content:"";position:absolute;top:50%;left:50%;width:38px;height:38px;border-radius:50%;
+  transform:translate(-50%,-50%);background:var(--text);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230A0A0B' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 6l-5 6 5 6M15 6l5 6-5 6'/%3E%3C/svg%3E");
+  background-size:20px;background-position:center;background-repeat:no-repeat}
+.ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+.ba .tag{position:absolute;top:12px;background:rgba(10,10,11,.72);color:var(--text);font-size:11px;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;padding:5px 10px;border-radius:999px;backdrop-filter:blur(4px);pointer-events:none}
+.ba .tag.l{left:12px}.ba .tag.r{right:12px}
+.cap{margin-top:10px;font-size:13px;color:var(--text-3)}
+
+section{padding-block:60px}
+@media(min-width:768px){section{padding-block:92px}}
+.num{font-family:var(--h);font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--text-3);margin-bottom:12px}
+.sechead{max-width:62ch;margin-bottom:34px}
+.sechead p{margin-top:14px;color:var(--text-2)}
+.pivot{margin-top:14px;font-size:clamp(17px,2vw,20px);line-height:1.5;color:var(--text-2);max-width:44ch}
+.pivot strong{color:var(--text);font-weight:700}
+
+/* bolesti: dvě široké, dvě úzké (asymetrie) */
+.bolesti{display:grid;gap:14px}
+@media(min-width:820px){.bolesti{grid-template-columns:1.25fr 1fr;gap:16px}.bolesti .b:nth-child(4n+2),.bolesti .b:nth-child(4n+3){}}
+.b{border:1px solid var(--border);border-radius:14px;padding:22px 22px 20px;background:var(--bg-2)}
+.b h3{font-size:18px;line-height:1.3;letter-spacing:-.02em;margin-bottom:8px}
+.b p{font-size:14.5px;color:var(--text-2)}
+
+/* postup */
+.kroky{display:grid;gap:18px;counter-reset:k}
+@media(min-width:900px){.kroky{grid-template-columns:repeat(4,1fr)}}
+.krok{background:var(--card);border:1px solid var(--border);border-radius:4px 18px 18px 18px;padding:22px 20px;position:relative;transition:transform .3s ease,border-color .3s ease}
+.krok:hover{transform:translateY(-3px);border-color:#3a3a40}
+.krok .k{font-family:var(--h);font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--text-3)}
+.krok h3{font-size:17px;letter-spacing:-.02em;margin:10px 0 8px}
+.krok p{font-size:14px;color:var(--text-2);line-height:1.55}
+
+/* devět světů */
+.svety{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media(min-width:900px){.svety{gap:12px}}
+.svet{position:relative;aspect-ratio:4/5;border-radius:10px;overflow:hidden;border:1px solid var(--border);background:#111}
+.svet img{width:100%;height:100%;object-fit:cover}
+.svet .g{position:absolute;inset:0}
+.svet span{position:absolute;left:8px;bottom:8px;right:8px;font-size:11px;font-weight:600;letter-spacing:.06em;color:var(--text);
+  text-shadow:none;background:rgba(10,10,11,.6);border-radius:6px;padding:4px 7px;width:max-content;max-width:calc(100% - 16px)}
+@media(max-width:520px){.svet span{font-size:10.5px;padding:3px 6px;white-space:normal;line-height:1.25}}
+
+/* maketa LinkedIn profilu (světlý / tmavý režim) */
+.lip{margin-top:46px;display:grid;gap:22px}
+@media(min-width:900px){.lip{grid-template-columns:1.3fr 1fr;gap:28px;align-items:center}}
+.lip-prepinac{display:inline-flex;border:1px solid var(--border);border-radius:999px;padding:3px;margin-bottom:14px}
+.lip-prepinac button{background:none;border:0;color:var(--text-2);font:600 12.5px var(--b);padding:7px 14px;border-radius:999px;cursor:pointer}
+.lip-prepinac button[aria-pressed="true"]{background:var(--text);color:var(--bg)}
+.lic{--pk:#fff;--pr:#f4f2ee;--pt:rgba(0,0,0,.9);--ps:rgba(0,0,0,.6);--pb:rgba(0,0,0,.08);
+  background:var(--pr);border-radius:14px;padding:18px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;letter-spacing:0}
+.lic[data-rezim="tmavy"]{--pk:#1b1f23;--pr:#000;--pt:rgba(255,255,255,.9);--ps:rgba(255,255,255,.6);--pb:rgba(255,255,255,.12)}
+.lic .karta{background:var(--pk);border-radius:8px;overflow:hidden;box-shadow:0 0 0 1px var(--pb)}
+.lic .banner{aspect-ratio:4/1;background:linear-gradient(110deg,#0d0d10 0%,#1d1d22 55%,#2a2a31 100%);position:relative}
+.lic .banner b{position:absolute;right:6%;top:50%;transform:translateY(-50%);font-family:var(--h);color:#F3F3F1;font-size:clamp(13px,2.1vw,22px);letter-spacing:-.02em}
+.lic .av{width:19%;aspect-ratio:1;border-radius:50%;overflow:hidden;margin:-11.5% 0 0 4%;border:3px solid var(--pk);position:relative;background:#222}
+.lic .av img{width:100%;height:100%;object-fit:cover;object-position:center 20%}
+.lic .tx{padding:8px 4% 18px}
+.lic .nm{font-size:clamp(16px,2vw,21px);font-weight:600;color:var(--pt)}
+.lic .hl{font-size:13px;color:var(--pt);margin-top:2px}
+.lic .lo{font-size:12px;color:var(--ps);margin-top:4px}
+.male{display:flex;gap:18px;align-items:flex-end;margin-top:16px;padding:14px 16px;background:var(--pk);border-radius:8px;box-shadow:0 0 0 1px var(--pb)}
+.male figure{margin:0;text-align:center;font-size:11px;color:var(--ps)}
+.male .k{border-radius:50%;overflow:hidden;margin:0 auto 6px;background:#222}
+.male .k img{width:100%;height:100%;object-fit:cover;object-position:center 20%}
+.lip .vysvetleni h3{font-size:clamp(19px,2.4vw,23px);letter-spacing:-.02em;margin-bottom:10px}
+.lip .vysvetleni p{color:var(--text-2);font-size:15.5px}
+.lip .vysvetleni p+p{margin-top:12px}
+
+/* pokožka: posuvník + výřezy */
+.kuze{display:grid;gap:24px}
+@media(min-width:900px){.kuze{grid-template-columns:1fr 1fr;gap:36px;align-items:start}}
+.kuze .ba{aspect-ratio:1}
+.zony{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.zony button{background:none;border:1px solid var(--border);color:var(--text-2);font:600 12.5px var(--b);padding:8px 14px;border-radius:999px;cursor:pointer;transition:color .2s,border-color .2s}
+.zony button[aria-pressed="true"]{color:var(--bg);background:var(--text);border-color:var(--text)}
+.kuze ul{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:10px}
+.kuze li{position:relative;padding-left:18px;color:var(--text-2);font-size:15px}
+.kuze li::before{content:"";position:absolute;left:0;top:10px;width:6px;height:6px;border-radius:50%;background:var(--text-3)}
+
+/* použití */
+.pouziti{display:grid;gap:12px}
+@media(min-width:760px){.pouziti{grid-template-columns:repeat(2,1fr);gap:14px}}
+@media(min-width:1040px){.pouziti{grid-template-columns:repeat(3,1fr)}}
+.pz{border:1px solid var(--border);border-radius:12px;padding:18px 20px;background:var(--bg-2);transition:border-color .3s ease,transform .3s ease}
+.pz:hover{border-color:#3a3a40;transform:translateY(-2px)}
+.pz b{display:block;font-family:var(--h);font-size:17px;letter-spacing:-.02em;margin-bottom:6px}
+.pz p{font-size:14.5px;color:var(--text-2)}
+.pz.siroke{grid-column:1/-1;display:grid;gap:6px}
+@media(min-width:760px){.pz.siroke{grid-template-columns:240px 1fr;align-items:baseline}}
+
+/* ceník (vzor /le-premier) */
+.cenik{margin-top:34px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(290px,100%),1fr));gap:20px}
+.pcard{position:relative;background:var(--card);border:1px solid var(--border);border-radius:24px;padding:30px;transition:border-color .3s ease,transform .3s ease;min-width:0;display:flex;flex-direction:column}
+.pcard:hover{border-color:#CDCBC5;transform:translateY(-2px)}
+.pcard.hlavni{border-color:#5a5a60;box-shadow:0 20px 60px rgba(243,243,241,.05)}
+.pcard-clip{position:absolute;inset:0;overflow:hidden;border-radius:24px;pointer-events:none}
+.pcard-ribbon{position:absolute;right:-42px;top:20px;transform:rotate(45deg);background:var(--text);color:var(--bg);padding:4px 48px;font-size:9px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+.pcard-kicker{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);margin-bottom:12px;padding-right:72px}
+.pcard-price{font-family:var(--h);font-weight:700;font-size:36px;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums;white-space:nowrap;margin-bottom:6px}
+.pcard-pro{font-size:13.5px;color:var(--text-2);margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid var(--border)}
+.pcard ul{list-style:none;margin:0 0 20px;padding:0;display:flex;flex-direction:column;gap:10px}
+.pcard li{position:relative;padding-left:18px;font-size:13.5px;line-height:1.45}
+.pcard li::before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:50%;background:var(--text-3)}
+.pcard-extra{margin-top:auto;font-size:13px;line-height:1.5;color:var(--text-3);border-top:1px solid var(--border);padding-top:14px}
+.pcard-extra a{color:var(--text-2)}
+.partner{margin-top:22px;border:1px dashed var(--border);border-radius:14px;padding:18px 20px;color:var(--text-2);font-size:15px;max-width:76ch}
+.partner b{color:var(--text)}
+
+/* co odpadá */
+.odplist{margin-top:34px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:26px 32px}
+.odp h3{font-size:18px;line-height:1.35;letter-spacing:-.01em;margin:0 0 8px}
+.odp p{font-size:14px;line-height:1.55;color:var(--text-2)}
+
+/* otázky */
+.faq{max-width:780px}
+.faq details{border-bottom:1px solid var(--border)}
+.faq summary{list-style:none;cursor:pointer;padding:20px 36px 20px 0;font-family:var(--h);font-size:17.5px;letter-spacing:-.02em;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";position:absolute;right:6px;top:50%;width:10px;height:10px;border-right:2px solid var(--text-3);border-bottom:2px solid var(--text-3);transform:translateY(-70%) rotate(45deg);transition:transform .25s ease}
+.faq details[open] summary::after{transform:translateY(-30%) rotate(225deg)}
+.faq details p{padding:0 0 20px;color:var(--text-2);font-size:15.5px;max-width:64ch}
+
+.closing{text-align:center}
+.closing h2{font-size:clamp(30px,4vw,46px);max-width:20ch;margin:0 auto 18px}
+.closing p{color:var(--text-2);margin:0 auto 30px;max-width:52ch}
+.closing .dalsi{margin-top:26px;font-size:14px;color:var(--text-3)}
+.closing .dalsi a{color:var(--text-2)}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="zastupce-fix" aria-label="Pracovní verze se zástupnými fotkami"><span>Pracovní<br>verze</span></div>
+
+<div class="w"><div class="top">
+  <a class="brand" href="/">Jakub Skupin</a>
+  <nav><a href="#ukazka">Ukázka</a><a href="#cenik">Ceník</a><a href="#kontakt">Kontakt</a></nav>
+</div></div>
+
+<header class="w hero">
+  <div>
+    <div class="eyebrow">Fotky bez focení · portréty pro LinkedIn, web a média</div>
+    <h1>Profesionální portréty z&nbsp;fotek, které už máte</h1>
+    <p class="lead">Pošlete 3 až 5 fotek z mobilu. Do tří pracovních dnů máte portréty na LinkedIn, na web i pro novináře. Bez fotografa, bez ateliéru a bez svolávání týmu. A&nbsp;pořád jste na nich vy.</p>
+    <div class="ctas">
+      <a class="btn" href="#kontakt">Poslat fotky</a>
+      <a class="lnk" href="#cenik">Ceník od 5&nbsp;900&nbsp;Kč</a>
+    </div>
+  </div>
+  <figure style="margin:0">
+    <div class="ba" style="--x:50%">
+      <img src="/fotky/assets/zastupce-pred.jpg" alt="Původní fotka z webkamery: šedé pozadí, sluchátka, ploché světlo" style="object-position:center 42%">
+      <img class="po" src="/fotky/assets/zastupce-po.jpg" alt="Upravený portrét: tmavé pozadí, měkké boční světlo">
+      <div class="hrana"></div>
+      <span class="tag l">Z mobilu</span><span class="tag r">Po úpravě</span>
+      <input type="range" min="0" max="100" value="50" aria-label="Posuvník před a po">
+    </div>
+    <figcaption class="cap">Zástupné fotky. Skutečný výsledek z této fotky doplním po prvním běhu.</figcaption>
+  </figure>
+</header>
+
+<section class="w" id="proc">
+  <div class="num rv">01 · Proč se to odkládá</div>
+  <div class="sechead rv">
+    <h2>Nová fotka se pořád odkládá</h2>
+    <p class="pivot">Focení chce termín, fotografa a půl dne. <strong>Fotky z mobilu máte dnes.</strong></p>
+  </div>
+  <div class="bolesti">
+    <div class="b rv"><h3>Na LinkedInu visí fotka z minulé firmy</h3><p>Lidé si vás pamatují podle tváře, kterou už sami nepoznáváte.</p></div>
+    <div class="b rv"><h3>Novinář chce fotku do zítřka</h3><p>Na šířku, v tiskové kvalitě a s místem na titulek. Máte selfie z konference.</p></div>
+    <div class="b rv"><h3>Na týmové stránce chybí půlka lidí</h3><p>Na focení zrovna nebyli. A ti, co byli, mají každý jiné světlo, protože se fotili ve třech vlnách.</p></div>
+    <div class="b rv"><h3>Nový kolega nastoupil v pondělí</h3><p>Fotku bude mít po dalším focení. Tedy za rok.</p></div>
+  </div>
+</section>
+
+<section class="w" id="postup">
+  <div class="num rv">02 · Jak to funguje</div>
+  <div class="sechead rv">
+    <h2>Nevymýšlím nového člověka. Dotahuji vaše fotky</h2>
+    <p>Na úpravě pracuje AI, ale vstupem jsou vždy vaše skutečné fotky. Každý krok kontroluji já.</p>
+  </div>
+  <div class="kroky">
+    <div class="krok rv"><div class="k">KROK 1</div><h3>Začištění</h3><p>Opravím, co pokazil mobil: šum, kompresi, barvy a zkreslení širokým objektivem, kvůli kterému má na selfie každý větší nos.</p></div>
+    <div class="krok rv"><div class="k">KROK 2</div><h3>Světlo a prostředí</h3><p>Měkké studio, večerní světlo, kancelář nebo vaše firemní barva. Sako místo trika, nebo naopak. Tvář zůstává.</p></div>
+    <div class="krok rv"><div class="k">KROK 3</div><h3>Kontrola podoby</h3><p>Každý portrét porovnám s vašimi fotkami okem i měřením shody tváře. Co neprojde, nedostanete.</p></div>
+    <div class="krok rv"><div class="k">KROK 4</div><h3>Formáty k použití</h3><p>Profilovka ověřená v kruhu ve světlém i tmavém režimu, banner, hero webu na šířku a fotky pro média na šířku i na výšku.</p></div>
+  </div>
+</section>
+
+<section class="w" id="ukazka">
+  <div class="num rv">03 · Ukázka</div>
+  <div class="sechead rv">
+    <h2>Nejdřív jsem to vyzkoušel na sobě</h2>
+    <p>Jeden master, devět světel. Tvář stojí pořád na stejném místě, mění se jen to, co kolem ní dělá fotograf.</p>
+  </div>
+  <div class="svety rv" aria-label="Devět variant nasvícení jednoho portrétu">
+    <div class="svet"><div class="g" style="background:radial-gradient(70% 60% at 30% 35%,#8d8d8a,#3d3d3c 70%,#262626)"></div><span>Měkké studio</span></div>
+    <div class="svet"><div class="g" style="background:radial-gradient(40% 50% at 70% 40%,#5a5a58,#0d0d0e 70%)"></div><span>Šero</span></div>
+    <div class="svet"><div class="g" style="background:radial-gradient(60% 60% at 80% 20%,#f2b25c,#7a4a22 55%,#2a1a10)"></div><span>Zlatá hodina</span></div>
+    <div class="svet"><div class="g" style="background:radial-gradient(30% 30% at 15% 20%,#ffb347,transparent 70%),radial-gradient(25% 25% at 85% 75%,#e2553a,transparent 70%),#120c0a"></div><span>Světlo přes sklo</span></div>
+    <div class="svet"><div class="g" style="background:radial-gradient(70% 70% at 35% 40%,#c4281c,#5a0d08 60%,#140303)"></div><span>Signature barva</span></div>
+    <div class="svet"><div class="g" style="background:linear-gradient(118deg,#050505 42%,#d9d4c8 47%,#d9d4c8 51%,#050505 56%)"></div><span>Paprsek přes oči</span></div>
+    <div class="svet"><div class="g" style="background:radial-gradient(60% 60% at 20% 40%,#e9ecef,#a9b4bd 60%,#6c7a83)"></div><span>Kancelář</span></div>
+    <div class="svet"><div class="g" style="background:radial-gradient(35% 30% at 72% 32%,#4b7cff,transparent 70%),#0c0f18"></div><span>PR s logem</span></div>
+    <div class="svet"><div class="g" style="background:radial-gradient(60% 60% at 35% 30%,#efefef,#7d7d7d 60%,#2e2e2e);filter:grayscale(1)"></div><span>Černobílý editorial</span></div>
+  </div>
+  <p class="cap rv">Zatím barevné zástupce světel. Fotky doplním po prvním běhu.</p>
+
+  <div class="lip">
+    <div class="rv">
+      <div class="lip-prepinac" role="group" aria-label="Režim LinkedInu">
+        <button type="button" aria-pressed="true" data-rezim="svetly">Světlý</button>
+        <button type="button" aria-pressed="false" data-rezim="tmavy">Tmavý</button>
+      </div>
+      <div class="lic" data-rezim="svetly">
+        <div class="karta">
+          <div class="banner"><b>jakubskupin.cz</b></div>
+          <div class="av"><img src="/fotky/assets/zastupce-po.jpg" alt="Profilovka v kruhu"></div>
+          <div class="tx">
+            <div class="nm">Jakub Skupin</div>
+            <div class="hl">Z vašich myšlenek udělám něco, co se dá ukázat, sdílet, prodat</div>
+          </div>
+        </div>
+        <div class="male" aria-label="Profilovka v reálných velikostech">
+          <figure><div class="k" style="width:100px;height:100px"><img src="/fotky/assets/zastupce-po.jpg" alt=""></div>profil</figure>
+          <figure><div class="k" style="width:48px;height:48px"><img src="/fotky/assets/zastupce-po.jpg" alt=""></div>příspěvek</figure>
+          <figure><div class="k" style="width:32px;height:32px"><img src="/fotky/assets/zastupce-po.jpg" alt=""></div>komentář</figure>
+        </div>
+      </div>
+    </div>
+    <div class="vysvetleni rv">
+      <h3>Profilovka se kontroluje tam, kde žije</h3>
+      <p>Na LinkedInu vás většina lidí uvidí ve 48 nebo 32 pixelech, v kruhu a často v tmavém režimu. Fotka, která je krásná na celou obrazovku, se v kolečku od komentáře může slít do šedé skvrny.</p>
+      <p>Proto každou profilovku pustím do makety v obou režimech a ve všech velikostech, než ji dostanete.</p>
+    </div>
+  </div>
+</section>
+
+<section class="w" id="kuze">
+  <div class="num rv">04 · Zblízka</div>
+  <div class="kuze">
+    <div class="rv">
+      <div class="zony" role="group" aria-label="Detail">
+        <button type="button" aria-pressed="true">Oči</button>
+        <button type="button" aria-pressed="false">Nos a ústa</button>
+        <button type="button" aria-pressed="false">Ruce</button>
+        <button type="button" aria-pressed="false">Vlasy</button>
+      </div>
+      <div class="ba" style="--x:50%">
+        <img src="/fotky/assets/zastupce-pred.jpg" alt="Detail před úpravou" style="object-position:50% 30%;transform:scale(2.2);transform-origin:50% 30%">
+        <img class="po" src="/fotky/assets/zastupce-po.jpg" alt="Detail po úpravě" style="object-position:50% 30%;transform:scale(2.2);transform-origin:50% 30%">
+        <div class="hrana"></div>
+        <span class="tag l">Před</span><span class="tag r">Po</span>
+        <input type="range" min="0" max="100" value="50" aria-label="Posuvník detailu před a po">
+      </div>
+      <p class="cap">Zástupné fotky, detail doplním z finálu.</p>
+    </div>
+    <div class="sechead rv" style="margin-bottom:0">
+      <h2>Pořád jste to vy, i&nbsp;zblízka</h2>
+      <p class="pivot">AI portréty prozradí plastová kůže. <strong>Tady zůstávají póry.</strong></p>
+      <ul>
+        <li>Póry, vrásky od smíchu i znaménka zůstávají tam, kde je máte.</li>
+        <li>Oči bez skelného lesku, zuby bez porcelánu.</li>
+        <li>Ruce s pěti prsty a s klouby, které k vám patří.</li>
+        <li>Vlasy po jednotlivých pramenech, ne jako helma.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="w" id="pouziti">
+  <div class="num rv">05 · Kde se to hodí</div>
+  <div class="sechead rv"><h2>Jedna sada, sedm použití</h2></div>
+  <div class="pouziti">
+    <div class="pz rv"><b>LinkedIn profil</b><p>Profilovka, která se čte i ve 32 px, a banner s místem na text.</p></div>
+    <div class="pz rv"><b>Hero osobního webu</b><p>Fotka na šířku s místem na nadpis. Klidně jako dočasný podklad, než bude rozpočet na fotografa.</p></div>
+    <div class="pz rv"><b>PR zpráva startupu</b><p>Zakladatel před vaším logem, nasvíceným a rozostřeným v pozadí. Na šířku i na výšku, v tiskové kvalitě.</p></div>
+    <div class="pz rv"><b>Týmová stránka</b><p>Všichni ve stejném světle a na stejném pozadí, i když se nikdy nesešli v jedné místnosti.</p></div>
+    <div class="pz rv"><b>Nový kolega</b><p>Ve stylu týmu v den nástupu, ne po dalším focení.</p></div>
+    <div class="pz rv"><b>Řečníci na konferenci</b><p>Jedna sada pro celý program, jeden styl pro všechny tváře na plakátech i webu.</p></div>
+    <div class="pz siroke rv"><b>Obálka z tváře</b><p>Vaše tvář jako grafická obálka pro posty, přednášky a carousely. Fotka zůstává fotkou, grafika jde přes ni. Pro <a class="lnk" href="/content-partner/">founder-led obsah</a> je to podpisový prvek, podle kterého vás lidé ve feedu poznají.</p></div>
+  </div>
+</section>
+
+<section class="w" id="cenik">
+  <div class="num rv">06 · Ceník</div>
+  <div class="sechead rv" style="margin-bottom:0">
+    <h2>Kolik to stojí</h2>
+    <p class="pivot">Cena je pevná. <strong>Jedno kolo připomínek je v ní.</strong></p>
+  </div>
+  <div class="cenik">
+    <div class="pcard rv">
+      <div class="pcard-kicker">Profil</div>
+      <div class="pcard-price">5&nbsp;900&nbsp;Kč</div>
+      <div class="pcard-pro">Pro jednoho člověka, který potřebuje LinkedIn a web</div>
+      <ul>
+        <li>3 až 5 fotek z mobilu na vstupu</li>
+        <li>čistý master a 3 světy podle výběru</li>
+        <li>profilovka ověřená v kruhu a banner 1584 × 396</li>
+        <li>hero webu na šířku</li>
+        <li>fotka pro média na šířku i na výšku</li>
+        <li>detail pokožky a tisková kvalita</li>
+      </ul>
+      <div class="pcard-extra">Do 3 pracovních dnů. Master a světy na odsouhlasení do 24 hodin.</div>
+    </div>
+    <div class="pcard hlavni rv">
+      <div class="pcard-clip"><div class="pcard-ribbon">Pro zakladatele</div></div>
+      <div class="pcard-kicker">Founder</div>
+      <div class="pcard-price">14&nbsp;900&nbsp;Kč</div>
+      <div class="pcard-pro">Pro zakladatele, kteří o firmě mluví sami</div>
+      <ul>
+        <li>všechno z balíčku Profil</li>
+        <li>9 světů a 3 outfity</li>
+        <li>úhly kamery 3 × 3 a výrazy 3 × 3</li>
+        <li>character sheet pro další obsah</li>
+        <li>PR fotka s vaším logem v pozadí</li>
+        <li>obálka z tváře</li>
+      </ul>
+      <div class="pcard-extra">Na vstupu i 30s video z mobilu. Character sheet zůstává jako podklad pro <a href="/content-partner/">founder-led obsah</a>.</div>
+    </div>
+    <div class="pcard rv">
+      <div class="pcard-kicker">Tým</div>
+      <div class="pcard-price">od 9&nbsp;900&nbsp;Kč</div>
+      <div class="pcard-pro">Za prvních 5 lidí, každý další 1&nbsp;490&nbsp;Kč</div>
+      <ul>
+        <li>jeden styl pro všechny: světlo, pozadí, barvy</li>
+        <li>mřížka na týmovou stránku webu</li>
+        <li>LinkedIn sada pro každého</li>
+        <li>nový kolega kdykoli ve stejném stylu</li>
+      </ul>
+      <div class="pcard-extra">Každý dá písemný souhlas s úpravou své fotky. Kdo nechce, nemusí.</div>
+    </div>
+  </div>
+  <p class="partner rv"><b>Jste copywriter, webový designér nebo děláte PR?</b> Nabídněte to svým klientům. Za každého, kdo přes vás objedná, dostanete 20&nbsp;% z ceny.</p>
+</section>
+
+<section class="w" id="odpada">
+  <div class="sechead rv" style="margin-bottom:0">
+    <h2>Co odpadá</h2>
+    <p class="pivot">Focení dřív znamenalo půlden mimo firmu. <strong>Teď stačí pár fotek.</strong></p>
+  </div>
+  <div class="odplist">
+    <div class="odp rv"><h3>Termín u fotografa</h3><p>Nemusíte hledat den, kdy máte čas, dobrý účes a fotograf volno zároveň.</p></div>
+    <div class="odp rv"><h3>Půlden mimo firmu</h3><p>Cesta do ateliéru, převlékání, čekání na světlo. Fotky z mobilu máte za pět minut.</p></div>
+    <div class="odp rv"><h3>Svolávání týmu</h3><p>Každý pošle své fotky, až bude mít chvíli. I kolegové z jiného města nebo z ciziny.</p></div>
+    <div class="odp rv"><h3>Druhé focení kvůli jednomu člověku</h3><p>Nový kolega dostane fotku ve stylu týmu bez dalšího termínu pro všechny.</p></div>
+  </div>
+</section>
+
+<section class="w" id="otazky">
+  <div class="num rv">07 · Otázky</div>
+  <div class="faq rv">
+    <details><summary>Pozná se, že je to AI?</summary><p>Pracuji s vašimi skutečnými fotkami, ne s vymyšlenou tváří. Hlídám kůži, oči, ruce a podobu, a každý portrét porovnávám s originálem. Že na úpravě pracuje AI, netajím.</p></details>
+    <details><summary>Kolik fotek potřebujete?</summary><p>Na balíček Profil 3 až 5 fotek z mobilu: zepředu, z mírného úhlu a jednu do pasu. Na nové úhly a výrazy v balíčku Founder ještě 30s video, jak pomalu otáčíte hlavou. Natočíte ho za minutu.</p></details>
+    <details><summary>Co když se mi výsledek nebude líbit?</summary><p>Do 24 hodin dostanete master a tři světy na odsouhlasení. Zbytek se dělá až potom. Jedno kolo připomínek je v ceně, takže se o směru bavíme dřív, než je hotovo.</p></details>
+    <details><summary>Nahradí to fotografa?</summary><p>U portrétů ano. Reportáž z akce, produktovou kampaň nebo focení v terénu ne, tam vám fotografa doporučím.</p></details>
+    <details><summary>Jak je to se souhlasem u týmu?</summary><p>Každý člověk dá písemný souhlas s úpravou své fotky. Kdo nechce, nemusí, a na týmové stránce může zůstat jeho dosavadní fotka.</p></details>
+    <details><summary>Můžu to nabízet svým klientům?</summary><p>Ano. Copywriteři, weboví designéři a PR agentury dostanou za každého přivedeného klienta 20&nbsp;% z ceny. Napište mi a domluvíme se.</p></details>
+  </div>
+</section>
+
+<section class="w closing" id="kontakt">
+  <h2 class="rv">Fotky už máte. Teď vyniknou</h2>
+  <p class="rv">Pošlete 3 až 5 fotek přes LinkedIn. Do 24 hodin dostanete master a tři světy na odsouhlasení.</p>
+  <a class="btn rv" href="https://www.linkedin.com/in/jakubskupin/" target="_blank" rel="noopener">Poslat fotky na LinkedIn &#8599;&#xFE0E;</a>
+  <p class="dalsi rv">Produkty místo lidí? Podívejte se na <a href="/vizualy/">produktové vizuály</a>.</p>
+</section>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+// posuvníky před/po
+document.querySelectorAll('.ba').forEach(ba=>{
+  const r=ba.querySelector('input');
+  const set=v=>ba.style.setProperty('--x',v+'%');
+  r.addEventListener('input',()=>set(r.value));
+});
+// přepínač světlý / tmavý režim LinkedInu
+const lic=document.querySelector('.lic');
+document.querySelectorAll('.lip-prepinac button').forEach(b=>b.addEventListener('click',()=>{
+  lic.dataset.rezim=b.dataset.rezim;
+  document.querySelectorAll('.lip-prepinac button').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));
+}));
+// zóny detailu: posun výřezu
+const zony={'Oči':'50% 30%','Nos a ústa':'50% 42%','Ruce':'50% 80%','Vlasy':'50% 8%'};
+const detail=document.querySelectorAll('#kuze .ba img');
+document.querySelectorAll('.zony button').forEach(b=>b.addEventListener('click',()=>{
+  const p=zony[b.textContent];
+  detail.forEach(i=>{i.style.objectPosition=p;i.style.transformOrigin=p});
+  document.querySelectorAll('.zony button').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));
+}));
+</script>
+</body>
+</html>
