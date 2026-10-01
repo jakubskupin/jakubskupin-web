@@ -40,13 +40,6 @@ b,strong{font-weight:600;color:var(--text)}
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
 .grain{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.05;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
-/* štítek pracovní verze: zástupné fotky, než budou výstupy */
-.zastupce-fix{position:fixed;top:84px;right:20px;z-index:60;width:88px;height:88px;border-radius:50%;
-  background:var(--text);color:var(--bg);display:flex;align-items:center;justify-content:center;text-align:center;
-  font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;line-height:1.25;
-  box-shadow:0 4px 18px rgba(0,0,0,.5);pointer-events:none}
-.zastupce-fix span{transform:rotate(-12deg);display:block}
-@media(max-width:720px){.zastupce-fix{width:66px;height:66px;font-size:8px;top:66px;right:12px}}
 
 .top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:12px 0;font-size:13px;color:var(--text-2)}
 .top a{padding:10px 0;text-decoration:none;color:var(--text-2)}.top a:hover{color:var(--text)}
@@ -110,11 +103,19 @@ section{padding-block:60px}
 .svety{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 @media(min-width:900px){.svety{gap:12px}}
 .svet{position:relative;aspect-ratio:4/5;border-radius:10px;overflow:hidden;border:1px solid var(--border);background:#111}
-.svet img{width:100%;height:100%;object-fit:cover}
+.svet img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.svet:hover img{transform:scale(1.04)}
 .svet .g{position:absolute;inset:0}
 .svet span{position:absolute;left:8px;bottom:8px;right:8px;font-size:11px;font-weight:600;letter-spacing:.06em;color:var(--text);
   text-shadow:none;background:rgba(10,10,11,.6);border-radius:6px;padding:4px 7px;width:max-content;max-width:calc(100% - 16px)}
 @media(max-width:520px){.svet span{font-size:10.5px;padding:3px 6px;white-space:normal;line-height:1.25}}
+
+.sady{display:grid;gap:12px;margin-top:22px}
+@media(min-width:760px){.sady{grid-template-columns:1fr 1fr}}
+.sady figure{margin:0;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:#111}
+.sady figcaption{padding:10px 14px;font-size:13px;color:var(--text-3)}
+.obalky{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+.obalky img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:8px;border:1px solid var(--border)}
 
 /* maketa LinkedIn profilu (světlý / tmavý režim) */
 .lip{margin-top:46px;display:grid;gap:22px}
@@ -129,7 +130,7 @@ section{padding-block:60px}
 .lic .banner{aspect-ratio:4/1;background:linear-gradient(110deg,#0d0d10 0%,#1d1d22 55%,#2a2a31 100%);position:relative}
 .lic .banner b{position:absolute;right:6%;top:50%;transform:translateY(-50%);font-family:var(--h);color:#F3F3F1;font-size:clamp(13px,2.1vw,22px);letter-spacing:-.02em}
 .lic .av{width:19%;aspect-ratio:1;border-radius:50%;overflow:hidden;margin:-11.5% 0 0 4%;border:3px solid var(--pk);position:relative;background:#222}
-.lic .av img{width:100%;height:100%;object-fit:cover;object-position:center 20%}
+.lic .av img{width:100%;height:100%;object-fit:cover;object-position:center 35%}
 .lic .tx{padding:8px 4% 18px}
 .lic .nm{font-size:clamp(16px,2vw,21px);font-weight:600;color:var(--pt)}
 .lic .hl{font-size:13px;color:var(--pt);margin-top:2px}
@@ -137,7 +138,7 @@ section{padding-block:60px}
 .male{display:flex;gap:18px;align-items:flex-end;margin-top:16px;padding:14px 16px;background:var(--pk);border-radius:8px;box-shadow:0 0 0 1px var(--pb)}
 .male figure{margin:0;text-align:center;font-size:11px;color:var(--ps)}
 .male .k{border-radius:50%;overflow:hidden;margin:0 auto 6px;background:#222}
-.male .k img{width:100%;height:100%;object-fit:cover;object-position:center 20%}
+.male .k img{width:100%;height:100%;object-fit:cover;object-position:center 35%}
 .lip .vysvetleni h3{font-size:clamp(19px,2.4vw,23px);letter-spacing:-.02em;margin-bottom:10px}
 .lip .vysvetleni p{color:var(--text-2);font-size:15.5px}
 .lip .vysvetleni p+p{margin-top:12px}
@@ -205,7 +206,6 @@ section{padding-block:60px}
 </head>
 <body>
 <div class="grain"></div>
-<div class="zastupce-fix" aria-label="Pracovní verze se zástupnými fotkami"><span>Pracovní<br>verze</span></div>
 
 <div class="w"><div class="top">
   <a class="brand" href="/">Jakub Skupin</a>
@@ -224,13 +224,13 @@ section{padding-block:60px}
   </div>
   <figure style="margin:0">
     <div class="ba" style="--x:50%">
-      <img src="/fotky/assets/zastupce-pred.jpg" alt="Původní fotka z webkamery: šedé pozadí, sluchátka, ploché světlo" style="object-position:center 42%">
-      <img class="po" src="/fotky/assets/zastupce-po.jpg" alt="Upravený portrét: tmavé pozadí, měkké boční světlo">
+      <img src="/fotky/assets/pred.jpg" alt="Selfie z mobilu u světlé zdi v tmavém triku">
+      <img class="po" src="/fotky/assets/po.jpg" alt="Tentýž portrét po úpravě: tvrdé boční světlo na tmavém pozadí">
       <div class="hrana"></div>
       <span class="tag l">Z mobilu</span><span class="tag r">Po úpravě</span>
       <input type="range" min="0" max="100" value="50" aria-label="Posuvník před a po">
     </div>
-    <figcaption class="cap">Zástupné fotky. Skutečný výsledek z této fotky doplním po prvním běhu.</figcaption>
+    <figcaption class="cap">Moje selfie u zdi a tatáž fotka po úpravě. Posuňte.</figcaption>
   </figure>
 </header>
 
@@ -269,17 +269,21 @@ section{padding-block:60px}
     <p>Jeden master, devět světel. Tvář stojí pořád na stejném místě, mění se jen to, co kolem ní dělá fotograf.</p>
   </div>
   <div class="svety rv" aria-label="Devět variant nasvícení jednoho portrétu">
-    <div class="svet"><div class="g" style="background:radial-gradient(70% 60% at 30% 35%,#8d8d8a,#3d3d3c 70%,#262626)"></div><span>Měkké studio</span></div>
-    <div class="svet"><div class="g" style="background:radial-gradient(40% 50% at 70% 40%,#5a5a58,#0d0d0e 70%)"></div><span>Šero</span></div>
-    <div class="svet"><div class="g" style="background:radial-gradient(60% 60% at 80% 20%,#f2b25c,#7a4a22 55%,#2a1a10)"></div><span>Zlatá hodina</span></div>
-    <div class="svet"><div class="g" style="background:radial-gradient(30% 30% at 15% 20%,#ffb347,transparent 70%),radial-gradient(25% 25% at 85% 75%,#e2553a,transparent 70%),#120c0a"></div><span>Světlo přes sklo</span></div>
-    <div class="svet"><div class="g" style="background:radial-gradient(70% 70% at 35% 40%,#c4281c,#5a0d08 60%,#140303)"></div><span>Signature barva</span></div>
-    <div class="svet"><div class="g" style="background:linear-gradient(118deg,#050505 42%,#d9d4c8 47%,#d9d4c8 51%,#050505 56%)"></div><span>Paprsek přes oči</span></div>
-    <div class="svet"><div class="g" style="background:radial-gradient(60% 60% at 20% 40%,#e9ecef,#a9b4bd 60%,#6c7a83)"></div><span>Kancelář</span></div>
-    <div class="svet"><div class="g" style="background:radial-gradient(35% 30% at 72% 32%,#4b7cff,transparent 70%),#0c0f18"></div><span>PR s logem</span></div>
-    <div class="svet"><div class="g" style="background:radial-gradient(60% 60% at 35% 30%,#efefef,#7d7d7d 60%,#2e2e2e);filter:grayscale(1)"></div><span>Černobílý editorial</span></div>
+    <div class="svet"><img src="/fotky/assets/svet-1.jpg" alt="Portrét ve světle měkké studio" loading="lazy"><span>Měkké studio</span></div>
+    <div class="svet"><img src="/fotky/assets/svet-2.jpg" alt="Portrét ve světle šero" loading="lazy"><span>Šero</span></div>
+    <div class="svet"><img src="/fotky/assets/svet-3.jpg" alt="Portrét ve světle zlatá hodina" loading="lazy"><span>Zlatá hodina</span></div>
+    <div class="svet"><img src="/fotky/assets/svet-4.jpg" alt="Portrét ve světle světlo přes sklo" loading="lazy"><span>Světlo přes sklo</span></div>
+    <div class="svet"><img src="/fotky/assets/svet-5.jpg" alt="Portrét ve světle signature barva" loading="lazy"><span>Signature barva</span></div>
+    <div class="svet"><img src="/fotky/assets/svet-6.jpg" alt="Portrét ve světle paprsek přes oči" loading="lazy"><span>Paprsek přes oči</span></div>
+    <div class="svet"><img src="/fotky/assets/svet-7.jpg" alt="Portrét ve světle kancelář" loading="lazy"><span>Kancelář</span></div>
+    <div class="svet"><img src="/fotky/assets/svet-8.jpg" alt="Portrét ve světle pr s logem" loading="lazy"><span>PR s logem</span></div>
+    <div class="svet"><img src="/fotky/assets/svet-9.jpg" alt="Portrét ve světle černobílý editorial" loading="lazy"><span>Černobílý editorial</span></div>
   </div>
-  <p class="cap rv">Zatím barevné zástupce světel. Fotky doplním po prvním běhu.</p>
+  <p class="cap rv">Všech devět vzniklo z jednoho masteru. Tvář stojí na stejném místě, mění se jen světlo a prostředí.</p>
+  <div class="sady rv">
+    <figure><img src="/fotky/assets/uhly-3x3.jpg" alt="Devět úhlů kamery stejného člověka" loading="lazy"><figcaption>Úhly kamery 3 × 3: profil, tři čtvrtiny, shora, zespodu, do pasu</figcaption></figure>
+    <figure><img src="/fotky/assets/vyrazy-3x3.jpg" alt="Devět výrazů stejného člověka" loading="lazy"><figcaption>Výrazy 3 × 3: od klidu po smích, podklad na náhledy a reakce</figcaption></figure>
+  </div>
 
   <div class="lip">
     <div class="rv">
@@ -290,16 +294,16 @@ section{padding-block:60px}
       <div class="lic" data-rezim="svetly">
         <div class="karta">
           <div class="banner"><b>jakubskupin.cz</b></div>
-          <div class="av"><img src="/fotky/assets/zastupce-po.jpg" alt="Profilovka v kruhu"></div>
+          <div class="av"><img src="/fotky/assets/profilovka.jpg" alt="Profilovka v kruhu"></div>
           <div class="tx">
             <div class="nm">Jakub Skupin</div>
             <div class="hl">Z vašich myšlenek udělám něco, co se dá ukázat, sdílet, prodat</div>
           </div>
         </div>
         <div class="male" aria-label="Profilovka v reálných velikostech">
-          <figure><div class="k" style="width:100px;height:100px"><img src="/fotky/assets/zastupce-po.jpg" alt=""></div>profil</figure>
-          <figure><div class="k" style="width:48px;height:48px"><img src="/fotky/assets/zastupce-po.jpg" alt=""></div>příspěvek</figure>
-          <figure><div class="k" style="width:32px;height:32px"><img src="/fotky/assets/zastupce-po.jpg" alt=""></div>komentář</figure>
+          <figure><div class="k" style="width:100px;height:100px"><img src="/fotky/assets/profilovka.jpg" alt=""></div>profil</figure>
+          <figure><div class="k" style="width:48px;height:48px"><img src="/fotky/assets/profilovka.jpg" alt=""></div>příspěvek</figure>
+          <figure><div class="k" style="width:32px;height:32px"><img src="/fotky/assets/profilovka.jpg" alt=""></div>komentář</figure>
         </div>
       </div>
     </div>
@@ -318,17 +322,17 @@ section{padding-block:60px}
       <div class="zony" role="group" aria-label="Detail">
         <button type="button" aria-pressed="true">Oči</button>
         <button type="button" aria-pressed="false">Nos a ústa</button>
-        <button type="button" aria-pressed="false">Ruce</button>
+        <button type="button" aria-pressed="false">Vousy</button>
         <button type="button" aria-pressed="false">Vlasy</button>
       </div>
       <div class="ba" style="--x:50%">
-        <img src="/fotky/assets/zastupce-pred.jpg" alt="Detail před úpravou" style="object-position:50% 30%;transform:scale(2.2);transform-origin:50% 30%">
-        <img class="po" src="/fotky/assets/zastupce-po.jpg" alt="Detail po úpravě" style="object-position:50% 30%;transform:scale(2.2);transform-origin:50% 30%">
+        <img src="/fotky/assets/kuze-pred.jpg" alt="Detail obličeje před úpravou pokožky" style="object-position:50% 45%;transform:scale(2.4);transform-origin:50% 45%">
+        <img class="po" src="/fotky/assets/kuze-po.jpg" alt="Detail obličeje po úpravě pokožky" style="object-position:50% 45%;transform:scale(2.4);transform-origin:50% 45%">
         <div class="hrana"></div>
         <span class="tag l">Před</span><span class="tag r">Po</span>
         <input type="range" min="0" max="100" value="50" aria-label="Posuvník detailu před a po">
       </div>
-      <p class="cap">Zástupné fotky, detail doplním z finálu.</p>
+      <p class="cap">Vlevo portrét ve světle Měkké studio, vpravo po úpravě pokožky ve 4K.</p>
     </div>
     <div class="sechead rv" style="margin-bottom:0">
       <h2>Pořád jste to vy, i&nbsp;zblízka</h2>
@@ -336,7 +340,7 @@ section{padding-block:60px}
       <ul>
         <li>Póry, vrásky od smíchu i znaménka zůstávají tam, kde je máte.</li>
         <li>Oči bez skelného lesku, zuby bez porcelánu.</li>
-        <li>Ruce s pěti prsty a s klouby, které k vám patří.</li>
+        <li>Vousy po jednotlivých chloupcích, ne jako šmouha.</li>
         <li>Vlasy po jednotlivých pramenech, ne jako helma.</li>
       </ul>
     </div>
@@ -353,7 +357,7 @@ section{padding-block:60px}
     <div class="pz rv"><b>Týmová stránka</b><p>Všichni ve stejném světle a na stejném pozadí, i když se nikdy nesešli v jedné místnosti.</p></div>
     <div class="pz rv"><b>Nový kolega</b><p>Ve stylu týmu v den nástupu, ne po dalším focení.</p></div>
     <div class="pz rv"><b>Řečníci na konferenci</b><p>Jedna sada pro celý program, jeden styl pro všechny tváře na plakátech i webu.</p></div>
-    <div class="pz siroke rv"><b>Obálka z tváře</b><p>Vaše tvář jako grafická obálka pro posty, přednášky a carousely. Fotka zůstává fotkou, grafika jde přes ni. Pro <a class="lnk" href="/content-partner/">founder-led obsah</a> je to podpisový prvek, podle kterého vás lidé ve feedu poznají.</p></div>
+    <div class="pz siroke rv"><b>Obálka z tváře</b><div><p>Vaše tvář jako grafická obálka pro posty, přednášky a carousely. Fotka zůstává fotkou, grafika jde přes ni. Pro <a class="lnk" href="/content-partner/">founder-led obsah</a> je to podpisový prvek, podle kterého vás lidé ve feedu poznají.</p><div class="obalky"><img src="/fotky/assets/K1a-prouzky-gpt.jpg" alt="Obálka z tváře s posunutými proužky a modrými pruhy" loading="lazy"><img src="/fotky/assets/K2a-ctverce-gpt.jpg" alt="Obálka z tváře s mřížkou modrých čtverců" loading="lazy"><img src="/fotky/assets/K3a-text-gpt.jpg" alt="Obálka z tváře složené z modrého rukopisu" loading="lazy"></div></div></div>
   </div>
 </section>
 
@@ -457,7 +461,7 @@ document.querySelectorAll('.lip-prepinac button').forEach(b=>b.addEventListener(
   document.querySelectorAll('.lip-prepinac button').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));
 }));
 // zóny detailu: posun výřezu
-const zony={'Oči':'50% 30%','Nos a ústa':'50% 42%','Ruce':'50% 80%','Vlasy':'50% 8%'};
+const zony={'Oči':'50% 45%','Nos a ústa':'50% 58%','Vousy':'50% 68%','Vlasy':'50% 27%'};
 const detail=document.querySelectorAll('#kuze .ba img');
 document.querySelectorAll('.zony button').forEach(b=>b.addEventListener('click',()=>{
   const p=zony[b.textContent];
