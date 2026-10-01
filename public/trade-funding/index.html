@@ -71,6 +71,14 @@ h2{font-family:var(--h);font-weight:700;letter-spacing:-.025em;margin:4px 0 0;fo
 .btn:hover span{transform:translateX(3px)}
 .spec{position:relative;margin:26px 0 0;font-size:13px;color:rgba(255,255,255,.6);max-width:640px}
 
+.bonus{padding:88px 0 0}
+.sheet{display:block;margin:0 0 14px;border-radius:12px;overflow:hidden;box-shadow:var(--shadow);background:#fff;transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s}
+.sheet:hover{transform:translateY(-2px);box-shadow:0 1px 2px rgba(0,28,68,.06),0 24px 60px rgba(0,28,68,.14)}
+.sheet img{display:block;width:100%;height:auto}
+.pair{display:grid;gap:14px}
+@media(min-width:720px){.pair{grid-template-columns:1fr 1fr}}
+.pair .screen{aspect-ratio:16/9}
+
 footer{padding:40px 0 64px;color:var(--text-2);font-size:14px}
 
 .rv{opacity:0;transform:translateY(16px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
@@ -151,6 +159,27 @@ footer{padding:40px 0 64px;color:var(--text-2);font-size:14px}
     <p>Tell me what you like and what you would change. I can still work your feedback into the&nbsp;test.</p>
     <a class="btn" href="https://www.upwork.com/ab/messages/rooms/room_eb12e67eda492ca91cc6d84e2bc9ff22" target="_blank" rel="noopener">Reply in our Upwork chat <span aria-hidden="true">→</span></a>
     <p class="spec">All three are ready in your format: ProRes 422 HQ at 3840×2160 and 1080×1920, 30 fps, 12 s seamless loop, white #FFFFFF, Rec.709, posters and project&nbsp;file.</p>
+  </section>
+
+  <section class="bonus">
+    <div class="head rv">
+      <div>
+        <p class="num">Bonus idea</p>
+        <h2>Cashper in 3D</h2>
+      </div>
+      <p class="why">While working on the hero, I kept coming back to Cashper. Working with him across the site would be lovely, and I see a real opportunity&nbsp;there.</p>
+    </div>
+    <a class="sheet rv" href="/trade-funding/assets/cashper-sheet.jpg" target="_blank" rel="noopener"><img src="/trade-funding/assets/cashper-sheet.jpg" alt="Cashper 3D character sheet: turnaround, expressions, ghost states and palette" loading="lazy"></a>
+    <div class="pair rv">
+      <div>
+        <div class="screen"><video src="/trade-funding/assets/cashper-on-site.mp4" poster="/trade-funding/assets/cashper-on-site.jpg" muted loop playsinline preload="none"></video></div>
+        <div class="tag"><span>On your current site</span><span>7 s</span></div>
+      </div>
+      <div>
+        <div class="screen"><video src="/trade-funding/assets/cashper-expressions.mp4" poster="/trade-funding/assets/cashper-expressions.jpg" muted loop playsinline preload="none"></video></div>
+        <div class="tag"><span>Expressions</span><span>6 s</span></div>
+      </div>
+    </div>
   </section>
 </main>
 
