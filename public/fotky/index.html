@@ -180,6 +180,16 @@ section{padding-block:60px}
 .pcard li::before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:50%;background:var(--text-3)}
 .pcard-extra{margin-top:auto;font-size:13px;line-height:1.5;color:var(--text-3);border-top:1px solid var(--border);padding-top:14px}
 .pcard-extra a{color:var(--text-2)}
+.zaruka{margin-top:28px;background:var(--card);border:1px solid var(--border);border-radius:4px 18px 18px 18px;padding:24px 22px;display:grid;gap:20px}
+@media(min-width:900px){.zaruka{grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:32px;padding:30px 32px}}
+.zaruka h3{font-family:var(--h);font-size:clamp(21px,2.4vw,26px);letter-spacing:-.02em;line-height:1.2;margin:0;text-wrap:balance}
+.zaruka .pivot{font-size:16px;margin-top:10px}
+.zkroky{display:grid;gap:16px}
+@media(min-width:640px){.zkroky{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.zkrok{border-top:1px solid var(--border);padding-top:14px}
+.zkrok .k{font-family:var(--h);font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--text-3)}
+.zkrok b{display:block;font-family:var(--h);font-size:16px;letter-spacing:-.01em;margin:8px 0 6px}
+.zkrok p{font-size:14px;color:var(--text-2);line-height:1.55;margin:0}
 .partner{margin-top:22px;border:1px dashed var(--border);border-radius:14px;padding:18px 20px;color:var(--text-2);font-size:15px;max-width:76ch}
 .partner b{color:var(--text)}
 
@@ -411,6 +421,17 @@ section{padding-block:60px}
       <div class="pcard-extra">Každý dá písemný souhlas s úpravou své fotky. Kdo nechce, nemusí.</div>
     </div>
   </div>
+  <div class="zaruka rv" id="zaruka">
+    <div>
+      <h3>Platíte, až se vám fotky líbí</h3>
+      <p class="pivot">Záloha jen drží termín. <strong>Zbytek až po souhlasu.</strong></p>
+    </div>
+    <div class="zkroky">
+      <div class="zkrok"><div class="k">1 · ZÁLOHA</div><b>990&nbsp;Kč předem</b><p>Započítá se do ceny a pokryje práci na prvních náhledech.</p></div>
+      <div class="zkrok"><div class="k">2 · NÁHLEDY</div><b>Do 24&nbsp;hodin je uvidíte</b><p>Master a tři světy s vodoznakem. Posoudíte je v klidu, bez schůzky.</p></div>
+      <div class="zkrok"><div class="k">3 · DOPLATEK</div><b>Až když jste spokojení</b><p>Plné rozlišení a všechny formáty pošlu po doplatku. Když se vám fotky nebudou líbit ani po kole připomínek, doplatek neplatíte.</p></div>
+    </div>
+  </div>
   <p class="partner rv"><b>Jste copywriter, webový designér nebo děláte PR?</b> Nabídněte to svým klientům. Za každého, kdo přes vás objedná, dostanete 20&nbsp;% z ceny.</p>
 </section>
 
@@ -432,7 +453,7 @@ section{padding-block:60px}
   <div class="faq rv">
     <details><summary>Pozná se, že je to AI?</summary><p>Pracuji s vašimi skutečnými fotkami, ne s vymyšlenou tváří. Hlídám kůži, oči, ruce a podobu, a každý portrét porovnávám s originálem. Že na úpravě pracuje AI, netajím.</p></details>
     <details><summary>Kolik fotek potřebujete?</summary><p>Na balíček Profil 3 až 5 fotek z mobilu: zepředu, z mírného úhlu a jednu do pasu. Na nové úhly a výrazy v balíčku Founder ještě 30s video, jak pomalu otáčíte hlavou. Natočíte ho za minutu.</p></details>
-    <details><summary>Co když se mi výsledek nebude líbit?</summary><p>Do 24 hodin dostanete master a tři světy na odsouhlasení. Zbytek se dělá až potom. Jedno kolo připomínek je v ceně, takže se o směru bavíme dřív, než je hotovo.</p></details>
+    <details><summary>Co když se mi výsledek nebude líbit?</summary><p>Do 24 hodin uvidíte master a tři světy s vodoznakem. Doplácíte, až když se vám líbí. Jedno kolo připomínek je v ceně, a když se vám fotky nebudou líbit ani potom, doplatek neplatíte. Propadne jen <a href="#zaruka">záloha 990&nbsp;Kč</a> za práci na náhledech.</p></details>
     <details><summary>Nahradí to fotografa?</summary><p>U portrétů ano. Reportáž z akce, produktovou kampaň nebo focení v terénu ne, tam vám fotografa doporučím.</p></details>
     <details><summary>Jak je to se souhlasem u týmu?</summary><p>Každý člověk dá písemný souhlas s úpravou své fotky. Kdo nechce, nemusí, a na týmové stránce může zůstat jeho dosavadní fotka.</p></details>
     <details><summary>Můžu to nabízet svým klientům?</summary><p>Ano. Copywriteři, weboví designéři a PR agentury dostanou za každého přivedeného klienta 20&nbsp;% z ceny. Napište mi a domluvíme se.</p></details>
@@ -441,7 +462,7 @@ section{padding-block:60px}
 
 <section class="w closing" id="kontakt">
   <h2 class="rv">Fotky už máte. Teď vyniknou</h2>
-  <p class="rv">Pošlete 3 až 5 fotek přes LinkedIn. Do 24 hodin dostanete master a tři světy na odsouhlasení.</p>
+  <p class="rv">Pošlete 3 až 5 fotek přes LinkedIn. Do 24 hodin uvidíte master a tři světy. <a href="#zaruka">Doplácíte, až když se vám líbí.</a></p>
   <a class="btn rv" href="https://www.linkedin.com/in/jakubskupin/" target="_blank" rel="noopener">Poslat fotky na LinkedIn &#8599;&#xFE0E;</a>
   <p class="dalsi rv">Produkty místo lidí? Podívejte se na <a href="/vizualy/">produktové vizuály</a>.</p>
 </section>
