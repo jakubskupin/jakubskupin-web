@@ -8,6 +8,9 @@ const nextConfig: NextConfig = {
       // podklady ke knize ŘEŽ: od 28. 9. 2026 na /rez, starý odkaz poslaný Janovi musí dál fungovat
       { source: "/bez-rohu", destination: "/rez", permanent: true },
       { source: "/bez-rohu/:path*", destination: "/rez/:path*", permanent: true },
+      // služba Fotky bez focení: pracovní verze žila lokálně na /fotky, živá adresa je od 2. 10. 2026 kratší /foto
+      { source: "/fotky", destination: "/foto", permanent: true },
+      { source: "/fotky/:path*", destination: "/foto", permanent: true },
     ];
   },
   async rewrites() {
@@ -24,7 +27,7 @@ const nextConfig: NextConfig = {
       { source: "/lindeblad", destination: "/lindeblad/index.html" },
       { source: "/web-ad", destination: "/web-ad/index.html" },
       { source: "/trade-funding", destination: "/trade-funding/index.html" },
-      { source: "/fotky", destination: "/fotky/index.html" },
+      { source: "/foto", destination: "/foto/index.html" },
     ];
   },
 };
