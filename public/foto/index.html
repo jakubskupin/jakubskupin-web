@@ -85,10 +85,11 @@ b,strong{font-weight:600;color:var(--text)}
 
 /* hero s videem na pozadí (testovací draft 3. 10. 2026) */
 .hv{position:relative;overflow:hidden;isolation:isolate;min-height:calc(100svh - 60px);display:flex;align-items:flex-end}
-.hv-bg{position:absolute;left:0;right:0;top:0;width:100%;height:58%;object-fit:cover;object-position:center 30%;z-index:-2;background:#070809}
-.hv-tint{position:absolute;inset:0;z-index:-1;
-  background:linear-gradient(0deg,var(--bg) 0%,var(--bg) 42%,rgba(10,10,11,.55) 52%,rgba(10,10,11,0) 66%)}
+.hv-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 18%;z-index:-2;background:#070809}
+.hv-tint{position:absolute;inset:0;z-index:-1;   /* mobil: ořez 9:16 přes celou výšku, text dole na tmavém přechodu */
+  background:linear-gradient(0deg,var(--bg) 0%,rgba(10,10,11,.93) 36%,rgba(10,10,11,.5) 52%,rgba(10,10,11,.08) 70%)}
 .hv .hero{padding-top:0}
+@media(max-width:899px){.hv-bg{top:-11%;height:111%}.hv .bez{display:none}.hv .hero{padding-bottom:28px}}   /* tvář nad nadpisem */
 @media(min-width:900px){.hv{min-height:min(92svh,860px);align-items:center}
   .hv-bg{inset:0;height:100%;object-position:center}
   .hv .hero{padding-top:52px}
@@ -101,7 +102,8 @@ b,strong{font-weight:600;color:var(--text)}
 @media(min-width:900px){.predpo{grid-template-columns:.9fr 1.1fr;align-items:center;gap:56px}.predpo figure{max-width:520px;justify-self:end;width:100%}}
 .predpo h2{font-family:var(--h);font-size:clamp(28px,4vw,44px);line-height:1.05;letter-spacing:-.02em;margin:10px 0 12px}
 .predpo p{color:var(--text-2);max-width:40ch}
-@media (prefers-reduced-motion: reduce){.hv-bg{display:none}.hv{background:#070809 url(/foto/video/hero-draft.jpg) center/cover}}
+@media (prefers-reduced-motion: reduce){.hv-bg{display:none}.hv{background:#070809 url(/foto/video/hero-draft-916.jpg) center 18%/cover}}
+@media (prefers-reduced-motion: reduce) and (min-width:900px){.hv{background-image:url(/foto/video/hero-draft.jpg);background-position:center}}
 
 /* posuvník před/po */
 .ba{position:relative;border-radius:18px;overflow:hidden;background:#000;border:1px solid var(--border);
@@ -268,7 +270,11 @@ section{padding-block:56px}
 </div></div>
 
 <section class="hv">
-  <video class="hv-bg" src="/foto/video/hero-draft.mp4" poster="/foto/video/hero-draft.jpg" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+  <video class="hv-bg" autoplay muted loop playsinline preload="auto" aria-hidden="true"
+    data-desktop="/foto/video/hero-draft.mp4" data-desktop-poster="/foto/video/hero-draft.jpg"
+    data-mobil="/foto/video/hero-draft-916.mp4" data-mobil-poster="/foto/video/hero-draft-916.jpg"></video>
+  <script>(function(){var v=document.currentScript.previousElementSibling,m=matchMedia('(max-width: 899px)').matches?'mobil':'desktop';
+    v.poster=v.dataset[m+'Poster'];v.src=v.dataset[m];var p=v.play();if(p&&p.catch)p.catch(function(){})})()</script>
   <div class="hv-tint" aria-hidden="true"></div>
   <span class="hv-tag">Testovací verze videa, 480p</span>
 <header class="w hero hero-v">
