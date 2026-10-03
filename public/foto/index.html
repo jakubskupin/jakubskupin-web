@@ -97,6 +97,15 @@ b,strong{font-weight:600;color:var(--text)}
     linear-gradient(0deg,var(--bg) 0%,rgba(10,10,11,0) 22%)}}
 .hero-v{width:100%}
 @media(min-width:900px){.hero-v{grid-template-columns:minmax(0,1fr)}}
+.hv-ctl{position:absolute;top:14px;right:16px;left:16px;z-index:3;display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:flex-end}
+.hv-ctl-l{font-size:11px;color:var(--text-2);margin-right:4px}
+.hv-ver,.hv-zvuk2{font:600 12px/1 var(--b);color:var(--text);background:rgba(10,10,11,.62);border:1px solid var(--border);border-radius:999px;padding:8px 12px;cursor:pointer;transition:background .2s ease,color .2s ease,border-color .2s ease}
+.hv-ver[aria-pressed="true"]{background:var(--text);color:var(--bg);border-color:var(--text)}
+.hv-zvuk2{display:inline-flex;gap:7px;align-items:center;background:#F26B21;border-color:#F26B21;color:#0A0A0B}
+.hv-zvuk2[aria-pressed="true"]{background:var(--text);border-color:var(--text)}
+.hv-zvuk2[aria-pressed="false"] .vlna{opacity:.35}
+.hv-zvuk2:disabled{background:rgba(10,10,11,.62);border-color:var(--border);color:var(--text-2);cursor:default}
+.hv-ver:focus-visible,.hv-zvuk2:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 .hv-tag{position:absolute;right:16px;top:14px;font-size:11px;color:var(--text-2);background:rgba(10,10,11,.6);border:1px solid var(--border);border-radius:999px;padding:4px 10px}
 .predpo{display:grid;gap:28px;padding-block:28px 12px}
 @media(min-width:900px){.predpo{grid-template-columns:.9fr 1.1fr;align-items:center;gap:56px}.predpo figure{max-width:520px;justify-self:end;width:100%}}
@@ -270,13 +279,28 @@ section{padding-block:56px}
 </div></div>
 
 <section class="hv">
-  <video class="hv-bg" autoplay muted loop playsinline preload="auto" aria-hidden="true"
-    data-desktop="/foto/video/hero-draft.mp4" data-desktop-poster="/foto/video/hero-draft.jpg"
-    data-mobil="/foto/video/hero-draft-916.mp4" data-mobil-poster="/foto/video/hero-draft-916.jpg"></video>
-  <script>(function(){var v=document.currentScript.previousElementSibling,m=matchMedia('(max-width: 899px)').matches?'mobil':'desktop';
-    v.poster=v.dataset[m+'Poster'];v.src=v.dataset[m];var p=v.play();if(p&&p.catch)p.catch(function(){})})()</script>
+  <video class="hv-bg" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
   <div class="hv-tint" aria-hidden="true"></div>
-  <span class="hv-tag">Testovací verze videa, 480p</span>
+  <div class="hv-ctl" role="group" aria-label="Testovací verze videa">
+    <span class="hv-ctl-l">Testovací video</span>
+    <button type="button" class="hv-ver" data-ver="1" aria-pressed="true">V1</button>
+    <button type="button" class="hv-ver" data-ver="2" aria-pressed="false">V2</button>
+    <button type="button" class="hv-zvuk2" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4z"/><path class="vlna" d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg><span>Zapnout zvuk</span></button>
+  </div>
+  <script>(function(){
+    var v=document.querySelector('.hv-bg'),z=document.querySelector('.hv-zvuk2'),zt=z.querySelector('span'),
+        m=matchMedia('(max-width: 899px)').matches?'m':'d',ver='1',
+        SRC={'1':{d:['/foto/video/hero-v2.mp4','/foto/video/hero-v2.jpg'],m:['/foto/video/hero-v2-916.mp4','/foto/video/hero-v2-916.jpg'],zvuk:true},
+             '2':{d:['/foto/video/hero-draft.mp4','/foto/video/hero-draft.jpg'],m:['/foto/video/hero-draft-916.mp4','/foto/video/hero-draft-916.jpg'],zvuk:false}};
+    function hraj(){var q=v.play();if(q&&q.catch)q.catch(function(){})}
+    function popisZvuku(){if(!SRC[ver].zvuk){z.disabled=true;zt.textContent='Tahle verze je bez zvuku';z.setAttribute('aria-pressed','false');return}
+      z.disabled=false;zt.textContent=v.muted?'Zapnout zvuk':'Vypnout zvuk';z.setAttribute('aria-pressed',String(!v.muted))}
+    function nastav(n){ver=n;var s=SRC[n][m];v.muted=true;v.poster=s[1];v.src=s[0];hraj();
+      document.querySelectorAll('.hv-ver').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.ver===n))});popisZvuku()}
+    document.querySelectorAll('.hv-ver').forEach(function(b){b.addEventListener('click',function(){nastav(b.dataset.ver)})});
+    z.addEventListener('click',function(){if(!SRC[ver].zvuk)return;v.muted=!v.muted;if(!v.muted){v.currentTime=0;v.volume=1}hraj();popisZvuku()});
+    nastav('1');
+  })()</script>
 <header class="w hero hero-v">
   <div style="position:relative">
     <div class="eyebrow">Fotky bez focení</div>
