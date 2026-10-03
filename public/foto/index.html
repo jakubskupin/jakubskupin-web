@@ -116,6 +116,10 @@ section{padding-block:56px}
 @media(min-width:900px){.mriz{columns:3;column-gap:14px}}
 .mriz.siroka{columns:1}
 @media(min-width:760px){.mriz.siroka{columns:2}}
+.mriz.g2{columns:auto;display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
+.mriz.g2 figure{margin:0}
+.mriz.g2 figure:first-child{grid-column:1/-1}
+@media(min-width:900px){.mriz.g2{gap:14px}}
 .v{position:relative;break-inside:avoid;margin:0 0 10px;border-radius:12px;overflow:hidden;border:1px solid var(--border);background:#111;cursor:default;
   transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease}
 @media(min-width:900px){.v{margin-bottom:14px}}
@@ -286,6 +290,10 @@ section{padding-block:56px}
   <div class="patro" id="patro-hero">
     <div class="patro-head rv"><span class="pis">C</span><h3>Hero na web</h3><p>Na šířku a s místem na nadpis. Do hero sekce nebo patičky.</p></div>
     <div class="mriz siroka" data-patro="hero"></div>
+  </div>
+  <div class="patro" id="patro-postava">
+    <div class="patro-head rv"><span class="pis">D</span><h3>Celá postava</h3><p>V prostředí, které sedí k vaší značce. Fotka, na které něco děláte, ne jen pózujete.</p></div>
+    <div class="mriz g2" data-patro="postava"></div>
   </div>
 </section>
 
@@ -482,7 +490,8 @@ const PATRA={
   {n:'Pruh přes oči',v:['142','008'],r:[896,1200],m:1},{n:'Mátový pruh světla',v:['134','135'],r:[896,1200],m:1},{n:'UV neon',v:['062','085','086','061'],r:[896,1200]},
   {n:'Světlo ve tmě',v:['145'],r:[896,1216]},{n:'Trojitá expozice',v:['126','127'],r:[896,1200]},{n:'Skleněné střepy',v:['128','129'],r:[896,1200]},
   {n:'Projekce světla',v:['107','108'],r:[896,1200]},{n:'Duotone',v:['088'],r:[896,1200]},{n:'Zrcátko',v:['130'],r:[896,1200]},{n:'Obálka z tváře',v:['018'],r:[933,1400]}],
- hero:[{n:'Zoom burst',v:['091','073'],r:[1376,768]},{n:'Černobílá noc',v:['089','090'],r:[1376,768]},{n:'Tri-X profil',v:['081','082'],r:[1376,768]},{n:'Oranžová svatozář',v:['112'],r:[1200,896]}]
+ hero:[{n:'Zoom burst',v:['091','073'],r:[1376,768]},{n:'Černobílá noc',v:['089','090'],r:[1376,768]},{n:'Tri-X profil',v:['081','082'],r:[1376,768]},{n:'Oranžová svatozář',v:['112'],r:[1200,896]}],
+ postava:[{n:'Lavice',v:['postava-lavice'],r:[1376,768]},{n:'Atrium',v:['postava-atrium'],r:[896,1200]},{n:'Kolonáda',v:['postava-kolonada'],r:[896,1200]}]
 };
 const jemne=matchMedia('(hover:hover) and (pointer:fine)').matches;
 document.querySelectorAll('.mriz').forEach(m=>{
