@@ -130,6 +130,28 @@ section{padding-block:56px}
 .hint{display:flex;gap:10px;align-items:center;font-size:13.5px;color:var(--text-2);margin-top:4px}
 .hint svg{flex:none}
 
+/* barvy značky: text a vzorky vlevo, dva posuvníky vpravo */
+.barvy{display:grid;gap:28px}
+@media(min-width:960px){.barvy{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:48px;align-items:start}}
+.barvy .sechead{margin-bottom:0}
+.barvy .sechead p+p{margin-top:12px}
+.vzorky{display:flex;gap:10px;margin-top:24px}
+.vz{flex:1;max-width:190px;border:1px solid var(--border);border-radius:4px 14px 14px 14px;overflow:hidden;background:var(--bg-2)}
+.vz i{display:block;height:64px}
+.vz span{display:block;padding:9px 12px 10px;font-size:12.5px;color:var(--text-2);line-height:1.35}
+.vz b{display:block;font-family:var(--b);font-weight:700;font-size:14px;letter-spacing:.04em;font-variant-numeric:tabular-nums}
+.rezim{display:inline-flex;gap:4px;margin-top:22px;padding:4px;border:1px solid var(--border);border-radius:999px;background:var(--bg-2)}
+.rezim button{font:600 13px/1 var(--b);color:var(--text-2);background:none;border:0;border-radius:999px;padding:10px 16px;cursor:pointer;transition:background .25s ease,color .25s ease}
+.rezim button:hover{color:var(--text)}
+.rezim button[aria-pressed="true"]{background:var(--text);color:var(--bg)}
+.mereni{margin-top:20px;font-size:13.5px;color:var(--text-3);max-width:46ch}
+.mereni b{color:var(--text-2);font-weight:600}
+.barvy-par{display:grid;gap:14px}
+@media(min-width:560px){.barvy-par{grid-template-columns:1fr 1fr}}
+@media(min-width:960px){.barvy-par{margin-top:6px}}
+.barvy-par .ba{aspect-ratio:747/1000;box-shadow:0 26px 70px rgba(0,95,106,.22)}
+.barvy-par .ba img{object-position:center}
+
 /* rozdíl proti aplikacím: asymetrická mřížka */
 .rozdil{display:grid;gap:12px}
 @media(min-width:820px){.rozdil{grid-template-columns:1.2fr 1fr;gap:14px}}
@@ -267,8 +289,53 @@ section{padding-block:56px}
   </div>
 </section>
 
+<section class="w" id="barvy">
+  <div class="num rv">02 · Vaše barvy</div>
+  <div class="barvy">
+    <div>
+      <div class="sechead rv">
+        <h2>V barvách vaší značky</h2>
+        <p class="pivot">Barvy z brand manuálu. <strong>Tvář zůstane.</strong></p>
+        <p>Pošlete HEX kódy a&nbsp;světlo i&nbsp;pozadí přebarvím přesně na&nbsp;ně. Rysy, stíny i&nbsp;kůže zůstávají z&nbsp;původní fotky, mění se jen barva.</p>
+      </div>
+      <div class="vzorky rv" aria-label="Barvy v ukázce">
+        <div class="vz"><i style="background:#005F6A"></i><span><b>#005F6A</b>Petrolejová</span></div>
+        <div class="vz"><i style="background:#F26B21"></i><span><b>#F26B21</b>Oranžová</span></div>
+      </div>
+      <div class="rezim rv" role="group" aria-label="Co přebarvit">
+        <button type="button" data-v="svetla" aria-pressed="false">Jen světlo</button>
+        <button type="button" data-v="pozadi" aria-pressed="true">Světlo i&nbsp;pozadí</button>
+      </div>
+      <p class="mereni rv">Změřeno proti originálu: struktura tváře se shoduje na <b>99,9&nbsp;%</b>, odstín světla se od zadané barvy liší o&nbsp;<b>0,2°</b> a&nbsp;pozadí Duotonu má přesně <b>#005F6A</b>.</p>
+      <p class="mereni rv">Šest modelů umělé inteligence v&nbsp;testu tvář buď trochu překreslilo, nebo barvu netrefilo. Proto barvy neměním promptem, ale přímo v&nbsp;pixelech fotky.</p>
+    </div>
+    <div class="barvy-par">
+      <figure class="rv" style="margin:0">
+        <div class="ba" style="--x:50%">
+          <img src="/foto/img/088.jpg" alt="Duotone v původních barvách: červené světlo na tváři, tmavě modré pozadí" width="747" height="1000" loading="lazy">
+          <img class="po" src="/foto/img/barvy-088-pozadi.jpg" data-svetla="/foto/img/barvy-088-svetla.jpg" data-pozadi="/foto/img/barvy-088-pozadi.jpg" alt="Tatáž fotka v barvách #F26B21 a #005F6A" width="747" height="1000" loading="lazy">
+          <div class="hrana"></div>
+          <span class="tag l">Původní</span><span class="tag r">Vaše barvy</span>
+          <input type="range" min="0" max="100" value="50" aria-label="Posuvník: Duotone původní a přebarvený">
+        </div>
+        <figcaption class="cap">Duotone</figcaption>
+      </figure>
+      <figure class="rv" style="margin:0">
+        <div class="ba" style="--x:50%">
+          <img src="/foto/img/127.jpg" alt="Trojitá expozice v původních barvách: červené světlo, téměř černé pozadí" width="747" height="1000" loading="lazy">
+          <img class="po" src="/foto/img/barvy-127-pozadi.jpg" data-svetla="/foto/img/barvy-127-svetla.jpg" data-pozadi="/foto/img/barvy-127-pozadi.jpg" alt="Tatáž fotka v barvách #F26B21 a #005F6A" width="747" height="1000" loading="lazy">
+          <div class="hrana"></div>
+          <span class="tag l">Původní</span><span class="tag r">Vaše barvy</span>
+          <input type="range" min="0" max="100" value="50" aria-label="Posuvník: Trojitá expozice původní a přebarvená">
+        </div>
+        <figcaption class="cap">Trojitá expozice</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
 <section class="w" id="rozdil">
-  <div class="num rv">02 · Rozdíl</div>
+  <div class="num rv">03 · Rozdíl</div>
   <div class="sechead rv">
     <h2>Služba, ne aplikace</h2>
     <p class="pivot">Aplikace vám dají padesát pokusů. <strong>Já hotovou fotku.</strong></p>
@@ -282,7 +349,7 @@ section{padding-block:56px}
 </section>
 
 <section class="w" id="detail">
-  <div class="num rv">03 · Detail</div>
+  <div class="num rv">04 · Detail</div>
   <div class="detail">
     <figure class="rv" style="margin:0">
       <div class="kv" id="kv" role="img" aria-label="Detail tváře rozdělený na čtyři kvadranty, v každém zvětšení jiným modelem">
@@ -307,7 +374,7 @@ section{padding-block:56px}
 </section>
 
 <section class="w" id="pouziti">
-  <div class="num rv">04 · Kde je použijete</div>
+  <div class="num rv">05 · Kde je použijete</div>
   <div class="sechead rv"><h2>Kde fotky použijete</h2></div>
   <div class="pouziti">
     <div class="pz rv"><b>LinkedIn</b><p>Profilovka, carousely, úvodní a závěrečný slajd prezentace.</p></div>
@@ -318,7 +385,7 @@ section{padding-block:56px}
 </section>
 
 <section class="w" id="pro-koho">
-  <div class="num rv">05 · Pro koho</div>
+  <div class="num rv">06 · Pro koho</div>
   <div class="sechead rv">
     <h2>Pro koho to je</h2>
     <p class="pivot">Firmu prodáváte svou tváří. <strong>Na focení nemáte čas.</strong></p>
@@ -329,7 +396,7 @@ section{padding-block:56px}
       <ul>
         <li>Fotka je pro vás obchodní nástroj, ne ozdoba profilu.</li>
         <li>S vaší tváří pracuji opatrně: podobu měřím proti vašim fotkám a bez souhlasu ji nikde neukážu.</li>
-        <li>Sedí to s vizuálním stylem firmy. Pošlete brand manuál nebo barvy a světlo do nich naladím.</li>
+        <li>Sedí to s vizuálním stylem firmy. Pošlete brand manuál nebo <a href="#barvy">barvy</a> a světlo do nich naladím.</li>
       </ul>
     </div>
     <div class="kh rv"><div class="k">TÝM</div><h3>Marketéři při redesignu webu</h3><p>Celý tým v jednom stylu, i když se nikdy nesejde. Nový kolega ve stejném světle v den nástupu.</p></div>
@@ -339,7 +406,7 @@ section{padding-block:56px}
 </section>
 
 <section class="w" id="cenik">
-  <div class="num rv">06 · Ceník</div>
+  <div class="num rv">07 · Ceník</div>
   <div class="sechead rv" style="margin-bottom:0">
     <h2>Kolik to stojí</h2>
     <p class="pivot">Za fotku zaplatíte předem. <strong>Riziko nesu já.</strong></p>
@@ -390,7 +457,7 @@ section{padding-block:56px}
 </section>
 
 <section class="w" id="otazky">
-  <div class="num rv">07 · Otázky</div>
+  <div class="num rv">08 · Otázky</div>
   <div class="faq rv">
     <details><summary>Pozná se, že je to AI?</summary><p>Pracuji s vašimi skutečnými fotkami a hlídám kůži, oči, ruce i podobu. Že na úpravě pracuje AI, netajím.</p></details>
     <details><summary>Kolik fotek potřebujete?</summary><p>3 až 5 fotek z mobilu: zepředu, z mírného úhlu a jednu do pasu. Nejlépe u okna a zadním fotoaparátem, ne selfie.</p></details>
@@ -441,6 +508,14 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.targ
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 // posuvník před/po
 document.querySelectorAll('.ba').forEach(ba=>{const r=ba.querySelector('input');r.addEventListener('input',()=>ba.style.setProperty('--x',r.value+'%'))});
+// barvy značky: přepínač „Jen světlo“ × „Světlo i pozadí“ mění pravou půlku obou posuvníků
+const poBarvy=document.querySelectorAll('#barvy .po');
+const rezimy=document.querySelectorAll('#barvy .rezim button');
+rezimy.forEach(b=>b.addEventListener('click',()=>{
+  rezimy.forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+  poBarvy.forEach(img=>{img.src=img.dataset[b.dataset.v]});
+}));
+new IntersectionObserver((es,o)=>{if(es.some(e=>e.isIntersecting)){poBarvy.forEach(img=>{const i=new Image();i.src=img.dataset.svetla});o.disconnect()}},{rootMargin:'400px 0px'}).observe(document.getElementById('barvy'));
 // lupa nad čtyřmi modely zvětšení
 const kv=document.getElementById('kv');
 const bod=e=>{const b=kv.getBoundingClientRect();kv.style.setProperty('--ox',((e.clientX-b.left)/b.width*100)+'%');kv.style.setProperty('--oy',((e.clientY-b.top)/b.height*100)+'%')};
