@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Profesionální fotka na LinkedIn bez focení | Jakub Skupin</title>
-<meta name="description" content="Pošlete pár fotek z mobilu, dostanete profesionální portrét na LinkedIn a web. Od 990 Kč, s kontrolou podoby a 100% vrácením peněz, když nebudete spokojení.">
+<meta name="description" content="Pošlete pár fotek z mobilu, dostanete profesionální portrét na LinkedIn a web. Od 1 490 Kč, s kontrolou podoby a 100% vrácením peněz, když nebudete spokojení.">
 <link rel="canonical" href="https://jakubskupin.cz/foto">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="cs_CZ">
 <meta property="og:site_name" content="Jakub Skupin">
 <meta property="og:title" content="Profesionální fotka na LinkedIn. Bez focení">
-<meta property="og:description" content="Pošlete pár fotek z mobilu. Zbytek dělám já. Od 990 Kč, 100 % peněz zpět, když nebudete spokojení.">
+<meta property="og:description" content="Pošlete pár fotek z mobilu. Zbytek dělám já. Od 1 490 Kč, 100 % peněz zpět, když nebudete spokojení.">
 <meta property="og:url" content="https://jakubskupin.cz/foto">
 <meta property="og:image" content="https://jakubskupin.cz/foto/img/og.jpg">
 <meta property="og:image:width" content="1200">
@@ -23,7 +23,7 @@
 {"@context":"https://schema.org","@graph":[
 {"@type":"Service","name":"Fotky bez focení","serviceType":"Profesionální portrét na LinkedIn a web z fotek z mobilu","areaServed":"CZ","url":"https://jakubskupin.cz/foto",
  "provider":{"@type":"Person","name":"Jakub Skupin","url":"https://jakubskupin.cz"},
- "offers":[{"@type":"Offer","name":"Profesionální fotka","price":"990","priceCurrency":"CZK"},{"@type":"Offer","name":"Osobní styl","price":"2900","priceCurrency":"CZK"}]},
+ "offers":[{"@type":"Offer","name":"Profesionální fotka","price":"1490","priceCurrency":"CZK"},{"@type":"Offer","name":"Osobní styl","price":"2990","priceCurrency":"CZK"}]},
 {"@type":"FAQPage","mainEntity":[
  {"@type":"Question","name":"Pozná se, že je to AI?","acceptedAnswer":{"@type":"Answer","text":"Pracuji s vašimi skutečnými fotkami a hlídám kůži, oči, ruce i podobu. Že na úpravě pracuje AI, netajím."}},
  {"@type":"Question","name":"Kolik fotek potřebujete?","acceptedAnswer":{"@type":"Answer","text":"3 až 5 fotek z mobilu: zepředu, z mírného úhlu a jednu do pasu."}},
@@ -196,6 +196,29 @@ section{padding-block:56px}
 .rz h3{font-size:17.5px;letter-spacing:-.02em;margin-bottom:6px}
 .rz p{font-size:14.5px;color:var(--text-2)}
 
+/* srovnání: matice 2 × 2, vodorovně kolik práce to stojí vás, svisle jistota výsledku */
+.cesty{display:grid;grid-template-columns:22px minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto auto 30px;gap:8px;max-width:900px}
+@media(min-width:768px){.cesty{grid-template-columns:30px minmax(0,1fr) minmax(0,1fr);gap:12px}}
+.cesty-y{grid-column:1;grid-row:1/3;display:flex;flex-direction:column;align-items:center;gap:8px}
+.cesty-x{grid-column:2/4;grid-row:3;display:flex;align-items:center;gap:8px}
+.cesty .osa{position:relative;flex:1;background:var(--border)}
+.cesty-y .osa{width:1px;margin-top:7px}
+.cesty-y .osa::before{content:"";position:absolute;left:-4px;top:-7px;border:4px solid transparent;border-bottom:7px solid var(--text-3);border-top:0}
+.cesty-x .osa{height:1px;margin-right:7px}
+.cesty-x .osa::after{content:"";position:absolute;right:-7px;top:-4px;border:4px solid transparent;border-left:7px solid var(--text-3);border-right:0}
+.cesty-y span,.cesty-x span{font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);white-space:nowrap}
+.cesty-y span{writing-mode:vertical-rl;transform:rotate(180deg)}
+.cesta{border:1px solid var(--border);border-radius:14px;padding:16px 14px;background:var(--bg-2);display:flex;flex-direction:column;gap:8px;min-width:0}
+@media(min-width:768px){.cesta{padding:22px 22px 20px;min-height:168px}}
+.cesta h3{font-size:16px;letter-spacing:-.02em;line-height:1.2;display:flex;align-items:center;gap:8px}
+@media(min-width:768px){.cesta h3{font-size:19px}}
+.cesta h3::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;border:1.5px solid var(--text-3)}
+.cesta p{font-size:13.5px;line-height:1.5;color:var(--text-2)}
+@media(min-width:768px){.cesta p{font-size:14.5px}}
+.cesta.ja{background:var(--card);border-color:#5a5a60;box-shadow:0 20px 60px rgba(64,118,140,.16)}
+.cesta.ja h3::before{background:var(--text);border-color:var(--text)}
+.cesta.ja p{color:rgba(243,243,241,.84)}
+
 /* upscale: 4 kvadranty, lupa */
 .detail{display:grid;gap:26px}
 @media(min-width:900px){.detail{grid-template-columns:1fr 1fr;gap:44px;align-items:center}}
@@ -308,7 +331,7 @@ section{padding-block:56px}
     <p class="lead">Pošlete pár fotek z mobilu. Zbytek dělám já: světlo, prostředí, retuš a kontrolu, že jste pořád vy.</p>
     <ul class="bez" aria-label="Co odpadá"><li>hledání fotografa</li><li>lokace</li><li>půlden focení</li></ul>
     <div class="ctas">
-      <a class="btn" href="#kontakt">Objednat fotku za 990&nbsp;Kč</a>
+      <a class="btn" href="#kontakt">Objednat fotku za 1&nbsp;490&nbsp;Kč</a>
       <a class="lnk" href="#ukazky">Ukázky</a>
     </div>
     <p class="garance"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F3F3F1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg><span><b>100&nbsp;% peněz zpět.</b> Zaplatíte předem, a když nebudete spokojení, vrátím celou částku.</span></p>
@@ -404,8 +427,24 @@ section{padding-block:56px}
   </div>
 </section>
 
+<section class="w" id="cesty">
+  <div class="num rv">03 · Srovnání</div>
+  <div class="sechead rv">
+    <h2>Čtyři cesty k profi fotce</h2>
+    <p class="pivot">Většinou platíte časem, nebo nejistotou. <strong>Tady ani jedním.</strong></p>
+  </div>
+  <div class="cesty rv" role="group" aria-label="Srovnání čtyř cest k profesionální fotce podle toho, kolik práce stojí vás a jak jistý je výsledek">
+    <div class="cesty-y" aria-hidden="true"><span>Jistý výsledek</span><i class="osa"></i><span>Loterie</span></div>
+    <div class="cesta ja"><h3>Fotky bez focení</h3><p>Pošlete pár fotek z mobilu. Scénu, světlo i kontrolu podoby řeším já.</p></div>
+    <div class="cesta"><h3>Fotograf</h3><p>Skutečné focení a jistý výsledek. Musíte ale najít termín, dojet a strávit tam čas.</p></div>
+    <div class="cesta"><h3>AI aplikace</h3><p>Levné a bez práce. Výsledek je ale loterie a podoba často nesedí.</p></div>
+    <div class="cesta"><h3>AI chatboty</h3><p>Zvládnete to sami, chce to ale cvik a čas. A fotky bývají poznat.</p></div>
+    <div class="cesty-x" aria-hidden="true"><span>Málo vaší práce</span><i class="osa"></i><span>Hodně</span></div>
+  </div>
+</section>
+
 <section class="w" id="rozdil">
-  <div class="num rv">03 · Rozdíl</div>
+  <div class="num rv">04 · Rozdíl</div>
   <div class="sechead rv">
     <h2>Služba, ne aplikace</h2>
     <p class="pivot">Aplikace vám dají padesát pokusů. <strong>Já hotovou fotku.</strong></p>
@@ -419,7 +458,7 @@ section{padding-block:56px}
 </section>
 
 <section class="w" id="detail">
-  <div class="num rv">04 · Detail</div>
+  <div class="num rv">05 · Detail</div>
   <div class="detail">
     <figure class="rv" style="margin:0">
       <div class="kv" id="kv" role="img" aria-label="Detail tváře rozdělený na čtyři kvadranty, v každém zvětšení jiným modelem">
@@ -444,7 +483,7 @@ section{padding-block:56px}
 </section>
 
 <section class="w" id="pouziti">
-  <div class="num rv">05 · Kde je použijete</div>
+  <div class="num rv">06 · Kde je použijete</div>
   <div class="sechead rv"><h2>Kde fotky použijete</h2></div>
   <div class="pouziti">
     <div class="pz rv"><b>LinkedIn</b><p>Profilovka, carousely, úvodní a závěrečný slajd prezentace.</p></div>
@@ -455,7 +494,7 @@ section{padding-block:56px}
 </section>
 
 <section class="w" id="pro-koho">
-  <div class="num rv">06 · Pro koho</div>
+  <div class="num rv">07 · Pro koho</div>
   <div class="sechead rv">
     <h2>Pro koho to je</h2>
     <p class="pivot">Firmu prodáváte svou tváří. <strong>Na focení nemáte čas.</strong></p>
@@ -470,13 +509,13 @@ section{padding-block:56px}
       </ul>
     </div>
     <div class="kh rv"><div class="k">TÝM</div><h3>Marketéři při redesignu webu</h3><p>Celý tým v jednom stylu, i když se nikdy nesejde. Nový kolega ve stejném světle v den nástupu.</p></div>
-    <div class="kh rv"><div class="k">JEDNOTLIVCI</div><h3>Freelanceři a konzultanti</h3><p>LinkedIn je váš obchodník. Profesionální fotka za 990&nbsp;Kč.</p></div>
+    <div class="kh rv"><div class="k">JEDNOTLIVCI</div><h3>Freelanceři a konzultanti</h3><p>LinkedIn je váš obchodník. Profesionální fotka za 1&nbsp;490&nbsp;Kč.</p></div>
     <div class="kh rv"><div class="k">PARTNEŘI</div><h3>Agentury a copywriteři</h3><p>Vašim klientům chybí fotky? Dodám je pod vaším projektem.</p></div>
   </div>
 </section>
 
 <section class="w" id="cenik">
-  <div class="num rv">07 · Ceník</div>
+  <div class="num rv">08 · Ceník</div>
   <div class="sechead rv" style="margin-bottom:0">
     <h2>Kolik to stojí</h2>
     <p class="pivot">Za fotku zaplatíte předem. <strong>Riziko nesu já.</strong></p>
@@ -484,7 +523,7 @@ section{padding-block:56px}
   <div class="cenik">
     <div class="pcard rv">
       <div class="pcard-kicker">Profesionální fotka</div>
-      <div class="pcard-price">990&nbsp;Kč</div>
+      <div class="pcard-price">1&nbsp;490&nbsp;Kč</div>
       <div class="pcard-pro">Jedna fotka v jednom prostředí</div>
       <ul>
         <li>pošlete 3 až 5 fotek z mobilu</li>
@@ -497,13 +536,13 @@ section{padding-block:56px}
     <div class="pcard hlavni rv">
       <div class="pcard-clip"><div class="pcard-ribbon">Doporučuji</div></div>
       <div class="pcard-kicker">Osobní styl</div>
-      <div class="pcard-price">2&nbsp;900&nbsp;Kč</div>
+      <div class="pcard-price">2&nbsp;990&nbsp;Kč</div>
       <div class="pcard-pro">Pro ty, kdo chtějí vyniknout</div>
       <ul>
         <li>4 fotky: profesionální a 3 kreativní</li>
         <li>úvodní a závěrečný slajd prezentace</li>
         <li>hero na web na šířku ve vysokém rozlišení</li>
-        <li>světlo a barvy podle vašeho stylu</li>
+        <li>kreativní světlo a barvy vaší značky</li>
         <li>jedno kolo připomínek</li>
       </ul>
       <div class="pcard-extra">Tady si můžeme dovolit odvážnější art direkci.</div>
@@ -527,7 +566,7 @@ section{padding-block:56px}
 </section>
 
 <section class="w" id="otazky">
-  <div class="num rv">08 · Otázky</div>
+  <div class="num rv">09 · Otázky</div>
   <div class="faq rv">
     <details><summary>Pozná se, že je to AI?</summary><p>Pracuji s vašimi skutečnými fotkami a hlídám kůži, oči, ruce i podobu. Že na úpravě pracuje AI, netajím.</p></details>
     <details><summary>Kolik fotek potřebujete?</summary><p>3 až 5 fotek z mobilu: zepředu, z mírného úhlu a jednu do pasu. Nejlépe u okna a zadním fotoaparátem, ne selfie.</p></details>
